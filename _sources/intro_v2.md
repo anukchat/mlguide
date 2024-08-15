@@ -10,6 +10,10 @@
   footer {
     display: none;
   }
+
+  .bd-header-article{
+      top: initial !important;
+  }
 </style>
 
 ```{raw} html
