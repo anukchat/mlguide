@@ -14,6 +14,10 @@
   .bd-header-article{
       top: initial !important;
   }
+
+  .scrolled .bd-header-article{
+    box-shadow: none;
+  }
 </style>
 
 ```{raw} html
