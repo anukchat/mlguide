@@ -1,2 +1,0 @@
-# mlguide
-Machine Learning Guide
