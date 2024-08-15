@@ -1,0 +1,1261 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Function Calling with OpenAI’s GPT Models: An Interactive Tutorial &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/tools/langchain/projects/data_generation/Exploring ChatGPT Function Calling';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/tools/langchain/projects/data_generation/Exploring ChatGPT Function Calling.html" />
+    <link rel="icon" href="../../../../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Essentials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../essentials/intro_python.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../essentials/python/introduction/intro_toc.html">Introduction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/002_Hello_World.html">Hello World</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/003_Python_Keywords_and_Identifiers.html">Keywords and identifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/004_Python_Statement_Indentation_Comments.html">Statement indentation &amp; comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/005_Python_Variables_%26_Constants.html">Variables &amp; constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/006_Python_Literals.html">Literals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/007_Python_Data_Types.html">Datatypes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/008_Python_Type_Conversion.html">Type conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/009_Python_Input_Output_Import.html">I/O &amp; imports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/010_Python_Operators.html">Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/011_Python_Namespace_and_Scope.html">Namespace &amp; scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/Interpreter_Vs_Compiler.html">Interpreter vs compiler</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../essentials/python/datatypes/datatypes_toc.html">Datatypes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/datatypes/001_Python_Numbers.html">Numbers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/datatypes/002_Python_String.html">String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/datatypes/003_Python_List.html">List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/datatypes/004_Python_Tuple.html">Tuple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/datatypes/005_Python_Dictionary.html">Dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/datatypes/006_Python_Sets.html">Sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/datatypes/Python_List_Comprehension.html">List comprehension</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../essentials/python/controlflow/controlflow_toc.html">Control flows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/controlflow/000_Python_Flow_Control_statement.html">Flow control statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/controlflow/001_Python_if_statement.html">If</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/controlflow/002_Python_if_else_statement.html">If else</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/controlflow/003_Python_if_elif_else_statement.html">If elif else</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/controlflow/004_Python_Nested_if_statement.html">Nested if</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/controlflow/005_Python_for_Loop.html">Loops in Python</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/controlflow/006_Python_while_Loop.html">Loops in Python</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/controlflow/007_Python_break_continue_pass_statements.html">Break continue &amp; pass</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../essentials/python/functions/functions_toc.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/001_Python_Functions.html">Python Functions</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/002_Python_Function_Global_Local_Nonlocal.html">Global, local and nonlocal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/003_Python_Function_global_Keywords.html">Python <code class="docutils literal notranslate"><span class="pre">global</span></code> Keyword</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/004_Python_Function_Arguments.html">Function Argument and Parameter</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/005_Python_Function_Recursion.html">Python Recursion</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/006_Python_Function_Anonymous.html">Anonymous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/007_Python_Function_Module.html">Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/008_Python_Function_random_Module.html">Random module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/009_Python_Function_math_Module.html">Math module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/010_Python_Function_Package.html">Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/Python_Docstrings.html">Docstrings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/Python_User_defined_Functions.html">User defined functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../essentials/python/files/files_toc.html">Files</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/files/001_Python_File_Input_Output.html">File I/O</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/files/002_Python_File_Directory.html">File directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/files/003_Python_File_Exception.html">File exception</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/files/004_Python_Exceptions_Handling.html">Exceptions handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/files/005_Python_User_defined_Exceptions.html">User defined exceptions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../essentials/python/objects/objects_toc.html">Objects &amp; classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/objects/001_Python_OOPs_Concepts.html">OOPs concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/objects/002_Python_Classes_and_Objects.html">Python  Classes and Objects</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/objects/003_Python_Inheritance.html">Inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/objects/004_Python_Operator_Overloading.html">Operator overloading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/objects/self_in_Python_Demystified.html">self demystified</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../essentials/python/advanced/advanced_toc.html">Advanced</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/advanced/001_Python_Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/advanced/002_Python_Generators.html">Generators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/advanced/003_Python_Closure.html">Closure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/advanced/004_Python_Decorators.html">Decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/advanced/005_Python_Property.html">Property</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/advanced/006_Python_RegEx.html">RegEx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/advanced/Python_args_and_kwargs.html">args and kwargs</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../essentials/python/datetime/datetime_toc.html">Date time module</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../essentials/python/datetime/001_Python_datetime_Module.html">Datetime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../essentials/python/datetime/002_Python_strftime.html">strftime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../essentials/python/datetime/003_Python_strptime.html">strptime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../essentials/python/datetime/004_Python_current_date_and_time.html">Current date &amp; time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../essentials/python/datetime/005_Python_get_current_time.html">Current time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../essentials/python/datetime/006_Python_timestamp_to_datetime.html">Timestamp to datetime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../essentials/python/datetime/007_Python_time_Module.html">Time module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../essentials/python/datetime/008_Python_sleep.html">Sleep</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../essentials/mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../essentials/mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../essentials/mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../essentials/mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../essentials/intro_statistics.html">Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../essentials/statistics/statistics.html">Work in progress</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../intro_tools.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../numpy/numpy_toc.html">NumPy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../numpy/001_Python_NumPy.html">Python NumPy</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../numpy/002_Python_NumPy_Array_Part1.html">Arrays Part 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../numpy/003_Python_NumPy_Array_Part2.html">Arrays Part 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../numpy/004_Python_NumPy_Array_Part3.html">Arrays Part 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../numpy/005_Python_NumPy_Array_Part4.html">Arrays Part 4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_DataFrame.html">Python Pandas</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/001_Python_Pandas_DataFrame_from_Dictionary.html">Dataframe from dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/002_Python_Pandas_DataFrame_from_List.html">Dataframe from List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/003_Python_Pandas_DataFrame_head_and_tail.html">Head &amp; tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/004_Python_Pandas_DataFrame_drop_columns.html">Drop columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/005_Python_Pandas_DataFrame_drop_duplicates.html">Drop duplicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/006_Python_Pandas_DataFrame_drop_columns_with_NA.html">Drop with NA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/007_Python_Pandas_DataFrame_rename_columns.html">Rename columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/008_Python_Pandas_DataFrame_to_Python_dictionary.html">Dataframe to python dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/009_Python_Pandas_DataFrame_set_index.html">Set index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/010_Python_Pandas_DataFrame_reset_index.html">Reset index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/002_Python_Pandas_Exercise_1.html">Exercise 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/003_Python_Pandas_Exercise_2.html">Exercise 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../matplotlib/002_Python_Matplotlib_Exercise_1.html">Matplotlib</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../matplotlib/003_Python_Matplotlib_Exercise_2.html">Matplotlib 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../seaborn/seaborn_toc.html">Seaborn</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/001_Seaborn_Loading_Dataset.html">Loading Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/002_Seaborn_Controlling_Aesthetics.html">Controlling aesthetics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/003_Matplotlib_vs_Seaborn.html">Matplotlib vs seaborn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/004_Seaborn_Color_Palettes.html">Color palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/005_Seaborn_LM_Plot_and_Reg_Plot.html">LM and regerssion plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/006_Seaborn_Scatter_Plot_and_Joint_Plot.html">Scatter and join plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/007_Seaborn_Additional_Regression_Plots.html">Regerssion plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/008_Seaborn_Distribution_Plots.html">Seaborn distribution plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/009_Seaborn_Categorical_Swarm_Plot.html">Categorical swarn plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/010_Seaborn_Categorical_Strip_Plot.html">Categorical strip plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/011_Seaborn_Categorical_Box_Plot.html">Categorical box plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/012_Seaborn_Categorical_Violin_Plot.html">Categorical violin plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/013_Seaborn_Categorical_Bar_Plot_Point_Plot_and_Count_Plot.html">Categorical bar, point &amp; count plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/014_Seaborn_Categorical_Factor_Plot.html">Categorical factor plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/015_Seaborn_TimeSeries_and_LetterValue_Plot.html">Timeseries and letter value plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/016_Seaborn_PairGrid_Plot.html">Pair grid Pplot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/017_Seaborn_FacetGrid_Plot.html">Facet grid plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/018_Seaborn_Heat_Map.html">Heat map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/019_Seaborn_Cluster_Map.html">Cluster map</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tools-for-nn.html">Neural networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/01_pytorch_workflow.html">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/03_pytorch_computer_vision.html">Computer vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/04_pytorch_custom_datasets.html">Custom datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/05_pytorch_going_modular.html">Going Modular</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/06_pytorch_transfer_learning.html">Transfer learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/07_pytorch_experiment_tracking.html">Experiment tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/08_pytorch_paper_replicating.html">Replicating papers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/09_pytorch_model_deployment.html">Model deployment</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tools-for-llms.html">LLMs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../LangChain%20Cookbook%20Part%201%20-%20Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../LangChain%20Cookbook%20Part%202%20-%20Use%20Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../project_toc.html">Projects gallery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../langsmith.html">LangSmith</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../langgraph.html">LangGraph</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../hf/intro.html">HuggingFace introduction and setup</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../concepts/concepts.html">Concepts at glance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts/linear-regression.html">Linear regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts/logistic-regression.html">Logistic regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts/k-means.html">K-means</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts/anomaly-detection.html">Anomaly detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts/neural-networks.html">Neural networks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Blogs &amp; resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/courses/courses_toc.html">Courses</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About me</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/tools/langchain/projects/data_generation/Exploring ChatGPT Function Calling.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/tools/langchain/projects/data_generation/Exploring ChatGPT Function Calling.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../../_sources/content/tools/langchain/projects/data_generation/Exploring ChatGPT Function Calling.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Function Calling with OpenAI’s GPT Models: An Interactive Tutorial</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-vanilla-example">OpenAI Vanilla Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain-support-for-functions">LangChain Support For Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ad-hoc-example-financial-forecast-edit">Ad Hoc Example Financial Forecast Edit</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="function-calling-with-openais-gpt-models-an-interactive-tutorial">
+<h1>Function Calling with OpenAI’s GPT Models: An Interactive Tutorial<a class="headerlink" href="#function-calling-with-openais-gpt-models-an-interactive-tutorial" title="Link to this heading">#</a></h1>
+<p>In this notebook, we’ll dive deep into a powerful feature offered by the latest versions of OpenAI’s GPT models (like gpt-3.5-turbo-0613 and gpt-4-0613): function calling.</p>
+<p>Let’s imagine you’re talking to a ChatGPT model and you want to have it use a tool. Traditionally you’d have to do some clever prompting to have it return the format you’d like.</p>
+<p>Now you can tell it about certain actions, or <strong>“functions”</strong>, it can take</p>
+<p>This doesn’t mean the assistant actually performs these actions. Rather, it’s aware of them and can instruct you on how to perform these actions based on the conversation at hand.</p>
+<p>For example, you can tell the assistant about a function that fetches weather data, and when asked “What’s the weather like in Boston?”, the assistant can reply with instructions on how to call this weather-fetching function with ‘Boston’ as the input.</p>
+<p><strong>Function calling</strong> enables us to leverage the model’s natural language understanding to effectively turn human language into structured data or specific function calls in our code.</p>
+<p>This capability is useful in numerous scenarios, from creating chatbots that can interact with other APIs, to automating tasks and extracting structured information from natural language inputs. See more information about <a class="reference external" href="https://platform.openai.com/docs/guides/gpt/function-calling">function calling</a></p>
+<p>Let’s explore and start by importing our packages</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unzip data folder</span>
+
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s1">&#39;../../data.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+    <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !pip install langchain --upgrade</span>
+<span class="c1"># Version: 0.0.199 Make sure you&#39;re on the latest version</span>
+
+<span class="kn">import</span> <span class="nn">langchain</span>
+<span class="kn">import</span> <span class="nn">openai</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="c1"># Environment Variables</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="n">openai</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;OPENAI_API_KEY&#39;</span><span class="p">,</span> <span class="s1">&#39;YourAPIKeyIfNotSet&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="openai-vanilla-example">
+<h2>OpenAI Vanilla Example<a class="headerlink" href="#openai-vanilla-example" title="Link to this heading">#</a></h2>
+<p>Let’s run through OpenAI’s vanilla example of calling a weather API.</p>
+<p>First let’s define our functions. This is the meat and potatoes of the new update</p>
+<p>Functions are specified with the following fields:</p>
+<ul class="simple">
+<li><p><strong>Name:</strong> The name of the function.</p></li>
+<li><p><strong>Description:</strong> A description of what the function does. The model will use this to decide when to call the function.</p></li>
+<li><p><strong>Parameters:</strong> The parameters object contains all of the input fields the function requires. These inputs can be of the following types: String, Number, Boolean, Object, Null, AnyOf. Refer to the API reference docs for details.</p></li>
+<li><p><strong>Required:</strong> Which of the parameters are required to make a query. The rest will be treated as optional.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">function_descriptions</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;get_current_weather&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Get the current weather in a given location&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The city and state, e.g. San Francisco, CA&quot;</span><span class="p">,</span>
+                        <span class="p">},</span>
+                        <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The temperature unit to use. Infer this from the users location.&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;enum&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;celsius&quot;</span><span class="p">,</span> <span class="s2">&quot;fahrenheit&quot;</span><span class="p">]</span>
+                        <span class="p">},</span>
+                    <span class="p">},</span>
+                    <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">],</span>
+                <span class="p">},</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then let’s call the OpenAI API with this as a new parameter. Note: Make sure to use a model that can accept the function call. Here we are using <code class="docutils literal notranslate"><span class="pre">gpt-3.5-turbo-0613</span></code>.</p>
+<p>Let’s first set a query that came from the user</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_query</span> <span class="o">=</span> <span class="s2">&quot;What&#39;s the weather like in San Francisco?&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then let’s set up our API call to OpenAI. Note: <code class="docutils literal notranslate"><span class="pre">function_call=&quot;auto&quot;</span></code> will allow the model to choose whether or not it responds with a function. You can set this to <code class="docutils literal notranslate"><span class="pre">none</span></code> if you <em>don’t</em> want a function response</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">ChatCompletion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4-0613&quot;</span><span class="p">,</span>
+        
+        <span class="c1"># This is the chat message from the user</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">user_query</span><span class="p">}],</span>
+    
+        
+        <span class="n">functions</span><span class="o">=</span><span class="n">function_descriptions</span><span class="p">,</span>
+        <span class="n">function_call</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Great, let’s take a look at the response</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ai_response_message</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;choices&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;message&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ai_response_message</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+  &quot;content&quot;: null,
+  &quot;function_call&quot;: {
+    &quot;arguments&quot;: &quot;{\n  \&quot;location\&quot;: \&quot;San Francisco, CA\&quot;,\n  \&quot;unit\&quot;: \&quot;fahrenheit\&quot;\n}&quot;,
+    &quot;name&quot;: &quot;get_current_weather&quot;
+  },
+  &quot;role&quot;: &quot;assistant&quot;
+}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Awesome, now we have our response w/ specific arguments called out.</p>
+<p>Let’s clean up our response a bit better</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_location</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">ai_response_message</span><span class="p">[</span><span class="s1">&#39;function_call&#39;</span><span class="p">][</span><span class="s1">&#39;arguments&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">)</span>
+<span class="n">user_unit</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">ai_response_message</span><span class="p">[</span><span class="s1">&#39;function_call&#39;</span><span class="p">][</span><span class="s1">&#39;arguments&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;unit&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then let’s make a function that will serve as an interface to a dummy api call</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_current_weather</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">unit</span><span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the current weather in a given location&quot;&quot;&quot;</span>
+    
+    <span class="n">weather_info</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="n">location</span><span class="p">,</span>
+        <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="s2">&quot;72&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="n">unit</span><span class="p">,</span>
+        <span class="s2">&quot;forecast&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;sunny&quot;</span><span class="p">,</span> <span class="s2">&quot;windy&quot;</span><span class="p">],</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">weather_info</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">function_response</span> <span class="o">=</span> <span class="n">get_current_weather</span><span class="p">(</span>
+    <span class="n">location</span><span class="o">=</span><span class="n">user_location</span><span class="p">,</span>
+    <span class="n">unit</span><span class="o">=</span><span class="n">user_unit</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">function_response</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;{&quot;location&quot;: &quot;San Francisco, CA&quot;, &quot;temperature&quot;: &quot;72&quot;, &quot;unit&quot;: &quot;fahrenheit&quot;, &quot;forecast&quot;: [&quot;sunny&quot;, &quot;windy&quot;]}&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have our reponse from our service, we can pass this information back to our model for a natural language response</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">second_response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">ChatCompletion</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4-0613&quot;</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">user_query</span><span class="p">},</span>
+        <span class="n">ai_response_message</span><span class="p">,</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;function&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;get_current_weather&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">function_response</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="n">second_response</span><span class="p">[</span><span class="s1">&#39;choices&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;message&#39;</span><span class="p">][</span><span class="s1">&#39;content&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Currently in San Francisco, CA the weather is sunny and windy with a temperature of 72°F.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="langchain-support-for-functions">
+<h2>LangChain Support For Functions<a class="headerlink" href="#langchain-support-for-functions" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="nn">langchain.schema</span> <span class="kn">import</span> <span class="n">HumanMessage</span><span class="p">,</span> <span class="n">AIMessage</span><span class="p">,</span> <span class="n">ChatMessage</span>
+<span class="kn">from</span> <span class="nn">langchain.tools</span> <span class="kn">import</span> <span class="n">format_tool_to_openai_function</span><span class="p">,</span> <span class="n">YouTubeSearchTool</span><span class="p">,</span> <span class="n">MoveFileTool</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s load up our models</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4-0613&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s load our tools and then transform them into OpenAI’s function framework</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tools</span> <span class="o">=</span> <span class="p">[</span><span class="n">MoveFileTool</span><span class="p">()]</span>
+<span class="n">functions</span> <span class="o">=</span> <span class="p">[</span><span class="n">format_tool_to_openai_function</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tools</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s take a look at what this tool was transformed as</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">functions</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;name&#39;: &#39;move_file&#39;,
+  &#39;description&#39;: &#39;Move or rename a file from one location to another&#39;,
+  &#39;parameters&#39;: {&#39;title&#39;: &#39;FileMoveInput&#39;,
+   &#39;description&#39;: &#39;Input for MoveFileTool.&#39;,
+   &#39;type&#39;: &#39;object&#39;,
+   &#39;properties&#39;: {&#39;source_path&#39;: {&#39;title&#39;: &#39;Source Path&#39;,
+     &#39;description&#39;: &#39;Path of the file to move&#39;,
+     &#39;type&#39;: &#39;string&#39;},
+    &#39;destination_path&#39;: {&#39;title&#39;: &#39;Destination Path&#39;,
+     &#39;description&#39;: &#39;New path for the moved file&#39;,
+     &#39;type&#39;: &#39;string&#39;}},
+   &#39;required&#39;: [&#39;source_path&#39;, &#39;destination_path&#39;]}}]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">message</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">predict_messages</span><span class="p">([</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s1">&#39;move file foo to bar&#39;</span><span class="p">)],</span> <span class="n">functions</span><span class="o">=</span><span class="n">functions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">message</span><span class="o">.</span><span class="n">additional_kwargs</span><span class="p">[</span><span class="s1">&#39;function_call&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;name&#39;: &#39;move_file&#39;,
+ &#39;arguments&#39;: &#39;{\n  &quot;source_path&quot;: &quot;foo&quot;,\n  &quot;destination_path&quot;: &quot;bar&quot;\n}&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<section id="ad-hoc-example-financial-forecast-edit">
+<h3>Ad Hoc Example Financial Forecast Edit<a class="headerlink" href="#ad-hoc-example-financial-forecast-edit" title="Link to this heading">#</a></h3>
+<p>I’m going to make a new function description that talks about updating a financial model. It’ll take 3 params, year to update, category to update, and amount to update.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">function_descriptions</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;edit_financial_forecast&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Make an edit to a users financial forecast model&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;year&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The year the user would like to make an edit to their forecast for&quot;</span><span class="p">,</span>
+                        <span class="p">},</span>
+                        <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The category of the edit a user would like to edit&quot;</span>
+                        <span class="p">},</span>
+                        <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The amount of units the user would like to change&quot;</span>
+                        <span class="p">},</span>
+                    <span class="p">},</span>
+                    <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">,</span> <span class="s2">&quot;amount&quot;</span><span class="p">],</span>
+                <span class="p">},</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;print_financial_forecast&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Send the financial forecast to the printer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;printer_name&quot;</span><span class="p">:</span> <span class="p">{</span>
+                            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;the name of the printer that the forecast should be sent to&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;enum&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;home_printer&quot;</span><span class="p">,</span> <span class="s2">&quot;office_printer&quot;</span><span class="p">]</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span>
+                    <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;printer_name&quot;</span><span class="p">],</span>
+                <span class="p">},</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>One of the cool parts about OpenAI’s new function calls is that the LLM will decide if it should return a normal response to a user, or call the function again. Let’s test this out with two different requests in the same query from the user</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_request</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Please do three things add 40 units to 2023 headcount</span>
+<span class="s2">and subtract 23 units from 2022 opex</span>
+<span class="s2">then print out the forecast at my home</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We are going to keep track of the message history ourselves. As more support for function conversations comes in we won’t need to do this.</p>
+<p>First we’ll send the message from the user to the LLM along with our function calls</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_response</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">predict_messages</span><span class="p">([</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">user_request</span><span class="p">)],</span>
+                                      <span class="n">functions</span><span class="o">=</span><span class="n">function_descriptions</span><span class="p">)</span>
+<span class="n">first_response</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AIMessage(content=&#39;&#39;, additional_kwargs={&#39;function_call&#39;: {&#39;name&#39;: &#39;edit_financial_forecast&#39;, &#39;arguments&#39;: &#39;{\n  &quot;year&quot;: 2023,\n  &quot;category&quot;: &quot;headcount&quot;,\n  &quot;amount&quot;: 40\n}&#39;}}, example=False)
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see we get an AIMessage back with no content. However there are <code class="docutils literal notranslate"><span class="pre">additoinal_kwargs</span></code> with the information that we need. Let’s pull these out to have a better look at them</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">first_response</span><span class="o">.</span><span class="n">additional_kwargs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;function_call&#39;: {&#39;name&#39;: &#39;edit_financial_forecast&#39;,
+  &#39;arguments&#39;: &#39;{\n  &quot;year&quot;: 2023,\n  &quot;category&quot;: &quot;headcount&quot;,\n  &quot;amount&quot;: 40\n}&#39;}}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">function_name</span> <span class="o">=</span> <span class="n">first_response</span><span class="o">.</span><span class="n">additional_kwargs</span><span class="p">[</span><span class="s2">&quot;function_call&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+<span class="n">function_name</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;edit_financial_forecast&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then print the arguments it gives back to us</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Year: </span><span class="si">{</span><span class="nb">eval</span><span class="p">(</span><span class="n">first_response</span><span class="o">.</span><span class="n">additional_kwargs</span><span class="p">[</span><span class="s1">&#39;function_call&#39;</span><span class="p">][</span><span class="s1">&#39;arguments&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">Category: </span><span class="si">{</span><span class="nb">eval</span><span class="p">(</span><span class="n">first_response</span><span class="o">.</span><span class="n">additional_kwargs</span><span class="p">[</span><span class="s1">&#39;function_call&#39;</span><span class="p">][</span><span class="s1">&#39;arguments&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">Amount: </span><span class="si">{</span><span class="nb">eval</span><span class="p">(</span><span class="n">first_response</span><span class="o">.</span><span class="n">additional_kwargs</span><span class="p">[</span><span class="s1">&#39;function_call&#39;</span><span class="p">][</span><span class="s1">&#39;arguments&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;amount&#39;</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Year: 2023
+Category: headcount
+Amount: 40
+</pre></div>
+</div>
+</div>
+</div>
+<p>But we aren’t done! There was a second request in the user query so let’s pass it back into the model</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">second_response</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">predict_messages</span><span class="p">([</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">user_request</span><span class="p">),</span>
+                                        <span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">first_response</span><span class="o">.</span><span class="n">additional_kwargs</span><span class="p">)),</span>
+                                        <span class="n">ChatMessage</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="s1">&#39;function&#39;</span><span class="p">,</span>
+                                                    <span class="n">additional_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">function_name</span><span class="p">},</span>
+                                                    <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;Just updated the financial forecast for year 2023, category headcount amd amount 40&quot;</span>
+                                                   <span class="p">)</span>
+                                       <span class="p">],</span>
+                                       <span class="n">functions</span><span class="o">=</span><span class="n">function_descriptions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see the response from this one</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">second_response</span><span class="o">.</span><span class="n">additional_kwargs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;function_call&#39;: {&#39;name&#39;: &#39;edit_financial_forecast&#39;,
+  &#39;arguments&#39;: &#39;{\n  &quot;year&quot;: 2022,\n  &quot;category&quot;: &quot;opex&quot;,\n  &quot;amount&quot;: -23\n}&#39;}}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">function_name</span> <span class="o">=</span> <span class="n">second_response</span><span class="o">.</span><span class="n">additional_kwargs</span><span class="p">[</span><span class="s1">&#39;function_call&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="n">function_name</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;edit_financial_forecast&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cool! It saw that the first response was done and then it went back to our function for us. Let’s see what it says if we do it a third time</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">third_response</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">predict_messages</span><span class="p">([</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">user_request</span><span class="p">),</span>
+                                       <span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">first_response</span><span class="o">.</span><span class="n">additional_kwargs</span><span class="p">)),</span>
+                                       <span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">second_response</span><span class="o">.</span><span class="n">additional_kwargs</span><span class="p">)),</span>
+                                       <span class="n">ChatMessage</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="s1">&#39;function&#39;</span><span class="p">,</span>
+                                                    <span class="n">additional_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">function_name</span><span class="p">},</span>
+                                                    <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                                                        Just made the following updates: 2022, opex -23 and</span>
+<span class="s2">                                                        Year: 2023</span>
+<span class="s2">                                                        Category: headcount</span>
+<span class="s2">                                                        Amount: 40</span>
+<span class="s2">                                                    &quot;&quot;&quot;</span>
+                                                   <span class="p">)</span>
+                                       <span class="p">],</span>
+                                       <span class="n">functions</span><span class="o">=</span><span class="n">function_descriptions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">third_response</span><span class="o">.</span><span class="n">additional_kwargs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;function_call&#39;: {&#39;name&#39;: &#39;print_financial_forecast&#39;,
+  &#39;arguments&#39;: &#39;{\n  &quot;printer_name&quot;: &quot;home_printer&quot;\n}&#39;}}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">function_name</span> <span class="o">=</span> <span class="n">third_response</span><span class="o">.</span><span class="n">additional_kwargs</span><span class="p">[</span><span class="s1">&#39;function_call&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="n">function_name</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;print_financial_forecast&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Nice! So it knew it was done with the financial forecasts (because we told it so) and then it sent our forecast to our home printer. Let’s close it out</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">forth_response</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">predict_messages</span><span class="p">([</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">user_request</span><span class="p">),</span>
+                                       <span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">first_response</span><span class="o">.</span><span class="n">additional_kwargs</span><span class="p">)),</span>
+                                       <span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">second_response</span><span class="o">.</span><span class="n">additional_kwargs</span><span class="p">)),</span>
+                                       <span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">third_response</span><span class="o">.</span><span class="n">additional_kwargs</span><span class="p">)),</span>
+                                       <span class="n">ChatMessage</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="s1">&#39;function&#39;</span><span class="p">,</span>
+                                                    <span class="n">additional_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">function_name</span><span class="p">},</span>
+                                                    <span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                                                        just printed the document at home</span>
+<span class="s2">                                                    &quot;&quot;&quot;</span>
+                                                   <span class="p">)</span>
+                                       <span class="p">],</span>
+                                       <span class="n">functions</span><span class="o">=</span><span class="n">function_descriptions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">forth_response</span><span class="o">.</span><span class="n">content</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;I have updated the financial forecast as per your instructions. It has also been printed at your home.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/tools/langchain/projects/data_generation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#openai-vanilla-example">OpenAI Vanilla Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain-support-for-functions">LangChain Support For Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ad-hoc-example-financial-forecast-edit">Ad Hoc Example Financial Forecast Edit</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1490 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Seaborn: Violin Plot &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/tools/seaborn/012_Seaborn_Categorical_Violin_Plot';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/tools/seaborn/012_Seaborn_Categorical_Violin_Plot.html" />
+    <link rel="icon" href="../../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Bar Plot, Point Plot and Count plot" href="013_Seaborn_Categorical_Bar_Plot_Point_Plot_and_Count_Plot.html" />
+    <link rel="prev" title="Seaborn: Box Plot" href="011_Seaborn_Categorical_Box_Plot.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Essentials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../essentials/intro_python.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/introduction/intro_toc.html">Introduction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/002_Hello_World.html">Hello World</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/003_Python_Keywords_and_Identifiers.html">Keywords and identifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/004_Python_Statement_Indentation_Comments.html">Statement indentation &amp; comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/005_Python_Variables_%26_Constants.html">Variables &amp; constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/006_Python_Literals.html">Literals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/007_Python_Data_Types.html">Datatypes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/008_Python_Type_Conversion.html">Type conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/009_Python_Input_Output_Import.html">I/O &amp; imports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/010_Python_Operators.html">Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/011_Python_Namespace_and_Scope.html">Namespace &amp; scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/Interpreter_Vs_Compiler.html">Interpreter vs compiler</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/datatypes/datatypes_toc.html">Datatypes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/001_Python_Numbers.html">Numbers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/002_Python_String.html">String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/003_Python_List.html">List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/004_Python_Tuple.html">Tuple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/005_Python_Dictionary.html">Dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/006_Python_Sets.html">Sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/Python_List_Comprehension.html">List comprehension</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/controlflow/controlflow_toc.html">Control flows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/000_Python_Flow_Control_statement.html">Flow control statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/001_Python_if_statement.html">If</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/002_Python_if_else_statement.html">If else</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/003_Python_if_elif_else_statement.html">If elif else</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/004_Python_Nested_if_statement.html">Nested if</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/005_Python_for_Loop.html">Loops in Python</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/006_Python_while_Loop.html">Loops in Python</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/007_Python_break_continue_pass_statements.html">Break continue &amp; pass</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/functions/functions_toc.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/001_Python_Functions.html">Python Functions</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/002_Python_Function_Global_Local_Nonlocal.html">Global, local and nonlocal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/003_Python_Function_global_Keywords.html">Python <code class="docutils literal notranslate"><span class="pre">global</span></code> Keyword</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/004_Python_Function_Arguments.html">Function Argument and Parameter</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/005_Python_Function_Recursion.html">Python Recursion</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/006_Python_Function_Anonymous.html">Anonymous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/007_Python_Function_Module.html">Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/008_Python_Function_random_Module.html">Random module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/009_Python_Function_math_Module.html">Math module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/010_Python_Function_Package.html">Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/Python_Docstrings.html">Docstrings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/Python_User_defined_Functions.html">User defined functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/files/files_toc.html">Files</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/files/001_Python_File_Input_Output.html">File I/O</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/files/002_Python_File_Directory.html">File directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/files/003_Python_File_Exception.html">File exception</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/files/004_Python_Exceptions_Handling.html">Exceptions handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/files/005_Python_User_defined_Exceptions.html">User defined exceptions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/objects/objects_toc.html">Objects &amp; classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/objects/001_Python_OOPs_Concepts.html">OOPs concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/objects/002_Python_Classes_and_Objects.html">Python  Classes and Objects</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/objects/003_Python_Inheritance.html">Inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/objects/004_Python_Operator_Overloading.html">Operator overloading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/objects/self_in_Python_Demystified.html">self demystified</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/advanced/advanced_toc.html">Advanced</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/001_Python_Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/002_Python_Generators.html">Generators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/003_Python_Closure.html">Closure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/004_Python_Decorators.html">Decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/005_Python_Property.html">Property</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/006_Python_RegEx.html">RegEx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/Python_args_and_kwargs.html">args and kwargs</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../essentials/python/datetime/datetime_toc.html">Date time module</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/001_Python_datetime_Module.html">Datetime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/002_Python_strftime.html">strftime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/003_Python_strptime.html">strptime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/004_Python_current_date_and_time.html">Current date &amp; time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/005_Python_get_current_time.html">Current time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/006_Python_timestamp_to_datetime.html">Timestamp to datetime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/007_Python_time_Module.html">Time module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/008_Python_sleep.html">Sleep</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../essentials/mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../essentials/mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../essentials/mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../essentials/mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../essentials/intro_statistics.html">Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../essentials/statistics/statistics.html">Work in progress</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro_tools.html">Data analytics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../numpy/numpy_toc.html">NumPy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../numpy/001_Python_NumPy.html">Python NumPy</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../numpy/002_Python_NumPy_Array_Part1.html">Arrays Part 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../numpy/003_Python_NumPy_Array_Part2.html">Arrays Part 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../numpy/004_Python_NumPy_Array_Part3.html">Arrays Part 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../numpy/005_Python_NumPy_Array_Part4.html">Arrays Part 4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_DataFrame.html">Python Pandas</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/001_Python_Pandas_DataFrame_from_Dictionary.html">Dataframe from dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/002_Python_Pandas_DataFrame_from_List.html">Dataframe from List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/003_Python_Pandas_DataFrame_head_and_tail.html">Head &amp; tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/004_Python_Pandas_DataFrame_drop_columns.html">Drop columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/005_Python_Pandas_DataFrame_drop_duplicates.html">Drop duplicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/006_Python_Pandas_DataFrame_drop_columns_with_NA.html">Drop with NA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/007_Python_Pandas_DataFrame_rename_columns.html">Rename columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/008_Python_Pandas_DataFrame_to_Python_dictionary.html">Dataframe to python dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/009_Python_Pandas_DataFrame_set_index.html">Set index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/010_Python_Pandas_DataFrame_reset_index.html">Reset index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/002_Python_Pandas_Exercise_1.html">Exercise 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/003_Python_Pandas_Exercise_2.html">Exercise 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../matplotlib/002_Python_Matplotlib_Exercise_1.html">Matplotlib</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../matplotlib/003_Python_Matplotlib_Exercise_2.html">Matplotlib 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="seaborn_toc.html">Seaborn</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="001_Seaborn_Loading_Dataset.html">Loading Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="002_Seaborn_Controlling_Aesthetics.html">Controlling aesthetics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="003_Matplotlib_vs_Seaborn.html">Matplotlib vs seaborn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="004_Seaborn_Color_Palettes.html">Color palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="005_Seaborn_LM_Plot_and_Reg_Plot.html">LM and regerssion plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="006_Seaborn_Scatter_Plot_and_Joint_Plot.html">Scatter and join plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="007_Seaborn_Additional_Regression_Plots.html">Regerssion plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="008_Seaborn_Distribution_Plots.html">Seaborn distribution plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="009_Seaborn_Categorical_Swarm_Plot.html">Categorical swarn plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="010_Seaborn_Categorical_Strip_Plot.html">Categorical strip plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="011_Seaborn_Categorical_Box_Plot.html">Categorical box plot</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Categorical violin plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="013_Seaborn_Categorical_Bar_Plot_Point_Plot_and_Count_Plot.html">Categorical bar, point &amp; count plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="014_Seaborn_Categorical_Factor_Plot.html">Categorical factor plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="015_Seaborn_TimeSeries_and_LetterValue_Plot.html">Timeseries and letter value plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="016_Seaborn_PairGrid_Plot.html">Pair grid Pplot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="017_Seaborn_FacetGrid_Plot.html">Facet grid plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="018_Seaborn_Heat_Map.html">Heat map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="019_Seaborn_Cluster_Map.html">Cluster map</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools-for-nn.html">Neural networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/01_pytorch_workflow.html">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/03_pytorch_computer_vision.html">Computer vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/04_pytorch_custom_datasets.html">Custom datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/05_pytorch_going_modular.html">Going Modular</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/06_pytorch_transfer_learning.html">Transfer learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/07_pytorch_experiment_tracking.html">Experiment tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/08_pytorch_paper_replicating.html">Replicating papers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/09_pytorch_model_deployment.html">Model deployment</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools-for-llms.html">LLMs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../langchain/LangChain%20Cookbook%20Part%201%20-%20Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../langchain/LangChain%20Cookbook%20Part%202%20-%20Use%20Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../langchain/projects/project_toc.html">Projects gallery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langchain/langsmith.html">LangSmith</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langchain/langgraph.html">LangGraph</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../hf/intro.html">HuggingFace introduction and setup</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../concepts/concepts.html">Concepts at glance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts/linear-regression.html">Linear regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts/logistic-regression.html">Logistic regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts/k-means.html">K-means</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts/anomaly-detection.html">Anomaly detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts/neural-networks.html">Neural networks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Blogs &amp; resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/courses/courses_toc.html">Courses</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About me</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/tools/seaborn/012_Seaborn_Categorical_Violin_Plot.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/tools/seaborn/012_Seaborn_Categorical_Violin_Plot.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/tools/seaborn/012_Seaborn_Categorical_Violin_Plot.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Seaborn: Violin Plot</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-violin-plot">Anatomy of Violin Plot</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="seaborn-violin-plot">
+<h1>Seaborn: Violin Plot<a class="headerlink" href="#seaborn-violin-plot" title="Link to this heading">#</a></h1>
+<p>Welcome back to another lecture on Seaborn!</p>
+<p>Today our topic of interest would be <strong><a class="reference external" href="http://seaborn.pydata.org/generated/seaborn.violinplot.html?highlight=violinplot#seaborn.violinplot%3Cbr/%3E">Violin Plot</a></strong>, which pretty much does the job similar to our previously discussed <strong>Box Plot</strong> with it’s own advantages and disadvantages. Let us at first try to understand what makes <strong>Violin plot</strong> shine out in Seaborn series of plots.</p>
+<p>Sometimes just the <strong>Central Tendency</strong> isn’t enough to understand a dataset, because it gets difficult to infer, if most of the values are clustered around the <em>median</em>, or are they clustered around the <em>minimum</em> and <em>maximum</em> peaks with actually nothing in the middle. Indeed we may use a <strong>Box plot</strong>, but then, even those don’t specifically indicate variations in a <em>multi-modal distribution</em> (those with <em>multiple peaks</em>). This is where Seaborn <strong>Violin plot</strong> comes in handy as a <em>hybrid</em> visualization plot, combining advantages of a <strong>Box plot</strong> and a <strong>KDE (Kernel Densiy Plot)</strong>.</p>
+<ul class="simple">
+<li><p>Violinplots allow to visualize the distribution of a numeric variable for one or several groups. It is really close from a boxplot, but allows a deeper understanding of the density.</p></li>
+<li><p>Violins are particularly adapted when the amount of data is huge and showing individual observations gets impossible. Seaborn is particularly adapted to realize them through its violin function.</p></li>
+<li><p>Violinplots are a really convenient way to show the data and would probably deserve more attention compared to boxplot that can sometimes hide features of the data.</p></li>
+</ul>
+<p>In terms of <strong>Summary statistics</strong>, a <strong>Violin Plot</strong> pretty much presents stats similar to that of a <strong>Box plot</strong>. Let us quickly import our <em>dependancies</em> and then look into what a <strong>Violin plot</strong> holds in stock for us:</p>
+<blockquote>
+<div><p><strong>Note:</strong>  backward slash <strong><code class="docutils literal notranslate"><span class="pre">\</span></code></strong> is used to write code in next line.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing intrinsic libraries:</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;rainbow&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="c1"># Let us also get tableau colors we defined earlier:</span>
+<span class="n">tableau_20</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">31</span><span class="p">,</span> <span class="mi">119</span><span class="p">,</span> <span class="mi">180</span><span class="p">),</span> <span class="p">(</span><span class="mi">174</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">232</span><span class="p">),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">14</span><span class="p">),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">187</span><span class="p">,</span> <span class="mi">120</span><span class="p">),</span>
+         <span class="p">(</span><span class="mi">44</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">44</span><span class="p">),</span> <span class="p">(</span><span class="mi">152</span><span class="p">,</span> <span class="mi">223</span><span class="p">,</span> <span class="mi">138</span><span class="p">),</span> <span class="p">(</span><span class="mi">214</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">152</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span>
+         <span class="p">(</span><span class="mi">148</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">189</span><span class="p">),</span> <span class="p">(</span><span class="mi">197</span><span class="p">,</span> <span class="mi">176</span><span class="p">,</span> <span class="mi">213</span><span class="p">),</span> <span class="p">(</span><span class="mi">140</span><span class="p">,</span> <span class="mi">86</span><span class="p">,</span> <span class="mi">75</span><span class="p">),</span> <span class="p">(</span><span class="mi">196</span><span class="p">,</span> <span class="mi">156</span><span class="p">,</span> <span class="mi">148</span><span class="p">),</span>
+         <span class="p">(</span><span class="mi">227</span><span class="p">,</span> <span class="mi">119</span><span class="p">,</span> <span class="mi">194</span><span class="p">),</span> <span class="p">(</span><span class="mi">247</span><span class="p">,</span> <span class="mi">182</span><span class="p">,</span> <span class="mi">210</span><span class="p">),</span> <span class="p">(</span><span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">),</span> <span class="p">(</span><span class="mi">199</span><span class="p">,</span> <span class="mi">199</span><span class="p">,</span> <span class="mi">199</span><span class="p">),</span>
+         <span class="p">(</span><span class="mi">188</span><span class="p">,</span> <span class="mi">189</span><span class="p">,</span> <span class="mi">34</span><span class="p">),</span> <span class="p">(</span><span class="mi">219</span><span class="p">,</span> <span class="mi">219</span><span class="p">,</span> <span class="mi">141</span><span class="p">),</span> <span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">207</span><span class="p">),</span> <span class="p">(</span><span class="mi">158</span><span class="p">,</span> <span class="mi">218</span><span class="p">,</span> <span class="mi">229</span><span class="p">)]</span>
+
+<span class="c1"># Scaling above RGB values to [0, 1] range, which is Matplotlib acceptable format:</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tableau_20</span><span class="p">)):</span>
+    <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">tableau_20</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">tableau_20</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span> <span class="o">/</span> <span class="mf">255.</span><span class="p">,</span> <span class="n">g</span> <span class="o">/</span> <span class="mf">255.</span><span class="p">,</span> <span class="n">b</span> <span class="o">/</span> <span class="mf">255.</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loading built-in Tips dataset:</span>
+
+<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
+<span class="n">tips</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_bill</th>
+      <th>tip</th>
+      <th>sex</th>
+      <th>smoker</th>
+      <th>day</th>
+      <th>time</th>
+      <th>size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>16.99</td>
+      <td>1.01</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10.34</td>
+      <td>1.66</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.01</td>
+      <td>3.50</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>23.68</td>
+      <td>3.31</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24.59</td>
+      <td>3.61</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>25.29</td>
+      <td>4.71</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>8.77</td>
+      <td>2.00</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting basic Violin Plot horizontally:</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="s2">&quot;total_bill&quot;</span><span class="p">],</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;total_bill&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/e26cc15485672140d676d07961c05bbbd6dac7284fb0afff278b356fbe947f99.png" src="../../../_images/e26cc15485672140d676d07961c05bbbd6dac7284fb0afff278b356fbe947f99.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting basic Violin Plot vertiacally:</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="s2">&quot;total_bill&quot;</span><span class="p">],</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:ylabel=&#39;total_bill&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/3805cb5eaef9dcbf2bc83cab53f7ca957d08cab7eab9f1ffe6eda18117b06167.png" src="../../../_images/3805cb5eaef9dcbf2bc83cab53f7ca957d08cab7eab9f1ffe6eda18117b06167.png" />
+</div>
+</div>
+<section id="anatomy-of-violin-plot">
+<h2>Anatomy of Violin Plot<a class="headerlink" href="#anatomy-of-violin-plot" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>This <strong>thick bar</strong> that you see at the center (between <em>values</em> 12 and 25) represents the <strong>Interquartile Range</strong> (that we discussed in previous lecture).</p></li>
+<li><p>The <strong>thin line</strong> just above the thick one represents <strong>95% Confidence Interval</strong>. In Statistics, a <strong>confidence interval</strong> is a type of <em>interval estimate</em> that is computed from the observed data. Another term that you might come across is <strong>Confidence Level</strong>, which is just the <strong>frequency</strong> of possible our <strong>Confidence Intervals</strong>, that contain the <em>true value</em> of their corresponding parameter.</p></li>
+<li><p>And the <strong>tiny white dot</strong> that you notice at the center of our thick line, is actually the <strong>Median</strong>.</p></li>
+<li><p>Finally, the <strong>spread</strong> that forms this <em>Violin shape</em> is a <strong>Kernel Density Estimation</strong> to show the <em>distribution shape</em> of the data. <em>Wider</em> sections represent <strong>higher probability</strong> of members from a sample space (observed data) taking on the given. <em>Skinnier</em> sections represent a <strong>lower probability</strong>.</p></li>
+</ul>
+<p>So in entirity, it is also one of the best statistical representation offered by Seaborn for visualizing the <strong>Probability Density</strong> of observed data. That doesn’t change the fact that <strong>Violin Plot</strong> can be noisier than a <strong>Box Plot</strong> while showing an abstract representation of each distribution of observations.</p>
+<p>Let us now get another basic <strong>Violin plot</strong> with few more Violins in it. For this single illustration, instead of our typical usage of built-in dataset, this time I shall use a different dataset that I have also attached in the Resources folder for you to access. I have a particular agenda behind this and shall let you know shortly after I plot it. So let us start by getting this dataset and then previewing it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loading University dataset:</span>
+<span class="n">university</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;datasets/University.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Dataset Preview:</span>
+<span class="n">university</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>university_name</th>
+      <th>total_students</th>
+      <th>students_enrolled</th>
+      <th>gender_dominance</th>
+      <th>education_level</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Harvard</td>
+      <td>1582568</td>
+      <td>12587</td>
+      <td>Male</td>
+      <td>High School</td>
+      <td>Day and Night</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Oxford</td>
+      <td>1568291</td>
+      <td>54682</td>
+      <td>Female</td>
+      <td>Graduate</td>
+      <td>Night</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Luke</td>
+      <td>1822565</td>
+      <td>54808</td>
+      <td>Female</td>
+      <td>Graduate</td>
+      <td>Day and Night</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Cambridge</td>
+      <td>785269</td>
+      <td>24865</td>
+      <td>Male</td>
+      <td>Post-Graduate</td>
+      <td>Day</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>MIT</td>
+      <td>64154651</td>
+      <td>258745</td>
+      <td>Female</td>
+      <td>High School</td>
+      <td>Day and Night</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Xavier's</td>
+      <td>6611852</td>
+      <td>5698</td>
+      <td>Male</td>
+      <td>High School</td>
+      <td>Day</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Cornell</td>
+      <td>5455131</td>
+      <td>98547</td>
+      <td>Male</td>
+      <td>Graduate</td>
+      <td>Night</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Harvard</td>
+      <td>785280</td>
+      <td>42530</td>
+      <td>Female</td>
+      <td>Post-Graduate</td>
+      <td>Day</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Oxford</td>
+      <td>2534156</td>
+      <td>22897</td>
+      <td>Male</td>
+      <td>Post-Graduate</td>
+      <td>Day and Night</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Luke</td>
+      <td>5425</td>
+      <td>89</td>
+      <td>Female</td>
+      <td>Ph.D</td>
+      <td>Night</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;university_name&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_students&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">university</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;university_name&#39;, ylabel=&#39;total_students&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/1de80134bb58ded815ed7b26c4c1031e59884602ec8e91cee0765228869271e0.png" src="../../../_images/1de80134bb58ded815ed7b26c4c1031e59884602ec8e91cee0765228869271e0.png" />
+</div>
+</div>
+<p>This plot has <em>data observations</em> distributed as per their <em>density</em>, overall it’s <em>Probability distribution</em> is displayed in this plot. If we notice very closely, we shall observe that the <strong>X-axis</strong> has <code class="docutils literal notranslate"><span class="pre">university_name</span></code> properly displayed, BUT the <strong>Y-axis</strong> has values in <em>scientific notation</em> as <strong>1e8</strong>, i.e. actually an <strong>Exponential form</strong>. But we also want our values on <em>Y-Axis</em> to be normally spread out. Another observation would be that the values are <em>negative</em> for <code class="docutils literal notranslate"><span class="pre">total_students</span></code>, but that is okay for us, as anyways we just want to figure out the spread which certainly can be <em>statistically negative</em>. Before we get into detailing of our <strong>Violin plot</strong>, let us at first get rid of this <em>exponential form</em> of values. And to do so, we would be required to call underlying <strong>Matplotlib Axes</strong> class. Let us now see how to use it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Removes Scientific notation &#39;1e8&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ticklabel_format</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;plain&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+
+<span class="c1"># Re-plotting University data:</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;university_name&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_students&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">university</span><span class="p">)</span>
+
+<span class="c1"># Getting rid of Top and Right spines (just for your &#39;Styling&#39; revision):</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/ba3ecdf7b5a9e8f2e29664233cc07b749bb787aa8156dd545a1aac535d1b578b.png" src="../../../_images/ba3ecdf7b5a9e8f2e29664233cc07b749bb787aa8156dd545a1aac535d1b578b.png" />
+</div>
+</div>
+<p>And here it goes! We got rid of the <strong>exponential form</strong> and have real value range for our dataset. Honestly, this dataset isn’t the best one to practice plots because I created it only to reproduce this particular issue of <strong>scientific notation</strong>. I have observed multiple times, beginners as well as professionals getting stuck with this inane problem of conversion; so thought of getting you introduced to a solution for this problem.</p>
+<p>Let us now get a full list of <em>parameters</em> offered by <em>Seaborn</em> along with <strong>Violin Plot</strong>:</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">seaborn.violinplot(x=None,</span> <span class="pre">y=None,</span> <span class="pre">hue=None,</span> <span class="pre">data=None,</span> <span class="pre">order=None,</span> <span class="pre">hue_order=None,</span> <span class="pre">bw='scott',</span> <span class="pre">cut=2,</span> <span class="pre">scale='area',</span> <span class="pre">scale_hue=True,</span> <span class="pre">gridsize=100,</span> <span class="pre">width=0.8,</span> <span class="pre">inner='box',</span> <span class="pre">split=False,</span> <span class="pre">dodge=True,</span> <span class="pre">orient=None,</span> <span class="pre">linewidth=None,</span> <span class="pre">color=None,</span> <span class="pre">palette=None,</span> <span class="pre">saturation=0.75,</span> <span class="pre">ax=None)</span></code></strong></p>
+<p>It seems that we do have a couple of new optional parameters here for customization:</p>
+<ul class="simple">
+<li><p>First one to catch my attention is <strong><code class="docutils literal notranslate"><span class="pre">bw</span></code></strong> parameter which is used to calculate the <strong>Kernel density estimator bandwidth</strong>. Ideally it is expected to be scalar and by default is set to <strong><code class="docutils literal notranslate"><span class="pre">scott</span></code></strong>, which we can even alter to <strong><code class="docutils literal notranslate"><span class="pre">silverman</span></code></strong> or another <strong>scalar value</strong>, that in turn shall call underlying Matplotlib <strong><code class="docutils literal notranslate"><span class="pre">kde.factor</span></code></strong>. This can also be <strong>callable</strong>, and if so, it will take a <strong>GaussianKDE</strong> instance as its only parameter to return a scalar.</p></li>
+<li><p>Next is <strong><code class="docutils literal notranslate"><span class="pre">cut</span></code></strong> parameter that represents <strong>distance</strong>, in units of <strong>bandwidth size</strong>, to extend the <strong>density</strong> past the <em>extreme datapoints</em>. Our last plot had negative values because by default <strong><code class="docutils literal notranslate"><span class="pre">cut</span></code></strong> is set to <strong><code class="docutils literal notranslate"><span class="pre">2</span></code></strong>, so if we add this parameter as <strong><code class="docutils literal notranslate"><span class="pre">cut=0</span></code></strong>, our <strong>violin range</strong> in plot shall be restricted within the range of our <strong><code class="docutils literal notranslate"><span class="pre">University</span></code></strong> dataset.</p></li>
+<li><p>Next is <strong><code class="docutils literal notranslate"><span class="pre">scale</span></code></strong> parameter which represents the method we’re going to use for <em>scaling width of each violin</em>. By default, it is set to represent <strong><code class="docutils literal notranslate"><span class="pre">area</span></code></strong>. But we also have options to replace either with <strong><code class="docutils literal notranslate"><span class="pre">count</span></code></strong> to scale by <em>number of observations</em> in that bin OR with <strong><code class="docutils literal notranslate"><span class="pre">width</span></code></strong> for each violin to have same width.</p></li>
+<li><p>Finally, we have <strong><code class="docutils literal notranslate"><span class="pre">gridsize</span></code></strong> that helps us compute <strong>Kernel Density Estimate</strong> by assigning <em>number of points in the discrete grid</em>.</p></li>
+</ul>
+<p>Let us now try to use all these parameters along with other possible variations. We have already observed KDE and Box Plot previously so conceptually we do not really have anything new here, so let us focus more on visualization in this lecture:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loading built-in Tips dataset:</span>
+<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Draw a vertical violinplot grouped by a categorical variable:</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;total_bill&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;day&#39;, ylabel=&#39;total_bill&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/195256352d120c6abf75fc44a8d013eaeadeb2d178fa45fd17ef4d6eadf99dc7.png" src="../../../_images/195256352d120c6abf75fc44a8d013eaeadeb2d178fa45fd17ef4d6eadf99dc7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Draw a violinplot with nested grouping by two categorical variables:</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;day&#39;</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span><span class="s1">&#39;total_bill&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;muted&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x22c3a5e3ac0&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/e1f93166914e35c66cc5ced9ff04eb5e2c02987feb2e5ec61e30cb20ff204494.png" src="../../../_images/e1f93166914e35c66cc5ced9ff04eb5e2c02987feb2e5ec61e30cb20ff204494.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Draw split violins to compare the across the hue variable:</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;total_bill&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;muted&#39;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x22c3a722fd0&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/d151ba0456f1c94c222f234c7b6449cadca40dc2f3be919fbe92a3dc5e5eb812.png" src="../../../_images/d151ba0456f1c94c222f234c7b6449cadca40dc2f3be919fbe92a3dc5e5eb812.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Making use of &#39;split&#39; parameter to visualize KDE separately:</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;smoker&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;rocket&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;day&#39;, ylabel=&#39;total_bill&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/a262422ad1eb5dc1d496d2c97c31ac2c71fa3134e38b96c9a68aef3ca227fafc.png" src="../../../_images/a262422ad1eb5dc1d496d2c97c31ac2c71fa3134e38b96c9a68aef3ca227fafc.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Control violin order by passing an explicit order:</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;total_bill&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;muted&#39;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fri&#39;</span><span class="p">,</span><span class="s1">&#39;Sat&#39;</span><span class="p">,</span><span class="s1">&#39;Sun&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;day&#39;, ylabel=&#39;total_bill&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/315e2b71ba933ef4419f0ab5d581906584170c5ddde593f2b8d3b5f166e61b95.png" src="../../../_images/315e2b71ba933ef4419f0ab5d581906584170c5ddde593f2b8d3b5f166e61b95.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let us use &#39;scale&#39; parameter now:</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;smoker&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;rocket&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;day&#39;, ylabel=&#39;total_bill&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/92ca6ce226f0af88c503d44bd352d63624addf5c17e1c07966bddeddbc36cc26.png" src="../../../_images/92ca6ce226f0af88c503d44bd352d63624addf5c17e1c07966bddeddbc36cc26.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scale the violin width by the number of observations in each bin:</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;total_bill&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;muted&#39;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+               <span class="n">scale</span> <span class="o">=</span> <span class="s1">&#39;count&#39;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;day&#39;, ylabel=&#39;total_bill&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/8aefdb29c3111fe4a430143857086aa70367ce1e7c28925a5e5cd510d93f0716.png" src="../../../_images/8aefdb29c3111fe4a430143857086aa70367ce1e7c28925a5e5cd510d93f0716.png" />
+</div>
+</div>
+<p>If you closely observe, you would notice how the spread of <em>Violin range</em> get modified as per the individual bin <strong><code class="docutils literal notranslate"><span class="pre">count</span></code></strong> that we set as our <strong><code class="docutils literal notranslate"><span class="pre">scale</span></code></strong> parameter. Let us add little more variation to this plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let us get our Quartiles visible:</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;smoker&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;rocket&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;width&quot;</span><span class="p">,</span> <span class="n">inner</span><span class="o">=</span><span class="s2">&quot;quartile&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;day&#39;, ylabel=&#39;total_bill&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/82d594ed8002abc8a1b55b810e8ad6bcdd729790ffe0971a54beff691f52aa0c.png" src="../../../_images/82d594ed8002abc8a1b55b810e8ad6bcdd729790ffe0971a54beff691f52aa0c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Draw the quartiles as horizontal lines instead of a mini-box without split :</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;total_bill&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;muted&#39;</span><span class="p">,</span> <span class="n">inner</span><span class="o">=</span><span class="s1">&#39;quartile&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;day&#39;, ylabel=&#39;total_bill&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/fae7f99df4c17c935b4cf968f07a4093aabc5382425c0eb6edc4631e919def6c.png" src="../../../_images/fae7f99df4c17c935b4cf968f07a4093aabc5382425c0eb6edc4631e919def6c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Draw the quartiles as horizontal lines instead of a mini-box with split:</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;total_bill&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;muted&#39;</span><span class="p">,</span>\
+               <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inner</span><span class="o">=</span><span class="s1">&#39;quartile&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;day&#39;, ylabel=&#39;total_bill&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/f1148be093504c6db2b6ca68daf2bdd160ee40e1df18537cd11f476e90154099.png" src="../../../_images/f1148be093504c6db2b6ca68daf2bdd160ee40e1df18537cd11f476e90154099.png" />
+</div>
+</div>
+<p>So addition of just one more parameter, i.e. <code class="docutils literal notranslate"><span class="pre">inner</span></code> helps us represent data points within Violin perceptible in the form of it’s Quartiles (as visible in our plot). Alternatively, we may also leave it to <em>default</em> as <code class="docutils literal notranslate"><span class="pre">box</span></code>; or alter to <code class="docutils literal notranslate"><span class="pre">point</span></code> and <code class="docutils literal notranslate"><span class="pre">stick</span></code>. Let us try one more:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show each observation with a stick inside the violin:</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;day&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;total_bill&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;muted&#39;</span><span class="p">,</span>\
+               <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inner</span><span class="o">=</span><span class="s1">&#39;stick&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;day&#39;, ylabel=&#39;total_bill&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/3326c5f87c3e7ab618c0dad892060bbc32164dbb235ec8aa9c861ada44b28d3e.png" src="../../../_images/3326c5f87c3e7ab618c0dad892060bbc32164dbb235ec8aa9c861ada44b28d3e.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">scale_hue</span></code> helps in computing <em>scale</em> as per <em>count of arrival of Smokers</em> on each day at the restaurant.</p>
+<p>Let us now use a <strong>narrower bandwidth</strong> to reduce the <em>amount of smoothing</em> of our violin:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;smoker&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;icefire&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> 
+               <span class="n">inner</span><span class="o">=</span><span class="s2">&quot;stick&quot;</span><span class="p">,</span> <span class="n">scale_hue</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;day&#39;, ylabel=&#39;total_bill&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/4c36f0da111282899b52dca4e67b34fd88cafd4b57de33d9a91932016c05769a.png" src="../../../_images/4c36f0da111282899b52dca4e67b34fd88cafd4b57de33d9a91932016c05769a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;smoker&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;icefire&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> 
+               <span class="n">inner</span><span class="o">=</span><span class="s2">&quot;quartile&quot;</span><span class="p">,</span> <span class="n">scale_hue</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bw</span><span class="o">=</span><span class="mf">.35</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;day&#39;, ylabel=&#39;total_bill&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/4eeecf7f54a74f56c9eab5ee057b9b36ed6fd0fe6e81a5a500f3e7c84ee9f25f.png" src="../../../_images/4eeecf7f54a74f56c9eab5ee057b9b36ed6fd0fe6e81a5a500f3e7c84ee9f25f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a narrow bandwidth to reduce the amount of smoothing:</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span>\
+                    <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set2&quot;</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+                   <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="n">inner</span><span class="o">=</span><span class="s2">&quot;stick&quot;</span><span class="p">,</span>\
+                   <span class="n">scale_hue</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bw</span><span class="o">=</span><span class="mf">.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x22c3b278670&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/8be59c3ef572d7336eaa851dcb7ea956e76a91559e0f9dd0de492f01c80f55d1.png" src="../../../_images/8be59c3ef572d7336eaa851dcb7ea956e76a91559e0f9dd0de492f01c80f55d1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Draw horizontal violins:</span>
+<span class="n">planets_data</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;planets&quot;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;orbital_period&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;method&quot;</span><span class="p">,</span>\
+                   <span class="n">data</span><span class="o">=</span><span class="n">planets_data</span><span class="p">[</span><span class="n">planets_data</span><span class="o">.</span><span class="n">orbital_period</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">],</span>\
+                  <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;width&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set3&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;orbital_period&#39;, ylabel=&#39;method&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/b89e0d7473e7a84558dd0f74eb3faf8844ff06999a7af493cee21c7731f02df5.png" src="../../../_images/b89e0d7473e7a84558dd0f74eb3faf8844ff06999a7af493cee21c7731f02df5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Don’t let density extend past extreme values in the data:</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;orbital_period&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;method&quot;</span><span class="p">,</span>\
+                   <span class="n">data</span><span class="o">=</span><span class="n">planets_data</span><span class="p">[</span><span class="n">planets_data</span><span class="o">.</span><span class="n">orbital_period</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">],</span>\
+                  <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;width&quot;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Set3&quot;</span><span class="p">,</span><span class="n">cut</span> <span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;orbital_period&#39;, ylabel=&#39;method&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/8c327a0778ef50ecfea2410589354d22bfa7f8277b1ec18d9d8a56be1dcfb37f.png" src="../../../_images/8c327a0778ef50ecfea2410589354d22bfa7f8277b1ec18d9d8a56be1dcfb37f.png" />
+</div>
+</div>
+<p>Hmm! That certainly unruffles the <em>density curve</em> at the <em>peak</em> as well at the <em>edges</em>. Let us now try to get this plot segregated based on another variable. As used in previous lectures, we shall once again use <strong>Seaborn factorplot</strong> to achieve this and add <code class="docutils literal notranslate"><span class="pre">col</span></code> parameter for separation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">factorplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;smoker&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Pastel1&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;violin&quot;</span><span class="p">,</span> 
+               <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">.6</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/deb81e6af753dfdf69a8b75cefaeb7a23d50fcb156bcbcaadb168ee1a883cd9e.png" src="../../../_images/deb81e6af753dfdf69a8b75cefaeb7a23d50fcb156bcbcaadb168ee1a883cd9e.png" />
+</div>
+</div>
+<p>Well this spread looks just the way we wanted it to be. Let us now try to segregate the feed within a single plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Modifying Background Style:</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;darkgrid&quot;</span><span class="p">)</span>
+
+<span class="c1"># Defining size of subplot (&#39;f&#39; represents Figure &amp; &#39;ax&#39; represents Axes):</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Drafting our Seaborn plot with our defined colors:</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Male&quot;</span><span class="p">:</span> <span class="n">tableau_20</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="s2">&quot;Female&quot;</span><span class="p">:</span> <span class="n">tableau_20</span><span class="p">[</span><span class="mi">14</span><span class="p">]})</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">despine</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Using Matplotlib for further customization (Header at Top, X-axis, Y-axis &amp; Legend location on plot):</span>
+<span class="n">f</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Generated Total Bill by Gender&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Day of Week&quot;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Total Bill (USD)&quot;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x22c3c78df40&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/07a88cad9d9890f1039891daca67105acf7381e3cb9240c61784ccc3fbda852c.png" src="../../../_images/07a88cad9d9890f1039891daca67105acf7381e3cb9240c61784ccc3fbda852c.png" />
+</div>
+</div>
+<p>I could have actually plotted this without so much of Matplotlib customization BUT I wanted to simultaneously give you a glimpse of how <em>basic Matplotlib plots</em> work (some of you might be an expert with Matplotlib but am sure it shall help beginners). So I shall quickly run through detailing of the code here: We know that <code class="docutils literal notranslate"><span class="pre">sns.set()</span></code> helps us change the background. Then we have <code class="docutils literal notranslate"><span class="pre">f</span></code> and <code class="docutils literal notranslate"><span class="pre">ax</span></code> which when defined with <strong>Matplotlib Subplot</strong>, allows us to set a <strong>size for the figure</strong> and it’s <strong>axes</strong>.</p>
+<p>Then we plot a normal <strong>Seaborn Violin plot</strong> as done earlier and with <code class="docutils literal notranslate"><span class="pre">left=True</span></code>, we make all the <strong>spines (or axes) invisible</strong>. Again we use Matplotlib to <strong>add customized headers</strong> at <em>top</em>, as well as for both the <em>axes</em>; and finally decide the <strong>location</strong> for displaying the <strong>Legend</strong> on the plot.</p>
+<p>Let us now try to something more; as in try to add <strong>statistical summary</strong> to <strong>annotate plot</strong> with <strong>number of observations</strong> in our Violin plot using the same Tips dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Modifying background styling:</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+
+<span class="c1"># Heavy use of &#39;Pandas&#39;: Creating temporary functions using Lambda to combine DataFrames for sorting and grouping data</span>
+<span class="c1"># before I pipeline Violin plot and assign labels:</span>
+<span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
+       <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">count</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">])[</span><span class="s1">&#39;total_bill&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()))</span>
+       <span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">grouper</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">df</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">N = &#39;</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span>
+       <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span><span class="s1">&#39;day&#39;</span><span class="p">)</span> 
+       <span class="o">.</span><span class="n">pipe</span><span class="p">((</span><span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">),</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;grouper&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">)</span>
+       <span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;Day of Week&#39;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Total Bill (USD)&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Text(0.5, 0, &#39;Day of Week&#39;), Text(0, 0.5, &#39;Total Bill (USD)&#39;)]
+</pre></div>
+</div>
+<img alt="../../../_images/a2434bd3f9b8ac87886b2da889c160d44d1240f66bed7d39c4c76870f175a996.png" src="../../../_images/a2434bd3f9b8ac87886b2da889c160d44d1240f66bed7d39c4c76870f175a996.png" />
+</div>
+</div>
+<p>If you find it difficult understanding the <em>usage of Lambda functions</em> (if not so familiar with Python or Pandas in particular) on <em>DataFrames</em>, the let me try to do this the other way around, and whichever looks simpler to you, you may use whenever required:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assigning a variable to our Violin plot:</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;Paired&quot;</span><span class="p">)</span>
+
+<span class="c1"># Calculating value for &#39;n&#39;:</span>
+<span class="n">ylist</span> <span class="o">=</span> <span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;day&#39;</span><span class="p">])[</span><span class="s1">&#39;total_bill&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">xlist</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ylist</span><span class="p">))</span>
+<span class="n">strlist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;N = 62&#39;</span><span class="p">,</span><span class="s1">&#39;N = 19&#39;</span><span class="p">,</span><span class="s1">&#39;N = 87&#39;</span><span class="p">,</span><span class="s1">&#39;N = 76&#39;</span><span class="p">]</span>
+
+<span class="c1"># Adding calculated value as Text to plot:</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">strlist</span><span class="p">)):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">xlist</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">ylist</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">strlist</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/23bc4dc3df7e6e8bb4de7d828bb7e78a22505e394070e817e38c8526d823fb53.png" src="../../../_images/23bc4dc3df7e6e8bb4de7d828bb7e78a22505e394070e817e38c8526d823fb53.png" />
+</div>
+</div>
+<p>In both the cases, <strong>N</strong> is just the <strong>Number of observations</strong> on that particular day. In the second plot, I have tried in fact tried to keep the value inside the plot but didn’t do the same above. The reason is that there might be scenarios where the summary statistics that you’re trying to deduce is so <em>lengthy with details</em> that NEITHER would it <em>look good</em> inside a plot NOR would it <em>fit in</em>, so in those cases, it is preferable to keep them on the axis itself.</p>
+<p>Please do remember that Seaborn in itself is just a <em>Visualization package</em> and creates compatibility to accept <em>Statistical packages</em> under it’s hood but for core statistical summary, you will have to call packages like <em>Statsmodels</em>. Though monkey hacks are always available here &amp; there.</p>
+<p>Now, let us try to combine little <em>more statistics</em> BUT graphically on top our Violin plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">,</span> <span class="n">font_scale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+
+<span class="c1"># Adding a new column (with any two categorical data we want):</span>
+<span class="n">tips</span><span class="p">[</span><span class="s2">&quot;sex_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[[</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">height_ratios</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">hspace</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># Selection of Order for statistical display:</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;sex_time&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;smoker&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">,</span> 
+              <span class="n">order</span><span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Female_Lunch&quot;</span><span class="p">,</span> <span class="s2">&quot;Male_Lunch&quot;</span><span class="p">,</span> <span class="s2">&quot;Female_Dinner&quot;</span><span class="p">,</span> <span class="s2">&quot;Male_Dinner&quot;</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;sex_time&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;smoker&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;plasma&quot;</span><span class="p">,</span> 
+               <span class="n">split</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="n">scale_hue</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">inner</span><span class="o">=</span><span class="s2">&quot;stick&quot;</span><span class="p">,</span> 
+               <span class="n">order</span><span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Female_Lunch&quot;</span><span class="p">,</span> <span class="s2">&quot;Male_Lunch&quot;</span><span class="p">,</span> <span class="s2">&quot;Female_Dinner&quot;</span><span class="p">,</span> <span class="s2">&quot;Male_Dinner&quot;</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s2">&quot;Lunch (Female)&quot;</span><span class="p">,</span> <span class="s2">&quot;Lunch (Male)&quot;</span><span class="p">,</span> <span class="s2">&quot;Dinner (Female)&quot;</span><span class="p">,</span> <span class="s2">&quot;Dinner (Male)&quot;</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time of Day (Gender)&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x22c3c8f1040&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/8816c055846fb8114ada7b2ffeb1e3e5e1f3b2fb7d68289896266119ffefbc55.png" src="../../../_images/8816c055846fb8114ada7b2ffeb1e3e5e1f3b2fb7d68289896266119ffefbc55.png" />
+</div>
+</div>
+<p>Here we have been able to successfully merge a <strong>Countplot</strong> on top of a <strong>Violin plot</strong>, thus a pretty decent match of <strong>Count of observations</strong> along with the <strong>Probability Density</strong>. Please note that the limit of customization is endless and I highly encourage you to try. Please make good use of resources online as well as offline to make the most out of it. In our next lecture, we shall be exploring a plot that you would see floating around more than any other plot, i.e. A <strong><a class="reference internal" href="#/content/tools/matplotlib/seaborn/013_Seaborn_Bar_Plot_Point_Plot_and_Count_Plot.ipynb"><span class="xref myst">Bar Plot, Point Plot and Count Plot</span></a></strong>. Till then, Enjoy Visualizing!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/tools/seaborn"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="011_Seaborn_Categorical_Box_Plot.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Seaborn: Box Plot</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="013_Seaborn_Categorical_Bar_Plot_Point_Plot_and_Count_Plot.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bar Plot, Point Plot and Count plot</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-violin-plot">Anatomy of Violin Plot</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

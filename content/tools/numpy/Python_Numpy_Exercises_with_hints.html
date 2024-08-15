@@ -1,0 +1,1398 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Python NumPy Exercises &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/tools/numpy/Python_Numpy_Exercises_with_hints';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/tools/numpy/Python_Numpy_Exercises_with_hints.html" />
+    <link rel="icon" href="../../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Python Pandas Module" href="../pandas/pandas_toc.html" />
+    <link rel="prev" title="Arrays reorganizing" href="005_Python_NumPy_Array_Part4.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Essentials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../essentials/intro_python.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/introduction/intro_toc.html">Introduction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/002_Hello_World.html">Hello World</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/003_Python_Keywords_and_Identifiers.html">Keywords and identifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/004_Python_Statement_Indentation_Comments.html">Statement indentation &amp; comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/005_Python_Variables_%26_Constants.html">Variables &amp; constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/006_Python_Literals.html">Literals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/007_Python_Data_Types.html">Datatypes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/008_Python_Type_Conversion.html">Type conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/009_Python_Input_Output_Import.html">I/O &amp; imports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/010_Python_Operators.html">Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/011_Python_Namespace_and_Scope.html">Namespace &amp; scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/Interpreter_Vs_Compiler.html">Interpreter vs compiler</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/datatypes/datatypes_toc.html">Datatypes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/001_Python_Numbers.html">Numbers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/002_Python_String.html">String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/003_Python_List.html">List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/004_Python_Tuple.html">Tuple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/005_Python_Dictionary.html">Dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/006_Python_Sets.html">Sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/Python_List_Comprehension.html">List comprehension</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/controlflow/controlflow_toc.html">Control flows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/000_Python_Flow_Control_statement.html">Flow control statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/001_Python_if_statement.html">If</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/002_Python_if_else_statement.html">If else</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/003_Python_if_elif_else_statement.html">If elif else</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/004_Python_Nested_if_statement.html">Nested if</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/005_Python_for_Loop.html">Loops in Python</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/006_Python_while_Loop.html">Loops in Python</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/007_Python_break_continue_pass_statements.html">Break continue &amp; pass</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/functions/functions_toc.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/001_Python_Functions.html">Python Functions</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/002_Python_Function_Global_Local_Nonlocal.html">Global, local and nonlocal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/003_Python_Function_global_Keywords.html">Python <code class="docutils literal notranslate"><span class="pre">global</span></code> Keyword</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/004_Python_Function_Arguments.html">Function Argument and Parameter</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/005_Python_Function_Recursion.html">Python Recursion</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/006_Python_Function_Anonymous.html">Anonymous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/007_Python_Function_Module.html">Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/008_Python_Function_random_Module.html">Random module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/009_Python_Function_math_Module.html">Math module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/010_Python_Function_Package.html">Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/Python_Docstrings.html">Docstrings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/Python_User_defined_Functions.html">User defined functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/files/files_toc.html">Files</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/files/001_Python_File_Input_Output.html">File I/O</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/files/002_Python_File_Directory.html">File directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/files/003_Python_File_Exception.html">File exception</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/files/004_Python_Exceptions_Handling.html">Exceptions handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/files/005_Python_User_defined_Exceptions.html">User defined exceptions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/objects/objects_toc.html">Objects &amp; classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/objects/001_Python_OOPs_Concepts.html">OOPs concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/objects/002_Python_Classes_and_Objects.html">Python  Classes and Objects</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/objects/003_Python_Inheritance.html">Inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/objects/004_Python_Operator_Overloading.html">Operator overloading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/objects/self_in_Python_Demystified.html">self demystified</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/advanced/advanced_toc.html">Advanced</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/001_Python_Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/002_Python_Generators.html">Generators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/003_Python_Closure.html">Closure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/004_Python_Decorators.html">Decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/005_Python_Property.html">Property</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/006_Python_RegEx.html">RegEx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/Python_args_and_kwargs.html">args and kwargs</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../essentials/python/datetime/datetime_toc.html">Date time module</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/001_Python_datetime_Module.html">Datetime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/002_Python_strftime.html">strftime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/003_Python_strptime.html">strptime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/004_Python_current_date_and_time.html">Current date &amp; time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/005_Python_get_current_time.html">Current time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/006_Python_timestamp_to_datetime.html">Timestamp to datetime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/007_Python_time_Module.html">Time module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/008_Python_sleep.html">Sleep</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../essentials/mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../essentials/mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../essentials/mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../essentials/mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../essentials/intro_statistics.html">Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../essentials/statistics/statistics.html">Work in progress</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../intro_tools.html">Data analytics</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="numpy_toc.html">NumPy</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="001_Python_NumPy.html">Python NumPy</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="002_Python_NumPy_Array_Part1.html">Arrays Part 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="003_Python_NumPy_Array_Part2.html">Arrays Part 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="004_Python_NumPy_Array_Part3.html">Arrays Part 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="005_Python_NumPy_Array_Part4.html">Arrays Part 4</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_DataFrame.html">Python Pandas</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/001_Python_Pandas_DataFrame_from_Dictionary.html">Dataframe from dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/002_Python_Pandas_DataFrame_from_List.html">Dataframe from List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/003_Python_Pandas_DataFrame_head_and_tail.html">Head &amp; tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/004_Python_Pandas_DataFrame_drop_columns.html">Drop columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/005_Python_Pandas_DataFrame_drop_duplicates.html">Drop duplicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/006_Python_Pandas_DataFrame_drop_columns_with_NA.html">Drop with NA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/007_Python_Pandas_DataFrame_rename_columns.html">Rename columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/008_Python_Pandas_DataFrame_to_Python_dictionary.html">Dataframe to python dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/009_Python_Pandas_DataFrame_set_index.html">Set index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/010_Python_Pandas_DataFrame_reset_index.html">Reset index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/002_Python_Pandas_Exercise_1.html">Exercise 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/003_Python_Pandas_Exercise_2.html">Exercise 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../matplotlib/002_Python_Matplotlib_Exercise_1.html">Matplotlib</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../matplotlib/003_Python_Matplotlib_Exercise_2.html">Matplotlib 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../seaborn/seaborn_toc.html">Seaborn</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/001_Seaborn_Loading_Dataset.html">Loading Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/002_Seaborn_Controlling_Aesthetics.html">Controlling aesthetics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/003_Matplotlib_vs_Seaborn.html">Matplotlib vs seaborn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/004_Seaborn_Color_Palettes.html">Color palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/005_Seaborn_LM_Plot_and_Reg_Plot.html">LM and regerssion plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/006_Seaborn_Scatter_Plot_and_Joint_Plot.html">Scatter and join plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/007_Seaborn_Additional_Regression_Plots.html">Regerssion plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/008_Seaborn_Distribution_Plots.html">Seaborn distribution plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/009_Seaborn_Categorical_Swarm_Plot.html">Categorical swarn plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/010_Seaborn_Categorical_Strip_Plot.html">Categorical strip plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/011_Seaborn_Categorical_Box_Plot.html">Categorical box plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/012_Seaborn_Categorical_Violin_Plot.html">Categorical violin plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/013_Seaborn_Categorical_Bar_Plot_Point_Plot_and_Count_Plot.html">Categorical bar, point &amp; count plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/014_Seaborn_Categorical_Factor_Plot.html">Categorical factor plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/015_Seaborn_TimeSeries_and_LetterValue_Plot.html">Timeseries and letter value plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/016_Seaborn_PairGrid_Plot.html">Pair grid Pplot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/017_Seaborn_FacetGrid_Plot.html">Facet grid plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/018_Seaborn_Heat_Map.html">Heat map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/019_Seaborn_Cluster_Map.html">Cluster map</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools-for-nn.html">Neural networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/01_pytorch_workflow.html">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/03_pytorch_computer_vision.html">Computer vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/04_pytorch_custom_datasets.html">Custom datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/05_pytorch_going_modular.html">Going Modular</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/06_pytorch_transfer_learning.html">Transfer learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/07_pytorch_experiment_tracking.html">Experiment tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/08_pytorch_paper_replicating.html">Replicating papers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/09_pytorch_model_deployment.html">Model deployment</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools-for-llms.html">LLMs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../langchain/LangChain%20Cookbook%20Part%201%20-%20Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../langchain/LangChain%20Cookbook%20Part%202%20-%20Use%20Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../langchain/projects/project_toc.html">Projects gallery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langchain/langsmith.html">LangSmith</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langchain/langgraph.html">LangGraph</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../hf/intro.html">HuggingFace introduction and setup</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../concepts/concepts.html">Concepts at glance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts/linear-regression.html">Linear regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts/logistic-regression.html">Logistic regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts/k-means.html">K-means</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts/anomaly-detection.html">Anomaly detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts/neural-networks.html">Neural networks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Blogs &amp; resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/courses/courses_toc.html">Courses</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About me</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/tools/numpy/Python_Numpy_Exercises_with_hints.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/tools/numpy/Python_Numpy_Exercises_with_hints.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/tools/numpy/Python_Numpy_Exercises_with_hints.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Python NumPy Exercises</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-numpy-package-under-the-name-np-and-print-the-numpy-version-and-the-configuration">1. Import the numpy package under the name <code class="docutils literal notranslate"><span class="pre">np</span></code> and print the numpy version and the configuration (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-a-list-of-numeric-value-into-a-one-dimensional-numpy-array">2. Convert a list of numeric value into a one-dimensional NumPy array (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-null-vector-of-size-9">3. Create a null vector of size 9 (★☆☆)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-find-the-memory-size-of-any-array">4. How to find the memory size of any array (★☆☆)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-documentation-of-the-numpy-add-function-from-the-command-line">5. How to get the documentation of the numpy add function from the command line? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-null-vector-of-size-12-but-the-sixth-value-which-is-1">6. Create a null vector of size 12 but the sixth value which is 1 (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-vector-with-values-ranging-from-20-to-59">7. Create a vector with values ranging from 20 to 59 (★☆☆)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reverse-a-vector-first-element-becomes-last">8. Reverse a vector (first element becomes last) (★☆☆)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-3x3-matrix-with-values-ranging-from-12-to-20">9. Create a 3x3 matrix with values ranging from 12 to 20 (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-indices-of-non-zero-elements-from-3-7-0-0-9-0">10. Find indices of non-zero elements from [3,7,0,0,9,0] (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-4x4-identity-matrix">11. Create a 4x4 identity matrix (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-2x2x2-array-with-random-values">12. Create a 2x2x2 array with random values (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-9x9-array-with-random-values-and-find-the-minimum-and-maximum-values">13. Create a 9x9 array with random values and find the minimum and maximum values (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-random-vector-of-size-20-and-find-the-mean-value">6# 6# 14. Create a random vector of size 20 and find the mean value (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-2d-array-with-1-on-the-border-and-0-inside">15. Create a 2d array with 1 on the border and 0 inside (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-border-filled-with-0s-around-an-existing-array">16. How to add a border (filled with 0’s) around an existing array? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-result-of-the-following-expression">17. What is the result of the following expression? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-6x6-matrix-with-values-1-2-3-4-just-below-the-diagonal">18. Create a 6x6 matrix with values 1,2,3,4 just below the diagonal (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-6x6-matrix-and-fill-it-with-a-checkerboard-pattern">19. Create a 6x6 matrix and fill it with a checkerboard pattern (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-8-9-10-shape-array-what-is-the-index-x-y-z-of-the-100th-element">20. Consider a (8,9,10) shape array, what is the index (x,y,z) of the 100th element? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-checkerboard-8x8-matrix-using-the-tile-function">21. Create a checkerboard 8x8 matrix using the tile function (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalize-a-6x6-random-matrix">22. Normalize a 6x6 random matrix (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-number-of-elements-of-an-array-length-of-one-array-element-in-bytes-and-total-bytes-consumed-by-the-elements">23. find the number of elements of an array, length of one array element in bytes and total bytes consumed by the elements. (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiply-a-6x3-matrix-by-a-3x4-matrix-real-matrix-product">24. Multiply a 6x3 matrix by a 3x4 matrix (real matrix product) (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#given-a-1d-array-negate-all-elements-which-are-between-3-and-8-in-place">25. Given a 1D array, negate all elements which are between 3 and 8, in place. (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-output-of-the-following-script">26. What is the output of the following script? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-python-program-compare-two-arrays-using-numpy">27. Write a Python program compare two arrays using numpy (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-result-of-the-following-expressions">28. What are the result of the following expressions? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-round-away-from-zero-a-float-array">29. How to round away from zero a float array ? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-find-common-values-between-two-arrays">30. How to find common values between two arrays? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-ignore-all-numpy-warnings-not-recommended">31. How to ignore all numpy warnings (not recommended)? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-the-following-expressions-true">32. Is the following expressions true? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-dates-of-yesterday-today-and-tomorrow">33. How to get the dates of yesterday, today and tomorrow? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-all-the-dates-corresponding-to-the-month-of-january-2016">34. How to get all the dates corresponding to the month of January 2016? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-compute-a-b-a-2-in-place-without-copy">35. How to compute ((A+B)*(-A/2)) in place (without copy)? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-the-integer-part-of-a-random-array-of-positive-numbers-using-4-different-methods">36. Extract the integer part of a random array of positive numbers using 4 different methods (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-3x3-matrix-with-row-values-ranging-from-0-to-2">37. Create a 3x3 matrix with row values ranging from 0 to 2 (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-generator-function-that-generates-9-integers-and-use-it-to-build-an-array">38. Consider a generator function that generates 9 integers and use it to build an array (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-vector-of-size-10-with-values-ranging-from-0-to-1-both-excluded">39. Create a vector of size 10 with values ranging from 0 to 1, both excluded (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-random-vector-of-size-10-and-sort-it">40. Create a random vector of size 10 and sort it (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-sum-a-small-array-faster-than-np-sum">41. How to sum a small array faster than np.sum? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-two-random-array-a-and-b-check-if-they-are-equal">42. Consider two random array A and B, check if they are equal (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-an-array-immutable-read-only">43. Make an array immutable (read-only) (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-random-5x2-matrix-representing-cartesian-coordinates-convert-them-to-polar-coordinates">44. Consider a random 5x2 matrix representing cartesian coordinates, convert them to polar coordinates (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-random-vector-of-size-5-and-replace-the-maximum-value-by-0">45. Create random vector of size 5 and replace the maximum value by 0 (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-structured-array-with-x-and-y-coordinates-covering-the-0-1-x-0-1-area">46. Create a structured array with <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinates covering the [0,1]x[0,1] area (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#given-two-arrays-x-and-y-construct-the-cauchy-matrix-c-cij-1-xi-yj">47. Given two arrays, X and Y, construct the Cauchy matrix C (Cij =1/(xi - yj)) (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#print-the-minimum-and-maximum-representable-value-for-each-numpy-scalar-type">48. Print the minimum and maximum representable value for each numpy scalar type (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-print-all-the-values-of-an-array">49. How to print all the values of an array? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-find-the-closest-value-to-a-given-scalar-in-a-vector">50. How to find the closest value (to a given scalar) in a vector? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-structured-array-representing-a-position-x-y-and-a-color-r-g-b">51. Create a structured array representing a position (x,y) and a color (r,g,b) (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-random-vector-with-shape-100-2-representing-coordinates-find-point-by-point-distances">52. Consider a random vector with shape (100,2) representing coordinates, find point by point distances (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-convert-a-float-32-bits-array-into-an-integer-32-bits-in-place">53. How to convert a float (32 bits) array into an integer (32 bits) in place?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-read-the-following-file">54. How to read the following file? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-equivalent-of-enumerate-for-numpy-arrays">55. What is the equivalent of enumerate for numpy arrays? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-a-generic-2d-gaussian-like-array">56. Generate a generic 2D Gaussian-like array (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-randomly-place-e-elements-in-a-2d-array">57. How to randomly place e elements in a 2D array? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subtract-the-mean-of-each-row-of-a-matrix">58. Subtract the mean of each row of a matrix (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-sort-an-array-by-the-nth-column">59. How to sort an array by the nth column? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-tell-if-a-given-2d-array-has-null-columns">60. How to tell if a given 2D array has null columns? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-nearest-value-from-a-given-value-in-an-array">61. Find the nearest value from a given value in an array (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considering-two-arrays-with-shape-1-3-and-3-1-how-to-compute-their-sum-using-an-iterator">62. Considering two arrays with shape (1,3) and (3,1), how to compute their sum using an iterator? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-an-array-class-that-has-a-name-attribute">63. Create an array class that has a name attribute (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-given-vector-how-to-add-1-to-each-element-indexed-by-a-second-vector-be-careful-with-repeated-indices">64. Consider a given vector, how to add 1 to each element indexed by a second vector (be careful with repeated indices)? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-accumulate-elements-of-a-vector-x-to-an-array-f-based-on-an-index-list-i">65. How to accumulate elements of a vector (X) to an array (F) based on an index list (I)? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considering-a-w-h-3-image-of-dtype-ubyte-compute-the-number-of-unique-colors">66. Considering a (w,h,3) image of (dtype=ubyte), compute the number of unique colors (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considering-a-four-dimensions-array-how-to-get-sum-over-the-last-two-axis-at-once">67. Considering a four dimensions array, how to get sum over the last two axis at once? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considering-a-one-dimensional-vector-d-how-to-compute-means-of-subsets-of-d-using-a-vector-s-of-same-size-describing-subset-indices">68. Considering a one-dimensional vector D, how to compute means of subsets of D using a vector S of same size describing subset  indices? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-diagonal-of-a-dot-product">69. How to get the diagonal of a dot product? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-the-vector-1-2-3-4-5-how-to-build-a-new-vector-with-3-consecutive-zeros-interleaved-between-each-value">70. Consider the vector [1, 2, 3, 4, 5], how to build a new vector with 3 consecutive zeros interleaved between each value? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-an-array-of-dimension-5-5-3-how-to-mulitply-it-by-an-array-with-dimensions-5-5">71. Consider an array of dimension (5,5,3), how to mulitply it by an array with dimensions (5,5)? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-swap-two-rows-of-an-array">72. How to swap two rows of an array? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-set-of-10-triplets-describing-10-triangles-with-shared-vertices-find-the-set-of-unique-line-segments-composing-all-the-triangles">73. Consider a set of 10 triplets describing 10 triangles (with shared vertices), find the set of unique line segments composing all the  triangles (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#given-a-sorted-array-c-that-corresponds-to-a-bincount-how-to-produce-an-array-a-such-that-np-bincount-a-c">74. Given a sorted array C that corresponds to a bincount, how to produce an array A such that np.bincount(A) == C? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-compute-averages-using-a-sliding-window-over-an-array">75. How to compute averages using a sliding window over an array? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-one-dimensional-array-z-build-a-two-dimensional-array-whose-first-row-is-z-0-z-1-z-2-and-each-subsequent-row-is-shifted-by-1-last-row-should-be-z-3-z-2-z-1">76. Consider a one-dimensional array Z, build a two-dimensional array whose first row is (Z[0],Z[1],Z[2]) and each subsequent row is  shifted by 1 (last row should be (Z[-3],Z[-2],Z[-1]) (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-negate-a-boolean-or-to-change-the-sign-of-a-float-inplace">77. How to negate a boolean, or to change the sign of a float inplace? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-2-sets-of-points-p0-p1-describing-lines-2d-and-a-point-p-how-to-compute-distance-from-p-to-each-line-i-p0-i-p1-i">78. Consider 2 sets of points P0,P1 describing lines (2d) and a point p, how to compute distance from p to each line i (P0[i],P1[i])? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-2-sets-of-points-p0-p1-describing-lines-2d-and-a-set-of-points-p-how-to-compute-distance-from-each-point-j-p-j-to-each-line-i-p0-i-p1-i">79. Consider 2 sets of points P0,P1 describing lines (2d) and a set of points P, how to compute distance from each point j (P[j]) to each line i (P0[i],P1[i])? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-an-arbitrary-array-write-a-function-that-extract-a-subpart-with-a-fixed-shape-and-centered-on-a-given-element-pad-with-a-fill-value-when-necessary">80. Consider an arbitrary array, write a function that extract a subpart with a fixed shape and centered on a given element (pad with a <code class="docutils literal notranslate"><span class="pre">fill</span></code> value when necessary) (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-an-array-a-1-2-3-4-5-6-7-8-9-10-11-12-13-14-how-to-generate-an-array-b-1-2-3-4-2-3-4-5-3-4-5-6-11-12-13-14">81. Consider an array a = [1,2,3,4,5,6,7,8,9,10,11,12,13,14], how to generate an array b = [[1,2,3,4], [2,3,4,5], [3,4,5,6], …, [11,12,13,14]]? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-a-matrix-rank">82. Compute a matrix rank (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-find-the-most-frequent-value-in-an-array">83. How to find the most frequent value in an array?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-all-the-contiguous-3x3-blocks-from-a-random-10x10-matrix">84. Extract all the contiguous 3x3 blocks from a random 10x10 matrix (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-2d-array-subclass-such-that-a-i-j-a-j-i">85. Create a 2D array subclass such that a[i,j] == a[j,i] (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-set-of-p-matrices-wich-shape-n-n-and-a-set-of-p-vectors-with-shape-n-1-how-to-compute-the-sum-of-of-the-p-matrix-products-at-once-result-has-shape-n-1">86. Consider a set of p matrices wich shape (n,n) and a set of p vectors with shape (n,1). How to compute the sum of of the p matrix products at once? (result has shape (n,1)) (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-16x16-array-how-to-get-the-block-sum-block-size-is-4x4">87. Consider a 16x16 array, how to get the block-sum (block size is 4x4)? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-implement-the-game-of-life-using-numpy-arrays">88. How to implement the Game of Life using numpy arrays? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-n-largest-values-of-an-array">89. How to get the n largest values of an array (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#given-an-arbitrary-number-of-vectors-build-the-cartesian-product-every-combinations-of-every-item">90. Given an arbitrary number of vectors, build the cartesian product (every combinations of every item) (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-create-a-record-array-from-a-regular-array">91. How to create a record array from a regular array? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-large-vector-a-compute-a-to-the-power-of-3-using-3-different-methods">92. Consider a large vector A, compute A to the power of 3 using 3 different methods (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-two-arrays-a-and-b-of-shape-8-3-and-2-2-how-to-find-rows-of-a-that-contain-elements-of-each-row-of-b-regardless-of-the-order-of-the-elements-in-b">93. Consider two arrays A and B of shape (8,3) and (2,2). How to find rows of A that contain elements of each row of B regardless of the order of the elements in B? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considering-a-10x3-matrix-extract-rows-with-unequal-values-e-g-2-2-3">94. Considering a 10x3 matrix, extract rows with unequal values (e.g. [2,2,3]) (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-a-vector-of-ints-into-a-matrix-binary-representation">95. Convert a vector of ints into a matrix binary representation (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#given-a-two-dimensional-array-how-to-extract-unique-rows">96. Given a two dimensional array, how to extract unique rows? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considering-2-vectors-a-b-write-the-einsum-equivalent-of-inner-outer-sum-and-mul-function">97. Considering 2 vectors A &amp; B, write the einsum equivalent of inner, outer, sum, and mul function (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considering-a-path-described-by-two-vectors-x-y-how-to-sample-it-using-equidistant-samples">98. Considering a path described by two vectors (X,Y), how to sample it using equidistant samples (★★★)?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#given-an-integer-n-and-a-2d-array-x-select-from-x-the-rows-which-can-be-interpreted-as-draws-from-a-multinomial-distribution-with-n-degrees-i-e-the-rows-which-only-contain-integers-and-which-sum-to-n">99. Given an integer n and a 2D array X, select from X the rows which can be interpreted as draws from a multinomial distribution with n degrees, i.e., the rows which only contain integers and which sum to n. (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-bootstrapped-95-confidence-intervals-for-the-mean-of-a-1d-array-x-i-e-resample-the-elements-of-an-array-with-replacement-n-times-compute-the-mean-of-each-sample-and-then-compute-percentiles-over-the-means">100. Compute bootstrapped 95% confidence intervals for the mean of a 1D array X (i.e., resample the elements of an array with replacement N times, compute the mean of each sample, and then compute percentiles over the means). (★★★)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="python-numpy-exercises">
+<h1>Python NumPy Exercises<a class="headerlink" href="#python-numpy-exercises" title="Link to this heading">#</a></h1>
+<p>This is a collection of exercises that have been collected in the numpy mailing list, on stack overflow
+and in the numpy documentation. The goal of this collection is to offer a quick reference for both old
+and new users but also to provide a set of exercises for those who teach.</p>
+<section id="import-the-numpy-package-under-the-name-np-and-print-the-numpy-version-and-the-configuration">
+<h2>1. Import the numpy package under the name <code class="docutils literal notranslate"><span class="pre">np</span></code> and print the numpy version and the configuration (★☆☆)<a class="headerlink" href="#import-the-numpy-package-under-the-name-np-and-print-the-numpy-version-and-the-configuration" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Hint:</span> <span class="pre">import</span> <span class="pre">…</span> <span class="pre">as</span></code> and <code class="docutils literal notranslate"><span class="pre">np.__version__,</span> <span class="pre">np.show_config)</span></code></p>
+</section>
+<section id="convert-a-list-of-numeric-value-into-a-one-dimensional-numpy-array">
+<h2>2. Convert a list of numeric value into a one-dimensional NumPy array (★☆☆)<a class="headerlink" href="#convert-a-list-of-numeric-value-into-a-one-dimensional-numpy-array" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡</span> <span class="pre">hint:</span> <span class="pre">numpy.array</span></code></p>
+</section>
+<section id="create-a-null-vector-of-size-9">
+<h2>3. Create a null vector of size 9 (★☆☆)<a class="headerlink" href="#create-a-null-vector-of-size-9" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡</span> <span class="pre">hint:</span> <span class="pre">np.zeros</span></code></p>
+<section id="how-to-find-the-memory-size-of-any-array">
+<h3>4. How to find the memory size of any array (★☆☆)<a class="headerlink" href="#how-to-find-the-memory-size-of-any-array" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">💡</span> <span class="pre">hint:</span> <span class="pre">size,</span> <span class="pre">itemsize</span></code></p>
+</section>
+</section>
+<section id="how-to-get-the-documentation-of-the-numpy-add-function-from-the-command-line">
+<h2>5. How to get the documentation of the numpy add function from the command line? (★☆☆)<a class="headerlink" href="#how-to-get-the-documentation-of-the-numpy-add-function-from-the-command-line" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.info</span></code></p>
+</section>
+<section id="create-a-null-vector-of-size-12-but-the-sixth-value-which-is-1">
+<h2>6. Create a null vector of size 12 but the sixth value which is 1 (★☆☆)<a class="headerlink" href="#create-a-null-vector-of-size-12-but-the-sixth-value-which-is-1" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">array[12]</span></code></p>
+</section>
+<section id="create-a-vector-with-values-ranging-from-20-to-59">
+<h2>7. Create a vector with values ranging from 20 to 59 (★☆☆)<a class="headerlink" href="#create-a-vector-with-values-ranging-from-20-to-59" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">arange</span></code></p>
+<section id="reverse-a-vector-first-element-becomes-last">
+<h3>8. Reverse a vector (first element becomes last) (★☆☆)<a class="headerlink" href="#reverse-a-vector-first-element-becomes-last" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">array[::-1]</span></code></p>
+</section>
+</section>
+<section id="create-a-3x3-matrix-with-values-ranging-from-12-to-20">
+<h2>9. Create a 3x3 matrix with values ranging from 12 to 20 (★☆☆)<a class="headerlink" href="#create-a-3x3-matrix-with-values-ranging-from-12-to-20" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">reshape</span></code></p>
+</section>
+<section id="find-indices-of-non-zero-elements-from-3-7-0-0-9-0">
+<h2>10. Find indices of non-zero elements from [3,7,0,0,9,0] (★☆☆)<a class="headerlink" href="#find-indices-of-non-zero-elements-from-3-7-0-0-9-0" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.nonzero</span></code></p>
+</section>
+<section id="create-a-4x4-identity-matrix">
+<h2>11. Create a 4x4 identity matrix (★☆☆)<a class="headerlink" href="#create-a-4x4-identity-matrix" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.eye</span></code></p>
+</section>
+<section id="create-a-2x2x2-array-with-random-values">
+<h2>12. Create a 2x2x2 array with random values (★☆☆)<a class="headerlink" href="#create-a-2x2x2-array-with-random-values" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.random.random</span></code></p>
+</section>
+<section id="create-a-9x9-array-with-random-values-and-find-the-minimum-and-maximum-values">
+<h2>13. Create a 9x9 array with random values and find the minimum and maximum values (★☆☆)<a class="headerlink" href="#create-a-9x9-array-with-random-values-and-find-the-minimum-and-maximum-values" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">min,</span> <span class="pre">max</span></code></p>
+</section>
+<section id="create-a-random-vector-of-size-20-and-find-the-mean-value">
+<h2>6# 6# 14. Create a random vector of size 20 and find the mean value (★☆☆)<a class="headerlink" href="#create-a-random-vector-of-size-20-and-find-the-mean-value" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">mean</span></code></p>
+</section>
+<section id="create-a-2d-array-with-1-on-the-border-and-0-inside">
+<h2>15. Create a 2d array with 1 on the border and 0 inside (★☆☆)<a class="headerlink" href="#create-a-2d-array-with-1-on-the-border-and-0-inside" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">array[1:-1,</span> <span class="pre">1:-1]</span></code></p>
+</section>
+<section id="how-to-add-a-border-filled-with-0s-around-an-existing-array">
+<h2>16. How to add a border (filled with 0’s) around an existing array? (★☆☆)<a class="headerlink" href="#how-to-add-a-border-filled-with-0s-around-an-existing-array" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.pad</span></code></p>
+</section>
+<section id="what-is-the-result-of-the-following-expression">
+<h2>17. What is the result of the following expression? (★☆☆)<a class="headerlink" href="#what-is-the-result-of-the-following-expression" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span>
+<span class="mf">0.7</span> <span class="o">==</span> <span class="mi">7</span> <span class="o">*</span> <span class="mf">0.1</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">NaN</span> <span class="pre">=</span> <span class="pre">not</span> <span class="pre">a</span> <span class="pre">number,</span> <span class="pre">inf</span> <span class="pre">=</span> <span class="pre">infinity</span></code></p>
+</section>
+<section id="create-a-6x6-matrix-with-values-1-2-3-4-just-below-the-diagonal">
+<h2>18. Create a 6x6 matrix with values 1,2,3,4 just below the diagonal (★☆☆)<a class="headerlink" href="#create-a-6x6-matrix-with-values-1-2-3-4-just-below-the-diagonal" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.diag</span></code></p>
+</section>
+<section id="create-a-6x6-matrix-and-fill-it-with-a-checkerboard-pattern">
+<h2>19. Create a 6x6 matrix and fill it with a checkerboard pattern (★☆☆)<a class="headerlink" href="#create-a-6x6-matrix-and-fill-it-with-a-checkerboard-pattern" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">array[::2]</span></code></p>
+</section>
+<section id="consider-a-8-9-10-shape-array-what-is-the-index-x-y-z-of-the-100th-element">
+<h2>20. Consider a (8,9,10) shape array, what is the index (x,y,z) of the 100th element? (★☆☆)<a class="headerlink" href="#consider-a-8-9-10-shape-array-what-is-the-index-x-y-z-of-the-100th-element" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.unravel_index</span></code></p>
+</section>
+<section id="create-a-checkerboard-8x8-matrix-using-the-tile-function">
+<h2>21. Create a checkerboard 8x8 matrix using the tile function (★☆☆)<a class="headerlink" href="#create-a-checkerboard-8x8-matrix-using-the-tile-function" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.tile</span></code></p>
+</section>
+<section id="normalize-a-6x6-random-matrix">
+<h2>22. Normalize a 6x6 random matrix (★☆☆)<a class="headerlink" href="#normalize-a-6x6-random-matrix" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">(x</span> <span class="pre">-mean)/std</span></code></p>
+</section>
+<section id="find-the-number-of-elements-of-an-array-length-of-one-array-element-in-bytes-and-total-bytes-consumed-by-the-elements">
+<h2>23. find the number of elements of an array, length of one array element in bytes and total bytes consumed by the elements. (★☆☆)<a class="headerlink" href="#find-the-number-of-elements-of-an-array-length-of-one-array-element-in-bytes-and-total-bytes-consumed-by-the-elements" title="Link to this heading">#</a></h2>
+</section>
+<section id="multiply-a-6x3-matrix-by-a-3x4-matrix-real-matrix-product">
+<h2>24. Multiply a 6x3 matrix by a 3x4 matrix (real matrix product) (★☆☆)<a class="headerlink" href="#multiply-a-6x3-matrix-by-a-3x4-matrix-real-matrix-product" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.dot</span></code> or <code class="docutils literal notranslate"><span class="pre">np.ones</span></code></p>
+</section>
+<section id="given-a-1d-array-negate-all-elements-which-are-between-3-and-8-in-place">
+<h2>25. Given a 1D array, negate all elements which are between 3 and 8, in place. (★☆☆)<a class="headerlink" href="#given-a-1d-array-negate-all-elements-which-are-between-3-and-8-in-place" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">&gt;,</span> <span class="pre">&lt;</span></code></p>
+</section>
+<section id="what-is-the-output-of-the-following-script">
+<h2>26. What is the output of the following script? (★☆☆)<a class="headerlink" href="#what-is-the-output-of-the-following-script" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="write-a-python-program-compare-two-arrays-using-numpy">
+<h2>27. Write a Python program compare two arrays using numpy (★☆☆)<a class="headerlink" href="#write-a-python-program-compare-two-arrays-using-numpy" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Array</span> <span class="n">a</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">Array</span> <span class="n">b</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> 
+<span class="p">[</span><span class="kc">False</span> <span class="kc">False</span><span class="p">]</span>
+<span class="n">a</span> <span class="o">&gt;=</span> <span class="n">b</span> 
+<span class="p">[</span><span class="kc">False</span> <span class="kc">False</span><span class="p">]</span> 
+<span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span> 
+<span class="p">[</span> <span class="kc">True</span> <span class="kc">True</span><span class="p">]</span> 
+<span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span> 
+<span class="p">[</span> <span class="kc">True</span> <span class="kc">True</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="what-are-the-result-of-the-following-expressions">
+<h2>28. What are the result of the following expressions? (★☆☆)<a class="headerlink" href="#what-are-the-result-of-the-following-expressions" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">//</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Consider an integer vector a</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">**</span><span class="n">a</span>
+<span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span>
+<span class="n">a</span> <span class="o">&lt;-</span> <span class="n">a</span>
+<span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">a</span>
+<span class="n">a</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">a</span><span class="o">&lt;</span><span class="n">a</span><span class="o">&gt;</span><span class="n">a</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-round-away-from-zero-a-float-array">
+<h2>29. How to round away from zero a float array ? (★☆☆)<a class="headerlink" href="#how-to-round-away-from-zero-a-float-array" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.uniform,</span> <span class="pre">np.copysign,</span> <span class="pre">np.ceil,</span> <span class="pre">np.abs,</span> <span class="pre">np.where</span></code></p>
+</section>
+<section id="how-to-find-common-values-between-two-arrays">
+<h2>30. How to find common values between two arrays? (★☆☆)<a class="headerlink" href="#how-to-find-common-values-between-two-arrays" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.intersect1d</span></code></p>
+</section>
+<section id="how-to-ignore-all-numpy-warnings-not-recommended">
+<h2>31. How to ignore all numpy warnings (not recommended)? (★☆☆)<a class="headerlink" href="#how-to-ignore-all-numpy-warnings-not-recommended" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.seterr,</span> <span class="pre">np.errstate</span></code></p>
+</section>
+<section id="is-the-following-expressions-true">
+<h2>32. Is the following expressions true? (★☆☆)<a class="headerlink" href="#is-the-following-expressions-true" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">emath</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">imaginary</span> <span class="pre">number</span></code></p>
+</section>
+<section id="how-to-get-the-dates-of-yesterday-today-and-tomorrow">
+<h2>33. How to get the dates of yesterday, today and tomorrow? (★☆☆)<a class="headerlink" href="#how-to-get-the-dates-of-yesterday-today-and-tomorrow" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.datetime64,</span> <span class="pre">np.timedelta64</span></code></p>
+</section>
+<section id="how-to-get-all-the-dates-corresponding-to-the-month-of-january-2016">
+<h2>34. How to get all the dates corresponding to the month of January 2016? (★★☆)<a class="headerlink" href="#how-to-get-all-the-dates-corresponding-to-the-month-of-january-2016" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.arange(dtype=datetime64['D'])</span></code></p>
+</section>
+<section id="how-to-compute-a-b-a-2-in-place-without-copy">
+<h2>35. How to compute ((A+B)*(-A/2)) in place (without copy)? (★★☆)<a class="headerlink" href="#how-to-compute-a-b-a-2-in-place-without-copy" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.add(out=),</span> <span class="pre">np.negative(out=),</span> <span class="pre">np.multiply(out=),</span> <span class="pre">np.divide(out=)</span></code></p>
+</section>
+<section id="extract-the-integer-part-of-a-random-array-of-positive-numbers-using-4-different-methods">
+<h2>36. Extract the integer part of a random array of positive numbers using 4 different methods (★★☆)<a class="headerlink" href="#extract-the-integer-part-of-a-random-array-of-positive-numbers-using-4-different-methods" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">%,</span> <span class="pre">np.floor,</span> <span class="pre">astype,</span> <span class="pre">np.trunc</span></code></p>
+</section>
+<section id="create-a-3x3-matrix-with-row-values-ranging-from-0-to-2">
+<h2>37. Create a 3x3 matrix with row values ranging from 0 to 2 (★★☆)<a class="headerlink" href="#create-a-3x3-matrix-with-row-values-ranging-from-0-to-2" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.arange</span></code></p>
+</section>
+<section id="consider-a-generator-function-that-generates-9-integers-and-use-it-to-build-an-array">
+<h2>38. Consider a generator function that generates 9 integers and use it to build an array (★☆☆)<a class="headerlink" href="#consider-a-generator-function-that-generates-9-integers-and-use-it-to-build-an-array" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.fromiter</span></code></p>
+</section>
+<section id="create-a-vector-of-size-10-with-values-ranging-from-0-to-1-both-excluded">
+<h2>39. Create a vector of size 10 with values ranging from 0 to 1, both excluded (★★☆)<a class="headerlink" href="#create-a-vector-of-size-10-with-values-ranging-from-0-to-1-both-excluded" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.linspace</span></code></p>
+</section>
+<section id="create-a-random-vector-of-size-10-and-sort-it">
+<h2>40. Create a random vector of size 10 and sort it (★★☆)<a class="headerlink" href="#create-a-random-vector-of-size-10-and-sort-it" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">sort</span></code></p>
+</section>
+<section id="how-to-sum-a-small-array-faster-than-np-sum">
+<h2>41. How to sum a small array faster than np.sum? (★★☆)<a class="headerlink" href="#how-to-sum-a-small-array-faster-than-np-sum" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.add.reduce</span></code></p>
+</section>
+<section id="consider-two-random-array-a-and-b-check-if-they-are-equal">
+<h2>42. Consider two random array A and B, check if they are equal (★★☆)<a class="headerlink" href="#consider-two-random-array-a-and-b-check-if-they-are-equal" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.allclose,</span> <span class="pre">np.array_equal</span></code></p>
+</section>
+<section id="make-an-array-immutable-read-only">
+<h2>43. Make an array immutable (read-only) (★★☆)<a class="headerlink" href="#make-an-array-immutable-read-only" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">flags.writeable</span></code></p>
+</section>
+<section id="consider-a-random-5x2-matrix-representing-cartesian-coordinates-convert-them-to-polar-coordinates">
+<h2>44. Consider a random 5x2 matrix representing cartesian coordinates, convert them to polar coordinates (★★☆)<a class="headerlink" href="#consider-a-random-5x2-matrix-representing-cartesian-coordinates-convert-them-to-polar-coordinates" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.sqrt,</span> <span class="pre">np.arctan2</span></code></p>
+</section>
+<section id="create-random-vector-of-size-5-and-replace-the-maximum-value-by-0">
+<h2>45. Create random vector of size 5 and replace the maximum value by 0 (★★☆)<a class="headerlink" href="#create-random-vector-of-size-5-and-replace-the-maximum-value-by-0" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">argmax</span></code></p>
+</section>
+<section id="create-a-structured-array-with-x-and-y-coordinates-covering-the-0-1-x-0-1-area">
+<h2>46. Create a structured array with <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinates covering the [0,1]x[0,1] area (★★☆)<a class="headerlink" href="#create-a-structured-array-with-x-and-y-coordinates-covering-the-0-1-x-0-1-area" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.meshgrid</span></code></p>
+</section>
+<section id="given-two-arrays-x-and-y-construct-the-cauchy-matrix-c-cij-1-xi-yj">
+<h2>47. Given two arrays, X and Y, construct the Cauchy matrix C (Cij =1/(xi - yj)) (★★☆)<a class="headerlink" href="#given-two-arrays-x-and-y-construct-the-cauchy-matrix-c-cij-1-xi-yj" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.subtract.outer</span></code></p>
+</section>
+<section id="print-the-minimum-and-maximum-representable-value-for-each-numpy-scalar-type">
+<h2>48. Print the minimum and maximum representable value for each numpy scalar type (★★☆)<a class="headerlink" href="#print-the-minimum-and-maximum-representable-value-for-each-numpy-scalar-type" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.iinfo,</span> <span class="pre">np.finfo,</span> <span class="pre">eps</span></code></p>
+</section>
+<section id="how-to-print-all-the-values-of-an-array">
+<h2>49. How to print all the values of an array? (★★☆)<a class="headerlink" href="#how-to-print-all-the-values-of-an-array" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.set_printoptions</span></code></p>
+</section>
+<section id="how-to-find-the-closest-value-to-a-given-scalar-in-a-vector">
+<h2>50. How to find the closest value (to a given scalar) in a vector? (★★☆)<a class="headerlink" href="#how-to-find-the-closest-value-to-a-given-scalar-in-a-vector" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">argmin</span></code></p>
+</section>
+<section id="create-a-structured-array-representing-a-position-x-y-and-a-color-r-g-b">
+<h2>51. Create a structured array representing a position (x,y) and a color (r,g,b) (★★☆)<a class="headerlink" href="#create-a-structured-array-representing-a-position-x-y-and-a-color-r-g-b" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">dtype</span></code></p>
+</section>
+<section id="consider-a-random-vector-with-shape-100-2-representing-coordinates-find-point-by-point-distances">
+<h2>52. Consider a random vector with shape (100,2) representing coordinates, find point by point distances (★★☆)<a class="headerlink" href="#consider-a-random-vector-with-shape-100-2-representing-coordinates-find-point-by-point-distances" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.atleast_2d,</span> <span class="pre">T,</span> <span class="pre">np.sqrt</span></code></p>
+</section>
+<section id="how-to-convert-a-float-32-bits-array-into-an-integer-32-bits-in-place">
+<h2>53. How to convert a float (32 bits) array into an integer (32 bits) in place?<a class="headerlink" href="#how-to-convert-a-float-32-bits-array-into-an-integer-32-bits-in-place" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">view</span> <span class="pre">and</span> <span class="pre">[:]</span> <span class="pre">=</span></code></p>
+</section>
+<section id="how-to-read-the-following-file">
+<h2>54. How to read the following file? (★★☆)<a class="headerlink" href="#how-to-read-the-following-file" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span>
+<span class="mi">6</span><span class="p">,</span>  <span class="p">,</span>  <span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span>
+ <span class="p">,</span>  <span class="p">,</span> <span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.genfromtxt</span></code></p>
+</section>
+<section id="what-is-the-equivalent-of-enumerate-for-numpy-arrays">
+<h2>55. What is the equivalent of enumerate for numpy arrays? (★★☆)<a class="headerlink" href="#what-is-the-equivalent-of-enumerate-for-numpy-arrays" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.ndenumerate,</span> <span class="pre">np.ndindex</span></code></p>
+</section>
+<section id="generate-a-generic-2d-gaussian-like-array">
+<h2>56. Generate a generic 2D Gaussian-like array (★★☆)<a class="headerlink" href="#generate-a-generic-2d-gaussian-like-array" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.meshgrid,</span> <span class="pre">np.exp</span></code></p>
+</section>
+<section id="how-to-randomly-place-e-elements-in-a-2d-array">
+<h2>57. How to randomly place e elements in a 2D array? (★★☆)<a class="headerlink" href="#how-to-randomly-place-e-elements-in-a-2d-array" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.put,</span> <span class="pre">np.random.choice</span></code></p>
+</section>
+<section id="subtract-the-mean-of-each-row-of-a-matrix">
+<h2>58. Subtract the mean of each row of a matrix (★★☆)<a class="headerlink" href="#subtract-the-mean-of-each-row-of-a-matrix" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">mean(axis=,keepdims=)</span></code></p>
+</section>
+<section id="how-to-sort-an-array-by-the-nth-column">
+<h2>59. How to sort an array by the nth column? (★★☆)<a class="headerlink" href="#how-to-sort-an-array-by-the-nth-column" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">argsort</span></code></p>
+</section>
+<section id="how-to-tell-if-a-given-2d-array-has-null-columns">
+<h2>60. How to tell if a given 2D array has null columns? (★★☆)<a class="headerlink" href="#how-to-tell-if-a-given-2d-array-has-null-columns" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">any,</span> <span class="pre">~</span></code></p>
+</section>
+<section id="find-the-nearest-value-from-a-given-value-in-an-array">
+<h2>61. Find the nearest value from a given value in an array (★★☆)<a class="headerlink" href="#find-the-nearest-value-from-a-given-value-in-an-array" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.abs,</span> <span class="pre">argmin,</span> <span class="pre">flat</span></code></p>
+</section>
+<section id="considering-two-arrays-with-shape-1-3-and-3-1-how-to-compute-their-sum-using-an-iterator">
+<h2>62. Considering two arrays with shape (1,3) and (3,1), how to compute their sum using an iterator? (★★☆)<a class="headerlink" href="#considering-two-arrays-with-shape-1-3-and-3-1-how-to-compute-their-sum-using-an-iterator" title="Link to this heading">#</a></h2>
+<p>`💡</p>
+</section>
+<section id="create-an-array-class-that-has-a-name-attribute">
+<h2>63. Create an array class that has a name attribute (★★☆)<a class="headerlink" href="#create-an-array-class-that-has-a-name-attribute" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">class</span> <span class="pre">method</span></code></p>
+</section>
+<section id="consider-a-given-vector-how-to-add-1-to-each-element-indexed-by-a-second-vector-be-careful-with-repeated-indices">
+<h2>64. Consider a given vector, how to add 1 to each element indexed by a second vector (be careful with repeated indices)? (★★★)<a class="headerlink" href="#consider-a-given-vector-how-to-add-1-to-each-element-indexed-by-a-second-vector-be-careful-with-repeated-indices" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.bincount</span> <span class="pre">|</span> <span class="pre">np.add.at</span></code></p>
+</section>
+<section id="how-to-accumulate-elements-of-a-vector-x-to-an-array-f-based-on-an-index-list-i">
+<h2>65. How to accumulate elements of a vector (X) to an array (F) based on an index list (I)? (★★★)<a class="headerlink" href="#how-to-accumulate-elements-of-a-vector-x-to-an-array-f-based-on-an-index-list-i" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.bincount</span></code></p>
+</section>
+<section id="considering-a-w-h-3-image-of-dtype-ubyte-compute-the-number-of-unique-colors">
+<h2>66. Considering a (w,h,3) image of (dtype=ubyte), compute the number of unique colors (★★☆)<a class="headerlink" href="#considering-a-w-h-3-image-of-dtype-ubyte-compute-the-number-of-unique-colors" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.unique</span></code></p>
+</section>
+<section id="considering-a-four-dimensions-array-how-to-get-sum-over-the-last-two-axis-at-once">
+<h2>67. Considering a four dimensions array, how to get sum over the last two axis at once? (★★★)<a class="headerlink" href="#considering-a-four-dimensions-array-how-to-get-sum-over-the-last-two-axis-at-once" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">sum(axis=(-2,-1))</span></code></p>
+</section>
+<section id="considering-a-one-dimensional-vector-d-how-to-compute-means-of-subsets-of-d-using-a-vector-s-of-same-size-describing-subset-indices">
+<h2>68. Considering a one-dimensional vector D, how to compute means of subsets of D using a vector S of same size describing subset  indices? (★★★)<a class="headerlink" href="#considering-a-one-dimensional-vector-d-how-to-compute-means-of-subsets-of-d-using-a-vector-s-of-same-size-describing-subset-indices" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.bincount</span></code></p>
+</section>
+<section id="how-to-get-the-diagonal-of-a-dot-product">
+<h2>69. How to get the diagonal of a dot product? (★★★)<a class="headerlink" href="#how-to-get-the-diagonal-of-a-dot-product" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.diag</span></code></p>
+</section>
+<section id="consider-the-vector-1-2-3-4-5-how-to-build-a-new-vector-with-3-consecutive-zeros-interleaved-between-each-value">
+<h2>70. Consider the vector [1, 2, 3, 4, 5], how to build a new vector with 3 consecutive zeros interleaved between each value? (★★★)<a class="headerlink" href="#consider-the-vector-1-2-3-4-5-how-to-build-a-new-vector-with-3-consecutive-zeros-interleaved-between-each-value" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">array[::4]</span></code></p>
+</section>
+<section id="consider-an-array-of-dimension-5-5-3-how-to-mulitply-it-by-an-array-with-dimensions-5-5">
+<h2>71. Consider an array of dimension (5,5,3), how to mulitply it by an array with dimensions (5,5)? (★★★)<a class="headerlink" href="#consider-an-array-of-dimension-5-5-3-how-to-mulitply-it-by-an-array-with-dimensions-5-5" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">array[:,</span> <span class="pre">:,</span> <span class="pre">None]</span></code></p>
+</section>
+<section id="how-to-swap-two-rows-of-an-array">
+<h2>72. How to swap two rows of an array? (★★★)<a class="headerlink" href="#how-to-swap-two-rows-of-an-array" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">array[[]]</span> <span class="pre">=</span> <span class="pre">array[[]]</span></code></p>
+</section>
+<section id="consider-a-set-of-10-triplets-describing-10-triangles-with-shared-vertices-find-the-set-of-unique-line-segments-composing-all-the-triangles">
+<h2>73. Consider a set of 10 triplets describing 10 triangles (with shared vertices), find the set of unique line segments composing all the  triangles (★★★)<a class="headerlink" href="#consider-a-set-of-10-triplets-describing-10-triangles-with-shared-vertices-find-the-set-of-unique-line-segments-composing-all-the-triangles" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">repeat,</span> <span class="pre">np.roll,</span> <span class="pre">np.sort,</span> <span class="pre">view,</span> <span class="pre">np.unique</span></code></p>
+</section>
+<section id="given-a-sorted-array-c-that-corresponds-to-a-bincount-how-to-produce-an-array-a-such-that-np-bincount-a-c">
+<h2>74. Given a sorted array C that corresponds to a bincount, how to produce an array A such that np.bincount(A) == C? (★★★)<a class="headerlink" href="#given-a-sorted-array-c-that-corresponds-to-a-bincount-how-to-produce-an-array-a-such-that-np-bincount-a-c" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.repeat</span></code></p>
+</section>
+<section id="how-to-compute-averages-using-a-sliding-window-over-an-array">
+<h2>75. How to compute averages using a sliding window over an array? (★★★)<a class="headerlink" href="#how-to-compute-averages-using-a-sliding-window-over-an-array" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.cumsum</span></code></p>
+</section>
+<section id="consider-a-one-dimensional-array-z-build-a-two-dimensional-array-whose-first-row-is-z-0-z-1-z-2-and-each-subsequent-row-is-shifted-by-1-last-row-should-be-z-3-z-2-z-1">
+<h2>76. Consider a one-dimensional array Z, build a two-dimensional array whose first row is (Z[0],Z[1],Z[2]) and each subsequent row is  shifted by 1 (last row should be (Z[-3],Z[-2],Z[-1]) (★★★)<a class="headerlink" href="#consider-a-one-dimensional-array-z-build-a-two-dimensional-array-whose-first-row-is-z-0-z-1-z-2-and-each-subsequent-row-is-shifted-by-1-last-row-should-be-z-3-z-2-z-1" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">from</span> <span class="pre">numpy.lib</span> <span class="pre">import</span> <span class="pre">stride_tricks</span></code></p>
+</section>
+<section id="how-to-negate-a-boolean-or-to-change-the-sign-of-a-float-inplace">
+<h2>77. How to negate a boolean, or to change the sign of a float inplace? (★★★)<a class="headerlink" href="#how-to-negate-a-boolean-or-to-change-the-sign-of-a-float-inplace" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.logical_not,</span> <span class="pre">np.negative</span></code></p>
+</section>
+<section id="consider-2-sets-of-points-p0-p1-describing-lines-2d-and-a-point-p-how-to-compute-distance-from-p-to-each-line-i-p0-i-p1-i">
+<h2>78. Consider 2 sets of points P0,P1 describing lines (2d) and a point p, how to compute distance from p to each line i (P0[i],P1[i])? (★★★)<a class="headerlink" href="#consider-2-sets-of-points-p0-p1-describing-lines-2d-and-a-point-p-how-to-compute-distance-from-p-to-each-line-i-p0-i-p1-i" title="Link to this heading">#</a></h2>
+</section>
+<section id="consider-2-sets-of-points-p0-p1-describing-lines-2d-and-a-set-of-points-p-how-to-compute-distance-from-each-point-j-p-j-to-each-line-i-p0-i-p1-i">
+<h2>79. Consider 2 sets of points P0,P1 describing lines (2d) and a set of points P, how to compute distance from each point j (P[j]) to each line i (P0[i],P1[i])? (★★★)<a class="headerlink" href="#consider-2-sets-of-points-p0-p1-describing-lines-2d-and-a-set-of-points-p-how-to-compute-distance-from-each-point-j-p-j-to-each-line-i-p0-i-p1-i" title="Link to this heading">#</a></h2>
+</section>
+<section id="consider-an-arbitrary-array-write-a-function-that-extract-a-subpart-with-a-fixed-shape-and-centered-on-a-given-element-pad-with-a-fill-value-when-necessary">
+<h2>80. Consider an arbitrary array, write a function that extract a subpart with a fixed shape and centered on a given element (pad with a <code class="docutils literal notranslate"><span class="pre">fill</span></code> value when necessary) (★★★)<a class="headerlink" href="#consider-an-arbitrary-array-write-a-function-that-extract-a-subpart-with-a-fixed-shape-and-centered-on-a-given-element-pad-with-a-fill-value-when-necessary" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">minimum</span> <span class="pre">maximum</span></code></p>
+</section>
+<section id="consider-an-array-a-1-2-3-4-5-6-7-8-9-10-11-12-13-14-how-to-generate-an-array-b-1-2-3-4-2-3-4-5-3-4-5-6-11-12-13-14">
+<h2>81. Consider an array a = [1,2,3,4,5,6,7,8,9,10,11,12,13,14], how to generate an array b = [[1,2,3,4], [2,3,4,5], [3,4,5,6], …, [11,12,13,14]]? (★★★)<a class="headerlink" href="#consider-an-array-a-1-2-3-4-5-6-7-8-9-10-11-12-13-14-how-to-generate-an-array-b-1-2-3-4-2-3-4-5-3-4-5-6-11-12-13-14" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">stride_tricks.as_strided</span></code></p>
+</section>
+<section id="compute-a-matrix-rank">
+<h2>82. Compute a matrix rank (★★★)<a class="headerlink" href="#compute-a-matrix-rank" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.linalg.svd</span></code></p>
+</section>
+<section id="how-to-find-the-most-frequent-value-in-an-array">
+<h2>83. How to find the most frequent value in an array?<a class="headerlink" href="#how-to-find-the-most-frequent-value-in-an-array" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.bincount,</span> <span class="pre">argmax</span></code></p>
+</section>
+<section id="extract-all-the-contiguous-3x3-blocks-from-a-random-10x10-matrix">
+<h2>84. Extract all the contiguous 3x3 blocks from a random 10x10 matrix (★★★)<a class="headerlink" href="#extract-all-the-contiguous-3x3-blocks-from-a-random-10x10-matrix" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">stride_tricks.as_strided</span></code></p>
+</section>
+<section id="create-a-2d-array-subclass-such-that-a-i-j-a-j-i">
+<h2>85. Create a 2D array subclass such that a[i,j] == a[j,i] (★★★)<a class="headerlink" href="#create-a-2d-array-subclass-such-that-a-i-j-a-j-i" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">class</span> <span class="pre">method</span></code></p>
+</section>
+<section id="consider-a-set-of-p-matrices-wich-shape-n-n-and-a-set-of-p-vectors-with-shape-n-1-how-to-compute-the-sum-of-of-the-p-matrix-products-at-once-result-has-shape-n-1">
+<h2>86. Consider a set of p matrices wich shape (n,n) and a set of p vectors with shape (n,1). How to compute the sum of of the p matrix products at once? (result has shape (n,1)) (★★★)<a class="headerlink" href="#consider-a-set-of-p-matrices-wich-shape-n-n-and-a-set-of-p-vectors-with-shape-n-1-how-to-compute-the-sum-of-of-the-p-matrix-products-at-once-result-has-shape-n-1" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.tensordot</span></code></p>
+</section>
+<section id="consider-a-16x16-array-how-to-get-the-block-sum-block-size-is-4x4">
+<h2>87. Consider a 16x16 array, how to get the block-sum (block size is 4x4)? (★★★)<a class="headerlink" href="#consider-a-16x16-array-how-to-get-the-block-sum-block-size-is-4x4" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.add.reduceat</span></code></p>
+</section>
+<section id="how-to-implement-the-game-of-life-using-numpy-arrays">
+<h2>88. How to implement the Game of Life using numpy arrays? (★★★)<a class="headerlink" href="#how-to-implement-the-game-of-life-using-numpy-arrays" title="Link to this heading">#</a></h2>
+</section>
+<section id="how-to-get-the-n-largest-values-of-an-array">
+<h2>89. How to get the n largest values of an array (★★★)<a class="headerlink" href="#how-to-get-the-n-largest-values-of-an-array" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.argsort</span> <span class="pre">|</span> <span class="pre">np.argpartition</span></code></p>
+</section>
+<section id="given-an-arbitrary-number-of-vectors-build-the-cartesian-product-every-combinations-of-every-item">
+<h2>90. Given an arbitrary number of vectors, build the cartesian product (every combinations of every item) (★★★)<a class="headerlink" href="#given-an-arbitrary-number-of-vectors-build-the-cartesian-product-every-combinations-of-every-item" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.indices</span></code></p>
+</section>
+<section id="how-to-create-a-record-array-from-a-regular-array">
+<h2>91. How to create a record array from a regular array? (★★★)<a class="headerlink" href="#how-to-create-a-record-array-from-a-regular-array" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.core.records.fromarrays</span></code></p>
+</section>
+<section id="consider-a-large-vector-a-compute-a-to-the-power-of-3-using-3-different-methods">
+<h2>92. Consider a large vector A, compute A to the power of 3 using 3 different methods (★★★)<a class="headerlink" href="#consider-a-large-vector-a-compute-a-to-the-power-of-3-using-3-different-methods" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.power,</span> <span class="pre">*,</span> <span class="pre">np.einsum</span></code></p>
+</section>
+<section id="consider-two-arrays-a-and-b-of-shape-8-3-and-2-2-how-to-find-rows-of-a-that-contain-elements-of-each-row-of-b-regardless-of-the-order-of-the-elements-in-b">
+<h2>93. Consider two arrays A and B of shape (8,3) and (2,2). How to find rows of A that contain elements of each row of B regardless of the order of the elements in B? (★★★)<a class="headerlink" href="#consider-two-arrays-a-and-b-of-shape-8-3-and-2-2-how-to-find-rows-of-a-that-contain-elements-of-each-row-of-b-regardless-of-the-order-of-the-elements-in-b" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.where</span></code></p>
+</section>
+<section id="considering-a-10x3-matrix-extract-rows-with-unequal-values-e-g-2-2-3">
+<h2>94. Considering a 10x3 matrix, extract rows with unequal values (e.g. [2,2,3]) (★★★)<a class="headerlink" href="#considering-a-10x3-matrix-extract-rows-with-unequal-values-e-g-2-2-3" title="Link to this heading">#</a></h2>
+</section>
+<section id="convert-a-vector-of-ints-into-a-matrix-binary-representation">
+<h2>95. Convert a vector of ints into a matrix binary representation (★★★)<a class="headerlink" href="#convert-a-vector-of-ints-into-a-matrix-binary-representation" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.unpackbits</span></code></p>
+</section>
+<section id="given-a-two-dimensional-array-how-to-extract-unique-rows">
+<h2>96. Given a two dimensional array, how to extract unique rows? (★★★)<a class="headerlink" href="#given-a-two-dimensional-array-how-to-extract-unique-rows" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.ascontiguousarray</span> <span class="pre">|</span> <span class="pre">np.unique</span></code></p>
+</section>
+<section id="considering-2-vectors-a-b-write-the-einsum-equivalent-of-inner-outer-sum-and-mul-function">
+<h2>97. Considering 2 vectors A &amp; B, write the einsum equivalent of inner, outer, sum, and mul function (★★★)<a class="headerlink" href="#considering-2-vectors-a-b-write-the-einsum-equivalent-of-inner-outer-sum-and-mul-function" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.einsum</span></code></p>
+</section>
+<section id="considering-a-path-described-by-two-vectors-x-y-how-to-sample-it-using-equidistant-samples">
+<h2>98. Considering a path described by two vectors (X,Y), how to sample it using equidistant samples (★★★)?<a class="headerlink" href="#considering-a-path-described-by-two-vectors-x-y-how-to-sample-it-using-equidistant-samples" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.cumsum,</span> <span class="pre">np.interp</span></code></p>
+</section>
+<section id="given-an-integer-n-and-a-2d-array-x-select-from-x-the-rows-which-can-be-interpreted-as-draws-from-a-multinomial-distribution-with-n-degrees-i-e-the-rows-which-only-contain-integers-and-which-sum-to-n">
+<h2>99. Given an integer n and a 2D array X, select from X the rows which can be interpreted as draws from a multinomial distribution with n degrees, i.e., the rows which only contain integers and which sum to n. (★★★)<a class="headerlink" href="#given-an-integer-n-and-a-2d-array-x-select-from-x-the-rows-which-can-be-interpreted-as-draws-from-a-multinomial-distribution-with-n-degrees-i-e-the-rows-which-only-contain-integers-and-which-sum-to-n" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.logical_and.reduce,</span> <span class="pre">np.mod</span></code></p>
+</section>
+<section id="compute-bootstrapped-95-confidence-intervals-for-the-mean-of-a-1d-array-x-i-e-resample-the-elements-of-an-array-with-replacement-n-times-compute-the-mean-of-each-sample-and-then-compute-percentiles-over-the-means">
+<h2>100. Compute bootstrapped 95% confidence intervals for the mean of a 1D array X (i.e., resample the elements of an array with replacement N times, compute the mean of each sample, and then compute percentiles over the means). (★★★)<a class="headerlink" href="#compute-bootstrapped-95-confidence-intervals-for-the-mean-of-a-1d-array-x-i-e-resample-the-elements-of-an-array-with-replacement-n-times-compute-the-mean-of-each-sample-and-then-compute-percentiles-over-the-means" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">💡hint:</span> <span class="pre">np.percentile</span></code></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/tools/numpy"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="005_Python_NumPy_Array_Part4.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Arrays reorganizing</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../pandas/pandas_toc.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Python Pandas Module</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-the-numpy-package-under-the-name-np-and-print-the-numpy-version-and-the-configuration">1. Import the numpy package under the name <code class="docutils literal notranslate"><span class="pre">np</span></code> and print the numpy version and the configuration (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-a-list-of-numeric-value-into-a-one-dimensional-numpy-array">2. Convert a list of numeric value into a one-dimensional NumPy array (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-null-vector-of-size-9">3. Create a null vector of size 9 (★☆☆)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-find-the-memory-size-of-any-array">4. How to find the memory size of any array (★☆☆)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-documentation-of-the-numpy-add-function-from-the-command-line">5. How to get the documentation of the numpy add function from the command line? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-null-vector-of-size-12-but-the-sixth-value-which-is-1">6. Create a null vector of size 12 but the sixth value which is 1 (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-vector-with-values-ranging-from-20-to-59">7. Create a vector with values ranging from 20 to 59 (★☆☆)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reverse-a-vector-first-element-becomes-last">8. Reverse a vector (first element becomes last) (★☆☆)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-3x3-matrix-with-values-ranging-from-12-to-20">9. Create a 3x3 matrix with values ranging from 12 to 20 (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-indices-of-non-zero-elements-from-3-7-0-0-9-0">10. Find indices of non-zero elements from [3,7,0,0,9,0] (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-4x4-identity-matrix">11. Create a 4x4 identity matrix (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-2x2x2-array-with-random-values">12. Create a 2x2x2 array with random values (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-9x9-array-with-random-values-and-find-the-minimum-and-maximum-values">13. Create a 9x9 array with random values and find the minimum and maximum values (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-random-vector-of-size-20-and-find-the-mean-value">6# 6# 14. Create a random vector of size 20 and find the mean value (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-2d-array-with-1-on-the-border-and-0-inside">15. Create a 2d array with 1 on the border and 0 inside (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-add-a-border-filled-with-0s-around-an-existing-array">16. How to add a border (filled with 0’s) around an existing array? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-result-of-the-following-expression">17. What is the result of the following expression? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-6x6-matrix-with-values-1-2-3-4-just-below-the-diagonal">18. Create a 6x6 matrix with values 1,2,3,4 just below the diagonal (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-6x6-matrix-and-fill-it-with-a-checkerboard-pattern">19. Create a 6x6 matrix and fill it with a checkerboard pattern (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-8-9-10-shape-array-what-is-the-index-x-y-z-of-the-100th-element">20. Consider a (8,9,10) shape array, what is the index (x,y,z) of the 100th element? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-checkerboard-8x8-matrix-using-the-tile-function">21. Create a checkerboard 8x8 matrix using the tile function (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalize-a-6x6-random-matrix">22. Normalize a 6x6 random matrix (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-number-of-elements-of-an-array-length-of-one-array-element-in-bytes-and-total-bytes-consumed-by-the-elements">23. find the number of elements of an array, length of one array element in bytes and total bytes consumed by the elements. (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiply-a-6x3-matrix-by-a-3x4-matrix-real-matrix-product">24. Multiply a 6x3 matrix by a 3x4 matrix (real matrix product) (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#given-a-1d-array-negate-all-elements-which-are-between-3-and-8-in-place">25. Given a 1D array, negate all elements which are between 3 and 8, in place. (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-output-of-the-following-script">26. What is the output of the following script? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-a-python-program-compare-two-arrays-using-numpy">27. Write a Python program compare two arrays using numpy (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-the-result-of-the-following-expressions">28. What are the result of the following expressions? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-round-away-from-zero-a-float-array">29. How to round away from zero a float array ? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-find-common-values-between-two-arrays">30. How to find common values between two arrays? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-ignore-all-numpy-warnings-not-recommended">31. How to ignore all numpy warnings (not recommended)? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#is-the-following-expressions-true">32. Is the following expressions true? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-dates-of-yesterday-today-and-tomorrow">33. How to get the dates of yesterday, today and tomorrow? (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-all-the-dates-corresponding-to-the-month-of-january-2016">34. How to get all the dates corresponding to the month of January 2016? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-compute-a-b-a-2-in-place-without-copy">35. How to compute ((A+B)*(-A/2)) in place (without copy)? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-the-integer-part-of-a-random-array-of-positive-numbers-using-4-different-methods">36. Extract the integer part of a random array of positive numbers using 4 different methods (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-3x3-matrix-with-row-values-ranging-from-0-to-2">37. Create a 3x3 matrix with row values ranging from 0 to 2 (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-generator-function-that-generates-9-integers-and-use-it-to-build-an-array">38. Consider a generator function that generates 9 integers and use it to build an array (★☆☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-vector-of-size-10-with-values-ranging-from-0-to-1-both-excluded">39. Create a vector of size 10 with values ranging from 0 to 1, both excluded (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-random-vector-of-size-10-and-sort-it">40. Create a random vector of size 10 and sort it (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-sum-a-small-array-faster-than-np-sum">41. How to sum a small array faster than np.sum? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-two-random-array-a-and-b-check-if-they-are-equal">42. Consider two random array A and B, check if they are equal (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-an-array-immutable-read-only">43. Make an array immutable (read-only) (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-random-5x2-matrix-representing-cartesian-coordinates-convert-them-to-polar-coordinates">44. Consider a random 5x2 matrix representing cartesian coordinates, convert them to polar coordinates (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-random-vector-of-size-5-and-replace-the-maximum-value-by-0">45. Create random vector of size 5 and replace the maximum value by 0 (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-structured-array-with-x-and-y-coordinates-covering-the-0-1-x-0-1-area">46. Create a structured array with <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> coordinates covering the [0,1]x[0,1] area (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#given-two-arrays-x-and-y-construct-the-cauchy-matrix-c-cij-1-xi-yj">47. Given two arrays, X and Y, construct the Cauchy matrix C (Cij =1/(xi - yj)) (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#print-the-minimum-and-maximum-representable-value-for-each-numpy-scalar-type">48. Print the minimum and maximum representable value for each numpy scalar type (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-print-all-the-values-of-an-array">49. How to print all the values of an array? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-find-the-closest-value-to-a-given-scalar-in-a-vector">50. How to find the closest value (to a given scalar) in a vector? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-structured-array-representing-a-position-x-y-and-a-color-r-g-b">51. Create a structured array representing a position (x,y) and a color (r,g,b) (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-random-vector-with-shape-100-2-representing-coordinates-find-point-by-point-distances">52. Consider a random vector with shape (100,2) representing coordinates, find point by point distances (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-convert-a-float-32-bits-array-into-an-integer-32-bits-in-place">53. How to convert a float (32 bits) array into an integer (32 bits) in place?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-read-the-following-file">54. How to read the following file? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-equivalent-of-enumerate-for-numpy-arrays">55. What is the equivalent of enumerate for numpy arrays? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-a-generic-2d-gaussian-like-array">56. Generate a generic 2D Gaussian-like array (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-randomly-place-e-elements-in-a-2d-array">57. How to randomly place e elements in a 2D array? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subtract-the-mean-of-each-row-of-a-matrix">58. Subtract the mean of each row of a matrix (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-sort-an-array-by-the-nth-column">59. How to sort an array by the nth column? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-tell-if-a-given-2d-array-has-null-columns">60. How to tell if a given 2D array has null columns? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-nearest-value-from-a-given-value-in-an-array">61. Find the nearest value from a given value in an array (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considering-two-arrays-with-shape-1-3-and-3-1-how-to-compute-their-sum-using-an-iterator">62. Considering two arrays with shape (1,3) and (3,1), how to compute their sum using an iterator? (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-an-array-class-that-has-a-name-attribute">63. Create an array class that has a name attribute (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-given-vector-how-to-add-1-to-each-element-indexed-by-a-second-vector-be-careful-with-repeated-indices">64. Consider a given vector, how to add 1 to each element indexed by a second vector (be careful with repeated indices)? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-accumulate-elements-of-a-vector-x-to-an-array-f-based-on-an-index-list-i">65. How to accumulate elements of a vector (X) to an array (F) based on an index list (I)? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considering-a-w-h-3-image-of-dtype-ubyte-compute-the-number-of-unique-colors">66. Considering a (w,h,3) image of (dtype=ubyte), compute the number of unique colors (★★☆)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considering-a-four-dimensions-array-how-to-get-sum-over-the-last-two-axis-at-once">67. Considering a four dimensions array, how to get sum over the last two axis at once? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considering-a-one-dimensional-vector-d-how-to-compute-means-of-subsets-of-d-using-a-vector-s-of-same-size-describing-subset-indices">68. Considering a one-dimensional vector D, how to compute means of subsets of D using a vector S of same size describing subset  indices? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-diagonal-of-a-dot-product">69. How to get the diagonal of a dot product? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-the-vector-1-2-3-4-5-how-to-build-a-new-vector-with-3-consecutive-zeros-interleaved-between-each-value">70. Consider the vector [1, 2, 3, 4, 5], how to build a new vector with 3 consecutive zeros interleaved between each value? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-an-array-of-dimension-5-5-3-how-to-mulitply-it-by-an-array-with-dimensions-5-5">71. Consider an array of dimension (5,5,3), how to mulitply it by an array with dimensions (5,5)? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-swap-two-rows-of-an-array">72. How to swap two rows of an array? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-set-of-10-triplets-describing-10-triangles-with-shared-vertices-find-the-set-of-unique-line-segments-composing-all-the-triangles">73. Consider a set of 10 triplets describing 10 triangles (with shared vertices), find the set of unique line segments composing all the  triangles (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#given-a-sorted-array-c-that-corresponds-to-a-bincount-how-to-produce-an-array-a-such-that-np-bincount-a-c">74. Given a sorted array C that corresponds to a bincount, how to produce an array A such that np.bincount(A) == C? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-compute-averages-using-a-sliding-window-over-an-array">75. How to compute averages using a sliding window over an array? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-one-dimensional-array-z-build-a-two-dimensional-array-whose-first-row-is-z-0-z-1-z-2-and-each-subsequent-row-is-shifted-by-1-last-row-should-be-z-3-z-2-z-1">76. Consider a one-dimensional array Z, build a two-dimensional array whose first row is (Z[0],Z[1],Z[2]) and each subsequent row is  shifted by 1 (last row should be (Z[-3],Z[-2],Z[-1]) (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-negate-a-boolean-or-to-change-the-sign-of-a-float-inplace">77. How to negate a boolean, or to change the sign of a float inplace? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-2-sets-of-points-p0-p1-describing-lines-2d-and-a-point-p-how-to-compute-distance-from-p-to-each-line-i-p0-i-p1-i">78. Consider 2 sets of points P0,P1 describing lines (2d) and a point p, how to compute distance from p to each line i (P0[i],P1[i])? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-2-sets-of-points-p0-p1-describing-lines-2d-and-a-set-of-points-p-how-to-compute-distance-from-each-point-j-p-j-to-each-line-i-p0-i-p1-i">79. Consider 2 sets of points P0,P1 describing lines (2d) and a set of points P, how to compute distance from each point j (P[j]) to each line i (P0[i],P1[i])? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-an-arbitrary-array-write-a-function-that-extract-a-subpart-with-a-fixed-shape-and-centered-on-a-given-element-pad-with-a-fill-value-when-necessary">80. Consider an arbitrary array, write a function that extract a subpart with a fixed shape and centered on a given element (pad with a <code class="docutils literal notranslate"><span class="pre">fill</span></code> value when necessary) (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-an-array-a-1-2-3-4-5-6-7-8-9-10-11-12-13-14-how-to-generate-an-array-b-1-2-3-4-2-3-4-5-3-4-5-6-11-12-13-14">81. Consider an array a = [1,2,3,4,5,6,7,8,9,10,11,12,13,14], how to generate an array b = [[1,2,3,4], [2,3,4,5], [3,4,5,6], …, [11,12,13,14]]? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-a-matrix-rank">82. Compute a matrix rank (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-find-the-most-frequent-value-in-an-array">83. How to find the most frequent value in an array?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-all-the-contiguous-3x3-blocks-from-a-random-10x10-matrix">84. Extract all the contiguous 3x3 blocks from a random 10x10 matrix (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-2d-array-subclass-such-that-a-i-j-a-j-i">85. Create a 2D array subclass such that a[i,j] == a[j,i] (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-set-of-p-matrices-wich-shape-n-n-and-a-set-of-p-vectors-with-shape-n-1-how-to-compute-the-sum-of-of-the-p-matrix-products-at-once-result-has-shape-n-1">86. Consider a set of p matrices wich shape (n,n) and a set of p vectors with shape (n,1). How to compute the sum of of the p matrix products at once? (result has shape (n,1)) (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-16x16-array-how-to-get-the-block-sum-block-size-is-4x4">87. Consider a 16x16 array, how to get the block-sum (block size is 4x4)? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-implement-the-game-of-life-using-numpy-arrays">88. How to implement the Game of Life using numpy arrays? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-get-the-n-largest-values-of-an-array">89. How to get the n largest values of an array (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#given-an-arbitrary-number-of-vectors-build-the-cartesian-product-every-combinations-of-every-item">90. Given an arbitrary number of vectors, build the cartesian product (every combinations of every item) (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-create-a-record-array-from-a-regular-array">91. How to create a record array from a regular array? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-a-large-vector-a-compute-a-to-the-power-of-3-using-3-different-methods">92. Consider a large vector A, compute A to the power of 3 using 3 different methods (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-two-arrays-a-and-b-of-shape-8-3-and-2-2-how-to-find-rows-of-a-that-contain-elements-of-each-row-of-b-regardless-of-the-order-of-the-elements-in-b">93. Consider two arrays A and B of shape (8,3) and (2,2). How to find rows of A that contain elements of each row of B regardless of the order of the elements in B? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considering-a-10x3-matrix-extract-rows-with-unequal-values-e-g-2-2-3">94. Considering a 10x3 matrix, extract rows with unequal values (e.g. [2,2,3]) (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-a-vector-of-ints-into-a-matrix-binary-representation">95. Convert a vector of ints into a matrix binary representation (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#given-a-two-dimensional-array-how-to-extract-unique-rows">96. Given a two dimensional array, how to extract unique rows? (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considering-2-vectors-a-b-write-the-einsum-equivalent-of-inner-outer-sum-and-mul-function">97. Considering 2 vectors A &amp; B, write the einsum equivalent of inner, outer, sum, and mul function (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considering-a-path-described-by-two-vectors-x-y-how-to-sample-it-using-equidistant-samples">98. Considering a path described by two vectors (X,Y), how to sample it using equidistant samples (★★★)?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#given-an-integer-n-and-a-2d-array-x-select-from-x-the-rows-which-can-be-interpreted-as-draws-from-a-multinomial-distribution-with-n-degrees-i-e-the-rows-which-only-contain-integers-and-which-sum-to-n">99. Given an integer n and a 2D array X, select from X the rows which can be interpreted as draws from a multinomial distribution with n degrees, i.e., the rows which only contain integers and which sum to n. (★★★)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-bootstrapped-95-confidence-intervals-for-the-mean-of-a-1d-array-x-i-e-resample-the-elements-of-an-array-with-replacement-n-times-compute-the-mean-of-each-sample-and-then-compute-percentiles-over-the-means">100. Compute bootstrapped 95% confidence intervals for the mean of a 1D array X (i.e., resample the elements of an array with replacement N times, compute the mean of each sample, and then compute percentiles over the means). (★★★)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

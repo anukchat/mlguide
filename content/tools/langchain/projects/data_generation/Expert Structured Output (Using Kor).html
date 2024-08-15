@@ -1,0 +1,1586 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Extract Structured Data From Text: Expert Mode (Using Kor) &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/tools/langchain/projects/data_generation/Expert Structured Output (Using Kor)';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/tools/langchain/projects/data_generation/Expert Structured Output (Using Kor).html" />
+    <link rel="icon" href="../../../../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Essentials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../essentials/intro_python.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../essentials/python/introduction/intro_toc.html">Introduction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/002_Hello_World.html">Hello World</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/003_Python_Keywords_and_Identifiers.html">Keywords and identifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/004_Python_Statement_Indentation_Comments.html">Statement indentation &amp; comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/005_Python_Variables_%26_Constants.html">Variables &amp; constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/006_Python_Literals.html">Literals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/007_Python_Data_Types.html">Datatypes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/008_Python_Type_Conversion.html">Type conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/009_Python_Input_Output_Import.html">I/O &amp; imports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/010_Python_Operators.html">Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/011_Python_Namespace_and_Scope.html">Namespace &amp; scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/introduction/Interpreter_Vs_Compiler.html">Interpreter vs compiler</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../essentials/python/datatypes/datatypes_toc.html">Datatypes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/datatypes/001_Python_Numbers.html">Numbers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/datatypes/002_Python_String.html">String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/datatypes/003_Python_List.html">List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/datatypes/004_Python_Tuple.html">Tuple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/datatypes/005_Python_Dictionary.html">Dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/datatypes/006_Python_Sets.html">Sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/datatypes/Python_List_Comprehension.html">List comprehension</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../essentials/python/controlflow/controlflow_toc.html">Control flows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/controlflow/000_Python_Flow_Control_statement.html">Flow control statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/controlflow/001_Python_if_statement.html">If</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/controlflow/002_Python_if_else_statement.html">If else</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/controlflow/003_Python_if_elif_else_statement.html">If elif else</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/controlflow/004_Python_Nested_if_statement.html">Nested if</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/controlflow/005_Python_for_Loop.html">Loops in Python</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/controlflow/006_Python_while_Loop.html">Loops in Python</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/controlflow/007_Python_break_continue_pass_statements.html">Break continue &amp; pass</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../essentials/python/functions/functions_toc.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/001_Python_Functions.html">Python Functions</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/002_Python_Function_Global_Local_Nonlocal.html">Global, local and nonlocal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/003_Python_Function_global_Keywords.html">Python <code class="docutils literal notranslate"><span class="pre">global</span></code> Keyword</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/004_Python_Function_Arguments.html">Function Argument and Parameter</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/005_Python_Function_Recursion.html">Python Recursion</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/006_Python_Function_Anonymous.html">Anonymous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/007_Python_Function_Module.html">Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/008_Python_Function_random_Module.html">Random module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/009_Python_Function_math_Module.html">Math module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/010_Python_Function_Package.html">Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/Python_Docstrings.html">Docstrings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/functions/Python_User_defined_Functions.html">User defined functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../essentials/python/files/files_toc.html">Files</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/files/001_Python_File_Input_Output.html">File I/O</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/files/002_Python_File_Directory.html">File directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/files/003_Python_File_Exception.html">File exception</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/files/004_Python_Exceptions_Handling.html">Exceptions handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/files/005_Python_User_defined_Exceptions.html">User defined exceptions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../essentials/python/objects/objects_toc.html">Objects &amp; classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/objects/001_Python_OOPs_Concepts.html">OOPs concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/objects/002_Python_Classes_and_Objects.html">Python  Classes and Objects</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/objects/003_Python_Inheritance.html">Inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/objects/004_Python_Operator_Overloading.html">Operator overloading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/objects/self_in_Python_Demystified.html">self demystified</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../essentials/python/advanced/advanced_toc.html">Advanced</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/advanced/001_Python_Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/advanced/002_Python_Generators.html">Generators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/advanced/003_Python_Closure.html">Closure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/advanced/004_Python_Decorators.html">Decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/advanced/005_Python_Property.html">Property</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/advanced/006_Python_RegEx.html">RegEx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../essentials/python/advanced/Python_args_and_kwargs.html">args and kwargs</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../../essentials/python/datetime/datetime_toc.html">Date time module</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../essentials/python/datetime/001_Python_datetime_Module.html">Datetime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../essentials/python/datetime/002_Python_strftime.html">strftime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../essentials/python/datetime/003_Python_strptime.html">strptime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../essentials/python/datetime/004_Python_current_date_and_time.html">Current date &amp; time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../essentials/python/datetime/005_Python_get_current_time.html">Current time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../essentials/python/datetime/006_Python_timestamp_to_datetime.html">Timestamp to datetime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../essentials/python/datetime/007_Python_time_Module.html">Time module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../essentials/python/datetime/008_Python_sleep.html">Sleep</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../essentials/mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../essentials/mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../essentials/mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../essentials/mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../essentials/intro_statistics.html">Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../essentials/statistics/statistics.html">Work in progress</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../intro_tools.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../numpy/numpy_toc.html">NumPy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../numpy/001_Python_NumPy.html">Python NumPy</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../numpy/002_Python_NumPy_Array_Part1.html">Arrays Part 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../numpy/003_Python_NumPy_Array_Part2.html">Arrays Part 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../numpy/004_Python_NumPy_Array_Part3.html">Arrays Part 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../numpy/005_Python_NumPy_Array_Part4.html">Arrays Part 4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_DataFrame.html">Python Pandas</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/001_Python_Pandas_DataFrame_from_Dictionary.html">Dataframe from dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/002_Python_Pandas_DataFrame_from_List.html">Dataframe from List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/003_Python_Pandas_DataFrame_head_and_tail.html">Head &amp; tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/004_Python_Pandas_DataFrame_drop_columns.html">Drop columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/005_Python_Pandas_DataFrame_drop_duplicates.html">Drop duplicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/006_Python_Pandas_DataFrame_drop_columns_with_NA.html">Drop with NA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/007_Python_Pandas_DataFrame_rename_columns.html">Rename columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/008_Python_Pandas_DataFrame_to_Python_dictionary.html">Dataframe to python dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/009_Python_Pandas_DataFrame_set_index.html">Set index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/001_Python_Pandas_Methods/010_Python_Pandas_DataFrame_reset_index.html">Reset index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/002_Python_Pandas_Exercise_1.html">Exercise 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pandas/003_Python_Pandas_Exercise_2.html">Exercise 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../matplotlib/002_Python_Matplotlib_Exercise_1.html">Matplotlib</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../matplotlib/003_Python_Matplotlib_Exercise_2.html">Matplotlib 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../seaborn/seaborn_toc.html">Seaborn</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/001_Seaborn_Loading_Dataset.html">Loading Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/002_Seaborn_Controlling_Aesthetics.html">Controlling aesthetics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/003_Matplotlib_vs_Seaborn.html">Matplotlib vs seaborn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/004_Seaborn_Color_Palettes.html">Color palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/005_Seaborn_LM_Plot_and_Reg_Plot.html">LM and regerssion plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/006_Seaborn_Scatter_Plot_and_Joint_Plot.html">Scatter and join plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/007_Seaborn_Additional_Regression_Plots.html">Regerssion plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/008_Seaborn_Distribution_Plots.html">Seaborn distribution plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/009_Seaborn_Categorical_Swarm_Plot.html">Categorical swarn plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/010_Seaborn_Categorical_Strip_Plot.html">Categorical strip plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/011_Seaborn_Categorical_Box_Plot.html">Categorical box plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/012_Seaborn_Categorical_Violin_Plot.html">Categorical violin plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/013_Seaborn_Categorical_Bar_Plot_Point_Plot_and_Count_Plot.html">Categorical bar, point &amp; count plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/014_Seaborn_Categorical_Factor_Plot.html">Categorical factor plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/015_Seaborn_TimeSeries_and_LetterValue_Plot.html">Timeseries and letter value plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/016_Seaborn_PairGrid_Plot.html">Pair grid Pplot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/017_Seaborn_FacetGrid_Plot.html">Facet grid plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/018_Seaborn_Heat_Map.html">Heat map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../seaborn/019_Seaborn_Cluster_Map.html">Cluster map</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tools-for-nn.html">Neural networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/01_pytorch_workflow.html">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/03_pytorch_computer_vision.html">Computer vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/04_pytorch_custom_datasets.html">Custom datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/05_pytorch_going_modular.html">Going Modular</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/06_pytorch_transfer_learning.html">Transfer learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/07_pytorch_experiment_tracking.html">Experiment tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/08_pytorch_paper_replicating.html">Replicating papers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../pytorch/09_pytorch_model_deployment.html">Model deployment</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tools-for-llms.html">LLMs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../LangChain%20Cookbook%20Part%201%20-%20Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../LangChain%20Cookbook%20Part%202%20-%20Use%20Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../project_toc.html">Projects gallery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../langsmith.html">LangSmith</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../langgraph.html">LangGraph</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../hf/intro.html">HuggingFace introduction and setup</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../concepts/concepts.html">Concepts at glance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts/linear-regression.html">Linear regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts/logistic-regression.html">Logistic regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts/k-means.html">K-means</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts/anomaly-detection.html">Anomaly detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concepts/neural-networks.html">Neural networks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Blogs &amp; resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/courses/courses_toc.html">Courses</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About me</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/tools/langchain/projects/data_generation/Expert Structured Output (Using Kor).ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/tools/langchain/projects/data_generation/Expert Structured Output (Using Kor).ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../../_sources/content/tools/langchain/projects/data_generation/Expert Structured Output (Using Kor).ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Extract Structured Data From Text: Expert Mode (Using Kor)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Extract Structured Data From Text: Expert Mode (Using Kor)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kor-hello-world-example">Kor Hello World Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-fields">Multiple Fields</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-lists">Working With Lists</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-attributes-real-world-example">Opening Attributes - Real World Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#salary">Salary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#business-idea-job-data-as-a-service">Business idea: Job Data As A Service</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interesting-user-feedback-persona-investor">Interesting User Feedback (Persona: Investor):</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="extract-structured-data-from-text-expert-mode-using-kor">
+<h1>Extract Structured Data From Text: Expert Mode (Using Kor)<a class="headerlink" href="#extract-structured-data-from-text-expert-mode-using-kor" title="Link to this heading">#</a></h1>
+<p>For complicated data extraction you need a robust library. The <a class="reference external" href="https://eyurtsev.github.io/kor/nested_objects.html">Kor Library</a> (created by <a class="reference external" href="https://twitter.com/veryboldbagel">Eugene Yurtsev</a>) is an awesome tool just for this.</p>
+<p>We are going to explore using Kor with a practical use case.</p>
+<p><strong>Why is this important?</strong>
+LLMs are great at text output, but they need extra help outputing information in a structure that we want. A common request from developers is to get JSON data back from our LLMs.</p>
+<p>Spoiler: Jump down to the bottom to see a bonefied business idea that you can start and manage today.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unzip data folder</span>
+
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s1">&#39;../../data.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+    <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Kor!</span>
+<span class="kn">from</span> <span class="nn">kor.extraction</span> <span class="kn">import</span> <span class="n">create_extraction_chain</span>
+<span class="kn">from</span> <span class="nn">kor.nodes</span> <span class="kn">import</span> <span class="n">Object</span><span class="p">,</span> <span class="n">Text</span><span class="p">,</span> <span class="n">Number</span>
+
+<span class="c1"># LangChain Models</span>
+<span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+
+<span class="c1"># Standard Helpers</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="c1"># Text Helpers</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">from</span> <span class="nn">markdownify</span> <span class="kn">import</span> <span class="n">markdownify</span> <span class="k">as</span> <span class="n">md</span>
+
+<span class="c1"># For token counting</span>
+<span class="kn">from</span> <span class="nn">langchain.callbacks</span> <span class="kn">import</span> <span class="n">get_openai_callback</span>
+
+<span class="k">def</span> <span class="nf">printOutput</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">output</span><span class="p">,</span><span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># It&#39;s better to do this an environment variable but putting it in plain text for clarity</span>
+<span class="n">openai_api_key</span> <span class="o">=</span> <span class="s1">&#39;your_api_key&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">openai_api_key</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s start off by creating our LLM. We’re using gpt4 to take advantage of its increased ability to follow instructions</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span>
+<span class="c1">#     model_name=&quot;gpt-3.5-turbo&quot;, # Cheaper but less reliable</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;gpt-4&quot;</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_tokens</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+    <span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="kor-hello-world-example">
+<h1>Kor Hello World Example<a class="headerlink" href="#kor-hello-world-example" title="Link to this heading">#</a></h1>
+<p>Create an object that holds information about the fields you’d like to extract</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">person_schema</span> <span class="o">=</span> <span class="n">Object</span><span class="p">(</span>
+    <span class="c1"># This what will appear in your output. It&#39;s what the fields below will be nested under.</span>
+    <span class="c1"># It should be the parent of the fields below. Usually it&#39;s singular (not plural)</span>
+    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;person&quot;</span><span class="p">,</span>
+    
+    <span class="c1"># Natural language description about your object</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Personal information about a person&quot;</span><span class="p">,</span>
+    
+    <span class="c1"># Fields you&#39;d like to capture from a piece of text about your object.</span>
+    <span class="n">attributes</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">Text</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;first_name&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The first name of a person.&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">],</span>
+    
+    <span class="c1"># Examples help go a long way with telling the LLM what you need</span>
+    <span class="n">examples</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;Alice and Bob are friends&quot;</span><span class="p">,</span> <span class="p">[{</span><span class="s2">&quot;first_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;first_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Bob&quot;</span><span class="p">}])</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Create a chain that will extract the information and then parse it. This uses LangChain under the hood</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain</span> <span class="o">=</span> <span class="n">create_extraction_chain</span><span class="p">(</span><span class="n">llm</span><span class="p">,</span> <span class="n">person_schema</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    My name is Bobby.</span>
+<span class="s2">    My sister&#39;s name is Rachel.</span>
+<span class="s2">    My brother&#39;s name Joe. My dog&#39;s name is Spot</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">predict_and_parse</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="p">(</span><span class="n">text</span><span class="p">))[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+
+<span class="n">printOutput</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="c1"># Notice how there isn&#39;t &quot;spot&quot; in the results list because it&#39;s the name of a dog, not a person.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+   &quot;person&quot;: [
+      {
+         &quot;first_name&quot;: &quot;Bobby&quot;
+      },
+      {
+         &quot;first_name&quot;: &quot;Rachel&quot;
+      },
+      {
+         &quot;first_name&quot;: &quot;Joe&quot;
+      }
+   ]
+}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Kor also facilitates returning None when the LLM doesn’t find what you’re looking for</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">predict_and_parse</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;The dog went to the park&quot;</span><span class="p">))[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+<span class="n">printOutput</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+   &quot;person&quot;: []
+}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="multiple-fields">
+<h1>Multiple Fields<a class="headerlink" href="#multiple-fields" title="Link to this heading">#</a></h1>
+<p>You can pass multiple fields if you’re looking for more information</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plant_schema</span> <span class="o">=</span> <span class="n">Object</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;plant&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Information about a plant&quot;</span><span class="p">,</span>
+    
+    <span class="c1"># Notice I put multiple fields to pull out different attributes</span>
+    <span class="n">attributes</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">Text</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;plant_type&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The common name of the plant.&quot;</span>
+        <span class="p">),</span>
+        <span class="n">Text</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;color&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The color of the plant&quot;</span>
+        <span class="p">),</span>
+        <span class="n">Number</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;rating&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The rating of the plant.&quot;</span>
+        <span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">examples</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span>
+            <span class="s2">&quot;Roses are red, lilies are white and a 8 out of 10.&quot;</span><span class="p">,</span>
+            <span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;plant_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Roses&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">},</span>
+                <span class="p">{</span><span class="s2">&quot;plant_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Lily&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span> <span class="p">:</span> <span class="mi">8</span><span class="p">},</span>
+            <span class="p">],</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;Palm trees are brown with a 6 rating. Sequoia trees are green&quot;</span>
+
+<span class="n">chain</span> <span class="o">=</span> <span class="n">create_extraction_chain</span><span class="p">(</span><span class="n">llm</span><span class="p">,</span> <span class="n">plant_schema</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">predict_and_parse</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">)[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+
+<span class="n">printOutput</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+   &quot;plant&quot;: [
+      {
+         &quot;color&quot;: &quot;brown&quot;,
+         &quot;plant_type&quot;: &quot;Palm tree&quot;,
+         &quot;rating&quot;: &quot;6.0&quot;
+      },
+      {
+         &quot;color&quot;: &quot;green&quot;,
+         &quot;plant_type&quot;: &quot;Sequoia tree&quot;,
+         &quot;rating&quot;: &quot;&quot;
+      }
+   ]
+}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="working-with-lists">
+<h1>Working With Lists<a class="headerlink" href="#working-with-lists" title="Link to this heading">#</a></h1>
+<p>You can also extract lists as well.</p>
+<p>Note: Check out how I have a nested object. The ‘parts’ object is in the ‘cars_schema’</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">parts</span> <span class="o">=</span> <span class="n">Object</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;parts&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A single part of a car&quot;</span><span class="p">,</span>
+    <span class="n">attributes</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">Text</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;part&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The name of the part&quot;</span><span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">examples</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span>
+            <span class="s2">&quot;the jeep has wheels and windows&quot;</span><span class="p">,</span>
+            <span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;part&quot;</span><span class="p">:</span> <span class="s2">&quot;wheel&quot;</span><span class="p">},</span>
+                <span class="p">{</span><span class="s2">&quot;part&quot;</span><span class="p">:</span> <span class="s2">&quot;window&quot;</span><span class="p">}</span>
+            <span class="p">],</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">cars_schema</span> <span class="o">=</span> <span class="n">Object</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;car&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Information about a car&quot;</span><span class="p">,</span>
+    <span class="n">examples</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span>
+            <span class="s2">&quot;the bmw is red and has an engine and steering wheel&quot;</span><span class="p">,</span>
+            <span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;BMW&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;parts&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;engine&quot;</span><span class="p">,</span> <span class="s2">&quot;steering wheel&quot;</span><span class="p">]}</span>
+            <span class="p">],</span>
+        <span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">attributes</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">Text</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;type&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The make or brand of the car&quot;</span>
+        <span class="p">),</span>
+        <span class="n">Text</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;color&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The color of the car&quot;</span>
+        <span class="p">),</span>
+        <span class="n">parts</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To do nested objects you need to specify encoder_or_encoder_class=&quot;json&quot;</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;The blue jeep has rear view mirror, roof, windshield&quot;</span>
+
+<span class="c1"># Changed the encoder to json</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">create_extraction_chain</span><span class="p">(</span><span class="n">llm</span><span class="p">,</span> <span class="n">cars_schema</span><span class="p">,</span> <span class="n">encoder_or_encoder_class</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">predict_and_parse</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">)[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+
+<span class="n">printOutput</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+   &quot;car&quot;: {
+      &quot;color&quot;: &quot;blue&quot;,
+      &quot;parts&quot;: [
+         {
+            &quot;part&quot;: &quot;rear view mirror&quot;
+         },
+         {
+            &quot;part&quot;: &quot;roof&quot;
+         },
+         {
+            &quot;part&quot;: &quot;windshield&quot;
+         }
+      ],
+      &quot;type&quot;: &quot;jeep&quot;
+   }
+}
+</pre></div>
+</div>
+</div>
+</div>
+<p>View the prompt that was sent over</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">prompt</span><span class="o">.</span><span class="n">format_prompt</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">prompt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Your goal is to extract structured information from the user&#39;s input that matches the form described below. When extracting information please make sure it matches the type information exactly. Do not add any attributes that do not appear in the schema shown below.
+
+```TypeScript
+
+car: { // Information about a car
+ type: string // The make or brand of the car
+ color: string // The color of the car
+ parts: { // A single part of a car
+  part: string // The name of the part
+ }
+}
+```
+
+
+Please output the extracted information in JSON format. Do not output anything except for the extracted information. Do not add any clarifying information. Do not add any fields that are not in the schema. If the text contains attributes that do not appear in the schema, please ignore them. All output must be in JSON format and follow the schema specified above. Wrap the JSON in &lt;json&gt; tags.
+
+Input: the bmw is red and has an engine and steering wheel
+Output: &lt;json&gt;{&quot;car&quot;: [{&quot;type&quot;: &quot;BMW&quot;, &quot;color&quot;: &quot;red&quot;, &quot;parts&quot;: [&quot;engine&quot;, &quot;steering wheel&quot;]}]}&lt;/json&gt;
+Input: the jeep has wheels and windows
+Output: &lt;json&gt;{&quot;car&quot;: {&quot;parts&quot;: [{&quot;part&quot;: &quot;wheel&quot;}, {&quot;part&quot;: &quot;window&quot;}]}}&lt;/json&gt;
+Input: The blue jeep has rear view mirror, roof, windshield
+Output:
+</pre></div>
+</div>
+</div>
+</div>
+<p>Kor is a really great way to extract actions from a user as well</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="n">Object</span><span class="p">(</span>
+  <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;forecaster&quot;</span><span class="p">,</span>
+  <span class="n">description</span><span class="o">=</span><span class="p">(</span>
+      <span class="s2">&quot;User is controling an app that makes financial forecasts. &quot;</span>
+      <span class="s2">&quot;They will give a command to update a forecast in the future&quot;</span>
+  <span class="p">),</span>
+  <span class="n">attributes</span><span class="o">=</span><span class="p">[</span>
+      <span class="n">Text</span><span class="p">(</span>
+          <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;year&quot;</span><span class="p">,</span>
+          <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Year the user wants to update&quot;</span><span class="p">,</span>
+          <span class="n">examples</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;please increase 2014&#39;s customers by 15%&quot;</span><span class="p">,</span> <span class="s2">&quot;2014&quot;</span><span class="p">)],</span>
+          <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+      <span class="p">),</span>
+      <span class="n">Text</span><span class="p">(</span>
+          <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;metric&quot;</span><span class="p">,</span>
+          <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The unit or metric a user would like to influence&quot;</span><span class="p">,</span>
+          <span class="n">examples</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;please increase 2014&#39;s customers by 15%&quot;</span><span class="p">,</span> <span class="s2">&quot;customers&quot;</span><span class="p">)],</span>
+          <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+      <span class="p">),</span>
+      <span class="n">Text</span><span class="p">(</span>
+          <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;amount&quot;</span><span class="p">,</span>
+          <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The quantity of a forecast adjustment&quot;</span><span class="p">,</span>
+          <span class="n">examples</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;please increase 2014&#39;s customers by 15%&quot;</span><span class="p">,</span> <span class="s2">&quot;.15&quot;</span><span class="p">)],</span>
+          <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+      <span class="p">)</span>
+    <span class="p">],</span>
+  <span class="n">many</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain</span> <span class="o">=</span> <span class="n">create_extraction_chain</span><span class="p">(</span><span class="n">llm</span><span class="p">,</span> <span class="n">schema</span><span class="p">,</span> <span class="n">encoder_or_encoder_class</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">predict_and_parse</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;please add 15 more units sold to 2023&quot;</span><span class="p">)[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+
+<span class="n">printOutput</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+   &quot;forecaster&quot;: {
+      &quot;amount&quot;: [
+         &quot;15&quot;
+      ],
+      &quot;metric&quot;: [
+         &quot;units sold&quot;
+      ],
+      &quot;year&quot;: [
+         &quot;2023&quot;
+      ]
+   }
+}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="opening-attributes-real-world-example">
+<h1>Opening Attributes - Real World Example<a class="headerlink" href="#opening-attributes-real-world-example" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://twitter.com/GregKamradt/status/1643027796850253824">Opening Attributes</a> (my sample project for this application)</p>
+<p>If anyone wants to strategize on this project DM me on twitter</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span>
+    <span class="c1"># model_name=&quot;gpt-3.5-turbo&quot;,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;gpt-4&quot;</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_tokens</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+    <span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We are going to be pulling jobs from Greenhouse. No API key is needed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pull_from_greenhouse</span><span class="p">(</span><span class="n">board_token</span><span class="p">):</span>
+    <span class="c1"># If doing this in production, make sure you do retries and backoffs</span>
+    
+    <span class="c1"># Get your URL ready to accept a parameter</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;https://boards-api.greenhouse.io/v1/boards/</span><span class="si">{</span><span class="n">board_token</span><span class="si">}</span><span class="s1">/jobs?content=true&#39;</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="c1"># In case it doesn&#39;t work</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Whoops, error&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+        
+    <span class="n">status_code</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span>
+    
+    <span class="n">jobs</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;jobs&#39;</span><span class="p">]</span>
+    
+    <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">board_token</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">status_code</span><span class="si">}</span><span class="s2">, Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span><span class="si">}</span><span class="s2"> jobs&quot;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">jobs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s try it out for <a class="reference external" href="https://www.okta.com/">Okta</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jobs</span> <span class="o">=</span> <span class="n">pull_from_greenhouse</span><span class="p">(</span><span class="s2">&quot;okta&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>okta: 200, Found 142 jobs
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s look at a sample job with it’s raw dictionary</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Keep in mind that my job_ids will likely change when you run this depending on the postings of the company</span>
+<span class="n">job_index</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Preview:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">jobs</span><span class="p">[</span><span class="n">job_index</span><span class="p">])[:</span><span class="mi">400</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Preview:
+
+{&quot;absolute_url&quot;: &quot;https://www.okta.com/company/careers/opportunity/4977199?gh_jid=4977199&quot;, &quot;data_compliance&quot;: [{&quot;type&quot;: &quot;gdpr&quot;, &quot;requires_consent&quot;: false, &quot;requires_processing_consent&quot;: false, &quot;requires_retention_consent&quot;: false, &quot;retention_period&quot;: null}], &quot;internal_job_id&quot;: 2518868, &quot;location&quot;: {&quot;name&quot;: &quot;Melbourne &quot;}, &quot;metadata&quot;: null, &quot;id&quot;: 4977199, &quot;updated_at&quot;: &quot;2023-04-05T22:41:12-04:00&quot;, &quot;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s clean this up a bit</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># I parsed through an output to create the function below</span>
+<span class="k">def</span> <span class="nf">describeJob</span><span class="p">(</span><span class="n">job_description</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Job ID: </span><span class="si">{</span><span class="n">job_description</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Link: </span><span class="si">{</span><span class="n">job_description</span><span class="p">[</span><span class="s1">&#39;absolute_url&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Updated At: </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">job_description</span><span class="p">[</span><span class="s1">&#39;updated_at&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%B </span><span class="si">%-d</span><span class="s1">, %Y&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Title: </span><span class="si">{</span><span class="n">job_description</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Content:</span><span class="se">\n</span><span class="si">{</span><span class="n">job_description</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">][:</span><span class="mi">550</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll look at another job. This job_id may or may not work for you depending on if the position is still active.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note: I&#39;m using a hard coded job id below. You&#39;ll need to switch this if this job ever changes</span>
+<span class="c1"># and it most definitely will!</span>
+<span class="n">job_id</span> <span class="o">=</span> <span class="mi">4982726</span>
+
+<span class="n">job_description</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">jobs</span> <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">job_id</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    
+<span class="n">describeJob</span><span class="p">(</span><span class="n">job_description</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Job ID: 4982726
+Link: https://www.okta.com/company/careers/opportunity/4982726?gh_jid=4982726
+Updated At: April 11, 2023
+Title: Staff Software Engineer 
+
+Content:
+&amp;lt;div class=&amp;quot;content-intro&amp;quot;&amp;gt;&amp;lt;p&amp;gt;&amp;lt;span style=&amp;quot;color: #000000;&amp;quot;&amp;gt;&amp;lt;strong&amp;gt;Get to know Okta&amp;lt;/strong&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;span style=&amp;quot;color: #000000;&amp;quot;&amp;gt;&amp;lt;br&amp;gt;&amp;lt;/span&amp;gt;Okta is The World’s Identity Company. We free everyone to safely use any technology—anywhere, on any device or app. Our Workforce and Customer Identity Clouds enable secure yet flexible access, authentication, and automation that transforms how people move through the digital world, putting Identity at t
+</pre></div>
+</div>
+</div>
+</div>
+<p>I want to convert the html to text, we’ll use BeautifulSoup to do this. There are multiple methods you could choose from. Pick what’s best for you.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">job_description</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">],</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+
+<span class="c1"># Convert your html to markdown. This reduces tokens and noise</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">md</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="n">text</span><span class="p">[:</span><span class="mi">600</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>**Get to know Okta**
+
+
+  
+Okta is The World’s Identity Company. We free everyone to safely use any technology—anywhere, on any device or app. Our Workforce and Customer Identity Clouds enable secure yet flexible access, authentication, and automation that transforms how people move through the digital world, putting Identity at the heart of business security and growth.   
+  
+At Okta, we celebrate a variety of perspectives and experiences. We are not looking for someone who checks every single box, we’re looking for lifelong learners and people who can make us better with their unique experien
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s create a Kor object that will look for tools. This is the meat and potatoes of the application</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tools</span> <span class="o">=</span> <span class="n">Object</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;tools&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        A tool, application, or other company that is listed in a job description.</span>
+<span class="s2">        Analytics, eCommerce and GTM are not tools</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">attributes</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">Text</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;tool&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The name of a tool or company&quot;</span>
+        <span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">examples</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span>
+            <span class="s2">&quot;Experience in working with Netsuite, or Looker a plus.&quot;</span><span class="p">,</span>
+            <span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="s2">&quot;Netsuite&quot;</span><span class="p">},</span>
+                <span class="p">{</span><span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="s2">&quot;Looker&quot;</span><span class="p">},</span>
+            <span class="p">],</span>
+        <span class="p">),</span>
+        <span class="p">(</span>
+           <span class="s2">&quot;Experience with Microsoft Excel&quot;</span><span class="p">,</span>
+            <span class="p">[</span>
+               <span class="p">{</span><span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft Excel&quot;</span><span class="p">}</span>
+            <span class="p">]</span> 
+        <span class="p">),</span>
+        <span class="p">(</span>
+           <span class="s2">&quot;You must know AWS to do well in the job&quot;</span><span class="p">,</span>
+            <span class="p">[</span>
+               <span class="p">{</span><span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="s2">&quot;AWS&quot;</span><span class="p">}</span>
+            <span class="p">]</span> 
+        <span class="p">),</span>
+        <span class="p">(</span>
+           <span class="s2">&quot;Troubleshooting customer issues and debugging from logs (Splunk, Syslogs, etc.) &quot;</span><span class="p">,</span>
+            <span class="p">[</span>
+               <span class="p">{</span><span class="s2">&quot;tool&quot;</span><span class="p">:</span> <span class="s2">&quot;Splunk&quot;</span><span class="p">},</span>
+            <span class="p">]</span> 
+        <span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain</span> <span class="o">=</span> <span class="n">create_extraction_chain</span><span class="p">(</span><span class="n">llm</span><span class="p">,</span> <span class="n">tools</span><span class="p">,</span> <span class="n">input_formatter</span><span class="o">=</span><span class="s2">&quot;triple_quotes&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">predict_and_parse</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">)[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+
+<span class="n">printOutput</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+   &quot;tools&quot;: [
+      {
+         &quot;tool&quot;: &quot;Okta&quot;
+      },
+      {
+         &quot;tool&quot;: &quot;Java&quot;
+      },
+      {
+         &quot;tool&quot;: &quot;Hibernate&quot;
+      },
+      {
+         &quot;tool&quot;: &quot;Spring Boot&quot;
+      },
+      {
+         &quot;tool&quot;: &quot;AWS&quot;
+      },
+      {
+         &quot;tool&quot;: &quot;GCP&quot;
+      },
+      {
+         &quot;tool&quot;: &quot;SQL&quot;
+      },
+      {
+         &quot;tool&quot;: &quot;ElasticSearch&quot;
+      },
+      {
+         &quot;tool&quot;: &quot;Docker&quot;
+      },
+      {
+         &quot;tool&quot;: &quot;Kubernetes&quot;
+      }
+   ]
+}
+</pre></div>
+</div>
+</div>
+</div>
+<section id="salary">
+<h2>Salary<a class="headerlink" href="#salary" title="Link to this heading">#</a></h2>
+<p>Let’s grab salary information while we are at it.</p>
+<p>Not all jobs will list this information. If they do, it’s rarely consistent across jobs. A great use case for LLMs to catch this information!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">salary_range</span> <span class="o">=</span> <span class="n">Object</span><span class="p">(</span>
+    <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;salary_range&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        The range of salary offered for a job mentioned in a job description</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">attributes</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">Number</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;low_end&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The low end of a salary range&quot;</span>
+        <span class="p">),</span>
+        <span class="n">Number</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;high_end&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The high end of a salary range&quot;</span>
+        <span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">examples</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span>
+            <span class="s2">&quot;This position will make between $140 thousand and $230,000.00&quot;</span><span class="p">,</span>
+            <span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;low_end&quot;</span><span class="p">:</span> <span class="mi">140000</span><span class="p">,</span> <span class="s2">&quot;high_end&quot;</span><span class="p">:</span> <span class="mi">230000</span><span class="p">},</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jobs</span> <span class="o">=</span> <span class="n">pull_from_greenhouse</span><span class="p">(</span><span class="s2">&quot;cruise&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cruise: 200, Found 219 jobs
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This job id may not work for you, pick another one from the list if it doesn&#39;t.</span>
+<span class="n">job_id</span> <span class="o">=</span> <span class="mi">4858414</span>
+
+<span class="n">job_description</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">jobs</span> <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">job_id</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    
+<span class="n">describeJob</span><span class="p">(</span><span class="n">job_description</span><span class="p">)</span>
+
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">job_description</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">],</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+
+<span class="c1"># Convert your html to markdown. This reduces tokens and noise</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">md</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="n">text</span><span class="p">[:</span><span class="mi">600</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Job ID: 4858414
+Link: https://boards.greenhouse.io/cruise/jobs/4858414?gh_jid=4858414
+Updated At: April 12, 2023
+Title: Senior Data Center Technician
+
+Content:
+&amp;lt;div class=&amp;quot;content-intro&amp;quot;&amp;gt;&amp;lt;p&amp;gt;&amp;lt;span style=&amp;quot;font-weight: 400;&amp;quot;&amp;gt;We&amp;#39;re Cruise, a self-driving service designed for the cities we love.&amp;lt;/span&amp;gt;&amp;lt;/p&amp;gt;
+&amp;lt;p&amp;gt;&amp;lt;span style=&amp;quot;font-weight: 400;&amp;quot;&amp;gt;We’re building the world’s most advanced self-driving vehicles to safely connect people to the places, things, and experiences they care about. We believe self-driving vehicles will help save lives, reshape cities, give back time in transit, and restore freedom of movement for many.&amp;lt;/span&amp;gt;
+We&#39;re Cruise, a self-driving service designed for the cities we love.
+
+
+We’re building the world’s most advanced self-driving vehicles to safely connect people to the places, things, and experiences they care about. We believe self-driving vehicles will help save lives, reshape cities, give back time in transit, and restore freedom of movement for many.
+
+
+In our cars, you’re free to be yourself. It’s the same here at Cruise. We’re creating a culture that values the experiences and contributions of all of the unique individuals who collectively make up Cruise, so that every employee can do thei
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain</span> <span class="o">=</span> <span class="n">create_extraction_chain</span><span class="p">(</span><span class="n">llm</span><span class="p">,</span> <span class="n">salary_range</span><span class="p">)</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">predict_and_parse</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">)[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+
+<span class="n">printOutput</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
+   &quot;salary_range&quot;: [
+      {
+         &quot;high_end&quot;: &quot;165000&quot;,
+         &quot;low_end&quot;: &quot;112300&quot;
+      }
+   ]
+}
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p>The salary range for this position is $112,300 - 165,000. Compensation will vary depending on location, job-related knowledge, skills, and experience. You may also be offered a bonus, restricted stock units, and benefits. These ranges are subject to change.</p>
+</div></blockquote>
+<p>Awesome!</p>
+<p><a class="reference external" href="https://help.openai.com/en/articles/7127956-how-much-does-gpt-4-cost">OpenAI GPT4 Pricing</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">get_openai_callback</span><span class="p">()</span> <span class="k">as</span> <span class="n">cb</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">predict_and_parse</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total Tokens: </span><span class="si">{</span><span class="n">cb</span><span class="o">.</span><span class="n">total_tokens</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prompt Tokens: </span><span class="si">{</span><span class="n">cb</span><span class="o">.</span><span class="n">prompt_tokens</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Completion Tokens: </span><span class="si">{</span><span class="n">cb</span><span class="o">.</span><span class="n">completion_tokens</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successful Requests: </span><span class="si">{</span><span class="n">cb</span><span class="o">.</span><span class="n">successful_requests</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total Cost (USD): $</span><span class="si">{</span><span class="n">cb</span><span class="o">.</span><span class="n">total_cost</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total Tokens: 1768
+Prompt Tokens: 1757
+Completion Tokens: 11
+Successful Requests: 1
+Total Cost (USD): $0.053369999999999994
+</pre></div>
+</div>
+</div>
+</div>
+<p>Suggested To Do if you want to build this out:</p>
+<ul class="simple">
+<li><p>Reduce amount of HTML and low-signal text that gets put into the prompt</p></li>
+<li><p>Gather list of 1000s of companies</p></li>
+<li><p>Run through most jobs (You’ll likely start to see duplicate information after the first 10-15 jobs per department)</p></li>
+<li><p>Store results</p></li>
+<li><p>Snapshot daily as you look for new jobs</p></li>
+<li><p>Follow <a class="reference external" href="https://twitter.com/GregKamradt">Greg</a> on Twitter for more tools or if you want to chat about this project</p></li>
+<li><p>Read the user feedback below for what else to build out with this project (I reached out to everyone who signed up on twitter)</p></li>
+</ul>
+</section>
+<section id="business-idea-job-data-as-a-service">
+<h2>Business idea: Job Data As A Service<a class="headerlink" href="#business-idea-job-data-as-a-service" title="Link to this heading">#</a></h2>
+<p>Start a data service that collects information about company’s jobs. This can be sold to investors looking for an edge.</p>
+<p>After posting <a class="reference external" href="https://twitter.com/GregKamradt/status/1643027796850253824">this tweet</a> there were 80 people that signed up for the trial. I emailed all of them and most were job seekers looking for companies that used the tech they specialized in.</p>
+<p>The more interesting use case were sales teams + investors.</p>
+<section id="interesting-user-feedback-persona-investor">
+<h3>Interesting User Feedback (Persona: Investor):<a class="headerlink" href="#interesting-user-feedback-persona-investor" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p>Hey Gregory, thanks for reaching out. <br><br>
+I always thought that job posts were a gold mine of information, and often suggest identifying targets based on these (go look at relevant job posts for companies that might want to work with you). Secondly, I also automatically ping BuiltWith from our CRM and send that to OpenAI and have a summarized tech stack created - so I see the benefit of having this as an investor. <br><br>
+For me personally, I like to get as much data as possible about a company. Would love to see job post cadence, type of jobs they post and when, notable keywords/phrases used, tech stack (which you have), and any other information we can glean from the job posts (sometimes they have the title of who you’ll report to, etc.). <br><br>
+For sales people, I think finer searches, maybe even in natural language if possible - such as “search for companies who posted a data science related job for the first time” - would be powerful.</p>
+</div></blockquote>
+<p>If you do this, let me know! I’d love to hear how it goes.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/tools/langchain/projects/data_generation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Extract Structured Data From Text: Expert Mode (Using Kor)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#kor-hello-world-example">Kor Hello World Example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-fields">Multiple Fields</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-lists">Working With Lists</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-attributes-real-world-example">Opening Attributes - Real World Example</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#salary">Salary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#business-idea-job-data-as-a-service">Business idea: Job Data As A Service</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interesting-user-feedback-persona-investor">Interesting User Feedback (Persona: Investor):</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

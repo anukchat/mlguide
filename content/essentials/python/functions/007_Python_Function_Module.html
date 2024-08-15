@@ -1,0 +1,1904 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Python Modules &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/essentials/python/functions/007_Python_Function_Module';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/essentials/python/functions/007_Python_Function_Module.html" />
+    <link rel="icon" href="../../../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Python Random Module" href="008_Python_Function_random_Module.html" />
+    <link rel="prev" title="Python Anonymous/lambda Function" href="006_Python_Function_Anonymous.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Essentials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../intro_python.html">Python</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../introduction/intro_toc.html">Introduction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/002_Hello_World.html">Hello World</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/003_Python_Keywords_and_Identifiers.html">Keywords and identifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/004_Python_Statement_Indentation_Comments.html">Statement indentation &amp; comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/005_Python_Variables_%26_Constants.html">Variables &amp; constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/006_Python_Literals.html">Literals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/007_Python_Data_Types.html">Datatypes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/008_Python_Type_Conversion.html">Type conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/009_Python_Input_Output_Import.html">I/O &amp; imports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/010_Python_Operators.html">Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/011_Python_Namespace_and_Scope.html">Namespace &amp; scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../introduction/Interpreter_Vs_Compiler.html">Interpreter vs compiler</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../datatypes/datatypes_toc.html">Datatypes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../datatypes/001_Python_Numbers.html">Numbers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../datatypes/002_Python_String.html">String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../datatypes/003_Python_List.html">List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../datatypes/004_Python_Tuple.html">Tuple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../datatypes/005_Python_Dictionary.html">Dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../datatypes/006_Python_Sets.html">Sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../datatypes/Python_List_Comprehension.html">List comprehension</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../controlflow/controlflow_toc.html">Control flows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../controlflow/000_Python_Flow_Control_statement.html">Flow control statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controlflow/001_Python_if_statement.html">If</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controlflow/002_Python_if_else_statement.html">If else</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controlflow/003_Python_if_elif_else_statement.html">If elif else</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controlflow/004_Python_Nested_if_statement.html">Nested if</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../controlflow/005_Python_for_Loop.html">Loops in Python</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../controlflow/006_Python_while_Loop.html">Loops in Python</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../controlflow/007_Python_break_continue_pass_statements.html">Break continue &amp; pass</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="functions_toc.html">Functions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="001_Python_Functions.html">Python Functions</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="002_Python_Function_Global_Local_Nonlocal.html">Global, local and nonlocal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="003_Python_Function_global_Keywords.html">Python <code class="docutils literal notranslate"><span class="pre">global</span></code> Keyword</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="004_Python_Function_Arguments.html">Function Argument and Parameter</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="005_Python_Function_Recursion.html">Python Recursion</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="006_Python_Function_Anonymous.html">Anonymous</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="008_Python_Function_random_Module.html">Random module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="009_Python_Function_math_Module.html">Math module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="010_Python_Function_Package.html">Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Python_Docstrings.html">Docstrings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Python_User_defined_Functions.html">User defined functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../files/files_toc.html">Files</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../files/001_Python_File_Input_Output.html">File I/O</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../files/002_Python_File_Directory.html">File directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../files/003_Python_File_Exception.html">File exception</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../files/004_Python_Exceptions_Handling.html">Exceptions handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../files/005_Python_User_defined_Exceptions.html">User defined exceptions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../objects/objects_toc.html">Objects &amp; classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../objects/001_Python_OOPs_Concepts.html">OOPs concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../objects/002_Python_Classes_and_Objects.html">Python  Classes and Objects</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../objects/003_Python_Inheritance.html">Inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../objects/004_Python_Operator_Overloading.html">Operator overloading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../objects/self_in_Python_Demystified.html">self demystified</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../advanced/advanced_toc.html">Advanced</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../advanced/001_Python_Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../advanced/002_Python_Generators.html">Generators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../advanced/003_Python_Closure.html">Closure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../advanced/004_Python_Decorators.html">Decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../advanced/005_Python_Property.html">Property</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../advanced/006_Python_RegEx.html">RegEx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../advanced/Python_args_and_kwargs.html">args and kwargs</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../datetime/datetime_toc.html">Date time module</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../datetime/001_Python_datetime_Module.html">Datetime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../datetime/002_Python_strftime.html">strftime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../datetime/003_Python_strptime.html">strptime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../datetime/004_Python_current_date_and_time.html">Current date &amp; time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../datetime/005_Python_get_current_time.html">Current time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../datetime/006_Python_timestamp_to_datetime.html">Timestamp to datetime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../datetime/007_Python_time_Module.html">Time module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../datetime/008_Python_sleep.html">Sleep</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_statistics.html">Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../statistics/statistics.html">Work in progress</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tools/intro_tools.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tools/numpy/numpy_toc.html">NumPy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/numpy/001_Python_NumPy.html">Python NumPy</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/numpy/002_Python_NumPy_Array_Part1.html">Arrays Part 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/numpy/003_Python_NumPy_Array_Part2.html">Arrays Part 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/numpy/004_Python_NumPy_Array_Part3.html">Arrays Part 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/numpy/005_Python_NumPy_Array_Part4.html">Arrays Part 4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tools/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pandas/001_Python_Pandas_DataFrame.html">Python Pandas</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pandas/001_Python_Pandas_Methods/001_Python_Pandas_DataFrame_from_Dictionary.html">Dataframe from dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pandas/001_Python_Pandas_Methods/002_Python_Pandas_DataFrame_from_List.html">Dataframe from List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pandas/001_Python_Pandas_Methods/003_Python_Pandas_DataFrame_head_and_tail.html">Head &amp; tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pandas/001_Python_Pandas_Methods/004_Python_Pandas_DataFrame_drop_columns.html">Drop columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pandas/001_Python_Pandas_Methods/005_Python_Pandas_DataFrame_drop_duplicates.html">Drop duplicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pandas/001_Python_Pandas_Methods/006_Python_Pandas_DataFrame_drop_columns_with_NA.html">Drop with NA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pandas/001_Python_Pandas_Methods/007_Python_Pandas_DataFrame_rename_columns.html">Rename columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pandas/001_Python_Pandas_Methods/008_Python_Pandas_DataFrame_to_Python_dictionary.html">Dataframe to python dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pandas/001_Python_Pandas_Methods/009_Python_Pandas_DataFrame_set_index.html">Set index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pandas/001_Python_Pandas_Methods/010_Python_Pandas_DataFrame_reset_index.html">Reset index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pandas/002_Python_Pandas_Exercise_1.html">Exercise 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pandas/003_Python_Pandas_Exercise_2.html">Exercise 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tools/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/matplotlib/002_Python_Matplotlib_Exercise_1.html">Matplotlib</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/matplotlib/003_Python_Matplotlib_Exercise_2.html">Matplotlib 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tools/seaborn/seaborn_toc.html">Seaborn</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/001_Seaborn_Loading_Dataset.html">Loading Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/002_Seaborn_Controlling_Aesthetics.html">Controlling aesthetics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/003_Matplotlib_vs_Seaborn.html">Matplotlib vs seaborn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/004_Seaborn_Color_Palettes.html">Color palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/005_Seaborn_LM_Plot_and_Reg_Plot.html">LM and regerssion plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/006_Seaborn_Scatter_Plot_and_Joint_Plot.html">Scatter and join plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/007_Seaborn_Additional_Regression_Plots.html">Regerssion plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/008_Seaborn_Distribution_Plots.html">Seaborn distribution plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/009_Seaborn_Categorical_Swarm_Plot.html">Categorical swarn plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/010_Seaborn_Categorical_Strip_Plot.html">Categorical strip plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/011_Seaborn_Categorical_Box_Plot.html">Categorical box plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/012_Seaborn_Categorical_Violin_Plot.html">Categorical violin plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/013_Seaborn_Categorical_Bar_Plot_Point_Plot_and_Count_Plot.html">Categorical bar, point &amp; count plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/014_Seaborn_Categorical_Factor_Plot.html">Categorical factor plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/015_Seaborn_TimeSeries_and_LetterValue_Plot.html">Timeseries and letter value plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/016_Seaborn_PairGrid_Plot.html">Pair grid Pplot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/017_Seaborn_FacetGrid_Plot.html">Facet grid plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/018_Seaborn_Heat_Map.html">Heat map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/seaborn/019_Seaborn_Cluster_Map.html">Cluster map</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tools/tools-for-nn.html">Neural networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tools/pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pytorch/01_pytorch_workflow.html">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pytorch/03_pytorch_computer_vision.html">Computer vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pytorch/04_pytorch_custom_datasets.html">Custom datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pytorch/05_pytorch_going_modular.html">Going Modular</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pytorch/06_pytorch_transfer_learning.html">Transfer learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pytorch/07_pytorch_experiment_tracking.html">Experiment tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pytorch/08_pytorch_paper_replicating.html">Replicating papers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/pytorch/09_pytorch_model_deployment.html">Model deployment</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../tools/tools-for-llms.html">LLMs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../tools/langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/langchain/LangChain%20Cookbook%20Part%201%20-%20Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/langchain/LangChain%20Cookbook%20Part%202%20-%20Use%20Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/langchain/projects/project_toc.html">Projects gallery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/langchain/langsmith.html">LangSmith</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../tools/langchain/langgraph.html">LangGraph</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools/hf/intro.html">HuggingFace introduction and setup</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../concepts/concepts.html">Concepts at glance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts/linear-regression.html">Linear regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts/logistic-regression.html">Logistic regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts/k-means.html">K-means</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts/anomaly-detection.html">Anomaly detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts/neural-networks.html">Neural networks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Blogs &amp; resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/courses/courses_toc.html">Courses</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About me</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/essentials/python/functions/007_Python_Function_Module.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/essentials/python/functions/007_Python_Function_Module.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/content/essentials/python/functions/007_Python_Function_Module.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Python Modules</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-modules-in-python">What are modules in Python?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantage">Advantage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-module-in-python">Creating a module in Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-import-modules-in-python">How to import modules in Python?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-import-statement">Python <code class="docutils literal notranslate"><span class="pre">import</span></code> statement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-multiple-modules"><code class="docutils literal notranslate"><span class="pre">import</span></code> multiple modules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-from-import-statement">Python <code class="docutils literal notranslate"><span class="pre">from-import</span></code> statement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-with-renaming"><code class="docutils literal notranslate"><span class="pre">import</span></code> with renaming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-all-names"><code class="docutils literal notranslate"><span class="pre">import</span></code> all names</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-module-search-path">Python Module Search Path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reloading-a-module">Reloading a module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dir-built-in-function">The <code class="docutils literal notranslate"><span class="pre">dir()</span></code> built-in function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-modules-list">Python Modules List</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-built-in-modules-examples">Python Built-In Modules Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-os-module">Example Using <code class="docutils literal notranslate"><span class="pre">os</span></code> Module</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-sys-module">Example Using <code class="docutils literal notranslate"><span class="pre">sys</span></code> Module</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-operator-module">Example Using <code class="docutils literal notranslate"><span class="pre">operator</span></code> Module</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-string-module">Example Using <code class="docutils literal notranslate"><span class="pre">string</span></code> Module</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-decimal-module">Example Using <code class="docutils literal notranslate"><span class="pre">decimal</span></code> Module</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-random-module">Example Using <code class="docutils literal notranslate"><span class="pre">random</span></code> Module</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#comparision-operators-in-python">Comparision operators in Python</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-math-module">Example Using <code class="docutils literal notranslate"><span class="pre">math</span></code> Module</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#math-module-functions">math module Functions:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#constants">Constants  -</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-statistics-module">Example Using <code class="docutils literal notranslate"><span class="pre">statistics</span></code> Module</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wrap-up">Wrap up</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="python-modules">
+<h1>Python Modules<a class="headerlink" href="#python-modules" title="Link to this heading">#</a></h1>
+<p>Learn to create and import custom modules in Python. Also, you will find different techniques to import and use custom and built-in modules in Python.</p>
+<section id="what-are-modules-in-python">
+<h2>What are modules in Python?<a class="headerlink" href="#what-are-modules-in-python" title="Link to this heading">#</a></h2>
+<p>Module containing a set of codes or a set of functions which can be included to an application. Modules refer to the Python file, which contains Python code like Python statements, classes, functions, variables, etc. A file with Python code is defined with extension**<code class="docutils literal notranslate"><span class="pre">.py</span></code>**</p>
+<p>For example: In <strong><code class="docutils literal notranslate"><span class="pre">main.py</span></code></strong>, where the <strong><code class="docutils literal notranslate"><span class="pre">main</span></code></strong> is the module name.</p>
+<p>In Python, large code is divided into small modules. The benefit of modules is, it provides a way to share reusable functions.</p>
+</section>
+<section id="advantage">
+<h2>Advantage<a class="headerlink" href="#advantage" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Reusability</strong>: Module can be used in some other python code. Hence it provides the facility of code reusability.</p></li>
+<li><p><strong>Categorization</strong>: Similar type of attributes can be placed in one module.</p></li>
+</ul>
+</section>
+<section id="creating-a-module-in-python">
+<h2>Creating a module in Python<a class="headerlink" href="#creating-a-module-in-python" title="Link to this heading">#</a></h2>
+<p>A file containing Python code, for example: <strong><code class="docutils literal notranslate"><span class="pre">example.py</span></code></strong>, is called a module, and its module name would be <strong><code class="docutils literal notranslate"><span class="pre">example</span></code></strong>.</p>
+<p>We use modules to break down large programs into small manageable and organized files. Furthermore, modules provide reusability of code.</p>
+<p>We can define our most used functions in a module and import it, instead of copying their definitions into different programs.</p>
+<p>The module contains Python code like classes, functions, methods, but it also has variables. A variable can list, tuple, dict, etc.</p>
+<p>Let us create a module. Type the following and save it as <strong><code class="docutils literal notranslate"><span class="pre">example.py</span></code></strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python Module example</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="s2">&quot;&quot;&quot;This program adds two numbers and return the result&quot;&quot;&quot;</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p>Here, we have defined a <strong><a class="reference internal" href="001_Python_Functions.html"><span class="std std-doc">function</span></a></strong> <strong><code class="docutils literal notranslate"><span class="pre">add()</span></code></strong> inside a module named <strong><code class="docutils literal notranslate"><span class="pre">example</span></code></strong>. The function takes in two numbers and returns their sum.</p>
+</section>
+<section id="how-to-import-modules-in-python">
+<h2>How to import modules in Python?<a class="headerlink" href="#how-to-import-modules-in-python" title="Link to this heading">#</a></h2>
+<p>We can import the definitions inside a module to another module or the interactive interpreter in Python.</p>
+<p>We use the <strong><code class="docutils literal notranslate"><span class="pre">import</span></code></strong> keyword to do this. To import our previously defined module example, we type the following in the Python prompt.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">example</span>
+</pre></div>
+</div>
+<p>This does not import the names of the functions defined in <strong><code class="docutils literal notranslate"><span class="pre">example</span></code></strong> directly in the current symbol table. It only imports the module name <strong><code class="docutils literal notranslate"><span class="pre">example</span></code></strong> there.</p>
+<p>Using the module name we can access the function using the dot <strong><code class="docutils literal notranslate"><span class="pre">.</span></code></strong> operator. For example:</p>
+<p><strong># Example 1:</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">example</span>
+<span class="n">example</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mf">6.6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.6
+</pre></div>
+</div>
+</div>
+</div>
+<p>Python has tons of standard modules. You can check out the full list of <strong><a class="reference external" href="https://docs.python.org/3/py-modindex.html">Python standard modules</a></strong> and their use cases. These files are in the Lib directory inside the location where you installed Python.</p>
+<p>Standard modules can be imported the same way as we import our user-defined modules.</p>
+<p>There are various ways to import modules. They are listed below:</p>
+<p>** # Example 2:**</p>
+<p>The Python code for a module named a name normally resides in a file <strong><a class="reference external" href="http://main.py">main.py</a></strong>. But first create a function in <strong><a class="reference external" href="http://test.py">test.py</a></strong>. Here is an example of a simple module,</p>
+<p><strong><a class="reference external" href="http://test.py">test.py</a></strong> -</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;something here inside fun()&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong><a class="reference external" href="http://main.py">main.py</a></strong> −</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">test</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">test</span> <span class="kn">import</span> <span class="n">fun</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fun</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Output of above example: Run <strong><a class="reference external" href="http://main.py">main.py</a></strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">something</span> <span class="pre">here</span> <span class="pre">inside</span> <span class="pre">fun()</span></code></p>
+<hr class="docutils" />
+<p>For <strong>test.ipynb</strong> or <strong>test1.ipynb</strong> and <strong>main.ipynb</strong></p>
+<p>Open anaconda prompt and type <strong><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">import-ipynb</span></code></strong></p>
+<p>see:
+Downloading import-ipynb-0.1.3.tar.gz (4.0 kB)</p>
+<p><strong><a class="reference external" href="http://test.py">test.py</a></strong> or <strong>test1.ipynb</strong> -</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;something here inside fun()&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>main.ipynb</strong> −</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">import_ipynb</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">test1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">test1</span> <span class="kn">import</span> <span class="n">fun</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fun</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Output of above example: Run <strong>main.ipynb</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">something</span> <span class="pre">here</span> <span class="pre">inside</span> <span class="pre">fun()</span></code></p>
+<p><strong># Example 3:</strong></p>
+<p><strong><a class="reference external" href="http://fibo.py">fibo.py</a></strong> -</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fibonacci numbers module</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="c1"># return Fibonacci series up to n</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>         <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span>         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p><strong><a class="reference external" href="http://main.py">main.py</a></strong> −</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">fibo</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fibo</span> <span class="kn">import</span> <span class="n">fib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">fib</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Output of above example: Run <strong><a class="reference external" href="http://main.py">main.py</a></strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">8,</span> <span class="pre">13,</span> <span class="pre">21,</span> <span class="pre">34,</span> <span class="pre">55,</span> <span class="pre">89]</span></code></p>
+<hr class="docutils" />
+<p>For <strong>test.ipynb</strong> or <strong>test1.ipynb</strong> and <strong>main.ipynb</strong></p>
+<p>Open anaconda prompt and type <strong><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">import-ipynb</span></code></strong></p>
+<p>see:
+Downloading import-ipynb-0.1.3.tar.gz (4.0 kB)</p>
+<p><strong>fibo1.ipynb</strong> or <strong><a class="reference external" href="http://fibo.py">fibo.py</a></strong> -</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fibonacci numbers module</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span> <span class="c1"># return Fibonacci series up to n</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="k">while</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+<span class="o">&gt;&gt;&gt;</span>         <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span>         <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p><strong>main.ipynb</strong> −</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">import_ipynb</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">fibo1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">fibo1</span> <span class="kn">import</span> <span class="n">fib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">fib</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Output of above example: Run <strong>main.ipynb</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">8,</span> <span class="pre">13,</span> <span class="pre">21,</span> <span class="pre">34,</span> <span class="pre">55,</span> <span class="pre">89]</span></code></p>
+<p><strong># Example 4:</strong></p>
+<p><strong><a class="reference external" href="http://equal.py">equal.py</a></strong> -</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#function definition</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">):</span>
+<span class="o">&gt;&gt;&gt;</span>         <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p><strong><a class="reference external" href="http://main.py">main.py</a></strong> −</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">equal</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Output of above example: Run <strong><a class="reference external" href="http://main.py">main.py</a></strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">True</span></code></p>
+<hr class="docutils" />
+<p>For <strong>equal.ipynb</strong> or <strong>equal1.ipynb</strong> and <strong>main.ipynb</strong></p>
+<p>Open anaconda prompt and type <strong><code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">import-ipynb</span></code></strong></p>
+<p>see:
+Downloading import-ipynb-0.1.3.tar.gz (4.0 kB)</p>
+<p><strong>equal.ipynb</strong> or <strong>equal1.ipynb</strong> -</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#function definition</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="k">if</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">):</span>
+<span class="o">&gt;&gt;&gt;</span>         <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p><strong>main.ipynb</strong> −</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">import_ipynb</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">equal1</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Output of above example: Run <strong>main.ipynb</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">True</span></code></p>
+<p>In Python, each and every built-in module has a large number of predefined functions to perform specific tasks. For instance, Python has a built-in module named <strong><code class="docutils literal notranslate"><span class="pre">operator</span></code></strong>, inside which the function called <strong><code class="docutils literal notranslate"><span class="pre">eq()</span></code></strong> is defined. This function returns the boolean value of <strong><code class="docutils literal notranslate"><span class="pre">True</span></code></strong> if the given two input values are equal. Else, returns <strong><code class="docutils literal notranslate"><span class="pre">False</span></code></strong>.</p>
+<p>So now, we can make use of this operator module in our <strong><code class="docutils literal notranslate"><span class="pre">main()</span></code></strong> program to check if two numbers are equal. This means we would no longer need that <strong><code class="docutils literal notranslate"><span class="pre">equal.py</span></code></strong> module.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 5: </span>
+
+<span class="c1">#main function</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">eq</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<section id="python-import-statement">
+<h3>Python <code class="docutils literal notranslate"><span class="pre">import</span></code> statement<a class="headerlink" href="#python-import-statement" title="Link to this heading">#</a></h3>
+<p>We can import a module using the <strong><code class="docutils literal notranslate"><span class="pre">import</span></code></strong> statement and access the definitions inside it using the dot operator <strong><code class="docutils literal notranslate"><span class="pre">.</span></code></strong> as described above. Here is an example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: </span>
+
+<span class="c1"># import statement example to import standard module math</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of pi is&quot;</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The value of pi is 3.141592653589793
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2:</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="c1"># use math module functions</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>    <span class="c1"># Output 2.449489742783178</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.449489742783178
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="import-multiple-modules">
+<h3><code class="docutils literal notranslate"><span class="pre">import</span></code> multiple modules<a class="headerlink" href="#import-multiple-modules" title="Link to this heading">#</a></h3>
+<p>If we want to use more than one module, then we can import multiple modules. This is the simplest form of <strong><code class="docutils literal notranslate"><span class="pre">import</span></code></strong> a keyword that we already use in the above example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Import two modules</span>
+
+<span class="kn">import</span> <span class="nn">math</span><span class="o">,</span> <span class="nn">random</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>720
+28
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="python-from-import-statement">
+<h3>Python <code class="docutils literal notranslate"><span class="pre">from-import</span></code> statement<a class="headerlink" href="#python-from-import-statement" title="Link to this heading">#</a></h3>
+<p>To import particular classes or functions, we can use the <strong><code class="docutils literal notranslate"><span class="pre">from-import</span></code></strong> statement. It is an alternate way to <strong><code class="docutils literal notranslate"><span class="pre">import</span></code></strong>. By using this form, we can import individual attributes and methods directly into the program.We can import specific names from a module without importing the module as a whole.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: import only factorial function from math module</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>720
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2: </span>
+
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">e</span>
+<span class="n">e</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.718281828459045
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 3: </span>
+
+<span class="c1"># import only pi from math module</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of pi is&quot;</span><span class="p">,</span> <span class="n">pi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The value of pi is 3.141592653589793
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, we imported only the <strong><code class="docutils literal notranslate"><span class="pre">pi</span></code></strong> attribute from the <strong><code class="docutils literal notranslate"><span class="pre">math</span></code></strong> module.</p>
+<p>In such cases, we don’t use the dot operator. We can also import multiple attributes as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 4: </span>
+
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">e</span>
+<span class="n">pi</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.141592653589793
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="import-with-renaming">
+<h3><code class="docutils literal notranslate"><span class="pre">import</span></code> with renaming<a class="headerlink" href="#import-with-renaming" title="Link to this heading">#</a></h3>
+<p>We can import a module by renaming it as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: </span>
+
+<span class="c1"># import module by renaming it</span>
+<span class="kn">import</span> <span class="nn">math</span> <span class="k">as</span> <span class="nn">m</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of pi is&quot;</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The value of pi is 3.141592653589793
+</pre></div>
+</div>
+</div>
+</div>
+<p>We have renamed the <strong><code class="docutils literal notranslate"><span class="pre">math</span></code></strong> module as <strong><code class="docutils literal notranslate"><span class="pre">m</span></code></strong>. This can save us typing time in some cases.</p>
+<blockquote>
+<div><p><strong>Note:</strong> that the name <strong><code class="docutils literal notranslate"><span class="pre">math</span></code></strong> is not recognized in our scope. Hence, <strong><code class="docutils literal notranslate"><span class="pre">math.pi</span></code></strong> is invalid, and <strong><code class="docutils literal notranslate"><span class="pre">m.pi</span></code></strong> is the correct implementation.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2:  Import a module by renaming it</span>
+
+<span class="kn">import</span> <span class="nn">random</span> <span class="k">as</span> <span class="nn">rand</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">rand</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 3:  import a method by renaming it</span>
+
+<span class="c1"># rename randint as random_number</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span> <span class="k">as</span> <span class="n">random_number</span>
+
+<span class="c1"># Gives any random number from range(10, 50)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random_number</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="import-all-names">
+<h3><code class="docutils literal notranslate"><span class="pre">import</span></code> all names<a class="headerlink" href="#import-all-names" title="Link to this heading">#</a></h3>
+<p>We can <strong><code class="docutils literal notranslate"><span class="pre">import</span></code></strong> all functions and attributes of a specific module, then instead of writing all function names and attribute names, we can import all using an <strong>asterisk</strong> <strong><code class="docutils literal notranslate"><span class="pre">*</span></code></strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: </span>
+
+<span class="c1"># import all names from the standard module math</span>
+
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The value of pi is&quot;</span><span class="p">,</span> <span class="n">pi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The value of pi is 3.141592653589793
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, we have imported all the definitions from the <strong><code class="docutils literal notranslate"><span class="pre">math</span></code></strong> module. This includes all names visible in our scope except those beginning with an underscore(private definitions).</p>
+<p>Importing everything with the asterisk <strong><code class="docutils literal notranslate"><span class="pre">*</span></code></strong> symbol is not a good programming practice. This can lead to duplicate definitions for an identifier. It also hampers the readability of our code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2: </span>
+
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>216.0
+720
+9.42477796076938
+10.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="python-module-search-path">
+<h2>Python Module Search Path<a class="headerlink" href="#python-module-search-path" title="Link to this heading">#</a></h2>
+<p>While importing a module, Python looks at several places. Interpreter first looks for a built-in module. Then(if built-in module not found), Python looks into a list of directories defined in <strong><code class="docutils literal notranslate"><span class="pre">sys.path</span></code></strong>. The search is in this order.</p>
+<ol class="arabic simple">
+<li><p>The current directory.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></strong> (an environment variable with a list of directories).</p></li>
+<li><p>The installation-dependent default directory.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;C:\\Users\\Deepak\\01_Learn_Python4Data\\04_Python_Functions&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\python38.zip&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\DLLs&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\lib&#39;,
+ &#39;C:\\ProgramData\\Anaconda3&#39;,
+ &#39;&#39;,
+ &#39;C:\\Users\\Deepak\\AppData\\Roaming\\Python\\Python38\\site-packages&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\lib\\site-packages&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\lib\\site-packages\\locket-0.2.1-py3.8.egg&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\lib\\site-packages\\win32&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\lib\\site-packages\\win32\\lib&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\lib\\site-packages\\Pythonwin&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\lib\\site-packages\\IPython\\extensions&#39;,
+ &#39;C:\\Users\\Deepak\\.ipython&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can add and modify this list to add our own path.</p>
+</section>
+<section id="reloading-a-module">
+<h2>Reloading a module<a class="headerlink" href="#reloading-a-module" title="Link to this heading">#</a></h2>
+<p>The Python interpreter imports a module only once during a session. This makes things more efficient. Foe example:</p>
+<p><strong># Example 1:</strong></p>
+<p>Suppose we have the following code in a module named <strong><code class="docutils literal notranslate"><span class="pre">my_module</span></code></strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This module shows the effect of</span>
+<span class="c1">#  multiple imports and reload</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This code got executed&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">my_module</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This code got executed
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see that our code got executed only once. This goes to say that our module was imported only once.</p>
+<p>Now if our module changed during the course of the program, we would have to reload it.One way to do this is to restart the interpreter. But this does not help much.</p>
+<p>Python provides a more efficient way of doing this. We can use the <strong><code class="docutils literal notranslate"><span class="pre">reload()</span></code></strong> function inside the <strong><code class="docutils literal notranslate"><span class="pre">imp</span></code></strong> module to reload a module. We can do it in the following ways:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">imp</span>
+<span class="kn">import</span> <span class="nn">my_module</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">my_module</span>
+<span class="n">imp</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">my_module</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This code got executed
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;module &#39;my_module&#39; from &#39;C:\\Users\\Deepak\\01_Learn_Python4Data\\04_Python_Functions\\my_module.py&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong># Example 2:</strong></p>
+<p>First, create a Python module with the name <strong><code class="docutils literal notranslate"><span class="pre">greet_module.pynb</span></code></strong>
+and write the below code in that file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Welcome to Dr Parmar&#39;s Python4DataScience class&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now, create a Python file with the name, <strong><a class="reference external" href="http://main.py">main.py</a></strong> and write the below code in it and import the module test_module.py. See the following code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">import_ipynb</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">time</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">reload</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># load 1st time</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">test_module</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># reload </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reload</span><span class="p">(</span><span class="n">test_module</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span> 
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># reload again  </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reload</span><span class="p">(</span><span class="n">test_module</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is test file..&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output of above example: Run <strong><a class="reference external" href="http://main.py">main.py</a></strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Welcome</span> <span class="n">to</span> <span class="n">Dr</span> <span class="n">Parmar</span><span class="s1">&#39;s Python4DataScience class</span>
+<span class="n">Welcome</span> <span class="n">to</span> <span class="n">Dr</span> <span class="n">Parmar</span><span class="s1">&#39;s Python4DataScience class</span>
+<span class="n">Welcome</span> <span class="n">to</span> <span class="n">Dr</span> <span class="n">Parmar</span><span class="s1">&#39;s Python4DataScience class</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">test</span> <span class="n">file</span><span class="o">..</span>
+</pre></div>
+</div>
+</section>
+<section id="the-dir-built-in-function">
+<h2>The <code class="docutils literal notranslate"><span class="pre">dir()</span></code> built-in function<a class="headerlink" href="#the-dir-built-in-function" title="Link to this heading">#</a></h2>
+<p>We can use the <strong><code class="docutils literal notranslate"><span class="pre">dir()</span></code></strong> function to find out names that are defined inside a module. When we use this function with any object (an object can be sequence like list, tuple, set, dict or can be class, function, module, etc. ), it returns properties, attributes, and method.</p>
+<p>For example, we have defined a function <strong><code class="docutils literal notranslate"><span class="pre">add()</span></code></strong> in the module example that we had in the beginning.</p>
+<p>We can use dir in example module in the following way:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="nb">dir</span><span class="p">(</span><span class="n">example</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;__builtins__&#39;,
+ &#39;__cached__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__file__&#39;,
+ &#39;__loader__&#39;,
+ &#39;__name__&#39;,
+ &#39;__package__&#39;,
+ &#39;__spec__&#39;,
+ &#39;add&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, we can see a sorted list of names (along with <strong><code class="docutils literal notranslate"><span class="pre">add</span></code></strong>). All other names that begin with an underscore are default Python attributes associated with the module (not user-defined).</p>
+<p>For example, the <strong><code class="docutils literal notranslate"><span class="pre">__name__</span></code></strong> attribute contains the name of the module.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2:</span>
+
+<span class="kn">import</span> <span class="nn">example</span>
+<span class="n">example</span><span class="o">.</span><span class="vm">__name__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;example&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>All the names defined in our current namespace can be found out using the <strong><code class="docutils literal notranslate"><span class="pre">dir()</span></code></strong> function without any arguments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 3:</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">b</span> <span class="o">=</span> <span class="s2">&quot;hello&quot;</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="nb">dir</span><span class="p">()</span>
+<span class="p">[</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">,</span> <span class="s1">&#39;__doc__&#39;</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;math&#39;</span><span class="p">,</span> <span class="s1">&#39;pyscripter&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;__builtins__&#39;, &#39;__doc__&#39;, &#39;__name__&#39;, &#39;a&#39;, &#39;b&#39;, &#39;math&#39;, &#39;pyscripter&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 4:</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">math</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;__doc__&#39;, &#39;__loader__&#39;, &#39;__name__&#39;, &#39;__package__&#39;, &#39;__spec__&#39;, &#39;acos&#39;, &#39;acosh&#39;, &#39;asin&#39;, &#39;asinh&#39;, &#39;atan&#39;, &#39;atan2&#39;, &#39;atanh&#39;, &#39;ceil&#39;, &#39;comb&#39;, &#39;copysign&#39;, &#39;cos&#39;, &#39;cosh&#39;, &#39;degrees&#39;, &#39;dist&#39;, &#39;e&#39;, &#39;erf&#39;, &#39;erfc&#39;, &#39;exp&#39;, &#39;expm1&#39;, &#39;fabs&#39;, &#39;factorial&#39;, &#39;floor&#39;, &#39;fmod&#39;, &#39;frexp&#39;, &#39;fsum&#39;, &#39;gamma&#39;, &#39;gcd&#39;, &#39;hypot&#39;, &#39;inf&#39;, &#39;isclose&#39;, &#39;isfinite&#39;, &#39;isinf&#39;, &#39;isnan&#39;, &#39;isqrt&#39;, &#39;ldexp&#39;, &#39;lgamma&#39;, &#39;log&#39;, &#39;log10&#39;, &#39;log1p&#39;, &#39;log2&#39;, &#39;modf&#39;, &#39;nan&#39;, &#39;perm&#39;, &#39;pi&#39;, &#39;pow&#39;, &#39;prod&#39;, &#39;radians&#39;, &#39;remainder&#39;, &#39;sin&#39;, &#39;sinh&#39;, &#39;sqrt&#39;, &#39;tan&#39;, &#39;tanh&#39;, &#39;tau&#39;, &#39;trunc&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="python-modules-list">
+<h2>Python Modules List<a class="headerlink" href="#python-modules-list" title="Link to this heading">#</a></h2>
+<p>Using Python built-in function <strong><code class="docutils literal notranslate"><span class="pre">help()</span></code></strong>, we can obtain the list of built-in modules available in Python. On executing the line help (‘modules’) in Python IDE, you can see all the Python built-in modules. Some of the frequently used ones are discussed below.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Module</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">Operator</span></code></strong></p></td>
+<td class="text-left"><p>This module provides a set of pre-defined functions corresponding to operators in Python.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">decimal</span></code></strong></p></td>
+<td class="text-left"><p>This module is used to print the complete decimal value when one number is divided by another number.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><a class="reference internal" href="008_Python_Function_random_Module.html"><span class="std std-doc">random</span></a></strong></p></td>
+<td class="text-left"><p>random module is used to generate random numbers. Some of the pre-defined functions of this module are <strong><code class="docutils literal notranslate"><span class="pre">randint()</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">choice()</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">uniform</span></code></strong>, etc.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">string</span></code></strong></p></td>
+<td class="text-left"><p>string module provides a set of functions that are used to perform certain operations on characters. This module has pre-defined functions like capwords, ascii_letters, etc.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><a class="reference internal" href="#/content/essentials/python/functions/009_Python_Function_math_Module.ipynb.ipynb"><span class="xref myst">math</span></a></strong></p></td>
+<td class="text-left"><p>math module is used to perform mathematical operations. This module provides some pre-defined mathematical functions like sqrt, factorial, etc.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="python-built-in-modules-examples">
+<h2>Python Built-In Modules Examples<a class="headerlink" href="#python-built-in-modules-examples" title="Link to this heading">#</a></h2>
+<p>There are many <strong>built-in</strong> modules in Python. Some of the common built-in modules: <strong><code class="docutils literal notranslate"><span class="pre">os</span></code></strong>, <strong><a class="reference external" href="https://docs.python.org/3/library/sys.html">sys</a></strong>, <strong><code class="docutils literal notranslate"><span class="pre">operator</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">string</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">decimal</span></code></strong>, <strong><a class="reference internal" href="008_Python_Function_random_Module.html"><span class="std std-doc">random</span></a></strong> , <strong><a class="reference internal" href="#/content/essentials/python/functions/009_Python_Function_math_Module.ipynb.ipynb"><span class="xref myst">math</span></a></strong>, <strong><code class="docutils literal notranslate"><span class="pre">statistics</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">datetime</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">time</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">collections</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">threading</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">mailbox</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">tkinter</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">json</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">re</span></code></strong>, etc.</p>
+<section id="example-using-os-module">
+<h3>Example Using <code class="docutils literal notranslate"><span class="pre">os</span></code> Module<a class="headerlink" href="#example-using-os-module" title="Link to this heading">#</a></h3>
+<p>Using python <strong><code class="docutils literal notranslate"><span class="pre">os</span></code></strong> module it is possible to automatically perform many operating system tasks. The <strong><code class="docutils literal notranslate"><span class="pre">os</span></code></strong> module in Python provides functions for creating, changing current working directory, and removing a directory (folder), fetching its contents, changing and identifying the current directory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="c1"># import the module</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="c1"># Creating a directory</span>
+<span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;directory_name&#39;</span><span class="p">)</span>
+<span class="c1"># Changing the current directory</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">)</span>
+<span class="c1"># Getting current working directory</span>
+<span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="c1"># Removing directory</span>
+<span class="n">os</span><span class="o">.</span><span class="n">rmdir</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileExistsError</span><span class="g g-Whitespace">                           </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">23</span><span class="o">-</span><span class="mi">5</span><span class="n">aa728677edf</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">os</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Creating a directory</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;directory_name&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># Changing the current directory</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">)</span>
+
+<span class="ne">FileExistsError</span>: [WinError 183] Cannot create a file when that file already exists: &#39;directory_name&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-using-sys-module">
+<h3>Example Using <code class="docutils literal notranslate"><span class="pre">sys</span></code> Module<a class="headerlink" href="#example-using-sys-module" title="Link to this heading">#</a></h3>
+<p>The <strong><a class="reference external" href="https://docs.python.org/3/library/sys.html">sys</a></strong> module provides functions and variables used to manipulate different parts of the Python runtime environment.</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">sys.argv</span></code></strong> function returns a list of command line arguments passed to a Python script. The item at index 0 in this list is always the name of the script, at index 1 is the argument passed from the command line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;C:\\Users\\Deepak\\01_Learn_Python4Data\\04_Python_Functions&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\python38.zip&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\DLLs&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\lib&#39;,
+ &#39;C:\\ProgramData\\Anaconda3&#39;,
+ &#39;&#39;,
+ &#39;C:\\Users\\Deepak\\AppData\\Roaming\\Python\\Python38\\site-packages&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\lib\\site-packages&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\lib\\site-packages\\locket-0.2.1-py3.8.egg&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\lib\\site-packages\\win32&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\lib\\site-packages\\win32\\lib&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\lib\\site-packages\\Pythonwin&#39;,
+ &#39;C:\\ProgramData\\Anaconda3\\lib\\site-packages\\IPython\\extensions&#39;,
+ &#39;C:\\Users\\Deepak\\.ipython&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>First</strong>, create a Python module with the name <strong><code class="docutils literal notranslate"><span class="pre">script.py</span></code></strong> and write the below code in that file.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># print(sys.argv[0], argv[1],sys.argv[2])  # this line would print out: filename argument1 argument2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Welcome </span><span class="si">{}</span><span class="s1">. Enjoy  </span><span class="si">{}</span><span class="s1"> for Data Science ^_^&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p><strong>Second</strong>, open <strong><code class="docutils literal notranslate"><span class="pre">Anaconda</span> <span class="pre">Prompt</span> <span class="pre">(Anaconda3)</span></code></strong></p>
+<p><strong>Third</strong>, type system path after <strong><code class="docutils literal notranslate"><span class="pre">cd</span></code></strong></p>
+<div class="highlight-sy notranslate"><div class="highlight"><pre><span></span>cd C:\\Users\\Deepak\\01_Learn_Python4Data\\04_Python_Functions
+</pre></div>
+</div>
+<p><strong>Forth</strong>, type</p>
+<div class="highlight-sy notranslate"><div class="highlight"><pre><span></span>python script.py Milaan Python
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-sy notranslate"><div class="highlight"><pre><span></span>Welcome Milaan. Enjoy  Python for Data Science ^_^
+</pre></div>
+</div>
+<div>
+<img src="img/anaconda_prompt.png" width="1000"/>
+</div><p>Some useful <strong><code class="docutils literal notranslate"><span class="pre">sys</span></code></strong> commands to type in:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># to exit sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+<span class="c1"># To know the largest integer variable it takes</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span>
+<span class="c1"># To know environment path</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+<span class="c1"># To know the version of python you are using</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">version</span>
+</pre></div>
+</div>
+</section>
+<section id="example-using-operator-module">
+<h3>Example Using <code class="docutils literal notranslate"><span class="pre">operator</span></code> Module<a class="headerlink" href="#example-using-operator-module" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span>
+<span class="c1">#prints the product of the values &#39;a&#39; and &#39;b&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+<span class="c1">#prints True if the value of &#39;a&#39; is greater than &#39;b&#39;. Else, False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gt</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+<span class="c1">#prints the remainder value, when the value of &#39;a&#39; is divided by &#39;b&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+<span class="c1">#concatenates and prints the given two strings</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">concat</span><span class="p">(</span><span class="s2">&quot;Hello &quot;</span><span class="p">,</span> <span class="s2">&quot;World&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>200
+False
+10
+Hello World
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-using-string-module">
+<h3>Example Using <code class="docutils literal notranslate"><span class="pre">string</span></code> Module<a class="headerlink" href="#example-using-string-module" title="Link to this heading">#</a></h3>
+<p>A <strong><a class="reference internal" href="../datatypes/002_Python_String.html"><span class="std std-doc">string</span></a></strong> module is a useful module for many purposes. The example below shows some use of the string module.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">capwords</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">))</span> <span class="c1">#capitalizes the first letter of each words</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ascii_letters</span><span class="p">)</span> <span class="c1">#prints all lowercase and uppercase letters</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello World
+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2:</span>
+
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_letters</span><span class="p">)</span> <span class="c1"># abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">digits</span><span class="p">)</span>        <span class="c1"># 0123456789</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">)</span>   <span class="c1"># !&quot;#$%&amp;&#39;()*+,-./:;&lt;=&gt;?@[\]^_`{|}~</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+0123456789
+!&quot;#$%&amp;&#39;()*+,-./:;&lt;=&gt;?@[\]^_`{|}~
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-using-decimal-module">
+<h3>Example Using <code class="docutils literal notranslate"><span class="pre">decimal</span></code> Module<a class="headerlink" href="#example-using-decimal-module" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">3</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="c1">#prints the complete decimal value of c</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.3333333333333335
+3.333333333333333481363069950020872056484222412109375
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-using-random-module">
+<h3>Example Using <code class="docutils literal notranslate"><span class="pre">random</span></code> Module<a class="headerlink" href="#example-using-random-module" title="Link to this heading">#</a></h3>
+<p>The <strong><a class="reference internal" href="008_Python_Function_random_Module.html"><span class="std std-doc">random</span></a></strong> module is used to generate the random numbers. It provides the following two built in functions:</p>
+<section id="comparision-operators-in-python">
+<h4>Comparision operators in Python<a class="headerlink" href="#comparision-operators-in-python" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Function</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">random()</span></code></strong></p></td>
+<td class="text-left"><p>It returns a random number between 0.0 and 1.0 where 1.0 is exclusive.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">randint(x,y)</span></code></strong></p></td>
+<td class="text-left"><p>It returns a random number between x and y where both the numbers are inclusive.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="c1">#prints a random number between the given range</span>
+
+<span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">56</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">choice</span><span class="p">(</span><span class="n">list1</span><span class="p">))</span> <span class="c1">#prints a random element from the given iterator</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">uniform</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="c1">#prints a random float number between two given values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+16
+13.03505598723366
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2:</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2946014910624595
+8
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 3:</span>
+
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>   <span class="c1"># import randint function</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="p">())</span>   <span class="c1"># it doesn&#39;t take any arguments; it returns a value between 0 and 0.9999</span>
+
+<span class="c1"># call randint function to get random number</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>  <span class="c1"># it returns a random integer number between [10, 30] inclusive</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">31</span><span class="o">-</span><span class="mi">92</span><span class="n">fab552c144</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>   <span class="c1"># import randint function</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> 
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="p">())</span>   <span class="c1"># it doesn&#39;t take any arguments; it returns a value between 0 and 0.9999</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> 
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># call randint function to get random number</span>
+
+<span class="ne">TypeError</span>: &#39;module&#39; object is not callable
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="example-using-math-module">
+<h3>Example Using <code class="docutils literal notranslate"><span class="pre">math</span></code> Module<a class="headerlink" href="#example-using-math-module" title="Link to this heading">#</a></h3>
+<p>Using <strong><a class="reference internal" href="#/content/essentials/python/functions/009_Python_Function_math_Module.ipynb.ipynb"><span class="xref myst">math</span></a></strong> module, you can use different built in mathematical functions.</p>
+<section id="math-module-functions">
+<h4>math module Functions:<a class="headerlink" href="#math-module-functions" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Function</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">ceil(n)</span></code></strong></p></td>
+<td class="text-left"><p>It returns the next integer number of the given number.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">sqrt(n)</span></code></strong></p></td>
+<td class="text-left"><p>It returns the Square root of the given number.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">exp(n)</span></code></strong></p></td>
+<td class="text-left"><p>It returns the natural logarithm e raised to the given number.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">floor(n)</span></code></strong></p></td>
+<td class="text-left"><p>It returns the previous integer number of the given number.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">log(n,baseto)</span></code></strong></p></td>
+<td class="text-left"><p>It returns the previous integer number of the given number.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">pow(baseto,</span> <span class="pre">exp)</span></code></strong></p></td>
+<td class="text-left"><p>It returns baseto raised to the exp power.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">sin(n)</span></code></strong></p></td>
+<td class="text-left"><p>It returns sine of the given radian.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">cos(n)</span></code></strong></p></td>
+<td class="text-left"><p>It returns cosine of the given radian.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">tan(n)</span></code></strong></p></td>
+<td class="text-left"><p>It returns tangent of the given radian.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span> <span class="c1"># prints the square root of the value 16 in the form of a floating-point value</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span> <span class="c1"># prints the factorial of the value 5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.0
+120
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2:</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="n">a</span><span class="o">=</span><span class="mf">4.6</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>       <span class="c1"># 5, rounding to the highest</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>      <span class="c1"># 4, rounding to the lowest</span>
+<span class="n">b</span><span class="o">=</span><span class="mi">9</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>       <span class="c1"># 3.0, square root</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">3.0</span><span class="p">))</span>      <span class="c1"># 20.085536923187668</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.0</span><span class="p">))</span>      <span class="c1"># 0.6931471805599453</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">3.0</span><span class="p">))</span>  <span class="c1"># 8.0, exponential function</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>        <span class="c1"># 0.0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>        <span class="c1"># 1.0</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="mi">45</span><span class="p">))</span>      <span class="c1"># 1.6197751905438615</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>    <span class="c1"># 2.0, logarithm with 10 as base </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+4
+3.0
+20.085536923187668
+0.6931471805599453
+8.0
+0.0
+1.0
+1.6197751905438615
+2.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="constants">
+<h4>Constants  -<a class="headerlink" href="#constants" title="Link to this heading">#</a></h4>
+<p>The math module provides two constants for mathematical Operations:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">math.pi</span></code></strong> : Returns constant Pi = 3.14159…</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">math.e</span></code></strong> : Returns constant e= 2.71828…</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 3:</span>
+
+<span class="kn">import</span> <span class="nn">math</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;math.pi : &quot;</span><span class="p">,</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>  <span class="c1"># 3.141592653589793, pi constant</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;math.e : &quot;</span><span class="p">,</span><span class="n">math</span><span class="o">.</span><span class="n">e</span><span class="p">)</span>    <span class="c1"># 2.718281828459045, e  constant</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>math.pi :  3.141592653589793
+math.e :  2.718281828459045
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="example-using-statistics-module">
+<h3>Example Using <code class="docutils literal notranslate"><span class="pre">statistics</span></code> Module<a class="headerlink" href="#example-using-statistics-module" title="Link to this heading">#</a></h3>
+<p>The statistics module provides functions for mathematical statistics of numeric data. The popular statistical functions which are defined in this module: <strong><code class="docutils literal notranslate"><span class="pre">mean</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">median</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">mode</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">stdev</span></code></strong> etc.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="kn">from</span> <span class="nn">statistics</span> <span class="kn">import</span> <span class="o">*</span> <span class="c1"># importing all the statistics modules</span>
+<span class="n">ages</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">26</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">ages</span><span class="p">))</span>       <span class="c1"># ~22.9</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">median</span><span class="p">(</span><span class="n">ages</span><span class="p">))</span>     <span class="c1"># 23</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mode</span><span class="p">(</span><span class="n">ages</span><span class="p">))</span>       <span class="c1"># 20</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stdev</span><span class="p">(</span><span class="n">ages</span><span class="p">))</span>      <span class="c1"># ~2.3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21.09090909090909
+22
+20
+6.106628291529549
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="wrap-up">
+<h3>Wrap up<a class="headerlink" href="#wrap-up" title="Link to this heading">#</a></h3>
+<p>Since Python provides a lot of built-in modules, it is advisable to use built-in modules rather than user-created modules to perform basic operations.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/essentials/python/functions"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="006_Python_Function_Anonymous.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Python Anonymous/<strong><code class="docutils literal notranslate"><span class="pre">lambda</span></code></strong> Function</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="008_Python_Function_random_Module.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Python Random Module</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-modules-in-python">What are modules in Python?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantage">Advantage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-module-in-python">Creating a module in Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-import-modules-in-python">How to import modules in Python?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-import-statement">Python <code class="docutils literal notranslate"><span class="pre">import</span></code> statement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-multiple-modules"><code class="docutils literal notranslate"><span class="pre">import</span></code> multiple modules</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-from-import-statement">Python <code class="docutils literal notranslate"><span class="pre">from-import</span></code> statement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-with-renaming"><code class="docutils literal notranslate"><span class="pre">import</span></code> with renaming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-all-names"><code class="docutils literal notranslate"><span class="pre">import</span></code> all names</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-module-search-path">Python Module Search Path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reloading-a-module">Reloading a module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dir-built-in-function">The <code class="docutils literal notranslate"><span class="pre">dir()</span></code> built-in function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-modules-list">Python Modules List</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-built-in-modules-examples">Python Built-In Modules Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-os-module">Example Using <code class="docutils literal notranslate"><span class="pre">os</span></code> Module</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-sys-module">Example Using <code class="docutils literal notranslate"><span class="pre">sys</span></code> Module</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-operator-module">Example Using <code class="docutils literal notranslate"><span class="pre">operator</span></code> Module</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-string-module">Example Using <code class="docutils literal notranslate"><span class="pre">string</span></code> Module</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-decimal-module">Example Using <code class="docutils literal notranslate"><span class="pre">decimal</span></code> Module</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-random-module">Example Using <code class="docutils literal notranslate"><span class="pre">random</span></code> Module</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#comparision-operators-in-python">Comparision operators in Python</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-math-module">Example Using <code class="docutils literal notranslate"><span class="pre">math</span></code> Module</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#math-module-functions">math module Functions:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#constants">Constants  -</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-using-statistics-module">Example Using <code class="docutils literal notranslate"><span class="pre">statistics</span></code> Module</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wrap-up">Wrap up</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,2235 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Going Modular: Part 2 (script mode) &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/tools/pytorch/going_modular/05_pytorch_going_modular_script_mode';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/tools/pytorch/going_modular/05_pytorch_going_modular_script_mode.html" />
+    <link rel="icon" href="../../../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Essentials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../essentials/intro_python.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../essentials/python/introduction/intro_toc.html">Introduction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/introduction/002_Hello_World.html">Hello World</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/introduction/003_Python_Keywords_and_Identifiers.html">Keywords and identifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/introduction/004_Python_Statement_Indentation_Comments.html">Statement indentation &amp; comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/introduction/005_Python_Variables_%26_Constants.html">Variables &amp; constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/introduction/006_Python_Literals.html">Literals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/introduction/007_Python_Data_Types.html">Datatypes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/introduction/008_Python_Type_Conversion.html">Type conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/introduction/009_Python_Input_Output_Import.html">I/O &amp; imports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/introduction/010_Python_Operators.html">Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/introduction/011_Python_Namespace_and_Scope.html">Namespace &amp; scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/introduction/Interpreter_Vs_Compiler.html">Interpreter vs compiler</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../essentials/python/datatypes/datatypes_toc.html">Datatypes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/datatypes/001_Python_Numbers.html">Numbers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/datatypes/002_Python_String.html">String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/datatypes/003_Python_List.html">List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/datatypes/004_Python_Tuple.html">Tuple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/datatypes/005_Python_Dictionary.html">Dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/datatypes/006_Python_Sets.html">Sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/datatypes/Python_List_Comprehension.html">List comprehension</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../essentials/python/controlflow/controlflow_toc.html">Control flows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/controlflow/000_Python_Flow_Control_statement.html">Flow control statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/controlflow/001_Python_if_statement.html">If</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/controlflow/002_Python_if_else_statement.html">If else</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/controlflow/003_Python_if_elif_else_statement.html">If elif else</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/controlflow/004_Python_Nested_if_statement.html">Nested if</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/controlflow/005_Python_for_Loop.html">Loops in Python</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/controlflow/006_Python_while_Loop.html">Loops in Python</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/controlflow/007_Python_break_continue_pass_statements.html">Break continue &amp; pass</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../essentials/python/functions/functions_toc.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/functions/001_Python_Functions.html">Python Functions</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/functions/002_Python_Function_Global_Local_Nonlocal.html">Global, local and nonlocal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/functions/003_Python_Function_global_Keywords.html">Python <code class="docutils literal notranslate"><span class="pre">global</span></code> Keyword</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/functions/004_Python_Function_Arguments.html">Function Argument and Parameter</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/functions/005_Python_Function_Recursion.html">Python Recursion</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/functions/006_Python_Function_Anonymous.html">Anonymous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/functions/007_Python_Function_Module.html">Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/functions/008_Python_Function_random_Module.html">Random module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/functions/009_Python_Function_math_Module.html">Math module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/functions/010_Python_Function_Package.html">Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/functions/Python_Docstrings.html">Docstrings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/functions/Python_User_defined_Functions.html">User defined functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../essentials/python/files/files_toc.html">Files</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/files/001_Python_File_Input_Output.html">File I/O</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/files/002_Python_File_Directory.html">File directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/files/003_Python_File_Exception.html">File exception</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/files/004_Python_Exceptions_Handling.html">Exceptions handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/files/005_Python_User_defined_Exceptions.html">User defined exceptions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../essentials/python/objects/objects_toc.html">Objects &amp; classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/objects/001_Python_OOPs_Concepts.html">OOPs concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/objects/002_Python_Classes_and_Objects.html">Python  Classes and Objects</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/objects/003_Python_Inheritance.html">Inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/objects/004_Python_Operator_Overloading.html">Operator overloading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/objects/self_in_Python_Demystified.html">self demystified</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../essentials/python/advanced/advanced_toc.html">Advanced</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/advanced/001_Python_Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/advanced/002_Python_Generators.html">Generators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/advanced/003_Python_Closure.html">Closure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/advanced/004_Python_Decorators.html">Decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/advanced/005_Python_Property.html">Property</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/advanced/006_Python_RegEx.html">RegEx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../essentials/python/advanced/Python_args_and_kwargs.html">args and kwargs</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../essentials/python/datetime/datetime_toc.html">Date time module</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../essentials/python/datetime/001_Python_datetime_Module.html">Datetime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../essentials/python/datetime/002_Python_strftime.html">strftime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../essentials/python/datetime/003_Python_strptime.html">strptime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../essentials/python/datetime/004_Python_current_date_and_time.html">Current date &amp; time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../essentials/python/datetime/005_Python_get_current_time.html">Current time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../essentials/python/datetime/006_Python_timestamp_to_datetime.html">Timestamp to datetime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../essentials/python/datetime/007_Python_time_Module.html">Time module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../essentials/python/datetime/008_Python_sleep.html">Sleep</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../essentials/mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../essentials/mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../essentials/mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../essentials/mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../essentials/intro_statistics.html">Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../essentials/statistics/statistics.html">Work in progress</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../intro_tools.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../numpy/numpy_toc.html">NumPy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../numpy/001_Python_NumPy.html">Python NumPy</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../numpy/002_Python_NumPy_Array_Part1.html">Arrays Part 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../numpy/003_Python_NumPy_Array_Part2.html">Arrays Part 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../numpy/004_Python_NumPy_Array_Part3.html">Arrays Part 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../numpy/005_Python_NumPy_Array_Part4.html">Arrays Part 4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../pandas/001_Python_Pandas_DataFrame.html">Python Pandas</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../pandas/001_Python_Pandas_Methods/001_Python_Pandas_DataFrame_from_Dictionary.html">Dataframe from dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pandas/001_Python_Pandas_Methods/002_Python_Pandas_DataFrame_from_List.html">Dataframe from List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pandas/001_Python_Pandas_Methods/003_Python_Pandas_DataFrame_head_and_tail.html">Head &amp; tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pandas/001_Python_Pandas_Methods/004_Python_Pandas_DataFrame_drop_columns.html">Drop columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pandas/001_Python_Pandas_Methods/005_Python_Pandas_DataFrame_drop_duplicates.html">Drop duplicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pandas/001_Python_Pandas_Methods/006_Python_Pandas_DataFrame_drop_columns_with_NA.html">Drop with NA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pandas/001_Python_Pandas_Methods/007_Python_Pandas_DataFrame_rename_columns.html">Rename columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pandas/001_Python_Pandas_Methods/008_Python_Pandas_DataFrame_to_Python_dictionary.html">Dataframe to python dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pandas/001_Python_Pandas_Methods/009_Python_Pandas_DataFrame_set_index.html">Set index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pandas/001_Python_Pandas_Methods/010_Python_Pandas_DataFrame_reset_index.html">Reset index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pandas/002_Python_Pandas_Exercise_1.html">Exercise 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pandas/003_Python_Pandas_Exercise_2.html">Exercise 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../matplotlib/002_Python_Matplotlib_Exercise_1.html">Matplotlib</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../matplotlib/003_Python_Matplotlib_Exercise_2.html">Matplotlib 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../seaborn/seaborn_toc.html">Seaborn</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/001_Seaborn_Loading_Dataset.html">Loading Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/002_Seaborn_Controlling_Aesthetics.html">Controlling aesthetics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/003_Matplotlib_vs_Seaborn.html">Matplotlib vs seaborn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/004_Seaborn_Color_Palettes.html">Color palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/005_Seaborn_LM_Plot_and_Reg_Plot.html">LM and regerssion plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/006_Seaborn_Scatter_Plot_and_Joint_Plot.html">Scatter and join plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/007_Seaborn_Additional_Regression_Plots.html">Regerssion plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/008_Seaborn_Distribution_Plots.html">Seaborn distribution plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/009_Seaborn_Categorical_Swarm_Plot.html">Categorical swarn plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/010_Seaborn_Categorical_Strip_Plot.html">Categorical strip plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/011_Seaborn_Categorical_Box_Plot.html">Categorical box plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/012_Seaborn_Categorical_Violin_Plot.html">Categorical violin plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/013_Seaborn_Categorical_Bar_Plot_Point_Plot_and_Count_Plot.html">Categorical bar, point &amp; count plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/014_Seaborn_Categorical_Factor_Plot.html">Categorical factor plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/015_Seaborn_TimeSeries_and_LetterValue_Plot.html">Timeseries and letter value plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/016_Seaborn_PairGrid_Plot.html">Pair grid Pplot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/017_Seaborn_FacetGrid_Plot.html">Facet grid plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/018_Seaborn_Heat_Map.html">Heat map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../seaborn/019_Seaborn_Cluster_Map.html">Cluster map</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tools-for-nn.html">Neural networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../01_pytorch_workflow.html">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_pytorch_computer_vision.html">Computer vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../04_pytorch_custom_datasets.html">Custom datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../05_pytorch_going_modular.html">Going Modular</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../06_pytorch_transfer_learning.html">Transfer learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../07_pytorch_experiment_tracking.html">Experiment tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../08_pytorch_paper_replicating.html">Replicating papers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../09_pytorch_model_deployment.html">Model deployment</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../tools-for-llms.html">LLMs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../langchain/LangChain%20Cookbook%20Part%201%20-%20Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../langchain/LangChain%20Cookbook%20Part%202%20-%20Use%20Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../langchain/projects/project_toc.html">Projects gallery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../langchain/langsmith.html">LangSmith</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../langchain/langgraph.html">LangGraph</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hf/intro.html">HuggingFace introduction and setup</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../concepts/concepts.html">Concepts at glance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts/linear-regression.html">Linear regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts/logistic-regression.html">Logistic regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts/k-means.html">K-means</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts/anomaly-detection.html">Anomaly detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts/neural-networks.html">Neural networks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Blogs &amp; resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/courses/courses_toc.html">Courses</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About me</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/tools/pytorch/going_modular/05_pytorch_going_modular_script_mode.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/tools/pytorch/going_modular/05_pytorch_going_modular_script_mode.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/content/tools/pytorch/going_modular/05_pytorch_going_modular_script_mode.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Going Modular: Part 2 (script mode)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-script-mode">What is script mode?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-has-script-mode-got-to-do-with-pytorch">What has script mode got to do with PyTorch?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-in-the-wild">PyTorch in the wild</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#whats-the-difference-between-this-notebook-part-2-and-the-cell-mode-notebook-part-1">What’s the difference between this notebook (Part 2) and the cell mode notebook (Part 1)?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-were-going-to-cover">What we’re going to cover</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-folder-for-storing-python-scripts">Creating a folder for storing Python scripts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-data">Get data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-datasets-and-dataloaders">Create Datasets and DataLoaders</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-datasets-and-dataloaders-script-mode">Create Datasets and DataLoaders (script mode)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-model-tinyvgg">Making a model (TinyVGG)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-model-tinyvgg-script-mode">Making a model (TinyVGG) (script mode)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-train-step-and-test-step-functions-and-train-to-combine-them">Creating <code class="docutils literal notranslate"><span class="pre">train_step()</span></code> and <code class="docutils literal notranslate"><span class="pre">test_step()</span></code> functions and <code class="docutils literal notranslate"><span class="pre">train()</span></code> to combine them</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-train-step-and-test-step-functions-and-train-to-combine-them-script-mode">Creating <code class="docutils literal notranslate"><span class="pre">train_step()</span></code> and <code class="docutils literal notranslate"><span class="pre">test_step()</span></code> functions and <code class="docutils literal notranslate"><span class="pre">train()</span></code> to combine them (script mode)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-function-to-save-the-model">Creating a function to save the model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-function-to-save-the-model-script-mode">Creating a function to save the model (script mode)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-evaluate-and-save-the-model">Train, evaluate and save the model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-evaluate-and-save-the-model-script-mode">Train, evaluate and save the model (script mode)</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="going-modular-part-2-script-mode">
+<h1>Going Modular: Part 2 (script mode)<a class="headerlink" href="#going-modular-part-2-script-mode" title="Link to this heading">#</a></h1>
+<p>This notebook is part 2/2 of section <a class="reference internal" href="../05_pytorch_going_modular.html"><span class="doc std std-doc">05. Going Modular</span></a>.</p>
+<p>For reference, the two parts are:</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="05_pytorch_going_modular_cell_mode.html"><span class="std std-doc"><strong>05. Going Modular: Part 1 (cell mode)</strong></span></a> - this notebook is run as a traditional Jupyter Notebook/Google Colab notebook and is a condensed version of <a class="reference internal" href="../04_pytorch_custom_datasets.html"><span class="std std-doc">notebook 04</span></a>.</p></li>
+<li><p><a class="reference internal" href="#"><span class="std std-doc"><strong>05. Going Modular: Part 2 (script mode)</strong></span></a> - this notebook is the same as number 1 but with added functionality to turn each of the major sections into Python scripts, such as, <code class="docutils literal notranslate"><span class="pre">data_setup.py</span></code> and <code class="docutils literal notranslate"><span class="pre">train.py</span></code>.</p></li>
+</ol>
+<p>Why two parts?</p>
+<p>Because sometimes the best way to learn something is to see how it <em>differs</em> from something else.</p>
+<p>If you run each notebook side-by-side you’ll see how they differ and that’s where the key learnings are.</p>
+<section id="what-is-script-mode">
+<h2>What is script mode?<a class="headerlink" href="#what-is-script-mode" title="Link to this heading">#</a></h2>
+<p><strong>Script mode</strong> uses <a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/magics.html">Jupyter Notebook cell magic</a> (special commands) to turn specific cells into Python scripts.</p>
+<p>For example if you run the following code in a cell, you’ll create a Python file called <code class="docutils literal notranslate"><span class="pre">hello_world.py</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">hello_world</span><span class="o">.</span><span class="n">py</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hello world, machine learning is fun!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You could then run this Python file on the command line with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>python hello_world.py
+
+&gt;&gt;&gt; hello world, machine learning is fun!
+</pre></div>
+</div>
+<p>The main cell magic we’re interested in using is <code class="docutils literal notranslate"><span class="pre">%%writefile</span></code>.</p>
+<p>Putting <code class="docutils literal notranslate"><span class="pre">%%writefile</span> <span class="pre">filename</span></code> at the top of a cell in Jupyter or Google Colab will write the contents of that cell to a specified <code class="docutils literal notranslate"><span class="pre">filename</span></code>.</p>
+<blockquote>
+<div><p><strong>Question:</strong> Do I have to create Python files like this? Can’t I just start directly with a Python file and skip using a Google Colab notebook?</p>
+<p><strong>Answer:</strong> Yes. This is only <em>one</em> way of creating Python scripts. If you know the kind of script you’d like to write, you could start writing it straight away. But since using Jupyter/Google Colab notebooks is a popular way of starting off data science and machine learning projects, knowing about the <code class="docutils literal notranslate"><span class="pre">%%writefile</span></code> magic command is a handy tip.</p>
+</div></blockquote>
+</section>
+<section id="what-has-script-mode-got-to-do-with-pytorch">
+<h2>What has script mode got to do with PyTorch?<a class="headerlink" href="#what-has-script-mode-got-to-do-with-pytorch" title="Link to this heading">#</a></h2>
+<p>If you’ve written some useful code in a Jupyter Notebook or Google Colab notebook, chances are you’ll want to use that code again.</p>
+<p>And turning your useful cells into Python scripts (<code class="docutils literal notranslate"><span class="pre">.py</span></code> files) means you can use specific pieces of your code in other projects.</p>
+<p>This practice is not PyTorch specific.</p>
+<p>But it’s how you’ll see many different online PyTorch repositories structured.</p>
+<section id="pytorch-in-the-wild">
+<h3>PyTorch in the wild<a class="headerlink" href="#pytorch-in-the-wild" title="Link to this heading">#</a></h3>
+<p>For example, if you find a PyTorch project on GitHub, it may be structured in the following way:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pytorch_project/
+├── pytorch_project/
+│   ├── data_setup.py
+│   ├── engine.py
+│   ├── model.py
+│   ├── train.py
+│   └── utils.py
+├── models/
+│   ├── model_1.pth
+│   └── model_2.pth
+└── data/
+    ├── data_folder_1/
+    └── data_folder_2/
+</pre></div>
+</div>
+<p>Here, the top level directory is called <code class="docutils literal notranslate"><span class="pre">pytorch_project</span></code> but you could call it whatever you want.</p>
+<p>Inside there’s another directory called <code class="docutils literal notranslate"><span class="pre">pytorch_project</span></code> which contains several <code class="docutils literal notranslate"><span class="pre">.py</span></code> files, the purposes of these may be:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data_setup.py</span></code> - a file to prepare data (and download data if needed).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">engine.py</span></code> - a file containing various training functions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model_builder.py</span></code> or <code class="docutils literal notranslate"><span class="pre">model.py</span></code> - a file to create a PyTorch model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">train.py</span></code> - a file to leverage all other files and train a target PyTorch model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">utils.py</span></code> - a file dedicated to helpful utility functions.</p></li>
+</ul>
+<p>And the <code class="docutils literal notranslate"><span class="pre">models</span></code> and <code class="docutils literal notranslate"><span class="pre">data</span></code> directories could hold PyTorch models and data files respectively (though due to the size of models and data files, it’s unlikely you’ll find the <em>full</em> versions of these on GitHub, these directories are present above mainly for demonstration purposes).</p>
+<blockquote>
+<div><p><strong>Note:</strong> There are many different ways to structure a Python project and subsequently a PyTorch project. This isn’t a guide on <em>how</em> to structure your projects, only an example of how you <em>might</em> come across PyTorch projects in the wild. For more on structuring Python projects, see Real Python’s <a class="reference external" href="https://realpython.com/python-application-layouts/"><em>Python Application Layouts: A Reference</em></a> guide.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="whats-the-difference-between-this-notebook-part-2-and-the-cell-mode-notebook-part-1">
+<h2>What’s the difference between this notebook (Part 2) and the cell mode notebook (Part 1)?<a class="headerlink" href="#whats-the-difference-between-this-notebook-part-2-and-the-cell-mode-notebook-part-1" title="Link to this heading">#</a></h2>
+<p>This notebook, 05 Going Modular: Part 2 (script mode), creates Python scripts out of the cells created in part 1.</p>
+<p>Running this notebook end-to-end will result in having a directory structure very similar to the <code class="docutils literal notranslate"><span class="pre">pytorch_project</span></code> structure above.</p>
+<p>You’ll notice each section in Part 2 (script mode) has an extra subsection (e.g. 2.1, 3.1, 4.1) for turning cell code into script code.</p>
+</section>
+<section id="what-were-going-to-cover">
+<h2>What we’re going to cover<a class="headerlink" href="#what-were-going-to-cover" title="Link to this heading">#</a></h2>
+<p>By the end of this notebook you should finish with a directory structure of:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>going_modular/
+├── going_modular/
+│   ├── data_setup.py
+│   ├── engine.py
+│   ├── model_builder.py
+│   ├── train.py
+│   └── utils.py
+├── models/
+│   ├── 05_going_modular_cell_mode_tinyvgg_model.pth
+│   └── 05_going_modular_script_mode_tinyvgg_model.pth
+└── data/
+    └── pizza_steak_sushi/
+        ├── train/
+        │   ├── pizza/
+        │   │   ├── image01.jpeg
+        │   │   └── ...
+        │   ├── steak/
+        │   └── sushi/
+        └── test/
+            ├── pizza/
+            ├── steak/
+            └── sushi/
+</pre></div>
+</div>
+<p>Using this directory structure, you should be able to train a model from within a notebook with the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!python going_modular/train.py
+</pre></div>
+</div>
+<p>Or from the command line with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">going_modular</span><span class="o">/</span><span class="n">train</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>In essence, we will have turned our helpful notebook code into <strong>reusable modular code</strong>.</p>
+</section>
+<section id="creating-a-folder-for-storing-python-scripts">
+<h2>Creating a folder for storing Python scripts<a class="headerlink" href="#creating-a-folder-for-storing-python-scripts" title="Link to this heading">#</a></h2>
+<p>Since we’re going to be creating Python scripts out of our most useful code cells, let’s create a folder for storing those scripts.</p>
+<p>We’ll call the folder <code class="docutils literal notranslate"><span class="pre">going_modular</span></code> and create it using Python’s <a class="reference external" href="https://docs.python.org/3/library/os.html"><code class="docutils literal notranslate"><span class="pre">os.makedirs()</span></code></a> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;going_modular&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="get-data">
+<h2>Get data<a class="headerlink" href="#get-data" title="Link to this heading">#</a></h2>
+<p>We’re going to start by downloading the same data we used in <a class="reference internal" href="../04_pytorch_custom_datasets.html"><span class="std std-doc">notebook 04</span></a>, the <code class="docutils literal notranslate"><span class="pre">pizza_steak_sushi</span></code> dataset with images of pizza, steak and sushi.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c1"># Setup path to data folder</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/&quot;</span><span class="p">)</span>
+<span class="n">image_path</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">/</span> <span class="s2">&quot;pizza_steak_sushi&quot;</span>
+
+<span class="c1"># If the image folder doesn&#39;t exist, download it and prepare it... </span>
+<span class="k">if</span> <span class="n">image_path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">image_path</span><span class="si">}</span><span class="s2"> directory exists.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Did not find </span><span class="si">{</span><span class="n">image_path</span><span class="si">}</span><span class="s2"> directory, creating one...&quot;</span><span class="p">)</span>
+    <span class="n">image_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+<span class="c1"># Download pizza, steak, sushi data</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">/</span> <span class="s2">&quot;pizza_steak_sushi.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://github.com/mrdbourke/pytorch-deep-learning/raw/main/data/pizza_steak_sushi.zip&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloading pizza, steak, sushi data...&quot;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+<span class="c1"># Unzip pizza, steak, sushi data</span>
+<span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">data_path</span> <span class="o">/</span> <span class="s2">&quot;pizza_steak_sushi.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unzipping pizza, steak, sushi data...&quot;</span><span class="p">)</span> 
+    <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+
+<span class="c1"># Remove zip file</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">data_path</span> <span class="o">/</span> <span class="s2">&quot;pizza_steak_sushi.zip&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>data/pizza_steak_sushi directory exists.
+Downloading pizza, steak, sushi data...
+Unzipping pizza, steak, sushi data...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup train and testing paths</span>
+<span class="n">train_dir</span> <span class="o">=</span> <span class="n">image_path</span> <span class="o">/</span> <span class="s2">&quot;train&quot;</span>
+<span class="n">test_dir</span> <span class="o">=</span> <span class="n">image_path</span> <span class="o">/</span> <span class="s2">&quot;test&quot;</span>
+
+<span class="n">train_dir</span><span class="p">,</span> <span class="n">test_dir</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(PosixPath(&#39;data/pizza_steak_sushi/train&#39;),
+ PosixPath(&#39;data/pizza_steak_sushi/test&#39;))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-datasets-and-dataloaders">
+<h2>Create Datasets and DataLoaders<a class="headerlink" href="#create-datasets-and-dataloaders" title="Link to this heading">#</a></h2>
+<p>Let’s turn our data into PyTorch <code class="docutils literal notranslate"><span class="pre">Dataset</span></code>’s and <code class="docutils literal notranslate"><span class="pre">DataLoader</span></code>’s and find out a few useful attributes from them such as <code class="docutils literal notranslate"><span class="pre">classes</span></code> and their lengths.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">transforms</span>
+
+<span class="c1"># Create simple transform</span>
+<span class="n">data_transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span> 
+    <span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">((</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)),</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+<span class="p">])</span>
+
+<span class="c1"># Use ImageFolder to create dataset(s)</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ImageFolder</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="n">train_dir</span><span class="p">,</span> <span class="c1"># target folder of images</span>
+                                  <span class="n">transform</span><span class="o">=</span><span class="n">data_transform</span><span class="p">,</span> <span class="c1"># transforms to perform on data (images)</span>
+                                  <span class="n">target_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="c1"># transforms to perform on labels (if necessary)</span>
+
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ImageFolder</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="n">test_dir</span><span class="p">,</span> 
+                                 <span class="n">transform</span><span class="o">=</span><span class="n">data_transform</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Train data:</span><span class="se">\n</span><span class="si">{</span><span class="n">train_data</span><span class="si">}</span><span class="se">\n</span><span class="s2">Test data:</span><span class="se">\n</span><span class="si">{</span><span class="n">test_data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train data:
+Dataset ImageFolder
+    Number of datapoints: 225
+    Root location: data/pizza_steak_sushi/train
+    StandardTransform
+Transform: Compose(
+               Resize(size=(64, 64), interpolation=bilinear, max_size=None, antialias=None)
+               ToTensor()
+           )
+Test data:
+Dataset ImageFolder
+    Number of datapoints: 75
+    Root location: data/pizza_steak_sushi/test
+    StandardTransform
+Transform: Compose(
+               Resize(size=(64, 64), interpolation=bilinear, max_size=None, antialias=None)
+               ToTensor()
+           )
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get class names as a list</span>
+<span class="n">class_names</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">classes</span>
+<span class="n">class_names</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;pizza&#39;, &#39;steak&#39;, &#39;sushi&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Can also get class names as a dict</span>
+<span class="n">class_dict</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">class_to_idx</span>
+<span class="n">class_dict</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;pizza&#39;: 0, &#39;steak&#39;: 1, &#39;sushi&#39;: 2}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the lengths</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">train_data</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(225, 75)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn train and test Datasets into DataLoaders</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+
+<span class="n">train_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">train_data</span><span class="p">,</span> 
+                              <span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="c1"># how many samples per batch?</span>
+                              <span class="n">num_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="c1"># how many subprocesses to use for data loading? (higher = more)</span>
+                              <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># shuffle the data?</span>
+
+<span class="n">test_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">test_data</span><span class="p">,</span> 
+                             <span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                             <span class="n">num_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                             <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># don&#39;t usually need to shuffle testing data</span>
+
+<span class="n">train_dataloader</span><span class="p">,</span> <span class="n">test_dataloader</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;torch.utils.data.dataloader.DataLoader at 0x7fca2e344760&gt;,
+ &lt;torch.utils.data.dataloader.DataLoader at 0x7fca2e3445b0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check out single image size/shape</span>
+<span class="n">img</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">))</span>
+
+<span class="c1"># Batch size will now be 1, try changing the batch_size parameter above and see what happens</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Image shape: </span><span class="si">{</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> -&gt; [batch_size, color_channels, height, width]&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Label shape: </span><span class="si">{</span><span class="n">label</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Image shape: torch.Size([1, 3, 64, 64]) -&gt; [batch_size, color_channels, height, width]
+Label shape: torch.Size([1])
+</pre></div>
+</div>
+</div>
+</div>
+<section id="create-datasets-and-dataloaders-script-mode">
+<h3>Create Datasets and DataLoaders (script mode)<a class="headerlink" href="#create-datasets-and-dataloaders-script-mode" title="Link to this heading">#</a></h3>
+<p>Rather than rewriting all of the code above everytime we wanted to load data, we can turn it into a script called <code class="docutils literal notranslate"><span class="pre">data_setup.py</span></code>.</p>
+<p>Let’s capture all of the above functionality into a function called <code class="docutils literal notranslate"><span class="pre">create_dataloaders()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> going_modular/data_setup.py
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains functionality for creating PyTorch DataLoaders for </span>
+<span class="sd">image classification data.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">transforms</span>
+
+<span class="n">NUM_WORKERS</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">create_dataloaders</span><span class="p">(</span>
+    <span class="n">train_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+    <span class="n">test_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+    <span class="n">transform</span><span class="p">:</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">,</span> 
+    <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> 
+    <span class="n">num_workers</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="n">NUM_WORKERS</span>
+<span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;Creates training and testing DataLoaders.</span>
+
+<span class="sd">  Takes in a training directory and testing directory path and turns</span>
+<span class="sd">  them into PyTorch Datasets and then into PyTorch DataLoaders.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    train_dir: Path to training directory.</span>
+<span class="sd">    test_dir: Path to testing directory.</span>
+<span class="sd">    transform: torchvision transforms to perform on training and testing data.</span>
+<span class="sd">    batch_size: Number of samples per batch in each of the DataLoaders.</span>
+<span class="sd">    num_workers: An integer for number of workers per DataLoader.</span>
+
+<span class="sd">  Returns:</span>
+<span class="sd">    A tuple of (train_dataloader, test_dataloader, class_names).</span>
+<span class="sd">    Where class_names is a list of the target classes.</span>
+<span class="sd">    Example usage:</span>
+<span class="sd">      train_dataloader, test_dataloader, class_names = \</span>
+<span class="sd">        = create_dataloaders(train_dir=path/to/train_dir,</span>
+<span class="sd">                             test_dir=path/to/test_dir,</span>
+<span class="sd">                             transform=some_transform,</span>
+<span class="sd">                             batch_size=32,</span>
+<span class="sd">                             num_workers=4)</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="c1"># Use ImageFolder to create dataset(s)</span>
+  <span class="n">train_data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ImageFolder</span><span class="p">(</span><span class="n">train_dir</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+  <span class="n">test_data</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">ImageFolder</span><span class="p">(</span><span class="n">test_dir</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+
+  <span class="c1"># Get class names</span>
+  <span class="n">class_names</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">classes</span>
+
+  <span class="c1"># Turn images into data loaders</span>
+  <span class="n">train_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
+      <span class="n">train_data</span><span class="p">,</span>
+      <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+      <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+      <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">,</span>
+      <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+  <span class="p">)</span>
+  <span class="n">test_dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
+      <span class="n">test_data</span><span class="p">,</span>
+      <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+      <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+      <span class="n">num_workers</span><span class="o">=</span><span class="n">num_workers</span><span class="p">,</span>
+      <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+  <span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">train_dataloader</span><span class="p">,</span> <span class="n">test_dataloader</span><span class="p">,</span> <span class="n">class_names</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting going_modular/data_setup.py
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="making-a-model-tinyvgg">
+<h2>Making a model (TinyVGG)<a class="headerlink" href="#making-a-model-tinyvgg" title="Link to this heading">#</a></h2>
+<p>We’re going to use the same model we used in notebook 04: TinyVGG from the CNN Explainer website.</p>
+<p>The only change here from notebook 04 is that a docstring has been added using <a class="reference external" href="https://google.github.io/styleguide/pyguide.html#384-classes">Google’s Style Guide for Python</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span> 
+
+<span class="k">class</span> <span class="nc">TinyVGG</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates the TinyVGG architecture.</span>
+
+<span class="sd">    Replicates the TinyVGG architecture from the CNN explainer website in PyTorch.</span>
+<span class="sd">    See the original architecture here: https://poloclub.github.io/cnn-explainer/</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    input_shape: An integer indicating number of input channels.</span>
+<span class="sd">    hidden_units: An integer indicating number of hidden units between layers.</span>
+<span class="sd">    output_shape: An integer indicating number of output units.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">hidden_units</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">output_shape</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_block_1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">input_shape</span><span class="p">,</span> 
+                    <span class="n">out_channels</span><span class="o">=</span><span class="n">hidden_units</span><span class="p">,</span> 
+                    <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
+                    <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                    <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>  
+          <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">hidden_units</span><span class="p">,</span> 
+                    <span class="n">out_channels</span><span class="o">=</span><span class="n">hidden_units</span><span class="p">,</span>
+                    <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                    <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                        <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_block_2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">hidden_units</span><span class="p">,</span> <span class="n">hidden_units</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">hidden_units</span><span class="p">,</span> <span class="n">hidden_units</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">Flatten</span><span class="p">(),</span>
+          <span class="c1"># Where did this in_features shape come from? </span>
+          <span class="c1"># It&#39;s because each layer of our network compresses and changes the shape of our inputs data.</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="n">hidden_units</span><span class="o">*</span><span class="mi">13</span><span class="o">*</span><span class="mi">13</span><span class="p">,</span>
+                    <span class="n">out_features</span><span class="o">=</span><span class="n">output_shape</span><span class="p">)</span>
+        <span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_block_1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_block_2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+        <span class="c1"># return self.classifier(self.block_2(self.block_1(x))) # &lt;- leverage the benefits of operator fusion</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s create an instance of <code class="docutils literal notranslate"><span class="pre">TinyVGG</span></code> and put it on the target device.</p>
+<blockquote>
+<div><p><strong>Note:</strong> If you’re using Google Colab, and you’d like to use a GPU (recommended), you can turn one on via going to Runtime -&gt; Change runtime type -&gt; Hardware accelerator -&gt; GPU.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
+
+<span class="c1"># Instantiate an instance of the model</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">model_0</span> <span class="o">=</span> <span class="n">TinyVGG</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="c1"># number of color channels (3 for RGB) </span>
+                  <span class="n">hidden_units</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                  <span class="n">output_shape</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data</span><span class="o">.</span><span class="n">classes</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">model_0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TinyVGG(
+  (conv_block_1): Sequential(
+    (0): Conv2d(3, 10, kernel_size=(3, 3), stride=(1, 1))
+    (1): ReLU()
+    (2): Conv2d(10, 10, kernel_size=(3, 3), stride=(1, 1))
+    (3): ReLU()
+    (4): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (conv_block_2): Sequential(
+    (0): Conv2d(10, 10, kernel_size=(3, 3), stride=(1, 1))
+    (1): ReLU()
+    (2): Conv2d(10, 10, kernel_size=(3, 3), stride=(1, 1))
+    (3): ReLU()
+    (4): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (classifier): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=1690, out_features=3, bias=True)
+  )
+)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s check out our model by doing a dummy forward pass.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Get a batch of images and labels from the DataLoader</span>
+<span class="n">img_batch</span><span class="p">,</span> <span class="n">label_batch</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">))</span>
+
+<span class="c1"># 2. Get a single image from the batch and unsqueeze the image so its shape fits the model</span>
+<span class="n">img_single</span><span class="p">,</span> <span class="n">label_single</span> <span class="o">=</span> <span class="n">img_batch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">label_batch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Single image shape: </span><span class="si">{</span><span class="n">img_single</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 3. Perform a forward pass on a single image</span>
+<span class="n">model_0</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">inference_mode</span><span class="p">():</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">model_0</span><span class="p">(</span><span class="n">img_single</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">))</span>
+    
+<span class="c1"># 4. Print out what&#39;s happening and convert model logits -&gt; pred probs -&gt; pred label</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output logits:</span><span class="se">\n</span><span class="si">{</span><span class="n">pred</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output prediction probabilities:</span><span class="se">\n</span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span><span class="w"> </span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output prediction label:</span><span class="se">\n</span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span><span class="w"> </span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Actual label:</span><span class="se">\n</span><span class="si">{</span><span class="n">label_single</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Single image shape: torch.Size([1, 3, 64, 64])
+
+Output logits:
+tensor([[ 0.0208, -0.0019,  0.0095]], device=&#39;cuda:0&#39;)
+
+Output prediction probabilities:
+tensor([[0.3371, 0.3295, 0.3333]], device=&#39;cuda:0&#39;)
+
+Output prediction label:
+tensor([0], device=&#39;cuda:0&#39;)
+
+Actual label:
+0
+</pre></div>
+</div>
+</div>
+</div>
+<section id="making-a-model-tinyvgg-script-mode">
+<h3>Making a model (TinyVGG) (script mode)<a class="headerlink" href="#making-a-model-tinyvgg-script-mode" title="Link to this heading">#</a></h3>
+<p>Over the past few notebooks (notebook 03 and notebook 04), we’ve built the TinyVGG model a few times.</p>
+<p>So it makes sense to put the model into its file so we can reuse it again and again.</p>
+<p>Let’s put our <code class="docutils literal notranslate"><span class="pre">TinyVGG()</span></code> model class into a script called <code class="docutils literal notranslate"><span class="pre">model_builder.py</span></code> with the line <code class="docutils literal notranslate"><span class="pre">%%writefile</span> <span class="pre">going_modular/model_builder.py</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> going_modular/model_builder.py
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains PyTorch model code to instantiate a TinyVGG model.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+
+<span class="k">class</span> <span class="nc">TinyVGG</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates the TinyVGG architecture.</span>
+
+<span class="sd">    Replicates the TinyVGG architecture from the CNN explainer website in PyTorch.</span>
+<span class="sd">    See the original architecture here: https://poloclub.github.io/cnn-explainer/</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    input_shape: An integer indicating number of input channels.</span>
+<span class="sd">    hidden_units: An integer indicating number of hidden units between layers.</span>
+<span class="sd">    output_shape: An integer indicating number of output units.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_shape</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">hidden_units</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">output_shape</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_block_1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">input_shape</span><span class="p">,</span> 
+                    <span class="n">out_channels</span><span class="o">=</span><span class="n">hidden_units</span><span class="p">,</span> 
+                    <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
+                    <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                    <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>  
+          <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">in_channels</span><span class="o">=</span><span class="n">hidden_units</span><span class="p">,</span> 
+                    <span class="n">out_channels</span><span class="o">=</span><span class="n">hidden_units</span><span class="p">,</span>
+                    <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                    <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                        <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_block_2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">hidden_units</span><span class="p">,</span> <span class="n">hidden_units</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">hidden_units</span><span class="p">,</span> <span class="n">hidden_units</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">MaxPool2d</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">Flatten</span><span class="p">(),</span>
+          <span class="c1"># Where did this in_features shape come from? </span>
+          <span class="c1"># It&#39;s because each layer of our network compresses and changes the shape of our inputs data.</span>
+          <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="n">hidden_units</span><span class="o">*</span><span class="mi">13</span><span class="o">*</span><span class="mi">13</span><span class="p">,</span>
+                    <span class="n">out_features</span><span class="o">=</span><span class="n">output_shape</span><span class="p">)</span>
+        <span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_block_1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_block_2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+        <span class="c1"># return self.classifier(self.block_2(self.block_1(x))) # &lt;- leverage the benefits of operator fusion</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting going_modular/model_builder.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>Create an instance of <code class="docutils literal notranslate"><span class="pre">TinyVGG</span></code> (from the script).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">from</span> <span class="nn">going_modular</span> <span class="kn">import</span> <span class="n">model_builder</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
+
+<span class="c1"># Instantiate an instance of the model from the &quot;model_builder.py&quot; script</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">model_1</span> <span class="o">=</span> <span class="n">model_builder</span><span class="o">.</span><span class="n">TinyVGG</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="c1"># number of color channels (3 for RGB) </span>
+                                <span class="n">hidden_units</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                                <span class="n">output_shape</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">class_names</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">model_1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TinyVGG(
+  (conv_block_1): Sequential(
+    (0): Conv2d(3, 10, kernel_size=(3, 3), stride=(1, 1))
+    (1): ReLU()
+    (2): Conv2d(10, 10, kernel_size=(3, 3), stride=(1, 1))
+    (3): ReLU()
+    (4): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (conv_block_2): Sequential(
+    (0): Conv2d(10, 10, kernel_size=(3, 3), stride=(1, 1))
+    (1): ReLU()
+    (2): Conv2d(10, 10, kernel_size=(3, 3), stride=(1, 1))
+    (3): ReLU()
+    (4): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (classifier): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=1690, out_features=3, bias=True)
+  )
+)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Do a dummy forward pass on <code class="docutils literal notranslate"><span class="pre">model_1</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Get a batch of images and labels from the DataLoader</span>
+<span class="n">img_batch</span><span class="p">,</span> <span class="n">label_batch</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">train_dataloader</span><span class="p">))</span>
+
+<span class="c1"># 2. Get a single image from the batch and unsqueeze the image so its shape fits the model</span>
+<span class="n">img_single</span><span class="p">,</span> <span class="n">label_single</span> <span class="o">=</span> <span class="n">img_batch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">label_batch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Single image shape: </span><span class="si">{</span><span class="n">img_single</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># 3. Perform a forward pass on a single image</span>
+<span class="n">model_1</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">inference_mode</span><span class="p">():</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">model_1</span><span class="p">(</span><span class="n">img_single</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">))</span>
+    
+<span class="c1"># 4. Print out what&#39;s happening and convert model logits -&gt; pred probs -&gt; pred label</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output logits:</span><span class="se">\n</span><span class="si">{</span><span class="n">pred</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output prediction probabilities:</span><span class="se">\n</span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span><span class="w"> </span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Output prediction label:</span><span class="se">\n</span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span><span class="w"> </span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Actual label:</span><span class="se">\n</span><span class="si">{</span><span class="n">label_single</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Single image shape: torch.Size([1, 3, 64, 64])
+
+Output logits:
+tensor([[ 0.0208, -0.0019,  0.0095]], device=&#39;cuda:0&#39;)
+
+Output prediction probabilities:
+tensor([[0.3371, 0.3295, 0.3333]], device=&#39;cuda:0&#39;)
+
+Output prediction label:
+tensor([0], device=&#39;cuda:0&#39;)
+
+Actual label:
+0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="creating-train-step-and-test-step-functions-and-train-to-combine-them">
+<h2>Creating <code class="docutils literal notranslate"><span class="pre">train_step()</span></code> and <code class="docutils literal notranslate"><span class="pre">test_step()</span></code> functions and <code class="docutils literal notranslate"><span class="pre">train()</span></code> to combine them<a class="headerlink" href="#creating-train-step-and-test-step-functions-and-train-to-combine-them" title="Link to this heading">#</a></h2>
+<p>Rather than writing them again, we can reuse the <code class="docutils literal notranslate"><span class="pre">train_step()</span></code> and <code class="docutils literal notranslate"><span class="pre">test_step()</span></code> functions from <a class="reference internal" href="../04_pytorch_custom_datasets.html"><span class="std std-doc">notebook 04</span></a>.</p>
+<p>The same goes for the <code class="docutils literal notranslate"><span class="pre">train()</span></code> function we created.</p>
+<p>The only difference here is that these functions have had docstrings added to them in <a class="reference external" href="https://google.github.io/styleguide/pyguide.html#383-functions-and-methods">Google’s Python Functions and Methods Style Guide</a>.</p>
+<p>Let’s start by making <code class="docutils literal notranslate"><span class="pre">train_step()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
+
+<span class="k">def</span> <span class="nf">train_step</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> 
+               <span class="n">dataloader</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">,</span> 
+               <span class="n">loss_fn</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> 
+               <span class="n">optimizer</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span>
+               <span class="n">device</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Trains a PyTorch model for a single epoch.</span>
+
+<span class="sd">    Turns a target PyTorch model to training mode and then</span>
+<span class="sd">    runs through all of the required training steps (forward</span>
+<span class="sd">    pass, loss calculation, optimizer step).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    model: A PyTorch model to be trained.</span>
+<span class="sd">    dataloader: A DataLoader instance for the model to be trained on.</span>
+<span class="sd">    loss_fn: A PyTorch loss function to minimize.</span>
+<span class="sd">    optimizer: A PyTorch optimizer to help minimize the loss function.</span>
+<span class="sd">    device: A target device to compute on (e.g. &quot;cuda&quot; or &quot;cpu&quot;).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    A tuple of training loss and training accuracy metrics.</span>
+<span class="sd">    In the form (train_loss, train_accuracy). For example:</span>
+
+<span class="sd">    (0.1112, 0.8743)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Put model in train mode</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+    <span class="c1"># Setup train loss and train accuracy values</span>
+    <span class="n">train_loss</span><span class="p">,</span> <span class="n">train_acc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="c1"># Loop through data loader data batches</span>
+    <span class="k">for</span> <span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
+        <span class="c1"># Send data to target device</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">y</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="c1"># 1. Forward pass</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+        <span class="c1"># 2. Calculate  and accumulate loss</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">train_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> 
+
+        <span class="c1"># 3. Optimizer zero grad</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+        <span class="c1"># 4. Loss backward</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+        <span class="c1"># 5. Optimizer step</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+        <span class="c1"># Calculate and accumulate accuracy metric across all batches</span>
+        <span class="n">y_pred_class</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">train_acc</span> <span class="o">+=</span> <span class="p">(</span><span class="n">y_pred_class</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+
+    <span class="c1"># Adjust metrics to get average loss and accuracy per batch </span>
+    <span class="n">train_loss</span> <span class="o">=</span> <span class="n">train_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span>
+    <span class="n">train_acc</span> <span class="o">=</span> <span class="n">train_acc</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">train_loss</span><span class="p">,</span> <span class="n">train_acc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ll do <code class="docutils literal notranslate"><span class="pre">test_step()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_step</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> 
+              <span class="n">dataloader</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">,</span> 
+              <span class="n">loss_fn</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+              <span class="n">device</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests a PyTorch model for a single epoch.</span>
+
+<span class="sd">    Turns a target PyTorch model to &quot;eval&quot; mode and then performs</span>
+<span class="sd">    a forward pass on a testing dataset.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    model: A PyTorch model to be tested.</span>
+<span class="sd">    dataloader: A DataLoader instance for the model to be tested on.</span>
+<span class="sd">    loss_fn: A PyTorch loss function to calculate loss on the test data.</span>
+<span class="sd">    device: A target device to compute on (e.g. &quot;cuda&quot; or &quot;cpu&quot;).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    A tuple of testing loss and testing accuracy metrics.</span>
+<span class="sd">    In the form (test_loss, test_accuracy). For example:</span>
+
+<span class="sd">    (0.0223, 0.8985)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Put model in eval mode</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span> 
+
+    <span class="c1"># Setup test loss and test accuracy values</span>
+    <span class="n">test_loss</span><span class="p">,</span> <span class="n">test_acc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="c1"># Turn on inference context manager</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">inference_mode</span><span class="p">():</span>
+        <span class="c1"># Loop through DataLoader batches</span>
+        <span class="k">for</span> <span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
+            <span class="c1"># Send data to target device</span>
+            <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">y</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+            <span class="c1"># 1. Forward pass</span>
+            <span class="n">test_pred_logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+            <span class="c1"># 2. Calculate and accumulate loss</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">test_pred_logits</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="n">test_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+            <span class="c1"># Calculate and accumulate accuracy</span>
+            <span class="n">test_pred_labels</span> <span class="o">=</span> <span class="n">test_pred_logits</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">test_acc</span> <span class="o">+=</span> <span class="p">((</span><span class="n">test_pred_labels</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">test_pred_labels</span><span class="p">))</span>
+
+    <span class="c1"># Adjust metrics to get average loss and accuracy per batch </span>
+    <span class="n">test_loss</span> <span class="o">=</span> <span class="n">test_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span>
+    <span class="n">test_acc</span> <span class="o">=</span> <span class="n">test_acc</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">test_loss</span><span class="p">,</span> <span class="n">test_acc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And we’ll combine <code class="docutils literal notranslate"><span class="pre">train_step()</span></code> and <code class="docutils literal notranslate"><span class="pre">test_step()</span></code> into <code class="docutils literal notranslate"><span class="pre">train()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> 
+          <span class="n">train_dataloader</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">,</span> 
+          <span class="n">test_dataloader</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">,</span> 
+          <span class="n">optimizer</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span>
+          <span class="n">loss_fn</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+          <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+          <span class="n">device</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Trains and tests a PyTorch model.</span>
+
+<span class="sd">    Passes a target PyTorch models through train_step() and test_step()</span>
+<span class="sd">    functions for a number of epochs, training and testing the model</span>
+<span class="sd">    in the same epoch loop.</span>
+
+<span class="sd">    Calculates, prints and stores evaluation metrics throughout.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    model: A PyTorch model to be trained and tested.</span>
+<span class="sd">    train_dataloader: A DataLoader instance for the model to be trained on.</span>
+<span class="sd">    test_dataloader: A DataLoader instance for the model to be tested on.</span>
+<span class="sd">    optimizer: A PyTorch optimizer to help minimize the loss function.</span>
+<span class="sd">    loss_fn: A PyTorch loss function to calculate loss on both datasets.</span>
+<span class="sd">    epochs: An integer indicating how many epochs to train for.</span>
+<span class="sd">    device: A target device to compute on (e.g. &quot;cuda&quot; or &quot;cpu&quot;).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    A dictionary of training and testing loss as well as training and</span>
+<span class="sd">    testing accuracy metrics. Each metric has a value in a list for </span>
+<span class="sd">    each epoch.</span>
+<span class="sd">    In the form: {train_loss: [...],</span>
+<span class="sd">                  train_acc: [...],</span>
+<span class="sd">                  test_loss: [...],</span>
+<span class="sd">                  test_acc: [...]} </span>
+<span class="sd">    For example if training for epochs=2: </span>
+<span class="sd">                 {train_loss: [2.0616, 1.0537],</span>
+<span class="sd">                  train_acc: [0.3945, 0.3945],</span>
+<span class="sd">                  test_loss: [1.2641, 1.5706],</span>
+<span class="sd">                  test_acc: [0.3400, 0.2973]} </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create empty results dictionary</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;train_loss&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">&quot;train_acc&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">&quot;test_loss&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">&quot;test_acc&quot;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Loop through training and testing steps for a number of epochs</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">)):</span>
+        <span class="n">train_loss</span><span class="p">,</span> <span class="n">train_acc</span> <span class="o">=</span> <span class="n">train_step</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+                                          <span class="n">dataloader</span><span class="o">=</span><span class="n">train_dataloader</span><span class="p">,</span>
+                                          <span class="n">loss_fn</span><span class="o">=</span><span class="n">loss_fn</span><span class="p">,</span>
+                                          <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+                                          <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">test_loss</span><span class="p">,</span> <span class="n">test_acc</span> <span class="o">=</span> <span class="n">test_step</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+          <span class="n">dataloader</span><span class="o">=</span><span class="n">test_dataloader</span><span class="p">,</span>
+          <span class="n">loss_fn</span><span class="o">=</span><span class="n">loss_fn</span><span class="p">,</span>
+          <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="c1"># Print out what&#39;s happening</span>
+        <span class="nb">print</span><span class="p">(</span>
+          <span class="sa">f</span><span class="s2">&quot;Epoch: </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> | &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;train_loss: </span><span class="si">{</span><span class="n">train_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;train_acc: </span><span class="si">{</span><span class="n">train_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;test_loss: </span><span class="si">{</span><span class="n">test_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;test_acc: </span><span class="si">{</span><span class="n">test_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Update results dictionary</span>
+        <span class="n">results</span><span class="p">[</span><span class="s2">&quot;train_loss&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_loss</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="s2">&quot;train_acc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_acc</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="s2">&quot;test_loss&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_loss</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="s2">&quot;test_acc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_acc</span><span class="p">)</span>
+
+    <span class="c1"># Return the filled results at the end of the epochs</span>
+    <span class="k">return</span> <span class="n">results</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="creating-train-step-and-test-step-functions-and-train-to-combine-them-script-mode">
+<h3>Creating <code class="docutils literal notranslate"><span class="pre">train_step()</span></code> and <code class="docutils literal notranslate"><span class="pre">test_step()</span></code> functions and <code class="docutils literal notranslate"><span class="pre">train()</span></code> to combine them (script mode)<a class="headerlink" href="#creating-train-step-and-test-step-functions-and-train-to-combine-them-script-mode" title="Link to this heading">#</a></h3>
+<p>To create a script for <code class="docutils literal notranslate"><span class="pre">train_step()</span></code>, <code class="docutils literal notranslate"><span class="pre">test_step()</span></code> and <code class="docutils literal notranslate"><span class="pre">train()</span></code>, we’ll combine their code all into a single cell.</p>
+<p>We’ll then write that cell to a file called <code class="docutils literal notranslate"><span class="pre">engine.py</span></code> because these functions will be the “engine” of our training pipeline.</p>
+<p>We can do so with the magic line <code class="docutils literal notranslate"><span class="pre">%%writefile</span> <span class="pre">going_modular/engine.py</span></code>.</p>
+<p>We’ll also make sure to put all the imports we need (<code class="docutils literal notranslate"><span class="pre">torch</span></code>, <code class="docutils literal notranslate"><span class="pre">typing</span></code>, and <code class="docutils literal notranslate"><span class="pre">tqdm</span></code>) at the top of the cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> going_modular/engine.py
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains functions for training and testing a PyTorch model.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="k">def</span> <span class="nf">train_step</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> 
+               <span class="n">dataloader</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">,</span> 
+               <span class="n">loss_fn</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> 
+               <span class="n">optimizer</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span>
+               <span class="n">device</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Trains a PyTorch model for a single epoch.</span>
+
+<span class="sd">    Turns a target PyTorch model to training mode and then</span>
+<span class="sd">    runs through all of the required training steps (forward</span>
+<span class="sd">    pass, loss calculation, optimizer step).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    model: A PyTorch model to be trained.</span>
+<span class="sd">    dataloader: A DataLoader instance for the model to be trained on.</span>
+<span class="sd">    loss_fn: A PyTorch loss function to minimize.</span>
+<span class="sd">    optimizer: A PyTorch optimizer to help minimize the loss function.</span>
+<span class="sd">    device: A target device to compute on (e.g. &quot;cuda&quot; or &quot;cpu&quot;).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    A tuple of training loss and training accuracy metrics.</span>
+<span class="sd">    In the form (train_loss, train_accuracy). For example:</span>
+
+<span class="sd">    (0.1112, 0.8743)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Put model in train mode</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+    <span class="c1"># Setup train loss and train accuracy values</span>
+    <span class="n">train_loss</span><span class="p">,</span> <span class="n">train_acc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="c1"># Loop through data loader data batches</span>
+    <span class="k">for</span> <span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
+        <span class="c1"># Send data to target device</span>
+        <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">y</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="c1"># 1. Forward pass</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+        <span class="c1"># 2. Calculate  and accumulate loss</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">train_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> 
+
+        <span class="c1"># 3. Optimizer zero grad</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+        <span class="c1"># 4. Loss backward</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+        <span class="c1"># 5. Optimizer step</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+        <span class="c1"># Calculate and accumulate accuracy metric across all batches</span>
+        <span class="n">y_pred_class</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">train_acc</span> <span class="o">+=</span> <span class="p">(</span><span class="n">y_pred_class</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+
+    <span class="c1"># Adjust metrics to get average loss and accuracy per batch </span>
+    <span class="n">train_loss</span> <span class="o">=</span> <span class="n">train_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span>
+    <span class="n">train_acc</span> <span class="o">=</span> <span class="n">train_acc</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">train_loss</span><span class="p">,</span> <span class="n">train_acc</span>
+
+<span class="k">def</span> <span class="nf">test_step</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> 
+              <span class="n">dataloader</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">,</span> 
+              <span class="n">loss_fn</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+              <span class="n">device</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tests a PyTorch model for a single epoch.</span>
+
+<span class="sd">    Turns a target PyTorch model to &quot;eval&quot; mode and then performs</span>
+<span class="sd">    a forward pass on a testing dataset.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    model: A PyTorch model to be tested.</span>
+<span class="sd">    dataloader: A DataLoader instance for the model to be tested on.</span>
+<span class="sd">    loss_fn: A PyTorch loss function to calculate loss on the test data.</span>
+<span class="sd">    device: A target device to compute on (e.g. &quot;cuda&quot; or &quot;cpu&quot;).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    A tuple of testing loss and testing accuracy metrics.</span>
+<span class="sd">    In the form (test_loss, test_accuracy). For example:</span>
+
+<span class="sd">    (0.0223, 0.8985)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Put model in eval mode</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span> 
+
+    <span class="c1"># Setup test loss and test accuracy values</span>
+    <span class="n">test_loss</span><span class="p">,</span> <span class="n">test_acc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="c1"># Turn on inference context manager</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">inference_mode</span><span class="p">():</span>
+        <span class="c1"># Loop through DataLoader batches</span>
+        <span class="k">for</span> <span class="n">batch</span><span class="p">,</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
+            <span class="c1"># Send data to target device</span>
+            <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">y</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+            <span class="c1"># 1. Forward pass</span>
+            <span class="n">test_pred_logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+            <span class="c1"># 2. Calculate and accumulate loss</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">test_pred_logits</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="n">test_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+            <span class="c1"># Calculate and accumulate accuracy</span>
+            <span class="n">test_pred_labels</span> <span class="o">=</span> <span class="n">test_pred_logits</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">test_acc</span> <span class="o">+=</span> <span class="p">((</span><span class="n">test_pred_labels</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">test_pred_labels</span><span class="p">))</span>
+
+    <span class="c1"># Adjust metrics to get average loss and accuracy per batch </span>
+    <span class="n">test_loss</span> <span class="o">=</span> <span class="n">test_loss</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span>
+    <span class="n">test_acc</span> <span class="o">=</span> <span class="n">test_acc</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">test_loss</span><span class="p">,</span> <span class="n">test_acc</span>
+
+<span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> 
+          <span class="n">train_dataloader</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">,</span> 
+          <span class="n">test_dataloader</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">,</span> 
+          <span class="n">optimizer</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Optimizer</span><span class="p">,</span>
+          <span class="n">loss_fn</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+          <span class="n">epochs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+          <span class="n">device</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Trains and tests a PyTorch model.</span>
+
+<span class="sd">    Passes a target PyTorch models through train_step() and test_step()</span>
+<span class="sd">    functions for a number of epochs, training and testing the model</span>
+<span class="sd">    in the same epoch loop.</span>
+
+<span class="sd">    Calculates, prints and stores evaluation metrics throughout.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    model: A PyTorch model to be trained and tested.</span>
+<span class="sd">    train_dataloader: A DataLoader instance for the model to be trained on.</span>
+<span class="sd">    test_dataloader: A DataLoader instance for the model to be tested on.</span>
+<span class="sd">    optimizer: A PyTorch optimizer to help minimize the loss function.</span>
+<span class="sd">    loss_fn: A PyTorch loss function to calculate loss on both datasets.</span>
+<span class="sd">    epochs: An integer indicating how many epochs to train for.</span>
+<span class="sd">    device: A target device to compute on (e.g. &quot;cuda&quot; or &quot;cpu&quot;).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    A dictionary of training and testing loss as well as training and</span>
+<span class="sd">    testing accuracy metrics. Each metric has a value in a list for </span>
+<span class="sd">    each epoch.</span>
+<span class="sd">    In the form: {train_loss: [...],</span>
+<span class="sd">              train_acc: [...],</span>
+<span class="sd">              test_loss: [...],</span>
+<span class="sd">              test_acc: [...]} </span>
+<span class="sd">    For example if training for epochs=2: </span>
+<span class="sd">             {train_loss: [2.0616, 1.0537],</span>
+<span class="sd">              train_acc: [0.3945, 0.3945],</span>
+<span class="sd">              test_loss: [1.2641, 1.5706],</span>
+<span class="sd">              test_acc: [0.3400, 0.2973]} </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create empty results dictionary</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;train_loss&quot;</span><span class="p">:</span> <span class="p">[],</span>
+               <span class="s2">&quot;train_acc&quot;</span><span class="p">:</span> <span class="p">[],</span>
+               <span class="s2">&quot;test_loss&quot;</span><span class="p">:</span> <span class="p">[],</span>
+               <span class="s2">&quot;test_acc&quot;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Loop through training and testing steps for a number of epochs</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">)):</span>
+        <span class="n">train_loss</span><span class="p">,</span> <span class="n">train_acc</span> <span class="o">=</span> <span class="n">train_step</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+                                          <span class="n">dataloader</span><span class="o">=</span><span class="n">train_dataloader</span><span class="p">,</span>
+                                          <span class="n">loss_fn</span><span class="o">=</span><span class="n">loss_fn</span><span class="p">,</span>
+                                          <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+                                          <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">test_loss</span><span class="p">,</span> <span class="n">test_acc</span> <span class="o">=</span> <span class="n">test_step</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+          <span class="n">dataloader</span><span class="o">=</span><span class="n">test_dataloader</span><span class="p">,</span>
+          <span class="n">loss_fn</span><span class="o">=</span><span class="n">loss_fn</span><span class="p">,</span>
+          <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="c1"># Print out what&#39;s happening</span>
+        <span class="nb">print</span><span class="p">(</span>
+          <span class="sa">f</span><span class="s2">&quot;Epoch: </span><span class="si">{</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> | &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;train_loss: </span><span class="si">{</span><span class="n">train_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;train_acc: </span><span class="si">{</span><span class="n">train_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;test_loss: </span><span class="si">{</span><span class="n">test_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;test_acc: </span><span class="si">{</span><span class="n">test_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Update results dictionary</span>
+        <span class="n">results</span><span class="p">[</span><span class="s2">&quot;train_loss&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_loss</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="s2">&quot;train_acc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_acc</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="s2">&quot;test_loss&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_loss</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="s2">&quot;test_acc&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_acc</span><span class="p">)</span>
+
+    <span class="c1"># Return the filled results at the end of the epochs</span>
+    <span class="k">return</span> <span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting going_modular/engine.py
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="creating-a-function-to-save-the-model">
+<h2>Creating a function to save the model<a class="headerlink" href="#creating-a-function-to-save-the-model" title="Link to this heading">#</a></h2>
+<p>Let’s setup a function to save our model to a directory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="k">def</span> <span class="nf">save_model</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+               <span class="n">target_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+               <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Saves a PyTorch model to a target directory.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    model: A target PyTorch model to save.</span>
+<span class="sd">    target_dir: A directory for saving the model to.</span>
+<span class="sd">    model_name: A filename for the saved model. Should include</span>
+<span class="sd">      either &quot;.pth&quot; or &quot;.pt&quot; as the file extension.</span>
+
+<span class="sd">    Example usage:</span>
+<span class="sd">    save_model(model=model_0,</span>
+<span class="sd">               target_dir=&quot;models&quot;,</span>
+<span class="sd">               model_name=&quot;05_going_modular_tingvgg_model.pth&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create target directory</span>
+    <span class="n">target_dir_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">target_dir</span><span class="p">)</span>
+    <span class="n">target_dir_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Create model save path</span>
+    <span class="k">assert</span> <span class="n">model_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.pth&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">model_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.pt&quot;</span><span class="p">),</span> <span class="s2">&quot;model_name should end with &#39;.pt&#39; or &#39;.pth&#39;&quot;</span>
+    <span class="n">model_save_path</span> <span class="o">=</span> <span class="n">target_dir_path</span> <span class="o">/</span> <span class="n">model_name</span>
+
+    <span class="c1"># Save the model state_dict()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Saving model to: </span><span class="si">{</span><span class="n">model_save_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span>
+             <span class="n">f</span><span class="o">=</span><span class="n">model_save_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="creating-a-function-to-save-the-model-script-mode">
+<h3>Creating a function to save the model (script mode)<a class="headerlink" href="#creating-a-function-to-save-the-model-script-mode" title="Link to this heading">#</a></h3>
+<p>How about we add our <code class="docutils literal notranslate"><span class="pre">save_model()</span></code> function to a script called <code class="docutils literal notranslate"><span class="pre">utils.py</span></code> which is short for “utilities”.</p>
+<p>We can do so with the magic line <code class="docutils literal notranslate"><span class="pre">%%writefile</span> <span class="pre">going_modular/utils.py</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> going_modular/utils.py
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains various utility functions for PyTorch model training and saving.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="k">def</span> <span class="nf">save_model</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+               <span class="n">target_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+               <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Saves a PyTorch model to a target directory.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    model: A target PyTorch model to save.</span>
+<span class="sd">    target_dir: A directory for saving the model to.</span>
+<span class="sd">    model_name: A filename for the saved model. Should include</span>
+<span class="sd">      either &quot;.pth&quot; or &quot;.pt&quot; as the file extension.</span>
+
+<span class="sd">    Example usage:</span>
+<span class="sd">    save_model(model=model_0,</span>
+<span class="sd">               target_dir=&quot;models&quot;,</span>
+<span class="sd">               model_name=&quot;05_going_modular_tingvgg_model.pth&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create target directory</span>
+    <span class="n">target_dir_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">target_dir</span><span class="p">)</span>
+    <span class="n">target_dir_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Create model save path</span>
+    <span class="k">assert</span> <span class="n">model_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.pth&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">model_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.pt&quot;</span><span class="p">),</span> <span class="s2">&quot;model_name should end with &#39;.pt&#39; or &#39;.pth&#39;&quot;</span>
+    <span class="n">model_save_path</span> <span class="o">=</span> <span class="n">target_dir_path</span> <span class="o">/</span> <span class="n">model_name</span>
+
+    <span class="c1"># Save the model state_dict()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Saving model to: </span><span class="si">{</span><span class="n">model_save_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span>
+             <span class="n">f</span><span class="o">=</span><span class="n">model_save_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting going_modular/utils.py
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="train-evaluate-and-save-the-model">
+<h2>Train, evaluate and save the model<a class="headerlink" href="#train-evaluate-and-save-the-model" title="Link to this heading">#</a></h2>
+<p>Let’s leverage the functions we’ve got above to train, test and save a model to file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set random seeds</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> 
+<span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Set number of epochs</span>
+<span class="n">NUM_EPOCHS</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1"># Recreate an instance of TinyVGG</span>
+<span class="n">model_0</span> <span class="o">=</span> <span class="n">TinyVGG</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="c1"># number of color channels (3 for RGB) </span>
+                  <span class="n">hidden_units</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                  <span class="n">output_shape</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data</span><span class="o">.</span><span class="n">classes</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="c1"># Setup loss function and optimizer</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">model_0</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+
+<span class="c1"># Start the timer</span>
+<span class="kn">from</span> <span class="nn">timeit</span> <span class="kn">import</span> <span class="n">default_timer</span> <span class="k">as</span> <span class="n">timer</span> 
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">timer</span><span class="p">()</span>
+
+<span class="c1"># Train model_0 </span>
+<span class="n">model_0_results</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model_0</span><span class="p">,</span> 
+                        <span class="n">train_dataloader</span><span class="o">=</span><span class="n">train_dataloader</span><span class="p">,</span>
+                        <span class="n">test_dataloader</span><span class="o">=</span><span class="n">test_dataloader</span><span class="p">,</span>
+                        <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+                        <span class="n">loss_fn</span><span class="o">=</span><span class="n">loss_fn</span><span class="p">,</span> 
+                        <span class="n">epochs</span><span class="o">=</span><span class="n">NUM_EPOCHS</span><span class="p">,</span>
+                        <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+
+<span class="c1"># End the timer and print out how long it took</span>
+<span class="n">end_time</span> <span class="o">=</span> <span class="n">timer</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Total training time: </span><span class="si">{</span><span class="n">end_time</span><span class="o">-</span><span class="n">start_time</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+
+<span class="c1"># Save the model</span>
+<span class="n">save_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model_0</span><span class="p">,</span>
+           <span class="n">target_dir</span><span class="o">=</span><span class="s2">&quot;models&quot;</span><span class="p">,</span>
+           <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;05_going_modular_cell_mode_tinyvgg_model.pth&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "205f478a42ca42f2ab32113d597dc388", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 1 | train_loss: 1.0956 | train_acc: 0.3867 | test_loss: 1.0630 | test_acc: 0.4133
+Epoch: 2 | train_loss: 1.0141 | train_acc: 0.5111 | test_loss: 1.0210 | test_acc: 0.4533
+Epoch: 3 | train_loss: 0.9591 | train_acc: 0.5644 | test_loss: 0.9961 | test_acc: 0.4400
+Epoch: 4 | train_loss: 0.8994 | train_acc: 0.5778 | test_loss: 0.9986 | test_acc: 0.4533
+Epoch: 5 | train_loss: 0.8652 | train_acc: 0.6267 | test_loss: 1.0010 | test_acc: 0.5467
+[INFO] Total training time: 5.461 seconds
+[INFO] Saving model to: models/05_going_modular_cell_mode_tinyvgg_model.pth
+</pre></div>
+</div>
+</div>
+</div>
+<section id="train-evaluate-and-save-the-model-script-mode">
+<h3>Train, evaluate and save the model (script mode)<a class="headerlink" href="#train-evaluate-and-save-the-model-script-mode" title="Link to this heading">#</a></h3>
+<p>Let’s combine all of our modular files into a single script <code class="docutils literal notranslate"><span class="pre">train.py</span></code>.</p>
+<p>This will allow us to run all of the functions we’ve written with a single line of code on the command line:</p>
+<p><code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">going_modular/train.py</span></code></p>
+<p>Or if we’re running it in a notebook:</p>
+<p><code class="docutils literal notranslate"><span class="pre">!python</span> <span class="pre">going_modular/train.py</span></code></p>
+<p>We’ll go through the following steps:</p>
+<ol class="arabic simple">
+<li><p>Import the various dependencies, namely <code class="docutils literal notranslate"><span class="pre">torch</span></code>, <code class="docutils literal notranslate"><span class="pre">os</span></code>, <code class="docutils literal notranslate"><span class="pre">torchvision.transforms</span></code> and all of the scripts from the <code class="docutils literal notranslate"><span class="pre">going_modular</span></code> directory, <code class="docutils literal notranslate"><span class="pre">data_setup</span></code>, <code class="docutils literal notranslate"><span class="pre">engine</span></code>, <code class="docutils literal notranslate"><span class="pre">model_builder</span></code>, <code class="docutils literal notranslate"><span class="pre">utils</span></code>.</p></li>
+</ol>
+<ul class="simple">
+<li><p><strong>Note:</strong> Since <code class="docutils literal notranslate"><span class="pre">train.py</span></code> will be <em>inside</em> the <code class="docutils literal notranslate"><span class="pre">going_modular</span></code> directory, we can import the other modules via <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">...</span></code> rather than <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">going_modular</span> <span class="pre">import</span> <span class="pre">...</span></code>.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Setup various hyperparameters such as batch size, number of epochs, learning rate and number of hidden units (these could be set in the future via <a class="reference external" href="https://docs.python.org/3/library/argparse.html">Python’s <code class="docutils literal notranslate"><span class="pre">argparse</span></code></a>).</p></li>
+<li><p>Setup the training and test directories.</p></li>
+<li><p>Setup device-agnostic code.</p></li>
+<li><p>Create the necessary data transforms.</p></li>
+<li><p>Create the DataLoaders using <code class="docutils literal notranslate"><span class="pre">data_setup.py</span></code>.</p></li>
+<li><p>Create the model using <code class="docutils literal notranslate"><span class="pre">model_builder.py</span></code>.</p></li>
+<li><p>Setup the loss function and optimizer.</p></li>
+<li><p>Train the model using <code class="docutils literal notranslate"><span class="pre">engine.py</span></code>.</p></li>
+<li><p>Save the model using <code class="docutils literal notranslate"><span class="pre">utils.py</span></code>.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%writefile</span> going_modular/train.py
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Trains a PyTorch image classification model using device-agnostic code.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">transforms</span>
+
+<span class="kn">import</span> <span class="nn">data_setup</span><span class="o">,</span> <span class="nn">engine</span><span class="o">,</span> <span class="nn">model_builder</span><span class="o">,</span> <span class="nn">utils</span>
+
+
+<span class="c1"># Setup hyperparameters</span>
+<span class="n">NUM_EPOCHS</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="n">HIDDEN_UNITS</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">LEARNING_RATE</span> <span class="o">=</span> <span class="mf">0.001</span>
+
+<span class="c1"># Setup directories</span>
+<span class="n">train_dir</span> <span class="o">=</span> <span class="s2">&quot;data/pizza_steak_sushi/train&quot;</span>
+<span class="n">test_dir</span> <span class="o">=</span> <span class="s2">&quot;data/pizza_steak_sushi/test&quot;</span>
+
+<span class="c1"># Setup target device</span>
+<span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
+
+<span class="c1"># Create transforms</span>
+<span class="n">data_transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+  <span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">((</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)),</span>
+  <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">()</span>
+<span class="p">])</span>
+
+<span class="c1"># Create DataLoaders with help from data_setup.py</span>
+<span class="n">train_dataloader</span><span class="p">,</span> <span class="n">test_dataloader</span><span class="p">,</span> <span class="n">class_names</span> <span class="o">=</span> <span class="n">data_setup</span><span class="o">.</span><span class="n">create_dataloaders</span><span class="p">(</span>
+    <span class="n">train_dir</span><span class="o">=</span><span class="n">train_dir</span><span class="p">,</span>
+    <span class="n">test_dir</span><span class="o">=</span><span class="n">test_dir</span><span class="p">,</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">data_transform</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">BATCH_SIZE</span>
+<span class="p">)</span>
+
+<span class="c1"># Create model with help from model_builder.py</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model_builder</span><span class="o">.</span><span class="n">TinyVGG</span><span class="p">(</span>
+    <span class="n">input_shape</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">hidden_units</span><span class="o">=</span><span class="n">HIDDEN_UNITS</span><span class="p">,</span>
+    <span class="n">output_shape</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">class_names</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="c1"># Set loss and optimizer</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span>
+                             <span class="n">lr</span><span class="o">=</span><span class="n">LEARNING_RATE</span><span class="p">)</span>
+
+<span class="c1"># Start training with help from engine.py</span>
+<span class="n">engine</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+             <span class="n">train_dataloader</span><span class="o">=</span><span class="n">train_dataloader</span><span class="p">,</span>
+             <span class="n">test_dataloader</span><span class="o">=</span><span class="n">test_dataloader</span><span class="p">,</span>
+             <span class="n">loss_fn</span><span class="o">=</span><span class="n">loss_fn</span><span class="p">,</span>
+             <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+             <span class="n">epochs</span><span class="o">=</span><span class="n">NUM_EPOCHS</span><span class="p">,</span>
+             <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+
+<span class="c1"># Save the model with help from utils.py</span>
+<span class="n">utils</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+                 <span class="n">target_dir</span><span class="o">=</span><span class="s2">&quot;models&quot;</span><span class="p">,</span>
+                 <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;05_going_modular_script_mode_tinyvgg_model.pth&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting going_modular/train.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now our final directory structure looks like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">/</span>
+  <span class="n">pizza_steak_sushi</span><span class="o">/</span>
+    <span class="n">train</span><span class="o">/</span>
+      <span class="n">pizza</span><span class="o">/</span>
+        <span class="n">train_image_01</span><span class="o">.</span><span class="n">jpeg</span>
+        <span class="n">train_image_02</span><span class="o">.</span><span class="n">jpeg</span>
+        <span class="o">...</span>
+      <span class="n">steak</span><span class="o">/</span>
+      <span class="n">sushi</span><span class="o">/</span>
+    <span class="n">test</span><span class="o">/</span>
+      <span class="n">pizza</span><span class="o">/</span>
+        <span class="n">test_image_01</span><span class="o">.</span><span class="n">jpeg</span>
+        <span class="n">test_image_02</span><span class="o">.</span><span class="n">jpeg</span>
+        <span class="o">...</span>
+      <span class="n">steak</span><span class="o">/</span>
+      <span class="n">sushi</span><span class="o">/</span>
+<span class="n">going_modular</span><span class="o">/</span>
+  <span class="n">data_setup</span><span class="o">.</span><span class="n">py</span>
+  <span class="n">engine</span><span class="o">.</span><span class="n">py</span>
+  <span class="n">model_builder</span><span class="o">.</span><span class="n">py</span>
+  <span class="n">train</span><span class="o">.</span><span class="n">py</span>
+  <span class="n">utils</span><span class="o">.</span><span class="n">py</span>
+<span class="n">models</span><span class="o">/</span>
+  <span class="n">saved_model</span><span class="o">.</span><span class="n">pth</span>
+</pre></div>
+</div>
+<p>Now to put it all together!</p>
+<p>Let’s run our <code class="docutils literal notranslate"><span class="pre">train.py</span></code> file from the command line with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!python going_modular/train.py
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>python<span class="w"> </span>going_modular/train.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0%|                                                     | 0/5 [00:00&lt;?, ?it/s]Epoch: 1 | train_loss: 1.1131 | train_acc: 0.2852 | test_loss: 1.1138 | test_acc: 0.2604
+ 20%|█████████                                    | 1/5 [00:01&lt;00:04,  1.06s/it]Epoch: 2 | train_loss: 1.0851 | train_acc: 0.4102 | test_loss: 1.1238 | test_acc: 0.1979
+ 40%|██████████████████                           | 2/5 [00:01&lt;00:02,  1.20it/s]Epoch: 3 | train_loss: 1.0837 | train_acc: 0.4141 | test_loss: 1.1459 | test_acc: 0.1979
+ 60%|███████████████████████████                  | 3/5 [00:02&lt;00:01,  1.33it/s]Epoch: 4 | train_loss: 1.1104 | train_acc: 0.2930 | test_loss: 1.1318 | test_acc: 0.1979
+ 80%|████████████████████████████████████         | 4/5 [00:03&lt;00:00,  1.40it/s]Epoch: 5 | train_loss: 1.0833 | train_acc: 0.2930 | test_loss: 1.0883 | test_acc: 0.3712
+100%|█████████████████████████████████████████████| 5/5 [00:03&lt;00:00,  1.35it/s]
+[INFO] Saving model to: models/05_going_modular_script_mode_tinyvgg_model.pth
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/tools/pytorch/going_modular"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-script-mode">What is script mode?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-has-script-mode-got-to-do-with-pytorch">What has script mode got to do with PyTorch?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-in-the-wild">PyTorch in the wild</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#whats-the-difference-between-this-notebook-part-2-and-the-cell-mode-notebook-part-1">What’s the difference between this notebook (Part 2) and the cell mode notebook (Part 1)?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-were-going-to-cover">What we’re going to cover</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-folder-for-storing-python-scripts">Creating a folder for storing Python scripts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-data">Get data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-datasets-and-dataloaders">Create Datasets and DataLoaders</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-datasets-and-dataloaders-script-mode">Create Datasets and DataLoaders (script mode)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-model-tinyvgg">Making a model (TinyVGG)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-model-tinyvgg-script-mode">Making a model (TinyVGG) (script mode)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-train-step-and-test-step-functions-and-train-to-combine-them">Creating <code class="docutils literal notranslate"><span class="pre">train_step()</span></code> and <code class="docutils literal notranslate"><span class="pre">test_step()</span></code> functions and <code class="docutils literal notranslate"><span class="pre">train()</span></code> to combine them</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-train-step-and-test-step-functions-and-train-to-combine-them-script-mode">Creating <code class="docutils literal notranslate"><span class="pre">train_step()</span></code> and <code class="docutils literal notranslate"><span class="pre">test_step()</span></code> functions and <code class="docutils literal notranslate"><span class="pre">train()</span></code> to combine them (script mode)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-function-to-save-the-model">Creating a function to save the model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-function-to-save-the-model-script-mode">Creating a function to save the model (script mode)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-evaluate-and-save-the-model">Train, evaluate and save the model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-evaluate-and-save-the-model-script-mode">Train, evaluate and save the model (script mode)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

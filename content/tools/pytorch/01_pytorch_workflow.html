@@ -1,0 +1,2225 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PyTorch Workflow Fundamentals &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/tools/pytorch/01_pytorch_workflow';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/tools/pytorch/01_pytorch_workflow.html" />
+    <link rel="icon" href="../../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="PyTorch Neural Network Classification" href="02_pytorch_classification.html" />
+    <link rel="prev" title="PyTorch Fundamentals" href="00_pytorch_fundamentals.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Essentials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../essentials/intro_python.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/introduction/intro_toc.html">Introduction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/002_Hello_World.html">Hello World</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/003_Python_Keywords_and_Identifiers.html">Keywords and identifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/004_Python_Statement_Indentation_Comments.html">Statement indentation &amp; comments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/005_Python_Variables_%26_Constants.html">Variables &amp; constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/006_Python_Literals.html">Literals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/007_Python_Data_Types.html">Datatypes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/008_Python_Type_Conversion.html">Type conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/009_Python_Input_Output_Import.html">I/O &amp; imports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/010_Python_Operators.html">Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/011_Python_Namespace_and_Scope.html">Namespace &amp; scope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/introduction/Interpreter_Vs_Compiler.html">Interpreter vs compiler</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/datatypes/datatypes_toc.html">Datatypes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/001_Python_Numbers.html">Numbers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/002_Python_String.html">String</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/003_Python_List.html">List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/004_Python_Tuple.html">Tuple</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/005_Python_Dictionary.html">Dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/006_Python_Sets.html">Sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/datatypes/Python_List_Comprehension.html">List comprehension</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/controlflow/controlflow_toc.html">Control flows</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/000_Python_Flow_Control_statement.html">Flow control statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/001_Python_if_statement.html">If</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/002_Python_if_else_statement.html">If else</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/003_Python_if_elif_else_statement.html">If elif else</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/004_Python_Nested_if_statement.html">Nested if</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/005_Python_for_Loop.html">Loops in Python</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/006_Python_while_Loop.html">Loops in Python</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/controlflow/007_Python_break_continue_pass_statements.html">Break continue &amp; pass</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/functions/functions_toc.html">Functions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/001_Python_Functions.html">Python Functions</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/002_Python_Function_Global_Local_Nonlocal.html">Global, local and nonlocal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/003_Python_Function_global_Keywords.html">Python <code class="docutils literal notranslate"><span class="pre">global</span></code> Keyword</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/004_Python_Function_Arguments.html">Function Argument and Parameter</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/005_Python_Function_Recursion.html">Python Recursion</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/006_Python_Function_Anonymous.html">Anonymous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/007_Python_Function_Module.html">Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/008_Python_Function_random_Module.html">Random module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/009_Python_Function_math_Module.html">Math module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/010_Python_Function_Package.html">Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/Python_Docstrings.html">Docstrings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/functions/Python_User_defined_Functions.html">User defined functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/files/files_toc.html">Files</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/files/001_Python_File_Input_Output.html">File I/O</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/files/002_Python_File_Directory.html">File directory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/files/003_Python_File_Exception.html">File exception</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/files/004_Python_Exceptions_Handling.html">Exceptions handling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/files/005_Python_User_defined_Exceptions.html">User defined exceptions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/objects/objects_toc.html">Objects &amp; classes</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/objects/001_Python_OOPs_Concepts.html">OOPs concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/objects/002_Python_Classes_and_Objects.html">Python  Classes and Objects</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/objects/003_Python_Inheritance.html">Inheritance</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/objects/004_Python_Operator_Overloading.html">Operator overloading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/objects/self_in_Python_Demystified.html">self demystified</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../essentials/python/advanced/advanced_toc.html">Advanced</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/001_Python_Iterators.html">Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/002_Python_Generators.html">Generators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/003_Python_Closure.html">Closure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/004_Python_Decorators.html">Decorators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/005_Python_Property.html">Property</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/006_Python_RegEx.html">RegEx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../essentials/python/advanced/Python_args_and_kwargs.html">args and kwargs</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../essentials/python/datetime/datetime_toc.html">Date time module</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/001_Python_datetime_Module.html">Datetime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/002_Python_strftime.html">strftime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/003_Python_strptime.html">strptime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/004_Python_current_date_and_time.html">Current date &amp; time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/005_Python_get_current_time.html">Current time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/006_Python_timestamp_to_datetime.html">Timestamp to datetime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/007_Python_time_Module.html">Time module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../essentials/python/datetime/008_Python_sleep.html">Sleep</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../essentials/mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../essentials/mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../essentials/mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../essentials/mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../essentials/intro_statistics.html">Statistics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../essentials/statistics/statistics.html">Work in progress</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tools</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../intro_tools.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../numpy/numpy_toc.html">NumPy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../numpy/001_Python_NumPy.html">Python NumPy</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../numpy/002_Python_NumPy_Array_Part1.html">Arrays Part 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../numpy/003_Python_NumPy_Array_Part2.html">Arrays Part 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../numpy/004_Python_NumPy_Array_Part3.html">Arrays Part 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../numpy/005_Python_NumPy_Array_Part4.html">Arrays Part 4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_DataFrame.html">Python Pandas</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/001_Python_Pandas_DataFrame_from_Dictionary.html">Dataframe from dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/002_Python_Pandas_DataFrame_from_List.html">Dataframe from List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/003_Python_Pandas_DataFrame_head_and_tail.html">Head &amp; tail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/004_Python_Pandas_DataFrame_drop_columns.html">Drop columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/005_Python_Pandas_DataFrame_drop_duplicates.html">Drop duplicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/006_Python_Pandas_DataFrame_drop_columns_with_NA.html">Drop with NA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/007_Python_Pandas_DataFrame_rename_columns.html">Rename columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/008_Python_Pandas_DataFrame_to_Python_dictionary.html">Dataframe to python dictionary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/009_Python_Pandas_DataFrame_set_index.html">Set index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/001_Python_Pandas_Methods/010_Python_Pandas_DataFrame_reset_index.html">Reset index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/002_Python_Pandas_Exercise_1.html">Exercise 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pandas/003_Python_Pandas_Exercise_2.html">Exercise 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../matplotlib/002_Python_Matplotlib_Exercise_1.html">Matplotlib</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../matplotlib/003_Python_Matplotlib_Exercise_2.html">Matplotlib 2</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../seaborn/seaborn_toc.html">Seaborn</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/001_Seaborn_Loading_Dataset.html">Loading Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/002_Seaborn_Controlling_Aesthetics.html">Controlling aesthetics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/003_Matplotlib_vs_Seaborn.html">Matplotlib vs seaborn</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/004_Seaborn_Color_Palettes.html">Color palettes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/005_Seaborn_LM_Plot_and_Reg_Plot.html">LM and regerssion plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/006_Seaborn_Scatter_Plot_and_Joint_Plot.html">Scatter and join plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/007_Seaborn_Additional_Regression_Plots.html">Regerssion plots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/008_Seaborn_Distribution_Plots.html">Seaborn distribution plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/009_Seaborn_Categorical_Swarm_Plot.html">Categorical swarn plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/010_Seaborn_Categorical_Strip_Plot.html">Categorical strip plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/011_Seaborn_Categorical_Box_Plot.html">Categorical box plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/012_Seaborn_Categorical_Violin_Plot.html">Categorical violin plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/013_Seaborn_Categorical_Bar_Plot_Point_Plot_and_Count_Plot.html">Categorical bar, point &amp; count plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/014_Seaborn_Categorical_Factor_Plot.html">Categorical factor plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/015_Seaborn_TimeSeries_and_LetterValue_Plot.html">Timeseries and letter value plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/016_Seaborn_PairGrid_Plot.html">Pair grid Pplot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/017_Seaborn_FacetGrid_Plot.html">Facet grid plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/018_Seaborn_Heat_Map.html">Heat map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../seaborn/019_Seaborn_Cluster_Map.html">Cluster map</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../tools-for-nn.html">Neural networks</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="pytorch_toc.html">Pytorch</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Workflows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_pytorch_computer_vision.html">Computer vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="04_pytorch_custom_datasets.html">Custom datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05_pytorch_going_modular.html">Going Modular</a></li>
+<li class="toctree-l3"><a class="reference internal" href="06_pytorch_transfer_learning.html">Transfer learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="07_pytorch_experiment_tracking.html">Experiment tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="08_pytorch_paper_replicating.html">Replicating papers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="09_pytorch_model_deployment.html">Model deployment</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tools-for-llms.html">LLMs</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../langchain/LangChain%20Cookbook%20Part%201%20-%20Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../langchain/LangChain%20Cookbook%20Part%202%20-%20Use%20Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../langchain/projects/project_toc.html">Projects gallery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langchain/langsmith.html">LangSmith</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langchain/langgraph.html">LangGraph</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../hf/intro.html">HuggingFace introduction and setup</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../concepts/concepts.html">Concepts at glance</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts/linear-regression.html">Linear regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts/logistic-regression.html">Logistic regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts/k-means.html">K-means</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts/anomaly-detection.html">Anomaly detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../concepts/neural-networks.html">Neural networks</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Blogs &amp; resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/courses/courses_toc.html">Courses</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About me</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/tools/pytorch/01_pytorch_workflow.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/tools/pytorch/01_pytorch_workflow.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/tools/pytorch/01_pytorch_workflow.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>PyTorch Workflow Fundamentals</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-were-going-to-cover">What we’re going to cover</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparing-and-loading">Data (preparing and loading)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-into-training-and-test-sets">Split data into training and test sets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-model">Build model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-model-building-essentials">PyTorch model building essentials</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-the-contents-of-a-pytorch-model">Checking the contents of a PyTorch model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-predictions-using-torch-inference-mode">Making predictions using <code class="docutils literal notranslate"><span class="pre">torch.inference_mode()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model">Train the model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-loss-function-and-optimizer-in-pytorch">Creating a loss function and optimizer in PyTorch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-an-optimization-loop-in-pytorch">Creating an optimization loop in PyTorch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-training-loop">PyTorch training loop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-testing-loop">PyTorch testing loop</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-predictions-with-a-trained-pytorch-model-inference">Making predictions with a trained PyTorch model (inference)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-and-loading-a-pytorch-model">Saving and loading a PyTorch model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-a-pytorch-models-state-dict">Saving a PyTorch model’s <code class="docutils literal notranslate"><span class="pre">state_dict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-a-saved-pytorch-models-state-dict">Loading a saved PyTorch model’s <code class="docutils literal notranslate"><span class="pre">state_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-all-together">Putting it all together</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-pytorch-linear-model">Building a PyTorch linear model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-predictions">Making predictions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-and-loading-a-model">Saving and loading a model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-learning">Extra learning</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="pytorch-workflow-fundamentals">
+<h1>PyTorch Workflow Fundamentals<a class="headerlink" href="#pytorch-workflow-fundamentals" title="Link to this heading">#</a></h1>
+<p>The essence of machine learning and deep learning is to take some data from the past, build an algorithm (like a neural network) to discover patterns in it and use the discoverd patterns to predict the future.</p>
+<p>There are many ways to do this and many new ways are being discovered all the time.</p>
+<p>But let’s start small.</p>
+<p>How about we start with a straight line?</p>
+<p>And we see if we can build a PyTorch model that learns the pattern of the straight line and matches it.</p>
+<section id="what-were-going-to-cover">
+<h2>What we’re going to cover<a class="headerlink" href="#what-were-going-to-cover" title="Link to this heading">#</a></h2>
+<p>A standard PyTorch workflow</p>
+<a class="reference internal image-reference" href="../../../_images/01_a_pytorch_workflow.png"><img alt="a pytorch workflow flowchat" src="../../../_images/01_a_pytorch_workflow.png" style="width: 900px;" /></a>
+<p>We’ll use this workflow to predict a simple straight line but the workflow steps can be repeated and changed depending on the problem you’re working on.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Topic</strong></p></th>
+<th class="head"><p><strong>Contents</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Getting data ready</strong></p></td>
+<td><p>Data can be almost anything but to get started we’re going to create a simple straight line</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Building a model</strong></p></td>
+<td><p>Here we’ll create a model to learn patterns in the data, we’ll also choose a <strong>loss function</strong>, <strong>optimizer</strong> and build a <strong>training loop</strong>.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Fitting the model to data (training)</strong></p></td>
+<td><p>We’ve got data and a model, now let’s let the model (try to) find patterns in the (<strong>training</strong>) data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Making predictions and evaluating a model (inference)</strong></p></td>
+<td><p>Our model’s found patterns in the data, let’s compare its findings to the actual (<strong>testing</strong>) data.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Saving and loading a model</strong></p></td>
+<td><p>You may want to use your model elsewhere, or come back to it later, here we’ll cover that.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Putting it all together</strong></p></td>
+<td><p>Let’s take all of the above and combine it.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>And now let’s import what we’ll need for this module.</p>
+<p>We’re going to get <code class="docutils literal notranslate"><span class="pre">torch</span></code>, <code class="docutils literal notranslate"><span class="pre">torch.nn</span></code> (<code class="docutils literal notranslate"><span class="pre">nn</span></code> stands for neural network and this package contains the building blocks for creating neural networks in PyTorch) and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span> <span class="c1"># nn contains all of PyTorch&#39;s building blocks for neural networks</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Check PyTorch version</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">__version__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;1.12.1+cu113&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-preparing-and-loading">
+<h2>Data (preparing and loading)<a class="headerlink" href="#data-preparing-and-loading" title="Link to this heading">#</a></h2>
+<p>“data” in machine learning can be almost anything you can imagine. A table of numbers (like a big Excel spreadsheet), images of any kind, videos (YouTube has lots of data!), audio files like songs or podcasts, protein structures, text and more.</p>
+<p><img alt="machine learning is a game of two parts: 1. turn your data into a representative set of numbers and 2. build or pick a model to learn the representation as best as possible" src="../../../_images/01-machine-learning-a-game-of-two-parts.png" /></p>
+<p>Machine learning is a game of two parts:</p>
+<ol class="arabic simple">
+<li><p>Turn your data, whatever it is, into numbers (a representation).</p></li>
+<li><p>Pick or build a model to learn the representation as best as possible.</p></li>
+</ol>
+<p>Let’s create our data as a straight line.</p>
+<p>We’ll use <a class="reference external" href="https://en.wikipedia.org/wiki/Linear_regression">linear regression</a> to create the data with known <strong>parameters</strong> (things that can be learned by a model) and then we’ll use PyTorch to see if we can build model to estimate these parameters using <a class="reference external" href="https://en.wikipedia.org/wiki/Gradient_descent"><strong>gradient descent</strong></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create *known* parameters</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="n">bias</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+<span class="c1"># Create data</span>
+<span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">end</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">step</span> <span class="o">=</span> <span class="mf">0.02</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">bias</span>
+
+<span class="n">X</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[0.0000],
+         [0.0200],
+         [0.0400],
+         [0.0600],
+         [0.0800],
+         [0.1000],
+         [0.1200],
+         [0.1400],
+         [0.1600],
+         [0.1800]]),
+ tensor([[0.3000],
+         [0.3140],
+         [0.3280],
+         [0.3420],
+         [0.3560],
+         [0.3700],
+         [0.3840],
+         [0.3980],
+         [0.4120],
+         [0.4260]]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we will build a model that can learn the relationship between <code class="docutils literal notranslate"><span class="pre">X</span></code> (<strong>features</strong>) and <code class="docutils literal notranslate"><span class="pre">y</span></code> (<strong>labels</strong>).</p>
+<section id="split-data-into-training-and-test-sets">
+<h3>Split data into training and test sets<a class="headerlink" href="#split-data-into-training-and-test-sets" title="Link to this heading">#</a></h3>
+<p>But before we build a model we need to split it up.</p>
+<p>One of most important steps in a machine learning project is creating a training and test set (and when required, a validation set).</p>
+<p>Each split of the dataset serves a specific purpose:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Split</p></th>
+<th class="head"><p>Purpose</p></th>
+<th class="head"><p>Amount of total data</p></th>
+<th class="head"><p>How often is it used?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Training set</strong></p></td>
+<td><p>The model learns from this data (like the course materials you study during the semester).</p></td>
+<td><p>~60-80%</p></td>
+<td><p>Always</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Validation set</strong></p></td>
+<td><p>The model gets tuned on this data (like the practice exam you take before the final exam).</p></td>
+<td><p>~10-20%</p></td>
+<td><p>Often but not always</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Testing set</strong></p></td>
+<td><p>The model gets evaluated on this data to test what it has learned (like the final exam you take at the end of the semester).</p></td>
+<td><p>~10-20%</p></td>
+<td><p>Always</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>We’ll just use a training and test set, this means we’ll have a dataset for our model to learn on as well as be evaluated on.</p>
+<p>We can create them by splitting our <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> tensors.</p>
+<blockquote>
+<div><p><strong>Note:</strong> When dealing with real-world data, this step is typically done right at the start of a project (the test set should always be kept separate from all other data). We want our model to learn on training data and then evaluate it on test data to get an indication of how well it <strong>generalizes</strong> to unseen examples.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create train/test split</span>
+<span class="n">train_split</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span> <span class="c1"># 80% of data used for training set, 20% for testing </span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="n">train_split</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="n">train_split</span><span class="p">]</span>
+<span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">train_split</span><span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="n">train_split</span><span class="p">:]</span>
+
+<span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(40, 40, 10, 10)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ve got 40 samples for training (<code class="docutils literal notranslate"><span class="pre">X_train</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">y_train</span></code>) and 10 samples for testing (<code class="docutils literal notranslate"><span class="pre">X_test</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">y_test</span></code>).</p>
+<p>The model we create is going to try and learn the relationship between <code class="docutils literal notranslate"><span class="pre">X_train</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">y_train</span></code> and then we will evaluate what it learns on <code class="docutils literal notranslate"><span class="pre">X_test</span></code> and <code class="docutils literal notranslate"><span class="pre">y_test</span></code>.</p>
+<p>Let’s create a function to visualize it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_predictions</span><span class="p">(</span><span class="n">train_data</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span> 
+                     <span class="n">train_labels</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> 
+                     <span class="n">test_data</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span> 
+                     <span class="n">test_labels</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span> 
+                     <span class="n">predictions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Plots training data, test data and compares predictions.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+  <span class="c1"># Plot training data in blue</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training data&quot;</span><span class="p">)</span>
+  
+  <span class="c1"># Plot test data in green</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Testing data&quot;</span><span class="p">)</span>
+
+  <span class="k">if</span> <span class="n">predictions</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1"># Plot the predictions in red (predictions were made on the test data)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predictions&quot;</span><span class="p">)</span>
+
+  <span class="c1"># Show the legend</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">prop</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_predictions</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/9b628432e0561db0473a4db8c053ba561db15fa6901a85e59b1962cc1d72ea12.png" src="../../../_images/9b628432e0561db0473a4db8c053ba561db15fa6901a85e59b1962cc1d72ea12.png" />
+</div>
+</div>
+<p>Now instead of just being numbers on a page, our data is a straight line.</p>
+<blockquote>
+<div><p><strong>Note:</strong> Now’s a good time to introduce you to the data explorer’s motto… “visualize, visualize, visualize!”</p>
+<p>Machines love numbers and we humans like numbers too but we also like to look at things.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="build-model">
+<h2>Build model<a class="headerlink" href="#build-model" title="Link to this heading">#</a></h2>
+<p>Let’s build a model to use the blue dots to predict the green dots.</p>
+<p>We’ll write the code first and then explain everything.</p>
+<p>Let’s replicate a standard linear regression model using pure PyTorch.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Linear Regression model class</span>
+<span class="k">class</span> <span class="nc">LinearRegressionModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span> <span class="c1"># &lt;- almost everything in PyTorch is a nn.Module (think of this as neural network lego blocks)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="c1"># &lt;- start with random weights (this will get adjusted as the model learns)</span>
+                                                <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">),</span> <span class="c1"># &lt;- PyTorch loves float32 by default</span>
+                                   <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># &lt;- can we update this value with gradient descent?)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="c1"># &lt;- start with random bias (this will get adjusted as the model learns)</span>
+                                            <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">),</span> <span class="c1"># &lt;- PyTorch loves float32 by default</span>
+                                <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># &lt;- can we update this value with gradient descent?))</span>
+
+    <span class="c1"># Forward defines the computation in the model</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span> <span class="c1"># &lt;- &quot;x&quot; is the input data (e.g. training/testing features)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias</span> <span class="c1"># &lt;- this is the linear regression formula (y = m*x + b)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Alright there’s a fair bit going on above but let’s break it down bit by bit.</p>
+<blockquote>
+<div><p><strong>Resource:</strong> We’ll be using Python classes to create bits and pieces for building neural networks. If you’re unfamiliar with Python class notation, refer <a class="reference internal" href="../../essentials/python/objects/002_Python_Classes_and_Objects.html"><span class="std std-doc">Python classes and objects</span></a>.</p>
+</div></blockquote>
+<section id="pytorch-model-building-essentials">
+<h3>PyTorch model building essentials<a class="headerlink" href="#pytorch-model-building-essentials" title="Link to this heading">#</a></h3>
+<p>PyTorch has four (give or take) essential modules you can use to create almost any kind of neural network you can imagine.</p>
+<p>They are <a class="reference external" href="https://pytorch.org/docs/stable/nn.html"><code class="docutils literal notranslate"><span class="pre">torch.nn</span></code></a>, <a class="reference external" href="https://pytorch.org/docs/stable/optim.html"><code class="docutils literal notranslate"><span class="pre">torch.optim</span></code></a>, <a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset"><code class="docutils literal notranslate"><span class="pre">torch.utils.data.Dataset</span></code></a> and <a class="reference external" href="https://pytorch.org/docs/stable/data.html"><code class="docutils literal notranslate"><span class="pre">torch.utils.data.DataLoader</span></code></a>. For now, we’ll focus on the first two and get to the other two later (though you may be able to guess what they do).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>PyTorch module</p></th>
+<th class="head"><p>What does it do?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://pytorch.org/docs/stable/nn.html"><code class="docutils literal notranslate"><span class="pre">torch.nn</span></code></a></p></td>
+<td><p>Contains all of the building blocks for computational graphs (essentially a series of computations executed in a particular way).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.parameter.Parameter.html#parameter"><code class="docutils literal notranslate"><span class="pre">torch.nn.Parameter</span></code></a></p></td>
+<td><p>Stores tensors that can be used with <code class="docutils literal notranslate"><span class="pre">nn.Module</span></code>. If <code class="docutils literal notranslate"><span class="pre">requires_grad=True</span></code> gradients (used for updating model parameters via <a class="reference external" href="https://ml-cheatsheet.readthedocs.io/en/latest/gradient_descent.html"><strong>gradient descent</strong></a>)  are calculated automatically, this is often referred to as “autograd”.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module"><code class="docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></a></p></td>
+<td><p>The base class for all neural network modules, all the building blocks for neural networks are subclasses. If you’re building a neural network in PyTorch, your models should subclass <code class="docutils literal notranslate"><span class="pre">nn.Module</span></code>. Requires a <code class="docutils literal notranslate"><span class="pre">forward()</span></code> method be implemented.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://pytorch.org/docs/stable/optim.html"><code class="docutils literal notranslate"><span class="pre">torch.optim</span></code></a></p></td>
+<td><p>Contains various optimization algorithms (these tell the model parameters stored in <code class="docutils literal notranslate"><span class="pre">nn.Parameter</span></code> how to best change to improve gradient descent and in turn reduce the loss).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">forward()</span></code></p></td>
+<td><p>All <code class="docutils literal notranslate"><span class="pre">nn.Module</span></code> subclasses require a <code class="docutils literal notranslate"><span class="pre">forward()</span></code> method, this defines the computation that will take place on the data passed to the particular <code class="docutils literal notranslate"><span class="pre">nn.Module</span></code> (e.g. the linear regression formula above).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Almost everything in a PyTorch neural network comes from <code class="docutils literal notranslate"><span class="pre">torch.nn</span></code>,</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">nn.Module</span></code> contains the larger building blocks (layers)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nn.Parameter</span></code> contains the smaller parameters like weights and biases (put these together to make <code class="docutils literal notranslate"><span class="pre">nn.Module</span></code>(s))</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">forward()</span></code> tells the larger blocks how to make calculations on inputs (tensors full of data) within  <code class="docutils literal notranslate"><span class="pre">nn.Module</span></code>(s)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">torch.optim</span></code> contains optimization methods on how to improve the parameters within <code class="docutils literal notranslate"><span class="pre">nn.Parameter</span></code> to better represent input data</p></li>
+</ul>
+<p><img alt="a pytorch linear model with annotations" src="../../../_images/01-pytorch-linear-model-annotated.png" />
+<em>Basic building blocks of creating a PyTorch model by subclassing <code class="docutils literal notranslate"><span class="pre">nn.Module</span></code>. For objects that subclass <code class="docutils literal notranslate"><span class="pre">nn.Module</span></code>, the <code class="docutils literal notranslate"><span class="pre">forward()</span></code> method must be defined.</em></p>
+<blockquote>
+<div><p><strong>Resource:</strong> See more of these essential modules and their uses cases in the <a class="reference external" href="https://pytorch.org/tutorials/beginner/ptcheat.html">PyTorch Cheat Sheet</a>.</p>
+</div></blockquote>
+</section>
+<section id="checking-the-contents-of-a-pytorch-model">
+<h3>Checking the contents of a PyTorch model<a class="headerlink" href="#checking-the-contents-of-a-pytorch-model" title="Link to this heading">#</a></h3>
+<p>Now we’ve got these out of the way, let’s create a model instance with the class we’ve made and check its parameters using <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module.parameters"><code class="docutils literal notranslate"><span class="pre">.parameters()</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set manual seed since nn.Parameter are randomly initialzied</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Create an instance of the model (this is a subclass of nn.Module that contains nn.Parameter(s))</span>
+<span class="n">model_0</span> <span class="o">=</span> <span class="n">LinearRegressionModel</span><span class="p">()</span>
+
+<span class="c1"># Check the nn.Parameter(s) within the nn.Module subclass we created</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">model_0</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Parameter containing:
+ tensor([0.3367], requires_grad=True),
+ Parameter containing:
+ tensor([0.1288], requires_grad=True)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also get the state (what the model contains) of the model using <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module.state_dict"><code class="docutils literal notranslate"><span class="pre">.state_dict()</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List named parameters </span>
+<span class="n">model_0</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OrderedDict([(&#39;weights&#39;, tensor([0.3367])), (&#39;bias&#39;, tensor([0.1288]))])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice how the values for <code class="docutils literal notranslate"><span class="pre">weights</span></code> and <code class="docutils literal notranslate"><span class="pre">bias</span></code> from <code class="docutils literal notranslate"><span class="pre">model_0.state_dict()</span></code> come out as random float tensors?</p>
+<p>This is because we initialized them above using <code class="docutils literal notranslate"><span class="pre">torch.randn()</span></code>.</p>
+<p>Essentially we want to start from random parameters and get the model to update them towards parameters that fit our data best (the hardcoded <code class="docutils literal notranslate"><span class="pre">weight</span></code> and <code class="docutils literal notranslate"><span class="pre">bias</span></code> values we set when creating our straight line data).</p>
+<blockquote>
+<div><p><strong>Exercise:</strong> Try changing the <code class="docutils literal notranslate"><span class="pre">torch.manual_seed()</span></code> value two cells above, see what happens to the weights and bias values.</p>
+</div></blockquote>
+<p>Because our model starts with random values, right now it’ll have poor predictive power.</p>
+</section>
+<section id="making-predictions-using-torch-inference-mode">
+<h3>Making predictions using <code class="docutils literal notranslate"><span class="pre">torch.inference_mode()</span></code><a class="headerlink" href="#making-predictions-using-torch-inference-mode" title="Link to this heading">#</a></h3>
+<p>To check this we can pass it the test data <code class="docutils literal notranslate"><span class="pre">X_test</span></code> to see how closely it predicts <code class="docutils literal notranslate"><span class="pre">y_test</span></code>.</p>
+<p>When we pass data to our model, it’ll go through the model’s <code class="docutils literal notranslate"><span class="pre">forward()</span></code> method and produce a result using the computation we’ve defined.</p>
+<p>Let’s make some predictions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make predictions with model</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">inference_mode</span><span class="p">():</span> 
+    <span class="n">y_preds</span> <span class="o">=</span> <span class="n">model_0</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Note: in older PyTorch code you might also see torch.no_grad()</span>
+<span class="c1"># with torch.no_grad():</span>
+<span class="c1">#   y_preds = model_0(X_test)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You probably noticed we used <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.inference_mode.html"><code class="docutils literal notranslate"><span class="pre">torch.inference_mode()</span></code></a> as a <a class="reference external" href="https://realpython.com/python-with-statement/">context manager</a> (that’s what the <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">torch.inference_mode():</span></code> is) to make the predictions.</p>
+<p>As the name suggests, <code class="docutils literal notranslate"><span class="pre">torch.inference_mode()</span></code> is used when using a model for inference (making predictions).</p>
+<p><code class="docutils literal notranslate"><span class="pre">torch.inference_mode()</span></code> turns off a bunch of things (like gradient tracking, which is necessary for training but not for inference) to make <strong>forward-passes</strong> (data going through the <code class="docutils literal notranslate"><span class="pre">forward()</span></code> method) faster.</p>
+<blockquote>
+<div><p><strong>Note:</strong> In older PyTorch code, you may also see <code class="docutils literal notranslate"><span class="pre">torch.no_grad()</span></code> being used for inference. While <code class="docutils literal notranslate"><span class="pre">torch.inference_mode()</span></code> and <code class="docutils literal notranslate"><span class="pre">torch.no_grad()</span></code> do similar things,
+<code class="docutils literal notranslate"><span class="pre">torch.inference_mode()</span></code> is newer, potentially faster and preferred. See this <a class="reference external" href="https://twitter.com/PyTorch/status/1437838231505096708?s=20">Tweet from PyTorch</a> for more.</p>
+</div></blockquote>
+<p>let’s see what predictions we got</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the predictions</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of testing samples: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of predictions made: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">y_preds</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Predicted values:</span><span class="se">\n</span><span class="si">{</span><span class="n">y_preds</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of testing samples: 10
+Number of predictions made: 10
+Predicted values:
+tensor([[0.3982],
+        [0.4049],
+        [0.4116],
+        [0.4184],
+        [0.4251],
+        [0.4318],
+        [0.4386],
+        [0.4453],
+        [0.4520],
+        [0.4588]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice how there’s one prediction value per testing sample.</p>
+<p>This is because of the kind of data we’re using. For our straight line, one <code class="docutils literal notranslate"><span class="pre">X</span></code> value maps to one <code class="docutils literal notranslate"><span class="pre">y</span></code> value.</p>
+<p>However, machine learning models are very flexible. You could have 100 <code class="docutils literal notranslate"><span class="pre">X</span></code> values mapping to one, two, three or 10 <code class="docutils literal notranslate"><span class="pre">y</span></code> values. It all depends on what you’re working on.</p>
+<p>Our predictions are still numbers on a page, let’s visualize them with our <code class="docutils literal notranslate"><span class="pre">plot_predictions()</span></code> function we created above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_predictions</span><span class="p">(</span><span class="n">predictions</span><span class="o">=</span><span class="n">y_preds</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/5ad8f37603b8d57a18cf0c57c67fb8da17ea73c11c3fb40cc82fa932bd052db7.png" src="../../../_images/5ad8f37603b8d57a18cf0c57c67fb8da17ea73c11c3fb40cc82fa932bd052db7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_test</span> <span class="o">-</span> <span class="n">y_preds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.4618],
+        [0.4691],
+        [0.4764],
+        [0.4836],
+        [0.4909],
+        [0.4982],
+        [0.5054],
+        [0.5127],
+        [0.5200],
+        [0.5272]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>hose predictions look pretty bad…</p>
+<p>This make sense though when you remember our model is just using random parameter values to make predictions.</p>
+<p>It hasn’t even looked at the blue dots to try to predict the green dots.</p>
+<p>Time to change that.</p>
+</section>
+</section>
+<section id="train-the-model">
+<h2>Train the model<a class="headerlink" href="#train-the-model" title="Link to this heading">#</a></h2>
+<p>Right now our model is making predictions using random parameters to make calculations, it’s basically guessing (randomly).</p>
+<p>To fix that, we can update its internal parameters (I also refer to <em>parameters</em> as patterns), the <code class="docutils literal notranslate"><span class="pre">weights</span></code> and <code class="docutils literal notranslate"><span class="pre">bias</span></code> values we set randomly using <code class="docutils literal notranslate"><span class="pre">nn.Parameter()</span></code> and <code class="docutils literal notranslate"><span class="pre">torch.randn()</span></code> to be something that better represents the data.</p>
+<p>We could hard code this (since we know the default values <code class="docutils literal notranslate"><span class="pre">weight=0.7</span></code> and <code class="docutils literal notranslate"><span class="pre">bias=0.3</span></code>) but where’s the fun in that?</p>
+<p>Much of the time you won’t know what the ideal parameters are for a model.</p>
+<p>Instead, it’s much more fun to write code to see if the model can try and figure them out itself.</p>
+<section id="creating-a-loss-function-and-optimizer-in-pytorch">
+<h3>Creating a loss function and optimizer in PyTorch<a class="headerlink" href="#creating-a-loss-function-and-optimizer-in-pytorch" title="Link to this heading">#</a></h3>
+<p>For our model to update its parameters on its own, we’ll need to add a few more things to our recipe.</p>
+<p>And that’s a <strong>loss function</strong> as well as an <strong>optimizer</strong>.</p>
+<p>The rolls of these are:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>What does it do?</p></th>
+<th class="head"><p>Where does it live in PyTorch?</p></th>
+<th class="head"><p>Common values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Loss function</strong></p></td>
+<td><p>Measures how wrong your models predictions (e.g. <code class="docutils literal notranslate"><span class="pre">y_preds</span></code>) are compared to the truth labels (e.g. <code class="docutils literal notranslate"><span class="pre">y_test</span></code>). Lower the better.</p></td>
+<td><p>PyTorch has plenty of built-in loss functions in <a class="reference external" href="https://pytorch.org/docs/stable/nn.html#loss-functions"><code class="docutils literal notranslate"><span class="pre">torch.nn</span></code></a>.</p></td>
+<td><p>Mean absolute error (MAE) for regression problems (<a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.L1Loss.html"><code class="docutils literal notranslate"><span class="pre">torch.nn.L1Loss()</span></code></a>). Binary cross entropy for binary classification problems (<a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.BCELoss.html"><code class="docutils literal notranslate"><span class="pre">torch.nn.BCELoss()</span></code></a>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Optimizer</strong></p></td>
+<td><p>Tells your model how to update its internal parameters to best lower the loss.</p></td>
+<td><p>You can find various optimization function implementations in <a class="reference external" href="https://pytorch.org/docs/stable/optim.html"><code class="docutils literal notranslate"><span class="pre">torch.optim</span></code></a>.</p></td>
+<td><p>Stochastic gradient descent (<a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.optim.SGD.html#torch.optim.SGD"><code class="docutils literal notranslate"><span class="pre">torch.optim.SGD()</span></code></a>). Adam optimizer (<a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.optim.Adam.html#torch.optim.Adam"><code class="docutils literal notranslate"><span class="pre">torch.optim.Adam()</span></code></a>).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Let’s create a loss function and an optimizer we can use to help improve our model.</p>
+<p>Depending on what kind of problem you’re working on will depend on what loss function and what optimizer you use.</p>
+<p>However, there are some common values, that are known to work well such as the SGD (stochastic gradient descent) or Adam optimizer. And the MAE (mean absolute error) loss function for regression problems (predicting a number) or binary cross entropy loss function for classification problems (predicting one thing or another).</p>
+<p>For our problem, since we’re predicting a number, let’s use MAE (which is under <code class="docutils literal notranslate"><span class="pre">torch.nn.L1Loss()</span></code>) in PyTorch as our loss function.</p>
+<p><img alt="what MAE loss looks like for our plot data" src="../../../_images/01-mae-loss-annotated.png" />
+<em>Mean absolute error (MAE, in PyTorch: <code class="docutils literal notranslate"><span class="pre">torch.nn.L1Loss</span></code>) measures the absolute difference between two points (predictions and labels) and then takes the mean across all examples.</em></p>
+<p>And we’ll use SGD, <code class="docutils literal notranslate"><span class="pre">torch.optim.SGD(params,</span> <span class="pre">lr)</span></code> where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">params</span></code> is the target model parameters you’d like to optimize (e.g. the <code class="docutils literal notranslate"><span class="pre">weights</span></code> and <code class="docutils literal notranslate"><span class="pre">bias</span></code> values we randomly set before).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lr</span></code> is the <strong>learning rate</strong> you’d like the optimizer to update the parameters at, higher means the optimizer will try larger updates (these can sometimes be too large and the optimizer will fail to work), lower means the optimizer will try smaller updates (these can sometimes be too small and the optimizer will take too long to find the ideal values). The learning rate is considered a <strong>hyperparameter</strong> . Common starting values for the learning rate are <code class="docutils literal notranslate"><span class="pre">0.01</span></code>, <code class="docutils literal notranslate"><span class="pre">0.001</span></code>, <code class="docutils literal notranslate"><span class="pre">0.0001</span></code>, however, these can also be adjusted over time (this is called <a class="reference external" href="https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate">learning rate scheduling</a>).</p></li>
+</ul>
+<p>Woah, that’s a lot, let’s see it in code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the loss function</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">L1Loss</span><span class="p">()</span> <span class="c1"># MAE loss is same as L1Loss</span>
+
+<span class="c1"># Create the optimizer</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">model_0</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="c1"># parameters of target model to optimize</span>
+                            <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span> <span class="c1"># learning rate (how much the optimizer should change parameters at each step, higher=more (less stable), lower=less (might take a long time))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="creating-an-optimization-loop-in-pytorch">
+<h3>Creating an optimization loop in PyTorch<a class="headerlink" href="#creating-an-optimization-loop-in-pytorch" title="Link to this heading">#</a></h3>
+<p>Woohoo! Now we’ve got a loss function and an optimizer, it’s now time to create a <strong>training loop</strong> (and <strong>testing loop</strong>).</p>
+<p>The training loop involves the model going through the training data and learning the relationships between the <code class="docutils literal notranslate"><span class="pre">features</span></code> and <code class="docutils literal notranslate"><span class="pre">labels</span></code>.</p>
+<p>The testing loop involves going through the testing data and evaluating how good the patterns are that the model learned on the training data (the model never see’s the testing data during training).</p>
+<p>Each of these is called a “loop” because we want our model to look (loop through) at each sample in each dataset.</p>
+<p>To create these we’re going to write a Python <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p>
+</section>
+<section id="pytorch-training-loop">
+<h3>PyTorch training loop<a class="headerlink" href="#pytorch-training-loop" title="Link to this heading">#</a></h3>
+<p>For the training loop, we’ll build the following steps:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Number</p></th>
+<th class="head"><p>Step name</p></th>
+<th class="head"><p>What does it do?</p></th>
+<th class="head"><p>Code example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Forward pass</p></td>
+<td><p>The model goes through all of the training data once, performing its <code class="docutils literal notranslate"><span class="pre">forward()</span></code> function calculations.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">model(x_train)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Calculate the loss</p></td>
+<td><p>The model’s outputs (predictions) are compared to the ground truth and evaluated to see how wrong they are.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">loss</span> <span class="pre">=</span> <span class="pre">loss_fn(y_pred,</span> <span class="pre">y_train)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Zero gradients</p></td>
+<td><p>The optimizers gradients are set to zero (they are accumulated by default) so they can be recalculated for the specific training step.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">optimizer.zero_grad()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Perform backpropagation on the loss</p></td>
+<td><p>Computes the gradient of the loss with respect for every model parameter to be updated  (each parameter with <code class="docutils literal notranslate"><span class="pre">requires_grad=True</span></code>). This is known as <strong>backpropagation</strong>, hence “backwards”.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Update the optimizer (<strong>gradient descent</strong>)</p></td>
+<td><p>Update the parameters with <code class="docutils literal notranslate"><span class="pre">requires_grad=True</span></code> with respect to the loss gradients in order to improve them.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">optimizer.step()</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img alt="pytorch training loop annotated" src="../../../_images/01-pytorch-training-loop-annotated.png" /></p>
+<blockquote>
+<div><p><strong>Note:</strong> The above is just one example of how the steps could be ordered or described. With experience you’ll find making PyTorch training loops can be quite flexible.</p>
+<p>And on the ordering of things, the above is a good default order but you may see slightly different orders. Some rules of thumb:</p>
+<ul class="simple">
+<li><p>Calculate the loss (<code class="docutils literal notranslate"><span class="pre">loss</span> <span class="pre">=</span> <span class="pre">...</span></code>) <em>before</em> performing backpropagation on it (<code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code>).</p></li>
+<li><p>Zero gradients (<code class="docutils literal notranslate"><span class="pre">optimizer.zero_grad()</span></code>) <em>before</em> stepping them (<code class="docutils literal notranslate"><span class="pre">optimizer.step()</span></code>).</p></li>
+<li><p>Step the optimizer (<code class="docutils literal notranslate"><span class="pre">optimizer.step()</span></code>) <em>after</em> performing backpropagation on the loss (<code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code>).</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="pytorch-testing-loop">
+<h3>PyTorch testing loop<a class="headerlink" href="#pytorch-testing-loop" title="Link to this heading">#</a></h3>
+<p>As for the testing loop (evaluating our model), the typical steps include:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Number</p></th>
+<th class="head"><p>Step name</p></th>
+<th class="head"><p>What does it do?</p></th>
+<th class="head"><p>Code example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Forward pass</p></td>
+<td><p>The model goes through all of the training data once, performing its <code class="docutils literal notranslate"><span class="pre">forward()</span></code> function calculations.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">model(x_test)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Calculate the loss</p></td>
+<td><p>The model’s outputs (predictions) are compared to the ground truth and evaluated to see how wrong they are.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">loss</span> <span class="pre">=</span> <span class="pre">loss_fn(y_pred,</span> <span class="pre">y_test)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Calulate evaluation metrics (optional)</p></td>
+<td><p>Alongisde the loss value you may want to calculate other evaluation metrics such as accuracy on the test set.</p></td>
+<td><p>Custom functions</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Notice the testing loop doesn’t contain performing backpropagation (<code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code>) or stepping the optimizer (<code class="docutils literal notranslate"><span class="pre">optimizer.step()</span></code>), this is because no parameters in the model are being changed during testing, they’ve already been calculated. For testing, we’re only interested in the output of the forward pass through the model.</p>
+<p><img alt="pytorch annotated testing loop" src="../../../_images/01-pytorch-testing-loop-annotated.png" /></p>
+<p>Let’s put all of the above together and train our model for 100 <strong>epochs</strong> (forward passes through the data) and we’ll evaluate it every 10 epochs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Set the number of epochs (how many times the model will pass over the training data)</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Create empty loss lists to track values</span>
+<span class="n">train_loss_values</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">test_loss_values</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">epoch_count</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="c1">### Training</span>
+
+    <span class="c1"># Put model in training mode (this is the default state of a model)</span>
+    <span class="n">model_0</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+    <span class="c1"># 1. Forward pass on train data using the forward() method inside </span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model_0</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="c1"># print(y_pred)</span>
+
+    <span class="c1"># 2. Calculate the loss (how different are our models predictions to the ground truth)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+    <span class="c1"># 3. Zero grad of the optimizer</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+    <span class="c1"># 4. Loss backwards</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+    <span class="c1"># 5. Progress the optimizer</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+    <span class="c1">### Testing</span>
+
+    <span class="c1"># Put the model in evaluation mode</span>
+    <span class="n">model_0</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">inference_mode</span><span class="p">():</span>
+      <span class="c1"># 1. Forward pass on test data</span>
+      <span class="n">test_pred</span> <span class="o">=</span> <span class="n">model_0</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+      <span class="c1"># 2. Caculate loss on test data</span>
+      <span class="n">test_loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">test_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">))</span> <span class="c1"># predictions come in torch.float datatype, so comparisons need to be done with tensors of the same type</span>
+
+      <span class="c1"># Print out what&#39;s happening</span>
+      <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">epoch_count</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">epoch</span><span class="p">)</span>
+            <span class="n">train_loss_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+            <span class="n">test_loss_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_loss</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch: </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s2"> | MAE Train Loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">}</span><span class="s2"> | MAE Test Loss: </span><span class="si">{</span><span class="n">test_loss</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0 | MAE Train Loss: 0.31288138031959534 | MAE Test Loss: 0.48106518387794495 
+Epoch: 10 | MAE Train Loss: 0.1976713240146637 | MAE Test Loss: 0.3463551998138428 
+Epoch: 20 | MAE Train Loss: 0.08908725529909134 | MAE Test Loss: 0.21729660034179688 
+Epoch: 30 | MAE Train Loss: 0.053148526698350906 | MAE Test Loss: 0.14464017748832703 
+Epoch: 40 | MAE Train Loss: 0.04543796554207802 | MAE Test Loss: 0.11360953003168106 
+Epoch: 50 | MAE Train Loss: 0.04167863354086876 | MAE Test Loss: 0.09919948130846024 
+Epoch: 60 | MAE Train Loss: 0.03818932920694351 | MAE Test Loss: 0.08886633068323135 
+Epoch: 70 | MAE Train Loss: 0.03476089984178543 | MAE Test Loss: 0.0805937647819519 
+Epoch: 80 | MAE Train Loss: 0.03132382780313492 | MAE Test Loss: 0.07232122868299484 
+Epoch: 90 | MAE Train Loss: 0.02788739837706089 | MAE Test Loss: 0.06473556160926819 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Looks like our loss is going down with every epoch, let’s plot it to find out.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the loss curves</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epoch_count</span><span class="p">,</span> <span class="n">train_loss_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Train loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epoch_count</span><span class="p">,</span> <span class="n">test_loss_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Test loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Training and test loss curves&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epochs&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/be5e73c0753f4797530e27cb5a447b6b3076e6cc80dd6136d5d701dd8a864e9b.png" src="../../../_images/be5e73c0753f4797530e27cb5a447b6b3076e6cc80dd6136d5d701dd8a864e9b.png" />
+</div>
+</div>
+<p>The <strong>loss curves</strong> show the loss going down over time. Remember, loss is the measure of how <em>wrong</em> your model is, so the lower the better.</p>
+<p>But why did the loss go down?</p>
+<p>Well, thanks to our loss function and optimizer, the model’s internal parameters (<code class="docutils literal notranslate"><span class="pre">weights</span></code> and <code class="docutils literal notranslate"><span class="pre">bias</span></code>) were updated to better reflect the underlying patterns in the data.</p>
+<p>Let’s inspect our model’s <a class="reference external" href="https://pytorch.org/tutorials/recipes/recipes/what_is_state_dict.html"><code class="docutils literal notranslate"><span class="pre">.state_dict()</span></code></a> to see see how close our model gets to the original values we set for weights and bias.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find our model&#39;s learned parameters</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The model learned the following values for weights and bias:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model_0</span><span class="o">.</span><span class="n">state_dict</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">And the original values for weights and bias are:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;weights: </span><span class="si">{</span><span class="n">weight</span><span class="si">}</span><span class="s2">, bias: </span><span class="si">{</span><span class="n">bias</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The model learned the following values for weights and bias:
+OrderedDict([(&#39;weights&#39;, tensor([0.5784])), (&#39;bias&#39;, tensor([0.3513]))])
+
+And the original values for weights and bias are:
+weights: 0.7, bias: 0.3
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our model got very close to calculate the exact original values for <code class="docutils literal notranslate"><span class="pre">weight</span></code> and <code class="docutils literal notranslate"><span class="pre">bias</span></code> (and it would probably get even closer if we trained it for longer).</p>
+<blockquote>
+<div><p><strong>Exercise:</strong> Try changing the <code class="docutils literal notranslate"><span class="pre">epochs</span></code> value above to 200, what happens to the loss curves and the weights and bias parameter values of the model?</p>
+</div></blockquote>
+<p>This is the whole idea of machine learning and deep learning, <strong>there are some ideal values that describe our data</strong> and rather than figuring them out by hand, <strong>we can train a model to figure them out programmatically</strong>.</p>
+</section>
+</section>
+<section id="making-predictions-with-a-trained-pytorch-model-inference">
+<h2>Making predictions with a trained PyTorch model (inference)<a class="headerlink" href="#making-predictions-with-a-trained-pytorch-model-inference" title="Link to this heading">#</a></h2>
+<p>Once you’ve trained a model, you’ll likely want to make predictions with it.</p>
+<p>We’ve already seen a glimpse of this in the training and testing code above, the steps to do it outside of the training/testing loop are similar.</p>
+<p>There are three things to remember when making predictions (also called performing inference) with a PyTorch model:</p>
+<ol class="arabic simple">
+<li><p>Set the model in evaluation mode (<code class="docutils literal notranslate"><span class="pre">model.eval()</span></code>).</p></li>
+<li><p>Make the predictions using the inference mode context manager (<code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">torch.inference_mode():</span> <span class="pre">...</span></code>).</p></li>
+<li><p>All predictions should be made with objects on the same device (e.g. data and model on GPU only or data and model on CPU only).</p></li>
+</ol>
+<p>The first two items make sure all helpful calculations and settings PyTorch uses behind the scenes during training but aren’t necessary for inference are turned off (this results in faster computation). And the third ensures that you won’t run into cross-device errors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Set the model in evaluation mode</span>
+<span class="n">model_0</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+<span class="c1"># 2. Setup the inference mode context manager</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">inference_mode</span><span class="p">():</span>
+  <span class="c1"># 3. Make sure the calculations are done with the model and data on the same device</span>
+  <span class="c1"># in our case, we haven&#39;t setup device-agnostic code yet so our data and model are</span>
+  <span class="c1"># on the CPU by default.</span>
+  <span class="c1"># model_0.to(device)</span>
+  <span class="c1"># X_test = X_test.to(device)</span>
+  <span class="n">y_preds</span> <span class="o">=</span> <span class="n">model_0</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">y_preds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.8141],
+        [0.8256],
+        [0.8372],
+        [0.8488],
+        [0.8603],
+        [0.8719],
+        [0.8835],
+        [0.8950],
+        [0.9066],
+        [0.9182]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Nice! We’ve made some predictions with our trained model, now how do they look?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_predictions</span><span class="p">(</span><span class="n">predictions</span><span class="o">=</span><span class="n">y_preds</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/4f563a9800a5a83b1132614a91802bfd086943cd47ca31b297bb7fbfa22b960a.png" src="../../../_images/4f563a9800a5a83b1132614a91802bfd086943cd47ca31b297bb7fbfa22b960a.png" />
+</div>
+</div>
+<p>Those red dots are looking far closer than they were before!</p>
+<p>Let’s get onto saving an reloading a model in PyTorch.</p>
+</section>
+<section id="saving-and-loading-a-pytorch-model">
+<h2>Saving and loading a PyTorch model<a class="headerlink" href="#saving-and-loading-a-pytorch-model" title="Link to this heading">#</a></h2>
+<p>If you’ve trained a PyTorch model, chances are you’ll want to save it and export it somewhere.</p>
+<p>As in, you might train it on Google Colab or your local machine with a GPU but you’d like to now export it to some sort of application where others can use it.</p>
+<p>Or maybe you’d like to save your progress on a model and come back and load it back later.</p>
+<p>For saving and loading models in PyTorch, there are three main methods you should be aware of (all of below have been taken from the <a class="reference external" href="https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference">PyTorch saving and loading models guide</a>):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>PyTorch method</p></th>
+<th class="head"><p>What does it do?</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://pytorch.org/docs/stable/torch.html?highlight=save#torch.save"><code class="docutils literal notranslate"><span class="pre">torch.save</span></code></a></p></td>
+<td><p>Saves a serialized object to disk using Python’s <a class="reference external" href="https://docs.python.org/3/library/pickle.html"><code class="docutils literal notranslate"><span class="pre">pickle</span></code></a> utility. Models, tensors and various other Python objects like dictionaries can be saved using <code class="docutils literal notranslate"><span class="pre">torch.save</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://pytorch.org/docs/stable/torch.html?highlight=torch%20load#torch.load"><code class="docutils literal notranslate"><span class="pre">torch.load</span></code></a></p></td>
+<td><p>Uses <code class="docutils literal notranslate"><span class="pre">pickle</span></code>’s unpickling features to deserialize and load pickled Python object files (like models, tensors or dictionaries) into memory. You can also set which device to load the object to (CPU, GPU etc).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html?highlight=load_state_dict#torch.nn.Module.load_state_dict"><code class="docutils literal notranslate"><span class="pre">torch.nn.Module.load_state_dict</span></code></a></p></td>
+<td><p>Loads a model’s parameter dictionary (<code class="docutils literal notranslate"><span class="pre">model.state_dict()</span></code>) using a saved <code class="docutils literal notranslate"><span class="pre">state_dict()</span></code> object.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> As stated in <a class="reference external" href="https://docs.python.org/3/library/pickle.html">Python’s <code class="docutils literal notranslate"><span class="pre">pickle</span></code> documentation</a>, the <code class="docutils literal notranslate"><span class="pre">pickle</span></code> module <strong>is not secure</strong>. That means you should only ever unpickle (load) data you trust. That goes for loading PyTorch models as well. Only ever use saved PyTorch models from sources you trust.</p>
+</div></blockquote>
+<section id="saving-a-pytorch-models-state-dict">
+<h3>Saving a PyTorch model’s <code class="docutils literal notranslate"><span class="pre">state_dict()</span></code><a class="headerlink" href="#saving-a-pytorch-models-state-dict" title="Link to this heading">#</a></h3>
+<p>The <a class="reference external" href="https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-loading-model-for-inference">recommended way</a> for saving and loading a model for inference (making predictions) is by saving and loading a model’s <code class="docutils literal notranslate"><span class="pre">state_dict()</span></code>.</p>
+<p>Let’s see how we can do that in a few steps:</p>
+<ol class="arabic simple">
+<li><p>We’ll create a directory for saving models to called <code class="docutils literal notranslate"><span class="pre">models</span></code> using Python’s <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> module.</p></li>
+<li><p>We’ll create a file path to save the model to.</p></li>
+<li><p>We’ll call <code class="docutils literal notranslate"><span class="pre">torch.save(obj,</span> <span class="pre">f)</span></code> where <code class="docutils literal notranslate"><span class="pre">obj</span></code> is the target model’s <code class="docutils literal notranslate"><span class="pre">state_dict()</span></code> and <code class="docutils literal notranslate"><span class="pre">f</span></code> is the filename of where to save the model.</p></li>
+</ol>
+<blockquote>
+<div><p><strong>Note:</strong> It’s common convention for PyTorch saved models or objects to end with <code class="docutils literal notranslate"><span class="pre">.pt</span></code> or <code class="docutils literal notranslate"><span class="pre">.pth</span></code>, like <code class="docutils literal notranslate"><span class="pre">saved_model_01.pth</span></code>.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># 1. Create models directory </span>
+<span class="n">MODEL_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;models&quot;</span><span class="p">)</span>
+<span class="n">MODEL_PATH</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 2. Create model save path </span>
+<span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s2">&quot;01_pytorch_workflow_model_0.pth&quot;</span>
+<span class="n">MODEL_SAVE_PATH</span> <span class="o">=</span> <span class="n">MODEL_PATH</span> <span class="o">/</span> <span class="n">MODEL_NAME</span>
+
+<span class="c1"># 3. Save the model state dict </span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving model to: </span><span class="si">{</span><span class="n">MODEL_SAVE_PATH</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="n">model_0</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="c1"># only saving the state_dict() only saves the models learned parameters</span>
+           <span class="n">f</span><span class="o">=</span><span class="n">MODEL_SAVE_PATH</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving model to: models/01_pytorch_workflow_model_0.pth
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the saved file path</span>
+<span class="o">!</span>ls<span class="w"> </span>-l<span class="w"> </span>models/01_pytorch_workflow_model_0.pth
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-rw-rw-r-- 1 daniel daniel 1063 Nov 10 16:07 models/01_pytorch_workflow_model_0.pth
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="loading-a-saved-pytorch-models-state-dict">
+<h3>Loading a saved PyTorch model’s <code class="docutils literal notranslate"><span class="pre">state_dict()</span></code><a class="headerlink" href="#loading-a-saved-pytorch-models-state-dict" title="Link to this heading">#</a></h3>
+<p>Since we’ve now got a saved model <code class="docutils literal notranslate"><span class="pre">state_dict()</span></code> at <code class="docutils literal notranslate"><span class="pre">models/01_pytorch_workflow_model_0.pth</span></code> we can now load it in using <code class="docutils literal notranslate"><span class="pre">torch.nn.Module.load_state_dict(torch.load(f))</span></code> where <code class="docutils literal notranslate"><span class="pre">f</span></code> is the filepath of our saved model <code class="docutils literal notranslate"><span class="pre">state_dict()</span></code>.</p>
+<p>Why call <code class="docutils literal notranslate"><span class="pre">torch.load()</span></code> inside <code class="docutils literal notranslate"><span class="pre">torch.nn.Module.load_state_dict()</span></code>?</p>
+<p>Because we only saved the model’s <code class="docutils literal notranslate"><span class="pre">state_dict()</span></code> which is a dictionary of learned parameters and not the <em>entire</em> model, we first have to load the <code class="docutils literal notranslate"><span class="pre">state_dict()</span></code> with <code class="docutils literal notranslate"><span class="pre">torch.load()</span></code> and then pass that <code class="docutils literal notranslate"><span class="pre">state_dict()</span></code> to a new instance of our model (which is a subclass of <code class="docutils literal notranslate"><span class="pre">nn.Module</span></code>).</p>
+<p>Why not save the entire model?</p>
+<p><a class="reference external" href="https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-entire-model">Saving the entire model</a> rather than just the <code class="docutils literal notranslate"><span class="pre">state_dict()</span></code> is more intuitive, however, to quote the PyTorch documentation (italics mine):</p>
+<blockquote>
+<div><p>The disadvantage of this approach <em>(saving the whole model)</em> is that the serialized data is bound to the specific classes and the exact directory structure used when the model is saved…</p>
+<p>Because of this, your code can break in various ways when used in other projects or after refactors.</p>
+</div></blockquote>
+<p>So instead, we’re using the flexible method of saving and loading just the <code class="docutils literal notranslate"><span class="pre">state_dict()</span></code>, which again is basically a dictionary of model parameters.</p>
+<p>Let’s test it out by created another instance of <code class="docutils literal notranslate"><span class="pre">LinearRegressionModel()</span></code>, which is a subclass of <code class="docutils literal notranslate"><span class="pre">torch.nn.Module</span></code> and will hence have the in-built method <code class="docutils literal notranslate"><span class="pre">load_state_dict()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Instantiate a new instance of our model (this will be instantiated with random weights)</span>
+<span class="n">loaded_model_0</span> <span class="o">=</span> <span class="n">LinearRegressionModel</span><span class="p">()</span>
+
+<span class="c1"># Load the state_dict of our saved model (this will update the new instance of our model with trained weights)</span>
+<span class="n">loaded_model_0</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="o">=</span><span class="n">MODEL_SAVE_PATH</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;All keys matched successfully&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now to test our loaded model, let’s perform inference with it (make predictions) on the test data.</p>
+<p>Remember the rules for performing inference with PyTorch models?</p>
+<p>If not, here’s a refresher:</p>
+<details>
+    <summary>PyTorch inference rules</summary>
+    <ol>
+      <li> Set the model in evaluation mode (<code>model.eval()</code>). </li>
+      <li> Make the predictions using the inference mode context manager (<code>with torch.inference_mode(): ...</code>). </li>
+      <li> All predictions should be made with objects on the same device (e.g. data and model on GPU only or data and model on CPU only).</li>
+    </ol> 
+</details>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Put the loaded model into evaluation mode</span>
+<span class="n">loaded_model_0</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+<span class="c1"># 2. Use the inference mode context manager to make predictions</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">inference_mode</span><span class="p">():</span>
+    <span class="n">loaded_model_preds</span> <span class="o">=</span> <span class="n">loaded_model_0</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span> <span class="c1"># perform a forward pass on the test data with the loaded model</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ve made some predictions with the loaded model, let’s see if they’re the same as the previous predictions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compare previous model predictions with loaded model predictions (these should be the same)</span>
+<span class="n">y_preds</span> <span class="o">==</span> <span class="n">loaded_model_preds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[True],
+        [True],
+        [True],
+        [True],
+        [True],
+        [True],
+        [True],
+        [True],
+        [True],
+        [True]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Nice!</p>
+<p>It looks like the loaded model predictions are the same as the previous model predictions (predictions made prior to saving). This indicates our model is saving and loading as expected.</p>
+<blockquote>
+<div><p><strong>Note:</strong> There are more methods to save and load PyTorch models but I’ll leave these for extra-curriculum and further reading. See the <a class="reference external" href="https://pytorch.org/tutorials/beginner/saving_loading_models.html#saving-and-loading-models">PyTorch guide for saving and loading models</a> for more.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="putting-it-all-together">
+<h2>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Link to this heading">#</a></h2>
+<p>Let’s put everything we’ve done so far together.</p>
+<p>Except this time we’ll make our code device agnostic (so if there’s a GPU available, it’ll use it and if not, it will default to the CPU).</p>
+<p>There’ll be far less commentary in this section than above since what we’re going to go through has already been covered.</p>
+<p>We’ll start by importing the standard libraries we need.</p>
+<blockquote>
+<div><p><strong>Note:</strong> If you’re using Google Colab, to setup a GPU, go to Runtime -&gt; Change runtime type -&gt; Hardware acceleration -&gt; GPU. If you do this, it will reset the Colab runtime and you will lose saved variables.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import PyTorch and matplotlib</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span> <span class="c1"># nn contains all of PyTorch&#39;s building blocks for neural networks</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Check PyTorch version</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">__version__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;1.12.1+cu113&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s start making our code device agnostic by setting <code class="docutils literal notranslate"><span class="pre">device=&quot;cuda&quot;</span></code> if it’s available, otherwise it’ll default to <code class="docutils literal notranslate"><span class="pre">device=&quot;cpu&quot;</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup device agnostic code</span>
+<span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using device: </span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using device: cuda
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you’ve got access to a GPU, the above should’ve printed out:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Using</span> <span class="n">device</span><span class="p">:</span> <span class="n">cuda</span>
+</pre></div>
+</div>
+<p>Otherwise, you’ll be using a CPU for the following computations. This is fine for our small dataset but it will take longer for larger datasets.</p>
+<section id="data">
+<h3>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h3>
+<p>Let’s create some data just like before.</p>
+<p>First, we’ll hard-code some <code class="docutils literal notranslate"><span class="pre">weight</span></code> and <code class="docutils literal notranslate"><span class="pre">bias</span></code> values.</p>
+<p>Then we’ll make a range of numbers between 0 and 1, these will be our <code class="docutils literal notranslate"><span class="pre">X</span></code> values.</p>
+<p>Finally, we’ll use the <code class="docutils literal notranslate"><span class="pre">X</span></code> values, as well as the <code class="docutils literal notranslate"><span class="pre">weight</span></code> and <code class="docutils literal notranslate"><span class="pre">bias</span></code> values to create <code class="docutils literal notranslate"><span class="pre">y</span></code> using the linear regression formula (<code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">weight</span> <span class="pre">*</span> <span class="pre">X</span> <span class="pre">+</span> <span class="pre">bias</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create weight and bias</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="n">bias</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+<span class="c1"># Create range values</span>
+<span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">end</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">step</span> <span class="o">=</span> <span class="mf">0.02</span>
+
+<span class="c1"># Create X and y (features and labels)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># without unsqueeze, errors will happen later on (shapes within linear layers)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">bias</span> 
+<span class="n">X</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor([[0.0000],
+         [0.0200],
+         [0.0400],
+         [0.0600],
+         [0.0800],
+         [0.1000],
+         [0.1200],
+         [0.1400],
+         [0.1600],
+         [0.1800]]),
+ tensor([[0.3000],
+         [0.3140],
+         [0.3280],
+         [0.3420],
+         [0.3560],
+         [0.3700],
+         [0.3840],
+         [0.3980],
+         [0.4120],
+         [0.4260]]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ve got some data, let’s split it into training and test sets.</p>
+<p>We’ll use an 80/20 split with 80% training data and 20% testing data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split data</span>
+<span class="n">train_split</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.8</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="n">train_split</span><span class="p">],</span> <span class="n">y</span><span class="p">[:</span><span class="n">train_split</span><span class="p">]</span>
+<span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">train_split</span><span class="p">:],</span> <span class="n">y</span><span class="p">[</span><span class="n">train_split</span><span class="p">:]</span>
+
+<span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(40, 40, 10, 10)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s visualize them to make sure they look okay.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note: If you&#39;ve reset your runtime, this function won&#39;t work, </span>
+<span class="c1"># you&#39;ll have to rerun the cell above where it&#39;s instantiated.</span>
+<span class="n">plot_predictions</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/9b628432e0561db0473a4db8c053ba561db15fa6901a85e59b1962cc1d72ea12.png" src="../../../_images/9b628432e0561db0473a4db8c053ba561db15fa6901a85e59b1962cc1d72ea12.png" />
+</div>
+</div>
+</section>
+<section id="building-a-pytorch-linear-model">
+<h3>Building a PyTorch linear model<a class="headerlink" href="#building-a-pytorch-linear-model" title="Link to this heading">#</a></h3>
+<p>We’ve got some data, now it’s time to make a model.</p>
+<p>We’ll create the same style of model as before except this time, instead of defining the weight and bias parameters of our model manually using <code class="docutils literal notranslate"><span class="pre">nn.Parameter()</span></code>, we’ll use <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html"><code class="docutils literal notranslate"><span class="pre">nn.Linear(in_features,</span> <span class="pre">out_features)</span></code></a> to do it for us.</p>
+<p>Where <code class="docutils literal notranslate"><span class="pre">in_features</span></code> is the number of dimensions your input data has and <code class="docutils literal notranslate"><span class="pre">out_features</span></code> is the number of dimensions you’d like it to be output to.</p>
+<p>In our case, both of these are <code class="docutils literal notranslate"><span class="pre">1</span></code> since our data has <code class="docutils literal notranslate"><span class="pre">1</span></code> input feature (<code class="docutils literal notranslate"><span class="pre">X</span></code>) per label (<code class="docutils literal notranslate"><span class="pre">y</span></code>).</p>
+<p><img alt="comparison of nn.Parameter Linear Regression model and nn.Linear Linear Regression model" src="../../../_images/01-pytorch-linear-regression-model-with-nn-Parameter-and-nn-Linear-compared.png" />
+<em>Creating a linear regression model using <code class="docutils literal notranslate"><span class="pre">nn.Parameter</span></code> versus using <code class="docutils literal notranslate"><span class="pre">nn.Linear</span></code>. There are plenty more examples of where the <code class="docutils literal notranslate"><span class="pre">torch.nn</span></code> module has pre-built computations, including many popular and useful neural network layers.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Subclass nn.Module to make our model</span>
+<span class="k">class</span> <span class="nc">LinearRegressionModelV2</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># Use nn.Linear() for creating the model parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                                      <span class="n">out_features</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Define the forward computation (input data x flows through nn.Linear())</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear_layer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Set the manual seed when creating the model (this isn&#39;t always need but is used for demonstrative purposes, try commenting it out and seeing what happens)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">model_1</span> <span class="o">=</span> <span class="n">LinearRegressionModelV2</span><span class="p">()</span>
+<span class="n">model_1</span><span class="p">,</span> <span class="n">model_1</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(LinearRegressionModelV2(
+   (linear_layer): Linear(in_features=1, out_features=1, bias=True)
+ ),
+ OrderedDict([(&#39;linear_layer.weight&#39;, tensor([[0.7645]])),
+              (&#39;linear_layer.bias&#39;, tensor([0.8300]))]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice the outputs of <code class="docutils literal notranslate"><span class="pre">model_1.state_dict()</span></code>, the <code class="docutils literal notranslate"><span class="pre">nn.Linear()</span></code> layer created a random <code class="docutils literal notranslate"><span class="pre">weight</span></code> and <code class="docutils literal notranslate"><span class="pre">bias</span></code> parameter for us.</p>
+<p>Now let’s put our model on the GPU (if it’s available).</p>
+<p>We can change the device our PyTorch objects are on using <code class="docutils literal notranslate"><span class="pre">.to(device)</span></code>.</p>
+<p>First let’s check the model’s current device.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check model device</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">model_1</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span><span class="o">.</span><span class="n">device</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>device(type=&#39;cpu&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Looks like the model’s on the CPU by default.</p>
+<p>Let’s change it to be on the GPU (if it’s available).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set model to GPU if it&#39;s availalble, otherwise it&#39;ll default to CPU</span>
+<span class="n">model_1</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> <span class="c1"># the device variable was set above to be &quot;cuda&quot; if available or &quot;cpu&quot; if not</span>
+<span class="nb">next</span><span class="p">(</span><span class="n">model_1</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span><span class="o">.</span><span class="n">device</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>device(type=&#39;cuda&#39;, index=0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because of our device agnostic code, the above cell will work regardless of whether a GPU is available or not.</p>
+<p>If you do have access to a CUDA-enabled GPU, you should see an output of something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">device</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="training">
+<h3>Training<a class="headerlink" href="#training" title="Link to this heading">#</a></h3>
+<p>Time to build a training and testing loop.</p>
+<p>First we’ll need a loss function and an optimizer.</p>
+<p>Let’s use the same functions we used earlier, <code class="docutils literal notranslate"><span class="pre">nn.L1Loss()</span></code> and <code class="docutils literal notranslate"><span class="pre">torch.optim.SGD()</span></code>.</p>
+<p>We’ll have to pass the new model’s parameters (<code class="docutils literal notranslate"><span class="pre">model.parameters()</span></code>) to the optimizer for it to adjust them during training.</p>
+<p>The learning rate of <code class="docutils literal notranslate"><span class="pre">0.01</span></code> worked well before too so let’s use that again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create loss function</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">L1Loss</span><span class="p">()</span>
+
+<span class="c1"># Create optimizer</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">model_1</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="c1"># optimize newly created model&#39;s parameters</span>
+                            <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Loss function and optimizer ready, now let’s train and evaluate our model using a training and testing loop.</p>
+<p>The only different thing we’ll be doing in this step compared to the previous training loop is putting the data on the target <code class="docutils literal notranslate"><span class="pre">device</span></code>.</p>
+<p>We’ve already put our model on the target <code class="docutils literal notranslate"><span class="pre">device</span></code> using <code class="docutils literal notranslate"><span class="pre">model_1.to(device)</span></code>.</p>
+<p>And we can do the same with the data.</p>
+<p>That way if the model is on the GPU, the data is on the GPU (and vice versa).</p>
+<p>Let’s step things up a notch this time and set <code class="docutils literal notranslate"><span class="pre">epochs=1000</span></code>.</p>
+<p>If you need a reminder of the PyTorch training loop steps, see below.</p>
+<details>
+    <summary>PyTorch training loop steps</summary>
+    <ol>
+        <li><b>Forward pass</b> - The model goes through all of the training data once, performing its
+            <code>forward()</code> function
+            calculations (<code>model(x_train)</code>).
+        </li>
+        <li><b>Calculate the loss</b> - The model's outputs (predictions) are compared to the ground truth and evaluated
+            to see how
+            wrong they are (<code>loss = loss_fn(y_pred, y_train</code>).</li>
+        <li><b>Zero gradients</b> - The optimizers gradients are set to zero (they are accumulated by default) so they
+            can be
+            recalculated for the specific training step (<code>optimizer.zero_grad()</code>).</li>
+        <li><b>Perform backpropagation on the loss</b> - Computes the gradient of the loss with respect for every model
+            parameter to
+            be updated (each parameter
+            with <code>requires_grad=True</code>). This is known as <b>backpropagation</b>, hence "backwards"
+            (<code>loss.backward()</code>).</li>
+        <li><b>Step the optimizer (gradient descent)</b> - Update the parameters with <code>requires_grad=True</code>
+            with respect to the loss
+            gradients in order to improve them (<code>optimizer.step()</code>).</li>
+    </ol>
+</details><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Set the number of epochs </span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">1000</span> 
+
+<span class="c1"># Put data on the available device</span>
+<span class="c1"># Without this, error will happen (not all model/data on device)</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">y_test</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="c1">### Training</span>
+    <span class="n">model_1</span><span class="o">.</span><span class="n">train</span><span class="p">()</span> <span class="c1"># train mode is on by default after construction</span>
+
+    <span class="c1"># 1. Forward pass</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model_1</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+
+    <span class="c1"># 2. Calculate loss</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+    <span class="c1"># 3. Zero grad optimizer</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+    <span class="c1"># 4. Loss backward</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+    <span class="c1"># 5. Step the optimizer</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+    <span class="c1">### Testing</span>
+    <span class="n">model_1</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span> <span class="c1"># put the model in evaluation mode for testing (inference)</span>
+    <span class="c1"># 1. Forward pass</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">inference_mode</span><span class="p">():</span>
+        <span class="n">test_pred</span> <span class="o">=</span> <span class="n">model_1</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    
+        <span class="c1"># 2. Calculate the loss</span>
+        <span class="n">test_loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">test_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch: </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s2"> | Train loss: </span><span class="si">{</span><span class="n">loss</span><span class="si">}</span><span class="s2"> | Test loss: </span><span class="si">{</span><span class="n">test_loss</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0 | Train loss: 0.5551779866218567 | Test loss: 0.5739762187004089
+Epoch: 100 | Train loss: 0.006215683650225401 | Test loss: 0.014086711220443249
+Epoch: 200 | Train loss: 0.0012645035749301314 | Test loss: 0.013801801018416882
+Epoch: 300 | Train loss: 0.0012645035749301314 | Test loss: 0.013801801018416882
+Epoch: 400 | Train loss: 0.0012645035749301314 | Test loss: 0.013801801018416882
+Epoch: 500 | Train loss: 0.0012645035749301314 | Test loss: 0.013801801018416882
+Epoch: 600 | Train loss: 0.0012645035749301314 | Test loss: 0.013801801018416882
+Epoch: 700 | Train loss: 0.0012645035749301314 | Test loss: 0.013801801018416882
+Epoch: 800 | Train loss: 0.0012645035749301314 | Test loss: 0.013801801018416882
+Epoch: 900 | Train loss: 0.0012645035749301314 | Test loss: 0.013801801018416882
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> Due to the random nature of machine learning, you will likely get slightly different results (different loss and prediction values) depending on whether your model was trained on CPU or GPU. This is true even if you use the same random seed on either device. If the difference is large, you may want to look for errors, however, if it is small (ideally it is), you can ignore it.</p>
+</div></blockquote>
+<p>Let’s check the parameters our model has learned and compare them to the original parameters we hard-coded.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find our model&#39;s learned parameters</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span> <span class="c1"># pprint = pretty print, see: https://docs.python.org/3/library/pprint.html </span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The model learned the following values for weights and bias:&quot;</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">model_1</span><span class="o">.</span><span class="n">state_dict</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">And the original values for weights and bias are:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;weights: </span><span class="si">{</span><span class="n">weight</span><span class="si">}</span><span class="s2">, bias: </span><span class="si">{</span><span class="n">bias</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The model learned the following values for weights and bias:
+OrderedDict([(&#39;linear_layer.weight&#39;, tensor([[0.6968]], device=&#39;cuda:0&#39;)),
+             (&#39;linear_layer.bias&#39;, tensor([0.3025], device=&#39;cuda:0&#39;))])
+
+And the original values for weights and bias are:
+weights: 0.7, bias: 0.3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="making-predictions">
+<h3>Making predictions<a class="headerlink" href="#making-predictions" title="Link to this heading">#</a></h3>
+<p>Now we’ve got a trained model, let’s turn on it’s evaluation mode and make some predictions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Turn model into evaluation mode</span>
+<span class="n">model_1</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+<span class="c1"># Make predictions on the test data</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">inference_mode</span><span class="p">():</span>
+    <span class="n">y_preds</span> <span class="o">=</span> <span class="n">model_1</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">y_preds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[0.8600],
+        [0.8739],
+        [0.8878],
+        [0.9018],
+        [0.9157],
+        [0.9296],
+        [0.9436],
+        [0.9575],
+        [0.9714],
+        [0.9854]], device=&#39;cuda:0&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you’re making predictions with data on the GPU, you might notice the output of the above has <code class="docutils literal notranslate"><span class="pre">device='cuda:0'</span></code> towards the end. That means the data is on CUDA device 0 (the first GPU your system has access to due to zero-indexing), if you end up using multiple GPUs in the future, this number may be higher.</p>
+<p>Now let’s plot our model’s predictions.</p>
+<blockquote>
+<div><p><strong>Note:</strong> Many data science libraries such as pandas, matplotlib and NumPy aren’t capable of using data that is stored on GPU. So you might run into some issues when trying to use a function from one of these libraries with tensor data not stored on the CPU. To fix this, you can call <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.Tensor.cpu.html"><code class="docutils literal notranslate"><span class="pre">.cpu()</span></code></a> on your target tensor to return a copy of your target tensor on the CPU.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot_predictions(predictions=y_preds) # -&gt; won&#39;t work... data not on CPU</span>
+
+<span class="c1"># Put data on the CPU and plot it</span>
+<span class="n">plot_predictions</span><span class="p">(</span><span class="n">predictions</span><span class="o">=</span><span class="n">y_preds</span><span class="o">.</span><span class="n">cpu</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/4731fdc8c8b617e6871818639907df8cb69e07f1e45fc98db21e92034c141d66.png" src="../../../_images/4731fdc8c8b617e6871818639907df8cb69e07f1e45fc98db21e92034c141d66.png" />
+</div>
+</div>
+<p>Red dots, they line up almost perfectly with the green dots. I guess the extra epochs helped.</p>
+</section>
+<section id="saving-and-loading-a-model">
+<h3>Saving and loading a model<a class="headerlink" href="#saving-and-loading-a-model" title="Link to this heading">#</a></h3>
+<p>We’re happy with our models predictions, so let’s save it to file so it can be used later.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="c1"># 1. Create models directory </span>
+<span class="n">MODEL_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;models&quot;</span><span class="p">)</span>
+<span class="n">MODEL_PATH</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 2. Create model save path </span>
+<span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s2">&quot;01_pytorch_workflow_model_1.pth&quot;</span>
+<span class="n">MODEL_SAVE_PATH</span> <span class="o">=</span> <span class="n">MODEL_PATH</span> <span class="o">/</span> <span class="n">MODEL_NAME</span>
+
+<span class="c1"># 3. Save the model state dict </span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saving model to: </span><span class="si">{</span><span class="n">MODEL_SAVE_PATH</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="n">model_1</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="c1"># only saving the state_dict() only saves the models learned parameters</span>
+           <span class="n">f</span><span class="o">=</span><span class="n">MODEL_SAVE_PATH</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Saving model to: models/01_pytorch_workflow_model_1.pth
+</pre></div>
+</div>
+</div>
+</div>
+<p>And just to make sure everything worked well, let’s load it back in.</p>
+<p>We’ll:</p>
+<ul class="simple">
+<li><p>Create a new instance of the <code class="docutils literal notranslate"><span class="pre">LinearRegressionModelV2()</span></code> class</p></li>
+<li><p>Load in the model state dict using <code class="docutils literal notranslate"><span class="pre">torch.nn.Module.load_state_dict()</span></code></p></li>
+<li><p>Send the new instance of the model to the target device (to ensure our code is device-agnostic)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Instantiate a fresh instance of LinearRegressionModelV2</span>
+<span class="n">loaded_model_1</span> <span class="o">=</span> <span class="n">LinearRegressionModelV2</span><span class="p">()</span>
+
+<span class="c1"># Load model state dict </span>
+<span class="n">loaded_model_1</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">MODEL_SAVE_PATH</span><span class="p">))</span>
+
+<span class="c1"># Put model to target device (if your data is on GPU, model will have to be on GPU to make predictions)</span>
+<span class="n">loaded_model_1</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded model:</span><span class="se">\n</span><span class="si">{</span><span class="n">loaded_model_1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model on device:</span><span class="se">\n</span><span class="si">{</span><span class="nb">next</span><span class="p">(</span><span class="n">loaded_model_1</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span><span class="o">.</span><span class="n">device</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loaded model:
+LinearRegressionModelV2(
+  (linear_layer): Linear(in_features=1, out_features=1, bias=True)
+)
+Model on device:
+cuda:0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can evaluate the loaded model to see if its predictions line up with the predictions made prior to saving.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluate loaded model</span>
+<span class="n">loaded_model_1</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">inference_mode</span><span class="p">():</span>
+    <span class="n">loaded_model_1_preds</span> <span class="o">=</span> <span class="n">loaded_model_1</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">y_preds</span> <span class="o">==</span> <span class="n">loaded_model_1_preds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[True],
+        [True],
+        [True],
+        [True],
+        [True],
+        [True],
+        [True],
+        [True],
+        [True],
+        [True]], device=&#39;cuda:0&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="extra-learning">
+<h2>Extra learning<a class="headerlink" href="#extra-learning" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Read <a class="reference external" href="https://pytorch.org/tutorials/beginner/nn_tutorial.html">What is <code class="docutils literal notranslate"><span class="pre">torch.nn</span></code>, really?</a> by Jeremy Howard for a deeper understanding of how one of the most important modules in PyTorch works.</p></li>
+<li><p>Spend 10-minutes scrolling through and checking out the <a class="reference external" href="https://pytorch.org/tutorials/beginner/ptcheat.html">PyTorch documentation cheatsheet</a> for all of the different PyTorch modules you might come across.</p></li>
+<li><p>Spend 10-minutes reading the <a class="reference external" href="https://pytorch.org/tutorials/beginner/saving_loading_models.html">loading and saving documentation on the PyTorch website</a> to become more familiar with the different saving and loading options in PyTorch.</p></li>
+<li><p>Spend 1-2 hours read/watching the following for an overview of the internals of gradient descent and backpropagation, the two main algorithms that have been working in the background to help our model learn.</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Gradient_descent">Wikipedia page for gradient descent</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/gradient-descent-algorithm-a-deep-dive-cf04e8115f21">Gradient Descent Algorithm — a deep dive</a> by Robert Kwiatkowski</p></li>
+<li><p><a class="reference external" href="https://youtu.be/IHZwWFHWa-w">Gradient descent, how neural networks learn video</a> by 3Blue1Brown</p></li>
+<li><p><a class="reference external" href="https://youtu.be/Ilg3gGewQ5U">What is backpropagation really doing?</a> video by 3Blue1Brown</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Backpropagation">Backpropagation Wikipedia Page</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/tools/pytorch"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="00_pytorch_fundamentals.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">PyTorch Fundamentals</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_pytorch_classification.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">PyTorch Neural Network Classification</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-were-going-to-cover">What we’re going to cover</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparing-and-loading">Data (preparing and loading)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#split-data-into-training-and-test-sets">Split data into training and test sets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-model">Build model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-model-building-essentials">PyTorch model building essentials</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-the-contents-of-a-pytorch-model">Checking the contents of a PyTorch model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-predictions-using-torch-inference-mode">Making predictions using <code class="docutils literal notranslate"><span class="pre">torch.inference_mode()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model">Train the model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-loss-function-and-optimizer-in-pytorch">Creating a loss function and optimizer in PyTorch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-an-optimization-loop-in-pytorch">Creating an optimization loop in PyTorch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-training-loop">PyTorch training loop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-testing-loop">PyTorch testing loop</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-predictions-with-a-trained-pytorch-model-inference">Making predictions with a trained PyTorch model (inference)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-and-loading-a-pytorch-model">Saving and loading a PyTorch model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-a-pytorch-models-state-dict">Saving a PyTorch model’s <code class="docutils literal notranslate"><span class="pre">state_dict()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-a-saved-pytorch-models-state-dict">Loading a saved PyTorch model’s <code class="docutils literal notranslate"><span class="pre">state_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-all-together">Putting it all together</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-pytorch-linear-model">Building a PyTorch linear model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-predictions">Making predictions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saving-and-loading-a-model">Saving and loading a model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-learning">Extra learning</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
