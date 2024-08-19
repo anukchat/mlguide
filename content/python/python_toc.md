@@ -54,38 +54,38 @@ The bytecode is sent to the Python Virtual Machine (PVM), which is a part of the
 </div>
 
 <div style="background-color: #f9f9f9; border-radius: 8px; padding: 20px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); text-align: center; display: flex; flex-direction: column; justify-content: center;">
-<h3>2️⃣<br/><a href="/content/python/1_installation.ipynb">Syntax & Semantics</a></h3>
+<h3>2️⃣<br/><a href="/content/python/2_syntax_and_semantics.ipynb">Syntax & Semantics</a></h3>
 </div>
 
 <div style="background-color: #f9f9f9; border-radius: 8px; padding: 20px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); text-align: center; display: flex; flex-direction: column; justify-content: center;">
-<h3>3️⃣<br/><a href="/content/python/1_installation.ipynb">Functions & Modules</a></h3>
+<h3>3️⃣<br/><a href="/content/python/3_functions_and_modules.ipynb">Functions & Modules</a></h3>
 <p></p>
 </div>
 
 <div style="background-color: #f9f9f9; border-radius: 8px; padding: 20px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); text-align: center; display: flex; flex-direction: column; justify-content: center;">
-<h3>4️⃣<br/><a href="/content/python/1_installation.ipynb">Error Handling</a></h3>
+<h3>4️⃣<br/><a href="/content/python/4_error_handling.ipynb">Error Handling</a></h3>
 </div>
 
 <div style="background-color: #f9f9f9; border-radius: 8px; padding: 20px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); text-align: center; display: flex; flex-direction: column; justify-content: center;">
-<h3>5️⃣<br/><a href="/content/python/1_installation.ipynb">Data Structures</a></h3>
+<h3>5️⃣<br/><a href="/content/python/5_data_structures.ipynb">Data Structures</a></h3>
 <p></p>
 </div>
 
 <div style="background-color: #f9f9f9; border-radius: 8px; padding: 20px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); text-align: center; display: flex; flex-direction: column; justify-content: center;">
-<h3>6️⃣<br/><a href="/content/python/1_installation.ipynb">OOPs</a></h3>
+<h3>6️⃣<br/><a href="/content/python/6_object_oriented.ipynb">OOPs</a></h3>
 </div>
 
 <div style="background-color: #f9f9f9; border-radius: 8px; padding: 20px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); text-align: center; display: flex; flex-direction: column; justify-content: center;">
-<h3>7️⃣<br/><a href="/content/python/1_installation.ipynb">Functional Programming</a></h3>
+<h3>7️⃣<br/><a href="/content/python/7_functional_programming.ipynb">Functional Programming</a></h3>
 <p></p>
 </div>
 
 <div style="background-color: #f9f9f9; border-radius: 8px; padding: 20px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); text-align: center; display: flex; flex-direction: column; justify-content: center;">
-<h3>8️⃣ <br/><a href="/content/python/1_installation.ipynb">Advanced Concepts</a></h3>
+<h3>8️⃣ <br/><a href="/content/python/8_advanced.ipynb">Advanced Concepts</a></h3>
 </div>
 
 <div style="background-color: #f9f9f9; border-radius: 8px; padding: 20px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); text-align: center; display: flex; flex-direction: column; justify-content: center;">
-<h3>9️⃣<br/><a href="/content/python/1_installation.ipynb">Examples</a></h3>
+<h3>9️⃣<br/><a href="/content/python/9_projects.ipynb">Examples</a></h3>
 </div>
 
 </div>
