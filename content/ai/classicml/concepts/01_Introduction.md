@@ -16,6 +16,28 @@ We call this process "intelligent behavior." When we create computer programs th
 
 **Machine learning** is a subfield of AI that focuses on building algorithms that can learn patterns from data and make predictions or decisions without being explicitly programmed.
 
+**Machine learning is different than traditional programming:**
+
+- Instead of writing explicit instructions for a computer to follow, we provide data and examples to train a model to make predictions or decisions.
+- The model learns the patterns in the data and makes predictions or decisions based on those patterns.
+
+**How does the model learn?**
+
+- First, we understand the data and see patterns between features and target, we create a hypothesis (an educated guess) about the relationship between features and target. (Example: We may hypothesize that the relationship between features and target is linear, which means that the target is a straight line.)
+  
+- To test this hypothesis, we fit the model with a set of data (training data) for which we already know the outcome. (Example: We may use a dataset that includes the number of hours studied and the exam score to train the model.)
+  
+- The way we do fitting is by something called as **Gradient Descent** algorithm, 
+  - Which basically starts with some random values of parameters 
+  - Then take up input values and calculate the initial output using the hypothesis we created, 
+  - Compare it with the desired output (loss) 
+  - Then adjust the parameters to bring the model output closer to the desired output
+  - Repeat this process for multiple iterations until the model converges to the best values of parameters that fit the data (Means the loss between the predicted output and desired output goes to minimum).
+  
+- Once the model is trained, we can use it to make predictions on new data. 
+- We keep testing the model on the data to see if it is performing well. 
+- We keep repeating the process until we have a model that is performing well on the data.
+
 ## AI, ML, Deep Learning
 
 ![AI, ML, deep learning, data science](../images/ai-ml-ds.png)
@@ -41,7 +63,7 @@ The process of creating machine learning (ML) models involves these key steps:
    - Collecting data from reliable sources
    - Cleaning and normalizing the data
    - Splitting data into training and testing sets
-3. **Feature Engineering**: Create new features from the existing features or remove features that are not relevant   to improve the performance of the model.
+3. **Feature Engineering**: Create new features from the existing features or remove features that are not relevant to improve the performance of the model.
 4. **Choose a model**: Select an appropriate ML algorithm based on your problem and data.
 5. **Train the model**: Use training data to teach the model patterns.
 5. **Evaluate**: Test the model's performance on unseen data.
@@ -52,10 +74,9 @@ The process of creating machine learning (ML) models involves these key steps:
 
 
 #### Define the problem
+Define the problem you want to solve with machine learning in detail. Consult domain experts, customers, and stakeholders to understand the problem and define success criteria in terms of important **customer metrics** (e.g., time savings, cost savings, revenue increase, customer satisfaction).
 
-It's important to define the problem you want to solve with machine learning in as much detail as possible, collect as much understaning as you can, talk with domain experts , customers, stakeholders and define the success criteria in terms of **customer metrics** that are important to them (It can be time savings, cost savings, revenue increase, customer satisfaction, etc). 
-
-Based on the understanding of the problem, you define what type of machine learning problem you are dealing with. Is it a classification problem, regression problem, clustering problem or anomaly detection problem.
+Determine the type of machine learning problem you're dealing with: classification, regression, clustering, or anomaly detection.
 
 1. **Classification**: Predict a discrete label or category from  fixed a set of categories. Example: Email spam filter, predicting whether an email is spam or not.
 2. **Regression**: Predict a continuous numerical value. Example: Predicting the price of a house based on its features.
@@ -98,25 +119,57 @@ Then you need to define the **Machine Learning Metric** that you will use to eva
 
 #### Collect data
 
-You need to collect data that is relevant to the problem you are trying to solve. You need to figure out how much data you need, what format it should be in, what the data quality is like, if the data is structured or unstructured, if the data is time-series or not and what all are the sources of the data, are they reliable, are they biased, are they diverse, are they representative of the real world.
+👉 Collect data relevant to the problem you're trying to solve
 
-You might need to write scripts for data collection from various sources. 
+👉 Determine the amount of data needed
+
+👉 Assess data quality
+
+👉 Determine if the data is structured or unstructured
+
+👉 Identify data sources and evaluate their:
+- Reliability
+- Potential biases
+- Diversity
+- Representativeness of the real world
 
 #### Clean data
 
-Real world data is messy. You need to clean the data to remove the duplicates, handle the missing values, normalize the data, convert the data into a format that is suitable for the machine learning model you are using. Represent the data in a way that the machine learning model can understand it.
+Real world data is messy. To clean the data:
 
-Here you would also do some Exploratory Data Analysis to understand the data better. You would look for outliers, missing values, duplicates, etc. 
+👉 Remove duplicates
 
-You would also want to normalize the data, convert the data into a format that is suitable for the machine learning model you are using. 
+👉 Handle missing values
+
+👉 Normalize the data
+
+👉 Convert data into a suitable format for the machine learning model
+
+👉 Represent data in a way the model can understand
+
+Perform Exploratory Data Analysis (EDA) to better understand the data:
+
+👉 Look for outliers
+
+👉 Identify missing values
+
+👉 Detect duplicates
+
+Additional data preparation steps:
+
+👉 Normalize the data
+
+👉 Convert data into a format suitable for the chosen machine learning model
 
 #### Feature Engineering
 
 Feature engineering is the process of selecting and transforming features (variables) to improve the performance of your machine learning model.
 
-- Create new features from the existing features to improve the performance of the model.
-- Drop the features that are not relevant.
-- Scale the features, convert the features into a format that is suitable for the machine learning model you are using.
+👉 Create new features from the existing features to improve the performance of the model.
+
+👉 Drop the features that are not relevant.
+
+👉 Scale the features, convert the features into a format that is suitable for the machine learning model you are using.
 
 > **Note**: Feature engineering is an iterative process. You would do it multiple times to get the best features for the model, depending on the performance of the model on the validation data.
 
@@ -125,8 +178,9 @@ Feature engineering is the process of selecting and transforming features (varia
 
 Now is the time to:
 
-1. Have a dataset that is representative of the real world, that model is going to see.
-2. Have a dataset that can validate the model's performance.
+👉 Have a dataset that is representative of the real world, that model is going to see.
+
+👉 Have a dataset that can validate the model's performance.
 
 To do this, you need to split the data into training and testing sets. You need to make sure that the data is split in a way that the model has not seen the testing data before.
 
@@ -138,26 +192,38 @@ Depending the type of problem, you would start with a simple model and then keep
 
 **Example**:
 
-1. For a classification problem, you would start with a simple model like **logistic regression.**  
-2. For a regression problem, you would start with a simple model like **linear regression**.
-3. For a clustering problem, you would start with a simple model like **k-means**.
-4. For an anomaly detection problem, you would start with a simple model like **isolation forest**.
+👉 For a classification problem, you would start with a simple model like **logistic regression.**  
+
+👉 For a regression problem, you would start with a simple model like **linear regression**.
+
+👉 For a clustering problem, you would start with a simple model like **k-means**.
+
+👉 For an anomaly detection problem, you would start with a simple model like **isolation forest**.
 
 To understand the model to start with, you would want to visualize the data distribution and correlations between the features. What patterns are being shown by the data (Ex: Are they linear or non-linear ?), based on that you want to select your hypothesis and then choose the appropriate model to start with.
 
->> **Note** This is again an iterative process. You would start with a simple model and then keep adding complexity to the model as needed.
+> **Note** This is again an iterative process. You would start with a simple model and then keep adding complexity to the model as needed.
 
 #### Train the model
 
-Once you have selected the model, you need to train the model on the training data. This is the process of finding the best parameters for the model.
+👉 Train the model on the training data
+  - This process finds the best parameters for the model
 
-Here, you would also want to play around with the hyperparameters of the model to get the best performance out of the model, play with feature selection, feature engineering. 
+👉 Optimize model performance:
+  - Experiment with hyperparameters
+  - Play with feature selection and engineering  
+  - Try different models to find the best performer
 
-Try out different models and see which one performs the best, sometimes you would just group multiple models together to get the best performance out of the model (This is called Ensemble learning).
+👉 Consider ensemble learning
+  - Group multiple models together for improved performance
+
+👉 Iterate through the process:
+  - Continuously refine the model based on performance metrics
+  - Adjust parameters, features, or model selection as needed
 
 #### Evaluate the model
 
-You need to evaluate the model's performance on the testing data. Make sure that the model is not overfitting or underfitting. You need to look at the metrics like accuracy, precision, recall, F1 score, etc. You need to keep monitoring the metrics on the validation data as you are training the model.
+Evaluate the model's performance on the testing data. Make sure that the model is not overfitting or underfitting. Look at the metrics like accuracy, precision, recall, F1 score, etc and keep monitoring the metrics on the validation data as you are training the model.
 
 - **Overfitting**: When a model performs too well on training data but poorly on new data.
 - **Underfitting**: When a model performs poorly on both training and new data.
@@ -169,7 +235,6 @@ This is the optimization step, you would look at model metrics on training and t
 #### Predict
 
 Once you are satisfied with the metrics and has achieved the target performance, you can use the model to make predictions on new data.
-
 
 #### Deployment
 
