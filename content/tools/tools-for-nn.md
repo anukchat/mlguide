@@ -1,1 +1,0 @@
-# Tools required to work with neural networks

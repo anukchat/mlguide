@@ -85,8 +85,12 @@ The bytecode is sent to the Python Virtual Machine (PVM), which is a part of the
 </div>
 
 <div style="background-color: #f9f9f9; border-radius: 8px; padding: 20px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); text-align: center; display: flex; flex-direction: column; justify-content: center;">
-<h3>9️⃣<br/><a href="/content/python/9_projects.ipynb">Examples</a></h3>
+<h3>9️⃣<br/><a href="/content/python/conceptual_topics.ipynb">Interpreter vs Compiler</a></h3>
 </div>
 
+<div style="background-color: #f9f9f9; border-radius: 8px; padding: 20px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); text-align: center; display: flex; flex-direction: column; justify-content: center;">
+<h3>9️⃣<br/><a href="/content/python/excercises.ipynb">Exercises</a></h3>
+</div>
+</div>
 </div>
 
