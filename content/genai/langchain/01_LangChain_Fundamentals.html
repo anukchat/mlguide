@@ -1,0 +1,2167 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>LangChain Cookbook 👨‍🍳👩‍🍳 &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/genai/langchain/01_LangChain_Fundamentals';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/genai/langchain/01_LangChain_Fundamentals.html" />
+    <link rel="icon" href="../../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳" href="02_LangChain_Use_Cases.html" />
+    <link rel="prev" title="Table of Contents" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/3_functions_and_modules.html">Functions &amp; Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/4_Object_Oriented.html">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/8_advanced.html">Advanced Concepts</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ai/Introduction_to_ml.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/000_Data_Exploration.html">Exploratory Data Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/001_Data_Preparation.html">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/003_Classification.html">Classfication</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/005_Evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/006_Advanced.html">K-Fold Cross Validation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ai/neural/neural_toc.html">Neural Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/neural/concepts/001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/neural/concepts/002_Backpropogation.html">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/neural/concepts/003_Activations.html">Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/neural/concepts/004_Optimization.html">Optimizations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ai/neural/concepts/pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ai/neural/concepts/pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ai/neural/concepts/pytorch/01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ai/neural/concepts/pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ai/neural/concepts/pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ai/neural/concepts/pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ai/neural/concepts/pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../introduction.html">Generative AI</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../concepts/transformers/01_transformers_from_scratch.html">Transformers</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="langchain_toc.html">Langchain</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/courses/courses_toc.html">Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/genai/langchain/01_LangChain_Fundamentals.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/genai/langchain/01_LangChain_Fundamentals.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/genai/langchain/01_LangChain_Fundamentals.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>LangChain Cookbook 👨‍🍳👩‍🍳</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">LangChain Cookbook 👨‍🍳👩‍🍳</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-langchain"><strong>What is LangChain?</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-langchain"><strong>Why LangChain?</strong></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain-components">LangChain Components</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-nuts-and-bolts-of-working-with-large-language-models-llms">Schema - Nuts and Bolts of working with Large Language Models (LLMs)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text"><strong>Text</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chat-messages"><strong>Chat Messages</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documents"><strong>Documents</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models-the-interface-to-the-ai-brains">Models - The interface to the AI brains</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#language-model"><strong>Language Model</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chat-model"><strong>Chat Model</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-calling-models">Function Calling Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-embedding-model"><strong>Text Embedding Model</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompts-text-generally-used-as-instructions-to-your-model">Prompts - Text generally used as instructions to your model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt"><strong>Prompt</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template"><strong>Prompt Template</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-selectors"><strong>Example Selectors</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-parsers-method-1-prompt-instructions-string-parsing"><strong>Output Parsers Method 1: Prompt Instructions &amp; String Parsing</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-parsers-method-2-openai-fuctions"><strong>Output Parsers Method 2: OpenAI Fuctions</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexes-structuring-documents-to-llms-can-work-with-them">Indexes - Structuring documents to LLMs can work with them</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#document-loaders"><strong>Document Loaders</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-splitters"><strong>Text Splitters</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retrievers"><strong>Retrievers</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorstores"><strong>VectorStores</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory">Memory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chat-message-history">Chat Message History</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chains">Chains ⛓️⛓️⛓️</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-sequential-chains">1. Simple Sequential Chains</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summarization-chain">2. Summarization Chain</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agents">Agents 🤖🤖</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Agents</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tools">Tools</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toolkit">Toolkit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="langchain-cookbook">
+<h1>LangChain Cookbook 👨‍🍳👩‍🍳<a class="headerlink" href="#langchain-cookbook" title="Link to this heading">#</a></h1>
+<p><em>This cookbook is based off the <a class="reference external" href="https://docs.langchain.com/docs/">LangChain Conceptual Documentation</a></em></p>
+<p><strong>Links:</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.langchain.com/docs/">LC Conceptual Documentation</a></p></li>
+<li><p><a class="reference external" href="https://python.langchain.com/en/latest/">LC Python Documentation</a></p></li>
+<li><p><a class="reference external" href="https://js.langchain.com/docs/">LC Javascript/Typescript Documentation</a></p></li>
+<li><p><a class="reference external" href="https://discord.gg/6adMQxSpJS">LC Discord</a></p></li>
+<li><p><a class="reference external" href="https://langchain.com/">www.langchain.com</a></p></li>
+<li><p><a class="reference external" href="https://twitter.com/LangChainAI">LC Twitter</a></p></li>
+</ul>
+<section id="what-is-langchain">
+<h2><strong>What is LangChain?</strong><a class="headerlink" href="#what-is-langchain" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p>LangChain is a framework for developing applications powered by language models.</p>
+</div></blockquote>
+<p><strong>~~TL~~DR</strong>: LangChain makes the complicated parts of working &amp; building with AI models easier. It helps do this in two ways:</p>
+<ol class="arabic simple">
+<li><p><strong>Integration</strong> - Bring external data, such as your files, other applications, and api data, to your LLMs</p></li>
+<li><p><strong>Agency</strong> - Allow your LLMs to interact with it’s environment via decision making. Use LLMs to help decide which action to take next</p></li>
+</ol>
+</section>
+<section id="why-langchain">
+<h2><strong>Why LangChain?</strong><a class="headerlink" href="#why-langchain" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Components</strong> - LangChain makes it easy to swap out abstractions and components necessary to work with language models.</p></li>
+<li><p><strong>Customized Chains</strong> - LangChain provides out of the box support for using and customizing ‘chains’ - a series of actions strung together.</p></li>
+<li><p><strong>Speed 🚢</strong> - This team ships insanely fast. You’ll be up to date with the latest LLM features.</p></li>
+<li><p><strong>Community 👥</strong> - Wonderful discord and community support, meet ups, hackathons, etc.</p></li>
+</ol>
+<p>Though LLMs can be straightforward (text-in, text-out) you’ll quickly run into friction points that LangChain helps with once you develop more complicated applications.</p>
+<p><em>Note: This cookbook will not cover all aspects of LangChain. It’s contents have been curated to get you to building &amp; impact as quick as possible. For more, please check out <a class="reference external" href="https://docs.langchain.com/docs/">LangChain Conceptual Documentation</a></em></p>
+<p>You’ll need an OpenAI api key to follow this tutorial. You can have it as an environement variable, in an .env file where this jupyter notebook lives, or insert it below where ‘YourAPIKey’ is. Have if you have questions on this, put these instructions into <a class="reference external" href="https://chat.openai.com/">ChatGPT</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unzip data folder</span>
+
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s1">&#39;data.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+    <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="n">openai_api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;OPENAI_API_KEY&#39;</span><span class="p">,</span> <span class="s1">&#39;YourAPIKey&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="langchain-components">
+<h1>LangChain Components<a class="headerlink" href="#langchain-components" title="Link to this heading">#</a></h1>
+<section id="schema-nuts-and-bolts-of-working-with-large-language-models-llms">
+<h2>Schema - Nuts and Bolts of working with Large Language Models (LLMs)<a class="headerlink" href="#schema-nuts-and-bolts-of-working-with-large-language-models-llms" title="Link to this heading">#</a></h2>
+<section id="text">
+<h3><strong>Text</strong><a class="headerlink" href="#text" title="Link to this heading">#</a></h3>
+<p>The natural language way to interact with LLMs</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># You&#39;ll be working with simple strings (that&#39;ll soon grow in complexity!)</span>
+<span class="n">my_text</span> <span class="o">=</span> <span class="s2">&quot;What day comes after Friday?&quot;</span>
+<span class="n">my_text</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;What day comes after Friday?&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="chat-messages">
+<h3><strong>Chat Messages</strong><a class="headerlink" href="#chat-messages" title="Link to this heading">#</a></h3>
+<p>Like text, but specified with a message type (System, Human, AI)</p>
+<ul class="simple">
+<li><p><strong>System</strong> - Helpful background context that tell the AI what to do</p></li>
+<li><p><strong>Human</strong> - Messages that are intented to represent the user</p></li>
+<li><p><strong>AI</strong> - Messages that show what the AI responded with</p></li>
+</ul>
+<p>For more, see OpenAI’s <a class="reference external" href="https://platform.openai.com/docs/guides/chat/introduction">documentation</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="nn">langchain.schema</span> <span class="kn">import</span> <span class="n">HumanMessage</span><span class="p">,</span> <span class="n">SystemMessage</span><span class="p">,</span> <span class="n">AIMessage</span>
+
+<span class="c1"># This it the language model we&#39;ll use. We&#39;ll talk about what we&#39;re doing below in the next section</span>
+<span class="n">chat</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mf">.7</span><span class="p">,</span> <span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s create a few messages that simulate a chat experience with a bot</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chat</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">SystemMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;You are a nice AI bot that helps a user figure out what to eat in one short sentence&quot;</span><span class="p">),</span>
+        <span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;I like tomatoes, what should I eat?&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AIMessage(content=&#39;You could try a caprese salad with fresh tomatoes, mozzarella, and basil.&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also pass more chat history w/ responses from the AI</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chat</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">SystemMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;You are a nice AI bot that helps a user figure out where to travel in one short sentence&quot;</span><span class="p">),</span>
+        <span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;I like the beaches where should I go?&quot;</span><span class="p">),</span>
+        <span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;You should go to Nice, France&quot;</span><span class="p">),</span>
+        <span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;What else should I do when I&#39;m there?&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AIMessage(content=&#39;You should also explore the charming streets of the Old Town and indulge in delicious French cuisine.&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also exclude the system message if you want</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chat</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;What day comes after Thursday?&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AIMessage(content=&#39;Friday&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="documents">
+<h3><strong>Documents</strong><a class="headerlink" href="#documents" title="Link to this heading">#</a></h3>
+<p>An object that holds a piece of text and metadata (more information about that text)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.schema</span> <span class="kn">import</span> <span class="n">Document</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Document</span><span class="p">(</span><span class="n">page_content</span><span class="o">=</span><span class="s2">&quot;This is my document. It is full of text that I&#39;ve gathered from other places&quot;</span><span class="p">,</span>
+         <span class="n">metadata</span><span class="o">=</span><span class="p">{</span>
+             <span class="s1">&#39;my_document_id&#39;</span> <span class="p">:</span> <span class="mi">234234</span><span class="p">,</span>
+             <span class="s1">&#39;my_document_source&#39;</span> <span class="p">:</span> <span class="s2">&quot;The LangChain Papers&quot;</span><span class="p">,</span>
+             <span class="s1">&#39;my_document_create_time&#39;</span> <span class="p">:</span> <span class="mi">1680013019</span>
+         <span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Document(page_content=&quot;This is my document. It is full of text that I&#39;ve gathered from other places&quot;, metadata={&#39;my_document_id&#39;: 234234, &#39;my_document_source&#39;: &#39;The LangChain Papers&#39;, &#39;my_document_create_time&#39;: 1680013019})
+</pre></div>
+</div>
+</div>
+</div>
+<p>But you don’t have to include metadata if you don’t want to</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Document</span><span class="p">(</span><span class="n">page_content</span><span class="o">=</span><span class="s2">&quot;This is my document. It is full of text that I&#39;ve gathered from other places&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Document(page_content=&quot;This is my document. It is full of text that I&#39;ve gathered from other places&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="models-the-interface-to-the-ai-brains">
+<h2>Models - The interface to the AI brains<a class="headerlink" href="#models-the-interface-to-the-ai-brains" title="Link to this heading">#</a></h2>
+<section id="language-model">
+<h3><strong>Language Model</strong><a class="headerlink" href="#language-model" title="Link to this heading">#</a></h3>
+<p>A model that does text in ➡️ text out!</p>
+<p><em>Check out how I changed the model I was using from the default one to ada-001 (a very cheap, low performing model). See more models <a class="reference external" href="https://platform.openai.com/docs/models">here</a></em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;text-ada-001&quot;</span><span class="p">,</span> <span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm</span><span class="p">(</span><span class="s2">&quot;What day comes after Friday?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\n\nSaturday&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="chat-model">
+<h3><strong>Chat Model</strong><a class="headerlink" href="#chat-model" title="Link to this heading">#</a></h3>
+<p>A model that takes a series of messages and returns a message output</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="nn">langchain.schema</span> <span class="kn">import</span> <span class="n">HumanMessage</span><span class="p">,</span> <span class="n">SystemMessage</span><span class="p">,</span> <span class="n">AIMessage</span>
+
+<span class="n">chat</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chat</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">SystemMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;You are an unhelpful AI bot that makes a joke at whatever the user says&quot;</span><span class="p">),</span>
+        <span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;I would like to go to New York, how should I do this?&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AIMessage(content=&#39;Why did the math book go to New York? Because it had too many problems and needed a change of scenery!&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="function-calling-models">
+<h3>Function Calling Models<a class="headerlink" href="#function-calling-models" title="Link to this heading">#</a></h3>
+<p><a class="reference external" href="https://openai.com/blog/function-calling-and-other-api-updates">Function calling models</a> are similar to Chat Models but with a little extra flavor. They are fine tuned to give structured data outputs.</p>
+<p>This comes in handy when you’re making an API call to an external service or doing extraction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chat</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;gpt-3.5-turbo-0613&#39;</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span><span class="p">)</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">chat</span><span class="p">(</span><span class="n">messages</span><span class="o">=</span>
+     <span class="p">[</span>
+         <span class="n">SystemMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;You are an helpful AI bot&quot;</span><span class="p">),</span>
+         <span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;What’s the weather like in Boston right now?&quot;</span><span class="p">)</span>
+     <span class="p">],</span>
+     <span class="n">functions</span><span class="o">=</span><span class="p">[{</span>
+         <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;get_current_weather&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Get the current weather in a given location&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
+             <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;object&quot;</span><span class="p">,</span>
+             <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+                 <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="p">{</span>
+                     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The city and state, e.g. San Francisco, CA&quot;</span>
+                 <span class="p">},</span>
+                 <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="p">{</span>
+                     <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;enum&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;celsius&quot;</span><span class="p">,</span> <span class="s2">&quot;fahrenheit&quot;</span><span class="p">]</span>
+                 <span class="p">}</span>
+             <span class="p">},</span>
+             <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;location&quot;</span><span class="p">]</span>
+         <span class="p">}</span>
+     <span class="p">}</span>
+     <span class="p">]</span>
+<span class="p">)</span>
+<span class="n">output</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AIMessage(content=&#39;&#39;, additional_kwargs={&#39;function_call&#39;: {&#39;name&#39;: &#39;get_current_weather&#39;, &#39;arguments&#39;: &#39;{\n  &quot;location&quot;: &quot;Boston, MA&quot;\n}&#39;}})
+</pre></div>
+</div>
+</div>
+</div>
+<p>See the extra <code class="docutils literal notranslate"><span class="pre">additional_kwargs</span></code> that is passed back to us? We can take that and pass it to an external API to get data. It saves the hassle of doing output parsing.</p>
+</section>
+<section id="text-embedding-model">
+<h3><strong>Text Embedding Model</strong><a class="headerlink" href="#text-embedding-model" title="Link to this heading">#</a></h3>
+<p>Change your text into a vector (a series of numbers that hold the semantic ‘meaning’ of your text). Mainly used when comparing two pieces of text together.</p>
+<p><em>BTW: Semantic means ‘relating to meaning in language or logic.’</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.embeddings</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span>
+
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">OpenAIEmbeddings</span><span class="p">(</span><span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Hi! It&#39;s time for the beach&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_embedding</span> <span class="o">=</span> <span class="n">embeddings</span><span class="o">.</span><span class="n">embed_query</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Here&#39;s a sample: </span><span class="si">{</span><span class="n">text_embedding</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Your embedding is length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">text_embedding</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Here&#39;s a sample: [-0.00019600906371495047, -0.0031846734422911363, -0.0007734206914647714, -0.019472001962491232, -0.015092319017854244]...
+Your embedding is length 1536
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="prompts-text-generally-used-as-instructions-to-your-model">
+<h2>Prompts - Text generally used as instructions to your model<a class="headerlink" href="#prompts-text-generally-used-as-instructions-to-your-model" title="Link to this heading">#</a></h2>
+<section id="prompt">
+<h3><strong>Prompt</strong><a class="headerlink" href="#prompt" title="Link to this heading">#</a></h3>
+<p>What you’ll pass to the underlying model</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;text-davinci-003&quot;</span><span class="p">,</span> <span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span><span class="p">)</span>
+
+<span class="c1"># I like to use three double quotation marks for my prompts because it&#39;s easier to read</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Today is Monday, tomorrow is Wednesday.</span>
+
+<span class="s2">What is wrong with that statement?</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">llm</span><span class="p">(</span><span class="n">prompt</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The statement is incorrect. Tomorrow is Tuesday, not Wednesday.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="prompt-template">
+<h3><strong>Prompt Template</strong><a class="headerlink" href="#prompt-template" title="Link to this heading">#</a></h3>
+<p>An object that helps create prompts based on a combination of user input, other non-static information and a fixed template string.</p>
+<p>Think of it as an <a class="reference external" href="https://realpython.com/python-f-strings/">f-string</a> in python but for prompts</p>
+<p><em>Advanced: Check out LangSmithHub(<a class="reference external" href="https://smith.langchain.com/hub">https://smith.langchain.com/hub</a>) for many more communit prompt templates</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span> <span class="nn">langchain</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;text-davinci-003&quot;</span><span class="p">,</span> <span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span><span class="p">)</span>
+
+<span class="c1"># Notice &quot;location&quot; below, that is a placeholder for another value later</span>
+<span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">I really want to travel to </span><span class="si">{location}</span><span class="s2">. What should I do there?</span>
+
+<span class="s2">Respond in one short sentence</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;location&quot;</span><span class="p">],</span>
+    <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">final_prompt</span> <span class="o">=</span> <span class="n">prompt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="s1">&#39;Rome&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final Prompt: </span><span class="si">{</span><span class="n">final_prompt</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;-----------&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LLM Output: </span><span class="si">{</span><span class="n">llm</span><span class="p">(</span><span class="n">final_prompt</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final Prompt: 
+I really want to travel to Rome. What should I do there?
+
+Respond in one short sentence
+
+-----------
+LLM Output: Visit the Colosseum, the Vatican, and the Trevi Fountain.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-selectors">
+<h3><strong>Example Selectors</strong><a class="headerlink" href="#example-selectors" title="Link to this heading">#</a></h3>
+<p>An easy way to select from a series of examples that allow you to dynamic place in-context information into your prompt. Often used when your task is nuanced or you have a large list of examples.</p>
+<p>Check out different types of example selectors <a class="reference external" href="https://python.langchain.com/docs/modules/model_io/prompts/example_selectors/">here</a></p>
+<p>If you want an overview on why examples are important (prompt engineering), check out <a class="reference external" href="https://www.youtube.com/watch?v=dOxUroR57xs">this video</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.prompts.example_selector</span> <span class="kn">import</span> <span class="n">SemanticSimilarityExampleSelector</span>
+<span class="kn">from</span> <span class="nn">langchain.vectorstores</span> <span class="kn">import</span> <span class="n">Chroma</span>
+<span class="kn">from</span> <span class="nn">langchain.embeddings</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span>
+<span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">FewShotPromptTemplate</span><span class="p">,</span> <span class="n">PromptTemplate</span>
+<span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;text-davinci-003&quot;</span><span class="p">,</span> <span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span><span class="p">)</span>
+
+<span class="n">example_prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">],</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;Example Input: </span><span class="si">{input}</span><span class="se">\n</span><span class="s2">Example Output: </span><span class="si">{output}</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Examples of locations that nouns are found</span>
+<span class="n">examples</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;pirate&quot;</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;ship&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;pilot&quot;</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;plane&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;driver&quot;</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;car&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;tree&quot;</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;ground&quot;</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;bird&quot;</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;nest&quot;</span><span class="p">},</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/gregorykamradt/opt/anaconda3/lib/python3.9/site-packages/deeplake/util/check_latest_version.py:32: UserWarning: A newer version of deeplake (3.7.2) is available. It&#39;s recommended that you update to the latest version using `pip install -U deeplake`.
+  warnings.warn(
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SemanticSimilarityExampleSelector will select examples that are similar to your input by semantic meaning</span>
+
+<span class="n">example_selector</span> <span class="o">=</span> <span class="n">SemanticSimilarityExampleSelector</span><span class="o">.</span><span class="n">from_examples</span><span class="p">(</span>
+    <span class="c1"># This is the list of examples available to select from.</span>
+    <span class="n">examples</span><span class="p">,</span> 
+    
+    <span class="c1"># This is the embedding class used to produce embeddings which are used to measure semantic similarity.</span>
+    <span class="n">OpenAIEmbeddings</span><span class="p">(</span><span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span><span class="p">),</span> 
+    
+    <span class="c1"># This is the VectorStore class that is used to store the embeddings and do a similarity search over.</span>
+    <span class="n">Chroma</span><span class="p">,</span> 
+    
+    <span class="c1"># This is the number of examples to produce.</span>
+    <span class="n">k</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">similar_prompt</span> <span class="o">=</span> <span class="n">FewShotPromptTemplate</span><span class="p">(</span>
+    <span class="c1"># The object that will help select examples</span>
+    <span class="n">example_selector</span><span class="o">=</span><span class="n">example_selector</span><span class="p">,</span>
+    
+    <span class="c1"># Your prompt</span>
+    <span class="n">example_prompt</span><span class="o">=</span><span class="n">example_prompt</span><span class="p">,</span>
+    
+    <span class="c1"># Customizations that will be added to the top and bottom of your prompt</span>
+    <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;Give the location an item is usually found in&quot;</span><span class="p">,</span>
+    <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;Input: </span><span class="si">{noun}</span><span class="se">\n</span><span class="s2">Output:&quot;</span><span class="p">,</span>
+    
+    <span class="c1"># What inputs your prompt will receive</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;noun&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select a noun!</span>
+<span class="n">my_noun</span> <span class="o">=</span> <span class="s2">&quot;plant&quot;</span>
+<span class="c1"># my_noun = &quot;student&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">similar_prompt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">noun</span><span class="o">=</span><span class="n">my_noun</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Give the location an item is usually found in
+
+Example Input: tree
+Example Output: ground
+
+Example Input: bird
+Example Output: nest
+
+Input: plant
+Output:
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm</span><span class="p">(</span><span class="n">similar_prompt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">noun</span><span class="o">=</span><span class="n">my_noun</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39; pot&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="output-parsers-method-1-prompt-instructions-string-parsing">
+<h3><strong>Output Parsers Method 1: Prompt Instructions &amp; String Parsing</strong><a class="headerlink" href="#output-parsers-method-1-prompt-instructions-string-parsing" title="Link to this heading">#</a></h3>
+<p>A helpful way to format the output of a model. Usually used for structured output. LangChain has a bunch more output parsers listed on their <a class="reference external" href="https://python.langchain.com/docs/modules/model_io/output_parsers">documentation</a>.</p>
+<p>Two big concepts:</p>
+<p><strong>1. Format Instructions</strong> - A autogenerated prompt that tells the LLM how to format it’s response based off your desired result</p>
+<p><strong>2. Parser</strong> - A method which will extract your model’s text output into a desired structure (usually json)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.output_parsers</span> <span class="kn">import</span> <span class="n">StructuredOutputParser</span><span class="p">,</span> <span class="n">ResponseSchema</span>
+<span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span><span class="p">,</span> <span class="n">HumanMessagePromptTemplate</span>
+<span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;text-davinci-003&quot;</span><span class="p">,</span> <span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># How you would like your response structured. This is basically a fancy prompt template</span>
+<span class="n">response_schemas</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">ResponseSchema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;bad_string&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;This a poorly formatted user input string&quot;</span><span class="p">),</span>
+    <span class="n">ResponseSchema</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;good_string&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;This is your response, a reformatted response&quot;</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># How you would like to parse your output</span>
+<span class="n">output_parser</span> <span class="o">=</span> <span class="n">StructuredOutputParser</span><span class="o">.</span><span class="n">from_response_schemas</span><span class="p">(</span><span class="n">response_schemas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># See the prompt template you created for formatting</span>
+<span class="n">format_instructions</span> <span class="o">=</span> <span class="n">output_parser</span><span class="o">.</span><span class="n">get_format_instructions</span><span class="p">()</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">format_instructions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The output should be a markdown code snippet formatted in the following schema, including the leading and trailing &quot;```json&quot; and &quot;```&quot;:
+
+```json
+{
+	&quot;bad_string&quot;: string  // This a poorly formatted user input string
+	&quot;good_string&quot;: string  // This is your response, a reformatted response
+}
+```
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">You will be given a poorly formatted string from a user.</span>
+<span class="s2">Reformat it and make sure all the words are spelled correctly</span>
+
+<span class="si">{format_instructions}</span>
+
+<span class="s2">% USER INPUT:</span>
+<span class="si">{user_input}</span>
+
+<span class="s2">YOUR RESPONSE:</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;user_input&quot;</span><span class="p">],</span>
+    <span class="n">partial_variables</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;format_instructions&quot;</span><span class="p">:</span> <span class="n">format_instructions</span><span class="p">},</span>
+    <span class="n">template</span><span class="o">=</span><span class="n">template</span>
+<span class="p">)</span>
+
+<span class="n">promptValue</span> <span class="o">=</span> <span class="n">prompt</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user_input</span><span class="o">=</span><span class="s2">&quot;welcom to califonya!&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">promptValue</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You will be given a poorly formatted string from a user.
+Reformat it and make sure all the words are spelled correctly
+
+The output should be a markdown code snippet formatted in the following schema, including the leading and trailing &quot;```json&quot; and &quot;```&quot;:
+
+```json
+{
+	&quot;bad_string&quot;: string  // This a poorly formatted user input string
+	&quot;good_string&quot;: string  // This is your response, a reformatted response
+}
+```
+
+% USER INPUT:
+welcom to califonya!
+
+YOUR RESPONSE:
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm_output</span> <span class="o">=</span> <span class="n">llm</span><span class="p">(</span><span class="n">promptValue</span><span class="p">)</span>
+<span class="n">llm_output</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;```json\n{\n\t&quot;bad_string&quot;: &quot;welcom to califonya!&quot;, \n\t&quot;good_string&quot;: &quot;Welcome to California!&quot;\n}\n```&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output_parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">llm_output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;bad_string&#39;: &#39;welcom to califonya!&#39;, &#39;good_string&#39;: &#39;Welcome to California!&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="output-parsers-method-2-openai-fuctions">
+<h3><strong>Output Parsers Method 2: OpenAI Fuctions</strong><a class="headerlink" href="#output-parsers-method-2-openai-fuctions" title="Link to this heading">#</a></h3>
+<p>When OpenAI released function calling, the game changed. This is recommended method when starting out.</p>
+<p>They trained models specifically for outputing structured data. It became super easy to specify a Pydantic schema and get a structured output.</p>
+<p>There are many ways to define your schema, I prefer using Pydantic Models because of how organized they are. Feel free to reference OpenAI’s <a class="reference external" href="https://platform.openai.com/docs/guides/gpt/function-calling">documention</a> for other methods.</p>
+<p>In order to use this method you’ll need to use a model that supports <a class="reference external" href="https://openai.com/blog/function-calling-and-other-api-updates#:~:text=Developers%20can%20now%20describe%20functions%20to%20gpt%2D4%2D0613%20and%20gpt%2D3.5%2Dturbo%2D0613%2C">function calling</a>. I’ll use <code class="docutils literal notranslate"><span class="pre">gpt4-0613</span></code></p>
+<p><strong>Example 1: Simple</strong></p>
+<p>Let’s get started by defining a simple model for us to extract from.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.pydantic_v1</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Identifying information about a person.&quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The person&#39;s name&quot;</span><span class="p">)</span>
+    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The person&#39;s age&quot;</span><span class="p">)</span>
+    <span class="n">fav_food</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The person&#39;s favorite food&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then let’s create a chain (more on this later) that will do the extracting for us</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chains.openai_functions</span> <span class="kn">import</span> <span class="n">create_structured_output_chain</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;gpt-4-0613&#39;</span><span class="p">,</span> <span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span><span class="p">)</span>
+
+<span class="n">chain</span> <span class="o">=</span> <span class="n">create_structured_output_chain</span><span class="p">(</span><span class="n">Person</span><span class="p">,</span> <span class="n">llm</span><span class="p">,</span> <span class="n">prompt</span><span class="p">)</span>
+<span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="s2">&quot;Sally is 13, Joey just turned 12 and loves spinach. Caroline is 10 years older than Sally.&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Person(name=&#39;Sally, Joey, Caroline&#39;, age=13, fav_food=&#39;spinach&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice how we only have data on one person from that list? That is because we didn’t specify we wanted multiple. Let’s change our schema to specify that we want a list of people if possible.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Sequence</span>
+
+<span class="k">class</span> <span class="nc">People</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Identifying information about all people in a text.&quot;&quot;&quot;</span>
+
+    <span class="n">people</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Person</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The people in the text&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ll call for People rather than Person</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain</span> <span class="o">=</span> <span class="n">create_structured_output_chain</span><span class="p">(</span><span class="n">People</span><span class="p">,</span> <span class="n">llm</span><span class="p">,</span> <span class="n">prompt</span><span class="p">)</span>
+<span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="s2">&quot;Sally is 13, Joey just turned 12 and loves spinach. Caroline is 10 years older than Sally.&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>People(people=[Person(name=&#39;Sally&#39;, age=13, fav_food=None), Person(name=&#39;Joey&#39;, age=12, fav_food=&#39;spinach&#39;), Person(name=&#39;Caroline&#39;, age=23, fav_food=None)])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s do some more parsing with it</p>
+<p><strong>Example 2: Enum</strong></p>
+<p>Now let’s parse when a product from a list is mentioned</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">enum</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;gpt-4-0613&#39;</span><span class="p">,</span> <span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Product</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">CRM</span> <span class="o">=</span> <span class="s2">&quot;CRM&quot;</span>
+    <span class="n">VIDEO_EDITING</span> <span class="o">=</span> <span class="s2">&quot;VIDEO_EDITING&quot;</span>
+    <span class="n">HARDWARE</span> <span class="o">=</span> <span class="s2">&quot;HARDWARE&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Products</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Identifying products that were mentioned in a text&quot;&quot;&quot;</span>
+
+    <span class="n">products</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Product</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The products mentioned in a text&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain</span> <span class="o">=</span> <span class="n">create_structured_output_chain</span><span class="p">(</span><span class="n">Products</span><span class="p">,</span> <span class="n">llm</span><span class="p">,</span> <span class="n">prompt</span><span class="p">)</span>
+<span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="s2">&quot;The CRM in this demo is great. Love the hardware. The microphone is also cool. Love the video editing&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Products(products=[&lt;Product.CRM: &#39;CRM&#39;&gt;, &lt;Product.HARDWARE: &#39;HARDWARE&#39;&gt;, &lt;Product.VIDEO_EDITING: &#39;VIDEO_EDITING&#39;&gt;])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="indexes-structuring-documents-to-llms-can-work-with-them">
+<h2>Indexes - Structuring documents to LLMs can work with them<a class="headerlink" href="#indexes-structuring-documents-to-llms-can-work-with-them" title="Link to this heading">#</a></h2>
+<section id="document-loaders">
+<h3><strong>Document Loaders</strong><a class="headerlink" href="#document-loaders" title="Link to this heading">#</a></h3>
+<p>Easy ways to import data from other sources. Shared functionality with <a class="reference external" href="https://openai.com/blog/chatgpt-plugins">OpenAI Plugins</a> <a class="reference external" href="https://github.com/openai/chatgpt-retrieval-plugin">specifically retrieval plugins</a></p>
+<p>See a <a class="reference external" href="https://python.langchain.com/en/latest/modules/indexes/document_loaders.html">big list</a> of document loaders here. A bunch more on <a class="reference external" href="https://llamahub.ai/">Llama Index</a> as well.</p>
+<p><strong>HackerNews</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">HNLoader</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loader</span> <span class="o">=</span> <span class="n">HNLoader</span><span class="p">(</span><span class="s2">&quot;https://news.ycombinator.com/item?id=34422627&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2"> comments&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Here&#39;s a sample:</span><span class="se">\n\n</span><span class="si">{</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">page_content</span><span class="p">[:</span><span class="mi">150</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">data</span><span class="p">[:</span><span class="mi">2</span><span class="p">]])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Found 76 comments
+Here&#39;s a sample:
+
+Ozzie_osman 8 months ago  
+             | next [–] 
+
+LangChain is awesome. For people not sure what it&#39;s doing, large language models (LLMs) are very Ozzie_osman 8 months ago  
+             | parent | next [–] 
+
+Also, another library to check out is GPT Index (https://github.com/jerryjliu/gpt_index)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Books from Gutenberg Project</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">GutenbergLoader</span>
+
+<span class="n">loader</span> <span class="o">=</span> <span class="n">GutenbergLoader</span><span class="p">(</span><span class="s2">&quot;https://www.gutenberg.org/cache/epub/2148/pg2148.txt&quot;</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">page_content</span><span class="p">[</span><span class="mi">1855</span><span class="p">:</span><span class="mi">1984</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      At Paris, just after dark one gusty evening in the autumn of 18-,
+
+
+      I was enjoying the twofold luxury of meditation 
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>URLs and webpages</strong></p>
+<p>Let’s try it out with <a class="reference external" href="http://www.paulgraham.com/">Paul Graham’s website</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">UnstructuredURLLoader</span>
+
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;http://www.paulgraham.com/&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">loader</span> <span class="o">=</span> <span class="n">UnstructuredURLLoader</span><span class="p">(</span><span class="n">urls</span><span class="o">=</span><span class="n">urls</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">page_content</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;New: \n\nHow to Do Great Work |\nRead |\nWill |\nTruth\n\n\n\n\n\nWant to start a startup? Get funded by Y Combinator.\n\n\n\n\n\n\n\n\n\n© mmxxiii pg&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="text-splitters">
+<h3><strong>Text Splitters</strong><a class="headerlink" href="#text-splitters" title="Link to this heading">#</a></h3>
+<p>Often times your document is too long (like a book) for your LLM. You need to split it up into chunks. Text splitters help with this.</p>
+<p>There are many ways you could split your text into chunks, experiment with <a class="reference external" href="https://python.langchain.com/en/latest/modules/indexes/text_splitters.html">different ones</a> to see which is best for you.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is a long document we can split up.</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data/PaulGrahamEssays/worked.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pg_work</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You have </span><span class="si">{</span><span class="nb">len</span><span class="p">([</span><span class="n">pg_work</span><span class="p">])</span><span class="si">}</span><span class="s2"> document&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You have 1 document
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_splitter</span> <span class="o">=</span> <span class="n">RecursiveCharacterTextSplitter</span><span class="p">(</span>
+    <span class="c1"># Set a really small chunk size, just to show.</span>
+    <span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">150</span><span class="p">,</span>
+    <span class="n">chunk_overlap</span>  <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">texts</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">create_documents</span><span class="p">([</span><span class="n">pg_work</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You have </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span><span class="si">}</span><span class="s2"> documents&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You have 610 documents
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Preview:&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">texts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">page_content</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">texts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">page_content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Preview:
+February 2021Before college the two main things I worked on, outside of school,
+were writing and programming. I didn&#39;t write essays. I wrote what 
+
+beginning writers were supposed to write then, and probably still
+are: short stories. My stories were awful. They had hardly any plot,
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are a ton of different ways to do text splitting and it really depends on your retrieval strategy and application design. Check out more splitters <a class="reference external" href="https://python.langchain.com/docs/modules/data_connection/document_transformers/">here</a></p>
+</section>
+<section id="retrievers">
+<h3><strong>Retrievers</strong><a class="headerlink" href="#retrievers" title="Link to this heading">#</a></h3>
+<p>Easy way to combine documents with language models.</p>
+<p>There are many different types of retrievers, the most widely supported is the VectoreStoreRetriever</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">TextLoader</span>
+<span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
+<span class="kn">from</span> <span class="nn">langchain.vectorstores</span> <span class="kn">import</span> <span class="n">FAISS</span>
+<span class="kn">from</span> <span class="nn">langchain.embeddings</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span>
+
+<span class="n">loader</span> <span class="o">=</span> <span class="n">TextLoader</span><span class="p">(</span><span class="s1">&#39;data/PaulGrahamEssays/worked.txt&#39;</span><span class="p">)</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get your splitter ready</span>
+<span class="n">text_splitter</span> <span class="o">=</span> <span class="n">RecursiveCharacterTextSplitter</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Split your docs into texts</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">split_documents</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+
+<span class="c1"># Get embedding engine ready</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">OpenAIEmbeddings</span><span class="p">(</span><span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span><span class="p">)</span>
+
+<span class="c1"># Embedd your texts</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">FAISS</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Init your retriever. Asking for just 1 document back</span>
+<span class="n">retriever</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">retriever</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VectorStoreRetriever(tags=[&#39;FAISS&#39;], vectorstore=&lt;langchain.vectorstores.faiss.FAISS object at 0x7f8389169070&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">get_relevant_documents</span><span class="p">(</span><span class="s2">&quot;what types of things did the author want to build?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">page_content</span><span class="p">[:</span><span class="mi">200</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">[:</span><span class="mi">2</span><span class="p">]]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>standards; what was the point? No one else wanted one either, so
+off they went. That was what happened to systems work.I wanted not just to build things, but to build things that would
+last.In this di
+
+much of it in grad school.Computer Science is an uneasy alliance between two halves, theory
+and systems. The theory people prove things, and the systems people
+build things. I wanted to build things. 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="vectorstores">
+<h3><strong>VectorStores</strong><a class="headerlink" href="#vectorstores" title="Link to this heading">#</a></h3>
+<p>Databases to store vectors. Most popular ones are <a class="reference external" href="https://www.pinecone.io/">Pinecone</a> &amp; <a class="reference external" href="https://weaviate.io/">Weaviate</a>. More examples on OpenAIs <a class="reference external" href="https://github.com/openai/chatgpt-retrieval-plugin#choosing-a-vector-database">retriever documentation</a>. <a class="reference external" href="https://www.trychroma.com/">Chroma</a> &amp; <a class="reference external" href="https://engineering.fb.com/2017/03/29/data-infrastructure/faiss-a-library-for-efficient-similarity-search/">FAISS</a> are easy to work with locally.</p>
+<p>Conceptually, think of them as tables w/ a column for embeddings (vectors) and a column for metadata.</p>
+<p>Example</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Embedding</p></th>
+<th class="head"><p>Metadata</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>[-0.00015641732898075134, -0.003165106289088726, …]</p></td>
+<td><p>{‘date’ : ‘1/2/23}</p></td>
+</tr>
+<tr class="row-odd"><td><p>[-0.00035465431654651654, 1.4654131651654516546, …]</p></td>
+<td><p>{‘date’ : ‘1/3/23}</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">TextLoader</span>
+<span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
+<span class="kn">from</span> <span class="nn">langchain.vectorstores</span> <span class="kn">import</span> <span class="n">FAISS</span>
+<span class="kn">from</span> <span class="nn">langchain.embeddings</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span>
+
+<span class="n">loader</span> <span class="o">=</span> <span class="n">TextLoader</span><span class="p">(</span><span class="s1">&#39;data/PaulGrahamEssays/worked.txt&#39;</span><span class="p">)</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<span class="c1"># Get your splitter ready</span>
+<span class="n">text_splitter</span> <span class="o">=</span> <span class="n">RecursiveCharacterTextSplitter</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Split your docs into texts</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">split_documents</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+
+<span class="c1"># Get embedding engine ready</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">OpenAIEmbeddings</span><span class="p">(</span><span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You have </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span><span class="si">}</span><span class="s2"> documents&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You have 78 documents
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embedding_list</span> <span class="o">=</span> <span class="n">embeddings</span><span class="o">.</span><span class="n">embed_documents</span><span class="p">([</span><span class="n">text</span><span class="o">.</span><span class="n">page_content</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You have </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">embedding_list</span><span class="p">)</span><span class="si">}</span><span class="s2"> embeddings&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Here&#39;s a sample of one: </span><span class="si">{</span><span class="n">embedding_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You have 78 embeddings
+Here&#39;s a sample of one: [-0.001058628615053026, -0.01118234211553424, -0.012874804746266883]...
+</pre></div>
+</div>
+</div>
+</div>
+<p>Your vectorstore store your embeddings (☝️) and make them easily searchable</p>
+</section>
+</section>
+<section id="memory">
+<h2>Memory<a class="headerlink" href="#memory" title="Link to this heading">#</a></h2>
+<p>Helping LLMs remember information.</p>
+<p>Memory is a bit of a loose term. It could be as simple as remembering information you’ve chatted about in the past or more complicated information retrieval.</p>
+<p>We’ll keep it towards the Chat Message use case. This would be used for chat bots.</p>
+<p>There are many types of memory, explore <a class="reference external" href="https://python.langchain.com/en/latest/modules/memory/how_to_guides.html">the documentation</a> to see which one fits your use case.</p>
+<section id="chat-message-history">
+<h3>Chat Message History<a class="headerlink" href="#chat-message-history" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.memory</span> <span class="kn">import</span> <span class="n">ChatMessageHistory</span>
+<span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+<span class="n">chat</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span><span class="p">)</span>
+
+<span class="n">history</span> <span class="o">=</span> <span class="n">ChatMessageHistory</span><span class="p">()</span>
+
+<span class="n">history</span><span class="o">.</span><span class="n">add_ai_message</span><span class="p">(</span><span class="s2">&quot;hi!&quot;</span><span class="p">)</span>
+
+<span class="n">history</span><span class="o">.</span><span class="n">add_user_message</span><span class="p">(</span><span class="s2">&quot;what is the capital of france?&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history</span><span class="o">.</span><span class="n">messages</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[AIMessage(content=&#39;hi!&#39;),
+ HumanMessage(content=&#39;what is the capital of france?&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ai_response</span> <span class="o">=</span> <span class="n">chat</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">messages</span><span class="p">)</span>
+<span class="n">ai_response</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AIMessage(content=&#39;The capital of France is Paris.&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history</span><span class="o">.</span><span class="n">add_ai_message</span><span class="p">(</span><span class="n">ai_response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="n">history</span><span class="o">.</span><span class="n">messages</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[AIMessage(content=&#39;hi!&#39;),
+ HumanMessage(content=&#39;what is the capital of france?&#39;),
+ AIMessage(content=&#39;The capital of France is Paris.&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="chains">
+<h2>Chains ⛓️⛓️⛓️<a class="headerlink" href="#chains" title="Link to this heading">#</a></h2>
+<p>Combining different LLM calls and action automatically</p>
+<p>Ex: Summary #1, Summary #2, Summary #3 &gt; Final Summary</p>
+<p>Check out <a class="reference external" href="https://www.youtube.com/watch?v=f9_BWhCI4Zo&amp;amp;t=2s">this video</a> explaining different summarization chain types</p>
+<p>There are <a class="reference external" href="https://python.langchain.com/en/latest/modules/chains/how_to_guides.html">many applications of chains</a> search to see which are best for your use case.</p>
+<p>We’ll cover two of them:</p>
+<section id="simple-sequential-chains">
+<h3>1. Simple Sequential Chains<a class="headerlink" href="#simple-sequential-chains" title="Link to this heading">#</a></h3>
+<p>Easy chains where you can use the output of an LLM as an input into another. Good for breaking up tasks (and keeping your LLM focused)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">LLMChain</span>
+<span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+<span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">SimpleSequentialChain</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Your job is to come up with a classic dish from the area that the users suggests.</span>
+<span class="s2">% USER LOCATION</span>
+<span class="si">{user_location}</span>
+
+<span class="s2">YOUR RESPONSE:</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">prompt_template</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span><span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;user_location&quot;</span><span class="p">],</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">)</span>
+
+<span class="c1"># Holds my &#39;location&#39; chain</span>
+<span class="n">location_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="n">prompt_template</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Given a meal, give a short and simple recipe on how to make that dish at home.</span>
+<span class="s2">% MEAL</span>
+<span class="si">{user_meal}</span>
+
+<span class="s2">YOUR RESPONSE:</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">prompt_template</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span><span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;user_meal&quot;</span><span class="p">],</span> <span class="n">template</span><span class="o">=</span><span class="n">template</span><span class="p">)</span>
+
+<span class="c1"># Holds my &#39;meal&#39; chain</span>
+<span class="n">meal_chain</span> <span class="o">=</span> <span class="n">LLMChain</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="n">prompt</span><span class="o">=</span><span class="n">prompt_template</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">overall_chain</span> <span class="o">=</span> <span class="n">SimpleSequentialChain</span><span class="p">(</span><span class="n">chains</span><span class="o">=</span><span class="p">[</span><span class="n">location_chain</span><span class="p">,</span> <span class="n">meal_chain</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">review</span> <span class="o">=</span> <span class="n">overall_chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;Rome&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">&gt; Entering new SimpleSequentialChain chain...</span>
+
+<span class=" -Color -Color-Bold -Color-Bold-Cyan">A classic dish from Rome is Spaghetti alla Carbonara, featuring egg, Parmesan cheese, black pepper, and pancetta or guanciale.</span>
+
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">Ingredients:</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">- 8oz spaghetti </span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">- 4 tablespoons olive oil</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">- 4oz diced pancetta or guanciale</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">- 2 cloves garlic, minced</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">- 2 eggs, lightly beaten</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">- 2 tablespoons parsley, chopped </span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">- ½ cup grated Parmesan </span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">- Salt and black pepper to taste</span>
+
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">Instructions:</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">1. Bring a pot of salted water to a boil and add the spaghetti. Cook according to package directions. </span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">2. Meanwhile, add the olive oil to a large skillet over medium-high heat. Add the diced pancetta and garlic, and cook until pancetta is browned and garlic is fragrant.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">3. In a medium bowl, whisk together the eggs, parsley, Parmesan, and salt and pepper.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">4. Drain the cooked spaghetti and add it to the skillet with the pancetta and garlic. Remove from heat and pour the egg mixture over the spaghetti, stirring to combine. </span>
+<span class=" -Color -Color-Bold -Color-Bold-Yellow">5. Serve the spaghetti alla carbonara with additional Parmesan cheese and black pepper.</span>
+
+<span class=" -Color -Color-Bold">&gt; Finished chain.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="summarization-chain">
+<h3>2. Summarization Chain<a class="headerlink" href="#summarization-chain" title="Link to this heading">#</a></h3>
+<p>Easily run through long numerous documents and get a summary. Check out <a class="reference external" href="https://www.youtube.com/watch?v=f9_BWhCI4Zo">this video</a> for other chain types besides map-reduce</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chains.summarize</span> <span class="kn">import</span> <span class="n">load_summarize_chain</span>
+<span class="kn">from</span> <span class="nn">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">TextLoader</span>
+<span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
+
+<span class="n">loader</span> <span class="o">=</span> <span class="n">TextLoader</span><span class="p">(</span><span class="s1">&#39;data/PaulGrahamEssays/disc.txt&#39;</span><span class="p">)</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+<span class="c1"># Get your splitter ready</span>
+<span class="n">text_splitter</span> <span class="o">=</span> <span class="n">RecursiveCharacterTextSplitter</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Split your docs into texts</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">split_documents</span><span class="p">(</span><span class="n">documents</span><span class="p">)</span>
+
+<span class="c1"># There is a lot of complexity hidden in this one line. I encourage you to check out the video above for more detail</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">load_summarize_chain</span><span class="p">(</span><span class="n">llm</span><span class="p">,</span> <span class="n">chain_type</span><span class="o">=</span><span class="s2">&quot;map_reduce&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">&gt; Entering new MapReduceDocumentsChain chain...</span>
+
+
+<span class=" -Color -Color-Bold">&gt; Entering new LLMChain chain...</span>
+Prompt after formatting:
+<span class=" -Color -Color-Bold -Color-Bold-Green">Write a concise summary of the following:</span>
+
+
+<span class=" -Color -Color-Bold -Color-Bold-Green">&quot;January 2017Because biographies of famous scientists tend to </span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">edit out their mistakes, we underestimate the </span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">degree of risk they were willing to take.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">And because anything a famous scientist did that</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">wasn&#39;t a mistake has probably now become the</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">conventional wisdom, those choices don&#39;t</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">seem risky either.Biographies of Newton, for example, understandably focus</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">more on physics than alchemy or theology.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">The impression we get is that his unerring judgment</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">led him straight to truths no one else had noticed.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">How to explain all the time he spent on alchemy</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">and theology?  Well, smart people are often kind of</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">crazy.But maybe there is a simpler explanation. Maybe&quot;</span>
+
+
+<span class=" -Color -Color-Bold -Color-Bold-Green">CONCISE SUMMARY:</span>
+Prompt after formatting:
+<span class=" -Color -Color-Bold -Color-Bold-Green">Write a concise summary of the following:</span>
+
+
+<span class=" -Color -Color-Bold -Color-Bold-Green">&quot;the smartness and the craziness were not as separate</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">as we think. Physics seems to us a promising thing</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">to work on, and alchemy and theology obvious wastes</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">of time. But that&#39;s because we know how things</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">turned out. In Newton&#39;s day the three problems </span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">seemed roughly equally promising. No one knew yet</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">what the payoff would be for inventing what we</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">now call physics; if they had, more people would </span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">have been working on it. And alchemy and theology</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">were still then in the category Marc Andreessen would </span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">describe as &quot;huge, if true.&quot;Newton made three bets. One of them worked. But </span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">they were all risky.&quot;</span>
+
+
+<span class=" -Color -Color-Bold -Color-Bold-Green">CONCISE SUMMARY:</span>
+
+<span class=" -Color -Color-Bold">&gt; Finished chain.</span>
+
+
+<span class=" -Color -Color-Bold">&gt; Entering new LLMChain chain...</span>
+Prompt after formatting:
+<span class=" -Color -Color-Bold -Color-Bold-Green">Write a concise summary of the following:</span>
+
+
+<span class=" -Color -Color-Bold -Color-Bold-Green">&quot; Biographies of famous scientists often edit out their mistakes, giving readers the wrong impression that they never faced any risks to achieve successful results. An example of this is Newton, whose smartness is assumed to have led straight him to truths without any detours into alchemy or theology - despite the fact that he spent a lot of time on both fields. Maybe the simpler explanation is that he was willing to take risks, even if it means potentially making mistakes.</span>
+
+<span class=" -Color -Color-Bold -Color-Bold-Green"> In the 17th century, Newton took a risk and made three bets, one of which turned out to be a successful invention of what we now call physics. The other two bets were on less popular subjects of the time such as alchemy and theology. People did not know then what the payoff would be, but the bets still seemed relatively promising.&quot;</span>
+
+
+<span class=" -Color -Color-Bold -Color-Bold-Green">CONCISE SUMMARY:</span>
+
+<span class=" -Color -Color-Bold">&gt; Finished chain.</span>
+
+<span class=" -Color -Color-Bold">&gt; Finished chain.</span>
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot; Biographies tend to omit famous scientists&#39; mistakes from their stories, but Newton was willing to take risks and explore multiple fields to make his discoveries. He placed three risky bets, one of which resulted in the creation of physics as we know it today.&quot;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="agents">
+<h2>Agents 🤖🤖<a class="headerlink" href="#agents" title="Link to this heading">#</a></h2>
+<p>Official LangChain Documentation describes agents perfectly (emphasis mine):</p>
+<blockquote>
+<div><p>Some applications will require not just a predetermined chain of calls to LLMs/other tools, but potentially an <strong>unknown chain</strong> that depends on the user’s input. In these types of chains, there is a “agent” which has access to a suite of tools. Depending on the user input, the agent can then <strong>decide which, if any, of these tools to call</strong>.</p>
+</div></blockquote>
+<p>Basically you use the LLM not just for text output, but also for decision making. The coolness and power of this functionality can’t be overstated enough.</p>
+<p>Sam Altman emphasizes that the LLMs are good ‘<a class="reference external" href="https://www.youtube.com/watch?v=L_Guz73e6fw&amp;amp;t=867s">reasoning engine</a>’. Agent take advantage of this.</p>
+<section id="id1">
+<h3>Agents<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>The language model that drives decision making.</p>
+<p>More specifically, an agent takes in an input and returns a response corresponding to an action to take along with an action input. You can see different types of agents (which are better for different use cases) <a class="reference external" href="https://python.langchain.com/en/latest/modules/agents/agents/agent_types.html">here</a>.</p>
+</section>
+<section id="tools">
+<h3>Tools<a class="headerlink" href="#tools" title="Link to this heading">#</a></h3>
+<p>A ‘capability’ of an agent. This is an abstraction on top of a function that makes it easy for LLMs (and agents) to interact with it. Ex: Google search.</p>
+<p>This area shares commonalities with <a class="reference external" href="https://platform.openai.com/docs/plugins/introduction">OpenAI plugins</a>.</p>
+</section>
+<section id="toolkit">
+<h3>Toolkit<a class="headerlink" href="#toolkit" title="Link to this heading">#</a></h3>
+<p>Groups of tools that your agent can select from</p>
+<p>Let’s bring them all together:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.agents</span> <span class="kn">import</span> <span class="n">load_tools</span>
+<span class="kn">from</span> <span class="nn">langchain.agents</span> <span class="kn">import</span> <span class="n">initialize_agent</span>
+<span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">openai_api_key</span><span class="o">=</span><span class="n">openai_api_key</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">serpapi_api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;SERP_API_KEY&quot;</span><span class="p">,</span> <span class="s2">&quot;YourAPIKey&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">toolkit</span> <span class="o">=</span> <span class="n">load_tools</span><span class="p">([</span><span class="s2">&quot;serpapi&quot;</span><span class="p">],</span> <span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="n">serpapi_api_key</span><span class="o">=</span><span class="n">serpapi_api_key</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agent</span> <span class="o">=</span> <span class="n">initialize_agent</span><span class="p">(</span><span class="n">toolkit</span><span class="p">,</span> <span class="n">llm</span><span class="p">,</span> <span class="n">agent</span><span class="o">=</span><span class="s2">&quot;zero-shot-react-description&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">return_intermediate_steps</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">agent</span><span class="p">({</span><span class="s2">&quot;input&quot;</span><span class="p">:</span><span class="s2">&quot;what was the first album of the&quot;</span> 
+                    <span class="s2">&quot;band that Natalie Bergman is a part of?&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">&gt; Entering new AgentExecutor chain...</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green"> I should try to find out what band Natalie Bergman is a part of.</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action: Search</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action Input: &quot;Natalie Bergman band&quot;</span>
+Observation: <span class=" -Color -Color-Bold -Color-Bold-Cyan">[&#39;Natalie Bergman is an American singer-songwriter. She is one half of the duo Wild Belle, along with her brother Elliot Bergman. Her debut solo album, Mercy, was released on Third Man Records on May 7, 2021. She is based in Los Angeles.&#39;, &#39;Natalie Bergman type: American singer-songwriter.&#39;, &#39;Natalie Bergman main_tab_text: Overview.&#39;, &#39;Natalie Bergman kgmid: /m/0qgx4kh.&#39;, &#39;Natalie Bergman genre: Folk.&#39;, &#39;Natalie Bergman parents: Susan Bergman, Judson Bergman.&#39;, &#39;Natalie Bergman born: 1988 or 1989 (age 34–35).&#39;, &#39;Natalie Bergman is an American singer-songwriter. She is one half of the duo Wild Belle, along with her brother Elliot Bergman. Her debut solo album, Mercy, ...&#39;]</span>
+Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> I should search for the first album of Wild Belle</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action: Search</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Action Input: &quot;Wild Belle first album&quot;</span>
+Observation: <span class=" -Color -Color-Bold -Color-Bold-Cyan">Isles</span>
+Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> I now know the final answer</span>
+<span class=" -Color -Color-Bold -Color-Bold-Green">Final Answer: Isles is the first album of the band that Natalie Bergman is a part of.</span>
+
+<span class=" -Color -Color-Bold">&gt; Finished chain.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="Wild Belle" src="content/genai/langchain/data/WildBelle1.png" /></p>
+<p>🎵Enjoy🎵
+<a class="reference external" href="https://open.spotify.com/track/1eREJIBdqeCcqNCB1pbz7w?si=c014293b63c7478c">https://open.spotify.com/track/1eREJIBdqeCcqNCB1pbz7w?si=c014293b63c7478c</a></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/genai/langchain"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Table of Contents</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_LangChain_Use_Cases.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">LangChain Cookbook 👨‍🍳👩‍🍳</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-langchain"><strong>What is LangChain?</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-langchain"><strong>Why LangChain?</strong></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain-components">LangChain Components</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schema-nuts-and-bolts-of-working-with-large-language-models-llms">Schema - Nuts and Bolts of working with Large Language Models (LLMs)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text"><strong>Text</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chat-messages"><strong>Chat Messages</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documents"><strong>Documents</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models-the-interface-to-the-ai-brains">Models - The interface to the AI brains</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#language-model"><strong>Language Model</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chat-model"><strong>Chat Model</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-calling-models">Function Calling Models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-embedding-model"><strong>Text Embedding Model</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prompts-text-generally-used-as-instructions-to-your-model">Prompts - Text generally used as instructions to your model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt"><strong>Prompt</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template"><strong>Prompt Template</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-selectors"><strong>Example Selectors</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-parsers-method-1-prompt-instructions-string-parsing"><strong>Output Parsers Method 1: Prompt Instructions &amp; String Parsing</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-parsers-method-2-openai-fuctions"><strong>Output Parsers Method 2: OpenAI Fuctions</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexes-structuring-documents-to-llms-can-work-with-them">Indexes - Structuring documents to LLMs can work with them</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#document-loaders"><strong>Document Loaders</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-splitters"><strong>Text Splitters</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retrievers"><strong>Retrievers</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorstores"><strong>VectorStores</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#memory">Memory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chat-message-history">Chat Message History</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chains">Chains ⛓️⛓️⛓️</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-sequential-chains">1. Simple Sequential Chains</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summarization-chain">2. Summarization Chain</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agents">Agents 🤖🤖</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Agents</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tools">Tools</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toolkit">Toolkit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

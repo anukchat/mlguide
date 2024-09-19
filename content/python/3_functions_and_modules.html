@@ -1,0 +1,1800 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Functions &amp; Modules &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/python/3_functions_and_modules';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/python/3_functions_and_modules.html" />
+    <link rel="icon" href="../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Object Oriented Programming" href="4_Object_Oriented.html" />
+    <link rel="prev" title="Syntax and Symantics" href="2_syntax_and_symantics.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="python_toc.html">Python</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Functions &amp; Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_Object_Oriented.html">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="8_advanced.html">Advanced Concepts</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ai/Introduction_to_ml.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/000_Data_Exploration.html">Exploratory Data Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/001_Data_Preparation.html">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/003_Classification.html">Classfication</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/005_Evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/006_Advanced.html">K-Fold Cross Validation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ai/neural/neural_toc.html">Neural Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ai/neural/concepts/001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/neural/concepts/002_Backpropogation.html">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/neural/concepts/003_Activations.html">Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/neural/concepts/004_Optimization.html">Optimizations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ai/neural/concepts/pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../genai/introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../genai/concepts/transformers/01_transformers_from_scratch.html">Transformers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../genai/langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../genai/langchain/intro.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../genai/langchain/01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../genai/langchain/02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/courses/courses_toc.html">Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/python/3_functions_and_modules.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/python/3_functions_and_modules.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/python/3_functions_and_modules.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Functions & Modules</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-without-parameters-and-return-value">Functions without parameters and return value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-with-return-value">Functions with return value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-with-parameters">Functions with parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#returning-multiple-values">Returning multiple values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#passing-default-values">Passing default values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">Docstrings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-scope">Variable scope</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global">Global</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local">Local</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aruguments">Aruguments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-arguments">Default Arguments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keyword-arguments">Keyword Arguments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arbitrary-variable-length-arguments">Arbitrary/Variable-length Arguments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-as-a-parameter">Function as a Parameter</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursion">Recursion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anonymous-lambda-functions">Anonymous / Lambda Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-module">Creating a module</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-a-module">Importing a module</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-path">Module path</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-modules">Built-in modules</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dir"><code class="docutils literal notranslate"><span class="pre">dir()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#os"><code class="docutils literal notranslate"><span class="pre">os()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sys"><code class="docutils literal notranslate"><span class="pre">sys()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#string"><code class="docutils literal notranslate"><span class="pre">string()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random"><code class="docutils literal notranslate"><span class="pre">random()</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#math"><code class="docutils literal notranslate"><span class="pre">math()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="functions-modules">
+<h1>Functions &amp; Modules<a class="headerlink" href="#functions-modules" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>In Python, a <strong>function is a block of organized, reusable (DRY- Don’t Repeat Yourself) code with a name</strong> that is used to perform a single, specific task. It can take arguments and returns the value.</p>
+<p>Functions help break our program into smaller and modular chunks.</p>
+<ol class="arabic">
+<li><p><strong>Built-in functions</strong></p>
+<p>The functions which are come along with Python itself.</p>
+<p>Examples: <strong><code class="docutils literal notranslate"><span class="pre">range()</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">print()</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">input()</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">type()</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">id()</span></code></strong>, <strong><code class="docutils literal notranslate"><span class="pre">eval()</span></code></strong> etc.</p>
+</li>
+<li><p><strong>User-defined function</strong></p>
+<p>Functions which are created by programmer explicitly according to the requirement</p>
+</li>
+</ol>
+<p><strong>Syntax:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">function_name</span><span class="p">(</span><span class="n">parameter1</span><span class="p">,</span> <span class="n">parameter2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;docstring&quot;&quot;&quot;</span>
+    <span class="c1"># function body    </span>
+    <span class="c1"># write some action</span>
+<span class="k">return</span> <span class="n">value</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/f1.png"><img alt="function" src="../../_images/f1.png" style="width: 550px;" /></a>
+<section id="functions-without-parameters-and-return-value">
+<h3>Functions without parameters and return value<a class="headerlink" href="#functions-without-parameters-and-return-value" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: </span>
+    
+<span class="k">def</span> <span class="nf">greet</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Welcome to Python for Data Science&quot;</span><span class="p">)</span>
+
+<span class="c1"># call function using its name</span>
+<span class="n">greet</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Welcome to Python for Data Science
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="functions-with-return-value">
+<h3>Functions with return value<a class="headerlink" href="#functions-with-return-value" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2: </span>
+
+<span class="k">def</span> <span class="nf">generate_full_name</span> <span class="p">():</span>
+    <span class="n">first_name</span> <span class="o">=</span> <span class="s1">&#39;Anukool&#39;</span>
+    <span class="n">last_name</span> <span class="o">=</span> <span class="s1">&#39;Chaturvedi&#39;</span>
+    <span class="n">space</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span>
+    <span class="n">full_name</span> <span class="o">=</span> <span class="n">first_name</span> <span class="o">+</span> <span class="n">space</span> <span class="o">+</span> <span class="n">last_name</span>
+    <span class="k">return</span> <span class="n">full_name</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">generate_full_name</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="functions-with-parameters">
+<h3>Functions with parameters<a class="headerlink" href="#functions-with-parameters" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:  with 1 parameter and no return value</span>
+
+<span class="k">def</span> <span class="nf">sum_of_numbers</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">total</span><span class="o">+=</span><span class="n">i</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sum_of_numbers</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>  <span class="c1"># 55</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sum_of_numbers</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span> <span class="c1"># 5050</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55
+None
+5050
+None
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2:  With multiple parameters &amp; return values</span>
+
+<span class="k">def</span> <span class="nf">sum_two_numbers</span> <span class="p">(</span><span class="n">num_one</span><span class="p">,</span> <span class="n">num_two</span><span class="p">):</span>  <span class="c1"># two parameter</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="n">num_one</span> <span class="o">+</span> <span class="n">num_two</span>
+    <span class="k">return</span> <span class="nb">sum</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sum of two numbers: &#39;</span><span class="p">,</span> <span class="n">sum_two_numbers</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sum of two numbers:  10
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we do not <strong><code class="docutils literal notranslate"><span class="pre">return</span></code></strong> a value with a function, then our function is returning <strong><code class="docutils literal notranslate"><span class="pre">None</span></code></strong> by default.</p>
+</section>
+<section id="returning-multiple-values">
+<h3>Returning multiple values<a class="headerlink" href="#returning-multiple-values" title="Link to this heading">#</a></h3>
+<p>In Python you can also return multiple values from a function. Use the return statement by separating each expression by a comma.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="k">def</span> <span class="nf">arithmetic</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span> <span class="n">num2</span><span class="p">):</span>
+    <span class="n">add</span> <span class="o">=</span> <span class="n">num1</span> <span class="o">+</span> <span class="n">num2</span>
+    <span class="n">sub</span> <span class="o">=</span> <span class="n">num1</span> <span class="o">-</span> <span class="n">num2</span>
+    <span class="n">multiply</span> <span class="o">=</span> <span class="n">num1</span> <span class="o">*</span> <span class="n">num2</span>
+    <span class="n">division</span> <span class="o">=</span> <span class="n">num1</span> <span class="o">/</span> <span class="n">num2</span>
+    <span class="c1"># return four values</span>
+    <span class="k">return</span> <span class="n">add</span><span class="p">,</span> <span class="n">sub</span><span class="p">,</span> <span class="n">multiply</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">arithmetic</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># read four return values in four variables</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Addition: &quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Subtraction: &quot;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Multiplication: &quot;</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Division: &quot;</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Addition:  12
+Subtraction:  8
+Multiplication:  20
+Division:  5.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="passing-default-values">
+<h3>Passing default values<a class="headerlink" href="#passing-default-values" title="Link to this heading">#</a></h3>
+<p>You can also pass default values to a function. If the value is not provided, the default value will be used</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: </span>
+
+<span class="k">def</span> <span class="nf">calculate_age</span> <span class="p">(</span><span class="n">birth_year</span><span class="p">,</span><span class="n">current_year</span> <span class="o">=</span> <span class="mi">2021</span><span class="p">):</span>
+    <span class="n">age</span> <span class="o">=</span> <span class="n">current_year</span> <span class="o">-</span> <span class="n">birth_year</span>
+    <span class="k">return</span> <span class="n">age</span><span class="p">;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Age: &#39;</span><span class="p">,</span> <span class="n">calculate_age</span><span class="p">(</span><span class="mi">1821</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Age:  200
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="docstrings">
+<h3>Docstrings<a class="headerlink" href="#docstrings" title="Link to this heading">#</a></h3>
+<p><strong>docstring</strong> is short for documentation string. It is a descriptive text (like a comment) written by a programmer to let others know what block of code does.</p>
+<p>Although <strong>optional</strong>, documentation is a good programming practice.</p>
+<p>It is being declared using triple single quotes <strong><code class="docutils literal notranslate"><span class="pre">'''</span> <span class="pre">'''</span></code></strong> or triple-double quote <strong><code class="docutils literal notranslate"><span class="pre">&quot;&quot;&quot;</span> <span class="pre">&quot;&quot;&quot;</span></code></strong> so that docstring can extend up to multiple lines.</p>
+<p>We can access docstring using doc attribute <strong><code class="docutils literal notranslate"><span class="pre">__doc__</span></code></strong> for any object like list, tuple, dict, and user-defined function, etc.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example</span>
+
+<span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="c1"># Docstring</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function swaps the value of two variables</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">temp</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>  <span class="c1"># value of x will go inside temp</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>     <span class="c1"># value of y will go inside x</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>  <span class="c1"># value of temp will go inside y</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;value of x is:&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;value of y is:&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span>     <span class="c1"># &quot;return&quot; is optional</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">swap</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>     <span class="c1">#call function</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>value of x is: 9
+value of y is: 6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">swap</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    This function swaps the value of two variables
+    
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="variable-scope">
+<h2>Variable scope<a class="headerlink" href="#variable-scope" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>When we define a function with variables, then those variables scope is limited to that function.</p>
+<p>In Python, the scope of a variable is the portion of a program where the variable is declared.</p>
+<p>Parameters and variables defined inside a function are not visible from outside the function. Hence, it is called the variable’s local scope.</p>
+<section id="global">
+<h3>Global<a class="headerlink" href="#global" title="Link to this heading">#</a></h3>
+<p>In Python, a variable declared outside of the function or in global scope is known as a global variable. This means that a global variable can be accessed inside or outside of the function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;global&quot;</span>
+
+<span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x inside:&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="n">fun</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x outside:&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x inside: global
+x outside: global
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can’t change the value of a global variable inside a function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;global&quot;</span>
+
+<span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">fun</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">UnboundLocalError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">fun</span><span class="p">()</span>
+
+<span class="nn">Cell In[15], line 6,</span> in <span class="ni">fun</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
+<span class="ne">----&gt; </span><span class="mi">6</span>     <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="ne">UnboundLocalError</span>: cannot access local variable &#39;x&#39; where it is not associated with a value
+</pre></div>
+</div>
+</div>
+</div>
+<p>To make this work, we can use <strong>global</strong> keyword. <strong><code class="docutils literal notranslate"><span class="pre">global</span></code></strong> keyword allows you to modify the variable outside of the current scope. It is used to create a global variable and make changes to the variable in a local context.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Modify a global variable inside a function</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;global&quot;</span>
+
+<span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">x</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">fun</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>globalglobal
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="local">
+<h3>Local<a class="headerlink" href="#local" title="Link to this heading">#</a></h3>
+<p>A variable declared inside the function’s body or in the local scope is known as a local variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: fun2 can&#39;t access loc_var defined in fun1, as it is local to fun1 </span>
+
+<span class="k">def</span> <span class="nf">fun1</span><span class="p">():</span>
+    <span class="n">loc_var</span> <span class="o">=</span> <span class="mi">999</span>   <span class="c1"># local variable</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value is :&quot;</span><span class="p">,</span> <span class="n">loc_var</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">fun2</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value is :&quot;</span><span class="p">,</span> <span class="n">loc_var</span><span class="p">)</span>
+
+<span class="n">fun1</span><span class="p">()</span>
+<span class="n">fun2</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Value is : 999
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">19</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value is :&quot;</span><span class="p">,</span> <span class="n">loc_var</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">fun1</span><span class="p">()</span>
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">fun2</span><span class="p">()</span>
+
+<span class="nn">Cell In[19], line 8,</span> in <span class="ni">fun2</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="k">def</span> <span class="nf">fun2</span><span class="p">():</span>
+<span class="ne">----&gt; </span><span class="mi">8</span>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value is :&quot;</span><span class="p">,</span> <span class="n">loc_var</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;loc_var&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="aruguments">
+<h2>Aruguments<a class="headerlink" href="#aruguments" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>In Python, there are other ways to define a function that can take variable number of arguments.</p>
+<p>Three different forms of this type are described below:
+<b></p>
+<ol class="arabic simple">
+<li><p>Default Arguments</p></li>
+<li><p>Keyword Arguments</p></li>
+<li><p>Arbitrary/Variable-length Arguments
+</b></p></li>
+</ol>
+<section id="default-arguments">
+<h3>Default Arguments<a class="headerlink" href="#default-arguments" title="Link to this heading">#</a></h3>
+<p>The default argument is a parameter that has a default value. If the value is not provided, the default value will be used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example:</span>
+
+<span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Good morning!&quot;</span><span class="p">):</span>  <span class="c1"># two arguments: `name` is fixed arg and &#39;msg&#39; is variable arg</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="n">msg</span><span class="p">)</span>
+
+
+<span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Alan&quot;</span><span class="p">)</span>
+<span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Bruce&quot;</span><span class="p">,</span> <span class="s2">&quot;How do you do?&quot;</span><span class="p">)</span>
+<span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Carson&quot;</span><span class="p">,</span><span class="s2">&quot;Good night!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello Alan, Good morning!
+Hello Bruce, How do you do?
+Hello Carson, Good night!
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="keyword-arguments">
+<h3>Keyword Arguments<a class="headerlink" href="#keyword-arguments" title="Link to this heading">#</a></h3>
+<p>A keyword argument is an argument value, passed to function preceded by the variable name and an equals sign.</p>
+<p>This allows you to skip arguments or place them out of order because the Python interpreter is able to use the keywords provided to match the values with parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Eric&quot;</span><span class="p">,</span> <span class="s2">&quot;How do you do?&quot;</span><span class="p">)</span>
+
+<span class="c1"># 2 keyword arguments</span>
+<span class="n">greet</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Eric&quot;</span><span class="p">,</span><span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;How do you do?&quot;</span><span class="p">)</span>
+
+<span class="c1"># 2 keyword arguments (out of order)</span>
+<span class="n">greet</span><span class="p">(</span><span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;How do you do?&quot;</span><span class="p">,</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Eric&quot;</span><span class="p">)</span> 
+
+<span class="c1"># 1 positional, 1 keyword argument</span>
+<span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Eric&quot;</span><span class="p">,</span> <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;How do you do?&quot;</span><span class="p">)</span>           
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello Eric, How do you do?
+Hello Eric, How do you do?
+Hello Eric, How do you do?
+Hello Eric, How do you do?
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we can see, we can mix positional arguments with keyword arguments during a function call. But we must keep in mind that keyword arguments must follow positional arguments.</p>
+<ol class="arabic simple">
+<li><p>Having a positional argument after keyword arguments will result in errors.</p></li>
+<li><p>In keyword arguments, order of argument doesn’t not matter, but the number of arguments must match. Otherwise, we will get an error.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">greet</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Eric&quot;</span><span class="p">,</span><span class="s2">&quot;How do you do?&quot;</span><span class="p">)</span>  <span class="c1"># Will result in an error</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="n">greet</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Eric&quot;</span><span class="p">,</span><span class="s2">&quot;How do you do?&quot;</span><span class="p">)</span>  <span class="c1"># Will result in an error</span>
+                                      <span class="o">^</span>
+<span class="ne">SyntaxError</span>: positional argument follows keyword argument
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="arbitrary-variable-length-arguments">
+<h3>Arbitrary/Variable-length Arguments<a class="headerlink" href="#arbitrary-variable-length-arguments" title="Link to this heading">#</a></h3>
+<p>Sometimes, we do not know in advance the number of arguments that will be passed into a function. Python allows us to handle this kind of situation through function calls with an arbitrary number of arguments.</p>
+<p>We can pass any number of arguments to this function. Internally all these values are represented in the form of a <strong>tuple</strong>.</p>
+<p>In the function definition, we use an asterisk <strong><code class="docutils literal notranslate"><span class="pre">*</span></code></strong> before the parameter name to denote this kind of argument. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: </span>
+
+<span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="o">*</span><span class="n">names</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This function greets all the person in the names tuple.&quot;&quot;&quot;</span>
+    <span class="c1"># names is a tuple with arguments</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Gary&quot;</span><span class="p">,</span> <span class="s2">&quot;Hank&quot;</span><span class="p">,</span> <span class="s2">&quot;Ivan&quot;</span><span class="p">,</span> <span class="s2">&quot;John&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello Gary
+Hello Hank
+Hello Ivan
+Hello John
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="function-as-a-parameter">
+<h3>Function as a Parameter<a class="headerlink" href="#function-as-a-parameter" title="Link to this heading">#</a></h3>
+<p>In Python, we can pass a function as a parameter to another function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: You can pass functions around as parameters</span>
+
+<span class="k">def</span> <span class="nf">square_number</span> <span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span>
+<span class="k">def</span> <span class="nf">do_something</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">do_something</span><span class="p">(</span><span class="n">square_number</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="c1"># 27</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="recursion">
+<h2>Recursion<a class="headerlink" href="#recursion" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>Recursion is the process of defining something in terms of itself.</p>
+<p>A physical world example would be to <strong>place two parallel mirrors facing each other</strong>. Any object in between them would be reflected recursively.</p>
+<p>In Python, we know that a <strong>function</strong> can call other functions. It is even possible for the function to call itself. These types of construct are termed as recursive functions.</p>
+<p>The following image shows the working of a recursive function called <strong><code class="docutils literal notranslate"><span class="pre">recurse</span></code></strong>.</p>
+<a class="reference internal image-reference" href="../../_images/re1.png"><img alt="../../_images/re1.png" src="../../_images/re1.png" style="width: 250px;" /></a>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This is a recursive function to find the factorial of an integer&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># 3 * 2 * 1 = 6</span>
+
+
+<span class="n">num</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The factorial of&quot;</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="s2">&quot;is&quot;</span><span class="p">,</span> <span class="n">factorial</span><span class="p">(</span><span class="n">num</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When we call this function with a positive integer, it will recursively call itself by decreasing the number.</p>
+<p>Each function multiplies the number with the factorial of the number below it until it is equal to one. This recursive call can be explained in the following steps.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">factorial</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>          <span class="c1"># 1st call with 3</span>
+<span class="mi">3</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>      <span class="c1"># 2nd call with 2</span>
+<span class="mi">3</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># 3rd call with 1</span>
+<span class="mi">3</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">1</span>             <span class="c1"># return from 3rd call as number=1</span>
+<span class="mi">3</span> <span class="o">*</span> <span class="mi">2</span>                 <span class="c1"># return from 2nd call</span>
+<span class="mi">6</span>                     <span class="c1"># return from 1st call</span>
+</pre></div>
+</div>
+<p>Let’s look at an image that shows a step-by-step process of what is going on:</p>
+<a class="reference internal image-reference" href="../../_images/re2.png"><img alt="recursion2" src="../../_images/re2.png" style="width: 350px;" /></a>
+<p>Our recursion ends when the number reduces to 1. This is called the base condition.</p>
+<p>Every recursive function must have a base condition that stops the recursion or else the function calls itself infinitely.</p>
+</section>
+<section id="anonymous-lambda-functions">
+<h2>Anonymous / Lambda Functions<a class="headerlink" href="#anonymous-lambda-functions" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>In Python, an anonymous function is a <strong>function</strong> that is defined without a name.</p>
+<p>While normal functions are defined using the <strong><code class="docutils literal notranslate"><span class="pre">def</span></code></strong> keyword in Python, anonymous functions are defined using the <strong><code class="docutils literal notranslate"><span class="pre">lambda</span></code></strong> keyword.</p>
+<p>For example: <strong><code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">n:n+n</span></code></strong></p>
+<p>Anonymous functions make the code very concise and easy to read</p>
+<p>Hence, anonymous functions are also called <strong><code class="docutils literal notranslate"><span class="pre">lambda</span></code></strong> functions.</p>
+<ul class="simple">
+<li><p>Lambda forms can take any number of arguments but return just one value in the form of an expression. They cannot contain commands or multiple expressions.</p></li>
+<li><p>An anonymous function cannot be a direct call to print because <strong>lambda</strong> requires an expression.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">lambda</span></code></strong> functions have their own local namespace and cannot access variables other than those in their parameter list and those in the global namespace.</p></li>
+<li><p>Although it appears that lambdas are a one-line version of a function, they are not equivalent to inline statements in C or C++, whose purpose is to stack allocation by passing function, during invocation for performance reasons.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Syntax:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">lambda</span> <span class="n">argument_list</span><span class="p">:</span> <span class="n">expression</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Program for even numbers without lambda function</span>
+
+<span class="k">def</span> <span class="nf">even_numbers</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">even_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">even_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">even_list</span>
+
+<span class="n">num_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">ans</span> <span class="o">=</span> <span class="n">even_numbers</span><span class="p">(</span><span class="n">num_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Even numbers are:&quot;</span><span class="p">,</span> <span class="n">ans</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Even numbers are: [10, 16, 78, 2]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Program for even number with a lambda function</span>
+
+<span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">even_nos</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">l</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Even numbers are: &quot;</span><span class="p">,</span> <span class="n">even_nos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Even numbers are:  [10, 16, 78, 2]
+</pre></div>
+</div>
+</div>
+</div>
+<p>x is the argument of the function, x % 2 is the expression</p>
+</section>
+<section id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>Module containing a set of codes or a set of functions which can be included to an application.</p>
+<p>Modules refer to the Python file, which contains Python code like Python statements, classes, functions, variables, etc. A file with Python code is defined with extension <strong><code class="docutils literal notranslate"><span class="pre">.py</span></code></strong></p>
+<p>For example: In <strong><code class="docutils literal notranslate"><span class="pre">main.py</span></code></strong>, where the <strong><code class="docutils literal notranslate"><span class="pre">main</span></code></strong> is the module name.</p>
+<p>In Python, large code is divided into small modules. The benefit of modules is, it provides a way to share reusable functions.</p>
+<p><strong>Advantage</strong></p>
+<ul class="simple">
+<li><p><strong>Reusability</strong>: Module can be used in some other python code. Hence it provides the facility of code reusability.</p></li>
+<li><p><strong>Categorization</strong>: Similar type of attributes can be placed in one module.</p></li>
+</ul>
+<section id="creating-a-module">
+<h3>Creating a module<a class="headerlink" href="#creating-a-module" title="Link to this heading">#</a></h3>
+<p>A file containing Python code, for example: <strong><code class="docutils literal notranslate"><span class="pre">example.py</span></code></strong>, is called a module, and its module name would be <strong><code class="docutils literal notranslate"><span class="pre">example</span></code></strong>.</p>
+<p>Let us create a module. Type the following and save it as <strong><code class="docutils literal notranslate"><span class="pre">example.py</span></code></strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python Module example</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="s2">&quot;&quot;&quot;This program adds two numbers and return the result&quot;&quot;&quot;</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="o">&gt;&gt;&gt;</span>     <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</section>
+<section id="importing-a-module">
+<h3>Importing a module<a class="headerlink" href="#importing-a-module" title="Link to this heading">#</a></h3>
+<p>We can import the definitions inside a module to another module or the interactive interpreter in Python.</p>
+<p>👉 We use the <strong><code class="docutils literal notranslate"><span class="pre">import</span></code></strong> keyword to do this.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing a module</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">example</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">example</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>👉  You can also import specific objects from a module. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">example</span> <span class="kn">import</span> <span class="n">add</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>👉 You can access submodules and import specific objects using the dot operator. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">example.submodule</span> <span class="kn">import</span> <span class="n">add</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>👉 You can also import all objects from a module. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">example</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>👉 You can import multiple objects from a module. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">example</span> <span class="kn">import</span> <span class="n">add</span><span class="p">,</span> <span class="n">sub</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>👉 You can give a new name or alias to the imported objects.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">example</span> <span class="k">as</span> <span class="nn">e</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="module-path">
+<h3>Module path<a class="headerlink" href="#module-path" title="Link to this heading">#</a></h3>
+<p>While importing a module, Python looks at several places. Interpreter first looks for a built-in module. Then(if built-in module not found), Python looks into a list of directories defined in <strong><code class="docutils literal notranslate"><span class="pre">sys.path</span></code></strong>. The search is in this order.</p>
+<ol class="arabic simple">
+<li><p>The current directory.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code></strong> (an environment variable with a list of directories).</p></li>
+<li><p>The installation-dependent default directory.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;import sys</span>
+<span class="go">&gt;&gt;&gt;sys.path</span>
+</pre></div>
+</div>
+</section>
+<section id="built-in-modules">
+<h3>Built-in modules<a class="headerlink" href="#built-in-modules" title="Link to this heading">#</a></h3>
+<p>Built-in modules are pre-installed with Python. You can see all built-in modules with the <strong><code class="docutils literal notranslate"><span class="pre">help('modules')</span></code></strong> method</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="s1">&#39;modules&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Please wait a moment while I gather a list of all available modules...
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/homebrew/Caskroom/miniconda/base/envs/ml-notes/lib/python3.12/pkgutil.py:78: UserWarning: The numpy.array_api submodule is still experimental. See NEP 47.
+  __import__(info.name)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IPython             aifc                ipykernel_launcher  sched
+PIL                 alabaster           itertools           secrets
+__future__          antigravity         jedi                select
+__hello__           appnope             jinja2              selectors
+__phello__          argparse            json                setuptools
+_abc                array               jsonschema          shelve
+_aix_support        ast                 jsonschema_specifications shlex
+_ast                asttokens           jupyter             shutil
+_asyncio            asyncio             jupyter_book        signal
+_bisect             atexit              jupyter_cache       site
+_blake2             attr                jupyter_client      six
+_bz2                attrs               jupyter_core        smtplib
+_codecs             audioop             keyword             sndhdr
+_codecs_cn          babel               kiwisolver          snowballstemmer
+_codecs_hk          base64              latexcodec          socket
+_codecs_iso2022     bdb                 lib2to3             socketserver
+_codecs_jp          binascii            linecache           soupsieve
+_codecs_kr          bisect              linkify_it          sphinx
+_codecs_tw          bs4                 locale              sphinx_book_theme
+_collections        builtins            logging             sphinx_comments
+_collections_abc    bz2                 lzma                sphinx_copybutton
+_compat_pickle      cProfile            mailbox             sphinx_design
+_compression        calendar            mailcap             sphinx_external_toc
+_contextvars        certifi             markdown_it         sphinx_jupyterbook_latex
+_crypt              cgi                 markupsafe          sphinx_multitoc_numbering
+_csv                cgitb               marshal             sphinx_thebe
+_ctypes             charset_normalizer  math                sphinx_togglebutton
+_ctypes_test        chunk               matplotlib          sqlalchemy
+_curses             click               matplotlib_inline   sqlite3
+_curses_panel       cmath               mdit_py_plugins     sre_compile
+_datetime           cmd                 mdurl               sre_constants
+_dbm                code                mimetypes           sre_parse
+_decimal            codecs              mmap                ssl
+_distutils_hack     codeop              modulefinder        stack_data
+_elementtree        collections         multiprocessing     stat
+_functools          colorsys            myst_nb             statistics
+_hashlib            comm                myst_parser         string
+_heapq              compileall          nbclient            stringprep
+_imp                concurrent          nbformat            struct
+_io                 configparser        nest_asyncio        subprocess
+_json               contextlib          netrc               sunau
+_locale             contextvars         nis                 symtable
+_lsprof             contourpy           nntplib             sys
+_lzma               copy                ntpath              sysconfig
+_markupbase         copyreg             nturl2path          syslog
+_md5                crypt               numbers             tabnanny
+_multibytecodec     csv                 numpy               tabulate
+_multiprocessing    ctypes              opcode              tarfile
+_opcode             curses              operator            telnetlib
+_operator           cycler              optparse            tempfile
+_osx_support        dataclasses         os                  termios
+_pickle             datetime            packaging           test
+_posixshmem         dateutil            pandas              tests
+_posixsubprocess    dbm                 parso               textwrap
+_py_abc             debugpy             pathlib             this
+_pydatetime         decimal             pdb                 threading
+_pydecimal          decorator           pexpect             time
+_pyio               difflib             pickle              timeit
+_pylong             dis                 pickleshare         tkinter
+_queue              doctest             pickletools         token
+_random             docutils            pip                 tokenize
+_scproxy            email               pipes               tomllib
+_sha1               encodings           pkg_resources       tornado
+_sha2               ensurepip           pkgutil             trace
+_sha3               enum                platform            traceback
+_signal             errno               platformdirs        tracemalloc
+_sitebuiltins       exceptiongroup      plistlib            traitlets
+_socket             executing           poplib              tty
+_sqlite3            fastjsonschema      posix               turtle
+_sre                faulthandler        posixpath           turtledemo
+_ssl                fcntl               pprint              types
+_stat               filecmp             profile             typing
+_statistics         fileinput           prompt_toolkit      typing_extensions
+_string             fnmatch             pstats              tzdata
+_strptime           fontTools           psutil              uc_micro
+_struct             fractions           pty                 unicodedata
+_symtable           ftplib              ptyprocess          unittest
+_sysconfigdata__darwin_darwin functools           pure_eval           urllib
+_sysconfigdata_arm64_apple_darwin20_0_0 gc                  pwd                 urllib3
+_testbuffer         genericpath         py_compile          uu
+_testcapi           getopt              pybtex              uuid
+_testclinic         getpass             pybtex_docutils     venv
+_testimportmultiple gettext             pyclbr              warnings
+_testinternalcapi   glob                pydata_sphinx_theme wave
+_testmultiphase     graphlib            pydoc               wcwidth
+_testsinglephase    grp                 pydoc_data          weakref
+_thread             gzip                pyexpat             webbrowser
+_threading_local    hashlib             pygments            wheel
+_tkinter            heapq               pylab               wsgiref
+_tokenize           hmac                pyparsing           xdrlib
+_tracemalloc        html                pytz                xml
+_typing             http                queue               xmlrpc
+_uuid               idlelib             quopri              xxlimited
+_warnings           idna                random              xxlimited_35
+_weakref            imagesize           re                  xxsubtype
+_weakrefset         imaplib             readline            yaml
+_xxinterpchannels   imghdr              referencing         zipapp
+_xxsubinterpreters  importlib           reprlib             zipfile
+_xxtestfuzz         importlib_metadata  requests            zipimport
+_yaml               inspect             resource            zipp
+_zoneinfo           io                  rlcompleter         zlib
+a11y_pygments       ipaddress           rpds                zmq
+abc                 ipykernel           runpy               zoneinfo
+
+Enter any module name to get more help.  Or, type &quot;modules spam&quot; to search
+for modules whose name or summary contain the string &quot;spam&quot;.
+</pre></div>
+</div>
+</div>
+</div>
+<section id="dir">
+<h4><code class="docutils literal notranslate"><span class="pre">dir()</span></code><a class="headerlink" href="#dir" title="Link to this heading">#</a></h4>
+<p>We can use the <strong><code class="docutils literal notranslate"><span class="pre">dir()</span></code></strong> function to find out names that are defined inside a module</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">dir</span><span class="p">(</span><span class="n">sys</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;__breakpointhook__&#39;,
+ &#39;__displayhook__&#39;,
+ &#39;__doc__&#39;,
+ &#39;__excepthook__&#39;,
+ &#39;__interactivehook__&#39;,
+ &#39;__loader__&#39;,
+ &#39;__name__&#39;,
+ &#39;__package__&#39;,
+ &#39;__spec__&#39;,
+ &#39;__stderr__&#39;,
+ &#39;__stdin__&#39;,
+ &#39;__stdout__&#39;,
+ &#39;__unraisablehook__&#39;,
+ &#39;_base_executable&#39;,
+ &#39;_clear_type_cache&#39;,
+ &#39;_current_exceptions&#39;,
+ &#39;_current_frames&#39;,
+ &#39;_debugmallocstats&#39;,
+ &#39;_framework&#39;,
+ &#39;_getframe&#39;,
+ &#39;_getframemodulename&#39;,
+ &#39;_git&#39;,
+ &#39;_home&#39;,
+ &#39;_setprofileallthreads&#39;,
+ &#39;_settraceallthreads&#39;,
+ &#39;_stdlib_dir&#39;,
+ &#39;_xoptions&#39;,
+ &#39;abiflags&#39;,
+ &#39;activate_stack_trampoline&#39;,
+ &#39;addaudithook&#39;,
+ &#39;api_version&#39;,
+ &#39;argv&#39;,
+ &#39;audit&#39;,
+ &#39;base_exec_prefix&#39;,
+ &#39;base_prefix&#39;,
+ &#39;breakpointhook&#39;,
+ &#39;builtin_module_names&#39;,
+ &#39;byteorder&#39;,
+ &#39;call_tracing&#39;,
+ &#39;copyright&#39;,
+ &#39;deactivate_stack_trampoline&#39;,
+ &#39;displayhook&#39;,
+ &#39;dont_write_bytecode&#39;,
+ &#39;exc_info&#39;,
+ &#39;excepthook&#39;,
+ &#39;exception&#39;,
+ &#39;exec_prefix&#39;,
+ &#39;executable&#39;,
+ &#39;exit&#39;,
+ &#39;flags&#39;,
+ &#39;float_info&#39;,
+ &#39;float_repr_style&#39;,
+ &#39;get_asyncgen_hooks&#39;,
+ &#39;get_coroutine_origin_tracking_depth&#39;,
+ &#39;get_int_max_str_digits&#39;,
+ &#39;getallocatedblocks&#39;,
+ &#39;getdefaultencoding&#39;,
+ &#39;getdlopenflags&#39;,
+ &#39;getfilesystemencodeerrors&#39;,
+ &#39;getfilesystemencoding&#39;,
+ &#39;getprofile&#39;,
+ &#39;getrecursionlimit&#39;,
+ &#39;getrefcount&#39;,
+ &#39;getsizeof&#39;,
+ &#39;getswitchinterval&#39;,
+ &#39;gettrace&#39;,
+ &#39;getunicodeinternedsize&#39;,
+ &#39;hash_info&#39;,
+ &#39;hexversion&#39;,
+ &#39;implementation&#39;,
+ &#39;int_info&#39;,
+ &#39;intern&#39;,
+ &#39;is_finalizing&#39;,
+ &#39;is_stack_trampoline_active&#39;,
+ &#39;last_traceback&#39;,
+ &#39;last_type&#39;,
+ &#39;last_value&#39;,
+ &#39;maxsize&#39;,
+ &#39;maxunicode&#39;,
+ &#39;meta_path&#39;,
+ &#39;modules&#39;,
+ &#39;monitoring&#39;,
+ &#39;orig_argv&#39;,
+ &#39;path&#39;,
+ &#39;path_hooks&#39;,
+ &#39;path_importer_cache&#39;,
+ &#39;platform&#39;,
+ &#39;platlibdir&#39;,
+ &#39;prefix&#39;,
+ &#39;ps1&#39;,
+ &#39;ps2&#39;,
+ &#39;ps3&#39;,
+ &#39;pycache_prefix&#39;,
+ &#39;set_asyncgen_hooks&#39;,
+ &#39;set_coroutine_origin_tracking_depth&#39;,
+ &#39;set_int_max_str_digits&#39;,
+ &#39;setdlopenflags&#39;,
+ &#39;setprofile&#39;,
+ &#39;setrecursionlimit&#39;,
+ &#39;setswitchinterval&#39;,
+ &#39;settrace&#39;,
+ &#39;stderr&#39;,
+ &#39;stdin&#39;,
+ &#39;stdlib_module_names&#39;,
+ &#39;stdout&#39;,
+ &#39;thread_info&#39;,
+ &#39;unraisablehook&#39;,
+ &#39;version&#39;,
+ &#39;version_info&#39;,
+ &#39;warnoptions&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="os">
+<h4><code class="docutils literal notranslate"><span class="pre">os()</span></code><a class="headerlink" href="#os" title="Link to this heading">#</a></h4>
+<p>Used to automatically perform many operating system tasks. It provides functions for creating, changing current working directory, and removing a directory (folder), fetching its contents, changing and identifying the current directory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="c1"># import the module</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="c1"># Getting current working directory</span>
+<span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="sys">
+<h4><code class="docutils literal notranslate"><span class="pre">sys()</span></code><a class="headerlink" href="#sys" title="Link to this heading">#</a></h4>
+<p>Used to access system specific parameters and functions. It provides access to some variables used or maintained by the interpreter and to functions that interact strongly with the interpreter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="string">
+<h4><code class="docutils literal notranslate"><span class="pre">string()</span></code><a class="headerlink" href="#string" title="Link to this heading">#</a></h4>
+<p>A <strong>string</strong> module is a useful module for working with text. It contains a set of functions that are used to perform certain operations on characters. This module has pre-defined functions like capwords, ascii_letters, etc.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">capwords</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">))</span> <span class="c1">#capitalizes the first letter of each words</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ascii_letters</span><span class="p">)</span> <span class="c1">#prints all lowercase and uppercase letters</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello World
+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="random">
+<h3><code class="docutils literal notranslate"><span class="pre">random()</span></code><a class="headerlink" href="#random" title="Link to this heading">#</a></h3>
+<p>The <strong>random</strong> module is used to generate the random numbers. It provides the following two built in functions:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Function</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">random()</span></code></strong></p></td>
+<td class="text-left"><p>It returns a random number between 0.0 and 1.0 where 1.0 is exclusive.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">randint(x,y)</span></code></strong></p></td>
+<td class="text-left"><p>It returns a random number between x and y where both the numbers are inclusive.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="c1">#prints a random number between the given range</span>
+
+<span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">56</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">choice</span><span class="p">(</span><span class="n">list1</span><span class="p">))</span> <span class="c1">#prints a random element from the given iterator</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">uniform</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span> <span class="c1">#prints a random float number between two given values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+30
+14.78589902230161
+</pre></div>
+</div>
+</div>
+</div>
+<section id="math">
+<h4><code class="docutils literal notranslate"><span class="pre">math()</span></code><a class="headerlink" href="#math" title="Link to this heading">#</a></h4>
+<p>The <strong>math</strong> module is used to perform mathematical operations. It provides some pre-defined mathematical functions like sqrt, factorial, etc.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Function</p></th>
+<th class="head text-left"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">ceil(n)</span></code></strong></p></td>
+<td class="text-left"><p>It returns the next integer number of the given number.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">sqrt(n)</span></code></strong></p></td>
+<td class="text-left"><p>It returns the Square root of the given number.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">exp(n)</span></code></strong></p></td>
+<td class="text-left"><p>It returns the natural logarithm e raised to the given number.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">floor(n)</span></code></strong></p></td>
+<td class="text-left"><p>It returns the previous integer number of the given number.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">log(n,baseto)</span></code></strong></p></td>
+<td class="text-left"><p>It returns the previous integer number of the given number.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">pow(baseto,</span> <span class="pre">exp)</span></code></strong></p></td>
+<td class="text-left"><p>It returns baseto raised to the exp power.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">sin(n)</span></code></strong></p></td>
+<td class="text-left"><p>It returns sine of the given radian.</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">cos(n)</span></code></strong></p></td>
+<td class="text-left"><p>It returns cosine of the given radian.</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><strong><code class="docutils literal notranslate"><span class="pre">tan(n)</span></code></strong></p></td>
+<td class="text-left"><p>It returns tangent of the given radian.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span> <span class="c1"># prints the square root of the value 16 in the form of a floating-point value</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span> <span class="c1"># prints the factorial of the value 5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.0
+120
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are alot more builtin and user defined modules, you can read more about them <a class="reference external" href="https://docs.python.org/3/library/index.html#modules-index">here</a></p>
+</section>
+</section>
+<section id="packages">
+<h3>Packages<a class="headerlink" href="#packages" title="Link to this heading">#</a></h3>
+<p>We want to divide our code base into clean, efficient modules using Python packages.</p>
+<p>We don’t usually store all of our files on our computer in the same location. We use a well-organized hierarchy of directories for easier access.</p>
+<p>Similar files are kept in the same directory, for example, we may keep all the songs in the “<strong>music</strong>” directory. Analogous to this, Python has packages for directories and <strong>modules</strong> for files.</p>
+<p>As our application program grows larger in size with a lot of modules, we place similar modules in one package and different modules in different packages. This makes a project (program) easy to manage and conceptually clear.</p>
+<p>Similarly, as a directory can contain subdirectories and files, a Python package can have sub-packages and modules.</p>
+<p>A directory must contain a file named <strong><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code></strong> in order for Python to consider it as a package. This file can be left empty but we generally place the initialization code for that package in this file.</p>
+<p>Here is an example. Suppose we are developing a game. One possible organization of packages and modules could be as shown in the figure below.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><a class="reference internal" href="../../_images/pack1.png"><img alt="../../_images/pack1.png" src="../../_images/pack1.png" style="width: 400px;" /></a></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><strong>Package Module Structure in Python Programming</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>We can import modules from packages using the dot <strong><code class="docutils literal notranslate"><span class="pre">.</span></code></strong> operator.</p>
+<p>For example, if we want to import the <strong><code class="docutils literal notranslate"><span class="pre">start</span></code></strong> module in the above example, it can be done as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;import Game.Level.start</span>
+</pre></div>
+</div>
+<p>Now, if this module contains a <strong>function</strong> named <strong><code class="docutils literal notranslate"><span class="pre">select_difficulty()</span></code></strong>, we must use the full name to reference it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;Game.Level.start.select_difficulty(2)</span>
+</pre></div>
+</div>
+<p>If this construct seems lengthy, we can import the module without the package prefix as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;from Game.Level import start</span>
+</pre></div>
+</div>
+<p>We can now call the function simply as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;start.select_difficulty(2)</span>
+</pre></div>
+</div>
+<p>Another way of importing just the required function (or class or variable) from a module within a package would be as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;from Game.Level.start import select_difficulty</span>
+</pre></div>
+</div>
+<p>Now we can directly call this function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt;select_difficulty(2)</span>
+</pre></div>
+</div>
+<p>Although easier, this method is not recommended. Using the full <strong>namespace</strong> avoids confusion and prevents two same identifier names from colliding.</p>
+<p>While importing packages, Python looks in the list of directories defined in <strong><code class="docutils literal notranslate"><span class="pre">sys.path</span></code></strong>, similar as for <strong>module search path</strong>.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2_syntax_and_symantics.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Syntax and Symantics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="4_Object_Oriented.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Object Oriented Programming</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-without-parameters-and-return-value">Functions without parameters and return value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-with-return-value">Functions with return value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-with-parameters">Functions with parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#returning-multiple-values">Returning multiple values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#passing-default-values">Passing default values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#docstrings">Docstrings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-scope">Variable scope</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#global">Global</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local">Local</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aruguments">Aruguments</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-arguments">Default Arguments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#keyword-arguments">Keyword Arguments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arbitrary-variable-length-arguments">Arbitrary/Variable-length Arguments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-as-a-parameter">Function as a Parameter</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursion">Recursion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#anonymous-lambda-functions">Anonymous / Lambda Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-module">Creating a module</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-a-module">Importing a module</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#module-path">Module path</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-modules">Built-in modules</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dir"><code class="docutils literal notranslate"><span class="pre">dir()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#os"><code class="docutils literal notranslate"><span class="pre">os()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sys"><code class="docutils literal notranslate"><span class="pre">sys()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#string"><code class="docutils literal notranslate"><span class="pre">string()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random"><code class="docutils literal notranslate"><span class="pre">random()</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#math"><code class="docutils literal notranslate"><span class="pre">math()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#packages">Packages</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

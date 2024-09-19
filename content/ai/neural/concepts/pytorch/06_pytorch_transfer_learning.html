@@ -1,0 +1,1689 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PyTorch Transfer Learning &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/ai/neural/concepts/pytorch/06_pytorch_transfer_learning';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/ai/neural/concepts/pytorch/06_pytorch_transfer_learning.html" />
+    <link rel="icon" href="../../../../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+    <link rel="next" title="Generative AI" href="../../../../genai/introduction.html" />
+    <link rel="prev" title="PyTorch Custom Datasets" href="04_pytorch_custom_datasets.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/3_functions_and_modules.html">Functions &amp; Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/4_Object_Oriented.html">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/8_advanced.html">Advanced Concepts</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../Introduction_to_ml.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/000_Data_Exploration.html">Exploratory Data Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/001_Data_Preparation.html">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/003_Classification.html">Classfication</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/005_Evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/006_Advanced.html">K-Fold Cross Validation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../neural_toc.html">Neural Networks</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../002_Backpropogation.html">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../003_Activations.html">Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../004_Optimization.html">Optimizations</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="pytorch_toc.html">Pytorch</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../genai/introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../genai/concepts/transformers/01_transformers_from_scratch.html">Transformers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../genai/langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../genai/langchain/intro.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../genai/langchain/01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../../genai/langchain/02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/courses/courses_toc.html">Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/ai/neural/concepts/pytorch/06_pytorch_transfer_learning.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/ai/neural/concepts/pytorch/06_pytorch_transfer_learning.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../../_sources/content/ai/neural/concepts/pytorch/06_pytorch_transfer_learning.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>PyTorch Transfer Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-transfer-learning">What is transfer learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-transfer-learning">Why use transfer learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-find-pretrained-models">Where to find pretrained models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-were-going-to-cover">What we’re going to cover</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-setup">Getting setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-data">Get data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-datasets-and-dataloaders">Create Datasets and DataLoaders</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-transform-for-torchvision-models-manual-creation">Creating a transform for <code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code> (manual creation)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-transform-for-torchvision-models-auto-creation">Creating a transform for <code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code> (auto creation)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-a-pretrained-model">Getting a pretrained model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#which-pretrained-model-should-you-use">Which pretrained model should you use?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-a-pretrained-model">Setting up a pretrained model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-a-summary-of-our-model-with-torchinfo-summary">Getting a summary of our model with <code class="docutils literal notranslate"><span class="pre">torchinfo.summary()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#freezing-the-base-model-and-changing-the-output-layer-to-suit-our-needs">Freezing the base model and changing the output layer to suit our needs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-model">Train model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-model-by-plotting-loss-curves">Evaluate model by plotting loss curves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-predictions-on-images-from-the-test-set">Make predictions on images from the test set</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-predictions-on-a-custom-image">Making predictions on a custom image</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-takeaways">Main takeaways</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="pytorch-transfer-learning">
+<h1>PyTorch Transfer Learning<a class="headerlink" href="#pytorch-transfer-learning" title="Link to this heading">#</a></h1>
+<p>We’ve built a few models by hand so far.</p>
+<p>But their performance has been poor.</p>
+<p>You might be thinking, <strong>is there a well-performing model that already exists for our problem?</strong></p>
+<p>And in the world of deep learning, the answer is often <em>yes</em>.</p>
+<p>We’ll see how by using a powerful technique called <a class="reference external" href="https://developers.google.com/machine-learning/glossary#transfer-learning"><strong>transfer learning</strong></a>.</p>
+<section id="what-is-transfer-learning">
+<h2>What is transfer learning?<a class="headerlink" href="#what-is-transfer-learning" title="Link to this heading">#</a></h2>
+<p><strong>Transfer learning</strong> allows us to take the patterns (also called weights) another model has learned from another problem and use them for our own problem.</p>
+<p>For example, we can take the patterns a computer vision model has learned from datasets such as <a class="reference external" href="https://www.image-net.org/">ImageNet</a> (millions of images of different objects) and use them to power our FoodVision Mini model.</p>
+<p>Or we could take the patterns from a <a class="reference external" href="https://developers.google.com/machine-learning/glossary#masked-language-model">language model</a> (a model that’s been through large amounts of text to learn a representation of language) and use them as the basis of a model to classify different text samples.</p>
+<p>The premise remains: find a well-performing existing model and apply it to your own problem.</p>
+<img alt="transfer learning overview on different problems" src="../../../../../_images/06-transfer-learning-example-overview.png" />
+<p><em>Example of transfer learning being applied to computer vision and natural language processing (NLP). In the case of computer vision, a computer vision model might learn patterns on millions of images in ImageNet and then use those patterns to infer on another problem. And for NLP, a language model may learn the structure of language by reading all of Wikipedia (and perhaps more) and then apply that knowledge to a different problem.</em></p>
+</section>
+<section id="why-use-transfer-learning">
+<h2>Why use transfer learning?<a class="headerlink" href="#why-use-transfer-learning" title="Link to this heading">#</a></h2>
+<p>There are two main benefits to using transfer learning:</p>
+<ol class="arabic simple">
+<li><p>Can leverage an existing model (usually a neural network architecture) proven to work on problems similar to our own.</p></li>
+<li><p>Can leverage a working model which has <strong>already learned</strong> patterns on similar data to our own. This often results in achieving <strong>great results with less custom data</strong>.</p></li>
+</ol>
+<img alt="transfer learning applied to FoodVision Mini" src="content/ai/neural/concepts/pytorch/images/06-transfer-learning-for-foodvision-mini%20.png" />
+<p><em>We’ll be putting these to the test for our FoodVision Mini problem, we’ll take a computer vision model pretrained on ImageNet and try to leverage its underlying learned representations for classifying images of pizza, steak and sushi.</em></p>
+<p>Both research and practice support the use of transfer learning too.</p>
+<p>A finding from a recent machine learning research paper recommended practioner’s use transfer learning wherever possible.</p>
+<a class="reference internal image-reference" href="../../../../../_images/06-how-to-train-your-vit-section-6-transfer-learning-highlight.png"><img alt="how to train your vision transformer paper section 6, advising to use transfer learning if you can" src="../../../../../_images/06-how-to-train-your-vit-section-6-transfer-learning-highlight.png" style="width: 900px;" /></a>
+<p><em>A study into the effects of whether training from scratch or using transfer learning was better from a practioner’s point of view, found transfer learning to be far more beneficial in terms of cost and time. <strong>Source:</strong> <a class="reference external" href="https://arxiv.org/abs/2106.10270">How to train your ViT? Data, Augmentation, and Regularization in Vision Transformers</a> paper section 6 (conclusion).</em></p>
+</section>
+<section id="where-to-find-pretrained-models">
+<h2>Where to find pretrained models<a class="headerlink" href="#where-to-find-pretrained-models" title="Link to this heading">#</a></h2>
+<p>The world of deep learning is an amazing place.</p>
+<p>So amazing that many people around the world share their work.</p>
+<p>Often, code and pretrained models for the latest state-of-the-art research is released within a few days of publishing.</p>
+<p>And there are several places you can find pretrained models to use for your own problems.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Location</strong></p></th>
+<th class="head"><p><strong>What’s there?</strong></p></th>
+<th class="head"><p><strong>Link(s)</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>PyTorch domain libraries</strong></p></td>
+<td><p>Each of the PyTorch domain libraries (<code class="docutils literal notranslate"><span class="pre">torchvision</span></code>, <code class="docutils literal notranslate"><span class="pre">torchtext</span></code>) come with pretrained models of some form. The models there work right within PyTorch.</p></td>
+<td><p><a class="reference external" href="https://pytorch.org/vision/stable/models.html"><code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code></a>, <a class="reference external" href="https://pytorch.org/text/main/models.html"><code class="docutils literal notranslate"><span class="pre">torchtext.models</span></code></a>, <a class="reference external" href="https://pytorch.org/audio/stable/models.html"><code class="docutils literal notranslate"><span class="pre">torchaudio.models</span></code></a>, <a class="reference external" href="https://pytorch.org/torchrec/torchrec.models.html"><code class="docutils literal notranslate"><span class="pre">torchrec.models</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>HuggingFace Hub</strong></p></td>
+<td><p>A series of pretrained models on many different domains (vision, text, audio and more) from organizations around the world. There’s plenty of different datasets too.</p></td>
+<td><p><a class="reference external" href="https://huggingface.co/models">https://huggingface.co/models</a>, <a class="reference external" href="https://huggingface.co/datasets">https://huggingface.co/datasets</a></p></td>
+</tr>
+<tr class="row-even"><td><p><strong><code class="docutils literal notranslate"><span class="pre">timm</span></code> (PyTorch Image Models) library</strong></p></td>
+<td><p>Almost all of the latest and greatest computer vision models in PyTorch code as well as plenty of other helpful computer vision features.</p></td>
+<td><p><a class="github reference external" href="https://github.com/rwightman/pytorch-image-models">rwightman/pytorch-image-models</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Paperswithcode</strong></p></td>
+<td><p>A collection of the latest state-of-the-art machine learning papers with code implementations attached. You can also find benchmarks here of model performance on different tasks.</p></td>
+<td><p><a class="reference external" href="https://paperswithcode.com/">https://paperswithcode.com/</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<img alt="different locations to find pretrained neural network models" src="../../../../../_images/06-transfer-learning-where-to-find-pretrained-models.png" />
+<p><em>With access to such high-quality resources as above, it should be common practice at the start of every deep learning problem you take on to ask, “Does a pretrained model exist for my problem?”</em></p>
+<blockquote>
+<div><p><strong>Exercise:</strong> Spend 5-minutes going through <a class="reference external" href="https://pytorch.org/vision/stable/models.html"><code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code></a> as well as the <a class="reference external" href="https://huggingface.co/models">HuggingFace Hub Models page</a>, what do you find? (there’s no right answers here, it’s just to practice exploring)</p>
+</div></blockquote>
+</section>
+<section id="what-were-going-to-cover">
+<h2>What we’re going to cover<a class="headerlink" href="#what-were-going-to-cover" title="Link to this heading">#</a></h2>
+<p>We’re going to take a pretrained model from <code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code> and customise it to work on (and hopefully improve) our FoodVision Mini problem.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Topic</strong></p></th>
+<th class="head"><p><strong>Contents</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Getting setup</strong></p></td>
+<td><p>We’ve written a fair bit of useful code over the past few sections, let’s download it and make sure we can use it again.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Get data</strong></p></td>
+<td><p>Let’s get the pizza, steak and sushi image classification dataset we’ve been using to try and improve our model’s results.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Create Datasets and DataLoaders</strong></p></td>
+<td><p>We’ll use the <code class="docutils literal notranslate"><span class="pre">data_setup.py</span></code> script we wrote in chapter 05. PyTorch Going Modular to setup our DataLoaders.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Get and customise a pretrained model</strong></p></td>
+<td><p>Here we’ll download a pretrained model from <code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code> and customise it to our own problem.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Train model</strong></p></td>
+<td><p>Let’s see how the new pretrained model goes on our pizza, steak, sushi dataset. We’ll use the training functions we created in the previous chapter.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Evaluate the model by plotting loss curves</strong></p></td>
+<td><p>How did our first transfer learning model go? Did it overfit or underfit?</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Make predictions on images from the test set</strong></p></td>
+<td><p>It’s one thing to check out a model’s evaluation metrics but it’s another thing to view its predictions on test samples, let’s <em>visualize, visualize, visualize</em>!</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="getting-setup">
+<h2>Getting setup<a class="headerlink" href="#getting-setup" title="Link to this heading">#</a></h2>
+<p>Let’s get started by importing/downloading the required modules for this section.</p>
+<p>To save us writing extra code, we’re going to be leveraging some of the Python scripts (such as <code class="docutils literal notranslate"><span class="pre">data_setup.py</span></code> and <code class="docutils literal notranslate"><span class="pre">engine.py</span></code>) we created in the previous section, <a class="reference internal" href="#05_pytorch_going_modular"><span class="xref myst">PyTorch Going Modular</span></a>.</p>
+<p>We’ll also get the <a class="reference external" href="https://github.com/TylerYep/torchinfo"><code class="docutils literal notranslate"><span class="pre">torchinfo</span></code></a> package if it’s not available.</p>
+<p><code class="docutils literal notranslate"><span class="pre">torchinfo</span></code> will help later on to give us a visual representation of our model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For this notebook to run with updated APIs, we need torch 1.12+ and torchvision 0.13+</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">torch</span>
+    <span class="kn">import</span> <span class="nn">torchvision</span>
+    <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;torch version should be 1.12+&quot;</span>
+    <span class="k">assert</span> <span class="nb">int</span><span class="p">(</span><span class="n">torchvision</span><span class="o">.</span><span class="n">__version__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="mi">13</span><span class="p">,</span> <span class="s2">&quot;torchvision version should be 0.13+&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;torch version: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;torchvision version: </span><span class="si">{</span><span class="n">torchvision</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] torch/torchvision versions not as required, installing nightly versions.&quot;</span><span class="p">)</span>
+    <span class="o">!</span>pip3<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>torch<span class="w"> </span>torchvision<span class="w"> </span>torchaudio<span class="w"> </span>--extra-index-url<span class="w"> </span>https://download.pytorch.org/whl/cu113
+    <span class="kn">import</span> <span class="nn">torch</span>
+    <span class="kn">import</span> <span class="nn">torchvision</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;torch version: </span><span class="si">{</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;torchvision version: </span><span class="si">{</span><span class="n">torchvision</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch version: 1.13.0.dev20220620+cu113
+torchvision version: 0.14.0.dev20220620+cu113
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Continue with regular imports</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torchvision</span>
+
+<span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+<span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">transforms</span>
+
+<span class="c1"># Try to get torchinfo, install it if it doesn&#39;t work</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">torchinfo</span> <span class="kn">import</span> <span class="n">summary</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[INFO] Couldn&#39;t find torchinfo... installing it.&quot;</span><span class="p">)</span>
+    <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>-q<span class="w"> </span>torchinfo
+    <span class="kn">from</span> <span class="nn">torchinfo</span> <span class="kn">import</span> <span class="n">summary</span>
+
+<span class="c1"># Try to import the going_modular directory, download it from GitHub if it doesn&#39;t work</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">going_modular.going_modular</span> <span class="kn">import</span> <span class="n">data_setup</span><span class="p">,</span> <span class="n">engine</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="c1"># Get the going_modular scripts</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[INFO] Couldn&#39;t find going_modular scripts... downloading them from GitHub.&quot;</span><span class="p">)</span>
+    <span class="o">!</span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/mrdbourke/pytorch-deep-learning
+    <span class="o">!</span>mv<span class="w"> </span>pytorch-deep-learning/going_modular<span class="w"> </span>.
+    <span class="o">!</span>rm<span class="w"> </span>-rf<span class="w"> </span>pytorch-deep-learning
+    <span class="kn">from</span> <span class="nn">going_modular.going_modular</span> <span class="kn">import</span> <span class="n">data_setup</span><span class="p">,</span> <span class="n">engine</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s setup device agnostic code.</p>
+<blockquote>
+<div><p><strong>Note:</strong> If you’re using Google Colab, and you don’t have a GPU turned on yet, it’s now time to turn one on via <code class="docutils literal notranslate"><span class="pre">Runtime</span> <span class="pre">-&gt;</span> <span class="pre">Change</span> <span class="pre">runtime</span> <span class="pre">type</span> <span class="pre">-&gt;</span> <span class="pre">Hardware</span> <span class="pre">accelerator</span> <span class="pre">-&gt;</span> <span class="pre">GPU</span></code>.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup device agnostic code</span>
+<span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
+<span class="n">device</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;cuda&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="get-data">
+<h2>Get data<a class="headerlink" href="#get-data" title="Link to this heading">#</a></h2>
+<p>Before we can start to use <strong>transfer learning</strong>, we’ll need a dataset.</p>
+<p>To see how transfer learning compares to our previous attempts at model building, we’ll download the same dataset we’ve been using for FoodVision Mini.</p>
+<p>Let’s write some code to download the <a class="reference external" href="https://github.com/mrdbourke/pytorch-deep-learning/blob/main/data/pizza_steak_sushi.zip"><code class="docutils literal notranslate"><span class="pre">pizza_steak_sushi.zip</span></code></a> dataset from the course GitHub and then unzip it.</p>
+<p>We can also make sure if we’ve already got the data, it doesn’t redownload.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c1"># Setup path to data folder</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/&quot;</span><span class="p">)</span>
+<span class="n">image_path</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">/</span> <span class="s2">&quot;pizza_steak_sushi&quot;</span>
+
+<span class="c1"># If the image folder doesn&#39;t exist, download it and prepare it... </span>
+<span class="k">if</span> <span class="n">image_path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">image_path</span><span class="si">}</span><span class="s2"> directory exists.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Did not find </span><span class="si">{</span><span class="n">image_path</span><span class="si">}</span><span class="s2"> directory, creating one...&quot;</span><span class="p">)</span>
+    <span class="n">image_path</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># Download pizza, steak, sushi data</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span> <span class="o">/</span> <span class="s2">&quot;pizza_steak_sushi.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://github.com/mrdbourke/pytorch-deep-learning/raw/main/data/pizza_steak_sushi.zip&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloading pizza, steak, sushi data...&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+    <span class="c1"># Unzip pizza, steak, sushi data</span>
+    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">data_path</span> <span class="o">/</span> <span class="s2">&quot;pizza_steak_sushi.zip&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unzipping pizza, steak, sushi data...&quot;</span><span class="p">)</span> 
+        <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+
+    <span class="c1"># Remove .zip file</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">data_path</span> <span class="o">/</span> <span class="s2">&quot;pizza_steak_sushi.zip&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>data/pizza_steak_sushi directory exists.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ve got the same dataset we’ve been using previously, a series of images of pizza, steak and sushi in standard image classification format.</p>
+<p>Let’s now create paths to our training and test directories.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup Dirs</span>
+<span class="n">train_dir</span> <span class="o">=</span> <span class="n">image_path</span> <span class="o">/</span> <span class="s2">&quot;train&quot;</span>
+<span class="n">test_dir</span> <span class="o">=</span> <span class="n">image_path</span> <span class="o">/</span> <span class="s2">&quot;test&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-datasets-and-dataloaders">
+<h2>Create Datasets and DataLoaders<a class="headerlink" href="#create-datasets-and-dataloaders" title="Link to this heading">#</a></h2>
+<p>Since we’ve downloaded the <code class="docutils literal notranslate"><span class="pre">going_modular</span></code> directory, we can use the <a class="reference internal" href="#./going_modular/going_modular/data_setup.py"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">data_setup.py</span></code></span></a> script we created in section <a class="reference internal" href="#05_pytorch_going_modular"><span class="xref myst">PyTorch Going Modular</span></a> to prepare and setup our DataLoaders.</p>
+<p>But since we’ll be using a pretrained model from <a class="reference external" href="https://pytorch.org/vision/stable/models.html"><code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code></a>, there’s a specific transform we need to prepare our images first.</p>
+<section id="creating-a-transform-for-torchvision-models-manual-creation">
+<h3>Creating a transform for <code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code> (manual creation)<a class="headerlink" href="#creating-a-transform-for-torchvision-models-manual-creation" title="Link to this heading">#</a></h3>
+<p>When using a pretrained model, it’s important that <strong>your custom data going into the model is prepared in the same way as the original training data that went into the model</strong>.</p>
+<p>Prior to <code class="docutils literal notranslate"><span class="pre">torchvision</span></code> v0.13+, to create a transform for a pretrained model in <code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code>, the documentation stated:</p>
+<blockquote>
+<div><p>All pre-trained models expect input images normalized in the same way, i.e. mini-batches of 3-channel RGB images of shape (3 x H x W), where H and W are expected to be at least 224.</p>
+<p>The images have to be loaded in to a range of <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code> and then normalized using <code class="docutils literal notranslate"><span class="pre">mean</span> <span class="pre">=</span> <span class="pre">[0.485,</span> <span class="pre">0.456,</span> <span class="pre">0.406]</span></code> and <code class="docutils literal notranslate"><span class="pre">std</span> <span class="pre">=</span> <span class="pre">[0.229,</span> <span class="pre">0.224,</span> <span class="pre">0.225]</span></code>.</p>
+<p>You can use the following transform to normalize:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">normalize</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mf">0.485</span><span class="p">,</span> <span class="mf">0.456</span><span class="p">,</span> <span class="mf">0.406</span><span class="p">],</span>
+                                 <span class="n">std</span><span class="o">=</span><span class="p">[</span><span class="mf">0.229</span><span class="p">,</span> <span class="mf">0.224</span><span class="p">,</span> <span class="mf">0.225</span><span class="p">])</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The good news is, we can achieve the above transformations with a combination of:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Transform number</strong></p></th>
+<th class="head"><p><strong>Transform required</strong></p></th>
+<th class="head"><p><strong>Code to perform transform</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Mini-batches of size <code class="docutils literal notranslate"><span class="pre">[batch_size,</span> <span class="pre">3,</span> <span class="pre">height,</span> <span class="pre">width]</span></code> where height and width are at least 224x224^.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torchvision.transforms.Resize()</span></code> to resize images into <code class="docutils literal notranslate"><span class="pre">[3,</span> <span class="pre">224,</span> <span class="pre">224]</span></code>^ and <code class="docutils literal notranslate"><span class="pre">torch.utils.data.DataLoader()</span></code> to create batches of images.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Values between 0 &amp; 1.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torchvision.transforms.ToTensor()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>A mean of <code class="docutils literal notranslate"><span class="pre">[0.485,</span> <span class="pre">0.456,</span> <span class="pre">0.406]</span></code> (values across each colour channel).</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torchvision.transforms.Normalize(mean=...)</span></code> to adjust the mean of our images.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>A standard deviation of <code class="docutils literal notranslate"><span class="pre">[0.229,</span> <span class="pre">0.224,</span> <span class="pre">0.225]</span></code> (values across each colour channel).</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torchvision.transforms.Normalize(std=...)</span></code> to adjust the standard deviation of our images.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> ^some pretrained models from <code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code> in different sizes to <code class="docutils literal notranslate"><span class="pre">[3,</span> <span class="pre">224,</span> <span class="pre">224]</span></code>, for example, some might take them in <code class="docutils literal notranslate"><span class="pre">[3,</span> <span class="pre">240,</span> <span class="pre">240]</span></code>. For specific input image sizes, see the documentation.</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Question:</strong> <em>Where did the mean and standard deviation values come from? Why do we need to do this?</em></p>
+<p>These were calculated from the data. Specifically, the ImageNet dataset by taking the means and standard deviations across a subset of images.</p>
+<p>We also don’t <em>need</em> to do this. Neural networks are usually quite capable of figuring out appropriate data distributions (they’ll calculate where the mean and standard deviations need to be on their own) but setting them at the start can help our networks achieve better performance quicker.</p>
+</div></blockquote>
+<p>Let’s compose a series of <code class="docutils literal notranslate"><span class="pre">torchvision.transforms</span></code> to perform the above steps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a transforms pipeline manually (required for torchvision &lt; 0.13)</span>
+<span class="n">manual_transforms</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">((</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)),</span> <span class="c1"># 1. Reshape all images to 224x224 (though some models may require different sizes)</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span> <span class="c1"># 2. Turn image values to between 0 &amp; 1 </span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mf">0.485</span><span class="p">,</span> <span class="mf">0.456</span><span class="p">,</span> <span class="mf">0.406</span><span class="p">],</span> <span class="c1"># 3. A mean of [0.485, 0.456, 0.406] (across each colour channel)</span>
+                         <span class="n">std</span><span class="o">=</span><span class="p">[</span><span class="mf">0.229</span><span class="p">,</span> <span class="mf">0.224</span><span class="p">,</span> <span class="mf">0.225</span><span class="p">])</span> <span class="c1"># 4. A standard deviation of [0.229, 0.224, 0.225] (across each colour channel),</span>
+<span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ve got a <strong>manually created series of transforms</strong> ready to prepare our images, let’s create training and testing DataLoaders.</p>
+<p>We can create these using the <code class="docutils literal notranslate"><span class="pre">create_dataloaders</span></code> function from the <a class="reference internal" href="#./going_modular/going_modular/data_setup.py"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">data_setup.py</span></code></span></a> script we created in <a class="reference internal" href="#05_pytorch_going_modular"><span class="xref myst">PyTorch Going Modular Part 2</span></a>.</p>
+<p>We’ll set <code class="docutils literal notranslate"><span class="pre">batch_size=32</span></code> so our model see’s mini-batches of 32 samples at a time.</p>
+<p>And we can transform our images using the transform pipeline we created above by setting <code class="docutils literal notranslate"><span class="pre">transform=manual_transforms</span></code>.</p>
+<blockquote>
+<div><p><strong>Note:</strong> I’ve included this manual creation of transforms in this notebook because you may come across resources that use this style. It’s also important to note that because these transforms are manually created, they’re also infinitely customizable. So if you wanted to included data augmentation techniques in your transforms pipeline, you could.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create training and testing DataLoaders as well as get a list of class names</span>
+<span class="n">train_dataloader</span><span class="p">,</span> <span class="n">test_dataloader</span><span class="p">,</span> <span class="n">class_names</span> <span class="o">=</span> <span class="n">data_setup</span><span class="o">.</span><span class="n">create_dataloaders</span><span class="p">(</span><span class="n">train_dir</span><span class="o">=</span><span class="n">train_dir</span><span class="p">,</span>
+                                                                               <span class="n">test_dir</span><span class="o">=</span><span class="n">test_dir</span><span class="p">,</span>
+                                                                               <span class="n">transform</span><span class="o">=</span><span class="n">manual_transforms</span><span class="p">,</span> <span class="c1"># resize, convert images to between 0 &amp; 1 and normalize them</span>
+                                                                               <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span> <span class="c1"># set mini-batch size to 32</span>
+
+<span class="n">train_dataloader</span><span class="p">,</span> <span class="n">test_dataloader</span><span class="p">,</span> <span class="n">class_names</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;torch.utils.data.dataloader.DataLoader at 0x7fa9429a3a60&gt;,
+ &lt;torch.utils.data.dataloader.DataLoader at 0x7fa9429a37c0&gt;,
+ [&#39;pizza&#39;, &#39;steak&#39;, &#39;sushi&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="creating-a-transform-for-torchvision-models-auto-creation">
+<h3>Creating a transform for <code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code> (auto creation)<a class="headerlink" href="#creating-a-transform-for-torchvision-models-auto-creation" title="Link to this heading">#</a></h3>
+<p>As previously stated, when using a pretrained model, it’s important that <strong>your custom data going into the model is prepared in the same way as the original training data that went into the model</strong>.</p>
+<p>Above we saw how to manually create a transform for a pretrained model.</p>
+<p>But as of <code class="docutils literal notranslate"><span class="pre">torchvision</span></code> v0.13+, an automatic transform creation feature has been added.</p>
+<p>When you setup a model from <code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code> and select the pretrained model weights you’d like to use, for example, say we’d like to use:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">EfficientNet_B0_Weights</span><span class="o">.</span><span class="n">DEFAULT</span>
+</pre></div>
+</div>
+<p>Where,</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">EfficientNet_B0_Weights</span></code> is the model architecture weights we’d like to use (there are many differnt model architecture options in <code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DEFAULT</span></code> means the <em>best available</em> weights (the best performance in ImageNet).</p>
+<ul>
+<li><p><strong>Note:</strong> Depending on the model architecture you choose, you may also see other options such as <code class="docutils literal notranslate"><span class="pre">IMAGENET_V1</span></code> and <code class="docutils literal notranslate"><span class="pre">IMAGENET_V2</span></code> where generally the higher version number the better. Though if you want the best available, <code class="docutils literal notranslate"><span class="pre">DEFAULT</span></code> is the easiest option. See the <a class="reference external" href="https://pytorch.org/vision/main/models.html"><code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code> documentation</a> for more.</p></li>
+</ul>
+</li>
+</ul>
+<p>Let’s try it out.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get a set of pretrained model weights</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">EfficientNet_B0_Weights</span><span class="o">.</span><span class="n">DEFAULT</span> <span class="c1"># .DEFAULT = best available weights from pretraining on ImageNet</span>
+<span class="n">weights</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EfficientNet_B0_Weights.IMAGENET1K_V1
+</pre></div>
+</div>
+</div>
+</div>
+<p>And now to access the transforms assosciated with our <code class="docutils literal notranslate"><span class="pre">weights</span></code>, we can use the <code class="docutils literal notranslate"><span class="pre">transforms()</span></code> method.</p>
+<p>This is essentially saying “get the data transforms that were used to train the <code class="docutils literal notranslate"><span class="pre">EfficientNet_B0_Weights</span></code> on ImageNet”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the transforms used to create our pretrained weights</span>
+<span class="n">auto_transforms</span> <span class="o">=</span> <span class="n">weights</span><span class="o">.</span><span class="n">transforms</span><span class="p">()</span>
+<span class="n">auto_transforms</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ImageClassification(
+    crop_size=[224]
+    resize_size=[256]
+    mean=[0.485, 0.456, 0.406]
+    std=[0.229, 0.224, 0.225]
+    interpolation=InterpolationMode.BICUBIC
+)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice how <code class="docutils literal notranslate"><span class="pre">auto_transforms</span></code> is very similar to <code class="docutils literal notranslate"><span class="pre">manual_transforms</span></code>, the only difference is that <code class="docutils literal notranslate"><span class="pre">auto_transforms</span></code> came with the model architecture we chose, where as we had to create <code class="docutils literal notranslate"><span class="pre">manual_transforms</span></code> by hand.</p>
+<p>The benefit of automatically creating a transform through <code class="docutils literal notranslate"><span class="pre">weights.transforms()</span></code> is that you ensure you’re using the same data transformation as the pretrained model used when it was trained.</p>
+<p>However, the tradeoff of using automatically created transforms is a lack of customization.</p>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">auto_transforms</span></code> to create DataLoaders with <code class="docutils literal notranslate"><span class="pre">create_dataloaders()</span></code> just as before.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create training and testing DataLoaders as well as get a list of class names</span>
+<span class="n">train_dataloader</span><span class="p">,</span> <span class="n">test_dataloader</span><span class="p">,</span> <span class="n">class_names</span> <span class="o">=</span> <span class="n">data_setup</span><span class="o">.</span><span class="n">create_dataloaders</span><span class="p">(</span><span class="n">train_dir</span><span class="o">=</span><span class="n">train_dir</span><span class="p">,</span>
+                                                                               <span class="n">test_dir</span><span class="o">=</span><span class="n">test_dir</span><span class="p">,</span>
+                                                                               <span class="n">transform</span><span class="o">=</span><span class="n">auto_transforms</span><span class="p">,</span> <span class="c1"># perform same data transforms on our own data as the pretrained model</span>
+                                                                               <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span> <span class="c1"># set mini-batch size to 32</span>
+
+<span class="n">train_dataloader</span><span class="p">,</span> <span class="n">test_dataloader</span><span class="p">,</span> <span class="n">class_names</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&lt;torch.utils.data.dataloader.DataLoader at 0x7fa942951460&gt;,
+ &lt;torch.utils.data.dataloader.DataLoader at 0x7fa942951550&gt;,
+ [&#39;pizza&#39;, &#39;steak&#39;, &#39;sushi&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="getting-a-pretrained-model">
+<h2>Getting a pretrained model<a class="headerlink" href="#getting-a-pretrained-model" title="Link to this heading">#</a></h2>
+<p>Alright, here comes the fun part!</p>
+<p>Over the past few notebooks we’ve been building PyTorch neural networks from scratch.</p>
+<p>And while that’s a good skill to have, our models haven’t been performing as well as we’d like.</p>
+<p>That’s where <strong>transfer learning</strong> comes in.</p>
+<p>The whole idea of transfer learning is to <strong>take an already well-performing model on a problem-space similar to yours and then customising it to your use case</strong>.</p>
+<p>Since we’re working on a computer vision problem (image classification with FoodVision Mini), we can find pretrained classification models in <a class="reference external" href="https://pytorch.org/vision/stable/models.html#classification"><code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code></a>.</p>
+<p>Exploring the documentation, you’ll find plenty of common computer vision architecture backbones such as:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Architecuture backbone</strong></p></th>
+<th class="head"><p><strong>Code</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://arxiv.org/abs/1512.03385">ResNet</a>’s</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torchvision.models.resnet18()</span></code>, <code class="docutils literal notranslate"><span class="pre">torchvision.models.resnet50()</span></code>…</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://arxiv.org/abs/1409.1556">VGG</a> (similar to what we used for TinyVGG)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torchvision.models.vgg16()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://arxiv.org/abs/1905.11946">EfficientNet</a>’s</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torchvision.models.efficientnet_b0()</span></code>, <code class="docutils literal notranslate"><span class="pre">torchvision.models.efficientnet_b1()</span></code>…</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://arxiv.org/abs/2010.11929">VisionTransformer</a> (ViT’s)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torchvision.models.vit_b_16()</span></code>, <code class="docutils literal notranslate"><span class="pre">torchvision.models.vit_b_32()</span></code>…</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://arxiv.org/abs/2203545">ConvNeXt</a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torchvision.models.convnext_tiny()</span></code>,  <code class="docutils literal notranslate"><span class="pre">torchvision.models.convnext_small()</span></code>…</p></td>
+</tr>
+<tr class="row-odd"><td><p>More available in <code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">torchvision.models...</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="which-pretrained-model-should-you-use">
+<h3>Which pretrained model should you use?<a class="headerlink" href="#which-pretrained-model-should-you-use" title="Link to this heading">#</a></h3>
+<p>It depends on your problem/the device you’re working with.</p>
+<p>Generally, the higher number in the model name (e.g. <code class="docutils literal notranslate"><span class="pre">efficientnet_b0()</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">efficientnet_b1()</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">efficientnet_b7()</span></code>) means <em>better performance</em> but a <em>larger</em> model.</p>
+<p>You might think better performance is <em>always better</em>, right?</p>
+<p>That’s true but <strong>some better performing models are too big for some devices</strong>.</p>
+<p>For example, say you’d like to run your model on a mobile-device, you’ll have to take into account the limited compute resources on the device, thus you’d be looking for a smaller model.</p>
+<p>But if you’ve got unlimited compute power, as <a class="reference external" href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html"><em>The Bitter Lesson</em></a> states, you’d likely take the biggest, most compute hungry model you can.</p>
+<p>Understanding this <strong>performance vs. speed vs. size tradeoff</strong> will come with time and practice.</p>
+<p>For me, I’ve found a nice balance in the <code class="docutils literal notranslate"><span class="pre">efficientnet_bX</span></code> models.</p>
+<p>As of May 2022, <a class="reference external" href="https://nutrify.app">Nutrify</a> (the machine learning powered app I’m working on) is powered by an <code class="docutils literal notranslate"><span class="pre">efficientnet_b0</span></code>.</p>
+<p><a class="reference external" href="https://comma.ai/">Comma.ai</a> (a company that makes open source self-driving car software) <a class="reference external" href="https://geohot.github.io/blog/jekyll/update/2021/10/29/an-architecture-for-life.html">uses an <code class="docutils literal notranslate"><span class="pre">efficientnet_b2</span></code></a> to learn a representation of the road.</p>
+<blockquote>
+<div><p><strong>Note:</strong> Even though we’re using <code class="docutils literal notranslate"><span class="pre">efficientnet_bX</span></code>, it’s important not to get too attached to any one architecture, as they are always changing as new research gets released. Best to experiment, experiment, experiment and see what works for your problem.</p>
+</div></blockquote>
+</section>
+<section id="setting-up-a-pretrained-model">
+<h3>Setting up a pretrained model<a class="headerlink" href="#setting-up-a-pretrained-model" title="Link to this heading">#</a></h3>
+<p>The pretrained model we’re going to be using is <a class="reference external" href="https://pytorch.org/vision/main/models/generated/torchvision.models.efficientnet_b0.html"><code class="docutils literal notranslate"><span class="pre">torchvision.models.efficientnet_b0()</span></code></a>.</p>
+<p>The architecture is from the paper <em><a class="reference external" href="https://arxiv.org/abs/1905.11946">EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks</a></em>.</p>
+<img alt="efficienet_b0 from PyTorch torchvision feature extraction model" src="../../../../../_images/06-effnet-b0-feature-extractor.png" />
+<p><em>Example of what we’re going to create, a pretrained <a class="reference external" href="https://ai.googleblog.com/2019/05/efficientnet-improving-accuracy-and.html"><code class="docutils literal notranslate"><span class="pre">EfficientNet_B0</span></code> model</a> from <code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code> with the output layer adjusted for our use case of classifying pizza, steak and sushi images.</em></p>
+<p>We can setup the <code class="docutils literal notranslate"><span class="pre">EfficientNet_B0</span></code> pretrained ImageNet weights using the same code as we used to create the transforms.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">EfficientNet_B0_Weights</span><span class="o">.</span><span class="n">DEFAULT</span> <span class="c1"># .DEFAULT = best available weights for ImageNet</span>
+</pre></div>
+</div>
+<p>This means the model has already been trained on millions of images and has a good base representation of image data.</p>
+<p>The PyTorch version of this pretrained model is capable of achieving ~77.7% accuracy across ImageNet’s 1000 classes.</p>
+<p>We’ll also send it to the target device.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># OLD: Setup the model with pretrained weights and send it to the target device (this was prior to torchvision v0.13)</span>
+<span class="c1"># model = torchvision.models.efficientnet_b0(pretrained=True).to(device) # OLD method (with pretrained=True)</span>
+
+<span class="c1"># NEW: Setup the model with pretrained weights and send it to the target device (torchvision v0.13+)</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">EfficientNet_B0_Weights</span><span class="o">.</span><span class="n">DEFAULT</span> <span class="c1"># .DEFAULT = best available weights </span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">efficientnet_b0</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="n">weights</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="c1">#model # uncomment to output (it&#39;s very long)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> In previous versions of <code class="docutils literal notranslate"><span class="pre">torchvision</span></code>, you’d create a pretrained model with code like:</p>
+<p><code class="docutils literal notranslate"><span class="pre">model</span> <span class="pre">=</span> <span class="pre">torchvision.models.efficientnet_b0(pretrained=True).to(device)</span></code></p>
+<p>However, running this using <code class="docutils literal notranslate"><span class="pre">torchvision</span></code> v0.13+ will result in errors such as the following:</p>
+<p><code class="docutils literal notranslate"><span class="pre">UserWarning:</span> <span class="pre">The</span> <span class="pre">parameter</span> <span class="pre">'pretrained'</span> <span class="pre">is</span> <span class="pre">deprecated</span> <span class="pre">since</span> <span class="pre">0.13</span> <span class="pre">and</span> <span class="pre">will</span> <span class="pre">be</span> <span class="pre">removed</span> <span class="pre">in</span> <span class="pre">0.15,</span> <span class="pre">please</span> <span class="pre">use</span> <span class="pre">'weights'</span> <span class="pre">instead.</span></code></p>
+<p>And…</p>
+<p><code class="docutils literal notranslate"><span class="pre">UserWarning:</span> <span class="pre">Arguments</span> <span class="pre">other</span> <span class="pre">than</span> <span class="pre">a</span> <span class="pre">weight</span> <span class="pre">enum</span> <span class="pre">or</span> <span class="pre">None</span> <span class="pre">for</span> <span class="pre">weights</span> <span class="pre">are</span> <span class="pre">deprecated</span> <span class="pre">since</span> <span class="pre">0.13</span> <span class="pre">and</span> <span class="pre">will</span> <span class="pre">be</span> <span class="pre">removed</span> <span class="pre">in</span> <span class="pre">0.15.</span> <span class="pre">The</span> <span class="pre">current</span> <span class="pre">behavior</span> <span class="pre">is</span> <span class="pre">equivalent</span> <span class="pre">to</span> <span class="pre">passing</span> <span class="pre">weights=EfficientNet_B0_Weights.IMAGENET1K_V1.</span> <span class="pre">You</span> <span class="pre">can</span> <span class="pre">also</span> <span class="pre">use</span> <span class="pre">weights=EfficientNet_B0_Weights.DEFAULT</span> <span class="pre">to</span> <span class="pre">get</span> <span class="pre">the</span> <span class="pre">most</span> <span class="pre">up-to-date</span> <span class="pre">weights.</span></code></p>
+</div></blockquote>
+<p>If we print the model, we get something similar to the following:</p>
+<img alt="output of printing the efficientnet_b0 model from torchvision.models" src="../../../../../_images/06-v2-effnetb0-model-print-out.png" />
+<p>Lots and lots and lots of layers.</p>
+<p>This is one of the benefits of transfer learning, taking an existing model, that’s been crafted by some of the best engineers in the world and applying to your own problem.</p>
+<p>Our <code class="docutils literal notranslate"><span class="pre">efficientnet_b0</span></code> comes in three main parts:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">features</span></code> - A collection of convolutional layers and other various activation layers to learn a base representation of vision data (this base representation/collection of layers is often referred to as <strong>features</strong> or <strong>feature extractor</strong>, “the base layers of the model learn the different <strong>features</strong> of images”).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">avgpool</span></code> - Takes the average of the output of the <code class="docutils literal notranslate"><span class="pre">features</span></code> layer(s) and turns it into a <strong>feature vector</strong>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">classifier</span></code> - Turns the <strong>feature vector</strong> into a vector with the same dimensionality as the number of required output classes (since <code class="docutils literal notranslate"><span class="pre">efficientnet_b0</span></code> is pretrained on ImageNet and because ImageNet has 1000 classes, <code class="docutils literal notranslate"><span class="pre">out_features=1000</span></code> is the default).</p></li>
+</ol>
+</section>
+<section id="getting-a-summary-of-our-model-with-torchinfo-summary">
+<h3>Getting a summary of our model with <code class="docutils literal notranslate"><span class="pre">torchinfo.summary()</span></code><a class="headerlink" href="#getting-a-summary-of-our-model-with-torchinfo-summary" title="Link to this heading">#</a></h3>
+<p>To learn more about our model, let’s use <code class="docutils literal notranslate"><span class="pre">torchinfo</span></code>’s <a class="reference external" href="https://github.com/TylerYep/torchinfo#documentation"><code class="docutils literal notranslate"><span class="pre">summary()</span></code> method</a>.</p>
+<p>To do so, we’ll pass in:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">model</span></code> - the model we’d like to get a summary of.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input_size</span></code> - the shape of the data we’d like to pass to our model, for the case of <code class="docutils literal notranslate"><span class="pre">efficientnet_b0</span></code>, the input size is <code class="docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">3,</span> <span class="pre">224,</span> <span class="pre">224)</span></code>, though <a class="reference external" href="https://github.com/pytorch/vision/blob/d2bfd639e46e1c5dc3c177f889dc7750c8d137c7/references/classification/train.py#L92-L93">other variants of <code class="docutils literal notranslate"><span class="pre">efficientnet_bX</span></code> have different input sizes</a>.</p>
+<ul>
+<li><p><strong>Note:</strong> Many modern models can handle input images of varying sizes thanks to <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.AdaptiveAvgPool2d.html"><code class="docutils literal notranslate"><span class="pre">torch.nn.AdaptiveAvgPool2d()</span></code></a>, this layer adaptively adjusts the <code class="docutils literal notranslate"><span class="pre">output_size</span></code> of a given input as required. You can try this out by passing different size input images to <code class="docutils literal notranslate"><span class="pre">summary()</span></code> or your models.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">col_names</span></code> - the various information columns we’d like to see about our model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">col_width</span></code> - how wide the columns should be for the summary.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">row_settings</span></code> - what features to show in a row.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print a summary using torchinfo (uncomment for actual output)</span>
+<span class="n">summary</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> 
+        <span class="n">input_size</span><span class="o">=</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">),</span> <span class="c1"># make sure this is &quot;input_size&quot;, not &quot;input_shape&quot;</span>
+        <span class="c1"># col_names=[&quot;input_size&quot;], # uncomment for smaller output</span>
+        <span class="n">col_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;input_size&quot;</span><span class="p">,</span> <span class="s2">&quot;output_size&quot;</span><span class="p">,</span> <span class="s2">&quot;num_params&quot;</span><span class="p">,</span> <span class="s2">&quot;trainable&quot;</span><span class="p">],</span>
+        <span class="n">col_width</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+        <span class="n">row_settings</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;var_names&quot;</span><span class="p">]</span>
+<span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================================================================================================
+Layer (type (var_name))                                      Input Shape          Output Shape         Param #              Trainable
+============================================================================================================================================
+EfficientNet (EfficientNet)                                  [32, 3, 224, 224]    [32, 1000]           --                   True
+├─Sequential (features)                                      [32, 3, 224, 224]    [32, 1280, 7, 7]     --                   True
+│    └─Conv2dNormActivation (0)                              [32, 3, 224, 224]    [32, 32, 112, 112]   --                   True
+│    │    └─Conv2d (0)                                       [32, 3, 224, 224]    [32, 32, 112, 112]   864                  True
+│    │    └─BatchNorm2d (1)                                  [32, 32, 112, 112]   [32, 32, 112, 112]   64                   True
+│    │    └─SiLU (2)                                         [32, 32, 112, 112]   [32, 32, 112, 112]   --                   --
+│    └─Sequential (1)                                        [32, 32, 112, 112]   [32, 16, 112, 112]   --                   True
+│    │    └─MBConv (0)                                       [32, 32, 112, 112]   [32, 16, 112, 112]   1,448                True
+│    └─Sequential (2)                                        [32, 16, 112, 112]   [32, 24, 56, 56]     --                   True
+│    │    └─MBConv (0)                                       [32, 16, 112, 112]   [32, 24, 56, 56]     6,004                True
+│    │    └─MBConv (1)                                       [32, 24, 56, 56]     [32, 24, 56, 56]     10,710               True
+│    └─Sequential (3)                                        [32, 24, 56, 56]     [32, 40, 28, 28]     --                   True
+│    │    └─MBConv (0)                                       [32, 24, 56, 56]     [32, 40, 28, 28]     15,350               True
+│    │    └─MBConv (1)                                       [32, 40, 28, 28]     [32, 40, 28, 28]     31,290               True
+│    └─Sequential (4)                                        [32, 40, 28, 28]     [32, 80, 14, 14]     --                   True
+│    │    └─MBConv (0)                                       [32, 40, 28, 28]     [32, 80, 14, 14]     37,130               True
+│    │    └─MBConv (1)                                       [32, 80, 14, 14]     [32, 80, 14, 14]     102,900              True
+│    │    └─MBConv (2)                                       [32, 80, 14, 14]     [32, 80, 14, 14]     102,900              True
+│    └─Sequential (5)                                        [32, 80, 14, 14]     [32, 112, 14, 14]    --                   True
+│    │    └─MBConv (0)                                       [32, 80, 14, 14]     [32, 112, 14, 14]    126,004              True
+│    │    └─MBConv (1)                                       [32, 112, 14, 14]    [32, 112, 14, 14]    208,572              True
+│    │    └─MBConv (2)                                       [32, 112, 14, 14]    [32, 112, 14, 14]    208,572              True
+│    └─Sequential (6)                                        [32, 112, 14, 14]    [32, 192, 7, 7]      --                   True
+│    │    └─MBConv (0)                                       [32, 112, 14, 14]    [32, 192, 7, 7]      262,492              True
+│    │    └─MBConv (1)                                       [32, 192, 7, 7]      [32, 192, 7, 7]      587,952              True
+│    │    └─MBConv (2)                                       [32, 192, 7, 7]      [32, 192, 7, 7]      587,952              True
+│    │    └─MBConv (3)                                       [32, 192, 7, 7]      [32, 192, 7, 7]      587,952              True
+│    └─Sequential (7)                                        [32, 192, 7, 7]      [32, 320, 7, 7]      --                   True
+│    │    └─MBConv (0)                                       [32, 192, 7, 7]      [32, 320, 7, 7]      717,232              True
+│    └─Conv2dNormActivation (8)                              [32, 320, 7, 7]      [32, 1280, 7, 7]     --                   True
+│    │    └─Conv2d (0)                                       [32, 320, 7, 7]      [32, 1280, 7, 7]     409,600              True
+│    │    └─BatchNorm2d (1)                                  [32, 1280, 7, 7]     [32, 1280, 7, 7]     2,560                True
+│    │    └─SiLU (2)                                         [32, 1280, 7, 7]     [32, 1280, 7, 7]     --                   --
+├─AdaptiveAvgPool2d (avgpool)                                [32, 1280, 7, 7]     [32, 1280, 1, 1]     --                   --
+├─Sequential (classifier)                                    [32, 1280]           [32, 1000]           --                   True
+│    └─Dropout (0)                                           [32, 1280]           [32, 1280]           --                   --
+│    └─Linear (1)                                            [32, 1280]           [32, 1000]           1,281,000            True
+============================================================================================================================================
+Total params: 5,288,548
+Trainable params: 5,288,548
+Non-trainable params: 0
+Total mult-adds (G): 12.35
+============================================================================================================================================
+Input size (MB): 19.27
+Forward/backward pass size (MB): 3452.35
+Params size (MB): 21.15
+Estimated Total Size (MB): 3492.77
+============================================================================================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<img alt="output of torchinfo.summary() when passed our model with all layers as trainable" src="../../../../../_images/06-torchinfo-summary-unfrozen-layers.png" />
+<p>Woah!</p>
+<p>Now that’s a big model!</p>
+<p>From the output of the summary, we can see all of the various input and output shape changes as our image data goes through the model.</p>
+<p>And there are a whole bunch more total parameters (pretrained weights) to recognize different patterns in our data.</p>
+<p>For reference, our model from previous sections, <strong>TinyVGG had 8,083 parameters vs. 5,288,548 parameters for <code class="docutils literal notranslate"><span class="pre">efficientnet_b0</span></code>, an increase of ~654x</strong>!</p>
+<p>What do you think, will this mean better performance?</p>
+</section>
+<section id="freezing-the-base-model-and-changing-the-output-layer-to-suit-our-needs">
+<h3>Freezing the base model and changing the output layer to suit our needs<a class="headerlink" href="#freezing-the-base-model-and-changing-the-output-layer-to-suit-our-needs" title="Link to this heading">#</a></h3>
+<p>The process of transfer learning usually goes: freeze some base layers of a pretrained model (typically the <code class="docutils literal notranslate"><span class="pre">features</span></code> section) and then adjust the output layers (also called head/classifier layers) to suit your needs.</p>
+<img alt="changing the efficientnet classifier head to a custom number of outputs" src="../../../../../_images/06-v2-effnet-changing-the-classifier-head.png" />
+<p><em>You can customise the outputs of a pretrained model by changing the output layer(s) to suit your problem. The original <code class="docutils literal notranslate"><span class="pre">torchvision.models.efficientnet_b0()</span></code> comes with <code class="docutils literal notranslate"><span class="pre">out_features=1000</span></code> because there are 1000 classes in ImageNet, the dataset it was trained on. However, for our problem, classifying images of pizza, steak and sushi we only need <code class="docutils literal notranslate"><span class="pre">out_features=3</span></code>.</em></p>
+<p>Let’s freeze all of the layers/parameters in the <code class="docutils literal notranslate"><span class="pre">features</span></code> section of our <code class="docutils literal notranslate"><span class="pre">efficientnet_b0</span></code> model.</p>
+<blockquote>
+<div><p><strong>Note:</strong> To <em>freeze</em> layers means to keep them how they are during training. For example, if your model has pretrained layers, to <em>freeze</em> them would be to say, “don’t change any of the patterns in these layers during training, keep them how they are.” In essence, we’d like to keep the pretrained weights/patterns our model has learned from ImageNet as a backbone and then only change the output layers.</p>
+</div></blockquote>
+<p>We can freeze all of the layers/parameters in the <code class="docutils literal notranslate"><span class="pre">features</span></code> section by setting the attribute <code class="docutils literal notranslate"><span class="pre">requires_grad=False</span></code>.</p>
+<p>For parameters with <code class="docutils literal notranslate"><span class="pre">requires_grad=False</span></code>, PyTorch doesn’t track gradient updates and in turn, these parameters won’t be changed by our optimizer during training.</p>
+<p>In essence, a parameter with <code class="docutils literal notranslate"><span class="pre">requires_grad=False</span></code> is “untrainable” or “frozen” in place.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Freeze all base layers in the &quot;features&quot; section of the model (the feature extractor) by setting requires_grad=False</span>
+<span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">features</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+    <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Feature extractor layers frozen!</p>
+<p>Let’s now adjust the output layer or the <code class="docutils literal notranslate"><span class="pre">classifier</span></code> portion of our pretrained model to our needs.</p>
+<p>Right now our pretrained model has <code class="docutils literal notranslate"><span class="pre">out_features=1000</span></code> because there are 1000 classes in ImageNet.</p>
+<p>However, we don’t have 1000 classes, we only have three, pizza, steak and sushi.</p>
+<p>We can change the <code class="docutils literal notranslate"><span class="pre">classifier</span></code> portion of our model by creating a new series of layers.</p>
+<p>The current <code class="docutils literal notranslate"><span class="pre">classifier</span></code> consists of:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">classifier</span><span class="p">):</span> <span class="n">Sequential</span><span class="p">(</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">):</span> <span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1280</span><span class="p">,</span> <span class="n">out_features</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We’ll keep the <code class="docutils literal notranslate"><span class="pre">Dropout</span></code> layer the same using <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.nn.Dropout.html"><code class="docutils literal notranslate"><span class="pre">torch.nn.Dropout(p=0.2,</span> <span class="pre">inplace=True)</span></code></a>.</p>
+<blockquote>
+<div><p><strong>Note:</strong> <a class="reference external" href="https://developers.google.com/machine-learning/glossary#dropout_regularization">Dropout layers</a> randomly remove connections between two neural network layers with a probability of <code class="docutils literal notranslate"><span class="pre">p</span></code>. For example, if <code class="docutils literal notranslate"><span class="pre">p=0.2</span></code>, 20% of connections between neural network layers will be removed at random each pass. This practice is meant to help regularize (prevent overfitting) a model by making sure the connections that remain learn features to compensate for the removal of the other connections (hopefully these remaining features are <em>more general</em>).</p>
+</div></blockquote>
+<p>And we’ll keep <code class="docutils literal notranslate"><span class="pre">in_features=1280</span></code> for our <code class="docutils literal notranslate"><span class="pre">Linear</span></code> output layer but we’ll change the <code class="docutils literal notranslate"><span class="pre">out_features</span></code> value to the length of our <code class="docutils literal notranslate"><span class="pre">class_names</span></code> (<code class="docutils literal notranslate"><span class="pre">len(['pizza',</span> <span class="pre">'steak',</span> <span class="pre">'sushi'])</span> <span class="pre">=</span> <span class="pre">3</span></code>).</p>
+<p>Our new <code class="docutils literal notranslate"><span class="pre">classifier</span></code> layer should be on the same device as our <code class="docutils literal notranslate"><span class="pre">model</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the manual seeds</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Get the length of class_names (one output unit for each class)</span>
+<span class="n">output_shape</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">class_names</span><span class="p">)</span>
+
+<span class="c1"># Recreate the classifier layer and seed it to the target device</span>
+<span class="n">model</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> 
+    <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">in_features</span><span class="o">=</span><span class="mi">1280</span><span class="p">,</span> 
+                    <span class="n">out_features</span><span class="o">=</span><span class="n">output_shape</span><span class="p">,</span> <span class="c1"># same number of output units as our number of classes</span>
+                    <span class="n">bias</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Output layer updated, let’s get another summary of our model and see what’s changed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Do a summary *after* freezing the features and changing the output classifier layer (uncomment for actual output)</span>
+<span class="n">summary</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> 
+        <span class="n">input_size</span><span class="o">=</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">),</span> <span class="c1"># make sure this is &quot;input_size&quot;, not &quot;input_shape&quot; (batch_size, color_channels, height, width)</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">col_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;input_size&quot;</span><span class="p">,</span> <span class="s2">&quot;output_size&quot;</span><span class="p">,</span> <span class="s2">&quot;num_params&quot;</span><span class="p">,</span> <span class="s2">&quot;trainable&quot;</span><span class="p">],</span>
+        <span class="n">col_width</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+        <span class="n">row_settings</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;var_names&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>============================================================================================================================================
+Layer (type (var_name))                                      Input Shape          Output Shape         Param #              Trainable
+============================================================================================================================================
+EfficientNet (EfficientNet)                                  [32, 3, 224, 224]    [32, 3]              --                   Partial
+├─Sequential (features)                                      [32, 3, 224, 224]    [32, 1280, 7, 7]     --                   False
+│    └─Conv2dNormActivation (0)                              [32, 3, 224, 224]    [32, 32, 112, 112]   --                   False
+│    │    └─Conv2d (0)                                       [32, 3, 224, 224]    [32, 32, 112, 112]   (864)                False
+│    │    └─BatchNorm2d (1)                                  [32, 32, 112, 112]   [32, 32, 112, 112]   (64)                 False
+│    │    └─SiLU (2)                                         [32, 32, 112, 112]   [32, 32, 112, 112]   --                   --
+│    └─Sequential (1)                                        [32, 32, 112, 112]   [32, 16, 112, 112]   --                   False
+│    │    └─MBConv (0)                                       [32, 32, 112, 112]   [32, 16, 112, 112]   (1,448)              False
+│    └─Sequential (2)                                        [32, 16, 112, 112]   [32, 24, 56, 56]     --                   False
+│    │    └─MBConv (0)                                       [32, 16, 112, 112]   [32, 24, 56, 56]     (6,004)              False
+│    │    └─MBConv (1)                                       [32, 24, 56, 56]     [32, 24, 56, 56]     (10,710)             False
+│    └─Sequential (3)                                        [32, 24, 56, 56]     [32, 40, 28, 28]     --                   False
+│    │    └─MBConv (0)                                       [32, 24, 56, 56]     [32, 40, 28, 28]     (15,350)             False
+│    │    └─MBConv (1)                                       [32, 40, 28, 28]     [32, 40, 28, 28]     (31,290)             False
+│    └─Sequential (4)                                        [32, 40, 28, 28]     [32, 80, 14, 14]     --                   False
+│    │    └─MBConv (0)                                       [32, 40, 28, 28]     [32, 80, 14, 14]     (37,130)             False
+│    │    └─MBConv (1)                                       [32, 80, 14, 14]     [32, 80, 14, 14]     (102,900)            False
+│    │    └─MBConv (2)                                       [32, 80, 14, 14]     [32, 80, 14, 14]     (102,900)            False
+│    └─Sequential (5)                                        [32, 80, 14, 14]     [32, 112, 14, 14]    --                   False
+│    │    └─MBConv (0)                                       [32, 80, 14, 14]     [32, 112, 14, 14]    (126,004)            False
+│    │    └─MBConv (1)                                       [32, 112, 14, 14]    [32, 112, 14, 14]    (208,572)            False
+│    │    └─MBConv (2)                                       [32, 112, 14, 14]    [32, 112, 14, 14]    (208,572)            False
+│    └─Sequential (6)                                        [32, 112, 14, 14]    [32, 192, 7, 7]      --                   False
+│    │    └─MBConv (0)                                       [32, 112, 14, 14]    [32, 192, 7, 7]      (262,492)            False
+│    │    └─MBConv (1)                                       [32, 192, 7, 7]      [32, 192, 7, 7]      (587,952)            False
+│    │    └─MBConv (2)                                       [32, 192, 7, 7]      [32, 192, 7, 7]      (587,952)            False
+│    │    └─MBConv (3)                                       [32, 192, 7, 7]      [32, 192, 7, 7]      (587,952)            False
+│    └─Sequential (7)                                        [32, 192, 7, 7]      [32, 320, 7, 7]      --                   False
+│    │    └─MBConv (0)                                       [32, 192, 7, 7]      [32, 320, 7, 7]      (717,232)            False
+│    └─Conv2dNormActivation (8)                              [32, 320, 7, 7]      [32, 1280, 7, 7]     --                   False
+│    │    └─Conv2d (0)                                       [32, 320, 7, 7]      [32, 1280, 7, 7]     (409,600)            False
+│    │    └─BatchNorm2d (1)                                  [32, 1280, 7, 7]     [32, 1280, 7, 7]     (2,560)              False
+│    │    └─SiLU (2)                                         [32, 1280, 7, 7]     [32, 1280, 7, 7]     --                   --
+├─AdaptiveAvgPool2d (avgpool)                                [32, 1280, 7, 7]     [32, 1280, 1, 1]     --                   --
+├─Sequential (classifier)                                    [32, 1280]           [32, 3]              --                   True
+│    └─Dropout (0)                                           [32, 1280]           [32, 1280]           --                   --
+│    └─Linear (1)                                            [32, 1280]           [32, 3]              3,843                True
+============================================================================================================================================
+Total params: 4,011,391
+Trainable params: 3,843
+Non-trainable params: 4,007,548
+Total mult-adds (G): 12.31
+============================================================================================================================================
+Input size (MB): 19.27
+Forward/backward pass size (MB): 3452.09
+Params size (MB): 16.05
+Estimated Total Size (MB): 3487.41
+============================================================================================================================================
+</pre></div>
+</div>
+</div>
+</div>
+<img alt="output of torchinfo.summary() after freezing multiple layers in our model and changing the classifier head" src="../../../../../_images/06-torchinfo-summary-frozen-layers.png" />
+<p>Ho, ho! There’s a fair few changes here!</p>
+<p>Let’s go through them:</p>
+<ul class="simple">
+<li><p><strong>Trainable column</strong> - You’ll see that many of the base layers (the ones in the <code class="docutils literal notranslate"><span class="pre">features</span></code> portion) have their Trainable value as <code class="docutils literal notranslate"><span class="pre">False</span></code>. This is because we set their attribute <code class="docutils literal notranslate"><span class="pre">requires_grad=False</span></code>. Unless we change this, these layers won’t be updated during furture training.</p></li>
+<li><p><strong>Output shape of <code class="docutils literal notranslate"><span class="pre">classifier</span></code></strong> - The <code class="docutils literal notranslate"><span class="pre">classifier</span></code> portion of the model now has an Output Shape value of <code class="docutils literal notranslate"><span class="pre">[32,</span> <span class="pre">3]</span></code> instead of <code class="docutils literal notranslate"><span class="pre">[32,</span> <span class="pre">1000]</span></code>. It’s Trainable value is also <code class="docutils literal notranslate"><span class="pre">True</span></code>. This means its parameters will be updated during training. In essence, we’re using the <code class="docutils literal notranslate"><span class="pre">features</span></code> portion to feed our <code class="docutils literal notranslate"><span class="pre">classifier</span></code> portion a base representation of an image and then our <code class="docutils literal notranslate"><span class="pre">classifier</span></code> layer is going to learn how to base representation aligns with our problem.</p></li>
+<li><p><strong>Less trainable parameters</strong> - Previously there was 5,288,548 trainable parameters. But since we froze many of the layers of the model and only left the <code class="docutils literal notranslate"><span class="pre">classifier</span></code> as trainable, there’s now only 3,843 trainable parameters (even less than our TinyVGG model). Though there’s also 4,007,548 non-trainable parameters, these will create a base representation of our input images to feed into our <code class="docutils literal notranslate"><span class="pre">classifier</span></code> layer.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note:</strong> The more trainable parameters a model has, the more compute power/longer it takes to train. Freezing the base layers of our model and leaving it with less trainable parameters means our model should train quite quickly. This is one huge benefit of transfer learning, taking the already learned parameters of a model trained on a problem similar to yours and only tweaking the outputs slightly to suit your problem.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="train-model">
+<h2>Train model<a class="headerlink" href="#train-model" title="Link to this heading">#</a></h2>
+<p>Now we’ve got a pretrained model that’s semi-frozen and has a customised <code class="docutils literal notranslate"><span class="pre">classifier</span></code>, how about we see transfer learning in action?</p>
+<p>To begin training, let’s create a loss function and an optimizer.</p>
+<p>Because we’re still working with multi-class classification, we’ll use <code class="docutils literal notranslate"><span class="pre">nn.CrossEntropyLoss()</span></code> for the loss function.</p>
+<p>And we’ll stick with <code class="docutils literal notranslate"><span class="pre">torch.optim.Adam()</span></code> as our optimizer with <code class="docutils literal notranslate"><span class="pre">lr=0.001</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define loss and optimizer</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To train our model, we can use <code class="docutils literal notranslate"><span class="pre">train()</span></code> function we defined in the <a class="reference internal" href="#05_pytorch_going_modular"><span class="xref myst">PyTorch Going Modular section 04</span></a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">train()</span></code> function is in the <a class="reference internal" href="#./going_modular/going_modular/engine.py"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">engine.py</span></code></span></a> script inside the <a class="reference internal" href="#./going_modular/going_modular"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">going_modular</span></code> directory</span></a>.</p>
+<p>Let’s see how long it takes to train our model for 5 epochs.</p>
+<blockquote>
+<div><p><strong>Note:</strong> We’re only going to be training the parameters <code class="docutils literal notranslate"><span class="pre">classifier</span></code> here as all of the other parameters in our model have been frozen.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the random seeds</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Start the timer</span>
+<span class="kn">from</span> <span class="nn">timeit</span> <span class="kn">import</span> <span class="n">default_timer</span> <span class="k">as</span> <span class="n">timer</span> 
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">timer</span><span class="p">()</span>
+
+<span class="c1"># Setup training and save the results</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+                       <span class="n">train_dataloader</span><span class="o">=</span><span class="n">train_dataloader</span><span class="p">,</span>
+                       <span class="n">test_dataloader</span><span class="o">=</span><span class="n">test_dataloader</span><span class="p">,</span>
+                       <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">,</span>
+                       <span class="n">loss_fn</span><span class="o">=</span><span class="n">loss_fn</span><span class="p">,</span>
+                       <span class="n">epochs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                       <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+
+<span class="c1"># End the timer and print out how long it took</span>
+<span class="n">end_time</span> <span class="o">=</span> <span class="n">timer</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[INFO] Total training time: </span><span class="si">{</span><span class="n">end_time</span><span class="o">-</span><span class="n">start_time</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "b61588abc1df499286a8e260d139026b", "version_major": 2, "version_minor": 0}</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 1 | train_loss: 1.0924 | train_acc: 0.3984 | test_loss: 0.9133 | test_acc: 0.5398
+Epoch: 2 | train_loss: 0.8717 | train_acc: 0.7773 | test_loss: 0.7912 | test_acc: 0.8153
+Epoch: 3 | train_loss: 0.7648 | train_acc: 0.7930 | test_loss: 0.7463 | test_acc: 0.8561
+Epoch: 4 | train_loss: 0.7108 | train_acc: 0.7539 | test_loss: 0.6372 | test_acc: 0.8655
+Epoch: 5 | train_loss: 0.6254 | train_acc: 0.7852 | test_loss: 0.6260 | test_acc: 0.8561
+[INFO] Total training time: 8.977 seconds
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our model trained quite fast (~5 seconds on my local machine with a <a class="reference external" href="https://www.nvidia.com/en-au/deep-learning-ai/products/titan-rtx/">NVIDIA TITAN RTX GPU</a>/about 15 seconds on Google Colab with a <a class="reference external" href="https://www.nvidia.com/en-au/data-center/tesla-p100/">NVIDIA P100 GPU</a>).</p>
+<p>And it looks like it smashed our previous model results out of the park!</p>
+<p>With an <code class="docutils literal notranslate"><span class="pre">efficientnet_b0</span></code> backbone, our model achieves almost 85%+ accuracy on the test dataset, almost <em>double</em> what we were able to achieve with TinyVGG.</p>
+<p>Not bad for a model we downloaded with a few lines of code.</p>
+</section>
+<section id="evaluate-model-by-plotting-loss-curves">
+<h2>Evaluate model by plotting loss curves<a class="headerlink" href="#evaluate-model-by-plotting-loss-curves" title="Link to this heading">#</a></h2>
+<p>Our model looks like it’s performing pretty well.</p>
+<p>Let’s plot it’s loss curves to see what the training looks like over time.</p>
+<p>We can plot the loss curves using the function <code class="docutils literal notranslate"><span class="pre">plot_loss_curves()</span></code> we created in <a class="reference internal" href="04_pytorch_custom_datasets.html"><span class="std std-doc">PyTorch Custom Datasets section 7.8</span></a>.</p>
+<p>The function is stored in the <a class="reference download internal" download="" href="../../../../../_downloads/925748efe9ebc3b1352789c78ee64836/helper_functions.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">helper_functions.py</span></code></span></a> script so we’ll try to import it and download the script if we don’t have it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the plot_loss_curves() function from helper_functions.py, download the file if we don&#39;t have it</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">helper_functions</span> <span class="kn">import</span> <span class="n">plot_loss_curves</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[INFO] Couldn&#39;t find helper_functions.py, downloading...&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;helper_functions.py&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">requests</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;helper_functions.py&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">helper_functions</span> <span class="kn">import</span> <span class="n">plot_loss_curves</span>
+
+<span class="c1"># Plot the loss curves of our model</span>
+<span class="n">plot_loss_curves</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../../_images/620b50efcba9f2f27ade4992fabbe73db6df13d84490e5464c72cf5d78f4070a.png" src="../../../../../_images/620b50efcba9f2f27ade4992fabbe73db6df13d84490e5464c72cf5d78f4070a.png" />
+</div>
+</div>
+<p>Those are some excellent looking loss curves!</p>
+<p>It looks like the loss for both datasets (train and test) is heading in the right direction.</p>
+<p>The same with the accuracy values, trending upwards.</p>
+<p>That goes to show the power of <strong>transfer learning</strong>. Using a pretrained model often leads to pretty good results with a small amount of data in less time.</p>
+<p>I wonder what would happen if you tried to train the model for longer? Or if we added more data?</p>
+<blockquote>
+<div><p><strong>Question:</strong> Looking at the loss curves, does our model look like it’s overfitting or underfitting? Or perhaps neither? Hint: Check out notebook <a class="reference internal" href="04_pytorch_custom_datasets.html"><span class="std std-doc">PyTorch Custom Datasets part - What should an ideal loss curve look like?</span></a> for ideas.</p>
+</div></blockquote>
+</section>
+<section id="make-predictions-on-images-from-the-test-set">
+<h2>Make predictions on images from the test set<a class="headerlink" href="#make-predictions-on-images-from-the-test-set" title="Link to this heading">#</a></h2>
+<p>It looks like our model performs well quantitatively but how about qualitatively?</p>
+<p>Let’s find out by making some predictions with our model on images from the test set (these aren’t seen during training) and plotting them.</p>
+<p><em>Visualize, visualize, visualize!</em></p>
+<p>One thing we’ll have to remember is that for our model to make predictions on an image, the image has to be in <em>same</em> format as the images our model was trained on.</p>
+<p>This means we’ll need to make sure our images have:</p>
+<ul class="simple">
+<li><p><strong>Same shape</strong> - If our images are different shapes to what our model was trained on, we’ll get shape errors.</p></li>
+<li><p><strong>Same datatype</strong> - If our images are a different datatype (e.g. <code class="docutils literal notranslate"><span class="pre">torch.int8</span></code> vs. <code class="docutils literal notranslate"><span class="pre">torch.float32</span></code>) we’ll get datatype errors.</p></li>
+<li><p><strong>Same device</strong> - If our images are on a different device to our model, we’ll get device errors.</p></li>
+<li><p><strong>Same transformations</strong> - If our model is trained on images that have been transformed in certain way (e.g. normalized with a specific mean and standard deviation) and we try and make preidctions on images transformed in a different way, these predictions may be off.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Note:</strong> These requirements go for all kinds of data if you’re trying to make predictions with a trained model. Data you’d like to predict on should be in the same format as your model was trained on.</p>
+</div></blockquote>
+<p>To do all of this, we’ll create a function <code class="docutils literal notranslate"><span class="pre">pred_and_plot_image()</span></code> to:</p>
+<ol class="arabic simple">
+<li><p>Take in a trained model, a list of class names, a filepath to a target image, an image size, a transform and a target device.</p></li>
+<li><p>Open an image with <a class="reference external" href="https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.open"><code class="docutils literal notranslate"><span class="pre">PIL.Image.open()</span></code></a>.</p></li>
+<li><p>Create a transform for the image (this will default to the <code class="docutils literal notranslate"><span class="pre">manual_transforms</span></code> we created above or it could use a transform generated from <code class="docutils literal notranslate"><span class="pre">weights.transforms()</span></code>).</p></li>
+<li><p>Make sure the model is on the target device.</p></li>
+<li><p>Turn on model eval mode with <code class="docutils literal notranslate"><span class="pre">model.eval()</span></code> (this turns off layers like <code class="docutils literal notranslate"><span class="pre">nn.Dropout()</span></code>, so they aren’t used for inference) and the inference mode context manager.</p></li>
+<li><p>Transform the target image with the transform made in step 3 and add an extra batch dimension with <code class="docutils literal notranslate"><span class="pre">torch.unsqueeze(dim=0)</span></code> so our input image has shape <code class="docutils literal notranslate"><span class="pre">[batch_size,</span> <span class="pre">color_channels,</span> <span class="pre">height,</span> <span class="pre">width]</span></code>.</p></li>
+<li><p>Make a prediction on the image by passing it to the model ensuring it’s on the target device.</p></li>
+<li><p>Convert the model’s output logits to prediction probabilities with <code class="docutils literal notranslate"><span class="pre">torch.softmax()</span></code>.</p></li>
+<li><p>Convert model’s prediction probabilities to prediction labels with <code class="docutils literal notranslate"><span class="pre">torch.argmax()</span></code>.</p></li>
+<li><p>Plot the image with <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> and set the title to the prediction label from step 9 and prediction probability from step 8.</p></li>
+</ol>
+<blockquote>
+<div><p><strong>Note:</strong> This is a similar function to <a class="reference internal" href="04_pytorch_custom_datasets.html"><span class="std std-doc">PyTorch Custom Datasets section 11.3’s</span></a> <code class="docutils literal notranslate"><span class="pre">pred_and_plot_image()</span></code> with a few tweaked steps.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="c1"># 1. Take in a trained model, class names, image path, image size, a transform and target device</span>
+<span class="k">def</span> <span class="nf">pred_and_plot_image</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span>
+                        <span class="n">image_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+                        <span class="n">class_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+                        <span class="n">image_size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">),</span>
+                        <span class="n">transform</span><span class="p">:</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">transforms</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="n">device</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">):</span>
+    
+    
+    <span class="c1"># 2. Open image</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+
+    <span class="c1"># 3. Create transformation for image (if one doesn&#39;t exist)</span>
+    <span class="k">if</span> <span class="n">transform</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">image_transform</span> <span class="o">=</span> <span class="n">transform</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">image_transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+            <span class="n">transforms</span><span class="o">.</span><span class="n">Resize</span><span class="p">(</span><span class="n">image_size</span><span class="p">),</span>
+            <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+            <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="p">[</span><span class="mf">0.485</span><span class="p">,</span> <span class="mf">0.456</span><span class="p">,</span> <span class="mf">0.406</span><span class="p">],</span>
+                                 <span class="n">std</span><span class="o">=</span><span class="p">[</span><span class="mf">0.229</span><span class="p">,</span> <span class="mf">0.224</span><span class="p">,</span> <span class="mf">0.225</span><span class="p">]),</span>
+        <span class="p">])</span>
+
+    <span class="c1">### Predict on image ### </span>
+
+    <span class="c1"># 4. Make sure the model is on the target device</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+    <span class="c1"># 5. Turn on model evaluation mode and inference mode</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">inference_mode</span><span class="p">():</span>
+      <span class="c1"># 6. Transform and add an extra dimension to image (model requires samples in [batch_size, color_channels, height, width])</span>
+      <span class="n">transformed_image</span> <span class="o">=</span> <span class="n">image_transform</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+      <span class="c1"># 7. Make a prediction on image with an extra dimension and send it to the target device</span>
+      <span class="n">target_image_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">transformed_image</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">))</span>
+
+    <span class="c1"># 8. Convert logits -&gt; prediction probabilities (using torch.softmax() for multi-class classification)</span>
+    <span class="n">target_image_pred_probs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">target_image_pred</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># 9. Convert prediction probabilities -&gt; prediction labels</span>
+    <span class="n">target_image_pred_label</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">target_image_pred_probs</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># 10. Plot image with predicted label and probability </span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pred: </span><span class="si">{</span><span class="n">class_names</span><span class="p">[</span><span class="n">target_image_pred_label</span><span class="p">]</span><span class="si">}</span><span class="s2"> | Prob: </span><span class="si">{</span><span class="n">target_image_pred_probs</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">False</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>What a good looking function!</p>
+<p>Let’s test it out by making predictions on a few random images from the test set.</p>
+<p>We can get a list of all the test image paths using <code class="docutils literal notranslate"><span class="pre">list(Path(test_dir).glob(&quot;*/*.jpg&quot;))</span></code>, the stars in the <code class="docutils literal notranslate"><span class="pre">glob()</span></code> method say “any file matching this pattern”, in other words, any file ending in <code class="docutils literal notranslate"><span class="pre">.jpg</span></code> (all of our images).</p>
+<p>And then we can randomly sample a number of these using Python’s <a class="reference external" href="https://docs.python.org/3/library/random.html#random.sample"><code class="docutils literal notranslate"><span class="pre">random.sample(populuation,</span> <span class="pre">k)</span></code></a> where <code class="docutils literal notranslate"><span class="pre">population</span></code> is the sequence to sample and <code class="docutils literal notranslate"><span class="pre">k</span></code> is the number of samples to retrieve.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get a random list of image paths from test set</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="n">num_images_to_plot</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">test_image_path_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">test_dir</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*/*.jpg&quot;</span><span class="p">))</span> <span class="c1"># get list all image paths from test data </span>
+<span class="n">test_image_path_sample</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">population</span><span class="o">=</span><span class="n">test_image_path_list</span><span class="p">,</span> <span class="c1"># go through all of the test image paths</span>
+                                       <span class="n">k</span><span class="o">=</span><span class="n">num_images_to_plot</span><span class="p">)</span> <span class="c1"># randomly select &#39;k&#39; image paths to pred and plot</span>
+
+<span class="c1"># Make predictions on and plot the images</span>
+<span class="k">for</span> <span class="n">image_path</span> <span class="ow">in</span> <span class="n">test_image_path_sample</span><span class="p">:</span>
+    <span class="n">pred_and_plot_image</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> 
+                        <span class="n">image_path</span><span class="o">=</span><span class="n">image_path</span><span class="p">,</span>
+                        <span class="n">class_names</span><span class="o">=</span><span class="n">class_names</span><span class="p">,</span>
+                        <span class="c1"># transform=weights.transforms(), # optionally pass in a specified transform from our pretrained model weights</span>
+                        <span class="n">image_size</span><span class="o">=</span><span class="p">(</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../../_images/98d873b2b7d3133061b2749de9545c7bb8b14ead72b03efc8cce49e99e2501a6.png" src="../../../../../_images/98d873b2b7d3133061b2749de9545c7bb8b14ead72b03efc8cce49e99e2501a6.png" />
+<img alt="../../../../../_images/61c6d176f499b819b9f024315e80f589a2ba3a6c458cf9628c537ec574b0d469.png" src="../../../../../_images/61c6d176f499b819b9f024315e80f589a2ba3a6c458cf9628c537ec574b0d469.png" />
+<img alt="../../../../../_images/2575af7fe8e600d252d1b703680503adc79ee3803f93695c1adf9f68d3575e99.png" src="../../../../../_images/2575af7fe8e600d252d1b703680503adc79ee3803f93695c1adf9f68d3575e99.png" />
+</div>
+</div>
+<p>Those predictions look far better than the ones our TinyVGG model was previously making.</p>
+<section id="making-predictions-on-a-custom-image">
+<h3>Making predictions on a custom image<a class="headerlink" href="#making-predictions-on-a-custom-image" title="Link to this heading">#</a></h3>
+<p>It looks like our model does well qualitatively on data from the test set.</p>
+<p>But how about on our own custom image?</p>
+<p>That’s where the real fun of machine learning is!</p>
+<p>Predicting on your own custom data, outisde of any training or test set.</p>
+<p>To test our model on a custom image, let’s import the old faithful <code class="docutils literal notranslate"><span class="pre">pizza-dad.jpeg</span></code> image (an image of my dad eating pizza).</p>
+<p>We’ll then pass it to the <code class="docutils literal notranslate"><span class="pre">pred_and_plot_image()</span></code> function we created above and see what happens.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download custom image</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="c1"># Setup custom image path</span>
+<span class="n">custom_image_path</span> <span class="o">=</span> <span class="n">data_path</span> <span class="o">/</span> <span class="s2">&quot;04-pizza-dad.jpeg&quot;</span>
+
+<span class="c1"># Download the image if it doesn&#39;t already exist</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">custom_image_path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">custom_image_path</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="c1"># When downloading from GitHub, need to use the &quot;raw&quot; file link</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;images/04-pizza-dad.jpeg&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Downloading </span><span class="si">{</span><span class="n">custom_image_path</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">custom_image_path</span><span class="si">}</span><span class="s2"> already exists, skipping download.&quot;</span><span class="p">)</span>
+
+<span class="c1"># Predict on custom image</span>
+<span class="n">pred_and_plot_image</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+                    <span class="n">image_path</span><span class="o">=</span><span class="n">custom_image_path</span><span class="p">,</span>
+                    <span class="n">class_names</span><span class="o">=</span><span class="n">class_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>data/04-pizza-dad.jpeg already exists, skipping download.
+</pre></div>
+</div>
+<img alt="../../../../../_images/3f01b4b5063fe20298da0610085fbd8e1aa42494d28668afea522eede9701b42.png" src="../../../../../_images/3f01b4b5063fe20298da0610085fbd8e1aa42494d28668afea522eede9701b42.png" />
+</div>
+</div>
+<p>Two thumbs up!</p>
+<p>Looks like our model got it right again!</p>
+<p>But this time the prediction probability is higher than the one from TinyVGG (<code class="docutils literal notranslate"><span class="pre">0.373</span></code>) in <a class="reference internal" href="04_pytorch_custom_datasets.html"><span class="std std-doc">PyTorch Custom Datasets section 11.3</span></a>.</p>
+<p>This indicates our <code class="docutils literal notranslate"><span class="pre">efficientnet_b0</span></code> model is <em>more</em> confident in its prediction where as our TinyVGG model was par with just guessing.</p>
+</section>
+</section>
+<section id="main-takeaways">
+<h2>Main takeaways<a class="headerlink" href="#main-takeaways" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Transfer learning</strong> often allows to you get good results with a relatively small amount of custom data.</p></li>
+<li><p>Knowing the power of transfer learning, it’s a good idea to ask at the start of every problem, “does an existing well-performing model exist for my problem?”</p></li>
+<li><p>When using a pretrained model, it’s important that your custom data be formatted/preprocessed in the same way that the original model was trained on, otherwise you may get degraded performance.</p></li>
+<li><p>The same goes for predicting on custom data, ensure your custom data is in the same format as the data your model was trained on.</p></li>
+<li><p>There are several different places to find pretrained models from the PyTorch domain libraries, HuggingFace Hub and libraries such as <code class="docutils literal notranslate"><span class="pre">timm</span></code> (PyTorch Image Models).</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/ai/neural/concepts/pytorch"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_pytorch_custom_datasets.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">PyTorch Custom Datasets</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../../../genai/introduction.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Generative AI</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-transfer-learning">What is transfer learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-transfer-learning">Why use transfer learning?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-find-pretrained-models">Where to find pretrained models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-were-going-to-cover">What we’re going to cover</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-setup">Getting setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-data">Get data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-datasets-and-dataloaders">Create Datasets and DataLoaders</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-transform-for-torchvision-models-manual-creation">Creating a transform for <code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code> (manual creation)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-transform-for-torchvision-models-auto-creation">Creating a transform for <code class="docutils literal notranslate"><span class="pre">torchvision.models</span></code> (auto creation)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-a-pretrained-model">Getting a pretrained model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#which-pretrained-model-should-you-use">Which pretrained model should you use?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-a-pretrained-model">Setting up a pretrained model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-a-summary-of-our-model-with-torchinfo-summary">Getting a summary of our model with <code class="docutils literal notranslate"><span class="pre">torchinfo.summary()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#freezing-the-base-model-and-changing-the-output-layer-to-suit-our-needs">Freezing the base model and changing the output layer to suit our needs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-model">Train model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-model-by-plotting-loss-curves">Evaluate model by plotting loss curves</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-predictions-on-images-from-the-test-set">Make predictions on images from the test set</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#making-predictions-on-a-custom-image">Making predictions on a custom image</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-takeaways">Main takeaways</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

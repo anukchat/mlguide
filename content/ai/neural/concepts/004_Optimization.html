@@ -1,0 +1,1701 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Practical aspects of Deep Learning &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/ai/neural/concepts/004_Optimization';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/ai/neural/concepts/004_Optimization.html" />
+    <link rel="icon" href="../../../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Pytorch" href="pytorch/pytorch_toc.html" />
+    <link rel="prev" title="Activation functions" href="003_Activations.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/3_functions_and_modules.html">Functions &amp; Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/4_Object_Oriented.html">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/8_advanced.html">Advanced Concepts</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Introduction_to_ml.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/000_Data_Exploration.html">Exploratory Data Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/001_Data_Preparation.html">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/003_Classification.html">Classfication</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/005_Evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/006_Advanced.html">K-Fold Cross Validation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../neural_toc.html">Neural Networks</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="002_Backpropogation.html">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="003_Activations.html">Activations</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Optimizations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pytorch/01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../genai/introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../genai/concepts/transformers/01_transformers_from_scratch.html">Transformers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../genai/langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/intro.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/courses/courses_toc.html">Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/ai/neural/concepts/004_Optimization.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/ai/neural/concepts/004_Optimization.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/content/ai/neural/concepts/004_Optimization.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Practical aspects of Deep Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-dev-test-sets">Train / Dev / Test sets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-variance">Bias / Variance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#underfitting-vs-overfitting">Underfitting vs Overfitting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">Regularization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-regularization-reduces-overfitting">Why regularization reduces overfitting?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dropout-regularization">Dropout Regularization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-dropout">Understanding Dropout</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-regularization-methods">Other regularization methods</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizing-inputs">Normalizing inputs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-exploding-gradients">Vanishing / Exploding gradients</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weight-initialization-for-deep-networks">Weight Initialization for Deep Networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-approximation-of-gradients">Numerical approximation of gradients</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-checking-implementation-notes">Gradient checking implementation notes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-algorithms">Optimization algorithms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-gradient-descent">Batch gradient descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-batch-gradient-descent">Mini-batch gradient descent</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-mini-batch-gradient-descent">Understanding mini-batch gradient descent</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exponentially-weighted-averages">Exponentially weighted averages</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-exponentially-weighted-averages">Understanding exponentially weighted averages</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-correction-in-exponentially-weighted-averages">Bias correction in exponentially weighted averages</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-with-momentum">Gradient descent with momentum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rmsprop">RMSprop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adam-optimization-algorithm">Adam optimization algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate-decay">Learning rate decay</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-of-local-optima">The problem of local optima</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-tuning">Hyperparameter tuning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-process">Tuning process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-an-appropriate-scale-to-pick-hyperparameters">Using an appropriate scale to pick hyperparameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters-tuning-in-practice-pandas-vs-caviar">Hyperparameters tuning in practice: Pandas vs. Caviar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizing-activations-in-a-network">Normalizing activations in a network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-batch-normalization-into-a-neural-network">Fitting Batch Normalization into a neural network</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-batch-normalization-work">Why does Batch normalization work?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-normalization-at-test-time">Batch normalization at test time</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#softmax-regression">Softmax Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#training-a-softmax-classifier">Training a Softmax classifier</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="practical-aspects-of-deep-learning">
+<h1>Practical aspects of Deep Learning<a class="headerlink" href="#practical-aspects-of-deep-learning" title="Link to this heading">#</a></h1>
+<section id="train-dev-test-sets">
+<h2>Train / Dev / Test sets<a class="headerlink" href="#train-dev-test-sets" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Its <em>impossible to get all your hyperparameters right on a new application from the first time</em>.</p></li>
+<li><p>So the idea is you go through the loop -&gt; <strong>Idea ==&gt; Code ==&gt; Experiment.</strong></p></li>
+<li><p>You have to go through the loop many times to figure out your hyperparameters.</p></li>
+<li><p>Your data will be split into three parts:</p>
+<ul>
+<li><p>Training set.       (Has to be the largest set)</p></li>
+<li><p>Hold-out cross validation set / Development or “dev” set.</p></li>
+<li><p>Testing set.</p></li>
+</ul>
+</li>
+<li><p>You will try to <strong>build a model upon training set</strong> then try to <strong>optimize hyperparameters</strong> on dev set as much as possible. Then after your model is ready you try and <strong>evaluate the testing set</strong>.</p></li>
+<li><p>so the trend on the ratio of splitting the models:</p>
+<ul>
+<li><p>If size of the  dataset is 100 to 1000000  ==&gt; 60/20/20</p></li>
+<li><p>If size of the  dataset is 1000000  to INF  ==&gt; 98/1/1 or  99.5/0.25/0.25</p></li>
+</ul>
+</li>
+<li><p>The trend now gives the training data the biggest sets.</p></li>
+<li><p>Make sure the dev and test set are coming from the same distribution.</p></li>
+</ul>
+<div class='alert alert-block alert-info'>
+For example if cat training/dev pictures are from the web but the test pictures are from users cell phone they will mismatch. It is better to make sure that dev and test set are from the same distribution.
+</div></section>
+<section id="bias-variance">
+<h2>Bias / Variance<a class="headerlink" href="#bias-variance" title="Link to this heading">#</a></h2>
+<section id="underfitting-vs-overfitting">
+<h3>Underfitting vs Overfitting<a class="headerlink" href="#underfitting-vs-overfitting" title="Link to this heading">#</a></h3>
+<p><img alt="Bias &amp; Variance" src="../../../../_images/bias_variance.png" /></p>
+<ul class="simple">
+<li><p>If your model is underfitting (logistic regression of non linear data) it has a “<strong>high bias</strong>”</p></li>
+<li><p>If your model is overfitting then it has a “<strong>high variance</strong>”</p></li>
+<li><p>Your model will be alright if you <strong>balance</strong> the Bias / Variance</p></li>
+<li><p>Another idea to get the bias /  variance if you don’t have a 2D plotting mechanism:</p>
+<ul>
+<li><p>High variance (<strong>overfitting</strong>) for example:</p>
+<ul>
+<li><p>Training error: 1%</p></li>
+<li><p>Dev error: 11%</p></li>
+</ul>
+</li>
+<li><p>high Bias (<strong>underfitting</strong>) for example:</p>
+<ul>
+<li><p>Training error: 15%</p></li>
+<li><p>Dev error: 14%</p></li>
+</ul>
+</li>
+<li><p>high Bias (<strong>underfitting</strong>) &amp;&amp; High variance (overfitting) for example:</p>
+<ul>
+<li><p>Training error: 15%</p></li>
+<li><p>Test error: 30%</p></li>
+</ul>
+</li>
+<li><p>Best:</p>
+<ul>
+<li><p>Training error: 0.5%</p></li>
+<li><p>Test error: 1%</p></li>
+</ul>
+</li>
+<li><p>These Assumptions came from that human has 0% error. If the problem isn’t like that you’ll need to use human error as baseline.</p></li>
+</ul>
+</li>
+<li><p><strong>If your algorithm has a high bias:</strong></p>
+<ul>
+<li><p>Try to make your NN bigger (size of hidden units, number of layers)</p></li>
+<li><p>Try a different model that is suitable for your data.</p></li>
+<li><p>Try to run it longer.</p></li>
+<li><p>Different (advanced) optimization algorithms.</p></li>
+</ul>
+</li>
+<li><p><strong>If your algorithm has a high variance:</strong></p>
+<ul>
+<li><p>More data.</p></li>
+<li><p>Try regularization.</p></li>
+<li><p>Try a different model that is suitable for your data.</p></li>
+</ul>
+</li>
+<li><p>You should try the previous two points until you have a low bias and low variance.</p></li>
+</ul>
+</section>
+</section>
+<section id="regularization">
+<h2>Regularization<a class="headerlink" href="#regularization" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Adding regularization to NN will <strong>help it reduce variance (overfitting)</strong></p></li>
+<li><p><strong>L1 matrix norm</strong>:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(||W|| = \sum(|w[i,j]|)\)</span>  (sum of absolute values of all w)</p></li>
+</ul>
+</li>
+<li><p><strong>L2 matrix norm</strong> because of arcane technical math reasons is called <strong>Frobenius norm:</strong></p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(||W||^2 = \sum(|w[i,j]|^2)\)</span>	( sum of all w squared )</p></li>
+<li><p>Also can be calculated as <span class="math notranslate nohighlight">\(||W||^2 = W.T * W\)</span> if W is a vector</p></li>
+</ul>
+</li>
+<li><p><strong>Regularization for logistic regression:</strong></p>
+<ul>
+<li><p>The normal cost function that we want to minimize is: <span class="math notranslate nohighlight">\(J(w,b) = \frac{1}{m} * \sum(L(y(i),y'(i)))\)</span></p></li>
+<li><p>The L2 regularization version: <span class="math notranslate nohighlight">\(J(w,b) = \frac{1}{m} * \sum(L(y(i),y'(i))) + \frac{\lambda}{2m} * \sum(|w[i]|^2)\)</span></p></li>
+<li><p>The L1 regularization version: <span class="math notranslate nohighlight">\(J(w,b) = \frac{1}{m} * \sum(L(y(i),y'(i))) + \frac{\lambda}{2m} * \sum(|w[i]|)\)</span></p></li>
+<li><p>The L1 regularization version makes a lot of w values become zeros, which makes the model size smaller.</p></li>
+<li><p>L2 regularization is being used much more often.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda\)</span> here is the regularization parameter (hyperparameter)</p></li>
+</ul>
+</li>
+<li><p><strong>Regularization for NN:</strong></p>
+<ul>
+<li><p>The normal cost function that we want to minimize is:  $<span class="math notranslate nohighlight">\(J(W1,b1...,WL,bL) = \frac{1}{m} * \sum(L(y(i),y'(i)))\)</span>$</p></li>
+<li><p>The L2 regularization version:  $<span class="math notranslate nohighlight">\(J(w,b) = \frac{1}{m} * \sum(L(y(i),y'(i))) + \frac{\lambda}{2m} * \sum((||W[l]||^2)\)</span>$</p></li>
+<li><p>We stack the matrix as one vector <span class="math notranslate nohighlight">\((mn,1)\)</span> and then we apply <span class="math notranslate nohighlight">\(\sqrt(w1^2 + w2^2.....)\)</span></p></li>
+<li><p>To do back propagation (old way):  $<span class="math notranslate nohighlight">\(dw[l] = (\text{from back propagation}) \)</span>$</p></li>
+<li><p>The new way:  $<span class="math notranslate nohighlight">\(dw[l] = (\text{from back propagation}) + \frac{\lambda}{m} * w[l]\)</span>$</p></li>
+<li><p>So plugging it in weight update step:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(w[l] = w[l] - \text{learning rate} * dw[l]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(w[l]= w[l] - \text{learning rate} * ((\text{from back propagation}) + \frac{\lambda}{m} * w[l])\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(w[l]= w[l] - \text{learning rate} * {\frac{\lambda}{m}} * w[l] - \text{learning rate} * (\text{from back propagation})\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(w[l]= (1 - \text{learning rate} * {\frac{\lambda}{m}}) * w[l] - \text{learning rate} * (\text{from back propagation})\)</span></p></li>
+</ul>
+</li>
+<li><p>In practice this penalizes large weights and effectively limits the freedom in your model.</p></li>
+<li><p>The new term <span class="math notranslate nohighlight">\((1 - \frac{(\text{learning rate}*\lambda)}{m}) * w[l]\)</span>  causes the <strong>weight to decay</strong> in proportion to its size.</p></li>
+</ul>
+</li>
+</ul>
+<section id="why-regularization-reduces-overfitting">
+<h3>Why regularization reduces overfitting?<a class="headerlink" href="#why-regularization-reduces-overfitting" title="Link to this heading">#</a></h3>
+<p>Here are some intuitions:</p>
+<ul class="simple">
+<li><p>Intuition 1:</p>
+<ul>
+<li><p>If <span class="math notranslate nohighlight">\(\lambda\)</span> is too large - a lot of w’s will be close to zeros which will make the NN simpler (you can think of it as it would behave closer to logistic regression).</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\lambda\)</span> is good enough it will just reduce some weights that makes the neural network overfit.</p></li>
+</ul>
+</li>
+<li><p>Intuition 2 (with <em>tanh</em> activation function):</p>
+<ul>
+<li><p>If <span class="math notranslate nohighlight">\(\lambda\)</span> is too large, w’s will be small (close to zero) - will use the linear part of the <em>tanh</em> activation function, so we will go from non linear activation to <em>roughly</em> linear which would make the NN a <em>roughly</em> linear classifier.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\lambda\)</span> good enough it will just make some of <em>tanh</em> activations <em>roughly</em> linear which will prevent overfitting.</p></li>
+</ul>
+</li>
+</ul>
+<div class='alert alert-block alert-info'>
+🔎 <strong>Implementation tip</strong>: If you implement gradient descent, one of the steps to debug gradient descent is to plot the cost function J as a function of the number of iterations of gradient descent and you want to see that the cost function J decreases <strong>monotonically</strong>> after every elevation of gradient descent with regularization. If you plot the old definition of J (no regularization) then you might not see it decrease monotonically.
+</div>
+</section>
+<section id="dropout-regularization">
+<h3>Dropout Regularization<a class="headerlink" href="#dropout-regularization" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>In most cases we use the L2 regularization.</p></li>
+<li><p>The dropout regularization <strong>eliminates some neurons/weights on each iteration</strong> based on a probability.</p></li>
+<li><p>A most common technique to implement dropout is called <strong>“Inverted dropout”</strong>.</p></li>
+<li><p>Code for Inverted dropout:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">keep_prob</span> <span class="o">=</span> <span class="mf">0.8</span>   <span class="c1"># 0 &lt;= keep_prob &lt;= 1</span>
+<span class="n">l</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># this code is only for layer 3</span>
+<span class="c1"># the generated number that are less than 0.8 will be dropped. 80% stay, 20% dropped</span>
+<span class="n">d3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">keep_prob</span>
+
+<span class="n">a3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">a3</span><span class="p">,</span><span class="n">d3</span><span class="p">)</span>   <span class="c1"># keep only the values in d3</span>
+
+<span class="c1"># increase a3 to not reduce the expected value of output</span>
+<span class="c1"># (ensures that the expected value of a3 remains the same) - to solve the scaling problem</span>
+<span class="n">a3</span> <span class="o">=</span> <span class="n">a3</span> <span class="o">/</span> <span class="n">keep_prob</span>       
+</pre></div>
+</div>
+</li>
+<li><p>Vector d[l] is used for forward and back propagation and is the same for them, but it is different for each iteration (pass) or training example.</p></li>
+<li><p>At test time we don’t use dropout. If you implement dropout at test time - it would add noise to predictions.</p></li>
+</ul>
+<section id="understanding-dropout">
+<h4>Understanding Dropout<a class="headerlink" href="#understanding-dropout" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Dropout randomly knocks out units in your network. So it’s as if on every iteration you’re working with a smaller NN, and so using a smaller NN seems like it should have a regularizing effect.</p></li>
+<li><p>Another intuition: can’t rely on any one feature, so have to spread out weights.</p></li>
+<li><p>It’s possible to show that dropout has a similar effect to L2 regularization.</p></li>
+<li><p>Dropout can have different <code class="docutils literal notranslate"><span class="pre">keep_prob</span></code> per layer.</p></li>
+<li><p>The input layer dropout has to be near 1 (or 1 - no dropout) because you don’t want to eliminate a lot of features.</p></li>
+<li><p>If you’re more worried about some layers overfitting than others, you can set a lower <code class="docutils literal notranslate"><span class="pre">keep_prob</span></code> for some layers than others. The downside is, this gives you even more hyperparameters to search for using cross-validation. One other alternative might be to have some layers where you apply dropout and some layers where you don’t apply dropout and then just have one hyperparameter, which is a <code class="docutils literal notranslate"><span class="pre">keep_prob</span></code> for the layers for which you do apply dropouts.</p></li>
+<li><p>A lot of researchers are using dropout with Computer Vision (CV) because they have a very big input size and almost never have enough data, so overfitting is the usual problem. And dropout is a regularization technique to prevent overfitting.</p></li>
+<li><p>A downside of dropout is that the cost function J is not well defined and it will be hard to debug (plot J by iteration).
+(To solve that you’ll need to turn off dropout, set all the <code class="docutils literal notranslate"><span class="pre">keep_prob</span></code>s to 1, and then run the code and check that it monotonically decreases J and then turn on the dropouts again.)</p></li>
+</ul>
+<p><img alt="dropouts" src="../../../../_images/dropout.png" /></p>
+</section>
+</section>
+<section id="other-regularization-methods">
+<h3>Other regularization methods<a class="headerlink" href="#other-regularization-methods" title="Link to this heading">#</a></h3>
+<ul>
+<li><p><strong>Data augmentation</strong>:</p>
+<ul class="simple">
+<li><p>For example in a computer vision data:</p>
+<ul>
+<li><p>You can flip all your pictures horizontally this will give you m more data instances.</p></li>
+<li><p>You could also apply a random position and rotation to an image to get more data.</p></li>
+</ul>
+</li>
+<li><p>For example in OCR, you can impose random rotations and distortions to digits/letters.</p></li>
+<li><p>New data obtained using this technique isn’t as good as the real independent data, but still can be used as a regularization technique.</p></li>
+</ul>
+<p><img alt="data augmentation" src="../../../../_images/data-augmentation.png" /></p>
+</li>
+<li><p><strong>Early stopping</strong>:</p>
+<ul class="simple">
+<li><p>In this technique we plot the training set and the dev set cost together for each iteration. At some iteration the dev set cost will stop decreasing and will start increasing.</p></li>
+<li><p>We will pick the point at which the training set error and dev set error are best (lowest training cost with lowest dev cost).</p></li>
+<li><p>We will take these parameters as the best parameters.
+<img alt="early stopping" src="../../../../_images/early-stopping.png" /></p></li>
+<li><p>Prefer to use L2 regularization instead of early stopping because this technique simultaneously tries to minimize the cost function and not to overfit which contradicts the orthogonalization approach (will be discussed further).</p></li>
+<li><p>But its advantage is that you don’t need to search a hyperparameter like in other regularization approaches (like <span class="math notranslate nohighlight">\(\lambda\)</span> in L2 regularization).</p></li>
+</ul>
+</li>
+<li><p><strong>Model Ensembles</strong>:</p>
+<ul class="simple">
+<li><p>Algorithm:</p>
+<ul>
+<li><p>Train multiple independent models.</p></li>
+<li><p>At test time average their results.</p></li>
+</ul>
+</li>
+<li><p>It can get you extra 2% performance.</p></li>
+<li><p>It reduces the generalization error.</p></li>
+<li><p>You can use some snapshots of your NN at the training ensembles them and take the results.</p></li>
+</ul>
+</li>
+</ul>
+<div class='alert alert-block alert-info'>
+<h3>Summary</h3>
+<h4>L2 Regularization</h4>
+<p><strong>Observations</strong>:</p>
+<ul class="simple">
+<li><p>The value of λ is a hyperparameter that you can tune using a dev set.</p></li>
+<li><p>L2 regularization makes your decision boundary smoother. If λ is too large, it is also possible to “oversmooth”, resulting in a model with high bias.</p></li>
+</ul>
+<p><strong>What is L2-regularization actually doing?</strong>:</p>
+<ul class="simple">
+<li><p>L2-regularization relies on the assumption that a model with small weights is simpler than a model with large weights. Thus, by penalizing the square values of the weights in the cost function you drive all the weights to smaller values. It becomes too costly for the cost to have large weights! This leads to a smoother model in which the output changes more slowly as the input changes.</p></li>
+</ul>
+<p><strong>What you should remember:</strong><br />
+Implications of L2-regularization on:</p>
+<ul class="simple">
+<li><p>cost computation:</p>
+<ul>
+<li><p>A regularization term is added to the cost</p></li>
+</ul>
+</li>
+<li><p>backpropagation function:</p>
+<ul>
+<li><p>There are extra terms in the gradients with respect to weight matrices</p></li>
+</ul>
+</li>
+<li><p>weights:</p>
+<ul>
+<li><p>weights end up smaller (“weight decay”) - are pushed to smaller values.</p></li>
+</ul>
+</li>
+</ul>
+<h4>Dropout</h4>
+<p><strong>What you should remember about dropout:</strong></p>
+<ul class="simple">
+<li><p>Dropout is a regularization technique.</p></li>
+<li><p>You only use dropout during training. Don’t use dropout (randomly eliminate nodes) during test time.</p></li>
+<li><p>Apply dropout both during forward and backward propagation.</p></li>
+<li><p>During training time, divide each dropout layer by keep_prob to keep the same expected value for the activations. For example, if <code class="docutils literal notranslate"><span class="pre">keep_prob</span></code> is 0.5, then we will on average shut down half the nodes, so the output will be scaled by 0.5 since only the remaining half are contributing to the solution. Dividing by 0.5 is equivalent to multiplying by 2. Hence, the output now has the same expected value. You can check that this works even when keep_prob is other values than 0.5.</p></li>
+</ul>
+</div></section>
+</section>
+<section id="normalizing-inputs">
+<h2>Normalizing inputs<a class="headerlink" href="#normalizing-inputs" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>If you normalize your inputs this will speed up the training process a lot.</p></li>
+<li><p>Normalization are going on these steps:</p>
+<ol class="arabic simple">
+<li><p>Get the mean of the training set: <span class="math notranslate nohighlight">\(mean = \frac{1}{m} * \sum(x(i))\)</span></p></li>
+<li><p>Subtract the mean from each input: <span class="math notranslate nohighlight">\(X = X - mean\)</span></p>
+<ul>
+<li><p>This makes your inputs centered around 0.</p></li>
+</ul>
+</li>
+<li><p>Get the variance of the training set: <span class="math notranslate nohighlight">\(variance = \frac{1}{m} * \sum(x(i)^2)\)</span></p></li>
+<li><p>Normalize the variance. <span class="math notranslate nohighlight">\(X /= variance\)</span></p></li>
+</ol>
+</li>
+<li><p>These steps should be applied to training, dev, and testing sets (but using mean and variance of the train set).</p></li>
+<li><p>Why normalize?</p>
+<ul>
+<li><p>If we don’t normalize the inputs our cost function will be deep and its shape will be inconsistent (elongated) then optimizing it will take a long time.</p></li>
+<li><p>But if we normalize it the opposite will occur. The shape of the cost function will be consistent (look more symmetric like circle in 2D example) and we can use a larger learning rate alpha - the optimization will be faster.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="Normalizing inputs" src="../../../../_images/normalize-inputs.png" /></p>
+<section id="vanishing-exploding-gradients">
+<h3>Vanishing / Exploding gradients<a class="headerlink" href="#vanishing-exploding-gradients" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>The Vanishing / Exploding gradients occurs when your derivatives become very small or very big.</p></li>
+<li><p>To understand the problem, suppose that we have a deep neural network with number of layers L, and all the activation functions are <strong>linear</strong> and each <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">0</span></code></p>
+<ul>
+<li><p>Then:<br />
+$<span class="math notranslate nohighlight">\(
+Y' = W[L]W[L-1].....W[2]W[1]X
+\)</span>$</p></li>
+<li><p>Then, if we have 2 hidden units per layer and x1 = x2 = 1, we result in:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">W</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.5</span>   <span class="mi">0</span><span class="p">]</span> 
+          <span class="p">[</span><span class="mi">0</span>   <span class="mf">1.5</span><span class="p">]</span> <span class="p">(</span><span class="n">l</span> <span class="o">!=</span> <span class="n">L</span> <span class="n">because</span> <span class="n">of</span> <span class="n">different</span> <span class="n">dimensions</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">output</span> <span class="n">layer</span><span class="p">)</span>
+<span class="n">Y</span><span class="s1">&#39; = W[L] [1.5  0]^(L-1) X = 1.5^L 	# which will be very large</span>
+          <span class="p">[</span><span class="mi">0</span>  <span class="mf">1.5</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-pyth0on notranslate"><div class="highlight"><pre><span></span>if W[l] = [0.5  0]
+          [0  0.5]
+Y&#39; = W[L] [0.5  0]^(L-1) X = 0.5^L 	# which will be very small
+          [0  0.5]
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>The last example explains that the activations (and similarly derivatives) will be decreased/increased exponentially as a function of number of layers.</p></li>
+<li><p>So If W &gt; I (Identity matrix) the activation and gradients will explode.</p></li>
+<li><p>And If W &lt; I (Identity matrix) the activation and gradients will vanish.</p></li>
+<li><p>For 152 layers network like (ResNet)! which is a really big number. With such a deep neural network, if your activations or gradients increase or decrease exponentially as a function of L, then these values could get really big or really small. And this makes training difficult, especially if your gradients are exponentially smaller than L, then gradient descent will take tiny little steps. It will take a long time for gradient descent to learn anything.</p></li>
+<li><p>There is a partial solution that doesn’t completely solve this problem but it helps a lot - careful choice of how you initialize the weights.</p></li>
+</ul>
+<p><strong>Gradients multiply for every parameter for every neuron unit, if gradient is large, updation will be large and would result in gradient explosion and vice versa</strong></p>
+<p><img alt="vanishing gradient" src="../../../../_images/vanishing-gradient.png" /></p>
+</section>
+</section>
+<section id="weight-initialization-for-deep-networks">
+<h2>Weight Initialization for Deep Networks<a class="headerlink" href="#weight-initialization-for-deep-networks" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>A partial solution to the Vanishing / Exploding gradients in NN is better or more <strong>careful choice of the random initialization of weights</strong></p></li>
+<li><p>In a single neuron (Perceptron model): <span class="math notranslate nohighlight">\(Z = w1_x1 + w2_x2 + ... + wn_xn\)</span></p></li>
+<li><p>So if <span class="math notranslate nohighlight">\(n_x\)</span> is large we want <span class="math notranslate nohighlight">\(W\)</span>’s to be smaller to not explode the cost.</p></li>
+<li><p>So it turns out that we need the variance which equals <span class="math notranslate nohighlight">\(\frac{1}{n_x}\)</span> to be the range of <span class="math notranslate nohighlight">\(W\)</span>’s</p></li>
+<li><p>So lets say when we initialize <span class="math notranslate nohighlight">\(W\)</span>’s like this (better to use with <span class="math notranslate nohighlight">\(tanh\)</span> activation):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>or variation of this (Bengio et al.):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">n</span><span class="p">[</span><span class="n">l</span><span class="p">]))</span>
+</pre></div>
+</div>
+</li>
+<li><p>Setting initialization part inside sqrt to <span class="math notranslate nohighlight">\(\frac{2}{n[l-1]}\)</span> for <code class="docutils literal notranslate"><span class="pre">ReLU</span></code> is better:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="n">n</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</li>
+<li><p>Number 1 or 2 in the neumerator can also be a hyperparameter to tune (but not the first to start with)</p></li>
+<li><p>This is one of the best way of partially solution to Vanishing / Exploding gradients (ReLU + Weight Initialization with variance) which will help gradients not to vanish/explode too quickly</p></li>
+<li><p>The initialization in this video is called “<strong>He Initialization / Xavier Initialization</strong>” and has been published in 2015 paper.</p></li>
+</ul>
+</section>
+<section id="numerical-approximation-of-gradients">
+<h2>Numerical approximation of gradients<a class="headerlink" href="#numerical-approximation-of-gradients" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>There is a technique called <strong>gradient checking</strong> which tells you if your implementation of backpropagation is correct.</p></li>
+<li><p>There’s a numerical way to calculate the derivative:<br />
+<img alt="Gradient approximation" src="../../../../_images/gradient-approximation.png" /></p></li>
+<li><p>Gradient checking approximates the gradients and is very helpful for finding the errors in your backpropagation implementation but it’s slower than gradient descent (so use only for debugging).</p></li>
+<li><p>Gradient checking:</p>
+<ul>
+<li><p>First take <span class="math notranslate nohighlight">\(W[1],b[1],...,W[L],b[L]\)</span> and reshape into one big vector (<span class="math notranslate nohighlight">\(\theta\)</span>)</p></li>
+<li><p>The cost function will be <span class="math notranslate nohighlight">\(J(\theta)\)</span></p></li>
+<li><p>Then take <span class="math notranslate nohighlight">\(dW[1],db[1],...,dW[L],db[L]\)</span> into one big vector (<span class="math notranslate nohighlight">\(d_\theta\)</span>)</p></li>
+<li><p><strong>Algorithm</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">eps</span> <span class="o">=</span> <span class="mi">10</span><span class="o">^-</span><span class="mi">7</span>   <span class="c1"># small number</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">len</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
+  <span class="n">d_theta_approx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">J</span><span class="p">(</span><span class="n">theta1</span><span class="p">,</span><span class="o">...</span><span class="p">,</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)</span> <span class="o">-</span>  <span class="n">J</span><span class="p">(</span><span class="n">theta1</span><span class="p">,</span><span class="o">...</span><span class="p">,</span><span class="n">theta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">eps</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span><span class="o">*</span><span class="n">eps</span>
+</pre></div>
+</div>
+</li>
+<li><p>Finally we evaluate this formula $<span class="math notranslate nohighlight">\(\frac{\| d\theta_{\text{approx}} - d\theta \|}{\| d\theta_{\text{approx}} \| + \| d\theta \|}\)</span>$</p>
+<ul class="simple">
+<li><p>if it is &lt; <span class="math notranslate nohighlight">\(10^-7\)</span>  - great, very likely the backpropagation implementation is correct</p></li>
+<li><p>if around <span class="math notranslate nohighlight">\(10^-5\)</span>   - can be OK, but need to inspect if there are no particularly big values in <span class="math notranslate nohighlight">\(d\theta_{\text{approx}} - d\theta\)</span> vector</p></li>
+<li><p>if it is &gt;= 10^-3 - bad, probably there is a bug in backpropagation implementation</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<section id="gradient-checking-implementation-notes">
+<h3>Gradient checking implementation notes<a class="headerlink" href="#gradient-checking-implementation-notes" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Don’t use the gradient checking algorithm at training time because it’s very slow.</p></li>
+<li><p>Use gradient checking only for debugging.</p></li>
+<li><p>If algorithm fails grad check, look at components to try to identify the bug.</p></li>
+<li><p>Don’t forget to add <span class="math notranslate nohighlight">\(\frac{\lambda}{2m)} * \sum(W[l])\)</span> to <span class="math notranslate nohighlight">\(J\)</span> if you are using L1 or L2 regularization.</p></li>
+<li><p>Gradient checking doesn’t work with dropout because J is not consistent.</p>
+<ul>
+<li><p>You can first turn off dropout (set <code class="docutils literal notranslate"><span class="pre">keep_prob</span> <span class="pre">=</span> <span class="pre">1.0</span></code>), run gradient checking and then turn on dropout again.</p></li>
+</ul>
+</li>
+<li><p>Run gradient checking at random initialization and train the network for a while maybe there’s a bug which can be seen when w’s and b’s become larger (further from 0) and can’t be seen on the first iteration (when w’s and b’s are very small).</p></li>
+</ul>
+</section>
+</section>
+<section id="optimization-algorithms">
+<h2>Optimization algorithms<a class="headerlink" href="#optimization-algorithms" title="Link to this heading">#</a></h2>
+<p>Until now, we’ve always used Gradient Descent to update the parameters and minimize the cost. Now we will learn more advanced optimization methods that can speed up learning and perhaps even get you to a better final value for the cost function. Having a good optimization algorithm can be the difference between waiting days vs. just a few hours to get a good result.</p>
+<section id="batch-gradient-descent">
+<h3>Batch gradient descent<a class="headerlink" href="#batch-gradient-descent" title="Link to this heading">#</a></h3>
+<p>A simple optimization method in machine learning is gradient descent (GD). When you take gradient steps with respect to <strong>all <span class="math notranslate nohighlight">\(m\)</span> examples on each step</strong>, it is also called <strong>Batch Gradient Descent</strong>.</p>
+<p>A variant of this is <strong>Stochastic Gradient Descent (SGD)</strong>, which is equivalent to <strong>mini-batch gradient descent where each mini-batch has just 1 example</strong>. The update rule that you have just implemented does not change. What changes is that you would be <strong>computing gradients on just one training example at a time</strong>, rather than on the whole training set. The code examples below illustrate the difference between stochastic gradient descent and (batch) gradient descent.</p>
+<ul class="simple">
+<li><p><strong>(Batch) Gradient Descent</strong>:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">data_input</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">labels</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="n">initialize_parameters</span><span class="p">(</span><span class="n">layers_dims</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_iterations</span><span class="p">):</span>
+    <span class="c1"># Forward propagation</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">caches</span> <span class="o">=</span> <span class="n">forward_propagation</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+    <span class="c1"># Compute cost.</span>
+    <span class="n">cost</span> <span class="o">+=</span> <span class="n">compute_cost</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="c1"># Backward propagation.</span>
+    <span class="n">grads</span> <span class="o">=</span> <span class="n">backward_propagation</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">caches</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+    <span class="c1"># Update parameters.</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="n">update_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">grads</span><span class="p">)</span>
+        
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Stochastic Gradient Descent</strong>:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">data_input</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">labels</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="n">initialize_parameters</span><span class="p">(</span><span class="n">layers_dims</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_iterations</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+        <span class="c1"># Forward propagation</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">caches</span> <span class="o">=</span> <span class="n">forward_propagation</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="n">j</span><span class="p">],</span> <span class="n">parameters</span><span class="p">)</span>
+        <span class="c1"># Compute cost</span>
+        <span class="n">cost</span> <span class="o">+=</span> <span class="n">compute_cost</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">Y</span><span class="p">[:,</span><span class="n">j</span><span class="p">])</span>
+        <span class="c1"># Backward propagation</span>
+        <span class="n">grads</span> <span class="o">=</span> <span class="n">backward_propagation</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">caches</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+        <span class="c1"># Update parameters.</span>
+        <span class="n">parameters</span> <span class="o">=</span> <span class="n">update_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">grads</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In Stochastic Gradient Descent, you use only 1 training example before updating the gradients. When the training set is large, SGD can be faster. But the parameters will “oscillate” toward the minimum rather than converge smoothly. Here is an illustration of this:</p>
+<img alt="../../../../_images/kiank_sgd.png" src="../../../../_images/kiank_sgd.png" />
+<div class='alert alert-block alert-info'>
+<p><strong>Note</strong> also that implementing SGD requires 3 for-loops in total:</p>
+<ol class="arabic simple">
+<li><p>Over the number of iterations</p></li>
+<li><p>Over the <span class="math notranslate nohighlight">\(m\)</span> training examples</p></li>
+<li><p>Over the layers (to update all parameters, from <span class="math notranslate nohighlight">\((W^{[1]},b^{[1]})\)</span> to <span class="math notranslate nohighlight">\((W^{[L]},b^{[L]})\)</span>)</p></li>
+</ol>
+<p>In practice, you’ll often get faster results if you do not use neither the whole training set, nor only one training example, to perform each update. Mini-batch gradient descent uses an intermediate number of examples for each step. With mini-batch gradient descent, you loop over the mini-batches instead of looping over individual training examples.</p>
+</div>
+</section>
+<section id="mini-batch-gradient-descent">
+<h3>Mini-batch gradient descent<a class="headerlink" href="#mini-batch-gradient-descent" title="Link to this heading">#</a></h3>
+<ul>
+<li><p><strong>Training NN with a large data is slow</strong>. So to find an optimization algorithm that runs faster is a good idea.</p></li>
+<li><p>Suppose we have <span class="math notranslate nohighlight">\(m = 50 \text{million}\)</span>. To train this data it will take a huge processing time for one step.
+(because 50 million won’t fit in the memory at once we need other processing to make such a thing.)</p></li>
+<li><p>It turns out you can make a faster algorithm to make gradient descent process some of your items even before you finish the 50 million items.</p></li>
+<li><p>Suppose we have split m to <strong>mini batches</strong> of size 1000.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X{1} = 0    ...  1000\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(X{2} = 1001 ...  2000\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(...\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(X{bs} = ...\)</span></p></li>
+</ul>
+</li>
+<li><p>We similarly split <span class="math notranslate nohighlight">\(X\)</span> &amp; <span class="math notranslate nohighlight">\(Y\)</span>.</p></li>
+<li><p>So the definition of mini batches ==&gt; <span class="math notranslate nohighlight">\(t: X{t}, Y{t}\)</span></p></li>
+<li><p>In <strong>Batch gradient descent</strong> we run the gradient descent on the whole dataset.</p></li>
+<li><p>While in <strong>Mini-Batch gradient descent</strong> we run the gradient descent on the mini datasets.</p></li>
+<li><p>Mini-Batch algorithm pseudo code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">No_of_batches</span>                         <span class="c1"># this is called an epoch</span>
+	<span class="n">AL</span><span class="p">,</span> <span class="n">caches</span> <span class="o">=</span> <span class="n">forward_prop</span><span class="p">(</span><span class="n">X</span><span class="p">{</span><span class="n">t</span><span class="p">},</span> <span class="n">Y</span><span class="p">{</span><span class="n">t</span><span class="p">})</span>
+	<span class="n">cost</span> <span class="o">=</span> <span class="n">compute_cost</span><span class="p">(</span><span class="n">AL</span><span class="p">,</span> <span class="n">Y</span><span class="p">{</span><span class="n">t</span><span class="p">})</span>
+	<span class="n">grads</span> <span class="o">=</span> <span class="n">backward_prop</span><span class="p">(</span><span class="n">AL</span><span class="p">,</span> <span class="n">caches</span><span class="p">)</span>
+	<span class="n">update_parameters</span><span class="p">(</span><span class="n">grads</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>The code inside an epoch should be vectorized.</p></li>
+<li><p>Mini-batch gradient descent works much faster in the large datasets.</p></li>
+</ul>
+<img alt="../../../../_images/kiank_minibatch.png" src="../../../../_images/kiank_minibatch.png" />
+<section id="understanding-mini-batch-gradient-descent">
+<h4>Understanding mini-batch gradient descent<a class="headerlink" href="#understanding-mini-batch-gradient-descent" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>In mini-batch algorithm, the cost won’t go down with each step as it does in batch algorithm. It could contain some ups and downs but generally it has to go down (unlike the batch gradient descent where cost function descreases on each iteration).</p></li>
+<li><p>Mini-batch size:</p>
+<ul>
+<li><p>(<strong>mini batch size = m</strong>)  ==&gt;    Batch gradient descent</p></li>
+<li><p>(<strong>mini batch size = 1</strong>)  ==&gt;    Stochastic gradient descent (SGD)</p></li>
+<li><p>(<strong>mini batch size = between 1 and m</strong>) ==&gt;    Mini-batch gradient descent</p></li>
+</ul>
+</li>
+<li><p>Batch gradient descent:</p>
+<ul>
+<li><p>too long per iteration (epoch)</p></li>
+</ul>
+</li>
+<li><p>Stochastic gradient descent:</p>
+<ul>
+<li><p>too noisy regarding cost minimization (can be reduced by using smaller learning rate)</p></li>
+<li><p>won’t ever converge (reach the minimum cost)</p></li>
+<li><p>lose speedup from vectorization</p></li>
+</ul>
+</li>
+<li><p>Mini-batch gradient descent:</p>
+<ol class="arabic simple">
+<li><p>faster learning:</p>
+<ul>
+<li><p>you have the vectorization advantage</p></li>
+<li><p>make progress without waiting to process the entire training set</p></li>
+</ul>
+</li>
+<li><p>doesn’t always exactly converge (oscelates in a very small region, but you can reduce learning rate)</p></li>
+</ol>
+</li>
+<li><p>Guidelines for choosing mini-batch size:</p>
+<ol class="arabic simple">
+<li><p>If small training set (&lt; 2000 examples) - use batch gradient descent.</p></li>
+<li><p>It has to be a power of 2 (because of the way computer memory is layed out and accessed, sometimes your code runs faster if your mini-batch size is a power of 2):
+<span class="math notranslate nohighlight">\(64, 128, 256, 512, 1024, ...\)</span></p></li>
+<li><p>Make sure that mini-batch fits in CPU/GPU memory.</p></li>
+</ol>
+</li>
+<li><p>Mini-batch size is a <strong>hyperparameter</strong>.</p></li>
+</ul>
+</section>
+</section>
+<section id="exponentially-weighted-averages">
+<h3>Exponentially weighted averages<a class="headerlink" href="#exponentially-weighted-averages" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>There are optimization algorithms that are better than <strong>gradient descent</strong>, but you should first learn about Exponentially weighted averages.</p></li>
+<li><p>If we have data like the temperature of day through the year it could be like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">t</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="mi">49</span>
+<span class="n">t</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="mi">45</span>
+<span class="o">...</span>
+<span class="n">t</span><span class="p">(</span><span class="mi">180</span><span class="p">)</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</li>
+<li><p>This data is small in winter and big in summer. If we plot this data we will find it some noisy.</p></li>
+<li><p>Now lets compute the Exponentially weighted averages:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V0</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">V1</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">V0</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">t</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">4</span>		<span class="c1"># 0.9 and 0.1 are hyperparameters</span>
+<span class="n">V2</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">V1</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">t</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="mf">8.5</span>
+<span class="n">V3</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">V2</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">t</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="mf">12.15</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</li>
+<li><p>General equation</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">V</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">v</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">beta</span><span class="p">)</span> <span class="o">*</span> <span class="n">theta</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>If we plot this it will represent averages over <span class="math notranslate nohighlight">\(~ (1 / (1 - \beta))\)</span> entries:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\beta = 0.9\)</span> will average last 10 entries</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta = 0.98\)</span> will average last 50 entries</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta = 0.5\)</span> will average last 2 entries</p></li>
+</ul>
+</li>
+<li><p>Best beta average for our case is between 0.9 and 0.98</p></li>
+<li><p><strong>Intuition</strong>: The reason why exponentially weighted averages are useful for further optimizing gradient descent algorithm is that it can give different weights to recent data points (<span class="math notranslate nohighlight">\(\theta\)</span>) based on value of <span class="math notranslate nohighlight">\(\beta\)</span>. If <span class="math notranslate nohighlight">\(\beta\)</span> is high (around 0.9), it smoothens out the averages of skewed data points (oscillations w.r.t. Gradient descent terminology). So this reduces oscillations in gradient descent and hence makes faster and smoother path towerds minima.</p></li>
+</ul>
+<section id="understanding-exponentially-weighted-averages">
+<h4>Understanding exponentially weighted averages<a class="headerlink" href="#understanding-exponentially-weighted-averages" title="Link to this heading">#</a></h4>
+<ul>
+<li><p>Intuitions:<br />
+<img alt="Exponentially Weghted Average" src="../../../../_images/exp-wieghted-avg.png" /></p></li>
+<li><p>We can implement this algorithm with more accurate results using a moving window. But the code is more efficient and faster using the exponentially weighted averages algorithm.</p></li>
+<li><p>Algorithm is very simple:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">Repeat</span>
+<span class="p">{</span>
+	<span class="n">Get</span> <span class="n">theta</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+	<span class="n">v</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">v</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">beta</span><span class="p">)</span> <span class="o">*</span> <span class="n">theta</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="bias-correction-in-exponentially-weighted-averages">
+<h4>Bias correction in exponentially weighted averages<a class="headerlink" href="#bias-correction-in-exponentially-weighted-averages" title="Link to this heading">#</a></h4>
+<ul>
+<li><p>The bias correction helps make the exponentially weighted averages more accurate.</p></li>
+<li><p>Because <code class="docutils literal notranslate"><span class="pre">v(0)</span> <span class="pre">=</span> <span class="pre">0</span></code>, the bias of the weighted averages is shifted and the accuracy suffers at the start.</p></li>
+<li><p>To solve the bias issue we have to use this equation:</p>
+<div class="math notranslate nohighlight">
+\[v(t) = (\beta * v(t-1) + \frac{(1-\beta) * \theta(t))}{(1 - \beta^t)}\]</div>
+</li>
+<li><p>As t becomes larger the <span class="math notranslate nohighlight">\((1 - \beta^t)\)</span> becomes close to 1</p></li>
+</ul>
+</section>
+</section>
+<section id="gradient-descent-with-momentum">
+<h3>Gradient descent with momentum<a class="headerlink" href="#gradient-descent-with-momentum" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>The momentum algorithm almost always works faster than standard gradient descent.</p></li>
+<li><p>The simple idea is to calculate the exponentially weighted averages for your gradients and then update your weights with the new values.</p></li>
+<li><p>Pseudo code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">vdW</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vdb</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">on</span> <span class="n">iteration</span> <span class="n">t</span><span class="p">:</span>
+	<span class="c1"># can be mini-batch or batch gradient descent</span>
+	<span class="n">compute</span> <span class="n">dw</span><span class="p">,</span> <span class="n">db</span> <span class="n">on</span> <span class="n">current</span> <span class="n">mini</span><span class="o">-</span><span class="n">batch</span>                
+			
+	<span class="n">vdW</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">vdW</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta</span><span class="p">)</span> <span class="o">*</span> <span class="n">dW</span>
+	<span class="n">vdb</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">vdb</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta</span><span class="p">)</span> <span class="o">*</span> <span class="n">db</span>
+	<span class="n">W</span> <span class="o">=</span> <span class="n">W</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">vdW</span>
+	<span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">vdb</span>
+</pre></div>
+</div>
+</li>
+<li><p>Momentum helps the cost function to go to the minimum point in a more fast and consistent way.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta\)</span> is another <strong>hyperparameter</strong>. <span class="math notranslate nohighlight">\(\beta = 0.9\)</span> is very common and works very well in most cases.</p></li>
+<li><p>In practice people don’t bother implementing <strong>bias correction</strong>.</p></li>
+</ul>
+</section>
+<section id="rmsprop">
+<h3>RMSprop<a class="headerlink" href="#rmsprop" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Stands for <strong>Root mean square prop</strong>.</p></li>
+<li><p>This algorithm speeds up the gradient descent.</p></li>
+<li><p>Pseudo code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sdW</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sdb</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">on</span> <span class="n">iteration</span> <span class="n">t</span><span class="p">:</span>
+	<span class="c1"># can be mini-batch or batch gradient descent</span>
+	<span class="n">compute</span> <span class="n">dw</span><span class="p">,</span> <span class="n">db</span> <span class="n">on</span> <span class="n">current</span> <span class="n">mini</span><span class="o">-</span><span class="n">batch</span>
+	
+	<span class="n">sdW</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta</span> <span class="o">*</span> <span class="n">sdW</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta</span><span class="p">)</span> <span class="o">*</span> <span class="n">dW</span><span class="o">^</span><span class="mi">2</span>  <span class="c1"># squaring is element-wise</span>
+	<span class="n">sdb</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta</span> <span class="o">*</span> <span class="n">sdb</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta</span><span class="p">)</span> <span class="o">*</span> <span class="n">db</span><span class="o">^</span><span class="mi">2</span>  <span class="c1"># squaring is element-wise</span>
+	<span class="n">W</span> <span class="o">=</span> <span class="n">W</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">dW</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sdW</span><span class="p">)</span>
+	<span class="n">b</span> <span class="o">=</span> <span class="n">B</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">db</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sdb</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>RMSprop will make the cost function move slower on the vertical direction and faster on the horizontal direction in the following example:
+<img alt="RMSprop" src="../../../../_images/rmsprop.png" /></p></li>
+<li><p>Ensure that <code class="docutils literal notranslate"><span class="pre">sdW</span></code> is not zero by adding a small value <span class="math notranslate nohighlight">\(\epsilon\)</span> (e.g. <span class="math notranslate nohighlight">\(\epsilon = 10^-8\)</span>) to it:<br />
+<span class="math notranslate nohighlight">\(W = W - learning_rate * dW / (\sqrt(sdW) + \epsilon)\)</span></p></li>
+<li><p>With RMSprop you can increase your learning rate.</p></li>
+<li><p>Developed by Geoffrey Hinton and firstly introduced on <a class="reference external" href="https://www.coursera.org/">Coursera.org</a> course.</p></li>
+</ul>
+</section>
+<section id="adam-optimization-algorithm">
+<h3>Adam optimization algorithm<a class="headerlink" href="#adam-optimization-algorithm" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Stands for <strong>Adaptive Moment Estimation</strong>.</p></li>
+<li><p>Adam optimization and RMSprop are among the optimization algorithms that worked very well with a lot of NN architectures.</p></li>
+<li><p>Adam optimization simply puts RMSprop and momentum together!</p></li>
+<li><p>Pseudo code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">vdW</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vdW</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">sdW</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sdb</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">on</span> <span class="n">iteration</span> <span class="n">t</span><span class="p">:</span>
+	<span class="c1"># can be mini-batch or batch gradient descent</span>
+	<span class="n">compute</span> <span class="n">dw</span><span class="p">,</span> <span class="n">db</span> <span class="n">on</span> <span class="n">current</span> <span class="n">mini</span><span class="o">-</span><span class="n">batch</span>                
+			
+	<span class="n">vdW</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta1</span> <span class="o">*</span> <span class="n">vdW</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta1</span><span class="p">)</span> <span class="o">*</span> <span class="n">dW</span>     <span class="c1"># momentum</span>
+	<span class="n">vdb</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta1</span> <span class="o">*</span> <span class="n">vdb</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta1</span><span class="p">)</span> <span class="o">*</span> <span class="n">db</span>     <span class="c1"># momentum</span>
+			
+	<span class="n">sdW</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta2</span> <span class="o">*</span> <span class="n">sdW</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta2</span><span class="p">)</span> <span class="o">*</span> <span class="n">dW</span><span class="o">^</span><span class="mi">2</span>   <span class="c1"># RMSprop</span>
+	<span class="n">sdb</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta2</span> <span class="o">*</span> <span class="n">sdb</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta2</span><span class="p">)</span> <span class="o">*</span> <span class="n">db</span><span class="o">^</span><span class="mi">2</span>   <span class="c1"># RMSprop</span>
+			
+	<span class="n">vdW</span> <span class="o">=</span> <span class="n">vdW</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta1</span><span class="o">^</span><span class="n">t</span><span class="p">)</span>      <span class="c1"># fixing bias</span>
+	<span class="n">vdb</span> <span class="o">=</span> <span class="n">vdb</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta1</span><span class="o">^</span><span class="n">t</span><span class="p">)</span>      <span class="c1"># fixing bias</span>
+			
+	<span class="n">sdW</span> <span class="o">=</span> <span class="n">sdW</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta2</span><span class="o">^</span><span class="n">t</span><span class="p">)</span>      <span class="c1"># fixing bias</span>
+	<span class="n">sdb</span> <span class="o">=</span> <span class="n">sdb</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta2</span><span class="o">^</span><span class="n">t</span><span class="p">)</span>      <span class="c1"># fixing bias</span>
+					
+	<span class="n">W</span> <span class="o">=</span> <span class="n">W</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">vdW</span> <span class="o">/</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sdW</span><span class="p">)</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">)</span>
+	<span class="n">b</span> <span class="o">=</span> <span class="n">B</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">vdb</span> <span class="o">/</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sdb</span><span class="p">)</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Hyperparameters for Adam:</p>
+<ul class="simple">
+<li><p>Learning rate: needed to be tuned.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_1\)</span>: parameter of the momentum - 0.9 is recommended by default.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_2\)</span>: parameter of the RMSprop - 0.999 is recommended by default.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon\)</span>: <span class="math notranslate nohighlight">\(10^-8\)</span> is recommended by default.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="learning-rate-decay">
+<h3>Learning rate decay<a class="headerlink" href="#learning-rate-decay" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Slowly reduce learning rate.</p></li>
+<li><p>As mentioned before mini-batch gradient descent won’t reach the optimum point (converge). But by making the learning rate decay with iterations it will be much closer to it because the steps (and possible oscillations) near the optimum are smaller.</p></li>
+<li><p>One technique equations is <span class="math notranslate nohighlight">\(\text{learning_rate} = (1 / (1 + \text{decay_rate} * \text{epoch_num})) * \text{learning_rate}_0\)</span></p>
+<ul>
+<li><p><strong>epoch_num</strong> is over all data (not a single mini-batch).</p></li>
+</ul>
+</li>
+<li><p>Other learning rate decay methods (continuous):</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(text{learning_rate} = (0.95 ^ \text{epoch_num}) * \text{learning_rate}_0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(text{learning_rate} = \frac{k}{\sqrt(\text{epoch_num})} * \text{learning_rate}_0\)</span></p></li>
+</ul>
+</li>
+<li><p>Some people perform learning rate decay discretely - repeatedly decrease after some number of epochs.</p></li>
+<li><p>Some people are making changes to the learning rate manually.</p></li>
+<li><p><strong>decay_rate</strong> is another <strong>hyperparameter</strong>.</p></li>
+</ul>
+</section>
+<section id="the-problem-of-local-optima">
+<h3>The problem of local optima<a class="headerlink" href="#the-problem-of-local-optima" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The normal local optima is not likely to appear in a deep neural network because data is usually high dimensional. For point to be a local optima it has to be a local optima for each of the dimensions which is highly unlikely.</p></li>
+<li><p>It’s unlikely to get stuck in a bad local optima in high dimensions, it is much more likely to get to the saddle point rather to the local optima, which is not a problem.</p></li>
+<li><p>Plateaus can make learning slow:</p>
+<ul>
+<li><p>Plateau is a region where the derivative is close to zero for a long time.</p></li>
+<li><p>This is where algorithms like <strong>momentum</strong>, <strong>RMSprop</strong> or <strong>Adam</strong> can help.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="hyperparameter-tuning">
+<h2>Hyperparameter tuning<a class="headerlink" href="#hyperparameter-tuning" title="Link to this heading">#</a></h2>
+<section id="tuning-process">
+<h3>Tuning process<a class="headerlink" href="#tuning-process" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>We need to tune our hyperparameters to get the best out of them.</p></li>
+<li><p>Hyperparameters importance are:</p>
+<ol class="arabic simple">
+<li><p>Learning rate.</p></li>
+<li><p>Momentum beta.</p></li>
+<li><p>Mini-batch size.</p></li>
+<li><p>No. of hidden units.</p></li>
+<li><p>No. of layers.</p></li>
+<li><p>Learning rate decay.</p></li>
+<li><p>Regularization lambda.</p></li>
+<li><p>Activation functions.</p></li>
+<li><p>Adam <span class="math notranslate nohighlight">\(/beta_1\)</span>, <span class="math notranslate nohighlight">\(/beta_2\)</span> &amp; <span class="math notranslate nohighlight">\(/epsilon\)</span>.</p></li>
+</ol>
+</li>
+<li><p>Its hard to decide which hyperparameter is the most important in a problem. It depends a lot on your problem.</p></li>
+<li><p>One of the ways to tune is to sample a grid with <code class="docutils literal notranslate"><span class="pre">N</span></code> hyperparameter settings and then try all settings combinations on your problem.</p></li>
+<li><p>Try random values: don’t use a grid.</p></li>
+<li><p>You can use <code class="docutils literal notranslate"><span class="pre">Coarse</span> <span class="pre">to</span> <span class="pre">fine</span> <span class="pre">sampling</span> <span class="pre">scheme</span></code>:</p>
+<ul>
+<li><p>When you find some hyperparameters values that give you a better performance - zoom into a smaller region around these values and sample more densely within this space.</p></li>
+</ul>
+</li>
+<li><p>These methods can be automated.</p></li>
+</ul>
+</section>
+<section id="using-an-appropriate-scale-to-pick-hyperparameters">
+<h3>Using an appropriate scale to pick hyperparameters<a class="headerlink" href="#using-an-appropriate-scale-to-pick-hyperparameters" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Let’s say you have a specific range for a hyperparameter from “a” to “b”. It’s better to search for the right ones using the logarithmic scale rather then in linear scale:</p>
+<ul>
+<li><p>Calculate: <span class="math notranslate nohighlight">\(a_log = \log(a)\)</span>  # e.g. a = 0.0001 then a_log = -4</p></li>
+<li><p>Calculate: <span class="math notranslate nohighlight">\(b_log = \log(b)\)</span>  # e.g. b = 1  then b_log = 0</p></li>
+<li><p>Then:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">a_log</span> <span class="o">-</span> <span class="n">b_log</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">+</span> <span class="n">b_log</span>
+<span class="c1"># In the example the range would be from [-4, 0] because rand range [0,1)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="mi">10</span><span class="o">^</span><span class="n">r</span>
+</pre></div>
+</div>
+<p>It uniformly samples values in log scale from [a,b].</p>
+</li>
+</ul>
+</li>
+<li><p>If we want to use the last method on exploring on the “momentum beta”:</p>
+<ul>
+<li><p>Beta best range is from 0.9 to 0.999.</p></li>
+<li><p>You should search for <span class="math notranslate nohighlight">\(1 - \beta\)</span> in range 0.001 to 0.1 (1 - 0.9 and 1 - 0.999)` and the use <span class="math notranslate nohighlight">\(a = 0.001\)</span> and <span class="math notranslate nohighlight">\(b = 0.1\)</span>. Then:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a_log</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span>
+<span class="n">b_log</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">a_log</span> <span class="o">-</span> <span class="n">b_log</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span> <span class="o">+</span> <span class="n">b_log</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">10</span><span class="o">^</span><span class="n">r</span>   <span class="c1"># because 1 - beta = 10^r</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="hyperparameters-tuning-in-practice-pandas-vs-caviar">
+<h3>Hyperparameters tuning in practice: Pandas vs. Caviar<a class="headerlink" href="#hyperparameters-tuning-in-practice-pandas-vs-caviar" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Intuitions about hyperparameter settings from one application area may or may not transfer to a different one.</p></li>
+<li><p>If you don’t have much computational resources you can use the “babysitting model”:</p>
+<ul>
+<li><p>Day 0 you might initialize your parameter as random and then start training.</p></li>
+<li><p>Then you watch your learning curve gradually decrease over the day.</p></li>
+<li><p>And each day you nudge your parameters a little during training.</p></li>
+<li><p>Called panda approach.</p></li>
+</ul>
+</li>
+<li><p>If you have enough computational resources, you can run some models in parallel and at the end of the day(s) you check the results.</p>
+<ul>
+<li><p>Called Caviar approach.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="normalizing-activations-in-a-network">
+<h3>Normalizing activations in a network<a class="headerlink" href="#normalizing-activations-in-a-network" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>In the rise of deep learning, one of the most important ideas has been an algorithm called <strong>batch normalization</strong>, created by two researchers, Sergey Ioffe and Christian Szegedy.</p></li>
+<li><p>Batch Normalization speeds up learning.</p></li>
+<li><p>Before we normalized input by subtracting the mean and dividing by variance. This helped a lot for the shape of the cost function and for reaching the minimum point faster.</p></li>
+<li><p>The question is: <em>for any hidden layer can we normalize <span class="math notranslate nohighlight">\(A[l]\)</span> to train <span class="math notranslate nohighlight">\(W[l+1]\)</span>, <span class="math notranslate nohighlight">\(b[l+1]\)</span> faster?</em> This is what batch normalization is about.</p></li>
+<li><p>There are some debates in the deep learning literature about whether you should normalize values before the activation function <span class="math notranslate nohighlight">\(Z[l]\)</span> or after applying the activation function <span class="math notranslate nohighlight">\(A[l]\)</span>. In practice, normalizing <span class="math notranslate nohighlight">\(Z[l]\)</span> is done much more often and that is what Andrew Ng presents.</p></li>
+<li><p>Algorithm:</p>
+<ul>
+<li><p>Given <span class="math notranslate nohighlight">\(Z[l] = [z(1), ..., z(m)]\)</span>, i = 1 to m (for each input)</p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\(mean = \frac{1}{m} * \sum(z[i])\)</span></p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\(variance = \frac{1}{m} * \sum((z[i] - mean)^2)\)</span></p></li>
+<li><p>Then <span class="math notranslate nohighlight">\(Z_norm[i] = \frac{(z[i] - mean)}{\sqrt(variance + \epsilon)}\)</span> (add <span class="math notranslate nohighlight">\(\epsilon\)</span> for numerical stability if variance = 0)</p>
+<ul>
+<li><p>Forcing the inputs to a distribution with zero mean and variance of 1.</p></li>
+</ul>
+</li>
+<li><p>Then <span class="math notranslate nohighlight">\(Z_tilde[i] = \gamma * Z_norm[i] + \beta\)</span></p>
+<ul>
+<li><p>To make inputs belong to other distribution (with other mean and variance).</p></li>
+<li><p>gamma and beta are learnable parameters of the model.</p></li>
+<li><p>Making the NN learn the distribution of the outputs.</p></li>
+<li><p><em>Note:</em> if <span class="math notranslate nohighlight">\(\gamma = \sqrt(variance + \epsilon)\)</span> and <span class="math notranslate nohighlight">\(\beta = mean\)</span> then <span class="math notranslate nohighlight">\(Z_tilde[i] = z[i]\)</span></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="fitting-batch-normalization-into-a-neural-network">
+<h3>Fitting Batch Normalization into a neural network<a class="headerlink" href="#fitting-batch-normalization-into-a-neural-network" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Using batch norm in 3 hidden layers NN:
+<img alt="Batch norm" src="../../../../_images/batch-norm.png" /></p></li>
+<li><p>Our NN parameters will be:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(W[1]\)</span>, <span class="math notranslate nohighlight">\(b[1]\)</span>, …, <span class="math notranslate nohighlight">\(W[L]\)</span>, <span class="math notranslate nohighlight">\(b[L]\)</span>, <span class="math notranslate nohighlight">\(\beta[1]\)</span>, <span class="math notranslate nohighlight">\(\gamma[1]\)</span>, …, <span class="math notranslate nohighlight">\(\beta[L]\)</span>, <span class="math notranslate nohighlight">\(\gamma[L]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta[1]\)</span>, <span class="math notranslate nohighlight">\(\gamma[1]\)</span>, …, <span class="math notranslate nohighlight">\(\beta[L]\)</span>, <span class="math notranslate nohighlight">\(\gamma[L]\)</span> are updated using any optimization algorithms (like GD, RMSprop, Adam)</p></li>
+</ul>
+</li>
+<li><p>If you are using a deep learning framework, you won’t have to implement batch norm yourself:</p>
+<ul class="simple">
+<li><p>Ex. in Tensorflow you can add this line: <code class="docutils literal notranslate"><span class="pre">tf.nn.batch-normalization()</span></code></p></li>
+</ul>
+</li>
+<li><p>Batch normalization is usually applied with mini-batches.</p></li>
+<li><p>If we are using batch normalization parameters <span class="math notranslate nohighlight">\(b[1]\)</span>, …, <span class="math notranslate nohighlight">\(b[L]\)</span> doesn’t count because they will be eliminated after mean subtraction step, so:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Z</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="n">A</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">Z</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="n">A</span><span class="p">[</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">Z_norm</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">Z_tilde</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">*</span> <span class="n">Z_norm</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">+</span> <span class="n">beta</span><span class="p">[</span><span class="n">l</span><span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Taking the mean of a constant <span class="math notranslate nohighlight">\(b[l]\)</span> will eliminate the <span class="math notranslate nohighlight">\(b[l]\)</span></p></li>
+</ul>
+</li>
+<li><p>So if you are using batch normalization, you can remove b[l] or make it always zero.</p></li>
+<li><p>So the parameters will be <span class="math notranslate nohighlight">\(W[l]\)</span>, <span class="math notranslate nohighlight">\(\beta[l]\)</span>, and <span class="math notranslate nohighlight">\(\alpha[l]\)</span>.</p></li>
+<li><p>Shapes:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Z[l]       - (n[l], m)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(beta[l]    - (n[l], m)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(gamma[l]   - (n[l], m)\)</span></p></li>
+</ul>
+</li>
+</ul>
+<section id="why-does-batch-normalization-work">
+<h4>Why does Batch normalization work?<a class="headerlink" href="#why-does-batch-normalization-work" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>The first reason is the same reason as why we normalize X.</p></li>
+<li><p>The second reason is that batch normalization reduces the problem of input values changing (shifting).</p></li>
+<li><p>Batch normalization does some regularization:</p>
+<ul>
+<li><p>Each mini batch is scaled by the mean/variance computed of that mini-batch.</p></li>
+<li><p>This adds some noise to the values <span class="math notranslate nohighlight">\(Z[l]\)</span> within that mini batch. So similar to dropout it adds some noise to each hidden layer’s activations.</p></li>
+<li><p>This has a slight regularization effect.</p></li>
+<li><p>Using bigger size of the mini-batch you are reducing noise and therefore regularization effect.</p></li>
+<li><p>Don’t rely on batch normalization as a regularization. It’s intended for normalization of hidden units, activations and therefore speeding up learning. For regularization use other regularization techniques (L2 or dropout).</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="batch-normalization-at-test-time">
+<h4>Batch normalization at test time<a class="headerlink" href="#batch-normalization-at-test-time" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>When we train a NN with Batch normalization, we compute the mean and the variance of the mini-batch.</p></li>
+<li><p>In testing we might need to process examples one at a time. The mean and the variance of one example won’t make sense.</p></li>
+<li><p>We have to compute an estimated value of mean and variance to use it in testing time.</p></li>
+<li><p>We can use the weighted average across the mini-batches.</p></li>
+<li><p>We will use the estimated values of the mean and variance to test.</p></li>
+<li><p>This method is also sometimes called “Running average”.</p></li>
+<li><p>In practice most often you will use a deep learning framework and it will contain some default implementation of doing such a thing.</p></li>
+</ul>
+</section>
+</section>
+<section id="softmax-regression">
+<h3>Softmax Regression<a class="headerlink" href="#softmax-regression" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>In every example we have used so far we were talking about binary classification.</p></li>
+<li><p>There are a generalization of logistic regression called Softmax regression that is used for multiclass classification/regression.</p></li>
+<li><p>For example if we are classifying by classes <strong>dog</strong>, <strong>cat</strong>, <strong>baby chick</strong> and <strong>none of that</strong></p>
+<ul class="simple">
+<li><p>Dog <strong>class = 1</strong></p></li>
+<li><p>Cat <strong>class = 2</strong></p></li>
+<li><p>Baby chick <strong>class = 3</strong></p></li>
+<li><p>None <strong>class = 0</strong></p></li>
+<li><p>To represent a dog vector <span class="math notranslate nohighlight">\(y = [0 1 0 0]\)</span></p></li>
+<li><p>To represent a cat vector <span class="math notranslate nohighlight">\(y = [0 0 1 0]\)</span></p></li>
+<li><p>To represent a baby chick vector <span class="math notranslate nohighlight">\(y = [0 0 0 1]\)</span></p></li>
+<li><p>To represent a none vector <span class="math notranslate nohighlight">\(y = [1 0 0 0]\)</span></p></li>
+</ul>
+</li>
+<li><p>Notations:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(C = no. of classes\)</span></p></li>
+<li><p>Range of classes is <span class="math notranslate nohighlight">\((0, ..., C-1)\)</span></p></li>
+<li><p>In output layer <span class="math notranslate nohighlight">\(Ny = C\)</span></p></li>
+</ul>
+</li>
+<li><p>Each of C values in the output layer will contain a probability of the example to belong to each of the classes.</p></li>
+<li><p>In the last layer we will have to activate the Softmax activation function instead of the sigmoid activation.</p></li>
+<li><p>Softmax activation equations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">e</span><span class="o">^</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">L</span><span class="p">])</span>                      <span class="c1"># shape(C, m)</span>
+<span class="n">A</span><span class="p">[</span><span class="n">L</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="o">^</span><span class="p">(</span><span class="n">Z</span><span class="p">[</span><span class="n">L</span><span class="p">])</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>          <span class="c1"># shape(C, m), sum(t) - sum of t&#39;s for each example (shape (1, m))</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<section id="training-a-softmax-classifier">
+<h4>Training a Softmax classifier<a class="headerlink" href="#training-a-softmax-classifier" title="Link to this heading">#</a></h4>
+<ul>
+<li><p>There’s an activation which is called hard max, which gets 1 for the maximum value and zeros for the others.</p>
+<ul class="simple">
+<li><p>If you are using NumPy, its <code class="docutils literal notranslate"><span class="pre">np.max</span></code> over the vertical axis.</p></li>
+</ul>
+</li>
+<li><p>The Softmax name came from softening the values and not harding them like hard max.</p></li>
+<li><p>Softmax is a generalization of logistic activation function to <code class="docutils literal notranslate"><span class="pre">C</span></code> classes. If <code class="docutils literal notranslate"><span class="pre">C</span> <span class="pre">=</span> <span class="pre">2</span></code> softmax reduces to logistic regression.</p></li>
+<li><p>The loss function used with softmax:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">log</span><span class="p">(</span><span class="n">y_hat</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span> <span class="c1"># j = 0 to C-1</span>
+</pre></div>
+</div>
+</li>
+<li><p>The cost function used with softmax:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">J</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">...</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">L</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y_hat</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span> <span class="c1"># i = 0 to m</span>
+</pre></div>
+</div>
+</li>
+<li><p>Back propagation with softmax:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dZ</span><span class="p">[</span><span class="n">L</span><span class="p">]</span> <span class="o">=</span> <span class="n">Y_hat</span> <span class="o">-</span> <span class="n">Y</span>
+</pre></div>
+</div>
+</li>
+<li><p>The derivative of softmax is:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Y_hat</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">Y_hat</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Example:
+<img alt="Softmaz" src="../../../../_images/softmax.png" /></p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/ai/neural/concepts"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="003_Activations.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Activation functions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="pytorch/pytorch_toc.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Pytorch</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-dev-test-sets">Train / Dev / Test sets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-variance">Bias / Variance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#underfitting-vs-overfitting">Underfitting vs Overfitting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">Regularization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-regularization-reduces-overfitting">Why regularization reduces overfitting?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dropout-regularization">Dropout Regularization</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-dropout">Understanding Dropout</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-regularization-methods">Other regularization methods</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizing-inputs">Normalizing inputs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-exploding-gradients">Vanishing / Exploding gradients</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weight-initialization-for-deep-networks">Weight Initialization for Deep Networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-approximation-of-gradients">Numerical approximation of gradients</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-checking-implementation-notes">Gradient checking implementation notes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-algorithms">Optimization algorithms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-gradient-descent">Batch gradient descent</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mini-batch-gradient-descent">Mini-batch gradient descent</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-mini-batch-gradient-descent">Understanding mini-batch gradient descent</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exponentially-weighted-averages">Exponentially weighted averages</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-exponentially-weighted-averages">Understanding exponentially weighted averages</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-correction-in-exponentially-weighted-averages">Bias correction in exponentially weighted averages</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-with-momentum">Gradient descent with momentum</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rmsprop">RMSprop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adam-optimization-algorithm">Adam optimization algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate-decay">Learning rate decay</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-problem-of-local-optima">The problem of local optima</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-tuning">Hyperparameter tuning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-process">Tuning process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-an-appropriate-scale-to-pick-hyperparameters">Using an appropriate scale to pick hyperparameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters-tuning-in-practice-pandas-vs-caviar">Hyperparameters tuning in practice: Pandas vs. Caviar</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizing-activations-in-a-network">Normalizing activations in a network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-batch-normalization-into-a-neural-network">Fitting Batch Normalization into a neural network</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-does-batch-normalization-work">Why does Batch normalization work?</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-normalization-at-test-time">Batch normalization at test time</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#softmax-regression">Softmax Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#training-a-softmax-classifier">Training a Softmax classifier</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

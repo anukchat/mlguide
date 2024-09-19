@@ -1,0 +1,1926 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Model Evaluation &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/ai/classicml/concepts/005_Evaluation';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/ai/classicml/concepts/005_Evaluation.html" />
+    <link rel="icon" href="../../../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="K-Fold Cross Validation" href="006_Advanced.html" />
+    <link rel="prev" title="Clustering" href="004_Clustering.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/3_functions_and_modules.html">Functions &amp; Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/4_Object_Oriented.html">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/8_advanced.html">Advanced Concepts</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Introduction_to_ml.html">Machine Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="000_Data_Exploration.html">Exploratory Data Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="001_Data_Preparation.html">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="003_Classification.html">Classfication</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="006_Advanced.html">K-Fold Cross Validation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../neural/neural_toc.html">Neural Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/002_Backpropogation.html">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/003_Activations.html">Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/004_Optimization.html">Optimizations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../neural/concepts/pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../genai/introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../genai/concepts/transformers/01_transformers_from_scratch.html">Transformers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../genai/langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/intro.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/courses/courses_toc.html">Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/ai/classicml/concepts/005_Evaluation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/ai/classicml/concepts/005_Evaluation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/content/ai/classicml/concepts/005_Evaluation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Model Evaluation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-fold-cross-validation">K-Fold Cross Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-out-cross-validation">Leave one out cross validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stratified-kfold">Stratified KFold</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validating-time-series-data">Validating Time Series data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">Accuracy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-positive-predicted-value">Precision (Positive Predicted Value)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recall-sensitivity">Recall (Sensitivity)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f1-score">F1 Score</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-search">Grid Search</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shortcomings-of-gridsearch">Shortcomings of GridSearch</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-would-this-work">Why would this work?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2-intuition"><span class="math notranslate nohighlight">\(R^2\)</span> Intuition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adjusted-r-2">Adjusted <span class="math notranslate nohighlight">\(R^2\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-with-r-2">Problem with <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-coefficients">Interpreting coefficients</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#receiver-operating-characteristic-roc-curve">Receiver Operating Characteristic (ROC) Curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-optimum-threshold">Setting optimum threshold</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#silhoutte-distance">Silhoutte Distance</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="model-evaluation">
+<h1>Model Evaluation<a class="headerlink" href="#model-evaluation" title="Link to this heading">#</a></h1>
+<p>Evaluation is the process of measuring the performance of a model. It’s a crucial step in the development of a model. There are various ways to evaluate a model, we will discuss some of the most common ones.</p>
+<section id="k-fold-cross-validation">
+<h2>K-Fold Cross Validation<a class="headerlink" href="#k-fold-cross-validation" title="Link to this heading">#</a></h2>
+<p>Testing accuracy for just once doesn’t account for the variance in the data and might give misleading results. K-Fold validation randomly selects one of <span class="math notranslate nohighlight">\(k\)</span> parts of the data set then tests the accuracy on the same. After required number of iterations, the accuracy is averaged</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Social_Network_Ads.csv&#39;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>   <span class="c1"># Using 1:2 as indices will give us np array of dim (10, 1)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>User ID</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>EstimatedSalary</th>
+      <th>Purchased</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>15624510</td>
+      <td>Male</td>
+      <td>19</td>
+      <td>19000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>15810944</td>
+      <td>Male</td>
+      <td>35</td>
+      <td>20000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>15668575</td>
+      <td>Female</td>
+      <td>26</td>
+      <td>43000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15603246</td>
+      <td>Female</td>
+      <td>27</td>
+      <td>57000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>15804002</td>
+      <td>Male</td>
+      <td>19</td>
+      <td>76000</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scale</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="n">X_sca</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X_sca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+
+
+<span class="n">kfold_cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">train_indices</span><span class="p">,</span> <span class="n">test_indices</span> <span class="ow">in</span> <span class="n">kfold_cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">train_indices</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">test_indices</span><span class="p">],</span> \
+                                        <span class="n">y</span><span class="p">[</span><span class="n">train_indices</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">test_indices</span><span class="p">]</span>
+    <span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">correct</span> <span class="o">+=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy: </span><span class="si">{0:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">correct</span><span class="o">/</span><span class="n">total</span><span class="p">))</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.82
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span> <span class="c1">#support vector classifier</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># applying k-fold cross validation</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="n">accuracies</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">accuracies</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">accuracies</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">accuracies</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.72222222 0.69444444 0.94444444 0.94444444 0.97222222 0.94444444
+ 0.83333333 0.75       0.80555556 0.91666667]
+0.8527777777777776
+0.0994196120454071
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="leave-one-out-cross-validation">
+<h2>Leave one out cross validation<a class="headerlink" href="#leave-one-out-cross-validation" title="Link to this heading">#</a></h2>
+<p>Another type of cross validation is leave one out cross validation. Out of the <span class="math notranslate nohighlight">\(n\)</span> samples, one of them is left out and the model is trained on other samples. When K in KFold validation is equal to the number of samples then K-Fold validation is same as leave one out cross validation</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Social_Network_Ads.csv&#39;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>   <span class="c1"># Using 1:2 as indices will give us np array of dim (10, 1)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>User ID</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>EstimatedSalary</th>
+      <th>Purchased</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>15624510</td>
+      <td>Male</td>
+      <td>19</td>
+      <td>19000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>15810944</td>
+      <td>Male</td>
+      <td>35</td>
+      <td>20000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>15668575</td>
+      <td>Female</td>
+      <td>26</td>
+      <td>43000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15603246</td>
+      <td>Female</td>
+      <td>27</td>
+      <td>57000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>15804002</td>
+      <td>Male</td>
+      <td>19</td>
+      <td>76000</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scale</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="n">X_sca</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X_sca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">LeaveOneOut</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+
+<span class="n">loo_cv</span> <span class="o">=</span> <span class="n">LeaveOneOut</span><span class="p">()</span>
+<span class="n">correct</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">train_indices</span><span class="p">,</span> <span class="n">test_indices</span> <span class="ow">in</span> <span class="n">loo_cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+<span class="c1">#     uncomment these lines to print splits</span>
+<span class="c1">#     print(&quot;Train Indices: {}...&quot;.format(train_indices[:4]))</span>
+<span class="c1">#     print(&quot;Test Indices: {}...&quot;.format(test_indices[:4]))</span>
+<span class="c1">#     print(&quot;Training SVC model using this configuration&quot;)</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">train_indices</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">test_indices</span><span class="p">],</span> \
+                                        <span class="n">y</span><span class="p">[</span><span class="n">train_indices</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">test_indices</span><span class="p">]</span>
+    <span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">correct</span> <span class="o">+=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy: </span><span class="si">{0:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">correct</span><span class="o">/</span><span class="n">total</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy: 0.84
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="stratified-kfold">
+<h2>Stratified KFold<a class="headerlink" href="#stratified-kfold" title="Link to this heading">#</a></h2>
+<p>Kfold validation does not preserve the split of the output variable while splitting the data in k-folds.</p>
+<p>Imagine training a Naive Bayes classifier using KFold validation using 10 samples where 5 are positive and 5 are negative. Since KFold randomly selects the split imagine splitting it in an unfortunate way – 1 split contains all positive samples and 1 contains all negative.</p>
+<p>Naive Bayes classifier will calculate the prior probabilities and find it to be 100% i.e. the model will think the output is always positive which is obviously wrong.</p>
+<p>To tackle this scenario we use Stratified split, what it would essentially do is preserve the split in the original dataset in training set, that is, if the original dataset has 50% positive and 50% negative outputs then the training set will also have 50% positive and 50% negative outputs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Social_Network_Ads.csv&#39;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>   <span class="c1"># Using 1:2 as indices will give us np array of dim (10, 1)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>User ID</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>EstimatedSalary</th>
+      <th>Purchased</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>15624510</td>
+      <td>Male</td>
+      <td>19</td>
+      <td>19000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>15810944</td>
+      <td>Male</td>
+      <td>35</td>
+      <td>20000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>15668575</td>
+      <td>Female</td>
+      <td>26</td>
+      <td>43000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15603246</td>
+      <td>Female</td>
+      <td>27</td>
+      <td>57000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>15804002</td>
+      <td>Male</td>
+      <td>19</td>
+      <td>76000</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Scale</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="n">X_sca</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X_sca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="validating-time-series-data">
+<h2>Validating Time Series data<a class="headerlink" href="#validating-time-series-data" title="Link to this heading">#</a></h2>
+<p>Time series data is data associated with a time frame, for instance stock prices.</p>
+<p>The motivation is to predict stock price for future given the data from previous data. If we were to use any splitting techniques from above we would end up predicting past from future (due to random nature from splitting) which shouldn’t be permitted, we should always predict future from past. This can be achieved using TimeSeriesSplit</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">TimeSeriesSplit</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.88375519 0.70839149]
+ [0.76029107 0.86953049]
+ [0.88220755 0.70728456]
+ [0.2416478  0.35790595]
+ [0.56243882 0.62992346]
+ [0.2962591  0.62643959]
+ [0.35616697 0.06525364]
+ [0.67784325 0.46470706]
+ [0.76170259 0.4194236 ]
+ [0.37069252 0.39007223]]
+[0.56404909 0.23175207 0.68194322 0.47164875 0.18481909 0.76661588
+ 0.40355237 0.31316771 0.20042839 0.57326238]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="confusion-matrix">
+<h2>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h2>
+<p>Confusion matrix is used only on classification tasks. It describes the following matrix</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>predicted true</p></th>
+<th class="head"><p>predicted false</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>actual true</p></td>
+<td><p>True Positive</p></td>
+<td><p>False Negative</p></td>
+</tr>
+<tr class="row-odd"><td><p>actual false</p></td>
+<td><p>False Positive</p></td>
+<td><p>True Negative</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="accuracy">
+<h3>Accuracy<a class="headerlink" href="#accuracy" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}\]</div>
+</section>
+<section id="precision-positive-predicted-value">
+<h3>Precision (Positive Predicted Value)<a class="headerlink" href="#precision-positive-predicted-value" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\text{Precision} = \frac{TP}{TP + FP}\]</div>
+<p>Intuitively, what precision states is out of the <strong>number of times your model predicts true</strong>, how many times is it correct?</p>
+<p><strong>This metric penalizes heavily for False Positives.</strong></p>
+<p>This metric should be considered when its OK to have some false negatives but not false positives.</p>
+<p>Imagine if your model is predicting the conclusion of a jurisdiction. Its OK to leave a criminal free, rather than punishing an innocent one.</p>
+</section>
+<section id="recall-sensitivity">
+<h3>Recall (Sensitivity)<a class="headerlink" href="#recall-sensitivity" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\text{Recall} = \frac{TP}{TP + FN}\]</div>
+<p>Intuitively, what recall states is out of the times the output is true, <strong>how many times are you correct</strong>?</p>
+<p><strong>This metric penalizes heavily for False Negatives.</strong></p>
+<p>This metric should be considered when its OK to have some false positives but not false negatives.</p>
+</section>
+<section id="f1-score">
+<h3>F1 Score<a class="headerlink" href="#f1-score" title="Link to this heading">#</a></h3>
+<p>F1 score is the harmonic mean of precision and recall.</p>
+<div class="math notranslate nohighlight">
+\[\text{F}_1 = 2 \cdot \frac{\text{precision} \cdot \text{recall}}{\text{precision} + \text{recall}}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">()</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[9, 1],
+       [1, 9]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>predicted true</p></th>
+<th class="head"><p>predicted false</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>actual true</p></td>
+<td><p>10</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>actual false</p></td>
+<td><p>1</p></td>
+<td><p>9</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="grid-search">
+<h2>Grid Search<a class="headerlink" href="#grid-search" title="Link to this heading">#</a></h2>
+<p>Grid Search is used for hyperparameter optimization. It allows you to specify range of values (for hyperparameters) to try on and in the end select the one with the highest cv accuracy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Social_Network_Ads.csv&#39;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>   <span class="c1"># Using 1:2 as indices will give us np array of dim (10, 1)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>User ID</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>EstimatedSalary</th>
+      <th>Purchased</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>15624510</td>
+      <td>Male</td>
+      <td>19</td>
+      <td>19000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>15810944</td>
+      <td>Male</td>
+      <td>35</td>
+      <td>20000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>15668575</td>
+      <td>Female</td>
+      <td>26</td>
+      <td>43000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15603246</td>
+      <td>Female</td>
+      <td>27</td>
+      <td>57000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>15804002</td>
+      <td>Male</td>
+      <td>19</td>
+      <td>76000</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split in training and testing</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+
+<span class="c1"># Scale</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="n">X_sca</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_sca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_sca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span> <span class="c1">#support vector classifier</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Grid search</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="c1"># insert parameters that you want to optimize</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
+        <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
+        <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;rbf&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;gamma&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+<span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">clf</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">grid_search</span> <span class="o">=</span> <span class="n">grid_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">grid_search</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grid_search</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grid_search</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SVC(C=1, gamma=0.5, random_state=0)
+0.9133333333333334
+{&#39;C&#39;: 1, &#39;gamma&#39;: 0.5, &#39;kernel&#39;: &#39;rbf&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we have the SVC with highest accuracy</p>
+<section id="shortcomings-of-gridsearch">
+<h3>Shortcomings of GridSearch<a class="headerlink" href="#shortcomings-of-gridsearch" title="Link to this heading">#</a></h3>
+<p>While GridSearch works well, it is inefficient since it tries all the combinations which is infeasible.</p>
+<p>Alternate approach is RandomizedSearch which will randomly select values and try them out for few iterations and in the end we select the best one.</p>
+<section id="why-would-this-work">
+<h4>Why would this work?<a class="headerlink" href="#why-would-this-work" title="Link to this heading">#</a></h4>
+<p>Well, let’s say there are 10x10 = 100 possible cominations, and the best model lies in some random 5% range.</p>
+<p>What is the probability that a randomly selected point will lie in that 5% range? Well, it’s 5% but what if we try <span class="math notranslate nohighlight">\(n\)</span> number of times? It will be <span class="math notranslate nohighlight">\(5*n\%\)</span> so if we try 10 times, we have <span class="math notranslate nohighlight">\(50\%\)</span> chance of landing on the sweet spot.</p>
+<p>What would happen if we’d use GridSearch? Let’s say the sweet spot lies between 95-100. We would have to try 95 times before reaching that spot, as opposed to RandomizedSear where we can try <span class="math notranslate nohighlight">\(10\)</span> times with <span class="math notranslate nohighlight">\(50%\)</span> confidence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Social_Network_Ads.csv&#39;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>   <span class="c1"># Using 1:2 as indices will give us np array of dim (10, 1)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>User ID</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>EstimatedSalary</th>
+      <th>Purchased</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>15624510</td>
+      <td>Male</td>
+      <td>19</td>
+      <td>19000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>15810944</td>
+      <td>Male</td>
+      <td>35</td>
+      <td>20000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>15668575</td>
+      <td>Female</td>
+      <td>26</td>
+      <td>43000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15603246</td>
+      <td>Female</td>
+      <td>27</td>
+      <td>57000</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>15804002</td>
+      <td>Male</td>
+      <td>19</td>
+      <td>76000</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split in training and testing</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+
+<span class="c1"># Scale</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="n">X_sca</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_sca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">X_sca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span> <span class="c1">#support vector classifier</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">RandomizedSearchCV</span>
+
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
+        <span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;linear&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">random_search</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">clf</span><span class="p">,</span> <span class="n">param_distributions</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;accuracy&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">random_search</span> <span class="o">=</span> <span class="n">random_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="r-2-intuition">
+<h2><span class="math notranslate nohighlight">\(R^2\)</span> Intuition<a class="headerlink" href="#r-2-intuition" title="Link to this heading">#</a></h2>
+<p>For a given model, the sum of squared errors is calculated as
+$<span class="math notranslate nohighlight">\( SS_{res} = \sum_{i=0}^n (y_i - \hat{y_i})^2 \)</span>$</p>
+<p>For a model where output is always the average value of <span class="math notranslate nohighlight">\(y\)</span> is
+$<span class="math notranslate nohighlight">\( SS_{tot} = \sum_{i=0}^n (y_i - y_{avg})^2 \)</span>$</p>
+<p>R Squared is defined as
+$<span class="math notranslate nohighlight">\( R^2 = 1 - \frac{SS_{res}}{SS_{tot}} \)</span>$</p>
+<p><strong>So the <span class="math notranslate nohighlight">\(R^2\)</span> basically depicts how different your model is from average model, if your model is equal to average model, the <span class="math notranslate nohighlight">\(R^2\)</span> is 0 which is bad, but if it is accurate one, the <span class="math notranslate nohighlight">\(SS_{res}\)</span> will be lower and <span class="math notranslate nohighlight">\(\frac{SS_{res}}{SS_{tot}}\)</span> will be lower, which means the <span class="math notranslate nohighlight">\(R^2\)</span> will be higher for an accurate model</strong></p>
+<blockquote>
+<div><p>Note that <span class="math notranslate nohighlight">\(R^2\)</span> can also be negative. This occurs when your model is even worse than the average model</p>
+</div></blockquote>
+</section>
+<section id="adjusted-r-2">
+<h2>Adjusted <span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#adjusted-r-2" title="Link to this heading">#</a></h2>
+<section id="problem-with-r-2">
+<h3>Problem with <span class="math notranslate nohighlight">\(R^2\)</span><a class="headerlink" href="#problem-with-r-2" title="Link to this heading">#</a></h3>
+<p>Hypothesis: <span class="math notranslate nohighlight">\(R^2\)</span> will never decrease</p>
+<p>When you have a model with <span class="math notranslate nohighlight">\(n\)</span> variables, the model will try to minimise the error. When you add <span class="math notranslate nohighlight">\(n + 1\)</span> th variable, the model will try to minimise the error by assigning it a valid coefficient. If it fails to do so, i.e. if the new variable isn’t helping at all, it will simply assign it a coefficient of 0. Hence, <span class="math notranslate nohighlight">\(R^2\)</span> will never decrease.</p>
+<p><strong>So, the problem is we will never know if the model is getting better by adding additional variables, which is an important thing to know.</strong></p>
+<p>So, the solution is to use adjusted <span class="math notranslate nohighlight">\(R^2\)</span> which is given by</p>
+<div class="math notranslate nohighlight">
+\[ R^2_{adj} = 1 - (1 - R^2) \frac{n - 1}{n - p - 1}\]</div>
+<p>Where,
+p = number of Regressors (independent variables)
+n = sample size</p>
+<p>So basically, it penalizes for the number of variables you use. It is a battle between increase in <span class="math notranslate nohighlight">\(R^2\)</span> vs the penalization brought by adding the additional variable</p>
+</section>
+<section id="interpreting-coefficients">
+<h3>Interpreting coefficients<a class="headerlink" href="#interpreting-coefficients" title="Link to this heading">#</a></h3>
+<p>Just because the coefficient of a variable is high, it doesn’t mean it is more corelated. We should look at the units while interpreting coefficient. Best way to do it is look at the change for a unit change. For instance, if the coefficient is 0.79 we can say, for a unit change i.e. for an additional dollar added into the column, the profit will increase by 79 cents</p>
+</section>
+</section>
+<section id="receiver-operating-characteristic-roc-curve">
+<h2>Receiver Operating Characteristic (ROC) Curve<a class="headerlink" href="#receiver-operating-characteristic-roc-curve" title="Link to this heading">#</a></h2>
+<p>ROC curve is a commonly used tool to evaluate <strong>binary classifier</strong>. It is used to compare different models. ROC curve has <strong>False Positive Rate</strong> or X-axis and <strong>True Positive Rate</strong> on Y-axis.
+Where,</p>
+<div class="math notranslate nohighlight">
+\[\text{False Positive Rate} = \frac{FP}{FP + TN}\]</div>
+<div class="math notranslate nohighlight">
+\[\text{True Positive Rate} = \frac{TP}{TP + FN}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="n">font</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;family&#39;</span> <span class="p">:</span> <span class="s1">&#39;normal&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;size&#39;</span>   <span class="p">:</span> <span class="mi">15</span><span class="p">}</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">font</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">Binarizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">auc</span><span class="p">,</span> <span class="n">roc_curve</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twiny</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">plot_roc</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">clf</span><span class="p">):</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">ths</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">auc_val</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;AUC = </span><span class="si">{0:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">auc_val</span><span class="p">))</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;False Positive Rate&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;True Positive Rate&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;ROC Curve</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">((</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">))</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">))</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plot_roc</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">clf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+</pre></div>
+</div>
+<img alt="../../../../_images/fee99cad34a6a122f98939c904f7b40ba2c1308c5d4a4b98ab10b0345de393c8.png" src="../../../../_images/fee99cad34a6a122f98939c904f7b40ba2c1308c5d4a4b98ab10b0345de393c8.png" />
+</div>
+</div>
+</section>
+<section id="setting-optimum-threshold">
+<h2>Setting optimum threshold<a class="headerlink" href="#setting-optimum-threshold" title="Link to this heading">#</a></h2>
+<p>Most of the time we are inclined towards setting the threshold of <span class="math notranslate nohighlight">\(0.5\)</span> for classification tasks, but can we do better?</p>
+<p>Using various thresholds we can output the accuracy and select the threshold with highest accuracy.</p>
+</section>
+<section id="silhoutte-distance">
+<h2>Silhoutte Distance<a class="headerlink" href="#silhoutte-distance" title="Link to this heading">#</a></h2>
+<p>Silhoutte Distance is used to study the separation between clusters. It can be used to evaluate and select the number of clusters. The formula is given by:</p>
+<div class="math notranslate nohighlight">
+\[ s\left(i\right)=\frac{b\left(i\right)-a\left(i\right)}{\max\left(a\left(i\right),b\left(i\right)\right)} \]</div>
+<p>Where,</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(a(i)\)</span> = average distance of point <span class="math notranslate nohighlight">\(i\)</span> with other members of same cluster.</p></li>
+<li><p><span class="math notranslate nohighlight">\(b(i)\)</span> = lowest of average distance of point <span class="math notranslate nohighlight">\(i\)</span> with member of clusters other than the one it is currently present in.</p></li>
+</ol>
+<p>The value of <span class="math notranslate nohighlight">\(s(i)\)</span> ranges from:</p>
+<div class="math notranslate nohighlight">
+\[-1\le s\left(i\right)\le1\]</div>
+<p>The value will be close to 1 when <span class="math notranslate nohighlight">\(b(i) &gt;&gt; a(i)\)</span>. That is when the nearest neighbor of point <span class="math notranslate nohighlight">\(i\)</span> is very far &amp; the members of clusters that <span class="math notranslate nohighlight">\(i\)</span> is a part of aren’t very far apart. This is the case when the clustering has worked well.</p>
+<p>The opposite case is when the value is close to -1. This happens when <span class="math notranslate nohighlight">\(a(i) &gt;&gt; b(i)\)</span>. That is when the the average distance of point within cluster is more than that of the neighboring one, then this indicates that the current point would do better if it is assigned to the neighboring one.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span>
+
+<span class="c1"># create fake dataset</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualize data</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">],</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+</pre></div>
+</div>
+<img alt="../../../../_images/340ed518f68a807c891e6e1b6d65f84d6835ab4657752f776c1537d5d71636b7.png" src="../../../../_images/340ed518f68a807c891e6e1b6d65f84d6835ab4657752f776c1537d5d71636b7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create classifier</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># visualize output</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">silhouette_score</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y_pred</span><span class="p">):</span>
+    <span class="n">X_label</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">y</span><span class="o">==</span><span class="n">label</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X_label</span><span class="p">],</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X_label</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+
+<span class="n">score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;KMeans prediction. Silhoutte score: </span><span class="si">{0:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">score</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Dimension 2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+</pre></div>
+</div>
+<img alt="../../../../_images/3deba12e24ace7dd6e7d466a685abae9d2743a4f524aa6409625a1e3072738fd.png" src="../../../../_images/3deba12e24ace7dd6e7d466a685abae9d2743a4f524aa6409625a1e3072738fd.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># visualize silhoutte sample scores</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">silhouette_samples</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sample_score</span> <span class="o">=</span> <span class="n">silhouette_samples</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sample_score</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Silhoutte sample score&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">score</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Dimension 1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Dimension 2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+findfont: Font family &#39;normal&#39; not found.
+</pre></div>
+</div>
+<img alt="../../../../_images/7e09af639e69588e1880b18b757304040408117551c38d5ef0a0e4d14c36b5f0.png" src="../../../../_images/7e09af639e69588e1880b18b757304040408117551c38d5ef0a0e4d14c36b5f0.png" />
+</div>
+</div>
+<p>Since most scores are close to 1, we conclude that the model is performing very good.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/ai/classicml/concepts"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="004_Clustering.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Clustering</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="006_Advanced.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">K-Fold Cross Validation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-fold-cross-validation">K-Fold Cross Validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#leave-one-out-cross-validation">Leave one out cross validation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stratified-kfold">Stratified KFold</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validating-time-series-data">Validating Time Series data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">Accuracy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-positive-predicted-value">Precision (Positive Predicted Value)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recall-sensitivity">Recall (Sensitivity)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f1-score">F1 Score</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grid-search">Grid Search</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shortcomings-of-gridsearch">Shortcomings of GridSearch</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#why-would-this-work">Why would this work?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#r-2-intuition"><span class="math notranslate nohighlight">\(R^2\)</span> Intuition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adjusted-r-2">Adjusted <span class="math notranslate nohighlight">\(R^2\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-with-r-2">Problem with <span class="math notranslate nohighlight">\(R^2\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-coefficients">Interpreting coefficients</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#receiver-operating-characteristic-roc-curve">Receiver Operating Characteristic (ROC) Curve</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-optimum-threshold">Setting optimum threshold</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#silhoutte-distance">Silhoutte Distance</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

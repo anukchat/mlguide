@@ -1,0 +1,1243 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Backpropagation &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/ai/neural/concepts/002_Backpropogation';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/ai/neural/concepts/002_Backpropogation.html" />
+    <link rel="icon" href="../../../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Activation functions" href="003_Activations.html" />
+    <link rel="prev" title="Neural Networks" href="001_Introduction.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/3_functions_and_modules.html">Functions &amp; Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/4_Object_Oriented.html">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/8_advanced.html">Advanced Concepts</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Introduction_to_ml.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/000_Data_Exploration.html">Exploratory Data Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/001_Data_Preparation.html">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/003_Classification.html">Classfication</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/005_Evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/006_Advanced.html">K-Fold Cross Validation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../neural_toc.html">Neural Networks</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="003_Activations.html">Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="004_Optimization.html">Optimizations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pytorch/01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../genai/introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../genai/concepts/transformers/01_transformers_from_scratch.html">Transformers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../genai/langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/intro.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/courses/courses_toc.html">Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/ai/neural/concepts/002_Backpropogation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/ai/neural/concepts/002_Backpropogation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/content/ai/neural/concepts/002_Backpropogation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Backpropagation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-initialization">Random Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-or-feedforward-propagation">Forward (or Feedforward) Propagation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorized-implementation-of-forward-propagation">Vectorized Implementation of Forward Propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-propagation-example">Forward Propagation Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-function">Cost Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Backpropagation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-computation">Gradient Computation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-algorithm">Gradient Descent Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate-alpha">Learning rate (<span class="math notranslate nohighlight">\(\alpha\)</span>)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="backpropagation">
+<h1>Backpropagation<a class="headerlink" href="#backpropagation" title="Link to this heading">#</a></h1>
+<p>We got a brief explaination of what a Neural network is, now let’s understand how such networks are trained.</p>
+<p>Let’s start by understanding how neural networks <em>learn</em> through something called <strong>Backpropagation</strong>.</p>
+<p>At the heart of AI, backpropagation is an important algorithm that helps a neural network learn from its mistakes and get better at making predictions.</p>
+<p>Imagine teaching a student by telling them how close their answers are to the correct one, and then giving them feedback to improve their next guess. This is exactly what backpropagation does!</p>
+<p><strong>Why do we need it ?</strong></p>
+<p>A neural network is like a series of math equations. It takes an input (like an image of a dog), runs some calculations, and then produces an output (like saying whether it’s a dog or a cat). <strong>But the first time the network makes a guess</strong>, it’s usually not very accurate.</p>
+<p>Backpropagation helps the network learn from its mistake by adjusting its internal settings (called <strong>weights</strong> and <strong>biases</strong>) to improve the guess next time.</p>
+<p>Let’s break this down step by step:</p>
+<ol class="arabic simple">
+<li><p><strong>Forward Propagation – Making a Guess</strong></p>
+<ul class="simple">
+<li><p>Imagine you’re solving a math problem: You take the input (numbers), do some calculations, and come up with an answer.</p></li>
+<li><p>In a neural network, the input is passed through layers, where each layer applies some math (a weighted sum + activation) to get a result.</p></li>
+<li><p>This result is compared to the correct answer (the true label), and we calculate how <em>wrong</em> the network’s guess was. This is called the <strong>loss</strong> or <strong>error</strong>.</p></li>
+</ul>
+</li>
+<li><p><strong>Error – How Far Off Was the Guess?</strong></p>
+<ul class="simple">
+<li><p>The error tells us how bad the guess was. Now, we need to figure out which parts of the network are responsible for that error.</p></li>
+<li><p>But instead of saying “You’re wrong!” to the network, we give it specific feedback, like “This part of your guess needs fixing more than that part.”</p></li>
+</ul>
+</li>
+<li><p><strong>Backward Propagation – Learning from the Mistake</strong></p>
+<ul class="simple">
+<li><p>This is where <strong>derivatives</strong> come in! Remember from high school calculus, a derivative tells you <strong>how much one thing changes in response to another</strong>. For example, the derivative of distance with respect to time gives you speed (how fast distance changes as time changes).</p></li>
+<li><p>In backpropagation, we’re asking: <strong>“How much does the error change when we change the weights and biases?</strong>”</p></li>
+<li><p>Using the <strong>chain rule</strong> from calculus, we calculate how changing each weight in the network would affect the error. Think of it like tracing your mistake backward through each math step.</p></li>
+</ul>
+</li>
+<li><p><strong>Derivatives and Gradients – Finding What to Fix</strong></p>
+<ul class="simple">
+<li><p>The derivative we calculated tells us how much each weight contributed to the error. This gives us a <strong>gradient</strong>—a direction to move in to reduce the error.</p></li>
+<li><p>Imagine you’re hiking in the mountains and want to reach the lowest point (the error’s minimum). The gradient points you in the direction of the steepest slope downward, telling you which way to go to reduce the error the fastest.</p></li>
+</ul>
+</li>
+<li><p><strong>Updating Weights – Fixing the Mistake</strong></p>
+<ul class="simple">
+<li><p>Once we know which weights are responsible for the error, we adjust them slightly in the opposite direction (down the slope) to reduce the error. This process is called <strong>gradient descent</strong>.</p></li>
+<li><p>The size of these adjustments is controlled by a <strong>learning rate</strong>—if the steps are too big, we might overshoot; if too small, learning is slow.</p></li>
+</ul>
+</li>
+<li><p><strong>Repetition – Practice Makes Perfect</strong></p>
+<ul class="simple">
+<li><p>This process of guessing (forward propagation), learning from mistakes (backpropagation), and updating weights continues for many cycles. Over time, the network’s guesses improve, and the error gets smaller and smaller.</p></li>
+</ul>
+</li>
+</ol>
+<p>So, in summary, the learning process is simply adjusting the weights and biases that’s it! The Neural Netowork does this by a process called Backpropagation. The steps are as follows:</p>
+<ol class="arabic simple">
+<li><p>Randomly <strong>initialise weights</strong></p></li>
+<li><p><strong>Forward Pass</strong>: Predict a value using an activation function.</p></li>
+<li><p>See how bad you’re performing using loss function (compare predicted value with actual value).</p></li>
+<li><p><strong>Backward Pass</strong>: Backpropagate the error. That is, tell your network that it’s wrong, and also tell what direction it’s supposed to go in order to reduce the error. This step updates the weights (here’s where the network learns!)</p></li>
+<li><p>Repeat steps 2 &amp; 3 until the error is reasonably small or for a specified number of iterations.</p></li>
+</ol>
+<p>Step 3 is the most important step. We’ll mathematically derive the equation for updating the values.</p>
+<section id="random-initialization">
+<h2>Random Initialization<a class="headerlink" href="#random-initialization" title="Link to this heading">#</a></h2>
+<p>Before starting forward propagation we need to initialize Theta parameters. We can not assign zero to all thetas since this would make our network useless because every neuron of the layer will learn the same as its siblings. In other word we need to <strong>break the symmetry</strong>. In order to do so we need to initialize thetas to some small random initial values:</p>
+<p><img alt="theta-init" src="../../../../_images/theta-init.svg" /></p>
+<blockquote>
+<div><p>Though there are some algorithms which provides the initialization strategies to make the model learn faster (Ex: <strong>Xavier Initialization</strong>)</p>
+</div></blockquote>
+</section>
+<section id="forward-or-feedforward-propagation">
+<h2>Forward (or Feedforward) Propagation<a class="headerlink" href="#forward-or-feedforward-propagation" title="Link to this heading">#</a></h2>
+<p>Forward propagation is an interactive process of calculating activations for each layer starting from the input layer and going to the output layer.</p>
+<p>For the simple network mentioned in a previous section above we’re able to calculate activations for second layer based on the input layer and our network parameters:</p>
+<p><img alt="a-1-2" src="../../../../_images/a-1-2.svg" /></p>
+<p><img alt="a-2-2" src="../../../../_images/a-2-2.svg" /></p>
+<p><img alt="a-3-2" src="../../../../_images/a-3-2.svg" /></p>
+<p>The output layer activation will be calculated based on the hidden layer activations:</p>
+<p><img alt="h-Theta-example" src="../../../../_images/h-Theta-example.svg" /></p>
+<p>Where <em>g()</em> function is activation functions that may be a sigmoid:</p>
+<p><img alt="sigmoid" src="../../../../_images/sigmoid.svg" /></p>
+<p><img alt="Sigmoid" src="https://upload.wikimedia.org/wikipedia/commons/8/88/Logistic-curve.svg" /></p>
+<section id="vectorized-implementation-of-forward-propagation">
+<h3>Vectorized Implementation of Forward Propagation<a class="headerlink" href="#vectorized-implementation-of-forward-propagation" title="Link to this heading">#</a></h3>
+<p>Now let’s convert previous calculations into more concise vectorized form. Because vectorisation helps us to do calculations faster (compared to for loops)</p>
+<p><img alt="neuron x" src="../../../../_images/neuron-x.svg" /></p>
+<p>To simplify previous activation equations let’s introduce a <em>z</em> variable:</p>
+<p><img alt="z-1" src="../../../../_images/z-1.svg" /></p>
+<p><img alt="z-2" src="../../../../_images/z-2.svg" /></p>
+<p><img alt="z-3" src="../../../../_images/z-3.svg" /></p>
+<p><img alt="z-matrix" src="../../../../_images/z-matrix.svg" /></p>
+<blockquote>
+<div><p>Don’t forget to add bias units (activations) before propagating to the next layer.
+<img alt="a-bias" src="../../../../_images/a-bias.svg" /></p>
+</div></blockquote>
+<p><img alt="z-3-vectorize" src="../../../../_images/z-3-vectorized.svg" /></p>
+<p><img alt="h-Theta-vectorized" src="../../../../_images/h-Theta-vectorized.svg" /></p>
+</section>
+<section id="forward-propagation-example">
+<h3>Forward Propagation Example<a class="headerlink" href="#forward-propagation-example" title="Link to this heading">#</a></h3>
+<p>Let’s take the following network architecture with 4 layers (input layer, 2 hidden layers and output layer) as an example:</p>
+<p><img alt="multi-class-network" src="../../../../_images/multi-class-network.drawio.svg" /></p>
+<p>In this case the forward propagation steps would look like the following:</p>
+<p><img alt="forward-propagation-example" src="../../../../_images/forward-propagation-example.svg" /></p>
+<blockquote>
+<div><p>Larger the architecture larger the number of layers, more the number of layers, more patterns can be learned by the model from your data . Intermediate layers are called as hidden layers</p>
+</div></blockquote>
+</section>
+</section>
+<section id="cost-function">
+<h2>Cost Function<a class="headerlink" href="#cost-function" title="Link to this heading">#</a></h2>
+<p>Cost function is used to check how bad you’re network is performing. One simple way to do that is subtract the predicted value and the actual value. For instance, if the actual value is 45 and your network is predicting 30, you can extrapolate you network is off by 15.</p>
+<p>In practise we don’t use the simple subtraction, we instead <strong>square</strong>. Why do we square it?</p>
+<p>Well the square function has better mathematical properties (like it’s a convex function and it’s differentiable) which makes it easier for us to calculate the gradient.</p>
+<div class="math notranslate nohighlight">
+\[ \tag 1
+MSE=\frac{1}{2m}\sum_{i=0}^m\left(y^{\left(i\right)} - h_{\theta}\left(x^{\left(i\right)}\right)\right)^2
+\]</div>
+<p>Which is simply the sum of the squared difference between the obeserved value and predicted value.</p>
+<p>In the above equation</p>
+<ol class="arabic simple">
+<li><p>MSE= Mean Square Error</p></li>
+<li><p>m = number of examples</p></li>
+<li><p><span class="math notranslate nohighlight">\(h(\theta)\)</span> = activation function</p></li>
+<li><p><span class="math notranslate nohighlight">\(x^{(i)}\)</span> = the ith sample in the dataset</p></li>
+<li><p><span class="math notranslate nohighlight">\(y^{(i)}\)</span> = output of ith sample in the dataset</p></li>
+</ol>
+<p>To calculate the cost function <span class="math notranslate nohighlight">\(J(\theta)\)</span>, we will perform derivation of the loss function with respect to the weights.</p>
+<p>We’ll be using sigmoid activation function which is simplest to illustrate while deriving Backpropagation.</p>
+<p>Derivation of the sigmoid function looks like this:</p>
+<div class="math notranslate nohighlight">
+\[ \tag 2
+\frac{\partial}{\partial x}\sigma\left(x\right)=\sigma\left(x\right)\cdot\left(1-\sigma\left(x\right)\right)
+\]</div>
+<p>We’ll denote the above equation by <span class="math notranslate nohighlight">\(\sigma'\left(x\right)\)</span></p>
+<p>After doing derivation w.r.t to the weights, the cost function for the neuron network would similar to the logistic regression cost function.</p>
+<p><img alt="cost-function" src="../../../../_images/cost-function.svg" /></p>
+<p><img alt="h-Theta" src="../../../../_images/h-Theta.svg" /></p>
+<p><img alt="h-Theta-i" src="../../../../_images/h-Theta-i.svg" /></p>
+<p>Here, <span class="math notranslate nohighlight">\(\frac{\lambda}{2m}\)</span> is a L2 regularization (we will know about this in Optimazation techniques)</p>
+</section>
+<section id="id1">
+<h2>Backpropagation<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>We have defined Forward propogation, Cost function (to calculate the loss w.r.t to each weight of the network), Now is the time to propogate the loss backward to every model weight and update them, so that we can reach closer to our end goal.</p>
+<section id="gradient-computation">
+<h3>Gradient Computation<a class="headerlink" href="#gradient-computation" title="Link to this heading">#</a></h3>
+<p>Backpropagation algorithm has the same purpose as gradient descent for linear or logistic regression - <strong>it corrects the values of thetas to minimize a cost function.</strong></p>
+<p>In other words we need to be able to calculate partial derivative of cost function for each theta.</p>
+<p><img alt="J-partial" src="../../../../_images/J-partial.svg" /></p>
+<p><img alt="multi-class-network" src="../../../../_images/multi-class-network.drawio.svg" /></p>
+<p>Let’s assume that:</p>
+<p><img alt="delta-j-l" src="../../../../_images/delta-j-l.svg" /> - “error” of node <em>j</em> in layer <em>l</em>.</p>
+<p>For each output unit (layer <em>L = 4</em>):</p>
+<p><img alt="delta-4" src="../../../../_images/delta-4.svg" /></p>
+<p>Or in vectorized form:</p>
+<p><img alt="delta-4-vectorized" src="../../../../_images/delta-4-vectorized.svg" /></p>
+<p><img alt="delta-3-2" src="../../../../_images/delta-3-2.svg" /></p>
+<p><img alt="sigmoid-gradient" src="../../../../_images/sigmoid-gradient.svg" /> - sigmoid gradient.</p>
+<p><img alt="sigmoid-gradient-2" src="../../../../_images/sigmoid-gradient-2.svg" /></p>
+<p>Now we may calculate the gradient step:</p>
+<p><img alt="J-partial-detailed" src="../../../../_images/J-partial-detailed.svg" /></p>
+</section>
+<section id="gradient-descent-algorithm">
+<h3>Gradient Descent Algorithm<a class="headerlink" href="#gradient-descent-algorithm" title="Link to this heading">#</a></h3>
+<p>We now know how to compute the gradients per weight (parameter), our <strong>Goal</strong> is to minimize the cost function <span class="math notranslate nohighlight">\(J(\theta)\)</span> to find the best parameters <span class="math notranslate nohighlight">\(\theta\)</span> that fit our model to the data.</p>
+<p>To achieve that, we need to follow gradient update steps iteratively till we reach convergance (Where difference between actual and expected is reduced to minimum)</p>
+<p><strong>Repeat until convergence</strong>:</p>
+<ul class="simple">
+<li><p>For each iteration, update the parameters using the following rule:
+$<span class="math notranslate nohighlight">\(
+\theta_j := \theta_j - \alpha \cdot \frac{\partial}{\partial \theta_j} J(\theta)\)</span>$</p></li>
+<li><p><span class="math notranslate nohighlight">\(( \theta_j )\)</span> is updated for each parameter in the model.</p></li>
+</ul>
+<p><strong>Stop when</strong>:</p>
+<ul class="simple">
+<li><p>The change in <span class="math notranslate nohighlight">\(\theta_j\)</span> between consecutive iterations <strong>is very small</strong>, indicating <strong>convergence</strong> (i.e., the cost function <span class="math notranslate nohighlight">\(J(\theta)\)</span> has reached a minimum).</p></li>
+</ul>
+<p>Where</p>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(\theta_j\)</span></strong>:  Represents the <span class="math notranslate nohighlight">\(j\)</span>-th parameter (or weight) of the model. The model has multiple parameters (<span class="math notranslate nohighlight">\(\theta_0, \theta_1, \dots \theta_n\)</span>) depending on the number of features in the input data.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(\alpha\)</span></strong> (Learning Rate):</p>
+<ul>
+<li><p>The learning rate controls how big of a step we take in the direction of the gradient.</p></li>
+<li><p><strong>Small <span class="math notranslate nohighlight">\(\alpha\)</span></strong>: Slow learning (takes many iterations to converge).</p></li>
+<li><p><strong>Large <span class="math notranslate nohighlight">\(\alpha\)</span></strong>: Can lead to overshooting and potentially not converge at all.</p></li>
+<li><p>Typical values: <span class="math notranslate nohighlight">\(\alpha\)</span> is often set between 0.01 and 0.1.</p></li>
+</ul>
+</li>
+<li><p><strong><span class="math notranslate nohighlight">\(\frac{\partial}{\partial \theta_j} J(\theta)\)</span></strong>:</p>
+<ul>
+<li><p>This is the partial derivative (gradient) of the cost function <span class="math notranslate nohighlight">\(J(\theta)\)</span> with respect to the parameter <span class="math notranslate nohighlight">\(\theta_j\)</span>.</p></li>
+<li><p>The gradient tells us the slope of the cost function at the current parameter values.</p></li>
+<li><p>If the slope is positive, <span class="math notranslate nohighlight">\(\theta_j\)</span> is decreased; if the slope is negative, <span class="math notranslate nohighlight">\(\theta_j\)</span> is increased. This is because we want to move towards the minimum of the cost function.</p></li>
+</ul>
+</li>
+<li><p><strong>Cost Function <span class="math notranslate nohighlight">\(J(\theta)\)</span></strong>:</p>
+<ul>
+<li><p>The cost function measures how far off the model’s predictions are from the actual values in the training data.</p></li>
+<li><p>For linear regression, it’s usually defined as:
+$<span class="math notranslate nohighlight">\(
+J(\theta) = \frac{1}{2m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right)^2
+\)</span>$</p></li>
+<li><p>Where:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(m\)</span> is the number of training examples.</p></li>
+<li><p><span class="math notranslate nohighlight">\(h_\theta(x^{(i)})\)</span> is the predicted value (hypothesis function).</p></li>
+<li><p><span class="math notranslate nohighlight">\(y^{(i)}\)</span> is the actual value.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><span class="math notranslate nohighlight">\(m\)</span></strong> (Number of training examples): <span class="math notranslate nohighlight">\(m\)</span> represents the number of examples in the training dataset.</p></li>
+<li><p>At each step of gradient descent, the parameters <span class="math notranslate nohighlight">\(\theta_j\)</span> are updated in the opposite direction of the gradient of the cost function. This ensures we are moving toward the minimum value of the cost function.</p></li>
+<li><p>The learning rate <span class="math notranslate nohighlight">\(\alpha\)</span> controls the size of these updates.</p></li>
+</ul>
+<p>For each <span class="math notranslate nohighlight">\(j = 0, 1, \dots, n\)</span>, repeat the following update until convergence:</p>
+<div class="math notranslate nohighlight">
+\[
+\theta_j := \theta_j - \alpha \cdot \frac{1}{m} \sum_{i=1}^{m} \left( h_\theta(x^{(i)}) - y^{(i)} \right) x_j^{(i)}
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(h_\theta(x^{(i)}) = \theta_0 + \theta_1 x_1^{(i)} + \theta_2 x_2^{(i)} + \dots + \theta_n x_n^{(i)}\)</span></p>
+<ul>
+<li><p>This is the model’s prediction (the hypothesis function).</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(x_j^{(i)}\)</span> is the value of the <span class="math notranslate nohighlight">\(j\)</span>-th feature for the <span class="math notranslate nohighlight">\(i\)</span>-th training example.</p></li>
+<li><p>The algorithm stops when:</p>
+<ul>
+<li><p>The change in <span class="math notranslate nohighlight">\(\theta_j\)</span> between consecutive iterations is very small (convergence).</p></li>
+<li><p>The maximum number of iterations is reached (sometimes used as a safety measure).</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="learning-rate-alpha">
+<h3>Learning rate (<span class="math notranslate nohighlight">\(\alpha\)</span>)<a class="headerlink" href="#learning-rate-alpha" title="Link to this heading">#</a></h3>
+<p>The learning rate is a hyperparameter that controls the step size at each iteration while moving toward a minimum of a loss function.</p>
+<ul class="simple">
+<li><p><strong>Too High</strong>: If the learning rate is too high, the model may converge too quickly to a suboptimal solution or even diverge, failing to find the best minimum of the loss function.</p></li>
+<li><p><strong>Too Low</strong>: If the learning rate is too low, the model will converge very slowly, requiring more iterations and computational resources to reach an optimal solution. It might also get stuck in local minima or plateau areas.</p></li>
+</ul>
+<p>Let’s understand it through a visualization</p>
+<p><img alt="learning rate" src="../../../../_images/learning-rate.png" /></p>
+<p>If you want to see yourself, how different values of learning rate impacts the gradient behaviour, try below visualization</p>
+<ol class="arabic simple">
+<li><p>Add a large learning rate of say 2 and keep clicking on <strong>Next iteration</strong> to check how loss reduces or it gets divergent after some time</p></li>
+<li><p>Add a very small learning rate of 0.001 and keep clicking on <strong>Next iteration</strong> to check how much time it takes to converge</p></li>
+<li><p>Add a medium learning rate of say 0.1 and check how much time it takes to converge</p></li>
+</ol>
+<iframe src="https://uclaacm.github.io/gradient-descent-visualiser/#playground" width="100%" height="600"></iframe>
+<blockquote>
+<div><p>Notice how the loss reduces and as we approach closer to the minimum, the number of iteration increases for convergence</p>
+</div></blockquote>
+<div class='alert alert-block alert-info' role='alert'>
+🔎 <strong>Hyperparameters</strong> in machine learning are settings that are chosen before the model training process begins and control the learning behavior of the model. 
+<p>They differ from model parameters (like weights) as they are not learned from the data. Proper tuning of hyperparameters is critical for optimizing model performance.</p>
+<p>Some of them are:</p>
+<ol class="arabic simple">
+<li><p><strong>Learning Rate</strong>:</p></li>
+<li><p><strong>Batch Size:</strong></p></li>
+<li><p><strong>Number of Epochs:</strong></p></li>
+<li><p><strong>Number of Layers and Neurons:</strong></p></li>
+<li><p><strong>Dropout Rate:</strong></p></li>
+<li><p><strong>Optimizer:</strong></p></li>
+<li><p><strong>Weight Initialization:</strong></p></li>
+<li><p>many more…</p></li>
+</ol>
+<p>These hyperparameters can significantly impact the performance of a neural network and are typically tuned through experimentation or automated search methods like grid search or random search.</p>
+</div>
+</section>
+</section>
+<section id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+
+<span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">loadmat</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">loadmat</span><span class="p">(</span><span class="s2">&quot;machine_learning_andrewng/ex4data1.mat&quot;</span><span class="p">)</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">loadmat</span><span class="p">(</span><span class="s2">&quot;machine_learning_andrewng/ex3weights.mat&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;__header__&#39;, &#39;__version__&#39;, &#39;__globals__&#39;, &#39;X&#39;, &#39;y&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+<span class="c1">#one-hot encoding the y values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span><span class="o">.</span><span class="n">values</span>
+<span class="n">theta1_loaded</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="s2">&quot;Theta1&quot;</span><span class="p">]</span>
+<span class="n">theta2_loaded</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="s2">&quot;Theta2&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">900</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x12d6ad750&gt;
+</pre></div>
+</div>
+<img alt="../../../../_images/408942a379d3d41f357a100675f152757009eb1220bd0a01c59227484e420d7d.png" src="../../../../_images/408942a379d3d41f357a100675f152757009eb1220bd0a01c59227484e420d7d.png" />
+</div>
+</div>
+<p>In this implementation we will use MNIST dataset, which is a set of handwritten number images from 1-10, our task is correctly detect these hand written digits</p>
+<p>The image size is 20x20 pixels, which we have already flattened in the dataset to (400,)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+
+<span class="k">class</span> <span class="nc">NeuralNetwork</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates Neural Network for MNIST dataset.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hidden_size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">output_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">lambda_</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the neural network with:</span>
+<span class="sd">        - hidden_size: Number of neurons in the hidden layer</span>
+<span class="sd">        - output_size: Number of output neurons (MNIST has 10 digits, so 10 outputs)</span>
+<span class="sd">        - lambda_: Regularization parameter to prevent overfitting</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span> <span class="o">=</span> <span class="n">hidden_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_size</span> <span class="o">=</span> <span class="n">output_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thetas</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Placeholder for network parameters (weights)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lambda_</span> <span class="o">=</span> <span class="n">lambda_</span>  <span class="c1"># Regularization coefficient</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Placeholder for input data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Placeholder for target data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_size</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Input layer size will be set based on data</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Activation function: Sigmoid used to introduce non-linearity&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">))</span>
+    
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="n">arr1</span><span class="p">,</span> <span class="n">arr2</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Flatten two matrices into a single vector (for optimization purposes)&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">arr1</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">arr2</span><span class="o">.</span><span class="n">flatten</span><span class="p">()]</span>
+    
+    <span class="k">def</span> <span class="nf">set_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">thetas</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set thetas (weights) by flattening and assigning them&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thetas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="o">*</span><span class="n">thetas</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">unflatten</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arr</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reshape the flattened thetas vector back into two separate matrices.</span>
+<span class="sd">        theta1 corresponds to input-to-hidden weights.</span>
+<span class="sd">        theta2 corresponds to hidden-to-output weights.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">theta1</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+        <span class="n">theta1</span> <span class="o">=</span> <span class="n">theta1</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">theta2</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):]</span>
+        <span class="n">theta2</span> <span class="o">=</span> <span class="n">theta2</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span>
+    
+    <span class="k">def</span> <span class="nf">init_random_thetas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.12</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize random values for weights (theta1 and theta2) with a small range to avoid symmetry.</span>
+<span class="sd">        The weights are initialized within [-epsilon, epsilon].</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">theta1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">epsilon</span> <span class="o">-</span> <span class="n">epsilon</span>
+        <span class="n">theta2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">epsilon</span> <span class="o">-</span> <span class="n">epsilon</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">sigmoid_prime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Derivative of the sigmoid function, used in backpropagation&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">cross_entropy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thetas</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the cross-entropy loss, including regularization.</span>
+<span class="sd">        Loss measures the difference between predicted and actual values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">thetas</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unflatten</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thetas</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unflatten</span><span class="p">(</span><span class="n">thetas</span><span class="p">)</span>
+
+        <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Number of training examples</span>
+        
+        <span class="c1"># Perform a forward pass to calculate the predicted values</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward_pass</span><span class="p">(</span><span class="n">thetas</span><span class="p">)</span>
+        
+        <span class="c1"># Calculate the loss: negative log-likelihood of the true values</span>
+        <span class="n">positive_loss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y_pred</span><span class="p">))</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+        <span class="n">negative_loss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">))</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+        
+        <span class="c1"># Add regularization term to prevent overfitting</span>
+        <span class="n">regularization</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lambda_</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">m</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">theta1</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">theta2</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+        
+        <span class="c1"># Final cost function with regularization</span>
+        <span class="n">J</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">positive_loss</span> <span class="o">+</span> <span class="n">negative_loss</span><span class="p">)</span> <span class="o">+</span> <span class="n">regularization</span>
+        <span class="k">return</span> <span class="n">J</span>
+
+    <span class="k">def</span> <span class="nf">forward_pass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thetas</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">elaborate</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Perform a forward pass through the network.</span>
+<span class="sd">        Calculate activations for each layer and return the output.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">thetas</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unflatten</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thetas</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unflatten</span><span class="p">(</span><span class="n">thetas</span><span class="p">)</span>
+        
+        <span class="c1"># Add bias to input data (a1)</span>
+        <span class="n">a1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">]</span>
+        
+        <span class="c1"># Hidden layer (z2, a2)</span>
+        <span class="n">z2</span> <span class="o">=</span> <span class="n">theta1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a1</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>  <span class="c1"># Compute z2 (hidden layer input)</span>
+        <span class="n">a2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">z2</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>  <span class="c1"># Apply activation function (sigmoid) to get a2</span>
+        
+        <span class="c1"># Add bias to hidden layer activations</span>
+        <span class="n">a2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">a2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">a2</span><span class="p">]</span>
+        
+        <span class="c1"># Output layer (z3, a3)</span>
+        <span class="n">z3</span> <span class="o">=</span> <span class="n">theta2</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a2</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">a3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">z3</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        
+        <span class="c1"># If requested, return intermediate activations for backpropagation</span>
+        <span class="k">if</span> <span class="n">elaborate</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">a3</span><span class="p">),</span> <span class="p">(</span><span class="n">z2</span><span class="p">,</span> <span class="n">z3</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">a3</span>
+
+    <span class="k">def</span> <span class="nf">backward_pass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thetas</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Perform a backward pass to compute gradients for weight updates.</span>
+<span class="sd">        This implements the backpropagation algorithm.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">thetas</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unflatten</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thetas</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unflatten</span><span class="p">(</span><span class="n">thetas</span><span class="p">)</span>
+
+        <span class="c1"># Forward pass to get all activations</span>
+        <span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="p">(</span><span class="n">z2</span><span class="p">,</span> <span class="n">z3</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward_pass</span><span class="p">(</span><span class="n">thetas</span><span class="p">,</span> <span class="n">elaborate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Compute the error in the output layer</span>
+        <span class="n">delta3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">((</span><span class="n">y_pred</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigmoid_prime</span><span class="p">(</span><span class="n">z3</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+
+        <span class="c1"># Gradient for theta2</span>
+        <span class="n">theta2_grad</span> <span class="o">=</span> <span class="n">a2</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">delta3</span><span class="p">)</span>
+        <span class="n">theta2_grad</span> <span class="o">=</span> <span class="n">theta2_grad</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># Ensure shape matches theta2</span>
+
+        <span class="c1"># Compute the error in the hidden layer</span>
+        <span class="n">delta2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">delta3</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">theta2</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigmoid_prime</span><span class="p">(</span><span class="n">z2</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+
+        <span class="c1"># Gradient for theta1</span>
+        <span class="n">theta1_grad</span> <span class="o">=</span> <span class="n">a1</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">delta2</span><span class="p">)</span>
+        <span class="n">theta1_grad</span> <span class="o">=</span> <span class="n">theta1_grad</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">theta1_grad</span><span class="p">,</span> <span class="n">theta2_grad</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">gradient_descent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">n_epochs</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.001</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Perform gradient descent optimization to minimize the cost function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Initialize random weights (thetas)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thetas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_random_thetas</span><span class="p">()</span>
+        <span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unflatten</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">thetas</span><span class="p">)</span>
+
+        <span class="c1"># Loop over epochs to update thetas using gradients</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_epochs</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="c1"># Compute cost for current thetas</span>
+            <span class="n">cost</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">Iteration: </span><span class="si">{0}</span><span class="s2"> Cost: </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">cost</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># Compute gradients</span>
+            <span class="n">theta1_grad</span><span class="p">,</span> <span class="n">theta2_grad</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unflatten</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">backward_pass</span><span class="p">())</span>
+
+            <span class="c1"># Update weights (thetas) using gradients</span>
+            <span class="n">theta1</span> <span class="o">=</span> <span class="n">theta1</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">theta1_grad</span>
+            <span class="n">theta2</span> <span class="o">=</span> <span class="n">theta2</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">theta2_grad</span>
+
+            <span class="c1"># Flatten the updated weights and set them as the current parameters</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">thetas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">theta1</span><span class="p">,</span> <span class="n">theta2</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">fmin_unc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Use scipy&#39;s minimize function to optimize the weights using unconstrained optimization.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thetas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_random_thetas</span><span class="p">()</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">thetas</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">backward_pass</span><span class="p">,</span>
+                       <span class="n">method</span><span class="o">=</span><span class="s2">&quot;tnc&quot;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fit the model with training data (X) and labels (y).</span>
+<span class="sd">        It sets the input size based on the training data and ensures</span>
+<span class="sd">        that the number of output neurons matches the number of labels.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_size</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Number of columns in y (</span><span class="si">{0}</span><span class="s2">) are != to number of output neurons (</span><span class="si">{1}</span><span class="s2">)&quot;</span>
+                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_size</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_size</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;gradient_descent&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Train the model using either gradient descent or unconstrained optimization.</span>
+<span class="sd">        It measures the training time.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;gradient_descent&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gradient_descent</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fmin_unc</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training time: </span><span class="si">{0:.2f}</span><span class="s2"> secs&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nn</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">(</span><span class="n">hidden_size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">output_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">nn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training using Gradient Descent&quot;</span><span class="p">)</span>
+<span class="n">nn</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training using Gradient Descent
+Iteration: 1000 Cost: 0.4521438114818742
+Training time: 6.80 secs
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nn</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">(</span><span class="n">hidden_size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">output_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">nn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training using Newton&#39;s Conjugate Gradient&quot;</span><span class="p">)</span>
+<span class="n">nn</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;newton&quot;</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training using Newton&#39;s Conjugate Gradient
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/2g/fd5fqwvd6x5cd9_2fspz1xh40000gp/T/ipykernel_81976/4005965860.py:177: OptimizeWarning: Unknown solver options: maxiter
+  res = minimize(self.cross_entropy, self.thetas, jac=self.backward_pass,
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> message: Converged (|f_n-f_(n-1)| ~= 0)
+ success: True
+  status: 1
+     fun: 0.44474797884435985
+       x: [-1.580e+00  1.086e-01 ... -3.269e+00  2.960e+00]
+     nit: 25
+     jac: [ 2.042e+00  0.000e+00 ... -5.364e-02 -1.743e-01]
+    nfev: 342
+Training time: 2.42 secs
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nn</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">(</span><span class="n">hidden_size</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">output_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">nn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">nn</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">theta1_loaded</span><span class="p">,</span> <span class="n">theta2_loaded</span><span class="p">)</span>
+<span class="n">nn</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.2876291651613189)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.coursera.org/learn/machine-learning">Machine Learning on Coursera</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=aircAruvnKk">But what is a Neural Network? By 3Blue1Brown</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Artificial_neural_network">Neural Network on Wikipedia</a></p></li>
+<li><p><a class="reference external" href="https://playground.tensorflow.org/">TensorFlow Neural Network Playground</a></p></li>
+<li><p><a class="reference external" href="https://insights.sei.cmu.edu/sei_blog/2018/02/deep-learning-going-deeper-toward-meaningful-patterns-in-complex-data.html">Deep Learning by Carnegie Mellon University</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/ai/neural/concepts"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="001_Introduction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Neural Networks</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="003_Activations.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Activation functions</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-initialization">Random Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-or-feedforward-propagation">Forward (or Feedforward) Propagation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vectorized-implementation-of-forward-propagation">Vectorized Implementation of Forward Propagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-propagation-example">Forward Propagation Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-function">Cost Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Backpropagation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-computation">Gradient Computation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-algorithm">Gradient Descent Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-rate-alpha">Learning rate (<span class="math notranslate nohighlight">\(\alpha\)</span>)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

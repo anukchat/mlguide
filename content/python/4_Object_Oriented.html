@@ -1,0 +1,1588 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Object Oriented Programming &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/python/4_Object_Oriented';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/python/4_Object_Oriented.html" />
+    <link rel="icon" href="../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Exceptions Handling" href="5_Exceptions_Handling.html" />
+    <link rel="prev" title="Functions &amp; Modules" href="3_functions_and_modules.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="python_toc.html">Python</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_functions_and_modules.html">Functions &amp; Modules</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="8_advanced.html">Advanced Concepts</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ai/Introduction_to_ml.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/000_Data_Exploration.html">Exploratory Data Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/001_Data_Preparation.html">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/003_Classification.html">Classfication</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/005_Evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/006_Advanced.html">K-Fold Cross Validation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ai/neural/neural_toc.html">Neural Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ai/neural/concepts/001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/neural/concepts/002_Backpropogation.html">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/neural/concepts/003_Activations.html">Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/neural/concepts/004_Optimization.html">Optimizations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ai/neural/concepts/pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../genai/introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../genai/concepts/transformers/01_transformers_from_scratch.html">Transformers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../genai/langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../genai/langchain/intro.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../genai/langchain/01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../genai/langchain/02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/courses/courses_toc.html">Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/python/4_Object_Oriented.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/python/4_Object_Oriented.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/python/4_Object_Oriented.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Object Oriented Programming</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class">Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object">Object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructor">Constructor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instance-variables-methods">Instance variables &amp; methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance">Inheritance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types">Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#single">Single</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple">Multiple</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multilevel">Multilevel</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical">Hierarchical</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hybrid">Hybrid</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-overriding">Method overriding</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encapsulation">Encapsulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polymorphism">Polymorphism</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="object-oriented-programming">
+<h1>Object Oriented Programming<a class="headerlink" href="#object-oriented-programming" title="Link to this heading">#</a></h1>
+<p>One of the popular approaches to solve a programming problem is by creating objects. This is known as Object-Oriented Programming (OOP).</p>
+<p>Object-oriented programming (OOP) is a programming paradigm based on the concept of <strong>“objects”</strong>.</p>
+<p>The object contains both data and code:</p>
+<ul class="simple">
+<li><p>Data in the form of properties (often known as attributes), and</p></li>
+<li><p>Code, in the form of methods (actions object can perform).</p></li>
+</ul>
+<p>An object has two characteristics:</p>
+<ul class="simple">
+<li><p>attributes</p></li>
+<li><p>behavior</p></li>
+</ul>
+<p>For example:</p>
+<p>A parrot is can be an object,as it has the following properties:</p>
+<ul class="simple">
+<li><p>name, age, color as attributes</p></li>
+<li><p>singing, dancing as behavior</p></li>
+</ul>
+<p>The concept of OOP in Python focuses on creating reusable code. This concept is also known as DRY (Don’t Repeat Yourself).</p>
+<p>In Python, the concept of OOP follows some basic principles:</p>
+<section id="class">
+<h2>Class<a class="headerlink" href="#class" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>👉 In Python, <strong>everything</strong> is an <strong>object</strong>.</p>
+<p>👉 To create an object we require a model or plan or <strong>blueprint</strong> which is nothing but class.</p>
+<p>👉 We create class to create an object.</p>
+<p>👉 The class defines <strong>attributes</strong> and the <strong>behavior</strong> of the object</p>
+<p>👉 While the object, on the other hand, represents the class.</p>
+<p>👉 Class represents the properties (attribute) and action (behavior) of the object.</p>
+<p>👉 Properties represent variables, and actions are represented by the methods. Hence class contains both variables and methods.</p>
+<p><strong>Syntax:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">classname</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;documentation string&#39;&#39;&#39;</span>
+    <span class="n">class_suite</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Documentation string:</strong> represent a description of the class. It is optional.</p></li>
+<li><p><strong>class_suite:</strong> class suite contains component statements, variables, methods, functions, attributes.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating a class</span>
+
+<span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+    <span class="k">pass</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Person</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;__main__.Person&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="object">
+<h2>Object<a class="headerlink" href="#object" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>👉 As <strong>Class</strong> is just a blueprint or template, so it <strong>doesn’t</strong> have any <strong>memory</strong> or storage.</p>
+<p>👉 The <strong>physical</strong> <strong>existence</strong> of a class is nothing but an <strong>object</strong>. In other words, the object is an entity that has a state and behavior.</p>
+<p><strong>Syntax:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reference_variable</span> <span class="o">=</span> <span class="n">classname</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The example for object of parrot class can be:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span> <span class="o">=</span> <span class="n">Parrot</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Here, <strong><code class="docutils literal notranslate"><span class="pre">obj</span></code></strong> is an <strong><code class="docutils literal notranslate"><span class="pre">object</span></code></strong> of class Parrot. It occupies space in memory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: We can create an object by calling the class</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">Person</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;__main__.Person object at 0x109eafdd0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2: Creating Class and Object in Python</span>
+
+<span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This is student class with data&quot;&quot;&quot;</span>    
+    <span class="k">def</span> <span class="nf">learn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>    <span class="c1"># A sample method</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Welcome to ml guide&quot;</span><span class="p">)</span>
+
+<span class="n">stud</span> <span class="o">=</span> <span class="n">Student</span><span class="p">()</span>        <span class="c1"># creating object</span>
+<span class="n">stud</span><span class="o">.</span><span class="n">learn</span><span class="p">()</span>            <span class="c1"># Calling method</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Welcome to ml guide
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2: Creating Class and Object in Python</span>
+
+<span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+      <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">firstname</span><span class="p">,</span> <span class="n">lastname</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">country</span><span class="p">,</span> <span class="n">city</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">firstname</span> <span class="o">=</span> <span class="n">firstname</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lastname</span> <span class="o">=</span> <span class="n">lastname</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="n">country</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">city</span> <span class="o">=</span> <span class="n">city</span>
+
+<span class="c1"># Creating object using Person class with parameters</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s1">&#39;Anukool&#39;</span><span class="p">,</span> <span class="s1">&#39;Chaturvedi&#39;</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="s1">&#39;England&#39;</span><span class="p">,</span> <span class="s1">&#39;London&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">firstname</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">lastname</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">country</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">city</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anukool
+Chaturvedi
+120
+England
+London
+</pre></div>
+</div>
+</div>
+</div>
+<p>Instead of using the normal statements to access attributes, you can use the following functions:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">getattr(obj,</span> <span class="pre">name[,</span> <span class="pre">default])</span></code></strong> − to access the attribute of object.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">hasattr(obj,name)</span></code></strong> − to check if an attribute exists or not.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">setattr(obj,name,value)</span></code></strong> − to set an attribute. If attribute does not exist, then it would be created.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">delattr(obj,</span> <span class="pre">name)</span></code></strong> − to delete an attribute.</p></li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">hasattr</span><span class="p">(</span><span class="n">std1</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">)</span> <span class="c1"># Returns true if &#39;id&#39; attribute exists</span>
+<span class="nb">getattr</span><span class="p">(</span><span class="n">std1</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">)</span> <span class="c1"># Returns value of &#39;id&#39; attribute</span>
+<span class="nb">setattr</span><span class="p">(</span><span class="n">std1</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="mi">104</span><span class="p">)</span> <span class="c1"># Set attribute &#39;id&#39; 104</span>
+<span class="nb">delattr</span><span class="p">(</span><span class="n">std1</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">)</span> <span class="c1"># Delete attribute &#39;id&#39;</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Accessing city attribute for person object</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;city&#39;</span><span class="p">))</span>
+
+<span class="c1"># Checking age attribute for person object exists or not</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">))</span>
+
+<span class="c1"># Setting age attribute to some other value</span>
+<span class="nb">setattr</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">))</span>
+
+<span class="c1"># Deleting age attribute</span>
+<span class="nb">delattr</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>London
+True
+200
+False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-info"><b>💡 Tip: </b>There are also special attributes in it that begins with double underscores <b>`__`</b>. For example, <b>`__doc__`</b> gives us the docstring of that class.</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is student class with data
+</pre></div>
+</div>
+</div>
+</div>
+<p>Every Python class keeps following built-in attributes and they can be accessed using <strong>dot operator</strong> like any other attribute −</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">__dict__</span></code></strong>  : Dictionary containing the class’s namespace.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">__doc__</span></code></strong> : Class documentation string or none, if undefined.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">__name__</span></code></strong> : Class name.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">__module__</span></code></strong>  : Module name in which the class is defined. This attribute is <strong><code class="docutils literal notranslate"><span class="pre">__main__</span></code></strong> in interactive mode.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">__bases__</span></code></strong> : A possibly empty tuple containing the base classes, in the order of their occurrence in the base class list.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># deleting entire object</span>
+<span class="k">del</span> <span class="n">p</span>
+
+<span class="n">p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">33</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># deleting entire object</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">del</span> <span class="n">p</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">p</span>
+
+<span class="ne">NameError</span>: name &#39;p&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-info"><b>💡 Tip: </b>In Python We can delete the object property or entire object itself by using the <b>`del`</b> keyword. After deleting it, if we try to access it, we will get an error.</b> </div></section>
+<section id="constructor">
+<h2>Constructor<a class="headerlink" href="#constructor" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>👉 Constructor is a special method in Python, which is used to initialize the attributes of the class.</p>
+<p>👉 It is called automatically when the object is created.</p>
+<p>👉 Like the constructor function in Java or JavaScript, Python has also a built-in <strong><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></strong> constructor function.</p>
+<p>👉 The <strong><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></strong> constructor function has <strong><code class="docutils literal notranslate"><span class="pre">self</span></code></strong> parameter which is a reference to the current instance of the class (in below example, <strong><code class="docutils literal notranslate"><span class="pre">self</span></code></strong> points to <strong>Person</strong>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+      <span class="k">def</span> <span class="fm">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="c1"># self allows to attach parameter to the class</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span><span class="n">name</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s1">&#39;Anukool&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anukool
+&lt;__main__.Person object at 0x109e91580&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: add more parameters to the constructor function.</span>
+
+<span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+      <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">firstname</span><span class="p">,</span> <span class="n">lastname</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">country</span><span class="p">,</span> <span class="n">city</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">firstname</span> <span class="o">=</span> <span class="n">firstname</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lastname</span> <span class="o">=</span> <span class="n">lastname</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="n">country</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">city</span> <span class="o">=</span> <span class="n">city</span>
+
+<span class="c1"># Creating object using Person class with parameters</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s1">&#39;Anukool&#39;</span><span class="p">,</span> <span class="s1">&#39;Chaturvedi&#39;</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="s1">&#39;England&#39;</span><span class="p">,</span> <span class="s1">&#39;London&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">firstname</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">lastname</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">country</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">city</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Anukool
+Chaturvedi
+120
+England
+London
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-info"><b>💡 Tip: </b>A constructor is optional, and if we do not provide any constructor, then Python provides the default constructor. Every class in Python has a constructor, but it’s not required to define it.</div></section>
+<section id="instance-variables-methods">
+<h2>Instance variables &amp; methods<a class="headerlink" href="#instance-variables-methods" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>👉 Instance variables are variables that are associated with each object.</p>
+<p>👉 For every object, a separate copy of the instance variable will be created.</p>
+<p>👉 Just like instance variables, we have instance methods associated with each object.</p>
+<p>👉 We need to create an object to execute the block of code or action defined in the instance method.</p>
+<p>👉 We can access the instance variable and methods using the object. Use dot (<strong><code class="docutils literal notranslate"><span class="pre">.</span></code></strong>) operator.</p>
+<blockquote>
+<div><p><strong>Note:</strong> Instance variables are used within the instance method</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Creating Class and Object in Python with show method</span>
+
+<span class="k">class</span> <span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">percentage</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">percentage</span> <span class="o">=</span> <span class="n">percentage</span>
+
+    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Name is:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;and percentage is:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">percentage</span><span class="p">)</span>
+
+        
+<span class="n">stud</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">&quot;Arthur&quot;</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+<span class="n">stud</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>   
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Name is: Arthur and percentage is: 90
+</pre></div>
+</div>
+</div>
+</div>
+<img src="images/instvarmeth.png" width="700"/>
+<br/><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2: Creating Class and Object in Python</span>
+
+<span class="k">class</span> <span class="nc">Parrot</span><span class="p">:</span>
+    <span class="n">species</span> <span class="o">=</span> <span class="s2">&quot;bird&quot;</span>                    <span class="c1"># class attribute</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>      <span class="c1"># instance attribute</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+<span class="c1"># instantiate the Parrot class</span>
+<span class="n">blu</span> <span class="o">=</span> <span class="n">Parrot</span><span class="p">(</span><span class="s2">&quot;Blu&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">woo</span> <span class="o">=</span> <span class="n">Parrot</span><span class="p">(</span><span class="s2">&quot;Woo&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># access the class attributes</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Blu is a </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">blu</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">species</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Woo is also a </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">woo</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">species</span><span class="p">))</span>
+
+<span class="c1"># access the instance attributes</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> is </span><span class="si">{}</span><span class="s2"> years old&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span> <span class="n">blu</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">blu</span><span class="o">.</span><span class="n">age</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> is </span><span class="si">{}</span><span class="s2"> years old&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span> <span class="n">woo</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">woo</span><span class="o">.</span><span class="n">age</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Blu is a bird
+Woo is also a bird
+Blu is 10 years old
+Woo is 15 years old
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the above program:
+👉 We created a class with the name <strong><code class="docutils literal notranslate"><span class="pre">Parrot</span></code></strong>.</p>
+<p>👉 Then, we define attributes (characteristics of the object), they are defined inside the <strong><code class="docutils literal notranslate"><span class="pre">__init__</span></code></strong> method of the class.</p>
+<p>👉 <strong><code class="docutils literal notranslate"><span class="pre">__init__</span></code></strong> is the initializer method that is first run as soon as the object is created.</p>
+<p>👉 Then, we create instances of the <strong><code class="docutils literal notranslate"><span class="pre">Parrot</span></code></strong> class. Here, <strong><code class="docutils literal notranslate"><span class="pre">blu</span></code></strong> and <strong><code class="docutils literal notranslate"><span class="pre">woo</span></code></strong> are references (value) to our new objects.</p>
+<p>👉 We can access the class attribute using <strong><code class="docutils literal notranslate"><span class="pre">__class__.species</span></code></strong></p>
+<blockquote>
+<div><p><strong>Note</strong>: Class attributes are the same for all instances of a class</p>
+</div></blockquote>
+<p>👉 Similarly, we access the instance attributes using <strong><code class="docutils literal notranslate"><span class="pre">blu.name</span></code></strong> and <strong><code class="docutils literal notranslate"><span class="pre">blu.age</span></code></strong>.</p>
+<blockquote>
+<div><p><strong>Note</strong>: Instance attributes are different for every instance of a class.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 3: Creating Object Methods in Python</span>
+
+<span class="k">class</span> <span class="nc">Parrot</span><span class="p">:</span>
+    
+    <span class="c1"># instance attributes</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+    
+    <span class="c1"># instance method</span>
+    <span class="k">def</span> <span class="nf">sing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">song</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> sings </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">song</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">dance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> is now dancing&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+<span class="c1"># instantiate the object</span>
+<span class="n">blu</span> <span class="o">=</span> <span class="n">Parrot</span><span class="p">(</span><span class="s2">&quot;Blu&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># call our instance methods</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">blu</span><span class="o">.</span><span class="n">sing</span><span class="p">(</span><span class="s2">&quot;&#39;Happy&#39;&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">blu</span><span class="o">.</span><span class="n">dance</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Blu sings &#39;Happy&#39;
+Blu is now dancing
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the above program, we define two methods i.e <strong><code class="docutils literal notranslate"><span class="pre">sing()</span></code></strong> and <strong><code class="docutils literal notranslate"><span class="pre">dance()</span></code></strong>. These are called instance methods because they are called on an instance object i.e <strong><code class="docutils literal notranslate"><span class="pre">blu</span></code></strong>.</p>
+<p>👉 Object Methods are functions defined inside the body of a class. They are used to define the behaviors of an object.</p>
+</section>
+<section id="inheritance">
+<h2>Inheritance<a class="headerlink" href="#inheritance" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>👉 <strong>Inheritance</strong> is the process of inheriting the <strong>properties</strong> of the <strong>base</strong> class (or parent class) into a <strong>derived</strong> class (or child class).</p>
+<p>👉 Using inheritance we can <strong>reuse</strong> parent class code.</p>
+<p>👉 Inheritance allows us to define a class that inherits all the methods and properties from parent class.</p>
+<p>👉 The parent class or super or base class is the class which gives all the methods and properties.</p>
+<p>👉 Child class is the class that inherits from another or parent class.</p>
+<p>👉 A <strong>child</strong> class can also provide its <strong>specific</strong> implementation to the functions of the parent class.</p>
+<p>👉 The main purpose of inheritance is the <strong>reusability</strong> of code because we can use the existing class to create a new class instead of creating it from scratch.</p>
+<a class="reference internal image-reference" href="../../_images/i.png"><img alt="../../_images/i.png" src="../../_images/i.png" style="width: 150px;" /></a>
+<p><strong>Syntax:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BaseClass</span><span class="p">:</span>
+    <span class="n">Body</span> <span class="n">of</span> <span class="n">base</span> <span class="k">class</span>
+<span class="nc">class</span> <span class="n">DerivedClass</span><span class="p">(</span><span class="n">BaseClass</span><span class="p">):</span>
+    <span class="n">Body</span> <span class="n">of</span> <span class="n">derived</span> <span class="k">class</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Use of Inheritance in Python [Single Inheritance]</span>
+
+<span class="k">class</span> <span class="nc">ClassOne</span><span class="p">:</span>              <span class="c1"># Base class</span>
+    <span class="k">def</span> <span class="nf">func1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is Parent class&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">ClassTwo</span><span class="p">(</span><span class="n">ClassOne</span><span class="p">):</span>    <span class="c1"># Derived class</span>
+    <span class="k">def</span> <span class="nf">func2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is Child class&#39;</span><span class="p">)</span>
+
+<span class="n">obj</span> <span class="o">=</span> <span class="n">ClassTwo</span><span class="p">()</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">func1</span><span class="p">()</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">func2</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is Parent class
+This is Child class
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us create a student class by inheriting from <strong><code class="docutils literal notranslate"><span class="pre">Person</span></code></strong> class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2: Use of Inheritance in Python [Single Inheritance]</span>
+
+<span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+      <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">firstname</span><span class="o">=</span><span class="s1">&#39;Anukool&#39;</span><span class="p">,</span> <span class="n">lastname</span><span class="o">=</span><span class="s1">&#39;Chaturvedi&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">country</span><span class="o">=</span><span class="s1">&#39;England&#39;</span><span class="p">,</span> <span class="n">city</span><span class="o">=</span><span class="s1">&#39;London&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">firstname</span> <span class="o">=</span> <span class="n">firstname</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">lastname</span> <span class="o">=</span> <span class="n">lastname</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="n">country</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">city</span> <span class="o">=</span> <span class="n">city</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">skills</span> <span class="o">=</span> <span class="p">[]</span>
+
+      <span class="k">def</span> <span class="nf">person_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">firstname</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lastname</span><span class="si">}</span><span class="s1"> is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="si">}</span><span class="s1"> years old. He lives in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">city</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">country</span><span class="si">}</span><span class="s1">.&#39;</span>
+      <span class="k">def</span> <span class="nf">add_skill</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">skill</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">skills</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">skill</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;Arthur&#39;</span><span class="p">,</span> <span class="s1">&#39;Curry&#39;</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="s1">&#39;England&#39;</span><span class="p">,</span> <span class="s1">&#39;London&#39;</span><span class="p">)</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;Emily&#39;</span><span class="p">,</span> <span class="s1">&#39;Carter&#39;</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="s1">&#39;England&#39;</span><span class="p">,</span> <span class="s1">&#39;Manchester&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">person_info</span><span class="p">())</span>
+<span class="n">s1</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="s1">&#39;HTML&#39;</span><span class="p">)</span>
+<span class="n">s1</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="s1">&#39;CSS&#39;</span><span class="p">)</span>
+<span class="n">s1</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="s1">&#39;JavaScript&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">skills</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">person_info</span><span class="p">())</span>
+<span class="n">s2</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="s1">&#39;Organizing&#39;</span><span class="p">)</span>
+<span class="n">s2</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="s1">&#39;Marketing&#39;</span><span class="p">)</span>
+<span class="n">s2</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="s1">&#39;Digital Marketing&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">skills</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Arthur Curry is 33 years old. He lives in London, England.
+[&#39;HTML&#39;, &#39;CSS&#39;, &#39;JavaScript&#39;]
+Emily Carter is 28 years old. He lives in Manchester, England.
+[&#39;Organizing&#39;, &#39;Marketing&#39;, &#39;Digital Marketing&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>👉 We did not call the <strong><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></strong> constructor in the child class.</p>
+<p>👉 If we didn’t call it then we can still access all the properties from the parent.</p>
+<p>👉 But if we do call the constructor we can access the parent properties by calling <strong><code class="docutils literal notranslate"><span class="pre">super()</span></code></strong>.</p>
+<p>👉 We can add a new method to the child or we can override the parent class methods by creating the same method name in the child class.</p>
+<p>👉 When we add the <strong><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></strong> function, the child class will no longer inherit the parent’s <strong><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></strong> function.</p>
+<p>Let’s see how we can override the parent method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 3: Overriding parent method from above example</span>
+
+<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">firstname</span><span class="o">=</span><span class="s1">&#39;Anukool&#39;</span><span class="p">,</span> <span class="n">lastname</span><span class="o">=</span><span class="s1">&#39;Chaturvedi&#39;</span><span class="p">,</span><span class="n">age</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">country</span><span class="o">=</span><span class="s1">&#39;England&#39;</span><span class="p">,</span> <span class="n">city</span><span class="o">=</span><span class="s1">&#39;London&#39;</span><span class="p">,</span> <span class="n">gender</span><span class="o">=</span><span class="s1">&#39;male&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gender</span> <span class="o">=</span> <span class="n">gender</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">firstname</span><span class="p">,</span> <span class="n">lastname</span><span class="p">,</span><span class="n">age</span><span class="p">,</span> <span class="n">country</span><span class="p">,</span> <span class="n">city</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">person_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">gender</span> <span class="o">=</span> <span class="s1">&#39;He&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gender</span> <span class="o">==</span><span class="s1">&#39;male&#39;</span> <span class="k">else</span> <span class="s1">&#39;She&#39;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">firstname</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lastname</span><span class="si">}</span><span class="s1"> is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="si">}</span><span class="s1"> years old. </span><span class="si">{</span><span class="n">gender</span><span class="si">}</span><span class="s1"> lives in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">city</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">country</span><span class="si">}</span><span class="s1">.&#39;</span>
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;Arthur&#39;</span><span class="p">,</span> <span class="s1">&#39;Curry&#39;</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="s1">&#39;England&#39;</span><span class="p">,</span> <span class="s1">&#39;London&#39;</span><span class="p">,</span><span class="s1">&#39;male&#39;</span><span class="p">)</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s1">&#39;Emily&#39;</span><span class="p">,</span> <span class="s1">&#39;Carter&#39;</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="s1">&#39;England&#39;</span><span class="p">,</span> <span class="s1">&#39;Manchester&#39;</span><span class="p">,</span><span class="s1">&#39;female&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">person_info</span><span class="p">())</span>
+<span class="n">s1</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="s1">&#39;HTML&#39;</span><span class="p">)</span>
+<span class="n">s1</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="s1">&#39;CSS&#39;</span><span class="p">)</span>
+<span class="n">s1</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="s1">&#39;JavaScript&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">skills</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">person_info</span><span class="p">())</span>
+<span class="n">s2</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="s1">&#39;Organizing&#39;</span><span class="p">)</span>
+<span class="n">s2</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="s1">&#39;Marketing&#39;</span><span class="p">)</span>
+<span class="n">s2</span><span class="o">.</span><span class="n">add_skill</span><span class="p">(</span><span class="s1">&#39;Digital Marketing&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">skills</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Arthur Curry is 33 years old. He lives in London, England.
+[&#39;HTML&#39;, &#39;CSS&#39;, &#39;JavaScript&#39;]
+Emily Carter is 28 years old. She lives in Manchester, England.
+[&#39;Organizing&#39;, &#39;Marketing&#39;, &#39;Digital Marketing&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>👉 We can use <strong><code class="docutils literal notranslate"><span class="pre">super()</span></code></strong> built-in function or the parent name Person to automatically inherit the methods and properties from its parent.</p>
+<p>👉 In the example above we override the parent method. The child method has a different feature, it can identify, if the gender is male or female and assign the proper pronoun(He/She).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 4: Use of Inheritance in Python</span>
+
+<span class="c1"># parent class</span>
+<span class="k">class</span> <span class="nc">Bird</span><span class="p">:</span>   
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bird is ready&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">whoisThis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bird&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">swim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Swim faster&quot;</span><span class="p">)</span>
+
+<span class="c1"># child class</span>
+<span class="k">class</span> <span class="nc">Penguin</span><span class="p">(</span><span class="n">Bird</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># call super() function</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Penguin is ready&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">whoisThis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Penguin&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Run faster&quot;</span><span class="p">)</span>
+
+<span class="n">peggy</span> <span class="o">=</span> <span class="n">Penguin</span><span class="p">()</span>
+<span class="n">peggy</span><span class="o">.</span><span class="n">whoisThis</span><span class="p">()</span>
+<span class="n">peggy</span><span class="o">.</span><span class="n">swim</span><span class="p">()</span>
+<span class="n">peggy</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bird is ready
+Penguin is ready
+Penguin
+Swim faster
+Run faster
+</pre></div>
+</div>
+</div>
+</div>
+<p>👉 Here, we have <strong><code class="docutils literal notranslate"><span class="pre">Bird</span></code></strong> (parent class) and <strong><code class="docutils literal notranslate"><span class="pre">Penguin</span></code></strong> (child class). The child class inherits the functions of parent class. We can see this from the <strong><code class="docutils literal notranslate"><span class="pre">swim()</span></code></strong> method.</p>
+<p>👉 Next, the child class modified the behavior of the parent class. We can see this from the <strong><code class="docutils literal notranslate"><span class="pre">whoisThis()</span></code></strong> method.</p>
+<p>👉 Furthermore, we extend the functions of the parent class, by creating a new <strong><code class="docutils literal notranslate"><span class="pre">run()</span></code></strong> method.</p>
+<p>👉 Additionally, we use the <strong><code class="docutils literal notranslate"><span class="pre">super()</span></code></strong> function inside the <strong><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></strong> method. This allows us to run the <strong><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></strong> method of the parent class inside the child class.</p>
+<section id="types">
+<h3>Types<a class="headerlink" href="#types" title="Link to this heading">#</a></h3>
+<p>Based upon the number of child and parent classes involved, there are five types of inheritance.
+<b></p>
+<ol class="arabic simple">
+<li><p>Single Inheritance</p></li>
+<li><p>Multiple Inheritance</p></li>
+<li><p>Multilevel inheritance</p></li>
+<li><p>Hierarchical Inheritance</p></li>
+<li><p>Hybrid Inheritance
+</b></p></li>
+</ol>
+<section id="single">
+<h4>Single<a class="headerlink" href="#single" title="Link to this heading">#</a></h4>
+<p>A derived class inherits from a single-base class. Examples mentioned above are Single Inheritance</p>
+<a class="reference internal image-reference" href="../../_images/si.png"><img alt="../../_images/si.png" src="../../_images/si.png" style="width: 150px;" /></a>
+</section>
+<section id="multiple">
+<h4>Multiple<a class="headerlink" href="#multiple" title="Link to this heading">#</a></h4>
+<p>One derived class can inherit from multiple base classes.</p>
+<a class="reference internal image-reference" href="../../_images/mpi.png"><img alt="../../_images/mpi.png" src="../../_images/mpi.png" style="width: 400px;" /></a>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Multiple Inheritance</span>
+
+<span class="c1"># Base class 1</span>
+<span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">person_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Inside Person class&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Name:&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;Age:&#39;</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
+
+<span class="c1"># Base class 2</span>
+<span class="k">class</span> <span class="nc">Company</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">company_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">company_name</span><span class="p">,</span> <span class="n">location</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Inside Company class&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Name:&#39;</span><span class="p">,</span> <span class="n">company_name</span><span class="p">,</span> <span class="s1">&#39;location:&#39;</span><span class="p">,</span> <span class="n">location</span><span class="p">)</span>
+
+<span class="c1"># Derived class</span>
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">(</span><span class="n">Person</span><span class="p">,</span> <span class="n">Company</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">Employee_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">salary</span><span class="p">,</span> <span class="n">skill</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Inside Employee class&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Salary:&#39;</span><span class="p">,</span> <span class="n">salary</span><span class="p">,</span> <span class="s1">&#39;Skill:&#39;</span><span class="p">,</span> <span class="n">skill</span><span class="p">)</span>
+
+<span class="c1"># Create object of Employee</span>
+<span class="n">emp</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">()</span>
+
+<span class="c1"># access data</span>
+<span class="n">emp</span><span class="o">.</span><span class="n">person_info</span><span class="p">(</span><span class="s1">&#39;Milaan&#39;</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span>
+<span class="n">emp</span><span class="o">.</span><span class="n">company_info</span><span class="p">(</span><span class="s1">&#39;Google&#39;</span><span class="p">,</span> <span class="s1">&#39;Atlanta&#39;</span><span class="p">)</span>
+<span class="n">emp</span><span class="o">.</span><span class="n">Employee_info</span><span class="p">(</span><span class="mi">19000</span><span class="p">,</span> <span class="s1">&#39;Machine Learning&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inside Person class
+Name: Milaan Age: 33
+Inside Company class
+Name: Google location: Atlanta
+Inside Employee class
+Salary: 19000 Skill: Machine Learning
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="multilevel">
+<h4>Multilevel<a class="headerlink" href="#multilevel" title="Link to this heading">#</a></h4>
+<p>Here, we can also inherit from a derived class. It can be of any depth in Python.</p>
+<p>All the features of the base class and the derived class are inherited into the new derived class.</p>
+<a class="reference internal image-reference" href="../../_images/mli.png"><img alt="../../_images/mli.png" src="../../_images/mli.png" style="width: 150px;" /></a>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="c1"># Base class</span>
+<span class="k">class</span> <span class="nc">Vehicle</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">Vehicle_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Inside Vehicle class&#39;</span><span class="p">)</span>
+
+<span class="c1"># Child class</span>
+<span class="k">class</span> <span class="nc">Car</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">car_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Inside Car class&#39;</span><span class="p">)</span>
+
+<span class="c1"># Child class</span>
+<span class="k">class</span> <span class="nc">SportsCar</span><span class="p">(</span><span class="n">Car</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">sports_car_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Inside SportsCar class&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create object of SportsCar</span>
+<span class="n">s_car</span> <span class="o">=</span> <span class="n">SportsCar</span><span class="p">()</span>
+
+<span class="c1"># access Vehicle&#39;s and Car info using SportsCar object</span>
+<span class="n">s_car</span><span class="o">.</span><span class="n">Vehicle_info</span><span class="p">()</span>
+<span class="n">s_car</span><span class="o">.</span><span class="n">car_info</span><span class="p">()</span>
+<span class="n">s_car</span><span class="o">.</span><span class="n">sports_car_info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="hierarchical">
+<h4>Hierarchical<a class="headerlink" href="#hierarchical" title="Link to this heading">#</a></h4>
+<p>In Hierarchical inheritance, more than one child class is derived from a single parent class. In other words, we can say one base class and multiple derived classes.</p>
+<a class="reference internal image-reference" href="../../_images/hi.png"><img alt="../../_images/hi.png" src="../../_images/hi.png" style="width: 500px;" /></a>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="k">class</span> <span class="nc">Vehicle</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is Vehicle&quot;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Car</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">car_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Car name is:&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Truck</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">truck_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Truck name is:&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="n">obj1</span> <span class="o">=</span> <span class="n">Car</span><span class="p">()</span>
+<span class="n">obj1</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">obj1</span><span class="o">.</span><span class="n">car_info</span><span class="p">(</span><span class="s1">&#39;BMW&#39;</span><span class="p">)</span>
+
+<span class="n">obj2</span> <span class="o">=</span> <span class="n">Truck</span><span class="p">()</span>
+<span class="n">obj2</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">obj2</span><span class="o">.</span><span class="n">truck_info</span><span class="p">(</span><span class="s1">&#39;Ford&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This is Vehicle
+Car name is: BMW
+This is Vehicle
+Truck name is: Ford
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="hybrid">
+<h4>Hybrid<a class="headerlink" href="#hybrid" title="Link to this heading">#</a></h4>
+<p>When inheritance is consists of multiple types or a combination of different inheritance is called hybrid inheritance.</p>
+<a class="reference internal image-reference" href="../../_images/hbi.png"><img alt="../../_images/hbi.png" src="../../_images/hbi.png" style="width: 500px;" /></a>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="k">class</span> <span class="nc">Vehicle</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">vehicle_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside Vehicle class&quot;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Car</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">car_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside Car class&quot;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Truck</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">truck_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside Truck class&quot;</span><span class="p">)</span>
+
+<span class="c1"># Sports Car can inherits properties of Vehicle and Car</span>
+<span class="k">class</span> <span class="nc">SportsCar</span><span class="p">(</span><span class="n">Car</span><span class="p">,</span> <span class="n">Vehicle</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">sports_car_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inside SportsCar class&quot;</span><span class="p">)</span>
+
+<span class="c1"># create object</span>
+<span class="n">s_car</span> <span class="o">=</span> <span class="n">SportsCar</span><span class="p">()</span>
+
+<span class="n">s_car</span><span class="o">.</span><span class="n">vehicle_info</span><span class="p">()</span>
+<span class="n">s_car</span><span class="o">.</span><span class="n">car_info</span><span class="p">()</span>
+<span class="n">s_car</span><span class="o">.</span><span class="n">sports_car_info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inside Vehicle class
+Inside Car class
+Inside SportsCar class
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="method-overriding">
+<h3>Method overriding<a class="headerlink" href="#method-overriding" title="Link to this heading">#</a></h3>
+<p>👉 In <strong>inheritance</strong>, if the child class wants to implement the method with same name and parameters as of parent class but with different logic then that is called <strong>method overriding</strong>.</p>
+<p>👉 When a child class method has the same name, same parameters, and same return type as a method in its superclass, then the method in the child is said to <strong>override</strong> the method in the parent class.</p>
+<a class="reference internal image-reference" href="../../_images/mo.png"><img alt="../../_images/mo.png" src="../../_images/mo.png" style="width: 500px;" /></a>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
+
+<span class="k">class</span> <span class="nc">Vehicle</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">max_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;max speed is 100 Km/Hour&quot;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Car</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+    <span class="c1"># overridden the implementation of Vehicle class</span>
+    <span class="k">def</span> <span class="nf">max_speed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;max speed is 200 Km/Hour&quot;</span><span class="p">)</span>
+
+<span class="c1"># Creating object of Car class</span>
+<span class="n">car</span> <span class="o">=</span> <span class="n">Car</span><span class="p">()</span>
+<span class="n">car</span><span class="o">.</span><span class="n">max_speed</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>max speed is 200 Km/Hour
+</pre></div>
+</div>
+</div>
+</div>
+<p>Method overriding is also called <strong>Runtime Polymorphism</strong>.</p>
+</section>
+</section>
+<section id="encapsulation">
+<h2>Encapsulation<a class="headerlink" href="#encapsulation" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>👉  Encapsulation is a method of wrapping data and functions into a single entity, like a class encapsulates all the data (methods and variables).</p>
+<p>👉  Encapsulation means the internal representation of an object is generally hidden from outside of the object’s definition.</p>
+<a class="reference internal image-reference" href="../../_images/encap.png"><img alt="../../_images/encap.png" src="../../_images/encap.png" style="width: 300px;" /></a>
+<p>👉 Using OOP in Python, we can restrict access to methods and variables. This prevents data from direct modification which is called encapsulation.</p>
+<p>👉 We denote private attributes using underscore as the prefix i.e single <strong><code class="docutils literal notranslate"><span class="pre">_</span></code></strong> or double <strong><code class="docutils literal notranslate"><span class="pre">__</span></code></strong>.</p>
+<p>👉  In Python, we do not have access modifiers directly, such as public, private, and protected.</p>
+<p>👉  But we can use single prefix underscore <strong><code class="docutils literal notranslate"><span class="pre">_</span></code></strong> and double underscore <strong><code class="docutils literal notranslate"><span class="pre">__</span></code></strong>. to control access of variable and method within the Python program.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Data Encapsulation in Python</span>
+
+<span class="k">class</span> <span class="nc">Computer</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__maxprice</span> <span class="o">=</span> <span class="mi">900</span>
+
+    <span class="k">def</span> <span class="nf">sell</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selling Price: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__maxprice</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">setMaxPrice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__maxprice</span> <span class="o">=</span> <span class="n">price</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Computer</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">sell</span><span class="p">()</span>
+
+<span class="c1"># change the price</span>
+<span class="n">c</span><span class="o">.</span><span class="n">__maxprice</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">c</span><span class="o">.</span><span class="n">sell</span><span class="p">()</span>
+
+<span class="c1"># using setter function</span>
+<span class="n">c</span><span class="o">.</span><span class="n">setMaxPrice</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">sell</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Selling Price: 900
+Selling Price: 900
+Selling Price: 1000
+</pre></div>
+</div>
+</div>
+</div>
+<p>👉 We used <strong><code class="docutils literal notranslate"><span class="pre">__init__()</span></code></strong> method to store the maximum selling price of <strong><code class="docutils literal notranslate"><span class="pre">Computer</span></code></strong>.</p>
+<p>👉 We tried to modify the price. However, we can’t change it because Python treats the <strong><code class="docutils literal notranslate"><span class="pre">__maxprice</span></code></strong> as private attributes.</p>
+<p>👉 As shown, to change the value, we have to use a setter function i.e <strong><code class="docutils literal notranslate"><span class="pre">setMaxPrice()</span></code></strong> which takes price as a parameter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 2: Data Encapsulation in Python</span>
+
+<span class="k">class</span> <span class="nc">Employee</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">salary</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__salary</span> <span class="o">=</span> <span class="n">salary</span>
+
+    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Name is &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s2">&quot;and salary is&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__salary</span><span class="p">)</span>
+
+<span class="c1"># Outside class</span>
+<span class="n">E</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s2">&quot;Bella&quot;</span><span class="p">,</span> <span class="mi">60000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">__salary</span><span class="p">)</span>
+
+<span class="c1"># AttributeError: &#39;Employee&#39; object has no attribute &#39;__salary&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">22</span><span class="p">],</span> <span class="n">line</span> <span class="mi">13</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># Outside class</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">E</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">(</span><span class="s2">&quot;Bella&quot;</span><span class="p">,</span> <span class="mi">60000</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">13</span> <span class="nb">print</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">__salary</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="c1"># AttributeError: &#39;Employee&#39; object has no attribute &#39;__salary&#39;</span>
+
+<span class="ne">AttributeError</span>: &#39;Employee&#39; object has no attribute &#39;__salary&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong><code class="docutils literal notranslate"><span class="pre">__salary</span></code></strong> is the <strong>private variable</strong>. We cannot access it from outside of class. If we try to access it, we will get an error.</p>
+</section>
+<section id="polymorphism">
+<h2>Polymorphism<a class="headerlink" href="#polymorphism" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<p>👉 Polymorphism is the ability of an object to take on many forms</p>
+<p><strong>Example 1:</strong> The student can act as a student in college, act as a player on the ground, and as a daughter/brother in the home.</p>
+<p><strong>Example 2:</strong> In the programming language, the <strong><code class="docutils literal notranslate"><span class="pre">+</span></code></strong> operator, acts as a concatenation and arithmetic addition.</p>
+<p><strong>Example 3:</strong> If we need to color a shape, there are multiple shape options (rectangle, square, circle). However we could use the same method to color any shape.</p>
+<a class="reference internal image-reference" href="../../_images/polymor.png"><img alt="../../_images/polymor.png" src="../../_images/polymor.png" style="width: 400px;" /></a>
+<p>👉 In Python, polymorphism allows us to define the child class methods with the same name as defined in the parent class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: Using Polymorphism in Python</span>
+
+<span class="k">class</span> <span class="nc">Parrot</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">fly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Parrot can fly&quot;</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">swim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Parrot can&#39;t swim&quot;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Penguin</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">fly</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Penguin can&#39;t fly&quot;</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">swim</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Penguin can swim&quot;</span><span class="p">)</span>
+
+<span class="c1"># common interface</span>
+<span class="k">def</span> <span class="nf">flying_test</span><span class="p">(</span><span class="n">bird</span><span class="p">):</span>
+    <span class="n">bird</span><span class="o">.</span><span class="n">fly</span><span class="p">()</span>
+
+<span class="c1">#instantiate objects</span>
+<span class="n">blu</span> <span class="o">=</span> <span class="n">Parrot</span><span class="p">()</span>
+<span class="n">peggy</span> <span class="o">=</span> <span class="n">Penguin</span><span class="p">()</span>
+
+<span class="c1"># passing the object</span>
+<span class="n">flying_test</span><span class="p">(</span><span class="n">blu</span><span class="p">)</span>
+<span class="n">flying_test</span><span class="p">(</span><span class="n">peggy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Parrot can fly
+Penguin can&#39;t fly
+</pre></div>
+</div>
+</div>
+</div>
+<p>👉 In the above program, each of the classes have a common <strong><code class="docutils literal notranslate"><span class="pre">fly()</span></code></strong> method. However, their functions are different.</p>
+<p>👉 To use polymorphism, we created  i.e <strong><code class="docutils literal notranslate"><span class="pre">flying_test()</span></code></strong> function that takes any object as parameter and calls the object’s <strong><code class="docutils literal notranslate"><span class="pre">fly()</span></code></strong> method.</p>
+<p>👉 When we passed the <strong><code class="docutils literal notranslate"><span class="pre">blu</span></code></strong> and <strong><code class="docutils literal notranslate"><span class="pre">peggy</span></code></strong> objects in the <strong><code class="docutils literal notranslate"><span class="pre">flying_test()</span></code></strong> function, it ran effectively.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="3_functions_and_modules.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Functions &amp; Modules</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="5_Exceptions_Handling.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exceptions Handling</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#class">Class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object">Object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructor">Constructor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#instance-variables-methods">Instance variables &amp; methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance">Inheritance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types">Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#single">Single</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple">Multiple</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#multilevel">Multilevel</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hierarchical">Hierarchical</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hybrid">Hybrid</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-overriding">Method overriding</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encapsulation">Encapsulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polymorphism">Polymorphism</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

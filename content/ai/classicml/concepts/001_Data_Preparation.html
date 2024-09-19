@@ -1,0 +1,1294 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data Preparation &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/ai/classicml/concepts/001_Data_Preparation';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/ai/classicml/concepts/001_Data_Preparation.html" />
+    <link rel="icon" href="../../../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Regression" href="002_Regression.html" />
+    <link rel="prev" title="Exploratory Data Analysis" href="000_Data_Exploration.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/3_functions_and_modules.html">Functions &amp; Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/4_Object_Oriented.html">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/8_advanced.html">Advanced Concepts</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Introduction_to_ml.html">Machine Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="000_Data_Exploration.html">Exploratory Data Analysis</a></li>
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="003_Classification.html">Classfication</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="005_Evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="006_Advanced.html">K-Fold Cross Validation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../neural/neural_toc.html">Neural Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/002_Backpropogation.html">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/003_Activations.html">Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/004_Optimization.html">Optimizations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../neural/concepts/pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../genai/introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../genai/concepts/transformers/01_transformers_from_scratch.html">Transformers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../genai/langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/intro.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/courses/courses_toc.html">Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/ai/classicml/concepts/001_Data_Preparation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/ai/classicml/concepts/001_Data_Preparation.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/content/ai/classicml/concepts/001_Data_Preparation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data Preparation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning">Data Cleaning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imputing-missing-values">Imputing missing values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-categorical-data">Encoding categorical data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binarizing">Binarizing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-scaling">Feature Scaling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#there-are-3-most-used-ways-to-scale-features">There are 3 most used ways to scale features.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extraction">Feature extraction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#countvectorizer">CountVectorizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dictvectorizer">DictVectorizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tfidfvectorizer">TfidfVectorizer</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-preparation">
+<h1>Data Preparation<a class="headerlink" href="#data-preparation" title="Link to this heading">#</a></h1>
+<p>We have done some exploratory data analysis in the previous section and found out some patterns. We also cleaned the data to some extent. Lets go deeper into some of the more techniques.</p>
+<section id="data-cleaning">
+<h2>Data Cleaning<a class="headerlink" href="#data-cleaning" title="Link to this heading">#</a></h2>
+<p>Most of the times, the data is damaged, or missing, we need to take care of it since Machine Learning models don’t work when the data is missing or not a number.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="imputing-missing-values">
+<h3>Imputing missing values<a class="headerlink" href="#imputing-missing-values" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Data.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Country</th>
+      <th>Age</th>
+      <th>Salary</th>
+      <th>Purchased</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>France</td>
+      <td>44.0</td>
+      <td>72000.0</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Spain</td>
+      <td>27.0</td>
+      <td>48000.0</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Germany</td>
+      <td>30.0</td>
+      <td>54000.0</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Spain</td>
+      <td>38.0</td>
+      <td>61000.0</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Germany</td>
+      <td>40.0</td>
+      <td>NaN</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># replace every occurrence of missing_values to one defined by strategy</span>
+<span class="c1"># which can be mean, median, mode.</span>
+
+<span class="n">imputer</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">missing_values</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">imputer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Country</th>
+      <th>Age</th>
+      <th>Salary</th>
+      <th>Purchased</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>France</td>
+      <td>44.0</td>
+      <td>72000.000000</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Spain</td>
+      <td>27.0</td>
+      <td>48000.000000</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Germany</td>
+      <td>30.0</td>
+      <td>54000.000000</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Spain</td>
+      <td>38.0</td>
+      <td>61000.000000</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Germany</td>
+      <td>40.0</td>
+      <td>63777.777778</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="encoding-categorical-data">
+<h3>Encoding categorical data<a class="headerlink" href="#encoding-categorical-data" title="Link to this heading">#</a></h3>
+<p>Our dataset has numerical and categorical features. We need to convert categorical features to numerical. For that we can use <code class="docutils literal notranslate"><span class="pre">LabelEncoder</span></code> or <code class="docutils literal notranslate"><span class="pre">OneHotEncoder</span></code>.</p>
+<p>One hot encoding is a popular technique to convert categorical variables to numerical. It creates a separate column for every variable and gives a value of 1 where the variable is present otherwise 0.</p>
+<p>Label encoding is another popular technique to convert categorical variables to numerical. It replaces every categorical variable with a number.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Label Encoder will replace every categorical variable with number. Useful for replacing yes by 1, no by 0.</span>
+<span class="c1"># One Hot Encoder will create a separate column for every variable and give a value of 1 where the variable is present</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span><span class="p">,</span> <span class="n">OneHotEncoder</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lable_encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">lable_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">temp</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Country</th>
+      <th>Age</th>
+      <th>Salary</th>
+      <th>Purchased</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>44.0</td>
+      <td>72000.000000</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>27.0</td>
+      <td>48000.000000</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>30.0</td>
+      <td>54000.000000</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>38.0</td>
+      <td>61000.000000</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>40.0</td>
+      <td>63777.777778</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># you can pass an array of indices of categorical features</span>
+<span class="c1"># one_hot_encoder = OneHotEncoder(categorical_features=[0])</span>
+<span class="c1"># temp = df.copy()</span>
+<span class="c1"># temp.iloc[:, 0] = one_hot_encoder.fit_transform(df.iloc[:, 0])</span>
+
+<span class="c1"># you can achieve the same thing using get_dummies</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+      <th>Salary</th>
+      <th>Country_France</th>
+      <th>Country_Germany</th>
+      <th>Country_Spain</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>44.000000</td>
+      <td>72000.000000</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>27.000000</td>
+      <td>48000.000000</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>30.000000</td>
+      <td>54000.000000</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>38.000000</td>
+      <td>61000.000000</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>40.000000</td>
+      <td>63777.777778</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>35.000000</td>
+      <td>58000.000000</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>38.777778</td>
+      <td>52000.000000</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>48.000000</td>
+      <td>79000.000000</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>50.000000</td>
+      <td>83000.000000</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>37.000000</td>
+      <td>67000.000000</td>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="binarizing">
+<h3>Binarizing<a class="headerlink" href="#binarizing" title="Link to this heading">#</a></h3>
+<p>Often we need to do the reverse of what we’ve done above. That is, convert continuous features to discrete values. For instance, we want to convert the output to 0 or 1 depending on the threshold.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+
+<span class="n">iris_dataset</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">iris_dataset</span><span class="o">.</span><span class="n">data</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">iris_dataset</span><span class="o">.</span><span class="n">target</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">iris_dataset</span><span class="o">.</span><span class="n">feature_names</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ll binarize the sepal width with 0 or 1 indicating whether the current value is below or above mean.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([3.5, 3. , 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.4, 3. ,
+       3. , 4. , 4.4, 3.9, 3.5, 3.8, 3.8, 3.4, 3.7, 3.6, 3.3, 3.4, 3. ,
+       3.4, 3.5, 3.4, 3.2, 3.1, 3.4, 4.1, 4.2, 3.1, 3.2, 3.5, 3.6, 3. ,
+       3.4, 3.5, 2.3, 3.2, 3.5, 3.8, 3. , 3.8, 3.2, 3.7, 3.3, 3.2, 3.2,
+       3.1, 2.3, 2.8, 2.8, 3.3, 2.4, 2.9, 2.7, 2. , 3. , 2.2, 2.9, 2.9,
+       3.1, 3. , 2.7, 2.2, 2.5, 3.2, 2.8, 2.5, 2.8, 2.9, 3. , 2.8, 3. ,
+       2.9, 2.6, 2.4, 2.4, 2.7, 2.7, 3. , 3.4, 3.1, 2.3, 3. , 2.5, 2.6,
+       3. , 2.6, 2.3, 2.7, 3. , 2.9, 2.9, 2.5, 2.8, 3.3, 2.7, 3. , 2.9,
+       3. , 3. , 2.5, 2.9, 2.5, 3.6, 3.2, 2.7, 3. , 2.5, 2.8, 3.2, 3. ,
+       3.8, 2.6, 2.2, 3.2, 2.8, 2.8, 2.7, 3.3, 3.2, 2.8, 3. , 2.8, 3. ,
+       2.8, 3.8, 2.8, 2.8, 2.6, 3. , 3.4, 3.1, 3. , 3.1, 3.1, 3.1, 2.7,
+       3.2, 3.3, 3. , 2.5, 3. , 3.4, 3. ])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">Binarizer</span>
+<span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">Binarizer</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1., 0., 1., 1., 1., 1., 1., 1., 0., 1., 1., 1., 0., 0., 1., 1., 1.,
+       1., 1., 1., 1., 1., 1., 1., 1., 0., 1., 1., 1., 1., 1., 1., 1., 1.,
+       1., 1., 1., 1., 0., 1., 1., 0., 1., 1., 1., 0., 1., 1., 1., 1., 1.,
+       1., 1., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0.,
+       0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       1., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0.,
+       0., 0., 0., 0., 0., 0., 0., 1., 1., 0., 0., 0., 0., 1., 0., 1., 0.,
+       0., 1., 0., 0., 0., 1., 1., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0.,
+       1., 1., 0., 1., 1., 1., 0., 1., 1., 0., 0., 0., 1., 0.])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="feature-scaling">
+<h2>Feature Scaling<a class="headerlink" href="#feature-scaling" title="Link to this heading">#</a></h2>
+<p>Because in Machine Learning models, features are mapped into n-dimensional space. So let’s say there are two variables (x, y) which will be mapped in 2D co-ordinate system. If one variable, say y, is very huge and other, x, is very small, then the euclidean distance will be dominated by the bigger one and smaller one will be ignored. In this case we are losing valuable information, hence feature scaling is used to solve this problem.</p>
+<p>Additional reasons for transformation:</p>
+<ol class="arabic simple">
+<li><p>To more closely approximate a theoretical distribution that has nice statistical properties.</p></li>
+<li><p>To spread out data more evenly.</p></li>
+<li><p>To make data distribution more symmetric</p></li>
+<li><p>To make relationships between variables more linear.</p></li>
+<li><p>To make data more constant in variance (homoscedasticity).</p></li>
+</ol>
+<section id="there-are-3-most-used-ways-to-scale-features">
+<h3>There are 3 most used ways to scale features.<a class="headerlink" href="#there-are-3-most-used-ways-to-scale-features" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Min Max Scaling</strong>:
+Will scale the input to have minimum of 0 and maximum of 1. That is, it scales the data in the range of [0, 1] This is useful when the parameters have to be on same positive scale. But in this case, the outliers are lost.
+$<span class="math notranslate nohighlight">\(X_{norm} = \frac{X - X_{min}}{X_{max} - X_{min}}\)</span>$</p></li>
+<li><p><strong>Standardization</strong>:
+Will scale the input to have mean of 0 and variance of 1.
+$<span class="math notranslate nohighlight">\(X_{stand} = \frac{X - \mu}{\sigma}\)</span>$</p></li>
+<li><p><strong>Normalizing</strong>:
+Will scale the input to make the norm of 1. For instance, for 3D data the 3 independent variables will lie on a unit Sphere.</p></li>
+<li><p><strong>Log Transformation</strong>:
+Taking the log of data after any of above transformation.</p></li>
+</ol>
+<p>Scaling inputs to unit norms is a common operation for text classification or clustering for instance. For instance the dot product of two l2-normalized TF-IDF vectors is the cosine similarity of the vectors and is the base similarity metric for the Vector Space Model commonly used by the Information Retrieval community.</p>
+<p>For most applications, Standardization is recommended. Min Max Scaling is recommended for Neural Networks. Normalizing is recommended when Clustering eg. KMeans.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">Normalizer</span><span class="p">,</span> <span class="n">MinMaxScaler</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;Data.csv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Age&quot;</span><span class="p">,</span> <span class="s2">&quot;Salary&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   Country   Age   Salary Purchased
+0   France  44.0  72000.0        No
+1    Spain  27.0  48000.0       Yes
+2  Germany  30.0  54000.0        No
+3    Spain  38.0  61000.0        No
+5   France  35.0  58000.0       Yes
+7   France  48.0  79000.0       Yes
+8  Germany  50.0  83000.0        No
+9   France  37.0  67000.0       Yes
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">standard_scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">normalizer</span> <span class="o">=</span> <span class="n">Normalizer</span><span class="p">()</span>
+<span class="n">min_max_scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Standardization&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">standard_scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Normalizing&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">normalizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MinMax Scaling&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">min_max_scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Standardization
+[[ 0.69985807  0.58989097]
+ [-1.51364653 -1.50749915]
+ [-1.12302807 -0.98315162]
+ [-0.08137885 -0.37141284]
+ [-0.47199731 -0.6335866 ]
+ [ 1.22068269  1.20162976]
+ [ 1.48109499  1.55119478]
+ [-0.211585    0.1529347 ]]
+Normalizing
+[[6.11110997e-04 9.99999813e-01]
+ [5.62499911e-04 9.99999842e-01]
+ [5.55555470e-04 9.99999846e-01]
+ [6.22950699e-04 9.99999806e-01]
+ [6.03448166e-04 9.99999818e-01]
+ [6.07594825e-04 9.99999815e-01]
+ [6.02409529e-04 9.99999819e-01]
+ [5.52238722e-04 9.99999848e-01]]
+MinMax Scaling
+[[0.73913043 0.68571429]
+ [0.         0.        ]
+ [0.13043478 0.17142857]
+ [0.47826087 0.37142857]
+ [0.34782609 0.28571429]
+ [0.91304348 0.88571429]
+ [1.         1.        ]
+ [0.43478261 0.54285714]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="feature-extraction">
+<h2>Feature extraction<a class="headerlink" href="#feature-extraction" title="Link to this heading">#</a></h2>
+<p>Let’s explore some of the feature extraction techniques. Feature extraction is the process of transforming the data into a format that can be used for machine learning. It is a way to extract features from the data.</p>
+<section id="countvectorizer">
+<h3>CountVectorizer<a class="headerlink" href="#countvectorizer" title="Link to this heading">#</a></h3>
+<p>CountVectorizer converts a bunch of documents to vector so that we can use it with models. It basically just counts the number of times a particular word has occured.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+
+<span class="n">docs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Mayur is a nice boy.&quot;</span><span class="p">,</span> <span class="s2">&quot;Mayur rock! wohooo!&quot;</span><span class="p">,</span> <span class="s2">&quot;My name is Mayur, and I am a Pythonista!&quot;</span><span class="p">]</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">todense</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 0 1 1 1 0 0 1 0 0 0]
+ [0 0 0 0 1 0 0 0 0 1 1]
+ [1 1 0 1 1 1 1 0 1 0 0]]
+{u&#39;and&#39;: 1, u&#39;boy&#39;: 2, u&#39;name&#39;: 6, u&#39;is&#39;: 3, u&#39;mayur&#39;: 4, u&#39;am&#39;: 0, u&#39;wohooo&#39;: 10, u&#39;rock&#39;: 9, u&#39;nice&#39;: 7, u&#39;my&#39;: 5, u&#39;pythonista&#39;: 8}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dictvectorizer">
+<h3>DictVectorizer<a class="headerlink" href="#dictvectorizer" title="Link to this heading">#</a></h3>
+<p>DictVectorizer will convert mappings to vectors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction</span> <span class="kn">import</span> <span class="n">DictVectorizer</span>
+
+<span class="n">docs</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;Mayur&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;is&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;awesome&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;No&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;dont&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;wanna&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;fall&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;in&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;love&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}]</span>
+<span class="n">dv</span> <span class="o">=</span> <span class="n">DictVectorizer</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">dv</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">todense</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0.  1.  0.  2.  0.  0.  0.  1.  0.  0.]
+ [ 1.  0.  1.  0.  2.  1.  2.  0.  3.  3.]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="tfidfvectorizer">
+<h3>TfidfVectorizer<a class="headerlink" href="#tfidfvectorizer" title="Link to this heading">#</a></h3>
+<p>In many text analytics applications, we need to convert the text into vectors to use with Machine Learning algorithms. This is known as the Vector Space Model.</p>
+<p>While CountVectorizer could be a solution, words like “the”, “a”, “in” etc. are common words and often are used in all kinds of documents. Using CountVectorizer gives more emphasis on such word counts which are not relevant.</p>
+<p>You could circumvent this problems by using <code class="docutils literal notranslate"><span class="pre">stop_words=&quot;english&quot;</span></code> which would filter out common words but let’s say you have a different vocabulary, for instance a conversation between 2 Computer Science students would have words like “RAM”, “processor”, “GPU” mentioned too often and you’d have to manually add the stop words everytime for all the problems you solve.</p>
+<p>Thus in such scenarios, it is recommended to use <code class="docutils literal notranslate"><span class="pre">TfidfVectorizer</span></code> which will take care of such things. Every word is given a number according to the following formula:</p>
+<div class="math notranslate nohighlight">
+\[ \text{tfidf }\left(\text{word}\right)=\text{tf}\left(\text{word},\text{document}_i\right)\cdot\text{idf}\left(\text{word}\right) \]</div>
+<p>Where,</p>
+<ol class="arabic simple">
+<li><p>tf(word, document_i) = Term Frequency of a word in the specific document i.</p></li>
+<li><p>idf(word) = Inverse Document Frequency of the word.</p></li>
+</ol>
+<p>Inverse Document Frequency is defined as the log of ratio of number of documents to the number of times the word has occured in the any document.</p>
+<div class="math notranslate nohighlight">
+\[ \text{idf }\left(w\right)=\log\left(\frac{n_d}{df\left(w\right)}\right)\]</div>
+<p>Where,</p>
+<ol class="arabic simple">
+<li><p>df(w) = number of times the word has occured in the any document.</p></li>
+</ol>
+<p>What is does intuitively is if a word has occured too many times in other document as well (common words like “the”, “is”) then it gives lesser weightage to such words in contrast to words that have occured more number of times in a single document in contrast to others. Which basically means that if a particular word occurs more number of times in a single document only, then it might be an important feature.</p>
+<p>Note that numerator and denominator are added with <code class="docutils literal notranslate"><span class="pre">1</span></code> to avoid underflow eg. when the document frequency is 0.</p>
+<p>Sklearn additionally also normalizes the output of tfidf to have a norm of 1. This is important since we’re interested in similarities hence vectors like (1, 1) and (3, 3) are really the same (they go in same direction, just have different weights) which is achieved by dividing by the length of the vector.</p>
+<div class="math notranslate nohighlight">
+\[v_i=\frac{v_i}{\left|v\right|_2}=\frac{v_i}{\sqrt{v_1^2+v_2^2+v_3^2+....+v_n^2}}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">TfidfVectorizer</span><span class="p">,</span> <span class="n">CountVectorizer</span>
+
+<span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">()</span>
+<span class="n">cv_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Mayur is a Guitarist&quot;</span><span class="p">,</span> <span class="s2">&quot;Mayur is Musician&quot;</span><span class="p">,</span> <span class="s2">&quot;Mayur is also a programmer&quot;</span><span class="p">]</span>
+<span class="n">X_idf</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+<span class="n">X_cv</span> <span class="o">=</span> <span class="n">cv_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_idf</span><span class="o">.</span><span class="n">todense</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tfidf_vectorizer</span><span class="o">.</span><span class="n">vocabulary_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_cv</span><span class="o">.</span><span class="n">todense</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.         0.76749457 0.45329466 0.45329466 0.         0.        ]
+ [0.         0.         0.45329466 0.45329466 0.76749457 0.        ]
+ [0.6088451  0.         0.35959372 0.35959372 0.         0.6088451 ]]
+{&#39;mayur&#39;: 3, &#39;is&#39;: 2, &#39;guitarist&#39;: 1, &#39;musician&#39;: 4, &#39;also&#39;: 0, &#39;programmer&#39;: 5}
+[[0 1 1 1 0 0]
+ [0 0 1 1 1 0]
+ [1 0 1 1 0 1]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see the “Mayur” and “is” are given less weightage than “guitarist”, “musician”, “programmer”</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/ai/classicml/concepts"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="000_Data_Exploration.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Exploratory Data Analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="002_Regression.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Regression</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-cleaning">Data Cleaning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imputing-missing-values">Imputing missing values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding-categorical-data">Encoding categorical data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binarizing">Binarizing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-scaling">Feature Scaling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#there-are-3-most-used-ways-to-scale-features">There are 3 most used ways to scale features.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-extraction">Feature extraction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#countvectorizer">CountVectorizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dictvectorizer">DictVectorizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tfidfvectorizer">TfidfVectorizer</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

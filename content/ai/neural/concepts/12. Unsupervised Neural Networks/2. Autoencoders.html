@@ -1,0 +1,961 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>AutoEncoders &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/ai/neural/concepts/12. Unsupervised Neural Networks/2. Autoencoders';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/ai/neural/concepts/12. Unsupervised Neural Networks/2. Autoencoders.html" />
+    <link rel="icon" href="../../../../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/3_functions_and_modules.html">Functions &amp; Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/4_Object_Oriented.html">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/8_advanced.html">Advanced Concepts</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../Introduction_to_ml.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/000_Data_Exploration.html">Exploratory Data Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/001_Data_Preparation.html">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/003_Classification.html">Classfication</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/005_Evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/006_Advanced.html">K-Fold Cross Validation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../../classicml/concepts/007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../neural_toc.html">Neural Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../002_Backpropogation.html">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../003_Activations.html">Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../004_Optimization.html">Optimizations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../genai/introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../genai/concepts/transformers/01_transformers_from_scratch.html">Transformers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../genai/langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../genai/langchain/intro.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../genai/langchain/01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../../genai/langchain/02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/courses/courses_toc.html">Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/ai/neural/concepts/12. Unsupervised Neural Networks/2. Autoencoders.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/ai/neural/concepts/12. Unsupervised Neural Networks/2. Autoencoders.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../../_sources/content/ai/neural/concepts/12. Unsupervised Neural Networks/2. Autoencoders.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>AutoEncoders</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="autoencoders">
+<h1>AutoEncoders<a class="headerlink" href="#autoencoders" title="Link to this heading">#</a></h1>
+<p>Autoencoders are used to transform your data from one form (less efficient) to a better representation (more efficient) This practise is useful for pre-training models. Precisely, when you train your NN, you initialise your weights randomly according to gaussian distribution. But in the end, they’re random weights you initialise with are often inefficient and tend to find local minima. Instead of feeding the network with input, the input is used to train the autoencoder which is better representation of the same data, which is then used to feed the model.</p>
+<img src="https://probablydance.files.wordpress.com/2016/04/3_middle_layer.png"/>
+Source: [Probably Dance](https://probablydance.com/2016/04/30/neural-networks-are-impressively-good-at-compression/)<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.parallel</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
+<span class="kn">import</span> <span class="nn">torch.utils.data</span>
+<span class="kn">from</span> <span class="nn">torch.autograd</span> <span class="kn">import</span> <span class="n">Variable</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-1-ef6a2885af41&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">torch</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">torch.nn.parallel</span>
+
+<span class="ne">ImportError</span>: No module named torch
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">movies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;ml-1m/movies.dat&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;::&#39;</span><span class="p">,</span> 
+                      <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">,</span>
+                      <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin-1&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">movies</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+<span class="n">users</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;ml-1m/users.dat&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;::&#39;</span><span class="p">,</span> 
+                      <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">,</span>
+                      <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin-1&#39;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">users</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">ratings</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;ml-1m/ratings.dat&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;::&#39;</span><span class="p">,</span> 
+                      <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">,</span>
+                      <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin-1&#39;</span><span class="p">)</span>
+<span class="n">ratings</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   0                                   1                             2
+0  1                    Toy Story (1995)   Animation|Children&#39;s|Comedy
+1  2                      Jumanji (1995)  Adventure|Children&#39;s|Fantasy
+2  3             Grumpier Old Men (1995)                Comedy|Romance
+3  4            Waiting to Exhale (1995)                  Comedy|Drama
+4  5  Father of the Bride Part II (1995)                        Comedy
+   0  1   2   3      4
+0  1  F   1  10  48067
+1  2  M  56  16  70072
+2  3  M  25  15  55117
+3  4  M  45   7  02460
+4  5  M  25  20  55455
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1193</td>
+      <td>5</td>
+      <td>978300760</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>661</td>
+      <td>3</td>
+      <td>978302109</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>914</td>
+      <td>3</td>
+      <td>978301968</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>3408</td>
+      <td>4</td>
+      <td>978300275</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>2355</td>
+      <td>5</td>
+      <td>978824291</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">training_set</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;ml-100k/u1.base&#39;</span><span class="p">,</span> 
+                           <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span> 
+<span class="n">test_set</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;ml-100k/u1.test&#39;</span><span class="p">,</span> 
+                       <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Getting the number of users and movies </span>
+<span class="n">nb_users</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">training_set</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]),</span>
+                   <span class="nb">max</span><span class="p">(</span><span class="n">test_set</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])))</span>
+<span class="n">nb_movies</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">training_set</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]),</span>
+                   <span class="nb">max</span><span class="p">(</span><span class="n">test_set</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># convert the data into an an array with users </span>
+<span class="c1"># in lines and movies in columns.</span>
+<span class="c1"># This is because torch expects the data to be</span>
+<span class="c1"># in this fashion</span>
+<span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a list of lists. One list for each user. </span>
+<span class="sd">    The rating are from 1 to 5. User that didn&#39;t see </span>
+<span class="sd">    the movie will have a rating of 0&quot;&quot;&quot;</span>
+    <span class="n">new_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">id_users</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nb_users</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># take the column with movie ids for this</span>
+        <span class="c1"># specific user</span>
+        <span class="n">id_movies</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">][</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">id_users</span><span class="p">]</span> 
+        <span class="c1"># same for the ratings</span>
+        <span class="n">id_ratings</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">][</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">id_users</span><span class="p">]</span>
+        <span class="c1"># we also have to take care of the case where</span>
+        <span class="c1"># this user didn&#39;t watch a specific movie</span>
+        <span class="c1"># So, create a list of 1682 (total movies) elements</span>
+        <span class="c1"># initialized with 0 and set the rating where this</span>
+        <span class="c1"># person has watched the movies. </span>
+        <span class="n">ratings</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nb_movies</span><span class="p">)</span>
+        <span class="n">ratings</span><span class="p">[</span><span class="n">id_movies</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">id_ratings</span>
+        <span class="n">new_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">ratings</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">new_data</span>
+<span class="n">training_set</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="n">training_set</span><span class="p">)</span>
+<span class="n">test_set</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="n">test_set</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Converting the data into torch tensors</span>
+<span class="n">training_set</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">training_set</span><span class="p">)</span>
+<span class="n">test_set</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">FloatTensor</span><span class="p">(</span><span class="n">test_set</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># For autoencoders we are predicting the ratings also</span>
+<span class="c1"># so no need to change the input to binary</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating the architecture of Auto Encoder</span>
+<span class="c1"># inherit from nn.Module to inhert functions</span>
+<span class="k">class</span> <span class="nc">StackedAutoEncoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a Stacked Auto Encoder</span>
+<span class="sd">    Configuration:</span>
+<span class="sd">    Input -&gt; 20 -&gt; 10 -&gt; 20 -&gt; Input</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">StackedAutoEncoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="c1"># first layer that will take input nb_movies</span>
+        <span class="c1"># the number of nodes in hidden layer will be 20</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first_full_connection</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">nb_movies</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="c1"># make second full connection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">second_full_connection</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="c1"># make third full connection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">third_full_connection</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+        <span class="c1"># make fourth full connection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fourth_ful_connection</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">nb_movies</span><span class="p">)</span>
+        <span class="c1"># use sigmoid activation function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">activation</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">()</span>
+        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_vector</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Encode and perform forward pass</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">input_vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">first_full_connection</span><span class="p">(</span><span class="n">input_vector</span><span class="p">))</span>
+        <span class="n">input_vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">second_full_connection</span><span class="p">(</span><span class="n">input_vector</span><span class="p">))</span>
+        <span class="n">input_vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">third_full_connection</span><span class="p">(</span><span class="n">input_vector</span><span class="p">))</span>
+        <span class="c1"># no activation required for the last layer</span>
+        <span class="n">input_vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fourth_ful_connection</span><span class="p">(</span><span class="n">input_vector</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">input_vector</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stacked_auto_encoder</span> <span class="o">=</span> <span class="n">StackedAutoEncoder</span><span class="p">()</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">RMSprop</span><span class="p">(</span><span class="n">stacked_auto_encoder</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+                         <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Training the Stacked Auto Encoder</span>
+<span class="n">number_of_epochs</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_epochs</span><span class="p">):</span>
+    <span class="n">training_loss</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">counter</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">id_user</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_users</span><span class="p">):</span>
+        <span class="c1"># Variable is used to create the same effect</span>
+        <span class="c1"># as np.reshape(-1, 1)</span>
+        <span class="n">input_vector</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">training_set</span><span class="p">[</span><span class="n">id_user</span><span class="p">])</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># creates copy</span>
+        <span class="n">target_variable</span> <span class="o">=</span> <span class="n">input_vector</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="c1"># exclude users who didn&#39;t rate any movies</span>
+        <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">target_variable</span><span class="o">.</span><span class="n">data</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># just pass it to the constructor</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">stacked_auto_encoder</span><span class="p">(</span><span class="n">input_vector</span><span class="p">)</span>
+            <span class="c1"># don&#39;t compute gradients of the target</span>
+            <span class="c1"># this saves computational cost</span>
+            <span class="n">target_variable</span><span class="o">.</span><span class="n">require_grad</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="c1"># reset the output of the variables</span>
+            <span class="c1"># where the user hasn&#39;t rated any rating</span>
+            <span class="n">output</span><span class="p">[</span><span class="n">target_variable</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">target_variable</span><span class="p">)</span>
+            <span class="c1"># This is needed because we want to calculate</span>
+            <span class="c1"># the error on only those movies who have </span>
+            <span class="c1"># ratings</span>
+            <span class="n">mean_corrector</span> <span class="o">=</span> <span class="n">nb_movies</span> <span class="o">/</span> \
+                                <span class="nb">float</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">target_variable</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+                                      <span class="o">+</span> <span class="mf">1e-10</span><span class="p">)</span>
+            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+            <span class="c1"># take squared loss</span>
+            <span class="n">training_loss</span> <span class="o">+=</span>  <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">mean_corrector</span><span class="p">)</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="c1"># update the weights</span>
+            <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+    <span class="nb">print</span> <span class="s1">&#39;Epoch: </span><span class="si">{0}</span><span class="se">\t</span><span class="s1">Training Loss: </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> 
+                                                  <span class="n">training_loss</span><span class="o">/</span><span class="n">counter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 1	Training Loss: 1.91791504736
+Epoch: 2	Training Loss: 1.2089137057
+Epoch: 3	Training Loss: 1.16117812748
+Epoch: 4	Training Loss: 1.1449053598
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-34-c9949e6ea124&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>             <span class="n">mean_corrector</span> <span class="o">=</span> <span class="n">nb_movies</span> <span class="o">/</span>                                 <span class="nb">float</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">target_variable</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span>                                       <span class="o">+</span> <span class="mf">1e-10</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">29</span>             <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span>             <span class="c1"># take squared loss</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span>             <span class="n">training_loss</span> <span class="o">+=</span>  <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">mean_corrector</span><span class="p">)</span>
+
+<span class="nn">/home/uzumaki/anaconda2/lib/python2.7/site-packages/torch/autograd/variable.pyc</span> in <span class="ni">backward</span><span class="nt">(self, gradient, retain_graph, create_graph, retain_variables)</span>
+<span class="g g-Whitespace">    </span><span class="mi">165</span>                 <span class="n">Variable</span><span class="o">.</span>
+<span class="g g-Whitespace">    </span><span class="mi">166</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">167</span><span class="s2">         torch.autograd.backward(self, gradient, retain_graph, create_graph, retain_variables)</span>
+<span class="g g-Whitespace">    </span><span class="mi">168</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">169</span><span class="s2">     def register_hook(self, hook):</span>
+
+<span class="nn">/home/uzumaki/anaconda2/lib/python2.7/site-packages/torch/autograd/__init__.pyc</span> in <span class="ni">backward</span><span class="nt">(variables, grad_variables, retain_graph, create_graph, retain_variables)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span><span class="s2">     Variable._execution_engine.run_backward(</span>
+<span class="ne">---&gt; </span><span class="mi">99</span><span class="s2">         variables, grad_variables, retain_graph)</span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span><span class="s2"> </span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Testing the Stacked Auto Encoder</span>
+<span class="n">test_loss</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">id_user</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_users</span><span class="p">):</span>
+    <span class="c1"># Variable is used to create the same effect</span>
+    <span class="c1"># as np.reshape(-1, 1)</span>
+    <span class="n">input_vector</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">training_set</span><span class="p">[</span><span class="n">id_user</span><span class="p">])</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">target_variable</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">test_set</span><span class="p">[</span><span class="n">id_user</span><span class="p">])</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># exclude users who didn&#39;t rate any movies</span>
+    <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">target_variable</span><span class="o">.</span><span class="n">data</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># just pass it to the constructor</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">stacked_auto_encoder</span><span class="p">(</span><span class="n">input_vector</span><span class="p">)</span>
+        <span class="c1"># don&#39;t compute gradients of the target</span>
+        <span class="c1"># this saves computational cost</span>
+        <span class="n">target_variable</span><span class="o">.</span><span class="n">require_grad</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">output</span><span class="p">[</span><span class="n">target_variable</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">target_variable</span><span class="p">)</span>
+        <span class="c1"># This is needed because we want to calculate</span>
+        <span class="c1"># the error on only those movies who have </span>
+        <span class="c1"># ratings</span>
+        <span class="n">mean_corrector</span> <span class="o">=</span> <span class="n">nb_movies</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+                                                <span class="n">target_variable</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+                                           <span class="o">+</span> <span class="mf">1e-10</span><span class="p">)</span>
+        <span class="c1"># take mean squared loss</span>
+        <span class="n">training_loss</span> <span class="o">+=</span>  <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">mean_corrector</span><span class="p">)</span>
+        <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="nb">print</span> <span class="s1">&#39;Test Loss: </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">test_loss</span><span class="o">/</span><span class="n">counter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 1	Trest Loss: 0.0
+Epoch: 2	Trest Loss: 0.0
+Epoch: 3	Trest Loss: 0.0
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-36-830c30f6a4e6&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span>             <span class="n">mean_corrector</span> <span class="o">=</span> <span class="n">nb_movies</span> <span class="o">/</span>                                 <span class="nb">float</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">target_variable</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span>                                       <span class="o">+</span> <span class="mf">1e-10</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">29</span>             <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span>             <span class="c1"># take squared loss</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span>             <span class="n">training_loss</span> <span class="o">+=</span>  <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">mean_corrector</span><span class="p">)</span>
+
+<span class="nn">/home/uzumaki/anaconda2/lib/python2.7/site-packages/torch/autograd/variable.pyc</span> in <span class="ni">backward</span><span class="nt">(self, gradient, retain_graph, create_graph, retain_variables)</span>
+<span class="g g-Whitespace">    </span><span class="mi">165</span>                 <span class="n">Variable</span><span class="o">.</span>
+<span class="g g-Whitespace">    </span><span class="mi">166</span>         <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">167</span><span class="s2">         torch.autograd.backward(self, gradient, retain_graph, create_graph, retain_variables)</span>
+<span class="g g-Whitespace">    </span><span class="mi">168</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">169</span><span class="s2">     def register_hook(self, hook):</span>
+
+<span class="nn">/home/uzumaki/anaconda2/lib/python2.7/site-packages/torch/autograd/__init__.pyc</span> in <span class="ni">backward</span><span class="nt">(variables, grad_variables, retain_graph, create_graph, retain_variables)</span>
+<span class="g g-Whitespace">     </span><span class="mi">97</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span><span class="s2">     Variable._execution_engine.run_backward(</span>
+<span class="ne">---&gt; </span><span class="mi">99</span><span class="s2">         variables, grad_variables, retain_graph)</span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span><span class="s2"> </span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python2",
+            path: "./content/ai/neural/concepts/12. Unsupervised Neural Networks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python2'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

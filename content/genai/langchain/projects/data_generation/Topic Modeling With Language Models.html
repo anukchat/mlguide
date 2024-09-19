@@ -1,0 +1,1233 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Topic Modeling With Language Models &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/genai/langchain/projects/data_generation/Topic Modeling With Language Models';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/genai/langchain/projects/data_generation/Topic Modeling With Language Models.html" />
+    <link rel="icon" href="../../../../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/3_functions_and_modules.html">Functions &amp; Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/4_Object_Oriented.html">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../python/8_advanced.html">Advanced Concepts</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../ai/Introduction_to_ml.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/000_Data_Exploration.html">Exploratory Data Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/001_Data_Preparation.html">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/003_Classification.html">Classfication</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/005_Evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/006_Advanced.html">K-Fold Cross Validation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../ai/neural/neural_toc.html">Neural Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../ai/neural/concepts/001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../ai/neural/concepts/002_Backpropogation.html">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../ai/neural/concepts/003_Activations.html">Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../ai/neural/concepts/004_Optimization.html">Optimizations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../ai/neural/concepts/pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../ai/neural/concepts/pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../ai/neural/concepts/pytorch/01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../ai/neural/concepts/pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../ai/neural/concepts/pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../ai/neural/concepts/pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../ai/neural/concepts/pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../concepts/transformers/01_transformers_from_scratch.html">Transformers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../intro.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../resources/courses/courses_toc.html">Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/genai/langchain/projects/data_generation/Topic Modeling With Language Models.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/genai/langchain/projects/data_generation/Topic Modeling With Language Models.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../../_sources/content/genai/langchain/projects/data_generation/Topic Modeling With Language Models.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Topic Modeling With Language Models</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-cases">Use Cases:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-set-up-create-your-llms-and-get-data">The Set Up - Create your LLMs and get data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-extract-topic-titles-short-description">Step 1: Extract Topic Titles &amp; Short Description</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-custom-prompts-customize-your-prompt-to-fit-your-use-case">The Custom Prompts - Customize your prompt to fit your use case</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-first-pass-run-through-your-text-and-extract-the-topics-per-your-custom-prompts">The First Pass - Run through your text and extract the topics per your custom prompts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-data-turn-your-llm-output-into-structured-data">Structured Data - Turn your LLM output into structured data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-expand-on-the-topics-you-found">Step 2: Expand on the topics you found</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-pinecone">Option #1: Pinecone</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-chroma">Option #2: Chroma</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-chapters-with-timestamps">Bonus: Chapters With Timestamps</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="topic-modeling-with-language-models">
+<h1>Topic Modeling With Language Models<a class="headerlink" href="#topic-modeling-with-language-models" title="Link to this heading">#</a></h1>
+<p><em>View this code on <a class="reference external" href="https://github.com/gkamradt/langchain-tutorials/blob/main/data_generation/Topic%20Modeling%20With%20Language%20Models.ipynb">Github</a></em></p>
+<p>Topic Modeling is the practice of pulling out categorized groups of information from a piece of longer text.</p>
+<p>Example: Inferring chapters from a book or segments of a movie. This is a classic data science topic that has been studied for years. Check out examples from previous research like <a class="reference external" href="https://towardsdatascience.com/introduction-to-topic-modeling-using-scikit-learn-4c3f3290f5b9">scikit-learn</a> and <a class="reference external" href="https://www.youtube.com/watch?v=uZxQz87lb84">BERTopic</a> if you want to see these techniques.</p>
+<p>However today we are going to take a pass at this problem using language models. Why? Language models are extremely good at processing text and pulling out big picture ideas from a document.</p>
+<p>There are many methods to do this and my goal for today’s tutorial is to show you a few different approaches so you can apply it to your own scenario.</p>
+<p>In this lesson we are prioritizing comprehensiveness and robustness of information over API costs so please be mindful of your expense comfortability.</p>
+<p>I’ll be taking a 2-pass approach today:</p>
+<ul class="simple">
+<li><p><strong>1st Pass:</strong> Run through the entire document via map reduce and pull out topics as bullet points</p></li>
+<li><p><strong>2nd Pass:</strong> Iterate through your topic bullet points and expand on them with a subset of context that was selected via retrieval</p></li>
+</ul>
+<p>Today we are going to be looking at a <a class="reference external" href="https://www.mfmpod.com/">My First Million</a> podcast because it’s rich with segments, ideas, sayings, and stories. Great for topic parsing!</p>
+<p><strong>Bonus</strong>: As a bonus we are also going to be looking at how to auto generate timestamps for each topic as well. The most common use case of this is YouTube Chapters</p>
+<p><strong>My Assumptions</strong></p>
+<ul class="simple">
+<li><p>You don’t have a table of contents. That would definitely help out (since a human likely generated them) but I want to make this method as general as possible so you can apply it</p></li>
+<li><p>You want to <em>learn</em> the nuts and bolts how to do this. If you wanted a 3rd party tool to do this for you I suggest something like <a class="reference external" href="https://www.assemblyai.com/">AssemblyAI</a> or <a class="reference external" href="https://podcastnotes.org/">PodcastNotes</a></p></li>
+</ul>
+<section id="use-cases">
+<h2>Use Cases:<a class="headerlink" href="#use-cases" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>YouTube Videos</strong> - Auto Chapter Generation</p></li>
+<li><p><strong>Podcasts</strong> - Extract structured information</p></li>
+<li><p><strong>Meeting Notes</strong> - Send topic summaries to participants</p></li>
+<li><p><strong>Town Hall Meetings</strong> - Structured information</p></li>
+<li><p><strong>Earnings Report Calls</strong> - Sell structured data to investment groups</p></li>
+<li><p><strong>Legal Documents</strong> - Quickly summarize by topic</p></li>
+<li><p><strong>Movie Scripts</strong> - Quick bullet points for production recaps</p></li>
+<li><p><strong>Books</strong> - Auto generate table of contents</p></li>
+</ul>
+<p>Finally, if you want to see the inspiration for this tutorial, <a class="reference external" href="https://twitter.com/GregKamradt/status/1651957952725807106">here’s the tweet</a> that started it all.</p>
+<p>Let’s get started!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unzip data folder</span>
+
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s1">&#39;../../data.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+    <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make the display a bit wider</span>
+<span class="c1"># from IPython.display import display, HTML</span>
+<span class="c1"># display(HTML(&quot;&lt;style&gt;.container { width:90% !important; }&lt;/style&gt;&quot;))</span>
+
+<span class="c1"># LangChain basics</span>
+<span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
+<span class="kn">from</span> <span class="nn">langchain.chains.summarize</span> <span class="kn">import</span> <span class="n">load_summarize_chain</span>
+<span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">create_extraction_chain</span>
+
+<span class="c1"># Vector Store and retrievals</span>
+<span class="kn">from</span> <span class="nn">langchain.embeddings.openai</span> <span class="kn">import</span> <span class="n">OpenAIEmbeddings</span>
+<span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">RetrievalQA</span>
+<span class="kn">from</span> <span class="nn">langchain.vectorstores</span> <span class="kn">import</span> <span class="n">Chroma</span><span class="p">,</span> <span class="n">Pinecone</span>
+<span class="kn">import</span> <span class="nn">pinecone</span>
+
+<span class="c1"># Chat Prompt templates for dynamic values</span>
+<span class="kn">from</span> <span class="nn">langchain.prompts.chat</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ChatPromptTemplate</span><span class="p">,</span>
+    <span class="n">SystemMessagePromptTemplate</span><span class="p">,</span>
+    <span class="n">HumanMessagePromptTemplate</span>
+<span class="p">)</span>
+
+<span class="c1"># Supporting libraries</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-set-up-create-your-llms-and-get-data">
+<h2>The Set Up - Create your LLMs and get data<a class="headerlink" href="#the-set-up-create-your-llms-and-get-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating two versions of the model so I can swap between gpt3.5 and gpt4</span>
+<span class="n">llm3</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                  <span class="n">openai_api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;OPENAI_API_KEY&#39;</span><span class="p">,</span> <span class="s1">&#39;YourAPIKeyIfNotSet&#39;</span><span class="p">),</span>
+                  <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;gpt-3.5-turbo-0613&quot;</span><span class="p">,</span>
+                  <span class="n">request_timeout</span> <span class="o">=</span> <span class="mi">180</span>
+                <span class="p">)</span>
+
+<span class="n">llm4</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                  <span class="n">openai_api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;OPENAI_API_KEY&#39;</span><span class="p">,</span> <span class="s1">&#39;YourAPIKeyIfNotSet&#39;</span><span class="p">),</span>
+                  <span class="n">model_name</span><span class="o">=</span><span class="s2">&quot;gpt-4-0613&quot;</span><span class="p">,</span>
+                  <span class="n">request_timeout</span> <span class="o">=</span> <span class="mi">180</span>
+                 <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First we’ll need to get transcripts. I put a few pre-processed transcripts in the data folder of this repo.</p>
+<p>If you need transcripts for your own audio I suggest a transcription tool like <a class="reference external" href="https://www.assemblyai.com/">AssemblyAI</a>. I also tried <a class="reference external" href="https://steno.ai/my-first-million">Steno.ai</a> but the quality and speaker detection wasn’t that high.</p>
+<p>Reach out if you want me to grab transcripts in bulk for you.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># I put three prepared transcripts</span>
+<span class="n">transcript_paths</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;../data/Transcripts/MFMPod/mfm_pod_steph.txt&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;../data/Transcripts/MFMPod/mfm_pod_alex.txt&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;../data/Transcripts/MFMPod/mfm_pod_rob.txt&#39;</span>
+<span class="p">]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;../data/Transcripts/MFMPod/mfm_pod_steph.txt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">transcript</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">transcript</span><span class="p">[:</span><span class="mi">280</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Shaan Puri (0:00:00-0:00:03): D to see hearing AIDS. I think that&#39;s actually going to be a big deal. 
+
+Sam Parr (0:00:03-0:00:05): And they&#39;re profitable. 
+
+Shaan Puri (0:00:05-0:00:08): I mean, I&#39;m just turning you on. Yeah, they were. 
+
+Sam Parr (0:00:12-0:00:13): They Mormon. 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we are going to split our text up into chunks. We do this so:</p>
+<ol class="arabic simple">
+<li><p>The context size is smaller and the LLM can increase it’s attention to context ratio</p></li>
+<li><p>In case the text is too long and it wouldn’t fit in the prompt anyway</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load up your text splitter</span>
+<span class="n">text_splitter</span> <span class="o">=</span> <span class="n">RecursiveCharacterTextSplitter</span><span class="p">(</span><span class="n">separators</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">],</span> <span class="n">chunk_size</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">2200</span><span class="p">)</span>
+
+<span class="c1"># I&#39;m only doing the first 23250 characters. This to save on costs. When you&#39;re doing your exercise you can remove this to let all the data through</span>
+<span class="n">transcript_subsection_characters</span> <span class="o">=</span> <span class="mi">23250</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">create_documents</span><span class="p">([</span><span class="n">transcript</span><span class="p">[:</span><span class="n">transcript_subsection_characters</span><span class="p">]])</span>
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You have </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span><span class="si">}</span><span class="s2"> docs. First doc is </span><span class="si">{</span><span class="n">llm3</span><span class="o">.</span><span class="n">get_num_tokens</span><span class="p">(</span><span class="n">docs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">page_content</span><span class="p">)</span><span class="si">}</span><span class="s2"> tokens&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You have 3 docs. First doc is 2801 tokens
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-1-extract-topic-titles-short-description">
+<h2>Step 1: Extract Topic Titles &amp; Short Description<a class="headerlink" href="#step-1-extract-topic-titles-short-description" title="Link to this heading">#</a></h2>
+<section id="the-custom-prompts-customize-your-prompt-to-fit-your-use-case">
+<h3>The Custom Prompts - Customize your prompt to fit your use case<a class="headerlink" href="#the-custom-prompts-customize-your-prompt-to-fit-your-use-case" title="Link to this heading">#</a></h3>
+<p>Next up I’m going to use custom prompts to instruct the LLM on how to pull out the topics I want.</p>
+<p>This will be heavily dependent on your domain. You should adjust the prompt below to use descriptions and examples that are relevant to you.</p>
+<p>I built these descriptions over many iterations playing with prompts and checking the output. If you ever start a business this will be part of your IP!</p>
+<p>I will ask the LLM for a topic title and a short description. I found it was too much for the LLM to ask for a long description in the first pass. Results weren’t great and high latency.</p>
+<p>Let’s start with our map prompt which will iterate over the chunks we just made</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">You are a helpful assistant that helps retrieve topics talked about in a podcast transcript</span>
+<span class="s2">- Your goal is to extract the topic names and brief 1-sentence description of the topic</span>
+<span class="s2">- Topics include:</span>
+<span class="s2">  - Themes</span>
+<span class="s2">  - Business Ideas</span>
+<span class="s2">  - Interesting Stories</span>
+<span class="s2">  - Money making businesses</span>
+<span class="s2">  - Quick stories about people</span>
+<span class="s2">  - Mental Frameworks</span>
+<span class="s2">  - Stories about an industry</span>
+<span class="s2">  - Analogies mentioned</span>
+<span class="s2">  - Advice or words of caution</span>
+<span class="s2">  - Pieces of news or current events</span>
+<span class="s2">- Provide a brief description of the topics after the topic name. Example: &#39;Topic: Brief Description&#39;</span>
+<span class="s2">- Use the same words and terminology that is said in the podcast</span>
+<span class="s2">- Do not respond with anything outside of the podcast. If you don&#39;t see any topics, say, &#39;No Topics&#39;</span>
+<span class="s2">- Do not respond with numbers, just bullet points</span>
+<span class="s2">- Do not include anything about &#39;Marketing Against the Grain&#39;</span>
+<span class="s2">- Only pull topics from the transcript. Do not use the examples</span>
+<span class="s2">- Make your titles descriptive but concise. Example: &#39;Shaan&#39;s Experience at Twitch&#39; should be &#39;Shaan&#39;s Interesting Projects At Twitch&#39;</span>
+<span class="s2">- A topic should be substantial, more than just a one-off comment</span>
+
+<span class="s2">% START OF EXAMPLES</span>
+<span class="s2"> - Sam’s Elisabeth Murdoch Story: Sam got a call from Elizabeth Murdoch when he had just launched The Hustle. She wanted to generate video content.</span>
+<span class="s2"> - Shaan’s Rupert Murdoch Story: When Shaan was running Blab he was invited to an event organized by Rupert Murdoch during CES in Las Vegas.</span>
+<span class="s2"> - Revenge Against The Spam Calls: A couple of businesses focused on protecting consumers: RoboCall, TrueCaller, DoNotPay, FitIt</span>
+<span class="s2"> - Wildcard CEOs vs. Prudent CEOs: However, Munger likes to surround himself with prudent CEO’s and says he would never hire Musk.</span>
+<span class="s2"> - Chess Business: Priyav, a college student, expressed his doubts on the MFM Facebook group about his Chess training business, mychesstutor.com, making $12.5K MRR with 90 enrolled.</span>
+<span class="s2"> - Restaurant Refiller: An MFM Facebook group member commented on how they pay AirMark $1,000/month for toilet paper and toilet cover refills for their restaurant. Shaan sees an opportunity here for anyone wanting to compete against AirMark.</span>
+<span class="s2"> - Collecting: Shaan shared an idea to build a mobile only marketplace for a collectors’ category; similar to what StockX does for premium sneakers.</span>
+<span class="si">% E</span><span class="s2">ND OF EXAMPLES</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">system_message_prompt_map</span> <span class="o">=</span> <span class="n">SystemMessagePromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+
+<span class="n">human_template</span><span class="o">=</span><span class="s2">&quot;Transcript: </span><span class="si">{text}</span><span class="s2">&quot;</span> <span class="c1"># Simply just pass the text as a human message</span>
+<span class="n">human_message_prompt_map</span> <span class="o">=</span> <span class="n">HumanMessagePromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">human_template</span><span class="p">)</span>
+
+<span class="n">chat_prompt_map</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_messages</span><span class="p">(</span><span class="n">messages</span><span class="o">=</span><span class="p">[</span><span class="n">system_message_prompt_map</span><span class="p">,</span> <span class="n">human_message_prompt_map</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we have our combine prompt which will run once over the results of the map prompt above</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">You are a helpful assistant that helps retrieve topics talked about in a podcast transcript</span>
+<span class="s2">- You will be given a series of bullet topics of topics vound</span>
+<span class="s2">- Your goal is to exract the topic names and brief 1-sentence description of the topic</span>
+<span class="s2">- Deduplicate any bullet points you see</span>
+<span class="s2">- Only pull topics from the transcript. Do not use the examples</span>
+
+<span class="s2">% START OF EXAMPLES</span>
+<span class="s2"> - Sam’s Elisabeth Murdoch Story: Sam got a call from Elizabeth Murdoch when he had just launched The Hustle. She wanted to generate video content.</span>
+<span class="s2"> - Shaan’s Rupert Murdoch Story: When Shaan was running Blab he was invited to an event organized by Rupert Murdoch during CES in Las Vegas.</span>
+<span class="si">% E</span><span class="s2">ND OF EXAMPLES</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">system_message_prompt_map</span> <span class="o">=</span> <span class="n">SystemMessagePromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+
+<span class="n">human_template</span><span class="o">=</span><span class="s2">&quot;Transcript: </span><span class="si">{text}</span><span class="s2">&quot;</span> <span class="c1"># Simply just pass the text as a human message</span>
+<span class="n">human_message_prompt_map</span> <span class="o">=</span> <span class="n">HumanMessagePromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">human_template</span><span class="p">)</span>
+
+<span class="n">chat_prompt_combine</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_messages</span><span class="p">(</span><span class="n">messages</span><span class="o">=</span><span class="p">[</span><span class="n">system_message_prompt_map</span><span class="p">,</span> <span class="n">human_message_prompt_map</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-first-pass-run-through-your-text-and-extract-the-topics-per-your-custom-prompts">
+<h3>The First Pass - Run through your text and extract the topics per your custom prompts<a class="headerlink" href="#the-first-pass-run-through-your-text-and-extract-the-topics-per-your-custom-prompts" title="Link to this heading">#</a></h3>
+<p>Then we get our chain ready. This is object that will do the actual processing for us when we call it. I’m using gpt4 because we need the increased reasoning ability to pull out topics. You could use gpt3.5 but results may vary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chain</span> <span class="o">=</span> <span class="n">load_summarize_chain</span><span class="p">(</span><span class="n">llm4</span><span class="p">,</span>
+                             <span class="n">chain_type</span><span class="o">=</span><span class="s2">&quot;map_reduce&quot;</span><span class="p">,</span>
+                             <span class="n">map_prompt</span><span class="o">=</span><span class="n">chat_prompt_map</span><span class="p">,</span>
+                             <span class="n">combine_prompt</span><span class="o">=</span><span class="n">chat_prompt_combine</span><span class="p">,</span>
+<span class="c1">#                              verbose=True</span>
+                            <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then the <code class="docutils literal notranslate"><span class="pre">.run()</span></code> code below will do the actual API calls and work</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">topics_found</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">({</span><span class="s2">&quot;input_documents&quot;</span><span class="p">:</span> <span class="n">docs</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="n">topics_found</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- Hearing Aids Business: Shaan and Sam explore the potential profitability of the hearing aids industry.
+- Children&#39;s Play Space Business: Shaan revisits a business idea about a membership-based children&#39;s play space.
+- Steph Smith&#39;s Career: The hosts discuss Steph Smith&#39;s career progression, including her current role at Andreessen Horowitz.
+- Working at Andreessen Horowitz: Steph shares insights about her experience at Andreessen Horowitz, a leading VC firm.
+- Office Culture: The trio discuss the differences between working in an office environment and working remotely.
+- Sam&#39;s Master Plan at Facebook: Sam shares advice he gave to his wife Sarah about making an impact at Facebook.
+- Shaan&#39;s Strategy at Twitch: Shaan recounts his networking strategy during his time at Twitch.
+- Commercial Real Estate Crisis: The hosts discuss the high vacancy rates in commercial real estate, particularly in cities like San Francisco.
+- Opportunity in Fractional Real Estate: Steph suggests that the commercial real estate crisis could lead to opportunities in fractional real estate.
+- Temple Immersive: The hosts discuss Temple Immersive, a nightclub that doubles as a yoga studio, as an example of fractional real estate.
+- Rage Rooms: Steph introduces the concept of rage rooms, where people pay to destroy objects in a controlled environment.
+- Escape Room Business Success: The hosts discuss Raleigh Williams&#39; successful escape room business, which sold for $26 million.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="structured-data-turn-your-llm-output-into-structured-data">
+<h3>Structured Data - Turn your LLM output into structured data<a class="headerlink" href="#structured-data-turn-your-llm-output-into-structured-data" title="Link to this heading">#</a></h3>
+<p>The LLM just returned a wall of text to us, I want to convert this into structured data I can more easily use elsewhere.</p>
+<p>We might have been able to do add structured output instructions to the pull above but I preferred to do it in two steps for clarity. Plus the cost us super low so we only have latency to worry about, but that isn’t a priority for this tutorial.</p>
+<p>We will use OpenAI’s [function calling](function Calling via ChatGPT API - First Look With LangChain - YouTube) to extract each topic.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">schema</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="c1"># The title of the topic</span>
+        <span class="s2">&quot;topic_name&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span> <span class="p">:</span> <span class="s2">&quot;The title of the topic listed&quot;</span>
+        <span class="p">},</span>
+        <span class="c1"># The description</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span> <span class="p">:</span> <span class="s2">&quot;The description of the topic listed&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;tag&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;description&quot;</span> <span class="p">:</span> <span class="s2">&quot;The type of content being described&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;enum&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Business Models&#39;</span><span class="p">,</span> <span class="s1">&#39;Life Advice&#39;</span><span class="p">,</span> <span class="s1">&#39;Health &amp; Wellness&#39;</span><span class="p">,</span> <span class="s1">&#39;Stories&#39;</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;topic&quot;</span><span class="p">,</span> <span class="s2">&quot;description&quot;</span><span class="p">],</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using gpt3.5 here because this is an easy extraction task and no need to jump to gpt4</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">create_extraction_chain</span><span class="p">(</span><span class="n">schema</span><span class="p">,</span> <span class="n">llm3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">topics_structured</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">topics_found</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">topics_structured</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{&#39;topic_name&#39;: &#39;Hearing Aids Business&#39;,
+  &#39;description&#39;: &#39;Shaan and Sam explore the potential profitability of the hearing aids industry.&#39;,
+  &#39;tag&#39;: &#39;Business Models&#39;},
+ {&#39;topic_name&#39;: &quot;Children&#39;s Play Space Business&quot;,
+  &#39;description&#39;: &quot;Shaan revisits a business idea about a membership-based children&#39;s play space.&quot;,
+  &#39;tag&#39;: &#39;Business Models&#39;},
+ {&#39;topic_name&#39;: &quot;Steph Smith&#39;s Career&quot;,
+  &#39;description&#39;: &quot;The hosts discuss Steph Smith&#39;s career progression, including her current role at Andreessen Horowitz.&quot;,
+  &#39;tag&#39;: &#39;Business Models&#39;},
+ {&#39;topic_name&#39;: &#39;Working at Andreessen Horowitz&#39;,
+  &#39;description&#39;: &#39;Steph shares insights about her experience at Andreessen Horowitz, a leading VC firm.&#39;,
+  &#39;tag&#39;: &#39;Business Models&#39;},
+ {&#39;topic_name&#39;: &#39;Office Culture&#39;,
+  &#39;description&#39;: &#39;The trio discuss the differences between working in an office environment and working remotely.&#39;,
+  &#39;tag&#39;: &#39;Business Models&#39;},
+ {&#39;topic_name&#39;: &quot;Sam&#39;s Master Plan at Facebook&quot;,
+  &#39;description&#39;: &#39;Sam shares advice he gave to his wife Sarah about making an impact at Facebook.&#39;,
+  &#39;tag&#39;: &#39;Life Advice&#39;},
+ {&#39;topic_name&#39;: &quot;Shaan&#39;s Strategy at Twitch&quot;,
+  &#39;description&#39;: &#39;Shaan recounts his networking strategy during his time at Twitch.&#39;,
+  &#39;tag&#39;: &#39;Life Advice&#39;},
+ {&#39;topic_name&#39;: &#39;Commercial Real Estate Crisis&#39;,
+  &#39;description&#39;: &#39;The hosts discuss the high vacancy rates in commercial real estate, particularly in cities like San Francisco.&#39;,
+  &#39;tag&#39;: &#39;Business Models&#39;},
+ {&#39;topic_name&#39;: &#39;Opportunity in Fractional Real Estate&#39;,
+  &#39;description&#39;: &#39;Steph suggests that the commercial real estate crisis could lead to opportunities in fractional real estate.&#39;,
+  &#39;tag&#39;: &#39;Business Models&#39;},
+ {&#39;topic_name&#39;: &#39;Temple Immersive&#39;,
+  &#39;description&#39;: &#39;The hosts discuss Temple Immersive, a nightclub that doubles as a yoga studio, as an example of fractional real estate.&#39;,
+  &#39;tag&#39;: &#39;Business Models&#39;},
+ {&#39;topic_name&#39;: &#39;Rage Rooms&#39;,
+  &#39;description&#39;: &#39;Steph introduces the concept of rage rooms, where people pay to destroy objects in a controlled environment.&#39;,
+  &#39;tag&#39;: &#39;Business Models&#39;},
+ {&#39;topic_name&#39;: &#39;Escape Room Business Success&#39;,
+  &#39;description&#39;: &quot;The hosts discuss Raleigh Williams&#39; successful escape room business, which sold for $26 million.&quot;,
+  &#39;tag&#39;: &#39;Business Models&#39;}]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Great, now we have our structured topics. Let’s move into the next step and <em>expand</em> on those topics even more.</p>
+</section>
+</section>
+<section id="step-2-expand-on-the-topics-you-found">
+<h2>Step 2: Expand on the topics you found<a class="headerlink" href="#step-2-expand-on-the-topics-you-found" title="Link to this heading">#</a></h2>
+<p>In order to expand on the topics we found we are going to do the vectorstore dance. We’ll chunk our podcast into <em>small</em> chunks and then modify the retrieval and qa chain to help us pull out more information.</p>
+<p>I want to split into small chunks to hopefully increase the signal to noise ratio. Here I’ll only do 4K characters which is less than half of what we did above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_splitter</span> <span class="o">=</span> <span class="n">RecursiveCharacterTextSplitter</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">4000</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+
+<span class="n">docs</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">create_documents</span><span class="p">([</span><span class="n">transcript</span><span class="p">[:</span><span class="n">transcript_subsection_characters</span><span class="p">]])</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You have </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span><span class="si">}</span><span class="s2"> docs. First doc is </span><span class="si">{</span><span class="n">llm3</span><span class="o">.</span><span class="n">get_num_tokens</span><span class="p">(</span><span class="n">docs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">page_content</span><span class="p">)</span><span class="si">}</span><span class="s2"> tokens&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>You have 8 docs. First doc is 776 tokens
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because I want to do Question &amp; Answer Retrieval, we need to get embeddings for our documents so we can pull out the docs which are similar for context later.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embeddings</span> <span class="o">=</span> <span class="n">OpenAIEmbeddings</span><span class="p">(</span><span class="n">openai_api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;OPENAI_API_KEY&#39;</span><span class="p">,</span> <span class="s1">&#39;YourAPIKeyIfNotSet&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="option-1-pinecone">
+<h3>Option #1: Pinecone<a class="headerlink" href="#option-1-pinecone" title="Link to this heading">#</a></h3>
+<p>Use this if you’re looking for scale in the cloud</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialize pinecone</span>
+<span class="n">pinecone</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;PINECONE_API_KEY&#39;</span><span class="p">,</span> <span class="s1">&#39;YourAPIKeyIfNotSet&#39;</span><span class="p">),</span>  <span class="c1"># find at app.pinecone.io</span>
+    <span class="n">environment</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;PINECONE_ENV&#39;</span><span class="p">,</span> <span class="s1">&#39;YourAPIKeyIfNotSet&#39;</span><span class="p">),</span>  <span class="c1"># next to api key in console</span>
+<span class="p">)</span>
+
+<span class="n">index_name</span> <span class="o">=</span> <span class="s2">&quot;topic-modeling&quot;</span>
+
+<span class="n">docsearch</span> <span class="o">=</span> <span class="n">Pinecone</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">,</span> <span class="n">index_name</span><span class="o">=</span><span class="n">index_name</span><span class="p">)</span>
+
+<span class="c1"># # If you want to delete your vectors in your index to start over, run the code below!</span>
+<span class="c1"># index = pinecone.Index(index_name)</span>
+<span class="c1"># index.delete(delete_all=&#39;true&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="option-2-chroma">
+<h3>Option #2: Chroma<a class="headerlink" href="#option-2-chroma" title="Link to this heading">#</a></h3>
+<p>Use this if you’re looking for local and easy to set up</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load it into Chroma</span>
+<span class="n">docsearch</span> <span class="o">=</span> <span class="n">Chroma</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">embeddings</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we are going to create a custom prompt for our Retriever. I’m doing this because the out of the <a class="reference external" href="https://github.com/hwchase17/langchain/blob/7414e9d19603c962063dd337cdcf3c3168d4b8be/langchain/chains/question_answering/stuff_prompt.py#L20">out-of-the-box</a> prompt used here isn’t bad, but a bit generic for my use case. Plus, I only really want to <em>answer a question</em> I want to generated a mini-summary based off of docs.</p>
+<p>Let’s switch it up!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The system instructions. Notice the &#39;context&#39; placeholder down below. This is where our relevant docs will go.</span>
+<span class="c1"># The &#39;question&#39; in the human message below won&#39;t be a question per se, but rather a topic we want to get relevant information on</span>
+<span class="n">system_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">You will be given text from a podcast transcript which contains many topics.</span>
+<span class="s2">You goal is to write a summary (5 sentences or less) about a topic the user chooses</span>
+<span class="s2">Do not respond with information that isn&#39;t relevant to the topic that the user gives you</span>
+<span class="s2">----------------</span>
+<span class="si">{context}</span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">SystemMessagePromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">system_template</span><span class="p">),</span>
+    <span class="n">HumanMessagePromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{question}</span><span class="s2">&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="c1"># This will pull the two messages together and get them ready to be sent to the LLM through the retriever</span>
+<span class="n">CHAT_PROMPT</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_messages</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># I&#39;m using gpt4 for the increased reasoning power.</span>
+<span class="c1"># I&#39;m also setting k=4 so the number of relevant docs we get back is 4. This parameter should be tuned to your use case</span>
+<span class="n">qa</span> <span class="o">=</span> <span class="n">RetrievalQA</span><span class="o">.</span><span class="n">from_chain_type</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm4</span><span class="p">,</span>
+                                 <span class="n">chain_type</span><span class="o">=</span><span class="s2">&quot;stuff&quot;</span><span class="p">,</span>
+                                 <span class="n">retriever</span><span class="o">=</span><span class="n">docsearch</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
+                                 <span class="n">chain_type_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+<span class="c1">#                                      &#39;verbose&#39;: True,</span>
+                                     <span class="s1">&#39;prompt&#39;</span><span class="p">:</span> <span class="n">CHAT_PROMPT</span>
+                                 <span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then let’s iterate through the topics that we found and run our QA query on them.</p>
+<p>This will print out our expanded topics. This is the final result you can use wherever you want!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Only doing the first 3 for conciseness </span>
+<span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">topics_structured</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        </span><span class="si">{</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;topic_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+
+    <span class="n">expanded_topic</span> <span class="o">=</span> <span class="n">qa</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;topic_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">expanded_topic</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hearing Aids Business: Shaan and Sam explore the potential profitability of the hearing aids industry.
+Shaan Puri and Sam Parr discussed the potential of the hearing aids industry, noting that it could be a profitable venture. They did not provide specific details about the industry but expressed optimism about its potential.
+
+
+
+Children&#39;s Play Space Business: Shaan revisits a business idea about a membership-based children&#39;s play space.
+Shaan Puri discussed a business idea he had previously mentioned about a children&#39;s play space. This business operates on a membership basis where parents pay a fee for their children to play with various toys inside the facility. However, Shaan clarified that he does not endorse this business idea, as he only had a single experience with it and does not know if it is profitable or not. He expressed concern that listeners might have taken his discussion as a recommendation and invested in similar franchises.
+
+
+
+Steph Smith&#39;s Career: The hosts discuss Steph Smith&#39;s career progression, including her current role at Andreessen Horowitz.
+Steph Smith, who started her career with a blog, was invited by Sam Parr to join Trends due to her impressive headline writing. After working there for a couple of years, she moved on to Andreessen Horowitz, one of the world&#39;s largest venture capital firms. Despite initially feeling out of place, she has now settled into her role and is enjoying her work. She also runs a podcast which she considers an asset to the firm. The hosts encourage her to take advantage of her position to network and learn from the smart people around her.
+
+
+
+Working at Andreessen Horowitz: Steph shares insights about her experience at Andreessen Horowitz, a leading VC firm.
+Steph Smith, who works at Andreessen Horowitz, discussed her experience at the firm during a podcast. She mentioned that she initially felt out of place among the high-achieving individuals at the firm, but has since grown more comfortable. Her colleagues advised her to take advantage of the opportunity to interact with some of the smartest people in the world, rather than just focusing on her job. They suggested she should be present in the office every day to seize any potential opportunities. Steph also mentioned that she feels the podcast she runs is an asset to the firm.
+
+
+
+Office Culture: The trio discuss the differences between working in an office environment and working remotely.
+Shaan Puri and Sam Parr encourage Steph Smith to take advantage of her position at Andreessen Horowitz by being physically present in the office and interacting with the high-profile individuals there. They argue that the real value of her job is the opportunity to network and learn from some of the smartest people in the world. Steph, who has been working remotely for the past eight years, admits she needs to be more proactive in creating these interactions. Shaan shares his own experience at Twitch, where he prioritized attending interesting meetings over his actual job responsibilities, which he believes led to his success.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="bonus-chapters-with-timestamps">
+<h2>Bonus: Chapters With Timestamps<a class="headerlink" href="#bonus-chapters-with-timestamps" title="Link to this heading">#</a></h2>
+<p>Because why not?</p>
+<p>We have the timestamps on the transcript so let’s pull them out and get timestamp chapters. This is helpful so you can scrub to the topic when you’re listening.</p>
+<p>I tried a few methods to do this, including function calling, but I found just a regular prompt worked great. It’s not <em>that</em> hard of a task to pull out a timestamp. I did the Retrieval chain again to get relevant documents, then asked the LLM to pull out the earliest timestamp it saw a topic was talked about.</p>
+<p><strong>Hardcore</strong>: Right now this will pull out the timestamp of the monologue. However the topic may or may not start at the beginning, maybe it’s the middle? Timestamps could be off. If you wanted to go more hardcore accurate you could go down to the word level and make a guestimate as to when the topic actually started.</p>
+<p>Same as above, we’ll make custom prompts for our QA chain</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">system_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">What is the first timestamp when the speakers started talking about a topic the user gives?</span>
+<span class="s2">Only respond with the timestamp, nothing else. Example: 0:18:24</span>
+<span class="s2">----------------</span>
+<span class="si">{context}</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">SystemMessagePromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">system_template</span><span class="p">),</span>
+    <span class="n">HumanMessagePromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{question}</span><span class="s2">&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+<span class="n">CHAT_PROMPT</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_messages</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qa</span> <span class="o">=</span> <span class="n">RetrievalQA</span><span class="o">.</span><span class="n">from_chain_type</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm4</span><span class="p">,</span>
+                                 <span class="n">chain_type</span><span class="o">=</span><span class="s2">&quot;stuff&quot;</span><span class="p">,</span>
+                                 <span class="n">retriever</span><span class="o">=</span><span class="n">docsearch</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span>
+                                 <span class="n">chain_type_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+<span class="c1">#                                      &#39;verbose&#39;: True,</span>
+                                     <span class="s1">&#39;prompt&#39;</span><span class="p">:</span> <span class="n">CHAT_PROMPT</span>
+                                 <span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Holder for our topic timestamps</span>
+<span class="n">topic_timestamps</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">topics_structured</span><span class="p">:</span>
+
+    <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;topic_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">qa</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    
+    <span class="n">topic_timestamps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">topic</span><span class="p">[</span><span class="s1">&#39;topic_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>They might be out of order so let’s sort them and print</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">topic_timestamps</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0:00:00 - Hearing Aids Business
+0:00:40 - Children&#39;s Play Space Business
+0:04:24 - Office Culture
+0:04:26 - Steph Smith&#39;s Career
+0:05:27 - Working at Andreessen Horowitz
+0:06:37 - Sam&#39;s Master Plan at Facebook
+0:09:21 - Shaan&#39;s Strategy at Twitch
+0:12:32 - Commercial Real Estate Crisis
+0:12:32 - Opportunity in Fractional Real Estate
+0:13:10 - Temple Immersive
+0:14:56 - Rage Rooms
+0:16:43 - Escape Room Business Success
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check out the audio for this episode <a class="reference external" href="https://steno.ai/my-first-million/steph-smith-jobs-of-the-future-fractional-real-estate-mouth">here</a></p>
+<p>Awesome! This is great, what domain are you going to parse topics from? Please let me know on <a class="reference external" href="https://twitter.com/GregKamradt">Twitter</a> or contact me directly at <a class="reference external" href="mailto:contact&#37;&#52;&#48;dataindependent&#46;com">contact<span>&#64;</span>dataindependent<span>&#46;</span>com</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/genai/langchain/projects/data_generation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-cases">Use Cases:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-set-up-create-your-llms-and-get-data">The Set Up - Create your LLMs and get data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-extract-topic-titles-short-description">Step 1: Extract Topic Titles &amp; Short Description</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-custom-prompts-customize-your-prompt-to-fit-your-use-case">The Custom Prompts - Customize your prompt to fit your use case</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-first-pass-run-through-your-text-and-extract-the-topics-per-your-custom-prompts">The First Pass - Run through your text and extract the topics per your custom prompts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structured-data-turn-your-llm-output-into-structured-data">Structured Data - Turn your LLM output into structured data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-expand-on-the-topics-you-found">Step 2: Expand on the topics you found</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-pinecone">Option #1: Pinecone</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-chroma">Option #2: Chroma</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bonus-chapters-with-timestamps">Bonus: Chapters With Timestamps</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,2204 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Python Exercises &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/python/exercises';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/python/exercises.html" />
+    <link rel="icon" href="../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3_functions_and_modules.html">Functions &amp; Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4_Object_Oriented.html">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="8_advanced.html">Advanced Concepts</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ai/Introduction_to_ml.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/000_Data_Exploration.html">Exploratory Data Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/001_Data_Preparation.html">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/003_Classification.html">Classfication</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/005_Evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/006_Advanced.html">K-Fold Cross Validation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../ai/classicml/concepts/007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ai/neural/neural_toc.html">Neural Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ai/neural/concepts/001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/neural/concepts/002_Backpropogation.html">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/neural/concepts/003_Activations.html">Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ai/neural/concepts/004_Optimization.html">Optimizations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ai/neural/concepts/pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ai/neural/concepts/pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../genai/introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../genai/concepts/transformers/01_transformers_from_scratch.html">Transformers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../genai/langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../genai/langchain/intro.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../genai/langchain/01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../genai/langchain/02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/courses/courses_toc.html">Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/python/exercises.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/python/exercises.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/python/exercises.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Python Exercises</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beginner">Beginner</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-and-data-types">Variables and Data Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-string-manipulation">Exercise 1: String Manipulation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-string-reversal">Exercise 2: String Reversal</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-palindrome-check">Exercise 3: Palindrome Check</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-basic-arithmetic">Exercise 4: Basic Arithmetic</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#control-flow">Control Flow</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-if-else-statement">Exercise 5: If-Else Statement</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6-for-loop">Exercise 6: For Loop</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7-fizzbuzz">Exercise 7: FizzBuzz</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-8-basic-function">Exercise 8: Basic Function</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lists">Lists</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-list-operations">Exercise 9: List Operations</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-list-flattening">Exercise 10: List Flattening</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-tuple-unpacking">Exercise 11: Tuple Unpacking</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionaries-and-sets">Dictionaries and Sets</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-12-dictionary-merge">Exercise 12: Dictionary Merge</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-13-set-operations">Exercise 13: Set Operations</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-file-i-o">Basic File I/O</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-file-reading-and-writing">Exercise 14: File Reading and Writing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intermediate">Intermediate</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-comprehensions">List Comprehensions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-15-even-numbers">Exercise 15: Even Numbers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-16-nested-list-comprehension">Exercise 16: Nested List Comprehension</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionaries">Dictionaries</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-17-dictionary-manipulation">Exercise 17: Dictionary Manipulation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lambda-functions">Lambda Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-18-sorting-with-lambda">Exercise 18: Sorting with Lambda</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#map-filter-and-reduce">Map, Filter, and Reduce</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-19-map-and-filter">Exercise 19: Map and Filter</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structures">Data Structures</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-20-implement-a-stack">Exercise 20: Implement a Stack</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-21-implement-a-queue">Exercise 21: Implement a Queue</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms">Algorithms</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-22-binary-search">Exercise 22: Binary Search</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#object-oriented-programming">Object-Oriented Programming</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-23-simple-class">Exercise 23: Simple Class</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-24-bank-account-class">Exercise 24: Bank Account Class</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-and-polymorphism">Inheritance and Polymorphism</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-25-shape-hierarchy">Exercise 25: Shape Hierarchy</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-expressions">Regular Expressions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-26-email-validation">Exercise 26: Email Validation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modules-and-packages">Modules and Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-27-custom-module">Exercise 27: Custom Module</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">Error Handling</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-28-try-except">Exercise 28: Try-Except</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-i-o">File I/O</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-29-reading-and-writing-files">Exercise 29: Reading and Writing Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced">Advanced</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decorators">Decorators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-30-timing-decorator">Exercise 30: Timing Decorator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-31-retry-decorator">Exercise 31: Retry Decorator</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generators-and-iterators">Generators and Iterators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-32-fibonacci-generator">Exercise 32: Fibonacci Generator</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#web-scraping">Web Scraping</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-33-web-scraping-with-beautifulsoup">Exercise 33: Web Scraping with BeautifulSoup</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-programming">Dynamic Programming</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-34-longest-common-subsequence">Exercise 34: Longest Common Subsequence</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-algorithms">Graph Algorithms</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-35-depth-first-search">Exercise 35: Depth-First Search</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-problems">Logical Problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-36-tower-of-hanoi">Exercise 36: Tower of Hanoi</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-37-n-queens-problem">Exercise 37: N-Queens Problem</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-38-custom-iterator-for-prime-numbers">Exercise 38: Custom Iterator for Prime Numbers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-39-asynchronous-web-crawler">Exercise 39: Asynchronous Web Crawler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="python-exercises">
+<h1>Python Exercises<a class="headerlink" href="#python-exercises" title="Link to this heading">#</a></h1>
+<section id="beginner">
+<h2>Beginner<a class="headerlink" href="#beginner" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<section id="variables-and-data-types">
+<h3>Variables and Data Types<a class="headerlink" href="#variables-and-data-types" title="Link to this heading">#</a></h3>
+<section id="exercise-1-string-manipulation">
+<h4>Exercise 1: String Manipulation<a class="headerlink" href="#exercise-1-string-manipulation" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a variable &#39;name&#39; with your name and &#39;age&#39; with your age.</span>
+<span class="c1"># Then print a message: &quot;Hello, [name]! You are [age] years old.&quot;</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span> <span class="s2">&quot;name should be a string&quot;</span>
+<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="s2">&quot;age should be an integer&quot;</span>
+<span class="k">assert</span> <span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">! You are </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2"> years old.&quot;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()[</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">output</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Alice&quot;</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">! You are </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2"> years old.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</details></section>
+<section id="exercise-2-string-reversal">
+<h4>Exercise 2: String Reversal<a class="headerlink" href="#exercise-2-string-reversal" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write a function &#39;reverse_string&#39; that takes a string as input and returns the reversed string.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="n">reverse_string</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;olleh&quot;</span><span class="p">,</span> <span class="s2">&quot;String reversal is incorrect&quot;</span>
+<span class="k">assert</span> <span class="n">reverse_string</span><span class="p">(</span><span class="s2">&quot;Python&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;nohtyP&quot;</span><span class="p">,</span> <span class="s2">&quot;String reversal is incorrect&quot;</span>
+<span class="k">assert</span> <span class="n">reverse_string</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;Should handle empty string&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reverse_string</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">s</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</details></section>
+<section id="exercise-3-palindrome-check">
+<h4>Exercise 3: Palindrome Check<a class="headerlink" href="#exercise-3-palindrome-check" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write a function &#39;is_palindrome&#39; that takes a string as input and returns True if it&#39;s a palindrome, False otherwise.</span>
+<span class="c1"># Ignore spaces and consider the string case-insensitive.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="n">is_palindrome</span><span class="p">(</span><span class="s2">&quot;A man a plan a canal Panama&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Should be a palindrome&quot;</span>
+<span class="k">assert</span> <span class="n">is_palindrome</span><span class="p">(</span><span class="s2">&quot;race a car&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Should not be a palindrome&quot;</span>
+<span class="k">assert</span> <span class="n">is_palindrome</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Empty string should be considered a palindrome&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_palindrome</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">char</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">s</span> <span class="k">if</span> <span class="n">char</span><span class="o">.</span><span class="n">isalnum</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">s</span> <span class="o">==</span> <span class="n">s</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</details></section>
+<section id="exercise-4-basic-arithmetic">
+<h4>Exercise 4: Basic Arithmetic<a class="headerlink" href="#exercise-4-basic-arithmetic" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the area of a rectangle with length 7 and width 5.</span>
+<span class="c1"># Store the result in a variable called &#39;area&#39;.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)),</span> <span class="s2">&quot;area should be a number&quot;</span>
+<span class="k">assert</span> <span class="n">area</span> <span class="o">==</span> <span class="mi">35</span><span class="p">,</span> <span class="s2">&quot;The area should be 35&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">length</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">area</span> <span class="o">=</span> <span class="n">length</span> <span class="o">*</span> <span class="n">width</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="control-flow">
+<h3>Control Flow<a class="headerlink" href="#control-flow" title="Link to this heading">#</a></h3>
+<section id="exercise-5-if-else-statement">
+<h4>Exercise 5: If-Else Statement<a class="headerlink" href="#exercise-5-if-else-statement" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write a function &#39;is_even&#39; that takes a number as input and returns True if it&#39;s even, False otherwise.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="n">is_even</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;4 should be even&quot;</span>
+<span class="k">assert</span> <span class="n">is_even</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;7 should be odd&quot;</span>
+<span class="k">assert</span> <span class="n">is_even</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;0 should be even&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_even</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">number</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</details></section>
+<section id="exercise-6-for-loop">
+<h4>Exercise 6: For Loop<a class="headerlink" href="#exercise-6-for-loop" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a list of numbers from 1 to 10 and use a for loop to sum all the numbers.</span>
+<span class="c1"># Store the result in a variable called &#39;total&#39;.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="s2">&quot;total should be an integer&quot;</span>
+<span class="k">assert</span> <span class="n">total</span> <span class="o">==</span> <span class="mi">55</span><span class="p">,</span> <span class="s2">&quot;The sum of numbers from 1 to 10 should be 55&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-7-fizzbuzz">
+<h4>Exercise 7: FizzBuzz<a class="headerlink" href="#exercise-7-fizzbuzz" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implement the classic FizzBuzz problem. Write a function &#39;fizzbuzz&#39; that takes a number n</span>
+<span class="c1"># and returns a list of strings for numbers from 1 to n:</span>
+<span class="c1"># - For multiples of 3, use &quot;Fizz&quot; instead of the number</span>
+<span class="c1"># - For multiples of 5, use &quot;Buzz&quot; instead of the number</span>
+<span class="c1"># - For multiples of both 3 and 5, use &quot;FizzBuzz&quot;</span>
+<span class="c1"># - For other numbers, use the number itself as a string</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="n">fizzbuzz</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;Fizz&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;Buzz&quot;</span><span class="p">,</span> <span class="s2">&quot;Fizz&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span> <span class="s2">&quot;Fizz&quot;</span><span class="p">,</span> <span class="s2">&quot;Buzz&quot;</span><span class="p">,</span> <span class="s2">&quot;11&quot;</span><span class="p">,</span> <span class="s2">&quot;Fizz&quot;</span><span class="p">,</span> <span class="s2">&quot;13&quot;</span><span class="p">,</span> <span class="s2">&quot;14&quot;</span><span class="p">,</span> <span class="s2">&quot;FizzBuzz&quot;</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">fizzbuzz</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;Fizz&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;Buzz&quot;</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">fizzbuzz</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;Fizz&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fizzbuzz</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;FizzBuzz&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Fizz&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Buzz&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h3>
+<section id="exercise-8-basic-function">
+<h4>Exercise 8: Basic Function<a class="headerlink" href="#exercise-8-basic-function" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write a function &#39;greet&#39; that takes a name as input and returns a greeting message.</span>
+<span class="c1"># For example, greet(&quot;Alice&quot;) should return &quot;Hello, Alice!&quot;.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Bob&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Hello, Bob!&quot;</span><span class="p">,</span> <span class="s2">&quot;Greeting message is incorrect&quot;</span>
+<span class="k">assert</span> <span class="n">greet</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Hello, !&quot;</span><span class="p">,</span> <span class="s2">&quot;Function should work with empty string&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!&quot;</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="lists">
+<h3>Lists<a class="headerlink" href="#lists" title="Link to this heading">#</a></h3>
+<section id="exercise-9-list-operations">
+<h4>Exercise 9: List Operations<a class="headerlink" href="#exercise-9-list-operations" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a list of fruits and perform the following operations:</span>
+<span class="c1"># 1. Add &quot;apple&quot; to the end of the list</span>
+<span class="c1"># 2. Insert &quot;banana&quot; at the beginning of the list</span>
+<span class="c1"># 3. Remove the second item from the list</span>
+<span class="c1"># Store the final list in a variable called &#39;fruits&#39;.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fruits</span><span class="p">,</span> <span class="nb">list</span><span class="p">),</span> <span class="s2">&quot;fruits should be a list&quot;</span>
+<span class="k">assert</span> <span class="n">fruits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;First item should be &#39;banana&#39;&quot;</span>
+<span class="k">assert</span> <span class="s2">&quot;apple&quot;</span> <span class="ow">in</span> <span class="n">fruits</span><span class="p">,</span> <span class="s2">&quot;&#39;apple&#39; should be in the list&quot;</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">fruits</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">fruits</span><span class="p">)),</span> <span class="s2">&quot;All items should be unique&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;grape&quot;</span><span class="p">,</span> <span class="s2">&quot;kiwi&quot;</span><span class="p">]</span>
+<span class="n">fruits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;apple&quot;</span><span class="p">)</span>
+<span class="n">fruits</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">)</span>
+<span class="n">fruits</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</details></section>
+<section id="exercise-10-list-flattening">
+<h4>Exercise 10: List Flattening<a class="headerlink" href="#exercise-10-list-flattening" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write a function &#39;flatten_list&#39; that takes a list of lists and returns a flattened list.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="n">flatten_list</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="s2">&quot;List flattening is incorrect&quot;</span>
+<span class="k">assert</span> <span class="n">flatten_list</span><span class="p">([[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]])</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s2">&quot;List flattening is incorrect&quot;</span>
+<span class="k">assert</span> <span class="n">flatten_list</span><span class="p">([])</span> <span class="o">==</span> <span class="p">[],</span> <span class="s2">&quot;Should handle empty list&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">flatten_list</span><span class="p">(</span><span class="n">nested_list</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">nested_list</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
+</pre></div>
+</div>
+</details></section>
+<section id="exercise-11-tuple-unpacking">
+<h4>Exercise 11: Tuple Unpacking<a class="headerlink" href="#exercise-11-tuple-unpacking" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a function &#39;swap_first_last&#39; that takes a tuple as input and returns a new tuple</span>
+<span class="c1"># with the first and last elements swapped.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="n">swap_first_last</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="o">==</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;Tuple swap is incorrect&quot;</span>
+<span class="k">assert</span> <span class="n">swap_first_last</span><span class="p">((</span><span class="mi">1</span><span class="p">,))</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span><span class="p">,),</span> <span class="s2">&quot;Should handle single-element tuple&quot;</span>
+<span class="k">assert</span> <span class="n">swap_first_last</span><span class="p">(())</span> <span class="o">==</span> <span class="p">(),</span> <span class="s2">&quot;Should handle empty tuple&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">swap_first_last</span><span class="p">(</span><span class="n">tup</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tup</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tup</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">tup</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],)</span> <span class="o">+</span> <span class="n">tup</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">tup</span><span class="p">[</span><span class="mi">0</span><span class="p">],)</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="dictionaries-and-sets">
+<h3>Dictionaries and Sets<a class="headerlink" href="#dictionaries-and-sets" title="Link to this heading">#</a></h3>
+<section id="exercise-12-dictionary-merge">
+<h4>Exercise 12: Dictionary Merge<a class="headerlink" href="#exercise-12-dictionary-merge" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write a function &#39;merge_dicts&#39; that takes two dictionaries as input and returns a new dictionary</span>
+<span class="c1"># containing all key-value pairs from both dictionaries. If a key exists in both dictionaries,</span>
+<span class="c1"># the value from the second dictionary should be used.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="n">dict1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">dict2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+<span class="k">assert</span> <span class="n">merge_dicts</span><span class="p">(</span><span class="n">dict1</span><span class="p">,</span> <span class="n">dict2</span><span class="p">)</span> <span class="o">==</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span> <span class="s2">&quot;Dictionary merge is incorrect&quot;</span>
+<span class="k">assert</span> <span class="n">merge_dicts</span><span class="p">({},</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span> <span class="o">==</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span> <span class="s2">&quot;Should handle empty dictionary&quot;</span>
+<span class="k">assert</span> <span class="n">merge_dicts</span><span class="p">({</span><span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span> <span class="p">{})</span> <span class="o">==</span> <span class="p">{</span><span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span> <span class="s2">&quot;Should handle empty dictionary&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">merge_dicts</span><span class="p">(</span><span class="n">dict1</span><span class="p">,</span> <span class="n">dict2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="o">**</span><span class="n">dict1</span><span class="p">,</span> <span class="o">**</span><span class="n">dict2</span><span class="p">}</span>
+</pre></div>
+</div>
+</details></section>
+<section id="exercise-13-set-operations">
+<h4>Exercise 13: Set Operations<a class="headerlink" href="#exercise-13-set-operations" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implement a function &#39;set_operations&#39; that takes two sets as input and returns a dictionary</span>
+<span class="c1"># containing the result of union, intersection, and difference operations.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="n">set1</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+<span class="n">set2</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">set_operations</span><span class="p">(</span><span class="n">set1</span><span class="p">,</span> <span class="n">set2</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;union&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">},</span> <span class="s2">&quot;Union operation is incorrect&quot;</span>
+<span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;intersection&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">},</span> <span class="s2">&quot;Intersection operation is incorrect&quot;</span>
+<span class="k">assert</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;difference&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="s2">&quot;Difference operation is incorrect&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">set_operations</span><span class="p">(</span><span class="n">set1</span><span class="p">,</span> <span class="n">set2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;union&#39;</span><span class="p">:</span> <span class="n">set1</span> <span class="o">|</span> <span class="n">set2</span><span class="p">,</span>
+        <span class="s1">&#39;intersection&#39;</span><span class="p">:</span> <span class="n">set1</span> <span class="o">&amp;</span> <span class="n">set2</span><span class="p">,</span>
+        <span class="s1">&#39;difference&#39;</span><span class="p">:</span> <span class="n">set1</span> <span class="o">-</span> <span class="n">set2</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="basic-file-i-o">
+<h3>Basic File I/O<a class="headerlink" href="#basic-file-i-o" title="Link to this heading">#</a></h3>
+<section id="exercise-14-file-reading-and-writing">
+<h4>Exercise 14: File Reading and Writing<a class="headerlink" href="#exercise-14-file-reading-and-writing" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write a function &#39;word_frequency&#39; that reads a text file, counts the frequency of each word,</span>
+<span class="c1"># and writes the results to a new file. Ignore case and punctuation.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Test the function (assuming you have a file named &#39;sample.txt&#39;)</span>
+<span class="n">word_frequency</span><span class="p">(</span><span class="s1">&#39;sample.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;word_counts.txt&#39;</span><span class="p">)</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;word_counts.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="s1">&#39;the&#39;</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="s2">&quot;Common word &#39;the&#39; should be in the frequency list&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;There should be multiple words in the frequency list&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+
+<span class="k">def</span> <span class="nf">word_frequency</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="n">output_file</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">frequency</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+    
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">frequency</span><span class="o">.</span><span class="n">most_common</span><span class="p">():</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+</section>
+<section id="intermediate">
+<h2>Intermediate<a class="headerlink" href="#intermediate" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<section id="list-comprehensions">
+<h3>List Comprehensions<a class="headerlink" href="#list-comprehensions" title="Link to this heading">#</a></h3>
+<section id="exercise-15-even-numbers">
+<h4>Exercise 15: Even Numbers<a class="headerlink" href="#exercise-15-even-numbers" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a list comprehension to create a list of even numbers from 0 to 20 (inclusive).</span>
+<span class="c1"># Store the result in a variable called &#39;even_numbers&#39;.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">even_numbers</span><span class="p">,</span> <span class="nb">list</span><span class="p">),</span> <span class="s2">&quot;even_numbers should be a list&quot;</span>
+<span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">num</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">even_numbers</span><span class="p">),</span> <span class="s2">&quot;All numbers should be even&quot;</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">even_numbers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;There should be 11 even numbers&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">even_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="n">num</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span> <span class="k">if</span> <span class="n">num</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</details></section>
+<section id="exercise-16-nested-list-comprehension">
+<h4>Exercise 16: Nested List Comprehension<a class="headerlink" href="#exercise-16-nested-list-comprehension" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a nested list comprehension to create a list of all possible coordinate pairs (x, y)</span>
+<span class="c1"># where x and y are integers between 0 and 4 (inclusive), excluding pairs where x equals y.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">coordinates</span><span class="p">)</span> <span class="o">==</span> <span class="mi">20</span><span class="p">,</span> <span class="s2">&quot;There should be 20 coordinate pairs&quot;</span>
+<span class="k">assert</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">coordinates</span><span class="p">,</span> <span class="s2">&quot;Pairs where x equals y should be excluded&quot;</span>
+<span class="k">assert</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="ow">in</span> <span class="n">coordinates</span><span class="p">,</span> <span class="s2">&quot;Pair (0, 4) should be included&quot;</span>
+<span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">4</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">&lt;=</span> <span class="mi">4</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">coordinates</span><span class="p">),</span> <span class="s2">&quot;All coordinates should be between 0 and 4&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">coordinates</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span><span class="p">]</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="dictionaries">
+<h3>Dictionaries<a class="headerlink" href="#dictionaries" title="Link to this heading">#</a></h3>
+<section id="exercise-17-dictionary-manipulation">
+<h4>Exercise 17: Dictionary Manipulation<a class="headerlink" href="#exercise-17-dictionary-manipulation" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a dictionary of book titles and their authors.</span>
+<span class="c1"># Then write a function &#39;get_author&#39; that takes a book title and returns the author.</span>
+<span class="c1"># If the book is not in the dictionary, it should return &quot;Unknown&quot;.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="n">get_author</span><span class="p">(</span><span class="s2">&quot;To Kill a Mockingbird&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Harper Lee&quot;</span><span class="p">,</span> <span class="s2">&quot;Incorrect author for &#39;To Kill a Mockingbird&#39;&quot;</span>
+<span class="k">assert</span> <span class="n">get_author</span><span class="p">(</span><span class="s2">&quot;1984&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;George Orwell&quot;</span><span class="p">,</span> <span class="s2">&quot;Incorrect author for &#39;1984&#39;&quot;</span>
+<span class="k">assert</span> <span class="n">get_author</span><span class="p">(</span><span class="s2">&quot;Nonexistent Book&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">,</span> <span class="s2">&quot;Should return &#39;Unknown&#39; for nonexistent books&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">books</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;To Kill a Mockingbird&quot;</span><span class="p">:</span> <span class="s2">&quot;Harper Lee&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;1984&quot;</span><span class="p">:</span> <span class="s2">&quot;George Orwell&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Pride and Prejudice&quot;</span><span class="p">:</span> <span class="s2">&quot;Jane Austen&quot;</span>
+<span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">get_author</span><span class="p">(</span><span class="n">title</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">books</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="lambda-functions">
+<h3>Lambda Functions<a class="headerlink" href="#lambda-functions" title="Link to this heading">#</a></h3>
+<section id="exercise-18-sorting-with-lambda">
+<h4>Exercise 18: Sorting with Lambda<a class="headerlink" href="#exercise-18-sorting-with-lambda" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a lambda function to sort a list of tuples based on the second element of each tuple.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">sorted_data</span> <span class="o">=</span> <span class="c1"># Your sorting code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="n">sorted_data</span> <span class="o">==</span> <span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">)],</span> <span class="s2">&quot;Sorting is incorrect&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="n">sorted_data</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="map-filter-and-reduce">
+<h3>Map, Filter, and Reduce<a class="headerlink" href="#map-filter-and-reduce" title="Link to this heading">#</a></h3>
+<section id="exercise-19-map-and-filter">
+<h4>Exercise 19: Map and Filter<a class="headerlink" href="#exercise-19-map-and-filter" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># Use map() and filter() to create a list of squares of even numbers from a given list of integers.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="s2">&quot;Map and filter result is incorrect&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)))</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="data-structures">
+<h3>Data Structures<a class="headerlink" href="#data-structures" title="Link to this heading">#</a></h3>
+<section id="exercise-20-implement-a-stack">
+<h4>Exercise 20: Implement a Stack<a class="headerlink" href="#exercise-20-implement-a-stack" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implement a Stack class with push, pop, and is_empty methods using a Python list.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="n">stack</span> <span class="o">=</span> <span class="n">Stack</span><span class="p">()</span>
+<span class="k">assert</span> <span class="n">stack</span><span class="o">.</span><span class="n">is_empty</span><span class="p">()</span> <span class="o">==</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;New stack should be empty&quot;</span>
+<span class="n">stack</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">stack</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Pop should return the last item pushed&quot;</span>
+<span class="k">assert</span> <span class="n">stack</span><span class="o">.</span><span class="n">is_empty</span><span class="p">()</span> <span class="o">==</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Stack should not be empty&quot;</span>
+<span class="k">assert</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Pop should return the remaining item&quot;</span>
+<span class="k">assert</span> <span class="n">stack</span><span class="o">.</span><span class="n">is_empty</span><span class="p">()</span> <span class="o">==</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Stack should be empty after popping all items&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Stack</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;pop from empty stack&quot;</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</details></section>
+<section id="exercise-21-implement-a-queue">
+<h4>Exercise 21: Implement a Queue<a class="headerlink" href="#exercise-21-implement-a-queue" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implement a Queue class with enqueue, dequeue, and is_empty methods using a Python list.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+<span class="k">assert</span> <span class="n">queue</span><span class="o">.</span><span class="n">is_empty</span><span class="p">()</span> <span class="o">==</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;New queue should be empty&quot;</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">queue</span><span class="o">.</span><span class="n">enqueue</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">queue</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Dequeue should return the first item enqueued&quot;</span>
+<span class="k">assert</span> <span class="n">queue</span><span class="o">.</span><span class="n">is_empty</span><span class="p">()</span> <span class="o">==</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Queue should not be empty&quot;</span>
+<span class="k">assert</span> <span class="n">queue</span><span class="o">.</span><span class="n">dequeue</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Dequeue should return the remaining item&quot;</span>
+<span class="k">assert</span> <span class="n">queue</span><span class="o">.</span><span class="n">is_empty</span><span class="p">()</span> <span class="o">==</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Queue should be empty after dequeuing all items&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Queue</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">enqueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">dequeue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;dequeue from empty queue&quot;</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="algorithms">
+<h3>Algorithms<a class="headerlink" href="#algorithms" title="Link to this heading">#</a></h3>
+<section id="exercise-22-binary-search">
+<h4>Exercise 22: Binary Search<a class="headerlink" href="#exercise-22-binary-search" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implement a binary search function that takes a sorted list and a target value,</span>
+<span class="c1"># and returns the index of the target value if found, or -1 if not found.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="n">sorted_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">17</span><span class="p">]</span>
+<span class="k">assert</span> <span class="n">binary_search</span><span class="p">(</span><span class="n">sorted_list</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;Should find 7 at index 3&quot;</span>
+<span class="k">assert</span> <span class="n">binary_search</span><span class="p">(</span><span class="n">sorted_list</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span> <span class="o">==</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;Should find 15 at index 7&quot;</span>
+<span class="k">assert</span> <span class="n">binary_search</span><span class="p">(</span><span class="n">sorted_list</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Should return -1 for value not in list&quot;</span>
+<span class="k">assert</span> <span class="n">binary_search</span><span class="p">(</span><span class="n">sorted_list</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Should find 1 at index 0&quot;</span>
+<span class="k">assert</span> <span class="n">binary_search</span><span class="p">(</span><span class="n">sorted_list</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span> <span class="o">==</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;Should find 17 at index 8&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">binary_search</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+    <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    
+    <span class="k">while</span> <span class="n">low</span> <span class="o">&lt;=</span> <span class="n">high</span><span class="p">:</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">mid</span>
+        <span class="k">elif</span> <span class="n">arr</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">:</span>
+            <span class="n">low</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">high</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+    
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="object-oriented-programming">
+<h3>Object-Oriented Programming<a class="headerlink" href="#object-oriented-programming" title="Link to this heading">#</a></h3>
+<section id="exercise-23-simple-class">
+<h4>Exercise 23: Simple Class<a class="headerlink" href="#exercise-23-simple-class" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a class &#39;Rectangle&#39; with attributes &#39;width&#39; and &#39;height&#39;.</span>
+<span class="c1"># Implement methods to calculate the area and perimeter of the rectangle.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="n">rect</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">rect</span><span class="o">.</span><span class="n">area</span><span class="p">()</span> <span class="o">==</span> <span class="mi">15</span><span class="p">,</span> <span class="s2">&quot;Area calculation is incorrect&quot;</span>
+<span class="k">assert</span> <span class="n">rect</span><span class="o">.</span><span class="n">perimeter</span><span class="p">()</span> <span class="o">==</span> <span class="mi">16</span><span class="p">,</span> <span class="s2">&quot;Perimeter calculation is incorrect&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Rectangle</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+    
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span>
+    
+    <span class="k">def</span> <span class="nf">perimeter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">)</span>
+</pre></div>
+</div>
+</details></section>
+<section id="exercise-24-bank-account-class">
+<h4>Exercise 24: Bank Account Class<a class="headerlink" href="#exercise-24-bank-account-class" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a class &#39;BankAccount&#39; with methods for deposit, withdraw, and check balance.</span>
+<span class="c1"># Implement a &#39;MinimumBalanceAccount&#39; that inherits from &#39;BankAccount&#39; and requires a minimum balance.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="n">account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">account</span><span class="o">.</span><span class="n">deposit</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">account</span><span class="o">.</span><span class="n">balance</span> <span class="o">==</span> <span class="mi">1500</span><span class="p">,</span> <span class="s2">&quot;Deposit not handled correctly&quot;</span>
+<span class="n">account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">account</span><span class="o">.</span><span class="n">balance</span> <span class="o">==</span> <span class="mi">1300</span><span class="p">,</span> <span class="s2">&quot;Withdrawal not handled correctly&quot;</span>
+
+<span class="n">min_account</span> <span class="o">=</span> <span class="n">MinimumBalanceAccount</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">minimum_balance</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+<span class="n">min_account</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="mi">600</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">min_account</span><span class="o">.</span><span class="n">balance</span> <span class="o">==</span> <span class="mi">1000</span><span class="p">,</span> <span class="s2">&quot;Minimum balance rule not enforced&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BankAccount</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial_balance</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">initial_balance</span>
+    
+    <span class="k">def</span> <span class="nf">deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">+=</span> <span class="n">amount</span>
+    
+    <span class="k">def</span> <span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">amount</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Insufficient funds&quot;</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">check_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span>
+
+<span class="k">class</span> <span class="nc">MinimumBalanceAccount</span><span class="p">(</span><span class="n">BankAccount</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">initial_balance</span><span class="p">,</span> <span class="n">minimum_balance</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">initial_balance</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minimum_balance</span> <span class="o">=</span> <span class="n">minimum_balance</span>
+    
+    <span class="k">def</span> <span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">-</span> <span class="n">amount</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimum_balance</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">withdraw</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Withdrawal would breach minimum balance&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="inheritance-and-polymorphism">
+<h3>Inheritance and Polymorphism<a class="headerlink" href="#inheritance-and-polymorphism" title="Link to this heading">#</a></h3>
+<section id="exercise-25-shape-hierarchy">
+<h4>Exercise 25: Shape Hierarchy<a class="headerlink" href="#exercise-25-shape-hierarchy" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a base class &#39;Shape&#39; with a method &#39;area&#39;.</span>
+<span class="c1"># Create two derived classes &#39;Circle&#39; and &#39;Square&#39; that inherit from &#39;Shape&#39; and implement the &#39;area&#39; method.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="n">circle</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">square</span> <span class="o">=</span> <span class="n">Square</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">assert</span> <span class="nb">round</span><span class="p">(</span><span class="n">circle</span><span class="o">.</span><span class="n">area</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mf">78.54</span><span class="p">,</span> <span class="s2">&quot;Circle area calculation is incorrect&quot;</span>
+<span class="k">assert</span> <span class="n">square</span><span class="o">.</span><span class="n">area</span><span class="p">()</span> <span class="o">==</span> <span class="mi">16</span><span class="p">,</span> <span class="s2">&quot;Square area calculation is incorrect&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">class</span> <span class="nc">Shape</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Circle</span><span class="p">(</span><span class="n">Shape</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+    
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="k">class</span> <span class="nc">Square</span><span class="p">(</span><span class="n">Shape</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">side</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">=</span> <span class="n">side</span>
+    
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">**</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="regular-expressions">
+<h3>Regular Expressions<a class="headerlink" href="#regular-expressions" title="Link to this heading">#</a></h3>
+<section id="exercise-26-email-validation">
+<h4>Exercise 26: Email Validation<a class="headerlink" href="#exercise-26-email-validation" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write a function &#39;is_valid_email&#39; that uses a regular expression to check if a given string is a valid email address.</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="n">is_valid_email</span><span class="p">(</span><span class="s2">&quot;user@example.com&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Should be a valid email&quot;</span>
+<span class="k">assert</span> <span class="n">is_valid_email</span><span class="p">(</span><span class="s2">&quot;invalid.email@com&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Should be an invalid email&quot;</span>
+<span class="k">assert</span> <span class="n">is_valid_email</span><span class="p">(</span><span class="s2">&quot;user@.com&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;Should be an invalid email&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="k">def</span> <span class="nf">is_valid_email</span><span class="p">(</span><span class="n">email</span><span class="p">):</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;^[\w\.-]+@[\w\.-]+\.\w+$&#39;</span>
+    <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">email</span><span class="p">))</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="modules-and-packages">
+<h3>Modules and Packages<a class="headerlink" href="#modules-and-packages" title="Link to this heading">#</a></h3>
+<section id="exercise-27-custom-module">
+<h4>Exercise 27: Custom Module<a class="headerlink" href="#exercise-27-custom-module" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a custom module &#39;geometry&#39; with functions to calculate area and perimeter of different shapes.</span>
+<span class="c1"># Then, in a separate file, import and use these functions.</span>
+
+<span class="c1"># File: geometry.py</span>
+<span class="c1"># Your code here for the geometry module</span>
+
+<span class="c1"># File: main.py</span>
+<span class="c1"># Your code here to import and use the geometry module</span>
+
+<span class="c1"># Assertions (in main.py)</span>
+<span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">circle_area</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">-</span> <span class="mf">78.54</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">,</span> <span class="s2">&quot;Circle area calculation is incorrect&quot;</span>
+<span class="k">assert</span> <span class="n">geometry</span><span class="o">.</span><span class="n">rectangle_perimeter</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="mi">18</span><span class="p">,</span> <span class="s2">&quot;Rectangle perimeter calculation is incorrect&quot;</span>
+<span class="k">assert</span> <span class="n">geometry</span><span class="o">.</span><span class="n">triangle_area</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;Triangle area calculation is incorrect&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># File: geometry.py</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">circle_area</span><span class="p">(</span><span class="n">radius</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">radius</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">rectangle_perimeter</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">length</span> <span class="o">+</span> <span class="n">width</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">triangle_area</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">c</span><span class="p">))</span>
+
+<span class="c1"># File: main.py</span>
+<span class="kn">import</span> <span class="nn">geometry</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">circle_area</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">rectangle_perimeter</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">triangle_area</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="error-handling">
+<h3>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading">#</a></h3>
+<section id="exercise-28-try-except">
+<h4>Exercise 28: Try-Except<a class="headerlink" href="#exercise-28-try-except" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write a function &#39;safe_divide&#39; that takes two numbers as input and returns their division.</span>
+<span class="c1"># If the second number is zero, catch the ZeroDivisionError and return &quot;Cannot divide by zero&quot;.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="n">safe_divide</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;10 divided by 2 should be 5&quot;</span>
+<span class="k">assert</span> <span class="n">safe_divide</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Cannot divide by zero&quot;</span><span class="p">,</span> <span class="s2">&quot;Should handle division by zero&quot;</span>
+<span class="k">assert</span> <span class="n">safe_divide</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mf">0.25</span><span class="p">,</span> <span class="s2">&quot;Should handle negative numbers&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">safe_divide</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Cannot divide by zero&quot;</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="file-i-o">
+<h3>File I/O<a class="headerlink" href="#file-i-o" title="Link to this heading">#</a></h3>
+<section id="exercise-29-reading-and-writing-files">
+<h4>Exercise 29: Reading and Writing Files<a class="headerlink" href="#exercise-29-reading-and-writing-files" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># Write a function &#39;word_count&#39; that reads a text file and returns a dictionary</span>
+<span class="c1"># with the count of each word in the file. Ignore case and punctuation.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="c1"># Assuming a file named &#39;sample.txt&#39; with content: &quot;Hello world! Hello Python.&quot;</span>
+<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">word_count</span><span class="p">(</span><span class="s1">&#39;sample.txt&#39;</span><span class="p">),</span> <span class="nb">dict</span><span class="p">),</span> <span class="s2">&quot;Should return a dictionary&quot;</span>
+<span class="k">assert</span> <span class="n">word_count</span><span class="p">(</span><span class="s1">&#39;sample.txt&#39;</span><span class="p">)[</span><span class="s1">&#39;hello&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Should count &#39;hello&#39; twice&quot;</span>
+<span class="k">assert</span> <span class="n">word_count</span><span class="p">(</span><span class="s1">&#39;sample.txt&#39;</span><span class="p">)[</span><span class="s1">&#39;world&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Should count &#39;world&#39; once&quot;</span>
+<span class="k">assert</span> <span class="n">word_count</span><span class="p">(</span><span class="s1">&#39;sample.txt&#39;</span><span class="p">)[</span><span class="s1">&#39;python&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Should count &#39;python&#39; once&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+
+<span class="k">def</span> <span class="nf">word_count</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+            <span class="n">counts</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+</section>
+<section id="advanced">
+<h2>Advanced<a class="headerlink" href="#advanced" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<section id="decorators">
+<h3>Decorators<a class="headerlink" href="#decorators" title="Link to this heading">#</a></h3>
+<section id="exercise-30-timing-decorator">
+<h4>Exercise 30: Timing Decorator<a class="headerlink" href="#exercise-30-timing-decorator" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a decorator &#39;timer&#39; that measures the time a function takes to execute.</span>
+<span class="c1"># The decorator should print: &quot;Function {func_name} took {time} seconds to run.&quot;</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="nd">@timer</span>
+<span class="k">def</span> <span class="nf">slow_function</span><span class="p">():</span>
+    <span class="kn">import</span> <span class="nn">time</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Run the function</span>
+<span class="n">slow_function</span><span class="p">()</span>
+
+<span class="c1"># Assertions</span>
+<span class="c1"># Note: We can&#39;t assert exact time, but we can check if the output is printed</span>
+<span class="k">assert</span> <span class="s2">&quot;Function slow_function took&quot;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()[</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">output</span>
+<span class="k">assert</span> <span class="s2">&quot;seconds to run&quot;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">()[</span><span class="s1">&#39;__builtins__&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">output</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+
+<span class="k">def</span> <span class="nf">timer</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Function </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> took </span><span class="si">{</span><span class="n">end_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> seconds to run.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+</pre></div>
+</div>
+</details></section>
+<section id="exercise-31-retry-decorator">
+<h4>Exercise 31: Retry Decorator<a class="headerlink" href="#exercise-31-retry-decorator" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a decorator &#39;retry&#39; that retries the decorated function a specified number of times if it raises an exception.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="nd">@retry</span><span class="p">(</span><span class="n">max_attempts</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">might_fail</span><span class="p">():</span>
+    <span class="kn">import</span> <span class="nn">random</span>
+    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.7</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Random failure&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;Success&quot;</span>
+
+<span class="c1"># Assertions</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">might_fail</span><span class="p">()</span>
+<span class="k">assert</span> <span class="n">result</span> <span class="o">==</span> <span class="s2">&quot;Success&quot;</span><span class="p">,</span> <span class="s2">&quot;Function should eventually succeed&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">functools</span>
+
+<span class="k">def</span> <span class="nf">retry</span><span class="p">(</span><span class="n">max_attempts</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_attempts</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">last_exception</span> <span class="o">=</span> <span class="n">e</span>
+            <span class="k">raise</span> <span class="n">last_exception</span>
+        <span class="k">return</span> <span class="n">wrapper</span>
+    <span class="k">return</span> <span class="n">decorator</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="generators-and-iterators">
+<h3>Generators and Iterators<a class="headerlink" href="#generators-and-iterators" title="Link to this heading">#</a></h3>
+<section id="exercise-32-fibonacci-generator">
+<h4>Exercise 32: Fibonacci Generator<a class="headerlink" href="#exercise-32-fibonacci-generator" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a generator function &#39;fibonacci&#39; that yields the Fibonacci sequence.</span>
+<span class="c1"># The function should take a parameter &#39;n&#39; for the number of Fibonacci numbers to generate.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="n">fib</span> <span class="o">=</span> <span class="n">fibonacci</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">fib</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">34</span><span class="p">],</span> <span class="s2">&quot;Incorrect Fibonacci sequence&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">a</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="web-scraping">
+<h3>Web Scraping<a class="headerlink" href="#web-scraping" title="Link to this heading">#</a></h3>
+<section id="exercise-33-web-scraping-with-beautifulsoup">
+<h4>Exercise 33: Web Scraping with BeautifulSoup<a class="headerlink" href="#exercise-33-web-scraping-with-beautifulsoup" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implement a function &#39;scrape_headlines&#39; that uses BeautifulSoup to scrape the top headlines</span>
+<span class="c1"># from a news website (e.g., https://news.ycombinator.com/).</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="n">headlines</span> <span class="o">=</span> <span class="n">scrape_headlines</span><span class="p">()</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">headlines</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Should have scraped at least one headline&quot;</span>
+<span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">headlines</span><span class="p">),</span> <span class="s2">&quot;All headlines should be strings&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="k">def</span> <span class="nf">scrape_headlines</span><span class="p">():</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://news.ycombinator.com/&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+    <span class="n">headlines</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;storylink&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">headline</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">headline</span> <span class="ow">in</span> <span class="n">headlines</span><span class="p">]</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="dynamic-programming">
+<h3>Dynamic Programming<a class="headerlink" href="#dynamic-programming" title="Link to this heading">#</a></h3>
+<section id="exercise-34-longest-common-subsequence">
+<h4>Exercise 34: Longest Common Subsequence<a class="headerlink" href="#exercise-34-longest-common-subsequence" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># Implement a function to find the length of the Longest Common Subsequence (LCS)</span>
+<span class="c1"># between two strings using dynamic programming.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="k">assert</span> <span class="n">lcs_length</span><span class="p">(</span><span class="s2">&quot;ABCDGH&quot;</span><span class="p">,</span> <span class="s2">&quot;AEDFHR&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;LCS should be &#39;ADH&#39; with length 3&quot;</span>
+<span class="k">assert</span> <span class="n">lcs_length</span><span class="p">(</span><span class="s2">&quot;AGGTAB&quot;</span><span class="p">,</span> <span class="s2">&quot;GXTXAYB&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;LCS should be &#39;GTAB&#39; with length 4&quot;</span>
+<span class="k">assert</span> <span class="n">lcs_length</span><span class="p">(</span><span class="s2">&quot;ABCBDAB&quot;</span><span class="p">,</span> <span class="s2">&quot;BDCABA&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;LCS should be &#39;BCBA&#39; with length 4&quot;</span>
+<span class="k">assert</span> <span class="n">lcs_length</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;ABC&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;LCS with empty string should be 0&quot;</span>
+<span class="k">assert</span> <span class="n">lcs_length</span><span class="p">(</span><span class="s2">&quot;ABC&quot;</span><span class="p">,</span> <span class="s2">&quot;ABC&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;LCS of identical strings should be their length&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lcs_length</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">Y</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="n">L</span><span class="p">[</span><span class="n">m</span><span class="p">][</span><span class="n">n</span><span class="p">]</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="graph-algorithms">
+<h3>Graph Algorithms<a class="headerlink" href="#graph-algorithms" title="Link to this heading">#</a></h3>
+<section id="exercise-35-depth-first-search">
+<h4>Exercise 35: Depth-First Search<a class="headerlink" href="#exercise-35-depth-first-search" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implement a depth-first search algorithm for a graph represented as an adjacency list.</span>
+<span class="c1"># The function should return the list of nodes in the order they were visited.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;E&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">dfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">))</span> <span class="o">==</span> <span class="nb">set</span><span class="p">([</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">]),</span> <span class="s2">&quot;DFS should visit all nodes&quot;</span>
+<span class="k">assert</span> <span class="n">dfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s2">&quot;DFS should start with the given node&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">dfs_recursive</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+        <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">neighbor</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+                <span class="n">dfs_recursive</span><span class="p">(</span><span class="n">neighbor</span><span class="p">)</span>
+    
+    <span class="n">dfs_recursive</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+<section id="logical-problems">
+<h3>Logical Problems<a class="headerlink" href="#logical-problems" title="Link to this heading">#</a></h3>
+<section id="exercise-36-tower-of-hanoi">
+<h4>Exercise 36: Tower of Hanoi<a class="headerlink" href="#exercise-36-tower-of-hanoi" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implement a function to solve the Tower of Hanoi puzzle.</span>
+<span class="c1"># The function should print the steps to move n disks from the source peg to the destination peg.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Test the function (no assertions, as it prints the steps)</span>
+<span class="n">tower_of_hanoi</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tower_of_hanoi</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">auxiliary</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Move disk 1 from </span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">destination</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="n">tower_of_hanoi</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">auxiliary</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Move disk </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">destination</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">tower_of_hanoi</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">auxiliary</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">source</span><span class="p">)</span>
+</pre></div>
+</div>
+</details></section>
+<section id="exercise-37-n-queens-problem">
+<h4>Exercise 37: N-Queens Problem<a class="headerlink" href="#exercise-37-n-queens-problem" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implement a function to solve the N-Queens problem.</span>
+<span class="c1"># The function should return a list of all possible solutions for placing N queens on an NxN chessboard.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="n">solutions_4</span> <span class="o">=</span> <span class="n">solve_n_queens</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">solutions_4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;There should be 2 solutions for 4-Queens&quot;</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">solve_n_queens</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;There should be 1 solution for 1-Queen&quot;</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">solve_n_queens</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;There should be no solutions for 0-Queens&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve_n_queens</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">is_safe</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Q&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Q&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Q&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">col</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">solutions</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">board</span><span class="p">])</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">is_safe</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+                <span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Q&#39;</span>
+                <span class="n">solve</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="n">col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">board</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span>
+
+    <span class="n">solutions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">board</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;.&#39;</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+    <span class="n">solve</span><span class="p">(</span><span class="n">board</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">solutions</span>
+</pre></div>
+</div>
+</details></section>
+<section id="exercise-38-custom-iterator-for-prime-numbers">
+<h4>Exercise 38: Custom Iterator for Prime Numbers<a class="headerlink" href="#exercise-38-custom-iterator-for-prime-numbers" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># Implement a custom iterator class that generates prime numbers up to a specified limit.</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="n">primes</span> <span class="o">=</span> <span class="n">PrimeIterator</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span> <span class="s2">&quot;Should generate correct prime numbers up to 20&quot;</span>
+
+<span class="n">primes</span> <span class="o">=</span> <span class="n">PrimeIterator</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="s2">&quot;Should generate correct prime numbers up to 10&quot;</span>
+
+<span class="n">primes</span> <span class="o">=</span> <span class="n">PrimeIterator</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">assert</span> <span class="nb">list</span><span class="p">(</span><span class="n">primes</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;Should generate only 2 for limit 2&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PrimeIterator</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">limit</span> <span class="o">=</span> <span class="n">limit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">limit</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_prime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current</span><span class="p">):</span>
+                <span class="n">prime</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">current</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">return</span> <span class="n">prime</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">raise</span> <span class="ne">StopIteration</span>
+
+    <span class="k">def</span> <span class="nf">is_prime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</details></section>
+<section id="exercise-39-asynchronous-web-crawler">
+<h4>Exercise 39: Asynchronous Web Crawler<a class="headerlink" href="#exercise-39-asynchronous-web-crawler" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Implement an asynchronous web crawler that fetches the content of multiple URLs concurrently.</span>
+<span class="c1"># The crawler should respect a maximum number of concurrent requests.</span>
+
+<span class="kn">import</span> <span class="nn">aiohttp</span>
+<span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="c1"># Your code here</span>
+
+<span class="c1"># Assertions</span>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;http://example.com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;http://example.org&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;http://example.net&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;http://example.edu&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;http://example.io&quot;</span>
+<span class="p">]</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">test_crawler</span><span class="p">():</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">async_crawl</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="n">max_concurrent</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">urls</span><span class="p">),</span> <span class="s2">&quot;Should fetch all URLs&quot;</span>
+    <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="s2">&quot;All results should be strings&quot;</span>
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">test_crawler</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<details>
+<summary>Solution</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">aiohttp</span>
+<span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">fetch</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+        <span class="k">return</span> <span class="k">await</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">async_crawl</span><span class="p">(</span><span class="n">urls</span><span class="p">,</span> <span class="n">max_concurrent</span><span class="p">):</span>
+    <span class="n">semaphore</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Semaphore</span><span class="p">(</span><span class="n">max_concurrent</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientSession</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+        <span class="k">async</span> <span class="k">def</span> <span class="nf">bounded_fetch</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+            <span class="k">async</span> <span class="k">with</span> <span class="n">semaphore</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">url</span><span class="p">,</span> <span class="k">await</span> <span class="n">fetch</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+        
+        <span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">bounded_fetch</span><span class="p">(</span><span class="n">url</span><span class="p">))</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">]</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="o">*</span><span class="n">tasks</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</pre></div>
+</div>
+</details></section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beginner">Beginner</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-and-data-types">Variables and Data Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-string-manipulation">Exercise 1: String Manipulation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-string-reversal">Exercise 2: String Reversal</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-palindrome-check">Exercise 3: Palindrome Check</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-4-basic-arithmetic">Exercise 4: Basic Arithmetic</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#control-flow">Control Flow</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-5-if-else-statement">Exercise 5: If-Else Statement</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-6-for-loop">Exercise 6: For Loop</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-7-fizzbuzz">Exercise 7: FizzBuzz</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-8-basic-function">Exercise 8: Basic Function</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lists">Lists</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-9-list-operations">Exercise 9: List Operations</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-10-list-flattening">Exercise 10: List Flattening</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-11-tuple-unpacking">Exercise 11: Tuple Unpacking</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionaries-and-sets">Dictionaries and Sets</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-12-dictionary-merge">Exercise 12: Dictionary Merge</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-13-set-operations">Exercise 13: Set Operations</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-file-i-o">Basic File I/O</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-14-file-reading-and-writing">Exercise 14: File Reading and Writing</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intermediate">Intermediate</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-comprehensions">List Comprehensions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-15-even-numbers">Exercise 15: Even Numbers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-16-nested-list-comprehension">Exercise 16: Nested List Comprehension</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionaries">Dictionaries</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-17-dictionary-manipulation">Exercise 17: Dictionary Manipulation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lambda-functions">Lambda Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-18-sorting-with-lambda">Exercise 18: Sorting with Lambda</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#map-filter-and-reduce">Map, Filter, and Reduce</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-19-map-and-filter">Exercise 19: Map and Filter</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structures">Data Structures</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-20-implement-a-stack">Exercise 20: Implement a Stack</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-21-implement-a-queue">Exercise 21: Implement a Queue</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithms">Algorithms</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-22-binary-search">Exercise 22: Binary Search</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#object-oriented-programming">Object-Oriented Programming</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-23-simple-class">Exercise 23: Simple Class</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-24-bank-account-class">Exercise 24: Bank Account Class</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inheritance-and-polymorphism">Inheritance and Polymorphism</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-25-shape-hierarchy">Exercise 25: Shape Hierarchy</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regular-expressions">Regular Expressions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-26-email-validation">Exercise 26: Email Validation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modules-and-packages">Modules and Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-27-custom-module">Exercise 27: Custom Module</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">Error Handling</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-28-try-except">Exercise 28: Try-Except</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#file-i-o">File I/O</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-29-reading-and-writing-files">Exercise 29: Reading and Writing Files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced">Advanced</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decorators">Decorators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-30-timing-decorator">Exercise 30: Timing Decorator</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-31-retry-decorator">Exercise 31: Retry Decorator</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generators-and-iterators">Generators and Iterators</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-32-fibonacci-generator">Exercise 32: Fibonacci Generator</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#web-scraping">Web Scraping</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-33-web-scraping-with-beautifulsoup">Exercise 33: Web Scraping with BeautifulSoup</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-programming">Dynamic Programming</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-34-longest-common-subsequence">Exercise 34: Longest Common Subsequence</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-algorithms">Graph Algorithms</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-35-depth-first-search">Exercise 35: Depth-First Search</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-problems">Logical Problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-36-tower-of-hanoi">Exercise 36: Tower of Hanoi</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-37-n-queens-problem">Exercise 37: N-Queens Problem</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-38-custom-iterator-for-prime-numbers">Exercise 38: Custom Iterator for Prime Numbers</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-39-asynchronous-web-crawler">Exercise 39: Asynchronous Web Crawler</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

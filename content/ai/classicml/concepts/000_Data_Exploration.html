@@ -1,0 +1,2088 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Exploratory Data Analysis &#8212; Anukool Chaturvedi</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=ec7e4d73" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/ai/classicml/concepts/000_Data_Exploration';</script>
+    <link rel="canonical" href="https://anukchat.github.io/content/ai/classicml/concepts/000_Data_Exploration.html" />
+    <link rel="icon" href="../../../../_static/mesh-smallest.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Data Preparation" href="001_Data_Preparation.html" />
+    <link rel="prev" title="Introduction" href="01_Introduction.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../intro_v2.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt="Anukool Chaturvedi - Home"/>
+    <script>document.write(`<img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt="Anukool Chaturvedi - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/3_functions_and_modules.html">Functions &amp; Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/4_Object_Oriented.html">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/8_advanced.html">Advanced Concepts</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../Introduction_to_ml.html">Machine Learning</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Exploratory Data Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="001_Data_Preparation.html">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="003_Classification.html">Classfication</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="005_Evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="006_Advanced.html">K-Fold Cross Validation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../neural/neural_toc.html">Neural Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/002_Backpropogation.html">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/003_Activations.html">Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/004_Optimization.html">Optimizations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../neural/concepts/pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../genai/introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../genai/concepts/transformers/01_transformers_from_scratch.html">Transformers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../genai/langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/intro.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/courses/courses_toc.html">Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/anukchat.github.io/main?urlpath=lab/tree/content/ai/classicml/concepts/000_Data_Exploration.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/anukchat.github.io/blob/main/content/ai/classicml/concepts/000_Data_Exploration.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/content/ai/classicml/concepts/000_Data_Exploration.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Exploratory Data Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Exploratory Data Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understand-the-data">Understand the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subjective-analysis">Subjective analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#releationship-of-saleprice-with-other-variables">Releationship of ‘SalePrice’ with other variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#relationship-with-numerical-variables">Relationship with numerical variables</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relationship-with-categorical-features">Relationship with categorical features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-summary">In summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-analysis">Objective analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-analysis">Correlation analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-matrix-heatmap-style">Correlation matrix (heatmap style)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#saleprice-correlation-matrix">‘SalePrice’ correlation matrix</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plots-between-saleprice-and-correlated-variables">Scatter plots between ‘SalePrice’ and correlated variables</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-data">Missing data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outliers">Outliers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#univariate-analysis">Univariate analysis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bivariate-analysis">Bivariate analysis</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-assumptions">Testing assumptions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normality">Normality</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#homoscedasticity">Homoscedasticity</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dummy-variables">Dummy variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><b>References</b></a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="exploratory-data-analysis">
+<h1>Exploratory Data Analysis<a class="headerlink" href="#exploratory-data-analysis" title="Link to this heading">#</a></h1>
+<p>EDA is the process of performing initial investigations on data to discover patterns, spot anomalies, test hypothesis and check assumptions.</p>
+<p>EDA is important for the following reasons, it helps to:</p>
+<ol class="arabic simple">
+<li><p>Understand the data better.</p></li>
+<li><p>Identify the outliers.</p></li>
+<li><p>Identify the missing values.</p></li>
+<li><p>Relationship between variables.</p></li>
+<li><p>Normality of the data.</p></li>
+<li><p>Outliers.</p></li>
+<li><p>Correlation between variables.</p></li>
+<li><p>Distribution of the data. etc.</p></li>
+</ol>
+<p>To start with EDA, we need to understand the problem statement.</p>
+<ol class="arabic simple">
+<li><p><b>Understand the problem</b>. We’ll look at each variable and do a philosophical analysis about their meaning and importance for this problem.</p></li>
+<li><p><b>Univariable study</b>. We’ll just focus on the dependent variable (‘SalePrice’) and try to know a little bit more about it.</p></li>
+<li><p><b>Multivariate study</b>. We’ll try to understand how the dependent variable and independent variables relate.</p></li>
+<li><p><b>Basic cleaning</b>. We’ll clean the dataset and handle the missing data, outliers and categorical variables.</p></li>
+<li><p><b>Test assumptions</b>. We’ll check if our data meets the assumptions required by most multivariate techniques.</p></li>
+</ol>
+<p>Now, it’s time to have fun!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>About the dataset</strong></p>
+<p>The dataset we’ll use is the well-known Ames Housing dataset. It is a dataset with 81 variables. The goal is to predict the price of a house based on its features.</p>
+<p>The dataset is available on <a class="reference external" href="https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data">Kaggle</a>.</p>
+<p>To understand the description of the columns in teh dataset, lets load house_price_data_description.txt file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read teh data description file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;house_price_data_description.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSSubClass: Identifies the type of dwelling involved in the sale.	
+
+        20	1-STORY 1946 &amp; NEWER ALL STYLES
+        30	1-STORY 1945 &amp; OLDER
+        40	1-STORY W/FINISHED ATTIC ALL AGES
+        45	1-1/2 STORY - UNFINISHED ALL AGES
+        50	1-1/2 STORY FINISHED ALL AGES
+        60	2-STORY 1946 &amp; NEWER
+        70	2-STORY 1945 &amp; OLDER
+        75	2-1/2 STORY ALL AGES
+        80	SPLIT OR MULTI-LEVEL
+        85	SPLIT FOYER
+        90	DUPLEX - ALL STYLES AND AGES
+       120	1-STORY PUD (Planned Unit Development) - 1946 &amp; NEWER
+       150	1-1/2 STORY PUD - ALL AGES
+       160	2-STORY PUD - 1946 &amp; NEWER
+       180	PUD - MULTILEVEL - INCL SPLIT LEV/FOYER
+       190	2 FAMILY CONVERSION - ALL STYLES AND AGES
+
+MSZoning: Identifies the general zoning classification of the sale.
+		
+       A	Agriculture
+       C	Commercial
+       FV	Floating Village Residential
+       I	Industrial
+       RH	Residential High Density
+       RL	Residential Low Density
+       RP	Residential Low Density Park 
+       RM	Residential Medium Density
+	
+LotFrontage: Linear feet of street connected to property
+
+LotArea: Lot size in square feet
+
+Street: Type of road access to property
+
+       Grvl	Gravel	
+       Pave	Paved
+       	
+Alley: Type of alley access to property
+
+       Grvl	Gravel
+       Pave	Paved
+       NA 	No alley access
+		
+LotShape: General shape of property
+
+       Reg	Regular	
+       IR1	Slightly irregular
+       IR2	Moderately Irregular
+       IR3	Irregular
+       
+LandContour: Flatness of the property
+
+       Lvl	Near Flat/Level	
+       Bnk	Banked - Quick and significant rise from street grade to building
+       HLS	Hillside - Significant slope from side to side
+       Low	Depression
+		
+Utilities: Type of utilities available
+		
+       AllPub	All public Utilities (E,G,W,&amp; S)	
+       NoSewr	Electricity, Gas, and Water (Septic Tank)
+       NoSeWa	Electricity and Gas Only
+       ELO	Electricity only	
+	
+LotConfig: Lot configuration
+
+       Inside	Inside lot
+       Corner	Corner lot
+       CulDSac	Cul-de-sac
+       FR2	Frontage on 2 sides of property
+       FR3	Frontage on 3 sides of property
+	
+LandSlope: Slope of property
+		
+       Gtl	Gentle slope
+       Mod	Moderate Slope	
+       Sev	Severe Slope
+	
+Neighborhood: Physical locations within Ames city limits
+
+       Blmngtn	Bloomington Heights
+       Blueste	Bluestem
+       BrDale	Briardale
+       BrkSide	Brookside
+       ClearCr	Clear Creek
+       CollgCr	College Creek
+       Crawfor	Crawford
+       Edwards	Edwards
+       Gilbert	Gilbert
+       IDOTRR	Iowa DOT and Rail Road
+       MeadowV	Meadow Village
+       Mitchel	Mitchell
+       Names	North Ames
+       NoRidge	Northridge
+       NPkVill	Northpark Villa
+       NridgHt	Northridge Heights
+       NWAmes	Northwest Ames
+       OldTown	Old Town
+       SWISU	South &amp; West of Iowa State University
+       Sawyer	Sawyer
+       SawyerW	Sawyer West
+       Somerst	Somerset
+       StoneBr	Stone Brook
+       Timber	Timberland
+       Veenker	Veenker
+			
+Condition1: Proximity to various conditions
+	
+       Artery	Adjacent to arterial street
+       Feedr	Adjacent to feeder street	
+       Norm	Normal	
+       RRNn	Within 200&#39; of North-South Railroad
+       RRAn	Adjacent to North-South Railroad
+       PosN	Near positive off-site feature--park, greenbelt, etc.
+       PosA	Adjacent to postive off-site feature
+       RRNe	Within 200&#39; of East-West Railroad
+       RRAe	Adjacent to East-West Railroad
+	
+Condition2: Proximity to various conditions (if more than one is present)
+		
+       Artery	Adjacent to arterial street
+       Feedr	Adjacent to feeder street	
+       Norm	Normal	
+       RRNn	Within 200&#39; of North-South Railroad
+       RRAn	Adjacent to North-South Railroad
+       PosN	Near positive off-site feature--park, greenbelt, etc.
+       PosA	Adjacent to postive off-site feature
+       RRNe	Within 200&#39; of East-West Railroad
+       RRAe	Adjacent to East-West Railroad
+	
+BldgType: Type of dwelling
+		
+       1Fam	Single-family Detached	
+       2FmCon	Two-family Conversion; originally built as one-family dwelling
+       Duplx	Duplex
+       TwnhsE	Townhouse End Unit
+       TwnhsI	Townhouse Inside Unit
+	
+HouseStyle: Style of dwelling
+	
+       1Story	One story
+       1.5Fin	One and one-half story: 2nd level finished
+       1.5Unf	One and one-half story: 2nd level unfinished
+       2Story	Two story
+       2.5Fin	Two and one-half story: 2nd level finished
+       2.5Unf	Two and one-half story: 2nd level unfinished
+       SFoyer	Split Foyer
+       SLvl	Split Level
+	
+OverallQual: Rates the overall material and finish of the house
+
+       10	Very Excellent
+       9	Excellent
+       8	Very Good
+       7	Good
+       6	Above Average
+       5	Average
+       4	Below Average
+       3	Fair
+       2	Poor
+       1	Very Poor
+	
+OverallCond: Rates the overall condition of the house
+
+       10	Very Excellent
+       9	Excellent
+       8	Very Good
+       7	Good
+       6	Above Average	
+       5	Average
+       4	Below Average	
+       3	Fair
+       2	Poor
+       1	Very Poor
+		
+YearBuilt: Original construction date
+
+YearRemodAdd: Remodel date (same as construction date if no remodeling or additions)
+
+RoofStyle: Type of roof
+
+       Flat	Flat
+       Gable	Gable
+       Gambrel	Gabrel (Barn)
+       Hip	Hip
+       Mansard	Mansard
+       Shed	Shed
+		
+RoofMatl: Roof material
+
+       ClyTile	Clay or Tile
+       CompShg	Standard (Composite) Shingle
+       Membran	Membrane
+       Metal	Metal
+       Roll	Roll
+       Tar&amp;Grv	Gravel &amp; Tar
+       WdShake	Wood Shakes
+       WdShngl	Wood Shingles
+		
+Exterior1st: Exterior covering on house
+
+       AsbShng	Asbestos Shingles
+       AsphShn	Asphalt Shingles
+       BrkComm	Brick Common
+       BrkFace	Brick Face
+       CBlock	Cinder Block
+       CemntBd	Cement Board
+       HdBoard	Hard Board
+       ImStucc	Imitation Stucco
+       MetalSd	Metal Siding
+       Other	Other
+       Plywood	Plywood
+       PreCast	PreCast	
+       Stone	Stone
+       Stucco	Stucco
+       VinylSd	Vinyl Siding
+       Wd Sdng	Wood Siding
+       WdShing	Wood Shingles
+	
+Exterior2nd: Exterior covering on house (if more than one material)
+
+       AsbShng	Asbestos Shingles
+       AsphShn	Asphalt Shingles
+       BrkComm	Brick Common
+       BrkFace	Brick Face
+       CBlock	Cinder Block
+       CemntBd	Cement Board
+       HdBoard	Hard Board
+       ImStucc	Imitation Stucco
+       MetalSd	Metal Siding
+       Other	Other
+       Plywood	Plywood
+       PreCast	PreCast
+       Stone	Stone
+       Stucco	Stucco
+       VinylSd	Vinyl Siding
+       Wd Sdng	Wood Siding
+       WdShing	Wood Shingles
+	
+MasVnrType: Masonry veneer type
+
+       BrkCmn	Brick Common
+       BrkFace	Brick Face
+       CBlock	Cinder Block
+       None	None
+       Stone	Stone
+	
+MasVnrArea: Masonry veneer area in square feet
+
+ExterQual: Evaluates the quality of the material on the exterior 
+		
+       Ex	Excellent
+       Gd	Good
+       TA	Average/Typical
+       Fa	Fair
+       Po	Poor
+		
+ExterCond: Evaluates the present condition of the material on the exterior
+		
+       Ex	Excellent
+       Gd	Good
+       TA	Average/Typical
+       Fa	Fair
+       Po	Poor
+		
+Foundation: Type of foundation
+		
+       BrkTil	Brick &amp; Tile
+       CBlock	Cinder Block
+       PConc	Poured Contrete	
+       Slab	Slab
+       Stone	Stone
+       Wood	Wood
+		
+BsmtQual: Evaluates the height of the basement
+
+       Ex	Excellent (100+ inches)	
+       Gd	Good (90-99 inches)
+       TA	Typical (80-89 inches)
+       Fa	Fair (70-79 inches)
+       Po	Poor (&lt;70 inches
+       NA	No Basement
+		
+BsmtCond: Evaluates the general condition of the basement
+
+       Ex	Excellent
+       Gd	Good
+       TA	Typical - slight dampness allowed
+       Fa	Fair - dampness or some cracking or settling
+       Po	Poor - Severe cracking, settling, or wetness
+       NA	No Basement
+	
+BsmtExposure: Refers to walkout or garden level walls
+
+       Gd	Good Exposure
+       Av	Average Exposure (split levels or foyers typically score average or above)	
+       Mn	Mimimum Exposure
+       No	No Exposure
+       NA	No Basement
+	
+BsmtFinType1: Rating of basement finished area
+
+       GLQ	Good Living Quarters
+       ALQ	Average Living Quarters
+       BLQ	Below Average Living Quarters	
+       Rec	Average Rec Room
+       LwQ	Low Quality
+       Unf	Unfinshed
+       NA	No Basement
+		
+BsmtFinSF1: Type 1 finished square feet
+
+BsmtFinType2: Rating of basement finished area (if multiple types)
+
+       GLQ	Good Living Quarters
+       ALQ	Average Living Quarters
+       BLQ	Below Average Living Quarters	
+       Rec	Average Rec Room
+       LwQ	Low Quality
+       Unf	Unfinshed
+       NA	No Basement
+
+BsmtFinSF2: Type 2 finished square feet
+
+BsmtUnfSF: Unfinished square feet of basement area
+
+TotalBsmtSF: Total square feet of basement area
+
+Heating: Type of heating
+		
+       Floor	Floor Furnace
+       GasA	Gas forced warm air furnace
+       GasW	Gas hot water or steam heat
+       Grav	Gravity furnace	
+       OthW	Hot water or steam heat other than gas
+       Wall	Wall furnace
+		
+HeatingQC: Heating quality and condition
+
+       Ex	Excellent
+       Gd	Good
+       TA	Average/Typical
+       Fa	Fair
+       Po	Poor
+		
+CentralAir: Central air conditioning
+
+       N	No
+       Y	Yes
+		
+Electrical: Electrical system
+
+       SBrkr	Standard Circuit Breakers &amp; Romex
+       FuseA	Fuse Box over 60 AMP and all Romex wiring (Average)	
+       FuseF	60 AMP Fuse Box and mostly Romex wiring (Fair)
+       FuseP	60 AMP Fuse Box and mostly knob &amp; tube wiring (poor)
+       Mix	Mixed
+		
+1stFlrSF: First Floor square feet
+ 
+2ndFlrSF: Second floor square feet
+
+LowQualFinSF: Low quality finished square feet (all floors)
+
+GrLivArea: Above grade (ground) living area square feet
+
+BsmtFullBath: Basement full bathrooms
+
+BsmtHalfBath: Basement half bathrooms
+
+FullBath: Full bathrooms above grade
+
+HalfBath: Half baths above grade
+
+Bedroom: Bedrooms above grade (does NOT include basement bedrooms)
+
+Kitchen: Kitchens above grade
+
+KitchenQual: Kitchen quality
+
+       Ex	Excellent
+       Gd	Good
+       TA	Typical/Average
+       Fa	Fair
+       Po	Poor
+       	
+TotRmsAbvGrd: Total rooms above grade (does not include bathrooms)
+
+Functional: Home functionality (Assume typical unless deductions are warranted)
+
+       Typ	Typical Functionality
+       Min1	Minor Deductions 1
+       Min2	Minor Deductions 2
+       Mod	Moderate Deductions
+       Maj1	Major Deductions 1
+       Maj2	Major Deductions 2
+       Sev	Severely Damaged
+       Sal	Salvage only
+		
+Fireplaces: Number of fireplaces
+
+FireplaceQu: Fireplace quality
+
+       Ex	Excellent - Exceptional Masonry Fireplace
+       Gd	Good - Masonry Fireplace in main level
+       TA	Average - Prefabricated Fireplace in main living area or Masonry Fireplace in basement
+       Fa	Fair - Prefabricated Fireplace in basement
+       Po	Poor - Ben Franklin Stove
+       NA	No Fireplace
+		
+GarageType: Garage location
+		
+       2Types	More than one type of garage
+       Attchd	Attached to home
+       Basment	Basement Garage
+       BuiltIn	Built-In (Garage part of house - typically has room above garage)
+       CarPort	Car Port
+       Detchd	Detached from home
+       NA	No Garage
+		
+GarageYrBlt: Year garage was built
+		
+GarageFinish: Interior finish of the garage
+
+       Fin	Finished
+       RFn	Rough Finished	
+       Unf	Unfinished
+       NA	No Garage
+		
+GarageCars: Size of garage in car capacity
+
+GarageArea: Size of garage in square feet
+
+GarageQual: Garage quality
+
+       Ex	Excellent
+       Gd	Good
+       TA	Typical/Average
+       Fa	Fair
+       Po	Poor
+       NA	No Garage
+		
+GarageCond: Garage condition
+
+       Ex	Excellent
+       Gd	Good
+       TA	Typical/Average
+       Fa	Fair
+       Po	Poor
+       NA	No Garage
+		
+PavedDrive: Paved driveway
+
+       Y	Paved 
+       P	Partial Pavement
+       N	Dirt/Gravel
+		
+WoodDeckSF: Wood deck area in square feet
+
+OpenPorchSF: Open porch area in square feet
+
+EnclosedPorch: Enclosed porch area in square feet
+
+3SsnPorch: Three season porch area in square feet
+
+ScreenPorch: Screen porch area in square feet
+
+PoolArea: Pool area in square feet
+
+PoolQC: Pool quality
+		
+       Ex	Excellent
+       Gd	Good
+       TA	Average/Typical
+       Fa	Fair
+       NA	No Pool
+		
+Fence: Fence quality
+		
+       GdPrv	Good Privacy
+       MnPrv	Minimum Privacy
+       GdWo	Good Wood
+       MnWw	Minimum Wood/Wire
+       NA	No Fence
+	
+MiscFeature: Miscellaneous feature not covered in other categories
+		
+       Elev	Elevator
+       Gar2	2nd Garage (if not described in garage section)
+       Othr	Other
+       Shed	Shed (over 100 SF)
+       TenC	Tennis Court
+       NA	None
+		
+MiscVal: $Value of miscellaneous feature
+
+MoSold: Month Sold (MM)
+
+YrSold: Year Sold (YYYY)
+
+SaleType: Type of sale
+		
+       WD 	Warranty Deed - Conventional
+       CWD	Warranty Deed - Cash
+       VWD	Warranty Deed - VA Loan
+       New	Home just constructed and sold
+       COD	Court Officer Deed/Estate
+       Con	Contract 15% Down payment regular terms
+       ConLw	Contract Low Down payment and low interest
+       ConLI	Contract Low Interest
+       ConLD	Contract Low Down
+       Oth	Other
+		
+SaleCondition: Condition of sale
+
+       Normal	Normal Sale
+       Abnorml	Abnormal Sale -  trade, foreclosure, short sale
+       AdjLand	Adjoining Land Purchase
+       Alloca	Allocation - two linked properties with separate deeds, typically condo with a garage unit	
+       Family	Sale between family members
+       Partial	Home was not completed when last assessed (associated with New Homes)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s load the house prices dataset</span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;house_prices.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#check the decoration</span>
+<span class="n">df_train</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;Id&#39;, &#39;MSSubClass&#39;, &#39;MSZoning&#39;, &#39;LotFrontage&#39;, &#39;LotArea&#39;, &#39;Street&#39;,
+       &#39;Alley&#39;, &#39;LotShape&#39;, &#39;LandContour&#39;, &#39;Utilities&#39;, &#39;LotConfig&#39;,
+       &#39;LandSlope&#39;, &#39;Neighborhood&#39;, &#39;Condition1&#39;, &#39;Condition2&#39;, &#39;BldgType&#39;,
+       &#39;HouseStyle&#39;, &#39;OverallQual&#39;, &#39;OverallCond&#39;, &#39;YearBuilt&#39;, &#39;YearRemodAdd&#39;,
+       &#39;RoofStyle&#39;, &#39;RoofMatl&#39;, &#39;Exterior1st&#39;, &#39;Exterior2nd&#39;, &#39;MasVnrType&#39;,
+       &#39;MasVnrArea&#39;, &#39;ExterQual&#39;, &#39;ExterCond&#39;, &#39;Foundation&#39;, &#39;BsmtQual&#39;,
+       &#39;BsmtCond&#39;, &#39;BsmtExposure&#39;, &#39;BsmtFinType1&#39;, &#39;BsmtFinSF1&#39;,
+       &#39;BsmtFinType2&#39;, &#39;BsmtFinSF2&#39;, &#39;BsmtUnfSF&#39;, &#39;TotalBsmtSF&#39;, &#39;Heating&#39;,
+       &#39;HeatingQC&#39;, &#39;CentralAir&#39;, &#39;Electrical&#39;, &#39;1stFlrSF&#39;, &#39;2ndFlrSF&#39;,
+       &#39;LowQualFinSF&#39;, &#39;GrLivArea&#39;, &#39;BsmtFullBath&#39;, &#39;BsmtHalfBath&#39;, &#39;FullBath&#39;,
+       &#39;HalfBath&#39;, &#39;BedroomAbvGr&#39;, &#39;KitchenAbvGr&#39;, &#39;KitchenQual&#39;,
+       &#39;TotRmsAbvGrd&#39;, &#39;Functional&#39;, &#39;Fireplaces&#39;, &#39;FireplaceQu&#39;, &#39;GarageType&#39;,
+       &#39;GarageYrBlt&#39;, &#39;GarageFinish&#39;, &#39;GarageCars&#39;, &#39;GarageArea&#39;, &#39;GarageQual&#39;,
+       &#39;GarageCond&#39;, &#39;PavedDrive&#39;, &#39;WoodDeckSF&#39;, &#39;OpenPorchSF&#39;,
+       &#39;EnclosedPorch&#39;, &#39;3SsnPorch&#39;, &#39;ScreenPorch&#39;, &#39;PoolArea&#39;, &#39;PoolQC&#39;,
+       &#39;Fence&#39;, &#39;MiscFeature&#39;, &#39;MiscVal&#39;, &#39;MoSold&#39;, &#39;YrSold&#39;, &#39;SaleType&#39;,
+       &#39;SaleCondition&#39;, &#39;SalePrice&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<section id="understand-the-data">
+<h2>Understand the data<a class="headerlink" href="#understand-the-data" title="Link to this heading">#</a></h2>
+<p>In order to understand our data, we can look at each variable and try to understand their meaning and relevance to this problem.</p>
+<p>It is time-consuming, but it will give us the flavour of our dataset.</p>
+<p>In order to have some discipline in our analysis, we can create an Excel spreadsheet with the following columns:</p>
+<ul class="simple">
+<li><p><b>Variable</b> - Variable name.</p></li>
+<li><p><b>Type</b> - Identification of the variables’ type. There are two possible values for this field: ‘numerical’ or ‘categorical’. By ‘numerical’ we mean variables for which the values are numbers, and by ‘categorical’ we mean variables for which the values are categories.</p></li>
+<li><p><b>Segment</b> - Identification of the variables’ segment. We can define three possible segments: building, space or location. When we say ‘building’, we mean a variable that relates to the physical characteristics of the building (e.g. ‘OverallQual’). When we say ‘space’, we mean a variable that reports space properties of the house (e.g. ‘TotalBsmtSF’). Finally, when we say a ‘location’, we mean a variable that gives information about the place where the house is located (e.g. ‘Neighborhood’).</p></li>
+<li><p><b>Expectation</b> - Our expectation about the variable influence in ‘SalePrice’. We can use a categorical scale with ‘High’, ‘Medium’ and ‘Low’ as possible values.</p></li>
+<li><p><b>Conclusion</b> - Our conclusions about the importance of the variable, after we give a quick look at the data. We can keep with the same categorical scale as in ‘Expectation’.</p></li>
+<li><p><b>Comments</b> - Any general comments that occured to us.</p></li>
+</ul>
+<p>While ‘Type’ and ‘Segment’ is just for possible future reference, the column ‘Expectation’ is important because it will help us develop a ‘sixth sense’. To fill this column, we should read the description of all the variables and, one by one, ask ourselves:</p>
+<ul class="simple">
+<li><p>Do we think about this variable when we are buying a house? (e.g. When we think about the house of our dreams, do we care about its ‘Masonry veneer type’?).</p></li>
+<li><p>If so, how important would this variable be? (e.g. What is the impact of having ‘Excellent’ material on the exterior instead of ‘Poor’? And of having ‘Excellent’ instead of ‘Good’?).</p></li>
+<li><p>Is this information already described in any other variable? (e.g. If ‘LandContour’ gives the flatness of the property, do we really need to know the ‘LandSlope’?).</p></li>
+</ul>
+<p>After this daunting exercise, we can filter the spreadsheet and look carefully to the variables with ‘High’ ‘Expectation’. Then, we can rush into some scatter plots between those variables and ‘SalePrice’, filling in the ‘Conclusion’ column which is just the correction of our expectations.</p>
+<p>I went through this process and concluded that the following variables can play an important role in this problem:</p>
+<ul class="simple">
+<li><p>OverallQual</p></li>
+<li><p>YearBuilt.</p></li>
+<li><p>TotalBsmtSF.</p></li>
+<li><p>GrLivArea.</p></li>
+</ul>
+<p>I ended up with two ‘building’ variables <strong>(‘OverallQual’ and ‘YearBuilt’)</strong> and two ‘space’ variables <strong>(‘TotalBsmtSF’ and ‘GrLivArea’)</strong>.</p>
+<p>This might be a little bit unexpected as it goes against the real estate mantra that all that matters is ‘location, location and location’.</p>
+<p>It is possible that this quick data examination process was a bit harsh for categorical variables. For example, I expected the ‘Neigborhood’ variable to be more relevant, but after the data examination I ended up excluding it. Maybe this is related to the use of scatter plots instead of boxplots, which are more suitable for categorical variables visualization. The way we visualize data often influences our conclusions.</p>
+<p>However, the main point of this exercise was to think a little about our data and expectactions, so I think we achieved our goal. Now it’s time for ‘a little less conversation, a little more action please’. Let’s <b>shake it!</b></p>
+</section>
+<section id="subjective-analysis">
+<h2>Subjective analysis<a class="headerlink" href="#subjective-analysis" title="Link to this heading">#</a></h2>
+<p>‘SalePrice’ is the reason of our quest. first we will do some descriptive analysis, which will help us to understand the distribution of the data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#descriptive statistics summary</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count      1460.000000
+mean     180921.195890
+std       79442.502883
+min       34900.000000
+25%      129975.000000
+50%      163000.000000
+75%      214000.000000
+max      755000.000000
+Name: SalePrice, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#histogram</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/0ac2fdc1131b27902ec20d14282c8ddeaac5ab01480a314cd82095e5c4bbc8ab.png" src="../../../../_images/0ac2fdc1131b27902ec20d14282c8ddeaac5ab01480a314cd82095e5c4bbc8ab.png" />
+</div>
+</div>
+<p>From above plot we can see that:</p>
+<ul class="simple">
+<li><p><b>Deviate from the normal distribution.</b></p></li>
+<li><p><b>Have appreciable positive skewness.</b></p></li>
+<li><p><em><b>Show peakedness.</b></em></p></li>
+</ul>
+<p><strong>Skewness and kurtosis</strong></p>
+<ul class="simple">
+<li><p>Skewness is a measure of the asymmetry of the data distribution. It tells us about the direction of the outliers. If the skewness is negative, the tail is on the left side of the distribution and if it is positive, the tail is on the right side.</p></li>
+<li><p>Kurtosis is a measure of the “tailedness” of the data distribution. It tells us about the outliers of the data distribution. If the kurtosis is high, the data distribution has heavy tails and the outliers are more spread out. If the kurtosis is low, the data distribution has light tails and the outliers are more concentrated.</p></li>
+</ul>
+<p>Skewness and kurtosis are important because they help us understand the shape of the data distribution and the presence of outliers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#skewness and kurtosis</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Skewness: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">skew</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kurtosis: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">kurt</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Skewness: 1.882876
+Kurtosis: 6.536282
+</pre></div>
+</div>
+</div>
+</div>
+<p>What does the abovve number mean?</p>
+<p><strong>Skewness</strong>: 1.882876</p>
+<p><strong>Kurtosis</strong>: 6.529276</p>
+<ul class="simple">
+<li><p>A value of 0 indicates a normal distribution,</p></li>
+<li><p>while positive values indicate a right-skewed distribution and</p></li>
+<li><p>negative values indicate a left-skewed distribution.</p></li>
+</ul>
+<p>In this case, the skewness value of 1.882876 indicates that the ‘SalePrice’ distribution is moderately right-skewed. This means that there are more values on the left side of the distribution and fewer values on the right side.</p>
+<p>The kurtosis value of 6.529276 indicates that the distribution is more peaked (leptokurtic) than a normal distribution, which suggests the presence of outliers or extreme values in the data.</p>
+<section id="releationship-of-saleprice-with-other-variables">
+<h3>Releationship of ‘SalePrice’ with other variables<a class="headerlink" href="#releationship-of-saleprice-with-other-variables" title="Link to this heading">#</a></h3>
+<section id="relationship-with-numerical-variables">
+<h4>Relationship with numerical variables<a class="headerlink" href="#relationship-with-numerical-variables" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#scatter plot grlivarea/saleprice</span>
+<span class="n">var</span> <span class="o">=</span> <span class="s1">&#39;GrLivArea&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">],</span> <span class="n">df_train</span><span class="p">[</span><span class="n">var</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">800000</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/a50c3b86727b1f81ab4516f7f06f83ef209851c0452a53f347caf4bb5ef25487.png" src="../../../../_images/a50c3b86727b1f81ab4516f7f06f83ef209851c0452a53f347caf4bb5ef25487.png" />
+</div>
+</div>
+<p>‘SalePrice’ and ‘GrLivArea’ follow a <b>linear relationship.</b></p>
+<p>Let’s check the relationship between ‘SalePrice’ and ‘TotalBsmtSF’.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#scatter plot totalbsmtsf/saleprice</span>
+<span class="n">var</span> <span class="o">=</span> <span class="s1">&#39;TotalBsmtSF&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">],</span> <span class="n">df_train</span><span class="p">[</span><span class="n">var</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">800000</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/458369d12f58f2c934457d2e2009284c0abde6cb51605202b4c10d015b709180.png" src="../../../../_images/458369d12f58f2c934457d2e2009284c0abde6cb51605202b4c10d015b709180.png" />
+</div>
+</div>
+<p>‘TotalBsmtSF’ also has a strong relationship with ‘SalePrice’ which can be an <strong>exponential</strong> or a <b>strong linear relationship</b>.</p>
+</section>
+</section>
+<section id="relationship-with-categorical-features">
+<h3>Relationship with categorical features<a class="headerlink" href="#relationship-with-categorical-features" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#box plot overallqual/saleprice</span>
+<span class="n">var</span> <span class="o">=</span> <span class="s1">&#39;OverallQual&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">],</span> <span class="n">df_train</span><span class="p">[</span><span class="n">var</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;SalePrice&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mi">800000</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/cafedd5e8291f36c7f8084ba57d56200d25fb165ad7d4d821a26c0a2d8d6e7e7.png" src="../../../../_images/cafedd5e8291f36c7f8084ba57d56200d25fb165ad7d4d821a26c0a2d8d6e7e7.png" />
+</div>
+</div>
+<p>Above plot shows that as the Overall quality of the house increases as the Sale price increases, which makes sense.</p>
+<p>The box plot is a good way to compare the distribution of the Sale price for different levels of Overall quality.</p>
+<p>Let’s do the same for ‘YearBuilt’</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var</span> <span class="o">=</span> <span class="s1">&#39;YearBuilt&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">],</span> <span class="n">df_train</span><span class="p">[</span><span class="n">var</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;SalePrice&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mi">800000</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/570d40cbc153b6aada0c6d31efe66cf62121c66df3bdb84ad8a6df47a1faaa2f.png" src="../../../../_images/570d40cbc153b6aada0c6d31efe66cf62121c66df3bdb84ad8a6df47a1faaa2f.png" />
+</div>
+</div>
+<p>Although not strongly but ‘SalePrice’ is more prone to spend more money in new stuff than in old relics.</p>
+<p><b>Note</b>: we don’t know if ‘SalePrice’ is in constant prices. Constant prices try to remove the effect of inflation. If ‘SalePrice’ is not in constant prices, it should be, so than prices are comparable over the years.</p>
+</section>
+<section id="in-summary">
+<h3>In summary<a class="headerlink" href="#in-summary" title="Link to this heading">#</a></h3>
+<p>Here ,we can conclude that:</p>
+<ul class="simple">
+<li><p>‘GrLivArea’ and ‘TotalBsmtSF’ seem to be linearly related with ‘SalePrice’. Both relationships are positive, which means that as one variable increases, the other also increases.</p></li>
+<li><p>In the case of ‘TotalBsmtSF’, we can see that the slope of the linear relationship is particularly high.</p></li>
+<li><p>‘OverallQual’ and ‘YearBuilt’ also seem to be related with ‘SalePrice’. The relationship seems to be stronger in the case of ‘OverallQual’, where the box plot shows how sales prices increase with the overall quality.</p></li>
+</ul>
+<p>We just analysed four variables, but there are many other that we should analyse. The trick here seems to be the choice of the right features (feature selection) and not the definition of complex relationships between them (feature engineering).</p>
+</section>
+</section>
+<section id="objective-analysis">
+<h2>Objective analysis<a class="headerlink" href="#objective-analysis" title="Link to this heading">#</a></h2>
+<p>Until now we just followed our intuition and analysed the variables we thought were important. In spite of our efforts to give an objective character to our analysis, we must say that our starting point was subjective.</p>
+<p>So, let’s overcome inertia and do a more objective analysis.</p>
+<section id="correlation-analysis">
+<h3>Correlation analysis<a class="headerlink" href="#correlation-analysis" title="Link to this heading">#</a></h3>
+<p>To understand the relationship objectively for all sort of variables, we can do some correlation analysis.</p>
+<ul class="simple">
+<li><p>Correlation matrix (heatmap style).</p></li>
+<li><p>‘SalePrice’ correlation matrix (zoomed heatmap style).</p></li>
+<li><p>Scatter plots between the most correlated variables (move like Jagger style).</p></li>
+</ul>
+<section id="correlation-matrix-heatmap-style">
+<h4>Correlation matrix (heatmap style)<a class="headerlink" href="#correlation-matrix-heatmap-style" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#correlation matrix</span>
+<span class="n">numeric_features</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">corrmat</span> <span class="o">=</span> <span class="n">df_train</span><span class="p">[</span><span class="n">numeric_features</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corrmat</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">.8</span><span class="p">,</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../../../../_images/e671db4c01d7a86f3f5eef89ccf35e13b336d0ad0c24ee9307f9e81bdc75e3e8.png" src="../../../../_images/e671db4c01d7a86f3f5eef89ccf35e13b336d0ad0c24ee9307f9e81bdc75e3e8.png" />
+</div>
+</div>
+<p>Heatmap is the best way to get a quick overview of the correlation matrix for all the variables.</p>
+<p>At first sight, there are two red colored squares that get my attention.</p>
+<ol class="arabic simple">
+<li><p>The first one refers to the ‘<strong>TotalBsmtSF</strong>’ and ‘<strong>1stFlrSF</strong>’ variables, and</p></li>
+<li><p>‘<strong>Garage<em>X</em></strong>’ variables.</p></li>
+</ol>
+<p>Both cases show how significant the correlation is between these variables. Actually, this correlation is so strong that it can indicate a situation of multicollinearity.</p>
+<p>If we think about these variables, <strong>we can conclude that they give almost the same information</strong> so multicollinearity really occurs.</p>
+<p>Heatmaps are great to detect this kind of situations and in problems dominated by feature selection, like ours, they are an essential tool.</p>
+<p>Another thing that got my attention was the ‘SalePrice’ correlations. We can see our well-known ‘GrLivArea’, ‘TotalBsmtSF’, and ‘OverallQual’,</p>
+<p>But we can also see many other variables that should be taken into account. That’s what we will do next.</p>
+</section>
+<section id="saleprice-correlation-matrix">
+<h4>‘SalePrice’ correlation matrix<a class="headerlink" href="#saleprice-correlation-matrix" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#saleprice correlation matrix</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1">#number of variables for heatmap</span>
+<span class="c1"># Get the correlation matrix for the top k variables</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="n">corrmat</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="s1">&#39;SalePrice&#39;</span><span class="p">)[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">font_scale</span><span class="o">=</span><span class="mf">1.25</span><span class="p">)</span>
+<span class="n">hm</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.2f&#39;</span><span class="p">,</span> <span class="n">annot_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span> <span class="n">yticklabels</span><span class="o">=</span><span class="n">cols</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="n">cols</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/7f7875ad364a1ebdaa2fdf836bbcad6da224a34e756788a7c701c18e46b29599.png" src="../../../../_images/7f7875ad364a1ebdaa2fdf836bbcad6da224a34e756788a7c701c18e46b29599.png" />
+</div>
+</div>
+<p>These are the variables most correlated with ‘SalePrice’</p>
+<p>👉 ‘OverallQual’, ‘GrLivArea’ and ‘TotalBsmtSF’ are strongly correlated with ‘SalePrice’.</p>
+<p>👉 ‘GarageCars’ and ‘GarageArea’ are also some of the most strongly correlated variables.</p>
+<ul class="simple">
+<li><p>However, as we discussed in the last sub-point, the number of cars that fit into the garage is a consequence of the garage area.</p></li>
+<li><p>‘GarageCars’ and ‘GarageArea’ are like twin brothers. You’ll never be able to distinguish them.</p></li>
+<li><p>Therefore, we just need one of these variables in our analysis (we can keep ‘GarageCars’ since its correlation with ‘SalePrice’ is higher).</p></li>
+</ul>
+<p>👉 ‘TotalBsmtSF’ and ‘1stFloor’ also seem to be twin brothers.
+- We can keep ‘TotalBsmtSF’ just to say that our first guess was right</p>
+<p>👉 ‘FullBath’</p>
+<p>👉 ‘TotRmsAbvGrd’ and ‘GrLivArea’, twin brothers again.</p>
+<p>👉 ‘YearBuilt’… It seems that ‘YearBuilt’ is slightly correlated with ‘SalePrice’.</p>
+<p>Let’s proceed to the scatter plots.</p>
+</section>
+<section id="scatter-plots-between-saleprice-and-correlated-variables">
+<h4>Scatter plots between ‘SalePrice’ and correlated variables<a class="headerlink" href="#scatter-plots-between-saleprice-and-correlated-variables" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#scatterplot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">,</span> <span class="s1">&#39;OverallQual&#39;</span><span class="p">,</span> <span class="s1">&#39;GrLivArea&#39;</span><span class="p">,</span> <span class="s1">&#39;GarageCars&#39;</span><span class="p">,</span> <span class="s1">&#39;TotalBsmtSF&#39;</span><span class="p">,</span> <span class="s1">&#39;FullBath&#39;</span><span class="p">,</span> <span class="s1">&#39;YearBuilt&#39;</span><span class="p">]</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="n">cols</span><span class="p">],</span> <span class="n">size</span> <span class="o">=</span> <span class="mf">2.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/c16fa250c8e06eedc879c159859b77edf136468754eb9a206d9ae4dbb3e5072c.png" src="../../../../_images/c16fa250c8e06eedc879c159859b77edf136468754eb9a206d9ae4dbb3e5072c.png" />
+</div>
+</div>
+<p>Mega scatter plot gives us a reasonable idea about variables relationships.</p>
+<p>One of the figures we may find interesting is the one between ‘TotalBsmtSF’ and ‘GrLiveArea’.</p>
+<p>In this figure we can see the dots drawing a linear line, which almost acts like a border. It totally makes sense that the majority of the dots stay below that line. Basement areas can be equal to the above ground living area, but it is not expected a basement area bigger than the above ground living area.</p>
+<p>The plot concerning ‘SalePrice’ and ‘YearBuilt’ can also make us think. In the bottom of the ‘dots cloud’, we see what almost appears to be a shy exponential function (be creative). We can also see this same tendency in the upper limit of the ‘dots cloud’ (be even more creative). Also, notice how the set of dots regarding the last years tend to stay above this limit (I just wanted to say that prices are increasing faster now).</p>
+<p>Let’s move forward to what’s missing: missing data!</p>
+</section>
+</section>
+<section id="missing-data">
+<h3>Missing data<a class="headerlink" href="#missing-data" title="Link to this heading">#</a></h3>
+<p>Important questions when thinking about missing data:</p>
+<ul class="simple">
+<li><p>How prevalent is the missing data?</p></li>
+<li><p>Is missing data random or does it have a pattern?</p></li>
+</ul>
+<p>The answer to these questions is important for practical reasons because missing data can imply a reduction of the sample size. This can prevent us from proceeding with the analysis. Moreover, from a substantive perspective, we need to ensure that the missing data process is not biased and hidding an inconvenient truth.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#missing data</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">percent</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">df_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">())</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">missing_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">total</span><span class="p">,</span> <span class="n">percent</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Total&#39;</span><span class="p">,</span> <span class="s1">&#39;Percent&#39;</span><span class="p">])</span>
+<span class="n">missing_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Total</th>
+      <th>Percent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>PoolQC</th>
+      <td>1453</td>
+      <td>0.995205</td>
+    </tr>
+    <tr>
+      <th>MiscFeature</th>
+      <td>1406</td>
+      <td>0.963014</td>
+    </tr>
+    <tr>
+      <th>Alley</th>
+      <td>1369</td>
+      <td>0.937671</td>
+    </tr>
+    <tr>
+      <th>Fence</th>
+      <td>1179</td>
+      <td>0.807534</td>
+    </tr>
+    <tr>
+      <th>MasVnrType</th>
+      <td>872</td>
+      <td>0.597260</td>
+    </tr>
+    <tr>
+      <th>FireplaceQu</th>
+      <td>690</td>
+      <td>0.472603</td>
+    </tr>
+    <tr>
+      <th>LotFrontage</th>
+      <td>259</td>
+      <td>0.177397</td>
+    </tr>
+    <tr>
+      <th>GarageYrBlt</th>
+      <td>81</td>
+      <td>0.055479</td>
+    </tr>
+    <tr>
+      <th>GarageCond</th>
+      <td>81</td>
+      <td>0.055479</td>
+    </tr>
+    <tr>
+      <th>GarageType</th>
+      <td>81</td>
+      <td>0.055479</td>
+    </tr>
+    <tr>
+      <th>GarageFinish</th>
+      <td>81</td>
+      <td>0.055479</td>
+    </tr>
+    <tr>
+      <th>GarageQual</th>
+      <td>81</td>
+      <td>0.055479</td>
+    </tr>
+    <tr>
+      <th>BsmtFinType2</th>
+      <td>38</td>
+      <td>0.026027</td>
+    </tr>
+    <tr>
+      <th>BsmtExposure</th>
+      <td>38</td>
+      <td>0.026027</td>
+    </tr>
+    <tr>
+      <th>BsmtQual</th>
+      <td>37</td>
+      <td>0.025342</td>
+    </tr>
+    <tr>
+      <th>BsmtCond</th>
+      <td>37</td>
+      <td>0.025342</td>
+    </tr>
+    <tr>
+      <th>BsmtFinType1</th>
+      <td>37</td>
+      <td>0.025342</td>
+    </tr>
+    <tr>
+      <th>MasVnrArea</th>
+      <td>8</td>
+      <td>0.005479</td>
+    </tr>
+    <tr>
+      <th>Electrical</th>
+      <td>1</td>
+      <td>0.000685</td>
+    </tr>
+    <tr>
+      <th>Id</th>
+      <td>0</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Let’s analyse this to understand how to handle the missing data.</p>
+<p>👉  We’ll consider that when more than 15% of the data is missing, we should delete the corresponding variable and pretend it never existed. This means that we will not try any trick to fill the missing data in these cases.</p>
+<p>👉  There is a set of variables (e.g. ‘PoolQC’, ‘MiscFeature’, ‘Alley’, etc.) that we should delete. None of these variables seem to be very important, since most of them are not aspects in which we think about when buying a house (maybe that’s the reason why data is missing?).</p>
+<p>👉  Variables like ‘PoolQC’, ‘MiscFeature’ and ‘FireplaceQu’ are strong candidates for outliers, so we’ll be happy to delete them.</p>
+<p>👉  For other cases, we can see that ‘Garage<em>X</em>’ variables have the same number of missing data. I bet missing data refers to the same set of observations (although I will not check it; it’s just 5%). Since the most important information regarding garages is expressed by ‘GarageCars’ and considering that we are just talking about 5% of missing data, I’ll delete the mentioned ‘Garage<em>X</em>’ variables. The same logic applies to ‘Bsmt<em>X</em>’ variables.</p>
+<p>👉  Regarding ‘MasVnrArea’ and ‘MasVnrType’, we can consider that these variables are not essential. Furthermore, they have a strong correlation with ‘YearBuilt’ and ‘OverallQual’ which are already considered. Thus, we will not lose information if we delete ‘MasVnrArea’ and ‘MasVnrType’.</p>
+<p>👉  Finally, we have one missing observation in ‘Electrical’. Since it is just one observation, we’ll delete this observation and keep the variable.</p>
+<p>In summary, to handle missing data, we’ll delete all the variables with missing data, except the variable ‘Electrical’. In ‘Electrical’ we’ll just delete the observation with missing data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#dealing with missing data</span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">(</span><span class="n">missing_data</span><span class="p">[</span><span class="n">missing_data</span><span class="p">[</span><span class="s1">&#39;Total&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df_train</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;Electrical&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">df_train</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="c1">#just checking that there&#39;s no missing data missing...</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="outliers">
+<h3>Outliers<a class="headerlink" href="#outliers" title="Link to this heading">#</a></h3>
+<p>Outliers is also something that we should be aware of. Why? Because outliers can markedly affect our models and can be a valuable source of information, providing us insights about specific behaviours.</p>
+<p>Outliers is a complex subject and it deserves more attention. Here, we’ll just do a quick analysis through the standard deviation of ‘SalePrice’ and a set of scatter plots.</p>
+<section id="univariate-analysis">
+<h4>Univariate analysis<a class="headerlink" href="#univariate-analysis" title="Link to this heading">#</a></h4>
+<p>The primary concern here is to establish a threshold that defines an observation as an outlier. To do so, we’ll standardize the data. In this context, data standardization means converting data values to have <strong>mean of 0 and a standard deviation of 1</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#standardizing data</span>
+<span class="n">saleprice_scaled</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">low_range</span> <span class="o">=</span> <span class="n">saleprice_scaled</span><span class="p">[</span><span class="n">saleprice_scaled</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">.</span><span class="n">argsort</span><span class="p">()][:</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">high_range</span> <span class="o">=</span> <span class="n">saleprice_scaled</span><span class="p">[</span><span class="n">saleprice_scaled</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">.</span><span class="n">argsort</span><span class="p">()][</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;outer range (low) of the distribution:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">low_range</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">outer range (high) of the distribution:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">high_range</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>outer range (low) of the distribution:
+[[-1.83820775]
+ [-1.83303414]
+ [-1.80044422]
+ [-1.78282123]
+ [-1.77400974]
+ [-1.62295562]
+ [-1.6166617 ]
+ [-1.58519209]
+ [-1.58519209]
+ [-1.57269236]]
+
+outer range (high) of the distribution:
+[[3.82758058]
+ [4.0395221 ]
+ [4.49473628]
+ [4.70872962]
+ [4.728631  ]
+ [5.06034585]
+ [5.42191907]
+ [5.58987866]
+ [7.10041987]
+ [7.22629831]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>How ‘SalePrice’ looks with her new clothes:</p>
+<ul class="simple">
+<li><p>Low range values are similar and not too far from 0.</p></li>
+<li><p>High range values are far from 0 and the 7.something values are really out of range.</p></li>
+</ul>
+<p>For now, we’ll not consider any of these values as an outlier but we should be careful with those two 7.something values.</p>
+</section>
+<section id="bivariate-analysis">
+<h4>Bivariate analysis<a class="headerlink" href="#bivariate-analysis" title="Link to this heading">#</a></h4>
+<p>We already know the following scatter plots by heart. However, when we look to things from a new perspective, there’s always something to discover.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#bivariate analysis saleprice/grlivarea</span>
+<span class="n">var</span> <span class="o">=</span> <span class="s1">&#39;GrLivArea&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">],</span> <span class="n">df_train</span><span class="p">[</span><span class="n">var</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">800000</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/3d306ec6df86dca77ce2585a731efb08244f12e3492f04db94cbe73713de1ac6.png" src="../../../../_images/3d306ec6df86dca77ce2585a731efb08244f12e3492f04db94cbe73713de1ac6.png" />
+</div>
+</div>
+<p>What has been revealed:</p>
+<p>👉 The two values with bigger ‘GrLivArea’ seem strange and they are not following the crowd. We can speculate why this is happening. These two points are not representative of the typical case. Therefore, we’ll define them as outliers and delete them.</p>
+<p>👉 The two observations in the top of the plot are those 7.something observations that we said we should be careful about. They look like two special cases, however they seem to be following the trend. For that reason, we will keep them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#deleting points</span>
+<span class="n">df_train</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;GrLivArea&#39;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;Id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1299</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">df_train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;Id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">524</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#bivariate analysis saleprice/grlivarea</span>
+<span class="n">var</span> <span class="o">=</span> <span class="s1">&#39;TotalBsmtSF&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">],</span> <span class="n">df_train</span><span class="p">[</span><span class="n">var</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">800000</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/8d0aef852d15c080c58852059aba28266d039e5e44530ec0d46f8ea5de6a2122.png" src="../../../../_images/8d0aef852d15c080c58852059aba28266d039e5e44530ec0d46f8ea5de6a2122.png" />
+</div>
+</div>
+<p>We can feel tempted to eliminate some observations (e.g. TotalBsmtSF &gt; 3000) but I suppose it’s not worth it. We can live with that, so we’ll not do anything.</p>
+</section>
+</section>
+<section id="testing-assumptions">
+<h3>Testing assumptions<a class="headerlink" href="#testing-assumptions" title="Link to this heading">#</a></h3>
+<p>Let’s do testing for the assumptions underlying the statistical bases for multivariate analysis. We already did some data cleaning and discovered a lot about ‘SalePrice’. Now it’s time to go deep and understand how ‘SalePrice’ complies with the statistical assumptions that enables us to apply multivariate techniques.</p>
+<p>According to <a class="reference external" href="https://amzn.to/2uC3j9p">Hair et al. (2013)</a>, four assumptions should be tested:</p>
+<ul class="simple">
+<li><p><b>Normality</b> - When we talk about normality what we mean is that the data should look like a normal distribution. This is important because several statistic tests rely  on this (e.g. t-statistics). In this exercise we’ll just check univariate normality for ‘SalePrice’ (which is a limited approach). Remember that univariate normality doesn’t ensure multivariate normality (which is what we would like to have), but it helps. Another detail to take into account is that in big samples (&gt;200 observations) normality is not such an issue. However, if we solve normality, we avoid a lot of other problems (e.g. heteroscedacity) so that’s the main reason why we are doing this analysis.</p></li>
+<li><p><b>Homoscedasticity</b> - Homoscedasticity refers to the ‘assumption that dependent variable(s) exhibit equal levels of variance across the range of predictor variable(s)’ <a class="reference external" href="https://amzn.to/2uC3j9p">(Hair et al., 2013)</a>. Homoscedasticity is desirable because we want the error term to be the same across all values of the independent variables.</p></li>
+<li><p><b>Linearity</b>- The most common way to assess linearity is to examine scatter plots and search for linear patterns. If patterns are not linear, it would be worthwhile to explore data transformations. However, we’ll not get into this because most of the scatter plots we’ve seen appear to have linear relationships.</p></li>
+<li><p><b>Absence of correlated errors</b> - Correlated errors, like the definition suggests, happen when one error is correlated to another. For instance, if one positive error makes a negative error systematically, it means that there’s a relationship between these variables. This occurs often in time series, where some patterns are time related. We’ll also not get into this. However, if you detect something, try to add a variable that can explain the effect you’re getting. That’s the most common solution for correlated errors.</p></li>
+</ul>
+<section id="normality">
+<h4>Normality<a class="headerlink" href="#normality" title="Link to this heading">#</a></h4>
+<p>The point here is to test ‘SalePrice’ in a very lean way. We’ll do this paying attention to:</p>
+<ul class="simple">
+<li><p><b>Histogram</b> - Kurtosis and skewness.</p></li>
+<li><p><b>Normal probability plot</b> - Data distribution should closely follow the diagonal that represents the normal distribution.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#histogram and normal probability plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">],</span> <span class="n">fit</span><span class="o">=</span><span class="n">norm</span><span class="p">);</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">probplot</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">],</span> <span class="n">plot</span><span class="o">=</span><span class="n">plt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/6c1e703de2b3b8d22da0772648e2d8e62def7e987bc411ab17ef837e875a3060.png" src="../../../../_images/6c1e703de2b3b8d22da0772648e2d8e62def7e987bc411ab17ef837e875a3060.png" />
+<img alt="../../../../_images/f07fc05822175a4b29597ec318af88be7577c9b2b94fd034038835e9152c262e.png" src="../../../../_images/f07fc05822175a4b29597ec318af88be7577c9b2b94fd034038835e9152c262e.png" />
+</div>
+</div>
+<p>Ok, ‘SalePrice’ is not normal. It shows ‘peakedness’, positive skewness and does not follow the diagonal line.</p>
+<p>But everything’s not lost. A simple data transformation can solve the problem.</p>
+<ul class="simple">
+<li><p>In case of positive skewness, log transformations usually works well.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#applying log transformation</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#transformed histogram and normal probability plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">],</span> <span class="n">fit</span><span class="o">=</span><span class="n">norm</span><span class="p">);</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">probplot</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">],</span> <span class="n">plot</span><span class="o">=</span><span class="n">plt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/ee85b55b1533dd8bd2bc868b295c333d26f5bd3f5fe03bf7cdf03f178212fc3f.png" src="../../../../_images/ee85b55b1533dd8bd2bc868b295c333d26f5bd3f5fe03bf7cdf03f178212fc3f.png" />
+<img alt="../../../../_images/58f63478a79b1501ebaad5c22ca348aa2dc3a325fdf7d8bb5482a6b516f2d18a.png" src="../../../../_images/58f63478a79b1501ebaad5c22ca348aa2dc3a325fdf7d8bb5482a6b516f2d18a.png" />
+</div>
+</div>
+<p>Done! Let’s check what’s going on with ‘GrLivArea’.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#histogram and normal probability plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;GrLivArea&#39;</span><span class="p">],</span> <span class="n">fit</span><span class="o">=</span><span class="n">norm</span><span class="p">);</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">probplot</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;GrLivArea&#39;</span><span class="p">],</span> <span class="n">plot</span><span class="o">=</span><span class="n">plt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/7424fce34636e281fe5a1b9c756ac1d4694a16500e3f1e0c5a7d95f48050d463.png" src="../../../../_images/7424fce34636e281fe5a1b9c756ac1d4694a16500e3f1e0c5a7d95f48050d463.png" />
+<img alt="../../../../_images/8ff328ac89cc7f1895aa605c2953ba631ae7d028ce8dea140367d8cfe6f30357.png" src="../../../../_images/8ff328ac89cc7f1895aa605c2953ba631ae7d028ce8dea140367d8cfe6f30357.png" />
+</div>
+</div>
+<p>Skewness</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#data transformation</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;GrLivArea&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;GrLivArea&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#transformed histogram and normal probability plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;GrLivArea&#39;</span><span class="p">],</span> <span class="n">fit</span><span class="o">=</span><span class="n">norm</span><span class="p">);</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">probplot</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;GrLivArea&#39;</span><span class="p">],</span> <span class="n">plot</span><span class="o">=</span><span class="n">plt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/9e816a82c358325f196a07e346e56266ceae37b9f90141523a043aad83f71f51.png" src="../../../../_images/9e816a82c358325f196a07e346e56266ceae37b9f90141523a043aad83f71f51.png" />
+<img alt="../../../../_images/93d41bd217d77b191bbca4b244c3ef907bcd63145dae0d25f485dd4184fa2aca.png" src="../../../../_images/93d41bd217d77b191bbca4b244c3ef907bcd63145dae0d25f485dd4184fa2aca.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#histogram and normal probability plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;TotalBsmtSF&#39;</span><span class="p">],</span> <span class="n">fit</span><span class="o">=</span><span class="n">norm</span><span class="p">);</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">probplot</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;TotalBsmtSF&#39;</span><span class="p">],</span> <span class="n">plot</span><span class="o">=</span><span class="n">plt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/3aa435a636305d5156dff487d194bbd92ab2bf874b5f791a949f86f351e7d45a.png" src="../../../../_images/3aa435a636305d5156dff487d194bbd92ab2bf874b5f791a949f86f351e7d45a.png" />
+<img alt="../../../../_images/291f12299dc57c145106d0cc6e9154dfc9f825d2c6a2ad0d6b66b5e55f8a86cf.png" src="../../../../_images/291f12299dc57c145106d0cc6e9154dfc9f825d2c6a2ad0d6b66b5e55f8a86cf.png" />
+</div>
+</div>
+<p>What do we have here?</p>
+<ul class="simple">
+<li><p>Something that, in general, presents skewness.</p></li>
+<li><p>A significant number of observations with value zero (houses without basement).</p></li>
+<li><p>A big problem because the value zero doesn’t allow us to do log transformations.</p></li>
+</ul>
+<p>👉 To apply a log transformation here, we’ll create a variable that can get the effect of having or not having basement (binary variable).</p>
+<p>👉 Then, we’ll do a log transformation to all the non-zero observations, ignoring those with value zero. This way we can transform data, without losing the effect of having or not basement.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#create column for new variable (one is enough because it&#39;s a binary categorical feature)</span>
+<span class="c1">#if area&gt;0 it gets 1, for area==0 it gets 0</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;HasBsmt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;TotalBsmtSF&#39;</span><span class="p">]),</span> <span class="n">index</span><span class="o">=</span><span class="n">df_train</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;HasBsmt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> 
+<span class="n">df_train</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;TotalBsmtSF&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;HasBsmt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#transform data</span>
+<span class="n">df_train</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;HasBsmt&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;TotalBsmtSF&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;TotalBsmtSF&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#histogram and normal probability plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;TotalBsmtSF&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;TotalBsmtSF&#39;</span><span class="p">],</span> <span class="n">fit</span><span class="o">=</span><span class="n">norm</span><span class="p">);</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">probplot</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;TotalBsmtSF&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;TotalBsmtSF&#39;</span><span class="p">],</span> <span class="n">plot</span><span class="o">=</span><span class="n">plt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/a712bdca6599286858661fe7805b0dda8a1355bcafbc4b198b4caafb66e3f17b.png" src="../../../../_images/a712bdca6599286858661fe7805b0dda8a1355bcafbc4b198b4caafb66e3f17b.png" />
+<img alt="../../../../_images/aec014a3453110a0749b6daa9541b731173b99d3356911d1e1554c1629b8190d.png" src="../../../../_images/aec014a3453110a0749b6daa9541b731173b99d3356911d1e1554c1629b8190d.png" />
+</div>
+</div>
+</section>
+<section id="homoscedasticity">
+<h4>Homoscedasticity<a class="headerlink" href="#homoscedasticity" title="Link to this heading">#</a></h4>
+<p>The best approach to test homoscedasticity for two metric variables is graphically. Departures from an equal dispersion are shown by such shapes as cones (small dispersion at one side of the graph, large dispersion at the opposite side) or diamonds (a large number of points at the center of the distribution).</p>
+<p>Starting by ‘SalePrice’ and ‘GrLivArea’…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#scatter plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;GrLivArea&#39;</span><span class="p">],</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/7800e9820e76cd5e84f6c45b913e3524e98e8c33cf8038e6b1b68b6a014bbc64.png" src="../../../../_images/7800e9820e76cd5e84f6c45b913e3524e98e8c33cf8038e6b1b68b6a014bbc64.png" />
+</div>
+</div>
+<p>Older versions of this scatter plot (previous to log transformations), had a conic shape (go back and check ‘Scatter plots between ‘SalePrice’ and correlated variables (move like Jagger style)’). As you can see, the current scatter plot doesn’t have a conic shape anymore. That’s the power of normality! Just by ensuring normality in some variables, we solved the homoscedasticity problem.</p>
+<p>Now let’s check ‘SalePrice’ with ‘TotalBsmtSF’.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#scatter plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;TotalBsmtSF&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;TotalBsmtSF&#39;</span><span class="p">],</span> <span class="n">df_train</span><span class="p">[</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;TotalBsmtSF&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/da9efdf02ae1b7bf40bff1e59754169170501f6c5fbd0e5f54b15381c40d2748.png" src="../../../../_images/da9efdf02ae1b7bf40bff1e59754169170501f6c5fbd0e5f54b15381c40d2748.png" />
+</div>
+</div>
+<p>We can say that, in general, ‘SalePrice’ exhibit equal levels of variance across the range of ‘TotalBsmtSF’. Cool!</p>
+</section>
+</section>
+<section id="dummy-variables">
+<h3>Dummy variables<a class="headerlink" href="#dummy-variables" title="Link to this heading">#</a></h3>
+<p>Easy mode.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#convert categorical variable into dummy</span>
+<span class="n">df_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="conclusion">
+<h1>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h1>
+<p>👉 We applied strategies from Hair et al. (2013), including:</p>
+<ul class="simple">
+<li><p>Analyzing ‘SalePrice’ alone and with correlated variables</p></li>
+<li><p>Handling missing data and outliers</p></li>
+<li><p>Testing statistical assumptions</p></li>
+<li><p>Transforming categorical variables to dummies</p></li>
+</ul>
+<p>👉 Next steps:</p>
+<ul class="simple">
+<li><p>Predict ‘SalePrice’ behavior</p></li>
+<li><p>Consider different approaches:</p>
+<ul>
+<li><p>Regularized linear regression</p></li>
+<li><p>Ensemble methods</p></li>
+<li><p>Other techniques</p></li>
+</ul>
+</li>
+</ul>
+<p>The choice of method is up to you to explore and determine</p>
+<section id="references">
+<h2><b>References</b><a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.kaggle.com/anukoolchaturvedi/house-prices-advanced-regression-techniques">Kaggle Notebook</a></p></li>
+<li><p><a class="reference external" href="https://www.kaggle.com/pmarcelino/data-analysis-and-feature-extraction-with-python">Other kernels</a></p></li>
+<li><p><a class="reference external" href="https://amzn.to/2JuDmvo">Hair et al., 2013, Multivariate Data Analysis, 7th Edition</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/anukchat.github.io",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/ai/classicml/concepts"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_Introduction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="001_Data_Preparation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data Preparation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Exploratory Data Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understand-the-data">Understand the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subjective-analysis">Subjective analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#releationship-of-saleprice-with-other-variables">Releationship of ‘SalePrice’ with other variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#relationship-with-numerical-variables">Relationship with numerical variables</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relationship-with-categorical-features">Relationship with categorical features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-summary">In summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-analysis">Objective analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-analysis">Correlation analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-matrix-heatmap-style">Correlation matrix (heatmap style)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#saleprice-correlation-matrix">‘SalePrice’ correlation matrix</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plots-between-saleprice-and-correlated-variables">Scatter plots between ‘SalePrice’ and correlated variables</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-data">Missing data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outliers">Outliers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#univariate-analysis">Univariate analysis</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#bivariate-analysis">Bivariate analysis</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-assumptions">Testing assumptions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normality">Normality</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#homoscedasticity">Homoscedasticity</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dummy-variables">Dummy variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references"><b>References</b></a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
