@@ -19,6 +19,10 @@
     box-shadow: none;
   }
 </style>
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = "light";
+    document.documentElement.dataset.theme = "light";
+  </script>
 
 ```{raw} html
 :class: full-width
