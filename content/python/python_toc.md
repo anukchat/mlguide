@@ -47,8 +47,6 @@ The bytecode is sent to the Python Virtual Machine (PVM), which is a part of the
 
 <div style="display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; padding: 20px;">
 
-
-
 <div style="background-color: #f9f9f9; border-radius: 8px; padding: 20px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); text-align: center; display: flex; flex-direction: column; justify-content: center;">
 <h3>1️⃣<br/><a href="/content/python/1_installation.ipynb">Installation</a></h3>
 </div>
