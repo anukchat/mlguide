@@ -338,7 +338,6 @@
             border: 1px solid #f5c6cb;
         }
     </style>
-    <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/15ce0b9946af5ca903b818daf/89735e8aaebe7c95723043c1f.js");</script>
 </head>
 
 <body>
@@ -374,26 +373,62 @@
                 browser! 🧑‍💻
             </p>
         </section>
-
-        <!-- <section class="cta-section">
+        <section class="cta-section">
             <h2>Get Exclusive ML Insights!</h2>
             <p>Join our community and receive weekly curated content, learning resources, and industry updates.</p>
             <div id="mc_embed_signup">
-                <form action="https://mlguide.us17.list-manage.com/subscribe/post?u=15ce0b9946af5ca903b818daf&amp;id=4d4041245e&amp;f_id=00f68ae0f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_self" novalidate="">
+                <form id="newsletter-form" action="https://script.google.com/macros/s/AKfycbxCbxRwkfWipbJh5kC96Lphs8aMStwmk3NuYiZXSu-jB1DnhLFUFfWyEcl_c1_yncmhbw/exec" method="POST" target="_self" >
                     <div id="mc_embed_signup_scroll">
                         <div class="mc-field-group">
-                            <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" placeholder="Enter your email">
+                            <input type="email" name="email" id="email" class="required email" required="" placeholder="Enter your email">
                         </div>
                         <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                            <input type="text" name="b_15ce0b9946af5ca903b818daf_4d4041245e" tabindex="-1" value="">
+                            <input type="text" tabindex="-1" value="">
                         </div>
                         <div class="clear">
-                            <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">
+                            <button type="submit" class="button">Subscribe</button>
                         </div>
                     </div>
                 </form>
+                <div id="thank-you-message" style="display: none;" class="response success-message">
+                    Thank you for subscribing! 🎉 Check your inbox for exclusive ML insights.
+                </div>
+                <div id="error-message" style="display: none;" class="response error-message">
+                    Oops! Something went wrong. Please try again later.
+                </div>
             </div>
-        </section> -->
+        </section>
+        <script>
+            document.getElementById("newsletter-form").addEventListener("submit", function(event){
+                event.preventDefault(); // Prevents the default form submission
+        
+                var form = this;
+        
+                // Submit the form using AJAX
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", form.action, true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        
+                // Gather the form data
+                var formData = new FormData(form);
+                var params = new URLSearchParams(formData).toString();
+        
+                xhr.onreadystatechange = function() {
+                  if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                      // Hide the form and show the thank you message
+                      document.getElementById("newsletter-form").style.display = "none";
+                      document.getElementById("thank-you-message").style.display = "block";
+                    } else {
+                      // Display an error message if submission fails
+                      document.getElementById("error-message").style.display = "block";
+                    }
+                  }
+                };
+        
+                xhr.send(params);
+            });
+        </script>     
 
         <h2 class="section-title">Learning Modules</h2>
         <div class="grid">
