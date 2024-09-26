@@ -62,6 +62,7 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/ai/classicml/concepts/003_Classification';</script>
     <link rel="canonical" href="https://mlguide.in/content/ai/classicml/concepts/003_Classification.html" />
+    <link rel="icon" href="../../../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <link rel="next" title="Clustering" href="004_Clustering.html" />
@@ -104,8 +105,8 @@
          class="form-control"
          name="q"
          id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
+         placeholder="Search..."
+         aria-label="Search..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -309,73 +310,6 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-launch-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
-    <i class="fas fa-rocket"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://mybinder.org/v2/gh/anukchat/mlguide/main?urlpath=lab/tree/content/ai/classicml/concepts/003_Classification.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch on Binder"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img alt="Binder logo" src="../../../../_static/images/logo_binder.svg">
-  </span>
-<span class="btn__text-container">Binder</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="https://colab.research.google.com/github/anukchat/mlguide/blob/main/content/ai/classicml/concepts/003_Classification.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img alt="Colab logo" src="../../../../_static/images/logo_colab.png">
-  </span>
-<span class="btn__text-container">Colab</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="initThebeSBT()"
-  class="btn btn-sm btn-launch-thebe dropdown-item"
-  title="Launch Thebe"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-play"></i>
-  </span>
-<span class="btn__text-container">Live Code</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
 
 
 
@@ -660,8 +594,8 @@ $<span class="math notranslate nohighlight">\(p=\frac{1}{1+e^{-h_{\theta}\left(x
 <section id="gradient-of-sigmoid-function">
 <h3>Gradient of sigmoid function<a class="headerlink" href="#gradient-of-sigmoid-function" title="Link to this heading">#</a></h3>
 <p>$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6308b84f-304a-495f-bdf2-3ead32f54ad9">
-<span class="eqno">(3)<a class="headerlink" href="#equation-6308b84f-304a-495f-bdf2-3ead32f54ad9" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-6799af62-c1de-41e0-9dfa-315d8503e562">
+<span class="eqno">(3)<a class="headerlink" href="#equation-6799af62-c1de-41e0-9dfa-315d8503e562" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dfrac{d}{dx} \sigma(x) &amp;= \dfrac{d}{dx} \left[ \dfrac{1}{1 + e^{-x}} \right] \\
 &amp;= \dfrac{d}{dx} \left( 1 + \mathrm{e}^{-x} \right)^{-1} \\
 &amp;= -(1 + e^{-x})^{-2}(-e^{-x}) \\
@@ -722,8 +656,8 @@ $<span class="math notranslate nohighlight">\(p=\frac{1}{1+e^{-h_{\theta}\left(x
 </ol>
 <p>Our loss function will be:
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a8fe4264-f8e3-47b5-a2b2-055dca275c2a">
-<span class="eqno">(4)<a class="headerlink" href="#equation-a8fe4264-f8e3-47b5-a2b2-055dca275c2a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-eb1f04e9-38ce-4b79-baf4-5434d1897bc2">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eb1f04e9-38ce-4b79-baf4-5434d1897bc2" title="Permalink to this equation">#</a></span>\[\begin{equation}
     Cost(h_\theta(x), y)=
     \begin{cases}
         -log(h_\theta(x)), &amp; \text{if}\ y=0 \\
@@ -781,8 +715,8 @@ $$h_\theta(x) = \frac{1}{1 + e^{-x}}\]</div>
 <img alt="../../../../_images/5bfea8c70273ea5af8ce300eec7e7c0b14fa1846b69c165284be14846bfd25e9.png" src="../../../../_images/5bfea8c70273ea5af8ce300eec7e7c0b14fa1846b69c165284be14846bfd25e9.png" />
 </div>
 </div>
-<div class="amsmath math notranslate nohighlight" id="equation-aaab7526-b473-429c-823c-f1f9bd12611b">
-<span class="eqno">(5)<a class="headerlink" href="#equation-aaab7526-b473-429c-823c-f1f9bd12611b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3dc9e7f1-6ad7-4ed7-a335-66f0c13d942b">
+<span class="eqno">(5)<a class="headerlink" href="#equation-3dc9e7f1-6ad7-4ed7-a335-66f0c13d942b" title="Permalink to this equation">#</a></span>\[\begin{equation}
   X=
   \begin{cases}
     0, &amp; \text{if}\ a=1 \\
@@ -3972,8 +3906,8 @@ Costs: [[ 1.78981083  1.60069349  1.45216994  1.33177187  1.23185649  1.1474152
     {
         requestKernel: true,
         binderOptions: {
-            repo: "anukchat/mlguide",
-            ref: "main",
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
         },
         codeMirrorConfig: {
             theme: "abcdef",
