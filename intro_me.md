@@ -15,6 +15,6 @@
 ```{raw} html
 :class: full-width
 <div style="height: 100vh;">
-  <iframe src="_static/about_me.html" style="border:none;height: 100%;width: 100%;"></iframe>
+  <iframe src="pages/about_me.html" style="border:none;height: 100%;width: 100%;"></iframe>
 </div>
 ```
