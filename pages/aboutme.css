@@ -350,7 +350,7 @@ body {
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    text-align: left;
+    /* text-align: left; */
 }
 
 /* Animations */
@@ -453,4 +453,22 @@ body {
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
+}
+
+@media screen and (max-width: 768px) {
+    .timeline::before {
+        left: 50px;
+    }
+    .timeline-item {
+        width: calc(100% - 100px);
+        margin-left: 100px;
+    }
+    .timeline-item.left,
+    .timeline-item.right {
+        float: none;
+    }
+    .timeline-item.left::after,
+    .timeline-item.right::after {
+        left: -56px;
+    }
 }

@@ -218,6 +218,40 @@
             ease: "power2.inOut",
             stagger: 0.2
         });
+
+        function setupResponsiveTimeline() {
+            let mm = gsap.matchMedia();
+
+            mm.add("(min-width: 769px)", () => {
+                gsap.utils.toArray(".timeline-item").forEach((item, i) => {
+                    gsap.from(item, {
+                        opacity: 0,
+                        x: i % 2 === 0 ? 50 : -50,
+                        duration: 1,
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 80%",
+                        }
+                    });
+                });
+            });
+
+            mm.add("(max-width: 768px)", () => {
+                gsap.utils.toArray(".timeline-item").forEach((item) => {
+                    gsap.from(item, {
+                        opacity: 0,
+                        x: 50,
+                        duration: 1,
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 80%",
+                        }
+                    });
+                });
+            });
+        }
+
+        setupResponsiveTimeline();
     </script>
 </body>
 </html>
