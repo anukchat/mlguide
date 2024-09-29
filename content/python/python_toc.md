@@ -58,13 +58,13 @@ Get started by installing Python on your system.
 :::
 
 ::: {card} 2️⃣ Syntax & Semantics
-:link: ../python/2_syntax_and_semantics.html
+:link: ../python/2_syntax_and_symantics.html
 :link-type: url
 :shadow: md
 :margin: 3
 :text-align: center
 
-Learn the fundamentals of Python's syntax and semantics.
+Learn the fundamentals of Python's syntax and symantics.
 :::
 
 ::: {card} 3️⃣ Functions & Modules
@@ -77,44 +77,44 @@ Learn the fundamentals of Python's syntax and semantics.
 Dive into functions and modular programming in Python.
 :::
 
-::: {card} 4️⃣ Error Handling
-:link: ../python/4_error_handling.html
+::: {card} 4️⃣ Object Oriented Programming
+:link: ../python/4_Object_Oriented.html
 :link-type: url
 :shadow: md
 :margin: 3
 :text-align: center
 
-Master error handling to build robust applications.
+Learn about object-oriented programming in Python.
 :::
 
-::: {card} 5️⃣ Data Structures
-:link: ../python/5_data_structures.html
+::: {card} 5️⃣ Exception Handling
+:link: ../python/5_Exceptions_Handling.html
 :link-type: url
 :shadow: md
 :margin: 3
 :text-align: center
 
-Explore Python's built-in data structures for efficient data management.
+Learn about exception handling in Python.
 :::
 
-::: {card} 6️⃣ OOPs
-:link: ../python/6_object_oriented.html
+::: {card} 6️⃣ Handling Files
+:link: ../python/6_Handling_Files.html
 :link-type: url
 :shadow: md
 :margin: 3
 :text-align: center
 
-Understand Object-Oriented Programming in Python.
+Learn how to handle files in Python.
 :::
 
-::: {card} 7️⃣ Functional Programming
-:link: ../python/7_functional_programming.html
+::: {card} 7️⃣ Datetime
+:link: ../python/7_Datetime_Operations.html
 :link-type: url
 :shadow: md
 :margin: 3
 :text-align: center
 
-Learn about functional programming paradigms in Python.
+Learn about datetime operations in Python.
 :::
 
 ::: {card} 8️⃣ Advanced Concepts
