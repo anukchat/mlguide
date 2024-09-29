@@ -44,15 +44,14 @@ The bytecode is sent to the Python Virtual Machine (PVM), which is a part of the
 
 ## Journey
 
-:::: {grid} 2
+:::: {grid} 1 2 3 4
 :align: center
 
 ::: {card} 1️⃣ Installation
 :link: ../python/1_installation.html
 :link-type: url
 :shadow: md
-:margin: 4
-:width: 25%
+:margin: 3
 :text-align: center
 
 Get started by installing Python on your system.
@@ -62,8 +61,7 @@ Get started by installing Python on your system.
 :link: ../python/2_syntax_and_semantics.html
 :link-type: url
 :shadow: md
-:margin: 4
-:width: 25%
+:margin: 3
 :text-align: center
 
 Learn the fundamentals of Python's syntax and semantics.
@@ -73,8 +71,7 @@ Learn the fundamentals of Python's syntax and semantics.
 :link: ../python/3_functions_and_modules.html
 :link-type: url
 :shadow: md
-:margin: 4
-:width: 25%
+:margin: 3
 :text-align: center
 
 Dive into functions and modular programming in Python.
@@ -84,8 +81,7 @@ Dive into functions and modular programming in Python.
 :link: ../python/4_error_handling.html
 :link-type: url
 :shadow: md
-:margin: 4
-:width: 25%
+:margin: 3
 :text-align: center
 
 Master error handling to build robust applications.
@@ -95,8 +91,7 @@ Master error handling to build robust applications.
 :link: ../python/5_data_structures.html
 :link-type: url
 :shadow: md
-:margin: 4
-:width: 25%
+:margin: 3
 :text-align: center
 
 Explore Python's built-in data structures for efficient data management.
@@ -106,8 +101,7 @@ Explore Python's built-in data structures for efficient data management.
 :link: ../python/6_object_oriented.html
 :link-type: url
 :shadow: md
-:margin: 4
-:width: 25%
+:margin: 3
 :text-align: center
 
 Understand Object-Oriented Programming in Python.
@@ -117,8 +111,7 @@ Understand Object-Oriented Programming in Python.
 :link: ../python/7_functional_programming.html
 :link-type: url
 :shadow: md
-:margin: 4
-:width: 25%
+:margin: 3
 :text-align: center
 
 Learn about functional programming paradigms in Python.
@@ -128,8 +121,7 @@ Learn about functional programming paradigms in Python.
 :link: ../python/8_advanced.html
 :link-type: url
 :shadow: md
-:margin: 4
-:width: 25%
+:margin: 3
 :text-align: center
 
 Delve into advanced Python topics for seasoned developers.
@@ -139,8 +131,7 @@ Delve into advanced Python topics for seasoned developers.
 :link: ../python/conceptual_topics.html
 :link-type: url
 :shadow: md
-:margin: 4
-:width: 25%
+:margin: 3
 :text-align: center
 
 Compare interpreters and compilers in the context of Python.
@@ -150,8 +141,7 @@ Compare interpreters and compilers in the context of Python.
 :link: ../python/exercises.html
 :link-type: url
 :shadow: md
-:margin: 4
-:width: 25%
+:margin: 3
 :text-align: center
 
 Test your knowledge with practical Python exercises.
