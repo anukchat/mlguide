@@ -42,10 +42,12 @@ The bytecode is sent to the Python Virtual Machine (PVM), which is a part of the
 
 ![Python Execution Flow](Fig_1_Python_Intro.png)
 
-## Journey
+## Modules
 
 :::: {grid} 1 2 3 4
 :align: center
+:margin: 0
+:gutter: 0
 
 ::: {card} 1️⃣ Installation
 :link: ../python/1_installation.html
