@@ -1,7 +1,39 @@
-## Mathematics essentials
+# Mathematics
 
-✅ **[Vectors](/content/essentials/mathematics/linear-algebra_vectors.ipynb)**
+:::: {grid} 1 2 3 4
+:align: center
+:margin: 0
+:gutter: 0
 
-✅ **[Matrices](/content/essentials/mathematics/linear-algebra_matrices.ipynb)**
+::: {card} 1️⃣ Vectors
+:link: ../mathematics/linear-algebra_vectors.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
 
-✅ **[Similarity measure](/content/essentials/mathematics/dissimilarity_measures.ipynb)**
+Understand vectors in linear algebra.
+:::
+
+::: {card} 2️⃣ Matrices
+:link: ../mathematics/linear-algebra_matrices.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+
+Understand matrices in linear algebra.
+:::
+
+::: {card} 3️⃣ Similarity measure
+:link: ../mathematics/dissimilarity_measures.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+
+Dive into similarity measures in mathematics.
+:::
+
+::::
+

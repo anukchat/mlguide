@@ -1,10 +1,31 @@
-# Python Matplotlib
+# Matplotlib
+:::: {grid} 1 2 3 4
+:align: center
+:margin: 0
+:gutter: 0
 
-✅ **[Matplotlib 1](/content/tools/matplotlib/002_Python_Matplotlib_Exercise_1.ipynb)**
+::: {card} 1️⃣ Matplotlib
+:link: ../matplotlib/001_Python_Matplotlib.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
 
-✅ **[Matplotlib 2](/content/tools/matplotlib/003_Python_Matplotlib_Exercise_2.ipynb)**
+Learn how to use Matplotlib in Python.
+:::
 
+::: {card} 2️⃣ Exercises
+:link: ../matplotlib/003_Python_Matplotlib_Exercises.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+
+Test your knowledge with practical Matplotlib exercises.
+:::
+
+::::
 
 ## Resources
 
-✅ <a href="\content\tools\matplotlib\Matplotlib Cheat Sheet Plotting in Python.pdf" download>Matplotlib Cheat Sheet</a>
+✅ <a href="Matplotlib Cheat Sheet Plotting in Python.pdf" download>Matplotlib Cheat Sheet</a>
