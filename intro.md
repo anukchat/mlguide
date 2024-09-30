@@ -1,4 +1,4 @@
-# Welcome
+# Machine Learning Guide
 
 <style>
   h1 {
