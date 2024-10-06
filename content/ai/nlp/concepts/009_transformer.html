@@ -1,0 +1,1844 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Transformer</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=b40f3148" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/ai/nlp/concepts/009_transformer';</script>
+    <link rel="canonical" href="https://mlguide.in/content/ai/nlp/concepts/009_transformer.html" />
+    <link rel="icon" href="../../../../_static/logo.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Language Model Tasks" href="010_llm_tasks.html" />
+    <link rel="prev" title="Attention" href="008_attention.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt=" - Home"/>
+    <script>document.write(`<img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt=" - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/3_functions_and_modules.html">Functions &amp; Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/4_Object_Oriented.html">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/8_advanced.html">Advanced Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/conceptual_topics.html">Interpreter vs Compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/exercises.html">Excercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Introduction_to_ml.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/000_Data_Exploration.html">Exploratory Data Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/001_Data_Preparation.html">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/003_Classification.html">Classfication</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/005_Evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/006_Advanced.html">K-Fold Cross Validation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../neural/neural_toc.html">Neural Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/002_Backpropogation.html">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/003_Activations.html">Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/004_Optimization.html">Optimizations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../neural/concepts/pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../nlp_intro.html">Natural Language Processing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="001_traditional_nlp.html">Word Vectors</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="002_embeddings.html">Embeddings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="003_ngram_cnn.html">N Gram using CNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="004_word2vec.html">Word2Vec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="005_language_model_basic.html">Neural Language Model</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="006_language_model_rnn.html">Recurrent Neural Network (RNN)</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="007_encoder_decoder.html">Encoder Decoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="008_attention.html">Attention</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="010_llm_tasks.html">Language Modelling Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="011_appendix.html">Appendix</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../genai/introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../genai/concepts/transformers/01_transformers_from_scratch.html">Transformers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../genai/langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/intro.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/courses/courses_toc.html">Courses</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/mlguide/main?urlpath=lab/tree/content/ai/nlp/concepts/009_transformer.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/mlguide/blob/main/content/ai/nlp/concepts/009_transformer.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/content/ai/nlp/concepts/009_transformer.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Transformer</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-data">Prepare data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-sequence-inputs">Generate sequence inputs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#positional-encoding">Positional Encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-head-and-scaled-dot-product-attention">Multi-head and Scaled Dot-Product Attention</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder">Encoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder">Decoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-model-transformer">Train Model (Transformer)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#translate-text">Translate Text</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pretraining">Pretraining</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pretraining-for-decoders">Pretraining for Decoders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pretraining-for-encoders">Pretraining for Encoders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pretraining-for-encoder-decoders">Pretraining for Encoder-Decoders</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="transformer">
+<h1>Transformer<a class="headerlink" href="#transformer" title="Link to this heading">#</a></h1>
+<p><strong><mark>(Machine Translation Example)</mark></strong></p>
+<p><strong>Transformer</strong> is popular SOTA (state-of-the-art) architecture and used in today’s a lot of successful works in neural methods.<br></p>
+<p>Finally we’ll implement transformer using previously learned architectures - such as, language modeling, encoder-decoder, and attention.</p>
+<p>As you saw in <a class="reference internal" href="#./08_attention.ipynb"><span class="xref myst">exercise 08</span></a>, <marl>attention captures the distant relationship and contexts in sequences.</mark></p>
+<p><strong>Transformer is motivated by this successful architecture.</strong></p>
+<p><img alt="Attention" src="../../../../_images/attend_image.png" /><br>
+<em>From : “08 Attention (Machine Translation Example)”</em></p>
+<p>In this example, we will implement the architecture written in the famous paper “<a class="reference external" href="https://arxiv.org/abs/1706.03762"><strong>Attention Is All You Need</strong></a>”.<br></p>
+<p>As you saw in <a class="reference internal" href="#./08_attention.ipynb"><span class="xref myst">exercise 08</span></a>, we have used RNN architecture (GRU gate) for <strong>getting contexts in encoder and decoder</strong>.</p>
+<p>However, <mark>in this transformer architecture, attention is also used even for getting contexts in encoder and decoder</mark>, instead of using RNN architecture. (In below architecture, you will find that there’s no RNN layers.)<br></p>
+<p>Total 3 attend layers <strong>(encoder’s self-attention, decoder’s self-attention, and encoder-decoder cross attention</strong>) are then applied in this network.</p>
+<p><img alt="Transformer" src="../../../../_images/transformer.png" /><br>
+<em>From : “<a class="reference external" href="https://arxiv.org/abs/1706.03762">Attention Is All You Need</a>” (Vaswani, et al., 2017)</em></p>
+<p>Unlike soft attention in <a class="reference internal" href="#./08_attention.ipynb"><span class="xref myst">exercise 08</span></a>, it applies the following attention - which is called “<strong>scaled dot-product attention</strong>” - in these 3 parts of attend layers.<br></p>
+<p>As you can see below, this <mark>model measures the similarity by the dot-product operation</mark>, and 3 networks for composing query, key, and value will be trained.</p>
+<p>👉 When the query vector and key vector are similar, it will have a large value of dot product between these vectors.</p>
+<p>👉 Such like soft attention (in <a class="reference internal" href="#./08_attention.ipynb"><span class="xref myst">exercise 08</span></a>), the matrix <span class="math notranslate nohighlight">\(Q \cdot K^T\)</span> will then have the relationship mapping (weight’s mapping) between query and key.</p>
+<p>👉 Finally, by applying dot-product operation again between this result and value’s vector, the final feature vectors will be obtained in each token.<br></p>
+<p>👉 To say intuitively, first dot-product operation asks each keys by queries in the sequence, and then composes the objectives by combining between its results and values by the second dot-product operation.</p>
+<p><img alt="Multi-head attention" src="../../../../_images/multi_head_attention.png" /></p>
+<p>In the <mark>attend layer in encoding and decoding (see below), input1 and input2 are the same sequence in above scaled dot-product attention.</mark> This architecture is called <strong>self-attention</strong>.<br></p>
+<p>For instance, the word “this” in “this is a pen” will have the close relationship with the word “pen”. The self-attention captures this kind of self-regressive relations in the sequence.<br></p>
+<p>By capturing these relations, the sequence will be well annotated in both encoder and decoder, instead of using RNN layer.</p>
+<p><img alt="Self-attention parts" src="../../../../_images/transformer_self_attention.png" /></p>
+<div class="alert alert-info">
+<p>💡 <strong>Note</strong> : On contrary, the above cross-attention layer is for machine translation task.</p>
+<p>In the self-attention layer in decoder, each time segment should not refer to the future segment. It then applies the masked attention, instead of applying fully-connected attention.<br></p>
+<p>Later we will see about this causal attention.</p>
+<p>By the design of this architecture, <mark>transformers will have the ability to capture the distant contexts</mark> and we can also expect to have the ability to capture more difficult contexts rather than RNN-based encoder-decoder.</p>
+</div>
+<p><strong>Transformer</strong> is today’s key part for SOTA (state-of-the-art) language models and a lot of today’s famous algorithms (such as, BERT, T5, GPT, etc) use transformers in its architectures.<br></p>
+<p>As you saw in <a class="reference internal" href="#./05_language_model_basic.ipynb"><span class="xref myst">basic language model’s example</span></a>, we can train transformers with unlabeled data (i.e, self-supervised learning) - such as, next word’s prediction, masked word’s prediction.</p>
+<p>By this unsupervised fashion, a lot of today’s algorithms learn a lot of language properties with existing large corpus (such as, Wikipedia), and can then be fine-tuned for downstream tasks with small number of labeled data - such as, sentiment detection, text classification, summarization, or modern instruction fine-tuning, etc. (See <a class="reference external" href="https://tsmatz.wordpress.com/2022/10/24/huggingface-japanese-ner-named-entity-recognition/">here</a> for fine-tuning example in Hugging Face.)<br></p>
+<p>For example, OpenAI GPT-3 175B is trained on 3.7 trillion tokens.</p>
+<div class="alert alert-info">
+<p>💡 <strong>Note</strong> : Transformers are categorized into 3 types : <strong>encoder-only</strong>, <strong>decoder-only</strong>, and <strong>encoder-decoder</strong>. (See <a class="reference external" href="https://arxiv.org/abs/2304.13712">here</a> for the summary of encoder-only, decoder-only, and encoder-decoder language models.)<br></p>
+<p>For instance, you can use encoder-only transformer for applying classification (such as, named entity recognitions), generating images, sentence embedding, and more.<br></p>
+<p>A lot of today’s popular large language models (LLMs) - such as, <strong>ChatGPT</strong>, <strong>LLaMA</strong>, etc - are <strong>decoder-only models</strong>. These are <strong>in-context generative models</strong>, in which the <strong>output is generated by using only input (prompt)</strong>, and the context of input’s text (<strong>prompting</strong>) is then <strong>very important</strong> to get the optimal results.</p>
+<p>These models are trained by 3-stages for practical use :</p>
+<ol class="arabic simple">
+<li><p>pretraining (self-supervised learning),</p></li>
+<li><p>supervised fine-tuning (SFT), and</p></li>
+<li><p>alignment.</p></li>
+</ol>
+<p>(See <a class="reference external" href="https://arxiv.org/abs/2203.02155">here</a> for these 3 training strategies.)</p>
+</div>
+<p>Now let’s see the implementation of each part in this transofrmer architecture, and train the model for machine translation task.<br></p>
+<p>For learning purpose, we’ll implement all layers (modules) from scratch, but you can also use built-in <code class="docutils literal notranslate"><span class="pre">torch.nn.MultiheadAttention</span></code> in PyTorch.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">torch</span><span class="o">==</span><span class="m">1</span>.13.1<span class="w"> </span><span class="nv">torchtext</span><span class="o">==</span><span class="m">0</span>.14.1<span class="w"> </span>--extra-index-url<span class="w"> </span>https://download.pytorch.org/whl/cu114
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>nltk
+</pre></div>
+</div>
+</div>
+</div>
+<section id="prepare-data">
+<h2>Prepare data<a class="headerlink" href="#prepare-data" title="Link to this heading">#</a></h2>
+<p>In this example, I use Engligh-French dataset by <a class="reference external" href="https://www.manythings.org/anki/">Anki</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget<span class="w"> </span>http://www.manythings.org/anki/fra-eng.zip
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2023-02-19 07:59:20--  http://www.manythings.org/anki/fra-eng.zip
+Resolving www.manythings.org (www.manythings.org)... 173.254.30.110
+Connecting to www.manythings.org (www.manythings.org)|173.254.30.110|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 6720195 (6.4M) [application/zip]
+Saving to: ‘fra-eng.zip’
+
+fra-eng.zip         100%[===================&gt;]   6.41M  11.6MB/s    in 0.6s    
+
+2023-02-19 07:59:21 (11.6 MB/s) - ‘fra-eng.zip’ saved [6720195/6720195]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>unzip<span class="w"> </span>fra-eng.zip<span class="w"> </span>-d<span class="w"> </span>fra-eng
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Archive:  fra-eng.zip
+  inflating: fra-eng/_about.txt      
+  inflating: fra-eng/fra.txt         
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>fra-eng/fra.txt
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Go.	Va !	CC-BY 2.0 (France) Attribution: tatoeba.org #2877272 (CM) &amp; #1158250 (Wittydev)
+Go.	Marche.	CC-BY 2.0 (France) Attribution: tatoeba.org #2877272 (CM) &amp; #8090732 (Micsmithel)
+Go.	En route !	CC-BY 2.0 (France) Attribution: tatoeba.org #2877272 (CM) &amp; #8267435 (felix63)
+Go.	Bouge !	CC-BY 2.0 (France) Attribution: tatoeba.org #2877272 (CM) &amp; #9022935 (Micsmithel)
+Hi.	Salut !	CC-BY 2.0 (France) Attribution: tatoeba.org #538123 (CM) &amp; #509819 (Aiji)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wc<span class="w"> </span>-l<span class="w"> </span>fra-eng/fra.txt
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>197463 fra-eng/fra.txt
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">pathobj</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;fra-eng/fra.txt&quot;</span><span class="p">)</span>
+<span class="n">text_all</span> <span class="o">=</span> <span class="n">pathobj</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">text_all</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">]</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">train_data</span><span class="p">)[:,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+<span class="c1"># print first row</span>
+<span class="n">train_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;Va !&#39;, &#39;Go.&#39;], dtype=&#39;&lt;U349&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this training set, text length in the latter part is longer (and includes multiple sentences) than the former part.<br></p>
+<p>Therefore we will shuffle entire data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+<span class="n">train_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;Je suis heureux que vous veniez.&#39;, &quot;I&#39;m glad you&#39;re coming.&quot;],
+      dtype=&#39;&lt;U349&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>When data consists of multiple sentences, it converts to a single sentence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">import</span> <span class="nn">nltk.data</span>
+
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;punkt&quot;</span><span class="p">)</span>
+<span class="n">tokenizer_en</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tokenizers/punkt/english.pickle&quot;</span><span class="p">)</span>
+<span class="n">tokenizer_fr</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tokenizers/punkt/french.pickle&quot;</span><span class="p">)</span>
+<span class="n">fr_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">en_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">train_data</span><span class="p">:</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">tokenizer_fr</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">tokenizer_en</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">x2</span><span class="p">):</span>
+        <span class="n">fr_list</span> <span class="o">+=</span> <span class="n">x1</span>
+        <span class="n">en_list</span> <span class="o">+=</span> <span class="n">x2</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">fr_list</span><span class="p">,</span> <span class="n">en_list</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading package punkt to /home/tsmatsuz/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+</pre></div>
+</div>
+</div>
+</div>
+<p>To get the better performance (accuracy), I standarize the input text as follows.</p>
+<ul class="simple">
+<li><p>Make all words to lowercase in order to reduce words</p></li>
+<li><p>Make “-” (hyphen) to space</p></li>
+<li><p>Remove all punctuation except “ ’ “ (e.g, Ken’s bag, ces’t, …)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">string</span>
+
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+    <span class="n">train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="s2">&quot;«»&quot;</span><span class="p">:</span>
+    <span class="n">train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
+<span class="c1"># print first row</span>
+<span class="n">train_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;je suis heureux que vous veniez&#39;, &quot;i&#39;m glad you&#39;re coming&quot;],
+      dtype=&#39;&lt;U250&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Add <code class="docutils literal notranslate"><span class="pre">&lt;start&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;end&gt;</span></code> tokens in string.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;&lt;start&gt;&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;&lt;end&gt;&quot;</span><span class="p">]),</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;&lt;start&gt;&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;&lt;end&gt;&quot;</span><span class="p">])]</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">train_data</span><span class="p">])</span>
+<span class="c1"># print first row</span>
+<span class="n">train_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;&lt;start&gt; je suis heureux que vous veniez &lt;end&gt;&#39;,
+       &quot;&lt;start&gt; i&#39;m glad you&#39;re coming &lt;end&gt;&quot;], dtype=&#39;&lt;U264&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="generate-sequence-inputs">
+<h2>Generate sequence inputs<a class="headerlink" href="#generate-sequence-inputs" title="Link to this heading">#</a></h2>
+<p>We will generate the sequence of word’s indices (i.e, tokenize) from text.</p>
+<p><img alt="Index vectorize" src="../../../../_images/index_vectorize2.png" /></p>
+<p>First we create a list of vocabulary (<code class="docutils literal notranslate"><span class="pre">vocab</span></code>) for both source text (French) and target text (English) respectively.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchtext.data.utils</span> <span class="kn">import</span> <span class="n">get_tokenizer</span>
+<span class="kn">from</span> <span class="nn">torchtext.vocab</span> <span class="kn">import</span> <span class="n">build_vocab_from_iterator</span>
+
+<span class="n">max_word</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="c1"># create space-split tokenizer</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">get_tokenizer</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># define tokenization function</span>
+<span class="k">def</span> <span class="nf">yield_tokens</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="n">tokens</span>
+
+<span class="c1"># build vocabulary list for French</span>
+<span class="n">vocab_fr</span> <span class="o">=</span> <span class="n">build_vocab_from_iterator</span><span class="p">(</span>
+    <span class="n">yield_tokens</span><span class="p">(</span><span class="n">train_data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]),</span>
+    <span class="n">specials</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&lt;unk&gt;&quot;</span><span class="p">],</span>
+    <span class="n">max_tokens</span><span class="o">=</span><span class="n">max_word</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">vocab_fr</span><span class="o">.</span><span class="n">set_default_index</span><span class="p">(</span><span class="n">vocab_fr</span><span class="p">[</span><span class="s2">&quot;&lt;unk&gt;&quot;</span><span class="p">])</span>
+
+<span class="c1"># build vocabulary list for English</span>
+<span class="n">vocab_en</span> <span class="o">=</span> <span class="n">build_vocab_from_iterator</span><span class="p">(</span>
+    <span class="n">yield_tokens</span><span class="p">(</span><span class="n">train_data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]),</span>
+    <span class="n">specials</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&lt;unk&gt;&quot;</span><span class="p">],</span>
+    <span class="n">max_tokens</span><span class="o">=</span><span class="n">max_word</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">vocab_en</span><span class="o">.</span><span class="n">set_default_index</span><span class="p">(</span><span class="n">vocab_en</span><span class="p">[</span><span class="s2">&quot;&lt;unk&gt;&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The generated token index is <code class="docutils literal notranslate"><span class="pre">0,</span> <span class="pre">1,</span> <span class="pre">...</span> <span class="pre">,</span> <span class="pre">vocab_size</span> <span class="pre">-</span> <span class="pre">1</span></code>.<br></p>
+<p>Now we will set <code class="docutils literal notranslate"><span class="pre">vocab_size</span></code> as a token id in padded positions for both French and English respctively.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pad_index_fr</span> <span class="o">=</span> <span class="n">vocab_fr</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
+<span class="n">vocab_fr</span><span class="o">.</span><span class="n">append_token</span><span class="p">(</span><span class="s2">&quot;&lt;pad&gt;&quot;</span><span class="p">)</span>
+
+<span class="n">pad_index_en</span> <span class="o">=</span> <span class="n">vocab_en</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
+<span class="n">vocab_en</span><span class="o">.</span><span class="n">append_token</span><span class="p">(</span><span class="s2">&quot;&lt;pad&gt;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Get list for both index-to-word and word-to-index.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">itos_fr</span> <span class="o">=</span> <span class="n">vocab_fr</span><span class="o">.</span><span class="n">get_itos</span><span class="p">()</span>
+<span class="n">stoi_fr</span> <span class="o">=</span> <span class="n">vocab_fr</span><span class="o">.</span><span class="n">get_stoi</span><span class="p">()</span>
+
+<span class="n">itos_en</span> <span class="o">=</span> <span class="n">vocab_en</span><span class="o">.</span><span class="n">get_itos</span><span class="p">()</span>
+<span class="n">stoi_en</span> <span class="o">=</span> <span class="n">vocab_en</span><span class="o">.</span><span class="n">get_stoi</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The number of token index in French (source) is </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vocab_fr</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The padded index in French (source) is </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stoi_fr</span><span class="p">[</span><span class="s2">&quot;&lt;pad&gt;&quot;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The number of token index in English (target) is </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vocab_en</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The padded index in English (target) is </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stoi_en</span><span class="p">[</span><span class="s2">&quot;&lt;pad&gt;&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of token index in French (source) is 10001.
+The padded index in French (source) is 10000.
+The number of token index in English (target) is 10001.
+The padded index in English (target) is 10000.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we build a collator function, which is used for pre-processing in data loader.</p>
+<p>In this collator,</p>
+<p>👉 First we create a list of word’s indices for source (French) and target (English) respectively as follows.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;start&gt;</span> <span class="pre">this</span> <span class="pre">is</span> <span class="pre">pen</span> <span class="pre">&lt;end&gt;</span></code> –&gt; <code class="docutils literal notranslate"><span class="pre">[2,</span> <span class="pre">7,</span> <span class="pre">5,</span> <span class="pre">14,</span> <span class="pre">1]</span></code></p>
+<p>👉 For target (English) sequence, we separate into features (x) and labels (y).<br>
+In this task, we predict the next word in target (English) sequence using the current word’s sequence (English) and the encoded context of source (French).<br>
+We then separate target sequence into the sequence iteself (x) and the following label (y).</p>
+<p><u>before</u> :</p>
+<p><code class="docutils literal notranslate"><span class="pre">[2,</span> <span class="pre">7,</span> <span class="pre">5,</span> <span class="pre">14,</span> <span class="pre">1]</span></code></p>
+<p><u>after</u> :</p>
+<p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">:</span> <span class="pre">[2,</span> <span class="pre">7,</span> <span class="pre">5,</span> <span class="pre">14,</span> <span class="pre">1]</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">:</span> <span class="pre">[7,</span> <span class="pre">5,</span> <span class="pre">14,</span> <span class="pre">1,</span> <span class="pre">-100]</span></code></p>
+<blockquote>
+<div><p>Note : Here I set -100 as an unknown label id, because PyTorch cross-entropy function (<code class="docutils literal notranslate"><span class="pre">torch.nn.functional.cross_entropy()</span></code>) has a property <code class="docutils literal notranslate"><span class="pre">ignore_index</span></code> which default value is -100.</p>
+</div></blockquote>
+<p>👉 Finally we pad the inputs (for both source and target) as follows.<br>
+The padded index in features is <code class="docutils literal notranslate"><span class="pre">pad_index</span></code> and the padded index in label is -100. (See above note.)</p>
+<p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">:</span> <span class="pre">[2,</span> <span class="pre">7,</span> <span class="pre">5,</span> <span class="pre">14,</span> <span class="pre">1,</span> <span class="pre">N,</span> <span class="pre">...</span> <span class="pre">,</span> <span class="pre">N]</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">:</span> <span class="pre">[7,</span> <span class="pre">5,</span> <span class="pre">14,</span> <span class="pre">1,</span> <span class="pre">-100,</span> <span class="pre">-100,</span> <span class="pre">...</span> <span class="pre">,</span> <span class="pre">-100]</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+
+<span class="n">seq_len_fr</span> <span class="o">=</span> <span class="mi">45</span>
+<span class="n">seq_len_en</span> <span class="o">=</span> <span class="mi">38</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">collate_batch</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
+    <span class="n">label_list</span><span class="p">,</span> <span class="n">feature_source_list</span><span class="p">,</span> <span class="n">feature_target_list</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">text_fr</span><span class="p">,</span> <span class="n">text_en</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">:</span>
+        <span class="c1"># (1) tokenize to a list of word&#39;s indices</span>
+        <span class="n">tokens_fr</span> <span class="o">=</span> <span class="n">vocab_fr</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">(</span><span class="n">text_fr</span><span class="p">))</span>
+        <span class="n">tokens_en</span> <span class="o">=</span> <span class="n">vocab_en</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">(</span><span class="n">text_en</span><span class="p">))</span>
+        <span class="c1"># (2) separate into features and labels in target tokens (English)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">tokens_en</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">)</span>
+        <span class="c1"># (3) limit length to seq_len and pad sequence</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="n">seq_len_en</span><span class="p">]</span>
+        <span class="n">tokens_fr</span> <span class="o">=</span> <span class="n">tokens_fr</span><span class="p">[:</span><span class="n">seq_len_fr</span><span class="p">]</span>
+        <span class="n">tokens_en</span> <span class="o">=</span> <span class="n">tokens_en</span><span class="p">[:</span><span class="n">seq_len_en</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">+=</span> <span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">seq_len_en</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+        <span class="n">tokens_fr</span> <span class="o">+=</span> <span class="p">[</span><span class="n">pad_index_fr</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">seq_len_fr</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens_fr</span><span class="p">))</span>
+        <span class="n">tokens_en</span> <span class="o">+=</span> <span class="p">[</span><span class="n">pad_index_en</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">seq_len_en</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens_en</span><span class="p">))</span>
+        <span class="c1"># add to list</span>
+        <span class="n">label_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">feature_source_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tokens_fr</span><span class="p">)</span>
+        <span class="n">feature_target_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tokens_en</span><span class="p">)</span>
+    <span class="c1"># convert to tensor</span>
+    <span class="n">label_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">label_list</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">feature_source_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">feature_source_list</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">feature_target_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">feature_target_list</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">label_list</span><span class="p">,</span> <span class="n">feature_source_list</span><span class="p">,</span> <span class="n">feature_target_list</span>
+
+<span class="n">dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
+    <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">train_data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">train_data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])),</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">collate_fn</span><span class="o">=</span><span class="n">collate_batch</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test</span>
+<span class="k">for</span> <span class="n">labels</span><span class="p">,</span> <span class="n">sources</span><span class="p">,</span> <span class="n">targets</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+    <span class="k">break</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;label shape in batch : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">size</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;feature source shape in batch : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sources</span><span class="o">.</span><span class="n">size</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;feature target shape in batch : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">targets</span><span class="o">.</span><span class="n">size</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***** label sample *****&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***** features (source) sample *****&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sources</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***** features (target) sample *****&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">targets</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>label shape in batch : torch.Size([32, 38])
+feature source shape in batch : torch.Size([32, 45])
+feature target shape in batch : torch.Size([32, 38])
+***** label sample *****
+tensor([  14,  427,  164,   14,    8,  593,    1, -100, -100, -100, -100, -100,
+        -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100,
+        -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100, -100,
+        -100, -100], device=&#39;cuda:0&#39;)
+***** features (source) sample *****
+tensor([    2,    13,    39,   255,    53,    15,   641,     1, 10000, 10000,
+        10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000,
+        10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000,
+        10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000,
+        10000, 10000, 10000, 10000, 10000], device=&#39;cuda:0&#39;)
+***** features (target) sample *****
+tensor([    2,    14,   427,   164,    14,     8,   593,     1, 10000, 10000,
+        10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000,
+        10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000,
+        10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000],
+       device=&#39;cuda:0&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="positional-encoding">
+<h2>Positional Encoding<a class="headerlink" href="#positional-encoding" title="Link to this heading">#</a></h2>
+<p>In the formal algorithms of transformer, the set of embedded tokens are encoded by positions without any additional parameters.</p>
+<p><img alt="Positional encoding" src="../../../../_images/transformer_positional_encoding.png" /></p>
+<p>If there’s no positional encoding, <mark>the sequence will be treated as a bag of tokens in neural networks.</mark></p>
+<p><strong>The positional information is needed for position-aware processing in attention.</strong></p>
+<p>There exist several ways (variations) for positional encoding.<br></p>
+<p>In this example, I’ll apply the following positional encoding method (called <strong>sinusoidal positional encoding</strong>), which is introduced in the <a class="reference external" href="https://arxiv.org/abs/1706.03762">original paper</a> of transformer.</p>
+<p>👉 The positional vector <span class="math notranslate nohighlight">\(PE(t)\)</span> is :</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned} 
+PE(t,2i) = \sin(t / 10000^{2i / d_e})
+PE(t,2i+1) = \cos(t / 10000^{2i / d_e})\\
+for 0 \leq i \lt d_e / 2
+\end{aligned}\end{align} \]</div>
+<p>where <span class="math notranslate nohighlight">\(t = \{0, 1, \ldots\}\)</span> is position (time-step) and <span class="math notranslate nohighlight">\(d_e\)</span> is embedding dimemsion.</p>
+<p>👉 For <span class="math notranslate nohighlight">\(t\)</span>-th token in the sequence, the embedding <span class="math notranslate nohighlight">\(E(t) \in \mathbb{R}^{d_e}\)</span> then becomes <span class="math notranslate nohighlight">\( E(t) + PE(t) \)</span>.</p>
+<blockquote>
+<div><p>Note : Here we assume that <span class="math notranslate nohighlight">\(d_e\)</span> (embedding dimension) is an even number. (When it’s an odd number, the dimension between <span class="math notranslate nohighlight">\(E(t)\)</span> and <span class="math notranslate nohighlight">\(PE(t)\)</span> differs.)</p>
+</div></blockquote>
+<p>👉 By applying this positional encoding, we can expect that the attention network will easily learn the position in each tokens, since there always exist a <span class="math notranslate nohighlight">\( 2 \times 2 \)</span> matrix <span class="math notranslate nohighlight">\(\mathbf{M}_{ik}\)</span> (depending on <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(k\)</span>) which satisfies</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{pmatrix} PE(t+k,2i)\\PE(t+k,2i+1) \end{pmatrix} = \mathbf{M}_{ik} \begin{pmatrix} PE(t,2i)\\PE(t,2i+1) \end{pmatrix} \end{split}\]</div>
+<p>for any <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<blockquote>
+<div><p>Note : In GPT, positional encoding is not a fixed encoding (not like above sinusoidal positional encoding) and it’s also learned in the training.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+<span class="k">class</span> <span class="nc">PositionalEncoding</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">):</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">embedding_dim</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1"># 1 / 10000^{2i / d_e}</span>
+        <span class="c1">#   --&gt; (embedding_dim / 2, )</span>
+        <span class="n">interval</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mi">10000</span><span class="o">**</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">embedding_dim</span><span class="p">))</span>
+        <span class="c1"># t</span>
+        <span class="c1">#   --&gt; (seq_len, )</span>
+        <span class="n">position</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="c1"># t / 10000^{2i / d_e}</span>
+        <span class="c1">#   --&gt; (seq_len, embedding_dim / 2)</span>
+        <span class="n">radian</span> <span class="o">=</span> <span class="n">position</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">interval</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="c1"># sin(t / 10000^{2i / d_e})</span>
+        <span class="c1">#   --&gt; (seq_len, embedding_dim / 2, 1)</span>
+        <span class="n">sin</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">radian</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># cos(t / 10000^{2i / d_e})</span>
+        <span class="c1">#   --&gt; (seq_len, embedding_dim / 2, 1)</span>
+        <span class="n">cos</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">radian</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># PE</span>
+        <span class="c1">#   --&gt; (seq_len, embedding_dim / 2, 2)</span>
+        <span class="n">pe_tmp</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># reshape</span>
+        <span class="c1">#   --&gt; (seq_len, embedding_dim)</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">pe_tmp</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pe</span> <span class="o">=</span> <span class="n">pe_tmp</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">inputs</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">pe</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s test the output of positional encoding layer.<br>
+In the following example, positional vectors will become :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+  <span class="p">[</span><span class="n">sin</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">cos</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="mi">0</span><span class="o">/</span><span class="mi">100</span><span class="p">),</span> <span class="n">cos</span><span class="p">(</span><span class="mi">0</span><span class="o">/</span><span class="mi">100</span><span class="p">)],</span>
+  <span class="p">[</span><span class="n">sin</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">cos</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">100</span><span class="p">),</span> <span class="n">cos</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">100</span><span class="p">)],</span>
+  <span class="p">[</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">100</span><span class="p">),</span> <span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">100</span><span class="p">)],</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">PositionalEncoding</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;##### positional vector #####&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">pe</span><span class="p">)</span>
+<span class="c1"># The input size should be (batch_size, seq_len, embedding_dim)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;##### input vector #####&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">test</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;##### output #####&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>##### positional vector #####
+tensor([[ 0.0000,  1.0000,  0.0000,  1.0000],
+        [ 0.8415,  0.5403,  0.0100,  0.9999],
+        [ 0.9093, -0.4161,  0.0200,  0.9998]], device=&#39;cuda:0&#39;)
+##### input vector #####
+tensor([[[ 1.,  2.,  3.,  4.],
+         [ 5.,  6.,  7.,  8.],
+         [ 9., 10., 11., 12.]],
+
+        [[13., 14., 15., 16.],
+         [17., 18., 19., 20.],
+         [21., 22., 23., 24.]]], device=&#39;cuda:0&#39;)
+##### output #####
+tensor([[[ 1.0000,  3.0000,  3.0000,  5.0000],
+         [ 5.8415,  6.5403,  7.0100,  9.0000],
+         [ 9.9093,  9.5839, 11.0200, 12.9998]],
+
+        [[13.0000, 15.0000, 15.0000, 17.0000],
+         [17.8415, 18.5403, 19.0100, 21.0000],
+         [21.9093, 21.5839, 23.0200, 24.9998]]], device=&#39;cuda:0&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="multi-head-and-scaled-dot-product-attention">
+<h2>Multi-head and Scaled Dot-Product Attention<a class="headerlink" href="#multi-head-and-scaled-dot-product-attention" title="Link to this heading">#</a></h2>
+<p>Next I’ll implement attention layer as follows.<br></p>
+<p>For the purpose learning, we’ll <strong>implement the scaled dot-product attention layer from scratch</strong>.</p>
+<p><strong>Note</strong> : In PyTorch, you can use built-in <strong>torch.nn.MultiheadAttention</strong>.</p>
+<p>In 3 parts of attention (encoder’s self-attention, decoder’s self-attention, and encoder-decoder cross attention), it runs the following steps. (See above description for the semantics of this model.) :</p>
+<p>👉 The embedded inputs in the sequence are processed by dense networks (fully-connected feed-forward networks), and “query” (<span class="math notranslate nohighlight">\(Q\)</span>), “key” (<span class="math notranslate nohighlight">\(K\)</span>), and “value” (<span class="math notranslate nohighlight">\(V\)</span>) are then generated.</p>
+<p>👉  Compute the relationship score between <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(K\)</span> by the dot product, <span class="math notranslate nohighlight">\(Q \cdot K^T\)</span>.</p>
+<p>👉  Scale the score by multiplying <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{d}}\)</span>, where <span class="math notranslate nohighlight">\(d\)</span> is the number of attention dimension.</p>
+<p>👉  In decoder side, apply causal mask.<br>
+Later I’ll explain details about this optional causal mask …</p>
+<p>👉  The relationship between <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(K\)</span> are softmaxed, i.e, normalized by <span class="math notranslate nohighlight">\(\displaystyle \frac{e^{s_i}}{e^{s_0} + e^{s_1} + \cdots + e^{s_{t-1}}}\)</span> where <span class="math notranslate nohighlight">\((s_0, s_1, \ldots , s_{t-1})\)</span> is the relationship vector and <span class="math notranslate nohighlight">\(t\)</span> is time-step.<br></p>
+<p>Note that the above scaling by <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{d}}\)</span> works as a softmax temprature in this step.</p>
+<p>👉  Finally the result (softmaxed score) is performed by the dot product with <span class="math notranslate nohighlight">\(V\)</span>.<br>
+The final result is then <span class="math notranslate nohighlight">\(\displaystyle \verb|softmax| \left( \frac{Q \cdot K^T}{\sqrt{d}} \right) \cdot V\)</span>.</p>
+<p>As mentioned arlier, input1 and input2 in the following picture will be the same in ecoder’s and decoder’s self-attention parts.</p>
+<p><img alt="Multi-head attention" src="../../../../_images/transformer_attention.png" /></p>
+<p>To make <strong>multiple attention work in parallel</strong>, model <strong>dimension</strong> (here 256) is <strong>divided into multiple heads</strong> (here 8), and each head will then have <span class="math notranslate nohighlight">\(\frac(model_dim,head_num)\)</span> dimension (here 32).</p>
+<p>👉  Finally, these separated heads are concatenated and then applied dense network to obtain model dimension’s result. (See above picture.)<br></p>
+<p>This technique will make our model have rich expression without losing the computing costs.</p>
+<p><strong>Now it’s time to explain about causal mask.</strong></p>
+<p>In self-attention on decoder’s side (when <code class="docutils literal notranslate"><span class="pre">use_causal_mask=True</span></code> in the following code), <mark>each token only refers past tokens and cannot access to the future tokens.</mark> (See the following picture.)</p>
+<p><img alt="Causal reference" src="../../../../_images/transformer_causal_reference.png" /></p>
+<p>For this reason, the softmax operation in decoder’s self-attention is performed only on lower triangular matrix as follows.<br></p>
+<p>This is because we apply optional mask before softmax operation.</p>
+<p><img alt="Causal attention in decoder" src="../../../../_images/transformer_causal_attention.png" /></p>
+<p><strong>Note</strong> : To make a lower triangular matrix, here I use <code class="docutils literal notranslate"><span class="pre">torch.tril()</span></code> in PyTorch.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
+
+<span class="k">class</span> <span class="nc">MyMultiHeadAttention</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes a MyMultiHeadAttention module.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        embedding_dim (int): The number of embedding dimensiom</span>
+<span class="sd">        attention_dim (int): The number of dimension within attention unit</span>
+<span class="sd">        num_heads (int): The number of the divided heads (See above.)</span>
+<span class="sd">        use_causal_mask (bool): Whether to mask the future tokens (See above.)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">embedding_dim</span><span class="p">,</span>
+        <span class="n">attention_dim</span><span class="p">,</span>
+        <span class="n">num_heads</span><span class="p">,</span>
+        <span class="n">use_causal_mask</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+        <span class="k">assert</span><span class="p">(</span><span class="n">attention_dim</span> <span class="o">%</span> <span class="n">num_heads</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span> <span class="o">=</span> <span class="n">num_heads</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attention_dim</span> <span class="o">=</span> <span class="n">attention_dim</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head_dim</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">attention_dim</span> <span class="o">/</span> <span class="n">num_heads</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_causal_mask</span> <span class="o">=</span> <span class="n">use_causal_mask</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">q_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">,</span> <span class="n">attention_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">,</span> <span class="n">attention_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">v_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">,</span> <span class="n">attention_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">attention_dim</span><span class="p">,</span> <span class="n">attention_dim</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    When self-attention, input2 will be None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input1</span><span class="p">,</span> <span class="n">mask1</span><span class="p">,</span> <span class="n">input2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mask2</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">input2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">input2</span> <span class="o">=</span> <span class="n">input1</span>
+        <span class="k">if</span> <span class="n">mask2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mask2</span> <span class="o">=</span> <span class="n">mask1</span>
+
+        <span class="c1"># get size</span>
+        <span class="n">seq_len1</span> <span class="o">=</span> <span class="n">input1</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">seq_len2</span> <span class="o">=</span> <span class="n">input2</span><span class="o">.</span><span class="n">size</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># apply query/key/value net - see above 1</span>
+        <span class="c1">#   --&gt; (batch_size, seq_len, attention_dim)</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">q_layer</span><span class="p">(</span><span class="n">input1</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_layer</span><span class="p">(</span><span class="n">input2</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_layer</span><span class="p">(</span><span class="n">input2</span><span class="p">)</span>
+
+        <span class="c1"># divide into multiple heads :</span>
+        <span class="c1">#   --&gt; (batch_size, seq_len, num_heads, attention_dim / num_heads)</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">seq_len1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_dim</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">seq_len2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_dim</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">seq_len2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_dim</span><span class="p">)</span>
+
+        <span class="c1"># compute Q K^T - see above 2</span>
+        <span class="c1">#   --&gt; (batch_size, seq_len1, seq_len2, num_heads)</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;bihd,bjhd-&gt;bijh&quot;</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+        
+        <span class="c1"># scale the result by 1/sqrt(d) - see above 3</span>
+        <span class="c1">#   --&gt; (batch_size, seq_len1, seq_len2, num_heads)</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">score</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">head_dim</span><span class="o">**</span><span class="mf">0.5</span>
+
+        <span class="c1"># generate causal mask matrix - see above 4</span>
+        <span class="c1"># (for decoder&#39;s self-attention only)</span>
+        <span class="c1">#   --&gt; (seq_len1, seq_len2)</span>
+        <span class="n">causal_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">seq_len1</span><span class="p">,</span> <span class="n">seq_len2</span><span class="p">)</span><span class="o">.</span><span class="n">int</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_causal_mask</span><span class="p">:</span>
+            <span class="c1"># when applying causal mask, the shape of input1 and input2 should be same</span>
+            <span class="k">assert</span><span class="p">(</span><span class="n">seq_len1</span> <span class="o">==</span> <span class="n">seq_len2</span><span class="p">)</span>
+            <span class="n">causal_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tril</span><span class="p">(</span><span class="n">causal_mask</span><span class="p">)</span>
+
+        <span class="c1"># generate sequence mask matrix</span>
+        <span class="c1">#   --&gt; (batch_size, seq_len1, 1) @ (batch_size, 1, seq_len2) = (batch_size, seq_len1, seq_len2)</span>
+        <span class="c1"># (note : bmm should be used for TensorFloat32. Here I then use torch.einsum() instead.)</span>
+        <span class="n">seq_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span>
+            <span class="s2">&quot;bxt,bty-&gt;bxy&quot;</span><span class="p">,</span>
+            <span class="n">mask1</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
+            <span class="n">mask2</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+        <span class="c1"># seq_mask = mask1.unsqueeze(dim=2) @ mask2.unsqueeze(dim=1)</span>
+
+        <span class="c1"># generate final mask matrix</span>
+        <span class="c1">#   --&gt; (batch_size, seq_len1, seq_len2)</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">causal_mask</span> <span class="o">*</span> <span class="n">seq_mask</span>
+        <span class="c1">#   --&gt; (batch_size, seq_len1, seq_len2, 1)</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        <span class="c1">#   --&gt; (batch_size, seq_len1, seq_len2, num_heads)</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_heads</span><span class="p">)</span>
+
+        <span class="c1"># apply softmax with mask - see above 5</span>
+        <span class="c1">#   --&gt; (batch_size, seq_len1, seq_len2, num_heads)</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">masked_fill</span><span class="p">(</span><span class="n">mask</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;-inf&quot;</span><span class="p">))</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">score</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># values in input1&#39;s padded position will become &quot;nan&quot; by</span>
+        <span class="c1"># softmax operation, because it&#39;s divided by zero.</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">score</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">()</span>
+
+        <span class="c1"># dot product with V - see above 6</span>
+        <span class="c1">#   --&gt; (batch_size, seq_len1, num_heads, attention_dim / num_heads)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s2">&quot;bijh,bjhd-&gt;bihd&quot;</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+        <span class="c1"># concatenate all heads and apply linear</span>
+        <span class="c1">#   --&gt; (batch_size, seq_len1, attention_dim)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">seq_len1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">attention_dim</span><span class="p">)</span>
+        <span class="c1">#   --&gt; (batch_size, seq_len1, attention_dim)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_linear</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="encoder">
+<h2>Encoder<a class="headerlink" href="#encoder" title="Link to this heading">#</a></h2>
+<p>Now let’s implement encoder side using previously generated multi-head attention module.<br></p>
+<p>Same as <a class="reference internal" href="#./08_attention.ipynb"><span class="xref myst">exercise 08</span></a>, the <mark>purpose of encoder is to generate the context of source sequence </mark> (French text).</p>
+<p>However, unlike earlier exercise, we don’t use RNN (GRU) and apply the scaled dot-product attention (self-attention) instead.</p>
+<p>As you can see in below picture (as it shows with “Nx”), the encoder in transformer is multi-layered architecture, in which it has the repeated layers.<br></p>
+<p>👉 For this reason, we’ll first implement the following repeatable single layer of component.</p>
+<p><img alt="Encoding Layer" src="../../../../_images/transformer_encoding_layer.png" /></p>
+<div class="alert alert-block alert-info">
+<p>💡 <strong>Note</strong>: As you can see above, it adds an output of identity layer (which is written by “Add&amp;Norm” in above picture) in the end of each layers.</p>
+<p>This is a known technique called <strong>residual learning</strong> in order to address a degradation problem of training accuracy in deep networks. (See “<a class="reference external" href="https://arxiv.org/abs/1512.03385">Deep Residual Learning for Image Recognition</a>” (He, et al., 2015) for details.)<br></p>
+<p><img alt="Residual Network" src="../../../../_images/transformer_residual01.png" /><br></p>
+<p>Today, a lot of transformers place the layer normalization between the residual blocks as follows. (In this example, we’ll create the code implementation accompanying the original paper.)<br></p>
+<p><img alt="Residual Network" src="../../../../_images/transformer_residual02.png" /></p>
+<p><strong>Note</strong> : I have also added a dropout for regularization in the following code.<br></p>
+<p>For the effect of a dropout, please see <a class="reference external" href="https://tsmatz.wordpress.com/2017/09/13/overfitting-for-regression-and-deep-learning/">here</a>.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SingleEncodingLayer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_dim</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">self_attention</span> <span class="o">=</span> <span class="n">MyMultiHeadAttention</span><span class="p">(</span>
+            <span class="n">embedding_dim</span><span class="o">=</span><span class="n">model_dim</span><span class="p">,</span>
+            <span class="n">attention_dim</span><span class="o">=</span><span class="n">model_dim</span><span class="p">,</span>
+            <span class="n">num_heads</span><span class="o">=</span><span class="n">num_heads</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">norm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LayerNorm</span><span class="p">(</span><span class="n">model_dim</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_dense1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">model_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_dense2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">model_dim</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">masks</span><span class="p">):</span>
+        <span class="c1"># apply self-attention</span>
+        <span class="n">attention_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">self_attention</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">masks</span><span class="p">)</span>
+        <span class="c1"># add &amp; layer norm (with dropout)</span>
+        <span class="n">attention_outputs</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">attention_outputs</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+        <span class="n">attention_outputs</span> <span class="o">=</span> <span class="n">attention_outputs</span> <span class="o">+</span> <span class="n">inputs</span>
+        <span class="n">attention_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">attention_outputs</span><span class="p">)</span>
+        <span class="c1"># feed forward</span>
+        <span class="n">linear_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dense1</span><span class="p">(</span><span class="n">attention_outputs</span><span class="p">)</span>
+        <span class="n">linear_outputs</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">linear_outputs</span><span class="p">)</span>
+        <span class="n">linear_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dense2</span><span class="p">(</span><span class="n">linear_outputs</span><span class="p">)</span>
+        <span class="c1"># add &amp; layer norm (with dropout)</span>
+        <span class="n">linear_outputs</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">linear_outputs</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+        <span class="n">linear_outputs</span> <span class="o">=</span> <span class="n">linear_outputs</span> <span class="o">+</span> <span class="n">attention_outputs</span>
+        <span class="n">linear_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">linear_outputs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">linear_outputs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With previously generated component (<code class="docutils literal notranslate"><span class="pre">SingleEncodingLayer</span></code>), now we implement the multi-layered encoder as follows.</p>
+<p><img alt="Encoding Layer" src="../../../../_images/transformer_encoder.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Encoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">padding_idx</span><span class="p">,</span> <span class="n">model_dim</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_layers</span> <span class="o">=</span> <span class="n">num_layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">padding_idx</span> <span class="o">=</span> <span class="n">padding_idx</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span>
+            <span class="n">vocab_size</span><span class="p">,</span>
+            <span class="n">model_dim</span><span class="p">,</span>
+            <span class="n">padding_idx</span><span class="o">=</span><span class="n">padding_idx</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos_encoding</span> <span class="o">=</span> <span class="n">PositionalEncoding</span><span class="p">(</span>
+            <span class="n">seq_len</span><span class="o">=</span><span class="n">seq_len</span><span class="p">,</span>
+            <span class="n">embedding_dim</span><span class="o">=</span><span class="n">model_dim</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoding_layers</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">([</span>
+            <span class="n">SingleEncodingLayer</span><span class="p">(</span>
+                <span class="n">model_dim</span><span class="o">=</span><span class="n">model_dim</span><span class="p">,</span>
+                <span class="n">num_heads</span><span class="o">=</span><span class="n">num_heads</span><span class="p">,</span>
+                <span class="n">hidden_dim</span><span class="o">=</span><span class="n">hidden_dim</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">)])</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+        <span class="c1"># get mask</span>
+        <span class="n">masks</span> <span class="o">=</span> <span class="p">(</span><span class="n">inputs</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding_idx</span><span class="p">)</span><span class="o">.</span><span class="n">int</span><span class="p">()</span>
+        <span class="c1"># apply embedding</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="c1"># apply positional encoding</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos_encoding</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
+        <span class="c1"># apply multi-layered encoders</span>
+        <span class="k">for</span> <span class="n">enc_layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoding_layers</span><span class="p">:</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="n">enc_layer</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">masks</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">masks</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="decoder">
+<h2>Decoder<a class="headerlink" href="#decoder" title="Link to this heading">#</a></h2>
+<p>Next implement decoder side.<br></p>
+<p>Same as encoder, we’ll first implement a repeatable single layer component as the following picture shows.</p>
+<p><img alt="Decoding Layer" src="../../../../_images/transformer_decoding_layer.png" /></p>
+<p>Unlike encoder, both self-attention and cross-attention are applied in decoder. (See above.)</p>
+<p>In the first attention, the target sequence (English) is encoded by self-attention. As I have mentioned above, causal masking is applied in this decoder’s self-attention. (Set the property <code class="docutils literal notranslate"><span class="pre">use_causal_mask=True</span></code> in our custom attention.)<br></p>
+<p>The next attention (cross-attention) is for machine translation. Same as <a class="reference internal" href="#./08_attention.ipynb"><span class="xref myst">exercise 08</span></a>, both the encoder’s outputs (contexts) for source (French) and the current decoded results for target (English) are fed into this attention, and the attended results between decoder’s inputs and encoder’s outputs will be obtained.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SingleDecodingLayer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_dim</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">self_attention</span> <span class="o">=</span> <span class="n">MyMultiHeadAttention</span><span class="p">(</span>
+            <span class="n">embedding_dim</span><span class="o">=</span><span class="n">model_dim</span><span class="p">,</span>
+            <span class="n">attention_dim</span><span class="o">=</span><span class="n">model_dim</span><span class="p">,</span>
+            <span class="n">num_heads</span><span class="o">=</span><span class="n">num_heads</span><span class="p">,</span>
+            <span class="n">use_causal_mask</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cross_attention</span> <span class="o">=</span> <span class="n">MyMultiHeadAttention</span><span class="p">(</span>
+            <span class="n">embedding_dim</span><span class="o">=</span><span class="n">model_dim</span><span class="p">,</span>
+            <span class="n">attention_dim</span><span class="o">=</span><span class="n">model_dim</span><span class="p">,</span>
+            <span class="n">num_heads</span><span class="o">=</span><span class="n">num_heads</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">norm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">LayerNorm</span><span class="p">(</span><span class="n">model_dim</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_dense1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">model_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_dense2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">model_dim</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">masks</span><span class="p">,</span> <span class="n">enc_outputs</span><span class="p">,</span> <span class="n">enc_masks</span><span class="p">):</span>
+        <span class="c1"># self-attention with causal masking</span>
+        <span class="n">attention_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">self_attention</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">masks</span><span class="p">)</span>
+        <span class="c1"># add &amp; layer norm (with dropout)</span>
+        <span class="n">attention_outputs</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">attention_outputs</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+        <span class="n">attention_outputs</span> <span class="o">=</span> <span class="n">attention_outputs</span> <span class="o">+</span> <span class="n">inputs</span>
+        <span class="n">attention_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">attention_outputs</span><span class="p">)</span>
+        <span class="c1"># encoder-decoder attention</span>
+        <span class="n">scored_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cross_attention</span><span class="p">(</span>
+            <span class="n">input1</span><span class="o">=</span><span class="n">attention_outputs</span><span class="p">,</span>
+            <span class="n">mask1</span><span class="o">=</span><span class="n">masks</span><span class="p">,</span>
+            <span class="n">input2</span><span class="o">=</span><span class="n">enc_outputs</span><span class="p">,</span>
+            <span class="n">mask2</span><span class="o">=</span><span class="n">enc_masks</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># add &amp; layer norm (with dropout)</span>
+        <span class="n">scored_outputs</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">scored_outputs</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+        <span class="n">scored_outputs</span> <span class="o">=</span> <span class="n">scored_outputs</span> <span class="o">+</span> <span class="n">attention_outputs</span>
+        <span class="n">scored_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">scored_outputs</span><span class="p">)</span>
+        <span class="c1"># feed forward</span>
+        <span class="n">linear_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dense1</span><span class="p">(</span><span class="n">scored_outputs</span><span class="p">)</span>
+        <span class="n">linear_outputs</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">linear_outputs</span><span class="p">)</span>
+        <span class="n">linear_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dense2</span><span class="p">(</span><span class="n">linear_outputs</span><span class="p">)</span>
+        <span class="c1"># add &amp; layer norm (with dropout)</span>
+        <span class="n">linear_outputs</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">linear_outputs</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+        <span class="n">linear_outputs</span> <span class="o">=</span> <span class="n">linear_outputs</span> <span class="o">+</span> <span class="n">scored_outputs</span>
+        <span class="n">linear_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">linear_outputs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">linear_outputs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we build multi-layered decoder with previous layer component (<code class="docutils literal notranslate"><span class="pre">SingleDecodingLayer</span></code>).</p>
+<p><img alt="Decoder" src="../../../../_images/transformer_decoder.png" /></p>
+<p>The outputs is used for predicting the next vocabulary by one-hot outputs, and the output’s shape will then be <code class="docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">sequence_length,</span> <span class="pre">vocabulary_size)</span></code>.</p>
+<div class="alert alert-info">
+<p>💡 <strong>Note</strong> : In this example, the final softmax will be applied in loss computation, and here I don’t explicitly implement this operation in this module. (The decoder will then output logits, not probabilities.)</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Decoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">padding_idx</span><span class="p">,</span> <span class="n">model_dim</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">,</span> <span class="n">num_heads</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_layers</span> <span class="o">=</span> <span class="n">num_layers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">padding_idx</span> <span class="o">=</span> <span class="n">padding_idx</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span>
+            <span class="n">vocab_size</span><span class="p">,</span>
+            <span class="n">model_dim</span><span class="p">,</span>
+            <span class="n">padding_idx</span><span class="o">=</span><span class="n">padding_idx</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pos_encoding</span> <span class="o">=</span> <span class="n">PositionalEncoding</span><span class="p">(</span>
+            <span class="n">seq_len</span><span class="o">=</span><span class="n">seq_len</span><span class="p">,</span>
+            <span class="n">embedding_dim</span><span class="o">=</span><span class="n">model_dim</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decoding_layers</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">([</span>
+            <span class="n">SingleDecodingLayer</span><span class="p">(</span>
+                <span class="n">model_dim</span><span class="o">=</span><span class="n">model_dim</span><span class="p">,</span>
+                <span class="n">num_heads</span><span class="o">=</span><span class="n">num_heads</span><span class="p">,</span>
+                <span class="n">hidden_dim</span><span class="o">=</span><span class="n">hidden_dim</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">)])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_dense</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">model_dim</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_inputs</span><span class="p">,</span> <span class="n">enc_outputs</span><span class="p">,</span> <span class="n">enc_masks</span><span class="p">):</span>
+        <span class="c1"># get mask</span>
+        <span class="n">target_masks</span> <span class="o">=</span> <span class="p">(</span><span class="n">target_inputs</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding_idx</span><span class="p">)</span><span class="o">.</span><span class="n">int</span><span class="p">()</span>
+        <span class="c1"># apply embedding</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">target_inputs</span><span class="p">)</span>
+        <span class="c1"># apply positional encoding</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos_encoding</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
+        <span class="c1"># apply multi-layered decoders</span>
+        <span class="k">for</span> <span class="n">dec_layer</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoding_layers</span><span class="p">:</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="n">dec_layer</span><span class="p">(</span>
+                <span class="n">inputs</span><span class="o">=</span><span class="n">outputs</span><span class="p">,</span>
+                <span class="n">masks</span><span class="o">=</span><span class="n">target_masks</span><span class="p">,</span>
+                <span class="n">enc_outputs</span><span class="o">=</span><span class="n">enc_outputs</span><span class="p">,</span>
+                <span class="n">enc_masks</span><span class="o">=</span><span class="n">enc_masks</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="c1"># apply final Linear</span>
+        <span class="c1">#   (batch_size, seq_len, model_dim) --&gt; (batch_size, seq_len, vocab_size)</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dense</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">outputs</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="train-model-transformer">
+<h2>Train Model (Transformer)<a class="headerlink" href="#train-model-transformer" title="Link to this heading">#</a></h2>
+<p>Using previous models, now we build the training loop.</p>
+<p>First we set the following parameters for training.<br></p>
+<p>In this example, the training dataset consists of single sentences (not long text) and I have reduced parameters to speed up the training, compared with the parameters which is used in the original paper.</p>
+<div class="alert alert-info">
+<p>💡 <strong>Note</strong> : By increasing parameters, transformers will have the ability to capture more difficult contexts, but it’ll need more training and corpus.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_dim</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="n">num_heads</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">num_layers</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">hidden_dim</span> <span class="o">=</span> <span class="mi">1024</span>
+
+<span class="c1">### In the original paper, the following parameters are used.</span>
+<span class="c1">#model_dim = 512</span>
+<span class="c1">#num_heads = 8</span>
+<span class="c1">#num_layers = 6</span>
+<span class="c1">#hidden_dim = 2048</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the original paper, the following learning rate scheduler is used for this model, and we also apply this scheduling in this training.<br></p>
+<p>The following function is used to modify learning rate in the training.</p>
+<div class="math notranslate nohighlight">
+\[ \verb|lrate| = d^{-0.5}_{\verb|model|} \cdot \min(\verb|step_num|^{-0.5},\verb|step_num|\cdot\verb|warmup_steps|^{-1.5}) \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_lr</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">model_dim</span><span class="p">,</span> <span class="n">warmup_steps</span><span class="o">=</span><span class="mi">4000</span><span class="p">):</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+    <span class="n">model_dim</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">model_dim</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">step</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="n">val1</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">val1</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">step</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">val2</span> <span class="o">=</span> <span class="n">step</span> <span class="o">/</span> <span class="p">(</span><span class="n">warmup_steps</span> <span class="o">**</span> <span class="mf">1.5</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">val1</span><span class="p">,</span><span class="n">val2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">model_dim</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, put it all together and run training as follows.</p>
+<p>In below code, the loss on label id=-100 is ignored in <code class="docutils literal notranslate"><span class="pre">cross_entropy()</span></code> function. The padded position and the end of sequence will then be ignored in optimization.</p>
+<p><strong>Note</strong> : Because the default value of  <code class="docutils literal notranslate"><span class="pre">ignore_index</span></code> property in <strong>cross_entropy()</strong> function is -100. (You can change this default value.)</p>
+<p>Transformer has ability to capture complex contexts, but I note that here I just simply apply training by using primitive data of single sentence in small epochs.<br></p>
+<p>Please try more large and complex data by adjusting above parameters and the number of training epochs.</p>
+<p>You will also find that transformer is fast.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">enc_model</span> <span class="o">=</span> <span class="n">Encoder</span><span class="p">(</span>
+    <span class="n">vocab_size</span><span class="o">=</span><span class="n">vocab_fr</span><span class="o">.</span><span class="fm">__len__</span><span class="p">(),</span>
+    <span class="n">seq_len</span><span class="o">=</span><span class="n">seq_len_fr</span><span class="p">,</span>
+    <span class="n">padding_idx</span><span class="o">=</span><span class="n">pad_index_fr</span><span class="p">,</span>
+    <span class="n">model_dim</span><span class="o">=</span><span class="n">model_dim</span><span class="p">,</span>
+    <span class="n">num_layers</span><span class="o">=</span><span class="n">num_layers</span><span class="p">,</span>
+    <span class="n">num_heads</span><span class="o">=</span><span class="n">num_heads</span><span class="p">,</span>
+    <span class="n">hidden_dim</span><span class="o">=</span><span class="n">hidden_dim</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">dec_model</span> <span class="o">=</span> <span class="n">Decoder</span><span class="p">(</span>
+    <span class="n">vocab_size</span><span class="o">=</span><span class="n">vocab_en</span><span class="o">.</span><span class="fm">__len__</span><span class="p">(),</span>
+    <span class="n">seq_len</span><span class="o">=</span><span class="n">seq_len_en</span><span class="p">,</span>
+    <span class="n">padding_idx</span><span class="o">=</span><span class="n">pad_index_en</span><span class="p">,</span>
+    <span class="n">model_dim</span><span class="o">=</span><span class="n">model_dim</span><span class="p">,</span>
+    <span class="n">num_layers</span><span class="o">=</span><span class="n">num_layers</span><span class="p">,</span>
+    <span class="n">num_heads</span><span class="o">=</span><span class="n">num_heads</span><span class="p">,</span>
+    <span class="n">hidden_dim</span><span class="o">=</span><span class="n">hidden_dim</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="n">all_params</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">enc_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">dec_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span>
+    <span class="n">params</span><span class="o">=</span><span class="n">all_params</span><span class="p">,</span>
+    <span class="n">lr</span><span class="o">=</span><span class="n">get_lr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">model_dim</span><span class="p">),</span>
+    <span class="n">betas</span><span class="o">=</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">),</span>
+    <span class="n">eps</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">labels</span><span class="p">,</span> <span class="n">sources</span><span class="p">,</span> <span class="n">targets</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+        <span class="c1"># optimize</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">enc_outputs</span><span class="p">,</span> <span class="n">enc_masks</span> <span class="o">=</span> <span class="n">enc_model</span><span class="p">(</span><span class="n">sources</span><span class="p">)</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">dec_model</span><span class="p">(</span><span class="n">targets</span><span class="p">,</span> <span class="n">enc_outputs</span><span class="p">,</span> <span class="n">enc_masks</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">labels</span><span class="p">)</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="c1"># update learning rate and step</span>
+        <span class="n">lr</span> <span class="o">=</span> <span class="n">get_lr</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">model_dim</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">param_group</span> <span class="ow">in</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">param_groups</span><span class="p">:</span>
+            <span class="n">param_group</span><span class="p">[</span><span class="s2">&quot;lr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lr</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="n">step</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># calculate accuracy</span>
+        <span class="n">pred_labels</span> <span class="o">=</span> <span class="n">logits</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">num_correct</span> <span class="o">=</span> <span class="p">(</span><span class="n">pred_labels</span> <span class="o">==</span> <span class="n">labels</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">num_total</span> <span class="o">=</span> <span class="p">(</span><span class="n">labels</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">num_correct</span> <span class="o">/</span> <span class="n">num_total</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Epoch </span><span class="si">{}</span><span class="s2"> - loss: </span><span class="si">{:2.4f}</span><span class="s2"> - accuracy: </span><span class="si">{:2.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">accuracy</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1 - loss: 2.1720 - accuracy: 0.6667
+Epoch 2 - loss: 1.8233 - accuracy: 0.7147
+Epoch 3 - loss: 1.5693 - accuracy: 0.7454
+Epoch 4 - loss: 1.3702 - accuracy: 0.7500
+Epoch 5 - loss: 1.1836 - accuracy: 0.7729
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="translate-text">
+<h2>Translate Text<a class="headerlink" href="#translate-text" title="Link to this heading">#</a></h2>
+<p><strong>Now translate French text to English text with trained model.</strong> (All these sentences are not in training set.)</p>
+<p>Here we simply translate several brief sentences, but the metrics to evaluate text-generation task will not be so easy. (Because simply checking an exact match to a reference text is not optimal.)<br></p>
+<p>To eveluate the trained model, use some common metrics available in text generation, such as, BLEU or ROUGE.</p>
+<p><strong>Note</strong> : Here we use greedy search and this will sometimes lead to wrong sequence. For drawbacks and solutinos, see note in <a class="reference internal" href="#./05_language_model_basic.ipynb"><span class="xref myst">this example</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">end_index_en</span> <span class="o">=</span> <span class="n">stoi_en</span><span class="p">[</span><span class="s2">&quot;&lt;end&gt;&quot;</span><span class="p">]</span>
+<span class="n">max_output</span> <span class="o">=</span> <span class="mi">128</span>
+
+<span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+    <span class="c1"># preprocess inputs</span>
+    <span class="n">text_fr</span> <span class="o">=</span> <span class="n">sentence</span>
+    <span class="n">text_fr</span> <span class="o">=</span> <span class="n">text_fr</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">text_fr</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;&lt;start&gt;&quot;</span><span class="p">,</span> <span class="n">text_fr</span><span class="p">,</span> <span class="s2">&quot;&lt;end&gt;&quot;</span><span class="p">])</span>
+    <span class="n">text_en_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&lt;start&gt;&quot;</span><span class="p">]</span>
+    <span class="n">text_en</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text_en_list</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">tokens_fr</span><span class="p">,</span> <span class="n">tokens_en</span> <span class="o">=</span> <span class="n">collate_batch</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="n">text_fr</span><span class="p">],</span> <span class="p">[</span><span class="n">text_en</span><span class="p">])))</span>
+
+    <span class="c1"># process encoder</span>
+    <span class="n">enc_outputs</span><span class="p">,</span> <span class="n">enc_masks</span> <span class="o">=</span> <span class="n">enc_model</span><span class="p">(</span><span class="n">tokens_fr</span><span class="p">)</span>
+
+    <span class="c1"># process decoder</span>
+    <span class="k">for</span> <span class="n">loop</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_output</span><span class="p">):</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">dec_model</span><span class="p">(</span>
+            <span class="n">tokens_en</span><span class="p">,</span>
+            <span class="n">enc_outputs</span><span class="p">,</span>
+            <span class="n">enc_masks</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">idx_en</span> <span class="o">=</span> <span class="n">logits</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="nb">len</span><span class="p">(</span><span class="n">text_en_list</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+        <span class="n">next_word_en</span> <span class="o">=</span> <span class="n">itos_en</span><span class="p">[</span><span class="n">idx_en</span><span class="p">]</span>
+        <span class="n">text_en_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">next_word_en</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">idx_en</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">==</span> <span class="n">end_index_en</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">text_en</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text_en_list</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">tokens_en</span> <span class="o">=</span> <span class="n">collate_batch</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="n">text_fr</span><span class="p">],</span> <span class="p">[</span><span class="n">text_en</span><span class="p">])))</span>
+
+    <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text_en_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;j&#39;aime la guitare&quot;</span><span class="p">))</span> <span class="c1"># i like guitar</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;il vit au japon&quot;</span><span class="p">))</span> <span class="c1"># he lives in Japan</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;ce stylo est utilisé par lui&quot;</span><span class="p">))</span> <span class="c1"># this pen is used by him</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;c&#39;est ma chanson préférée&quot;</span><span class="p">))</span> <span class="c1"># that&#39;s my favorite song</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">translate</span><span class="p">(</span><span class="s2">&quot;il conduit une voiture et va à new york&quot;</span><span class="p">))</span> <span class="c1"># he drives a car and goes to new york</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;start&gt; i love the guitar &lt;end&gt;
+&lt;start&gt; he lives in japan &lt;end&gt;
+&lt;start&gt; this pen is used to him &lt;end&gt;
+&lt;start&gt; this is my favorite song &lt;end&gt;
+&lt;start&gt; he drives a car and go to new york &lt;end&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="pretraining">
+<h2>Pretraining<a class="headerlink" href="#pretraining" title="Link to this heading">#</a></h2>
+<p><strong>Pretraining</strong> involves training a transformer model on a vast amount of unlabelled data using self-supervised or unsupervised learning objectives.</p>
+<p>The goal is to enable the model to learn general language representations, which can then be fine-tuned on smaller, task-specific datasets.</p>
+<section id="pretraining-for-decoders">
+<h3>Pretraining for Decoders<a class="headerlink" href="#pretraining-for-decoders" title="Link to this heading">#</a></h3>
+<p>Pretraining transformers, or more generally encoder-decoder seq2seq models, can be divided into 3 categories: pretraining decoder only, encoder only, and both. First we take a look at pretraining only a decoder.</p>
+<p><img alt="image.png" src="../../../../_images/pretraining_decoder.PNG" /> <br></p>
+<p><em>Figure 2. Pretraining decoder on auxiliary task.</em></p>
+<p>Notice in Figure 2, we pretrain the word embeddings (the bottom most row of blocks) and also the network itself. The Linear layer is throwaway and used for the specific auxiliary task.</p>
+<p><strong>Generative Pretrained Transformer (GPT)</strong> was a Transformer decoder (no encoder!) with 12 layers, 768-dimensional hidden states, and 3072-dimensional FFN hidden layers. They used byte-pair encoding with 40,000 merges. I think what they mean by this is they were able to construct 40,000 matches of subword tokens. The model they trained (GPT1) was trained on BooksCorpus (over 7000 books).</p>
+<p>They formatted the inputs to the decoder in a <strong>natural language inference</strong> format. This is where the model is fed 2 sentences: a <em>premise</em> and a <em>hypothesis</em>. The model is then trained to predict whether the hypothesis is entailing, contradictory, or neutral to the premise sentence.</p>
+<p><img alt="image.png" src="../../../../_images/gpt_input.PNG" /> <br></p>
+<p><em>Figure 3. GPT input format.</em></p>
+<p>In Figure 3, they roughly formatted this task in a series of tokens.</p>
+<p><strong>GPT-2</strong> and <strong>GPT-3</strong> are larger newer versions of the original GPT trained on even larger amounts of data.</p>
+</section>
+<section id="pretraining-for-encoders">
+<h3>Pretraining for Encoders<a class="headerlink" href="#pretraining-for-encoders" title="Link to this heading">#</a></h3>
+<p>For encoders, <mark>we can’t pretrain it like a normal language model (because encoders, in the Transformer, have bidirectional context)</mark>.</p>
+<p>The way we pretrain an encoder is feed in a sentence but with randomly words masked. The encoder is then tasked to predict the masked words. This is called <strong>masked language modeling</strong>.</p>
+<p><strong>Bidrectional Encoder Representations from Transformers (BERT)</strong> employs this paradigm.</p>
+<p>👉 Instead, they replace an input word with <code class="docutils literal notranslate"><span class="pre">[MASK]</span></code> 80% of the time.</p>
+<p>👉 10% of the time it will replace the input word with a random token and 10% of the time it will leave the input word unchanged.</p>
+<p>The reasoning for the last 2 options (as opposed to just simply randomly masking words) is to force the model to learn meaningful representations instead of just focusing on finding the right word for the masked token.</p>
+<p>Another way of pretraining, <mark>introduced in BERT</mark>, was passing in 2 pieces of contiguous text. And the model is tasked with classifying whether or not the 2nd piece of text directly follows the 1st piece of text.</p>
+<p><img alt="image.png" src="../../../../_images/bert_details.PNG" /> <br>
+<em>Figure 4. Details about BERT.</em></p>
+<p><strong>Evaluating in NLP is difficult</strong>. Many NLP experts have built datasets that are particularly hard because of certain themes and understandings that must be understood to perform well on those datasets.</p>
+<p>Here are a few:</p>
+<ul class="simple">
+<li><p>QQP (Quora Question Pairs)</p>
+<ul>
+<li><p>detect paraphrase questions</p></li>
+</ul>
+</li>
+<li><p>QNLI</p>
+<ul>
+<li><p>natural language inference</p></li>
+</ul>
+</li>
+<li><p>SST-2</p>
+<ul>
+<li><p>sentiment analysis</p></li>
+</ul>
+</li>
+<li><p>CoLA</p>
+<ul>
+<li><p>corpus of linguistic acceptability; detect whether sentences are grammatically correct</p></li>
+</ul>
+</li>
+<li><p>STS-B</p>
+<ul>
+<li><p>semantic textual similarity</p></li>
+</ul>
+</li>
+<li><p>MRPC</p>
+<ul>
+<li><p>microsoft paraphrase corpus</p></li>
+</ul>
+</li>
+<li><p>RTE</p>
+<ul>
+<li><p>small natural language inference corpus</p></li>
+</ul>
+</li>
+</ul>
+<p>There are many BERT variants like RoBERTa, SpanBERT, DistilBERT, etc. <strong>RoBERTa</strong> trains BERT for a longer period of time because they claim BERT was underfit and they also remove the next-sentence prediction task. <strong>SpanBERT</strong> masks a contiguous span of words.</p>
+<p><img alt="image.png" src="../../../../_images/roberta.PNG" /> <br>
+<em>Figure 5. RoBERTa compared to BERT.</em></p>
+<p>The general trend is just longer training on larger datasets with larger models.</p>
+</section>
+<section id="pretraining-for-encoder-decoders">
+<h3>Pretraining for Encoder-Decoders<a class="headerlink" href="#pretraining-for-encoder-decoders" title="Link to this heading">#</a></h3>
+<p>A model called <strong>T5</strong> is trained with <strong>span corruption</strong>. Instead of masking a single word, we mask a span of words and replace it with a single token. So the <mark>model not only has to predict what’s missing</mark>, but it also doesn’t know how many subwords are missing (so it must learn this too!).</p>
+<p><img alt="image-2.png" src="../../../../_images/span_corruption.PNG" /> <br></p>
+<p><em>Figure 6. Span Corruption.</em></p>
+<p>One interesting property of T5 was that <mark>it could be finetuned to answer general questions by retrieving knowledge from its parameters.</mark></p>
+<p>By pretraining, the model can learn trivia knowledge, syntax, coreference, lexical semantics/topics, sentiment, simple arithmetic, and also cultural aspects of society.</p>
+<p><img alt="image.png" src="../../../../_images/in_context_learning.PNG" /> <br>
+<em>Figure 7. Learning without gradient steps.</em></p>
+<p>Large language models seem to be able to pick up patterns in the text from what I’m understanding.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/mlguide",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/ai/nlp/concepts"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="008_attention.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Attention</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="010_llm_tasks.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Language Model Tasks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-data">Prepare data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-sequence-inputs">Generate sequence inputs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#positional-encoding">Positional Encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-head-and-scaled-dot-product-attention">Multi-head and Scaled Dot-Product Attention</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder">Encoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder">Decoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-model-transformer">Train Model (Transformer)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#translate-text">Translate Text</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pretraining">Pretraining</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pretraining-for-decoders">Pretraining for Decoders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pretraining-for-encoders">Pretraining for Encoders</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pretraining-for-encoder-decoders">Pretraining for Encoder-Decoders</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div class="social-icons">
+    <a href="https://twitter.com/chaturanukool" target="_blank"><i class="fab fa-twitter"></i></a>
+    <a href="https://linkedin.com/in/anukool-chaturvedi" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://github.com/anukchat" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="mailto:chaturvedianukool@gmail.com"><i class="fas fa-envelope"></i></a>
+    </p>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

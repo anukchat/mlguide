@@ -1,0 +1,2098 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Embeddings</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=b40f3148" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/ai/nlp/concepts/002_embeddings';</script>
+    <link rel="canonical" href="https://mlguide.in/content/ai/nlp/concepts/002_embeddings.html" />
+    <link rel="icon" href="../../../../_static/logo.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="N-Gram detection with 1D Convolution" href="003_ngram_cnn.html" />
+    <link rel="prev" title="Word Vectors" href="001_traditional_nlp.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt=" - Home"/>
+    <script>document.write(`<img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt=" - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/3_functions_and_modules.html">Functions &amp; Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/4_Object_Oriented.html">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/8_advanced.html">Advanced Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/conceptual_topics.html">Interpreter vs Compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/exercises.html">Excercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Introduction_to_ml.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/000_Data_Exploration.html">Exploratory Data Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/001_Data_Preparation.html">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/003_Classification.html">Classfication</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/005_Evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/006_Advanced.html">K-Fold Cross Validation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../neural/neural_toc.html">Neural Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/002_Backpropogation.html">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/003_Activations.html">Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/004_Optimization.html">Optimizations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../neural/concepts/pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../nlp_intro.html">Natural Language Processing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="001_traditional_nlp.html">Word Vectors</a></li>
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Embeddings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="003_ngram_cnn.html">N Gram using CNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="004_word2vec.html">Word2Vec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="005_language_model_basic.html">Neural Language Model</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="006_language_model_rnn.html">Recurrent Neural Network (RNN)</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="007_encoder_decoder.html">Encoder Decoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="008_attention.html">Attention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="009_transformer.html">Transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="010_llm_tasks.html">Language Modelling Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="011_appendix.html">Appendix</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../genai/introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../genai/concepts/transformers/01_transformers_from_scratch.html">Transformers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../genai/langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/intro.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/courses/courses_toc.html">Courses</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/mlguide/main?urlpath=lab/tree/content/ai/nlp/concepts/002_embeddings.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/mlguide/blob/main/content/ai/nlp/concepts/002_embeddings.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/content/ai/nlp/concepts/002_embeddings.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Embeddings</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-vectors">Sparse Vectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#count-vectorize">Count Vectorize</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-weighting">TF-IDF weighting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dense-vectors">Dense Vectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-data">Prepare data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-network">Build network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-model-and-evaluate">Train model and Evaluate</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="embeddings">
+<h1>Embeddings<a class="headerlink" href="#embeddings" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<p>In NLP, embeddings are the vectors which represent some aspects (meaning) for words or documents, they are represented in the form of mathematical matrices.</p>
+<p>There are many types of embeddings - such as, character embedding, word embedding, sentence embedding, or document embedding, we will explore sentence vectorization in this tutorial.</p>
+<section id="sparse-vectors">
+<h2>Sparse Vectors<a class="headerlink" href="#sparse-vectors" title="Link to this heading">#</a></h2>
+<p>A sparse vector is a type of vector in which most of its elements are zero. This concept is prevalent in various fields such as computer science, mathematics, and data science, particularly in areas dealing with high-dimensional data. Understanding sparse vectors is crucial for efficient data storage, processing, and analysis.</p>
+<p>Install required packages</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>scikit-learn<span class="w"> </span>nltk<span class="w"> </span>pandas
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;popular&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading collection &#39;popular&#39;
+[nltk_data]    | 
+[nltk_data]    | Downloading package cmudict to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    |   Unzipping corpora/cmudict.zip.
+[nltk_data]    | Downloading package gazetteers to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    |   Unzipping corpora/gazetteers.zip.
+[nltk_data]    | Downloading package genesis to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    |   Unzipping corpora/genesis.zip.
+[nltk_data]    | Downloading package gutenberg to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    |   Unzipping corpora/gutenberg.zip.
+[nltk_data]    | Downloading package inaugural to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    |   Unzipping corpora/inaugural.zip.
+[nltk_data]    | Downloading package movie_reviews to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    |   Unzipping corpora/movie_reviews.zip.
+[nltk_data]    | Downloading package names to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    |   Unzipping corpora/names.zip.
+[nltk_data]    | Downloading package shakespeare to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    |   Unzipping corpora/shakespeare.zip.
+[nltk_data]    | Downloading package stopwords to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    |   Unzipping corpora/stopwords.zip.
+[nltk_data]    | Downloading package treebank to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    |   Unzipping corpora/treebank.zip.
+[nltk_data]    | Downloading package twitter_samples to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    |   Unzipping corpora/twitter_samples.zip.
+[nltk_data]    | Downloading package omw to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    | Downloading package omw-1.4 to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    | Downloading package wordnet to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    |   Package wordnet is already up-to-date!
+[nltk_data]    | Downloading package wordnet2021 to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    | Downloading package wordnet31 to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    | Downloading package wordnet_ic to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    |   Unzipping corpora/wordnet_ic.zip.
+[nltk_data]    | Downloading package words to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    |   Unzipping corpora/words.zip.
+[nltk_data]    | Downloading package maxent_ne_chunker to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    |   Unzipping chunkers/maxent_ne_chunker.zip.
+[nltk_data]    | Downloading package punkt to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    |   Unzipping tokenizers/punkt.zip.
+[nltk_data]    | Downloading package snowball_data to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    | Downloading package averaged_perceptron_tagger to
+[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
+[nltk_data]    |   Unzipping taggers/averaged_perceptron_tagger.zip.
+[nltk_data]    | 
+[nltk_data]  Done downloading collection popular
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<section id="count-vectorize">
+<h3>Count Vectorize<a class="headerlink" href="#count-vectorize" title="Link to this heading">#</a></h3>
+<p>One of primitive method to vectorize a text is count vectorization.<br></p>
+<p>This method is based on one hot vectorizing and each element represents the count of that word in a document as follows.</p>
+<p><img alt="Count vectorize" src="../../../../_images/count_vectorize.png" /></p>
+<p>Count vectorization is very straighforward and comprehensive for humans, but it’ll build sparse vectors (in which, almost elements are zero) and also resource-intensive.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">WordNetLemmatizer</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1">#  Lemmatizer helps to reduce words to their root form </span>
+<span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
+
+<span class="c1"># Convert :</span>
+<span class="c1"># &quot;pens&quot; -&gt; &quot;pen&quot;</span>
+<span class="c1"># &quot;wolves&quot; -&gt; &quot;wolf&quot;</span>
+<span class="k">def</span> <span class="nf">my_lemmatizer</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">lemmatizer</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)]</span>
+
+<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span>
+    <span class="n">tokenizer</span><span class="o">=</span><span class="n">my_lemmatizer</span><span class="p">)</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;This is a book&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;These are pens and my pen is here&quot;</span>
+<span class="p">]</span>
+<span class="n">vectors</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+
+<span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">vectorizer</span><span class="o">.</span><span class="n">vocabulary_</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">vectors</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>and</th>
+      <th>are</th>
+      <th>book</th>
+      <th>here</th>
+      <th>is</th>
+      <th>my</th>
+      <th>pen</th>
+      <th>these</th>
+      <th>this</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><mark>This vectorization often results into low performance (low accuracy) in several ML use-cases. </mark></p>
+<p>(Since the neural network won’t work well with very high-dimensional and sparse vectors.)<br></p>
+<p>The following is the example for classifying document into 20 e-mail groups.</p>
+<blockquote>
+<div><p>Note : In the real usage, train with unknown words with a specific symbol, such as “[UNK]”.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_20newsgroups</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+
+<span class="c1"># Load train dataset</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">fetch_20newsgroups</span><span class="p">(</span>
+    <span class="n">subset</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span>
+    <span class="n">remove</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;headers&quot;</span><span class="p">,</span> <span class="s2">&quot;footers&quot;</span><span class="p">,</span> <span class="s2">&quot;quotes&quot;</span><span class="p">))</span>
+
+<span class="c1"># Count vectorize</span>
+<span class="n">vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">X_trian</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">target</span>
+
+<span class="c1"># Train</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">MultinomialNB</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">.01</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_trian</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Evaluate accuracy</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">fetch_20newsgroups</span><span class="p">(</span>
+    <span class="n">subset</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span>
+    <span class="n">remove</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;headers&quot;</span><span class="p">,</span> <span class="s2">&quot;footers&quot;</span><span class="p">,</span> <span class="s2">&quot;quotes&quot;</span><span class="p">))</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">target</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;classification accuracy: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">score</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/tsmatsuz/.local/lib/python3.6/site-packages/sklearn/feature_extraction/text.py:489: UserWarning: The parameter &#39;token_pattern&#39; will not be used since &#39;tokenizer&#39; is not None&#39;
+  warnings.warn(&quot;The parameter &#39;token_pattern&#39; will not be used&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>classification accuracy: 0.6240042485395645
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="tf-idf-weighting">
+<h3>TF-IDF weighting<a class="headerlink" href="#tf-idf-weighting" title="Link to this heading">#</a></h3>
+<p>TF-IDF (Term Frequency - Inverse Document Frequency) weighting is a widely used statistical method for evaluating the importance of a word in a document relative to a collection of documents (corpus).</p>
+<p>In earlier example, the weight of word “book” or “pen” is the same as the weight of words “a”, “for”, “the”, etc.<br></p>
+<p><mark>Using TF-IDF, you can prioritize the words that rarely appear in the given corpus.</mark></p>
+<p><strong>TF (=<strong>T</strong>erm <strong>F</strong>requency) is</strong></p>
+<p>Measures how frequently a term appears in a document.</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\#d(w)}{\sum_{w^{\prime} \in d} \#d(w^{\prime})} \]</div>
+<p>in which, <span class="math notranslate nohighlight">\( \#d(w) \)</span> means the count of word <span class="math notranslate nohighlight">\(w\)</span> in document <span class="math notranslate nohighlight">\(d\)</span>.<br></p>
+<p>TF is the normalized value of the count of word <span class="math notranslate nohighlight">\(w\)</span> in document <span class="math notranslate nohighlight">\(d\)</span>.</p>
+<p><strong>IDF (=<strong>I</strong>nverse <strong>D</strong>ocument <strong>F</strong>requency) is</strong></p>
+<p>Measures how important a term is across the entire corpus.</p>
+<div class="math notranslate nohighlight">
+\[\log{\frac{|D|}{|\{d \in D:w\in d\}|}}\]</div>
+<p>This term diminishes the weight of terms that occur very frequently in the corpus and increases the weight of terms that are rare. This helps in highlighting terms that are more informative.</p>
+<p><strong>TF-IDF is</strong></p>
+<div class="math notranslate nohighlight">
+\[ \frac{\#d(w)}{\sum_{w^{\prime} \in d} \#d(w^{\prime})} \times \log{\frac{|D|}{|\{d \in D:w\in d\}|}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(D\)</span> is large corpus (a set of documents).</p>
+<p>If some word <span class="math notranslate nohighlight">\(w\)</span> (such like, “a”, “the”) is included in all document <span class="math notranslate nohighlight">\(d \in D\)</span>, the second term will be <strong>relatively small</strong>.</p>
+<p>If some word is rarely included in <span class="math notranslate nohighlight">\(d \in D\)</span>, the second term will be <strong>relatively large</strong>.</p>
+<p>Let’s see the following example.<br></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span><span class="p">,</span> <span class="n">TfidfTransformer</span>
+<span class="kn">from</span> <span class="nn">nltk</span> <span class="kn">import</span> <span class="n">word_tokenize</span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">WordNetLemmatizer</span>
+
+<span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">WordNetLemmatizer</span><span class="p">()</span>
+
+<span class="c1"># Convert :</span>
+<span class="c1"># &quot;pens&quot; -&gt; &quot;pen&quot;</span>
+<span class="c1"># &quot;wolves&quot; -&gt; &quot;wolf&quot;</span>
+<span class="k">def</span> <span class="nf">my_lemmatizer</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">lemmatizer</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)]</span>
+
+<span class="c1"># Count vectorize</span>
+<span class="n">count_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">my_lemmatizer</span><span class="p">)</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;This is a book&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;These are pens and my pen is here&quot;</span>
+<span class="p">]</span>
+<span class="n">count_vectors</span> <span class="o">=</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+
+<span class="c1"># TF-IDF weighting</span>
+<span class="n">tfidf_trans</span> <span class="o">=</span> <span class="n">TfidfTransformer</span><span class="p">(</span><span class="n">use_idf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">count_vectors</span><span class="p">)</span>
+<span class="n">tfidf_vectors</span> <span class="o">=</span> <span class="n">tfidf_trans</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">count_vectors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see above, only the word “is” is included in both documents.</p>
+<p>The word “pen” is also used twice, however, this word is not used in the first document.<br></p>
+<p>As a result, only the word “is” has small value for IDF weights.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">count_vectorizer</span><span class="o">.</span><span class="n">vocabulary_</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">tfidf_trans</span><span class="o">.</span><span class="n">idf_</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>and</th>
+      <th>are</th>
+      <th>book</th>
+      <th>here</th>
+      <th>is</th>
+      <th>my</th>
+      <th>pen</th>
+      <th>these</th>
+      <th>this</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.405465</td>
+      <td>1.405465</td>
+      <td>1.405465</td>
+      <td>1.405465</td>
+      <td>1.405465</td>
+      <td>1.0</td>
+      <td>1.405465</td>
+      <td>1.405465</td>
+      <td>1.405465</td>
+      <td>1.405465</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The generated vectors has the following values.<br></p>
+<p>As you can see below, the word “is” has relatively small value compared with other words in the same document.<br></p>
+<p>The second document (“These are pens and my pen is here”) has more words than the first document (“This is a book”), and then TF values (normalized values) in the second document are small rather than ones in the first document.<br></p>
+<p>The word “pen” appears in the second documnt twice, and it then has 2x values compared to other words in this document.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tfidf_vectors</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>a</th>
+      <th>and</th>
+      <th>are</th>
+      <th>book</th>
+      <th>here</th>
+      <th>is</th>
+      <th>my</th>
+      <th>pen</th>
+      <th>these</th>
+      <th>this</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.534046</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.534046</td>
+      <td>0.000000</td>
+      <td>0.379978</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.534046</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.000000</td>
+      <td>0.324336</td>
+      <td>0.324336</td>
+      <td>0.000000</td>
+      <td>0.324336</td>
+      <td>0.230768</td>
+      <td>0.324336</td>
+      <td>0.648673</td>
+      <td>0.324336</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Let’s see the example for classifying text into 20 e-mail groups. (Compare the result with the previous one.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_20newsgroups</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+
+<span class="c1"># Load train dataset</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">fetch_20newsgroups</span><span class="p">(</span>
+    <span class="n">subset</span><span class="o">=</span><span class="s2">&quot;train&quot;</span><span class="p">,</span>
+    <span class="n">remove</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;headers&quot;</span><span class="p">,</span> <span class="s2">&quot;footers&quot;</span><span class="p">,</span> <span class="s2">&quot;quotes&quot;</span><span class="p">))</span>
+
+<span class="c1"># Count vectorize</span>
+<span class="n">count_vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">X_train_count</span> <span class="o">=</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># TF-IDF weighting</span>
+<span class="n">tfidf_trans</span> <span class="o">=</span> <span class="n">TfidfTransformer</span><span class="p">(</span><span class="n">use_idf</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_count</span><span class="p">)</span>
+<span class="n">X_train_tfidf</span> <span class="o">=</span> <span class="n">tfidf_trans</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train_count</span><span class="p">)</span>
+
+<span class="c1"># Train</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">target</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">MultinomialNB</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">.01</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_tfidf</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Evaluate accuracy</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">fetch_20newsgroups</span><span class="p">(</span>
+    <span class="n">subset</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">,</span>
+    <span class="n">remove</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;headers&quot;</span><span class="p">,</span> <span class="s2">&quot;footers&quot;</span><span class="p">,</span> <span class="s2">&quot;quotes&quot;</span><span class="p">))</span>
+<span class="n">X_test_count</span> <span class="o">=</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">test</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">X_test_tfidf</span> <span class="o">=</span> <span class="n">tfidf_trans</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test_count</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_tfidf</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">target</span>
+<span class="n">score</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;classification accuracy: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">score</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/tsmatsuz/.local/lib/python3.6/site-packages/sklearn/feature_extraction/text.py:489: UserWarning: The parameter &#39;token_pattern&#39; will not be used since &#39;tokenizer&#39; is not None&#39;
+  warnings.warn(&quot;The parameter &#39;token_pattern&#39; will not be used&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>classification accuracy: 0.6964949548592672
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>TF-IDF can also be applied to dense vectors</strong> as follows :</p>
+<div class="math notranslate nohighlight">
+\[ \frac{1}{\sum_{i=1}^{k} \verb|tfidf|(w_i)} \sum_{i=1}^{k} \verb|tfidf|(w_i) v(w_i) \]</div>
+<p>where <span class="math notranslate nohighlight">\(v(\cdot)\)</span> is word’s vectorization (dense vector) and <span class="math notranslate nohighlight">\(\verb|tfidf|(\cdot)\)</span> is TF-IDF weighting.</p>
+</section>
+</section>
+<section id="dense-vectors">
+<h2>Dense Vectors<a class="headerlink" href="#dense-vectors" title="Link to this heading">#</a></h2>
+<p>As you saw in the previous examples, the <mark>generated count vectors are sparse</mark> and a lot of algorithms won’t work well with this high-dimensional vectors.<br></p>
+<p>For this reason, <mark>refined trainers will transform sparse vectors into non-sparse forms (<strong>dense vectors</strong>)</mark> and process some tasks (such as, NLP classification, etc) againt these dense vectors in practice.</p>
+<p><img alt="Dense vectorize" src="../../../../_images/dense_vectorize.png" /></p>
+<p>👉 In today’s advanced embedding, the embedding layer can sometimes be the model of non-linear neural networks.<br></p>
+<p>👉 But, in most cases, word embedding is essentially a lookup table which maps a sparse vector into a dense vector.</p>
+<p>Assuming <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is a word index vector (i.e, sparse vector) with voculabrary size <span class="math notranslate nohighlight">\(|V|\)</span>,</p>
+<p>👉 in which the i-th element of <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is <span class="math notranslate nohighlight">\(1\)</span> and other elements are <span class="math notranslate nohighlight">\(0\)</span>,</p>
+<p>👉 the embedding table <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> will then be a <span class="math notranslate nohighlight">\( |V| \times d \)</span> matrix which converts a sparse vector <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> to a <span class="math notranslate nohighlight">\(d\)</span>-dimensional dense vector by <span class="math notranslate nohighlight">\( \mathbf{w} \mathbf{E} \)</span>. (i.e, The i-th row of <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> is a dense vector for a word <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>.)<br></p>
+<p>The <span class="math notranslate nohighlight">\( |V| \times d \)</span> parameters will then be trained by some task.</p>
+<p><img alt="Embedding" src="../../../../_images/embedding_matrix.png" /></p>
+<div class="alert alert-info alrt-block">
+<p>👉 <strong>Note</strong> : A lookup table cannot be used in sentence embedding, because the number of sentences is not finite.<br></p>
+</div>
+<p>👉 <mark>The generated dense vector (i.e, non-sparse form) will represent some aspects (meaning) for words or documents.</mark></p>
+<p>In order to get the trained (optimal) parameters of <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> (and optimal dense vectors), you can take either of the following 3 options :</p>
+<ol class="arabic simple">
+<li><p>Train embeddings <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> from the beginning.</p></li>
+<li><p>Use existing pre-trained embeddings <span class="math notranslate nohighlight">\(\mathbf{E_0}\)</span> trained by a large text corpus. (For instance, see Hugging Face hub for a lot of pre-trained SOTA models.)</p></li>
+<li><p>Download pre-trained embeddings <span class="math notranslate nohighlight">\(\mathbf{E_0}\)</span> and train (fine-tune) <span class="math notranslate nohighlight">\(\mathbf{E_0}\)</span> furthermore to get new optimal <span class="math notranslate nohighlight">\(\mathbf{E_1}\)</span>.</p></li>
+</ol>
+<div class="alert alert-info alert-block">
+<p>💡 <strong>Note</strong> : In order to fine-tune the pre-trained vectors, there also exists the following approaches :<br></p>
+<ul class="simple">
+<li><p>Find an additional matrix <span class="math notranslate nohighlight">\(\mathbf{T} \in \mathbb{R}^{d \times d} \)</span>, with which we can obtain new embedding <span class="math notranslate nohighlight">\(\mathbf{E} \mathbf{T}\)</span></p></li>
+<li><p>Find an additional matrix <span class="math notranslate nohighlight">\(\mathbf{A} \in \mathbb{R}^{|V| \times d} \)</span>, with which we can obtain new embedding <span class="math notranslate nohighlight">\(\mathbf{E} + \mathbf{A}\)</span></p></li>
+<li><p>Hybrid of 1 and 2</p></li>
+</ul>
+</div>
+<p>In a lot of today’s NLP models, <mark>the word is embedded into dense vectors and the sequence of words in document is trained by RNN-based learners , Attention-based learners, or Transformers with a large corpus </mark>.</p>
+<p>However, for the purpose of understanding, we’ll see a simple classification trainer, in which the word is embedded and the sequence is combined by using primitive continuos bag-of-words (CBOW) representation.<br></p>
+<p>In this example, we’ll train a model (which includes custom embedding) to detect sentiment with movie review dataset (IMDB) for natural language processing.</p>
+<p>CBOW (continuos bag-of-words) representation is a combination of vectors, which is obtained by the mean (average) of vectors as follows. (The magnitude of vector doesn’t then depend on the length of sentence.)</p>
+<p><span class="math notranslate nohighlight">\( \frac{1}{k} \sum_{i=1}^{k} v(w_i) \)</span>     where <span class="math notranslate nohighlight">\(v(\cdot)\)</span> is dense vector.</p>
+<p><strong>Install required packages</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">torch</span><span class="o">==</span><span class="m">1</span>.13.1<span class="w"> </span><span class="nv">torchtext</span><span class="o">==</span><span class="m">0</span>.14.1<span class="w"> </span><span class="nv">torchdata</span><span class="o">==</span><span class="m">0</span>.5.1<span class="w"> </span>--extra-index-url<span class="w"> </span>https://download.pytorch.org/whl/cu114
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>nltk<span class="w"> </span>numpy<span class="w"> </span>pandas
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;popular&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="prepare-data">
+<h3>Prepare data<a class="headerlink" href="#prepare-data" title="Link to this heading">#</a></h3>
+<p>In this example, we use IMDB dataset (movie review dataset).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchtext.datasets</span> <span class="kn">import</span> <span class="n">IMDB</span>
+
+<span class="n">train_iter</span> <span class="o">=</span> <span class="n">IMDB</span><span class="p">(</span><span class="n">split</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The record number is as follows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">train_iter</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25000
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we pick up and see the first row of records.<br>
+In this dataset, it includes the review text and 2-class flag 1 or 2 for satisfied/dissatisfied respectively.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test (print first row)</span>
+<span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">train_iter</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***** text *****&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***** label *****&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+    <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>***** text *****
+I love sci-fi and am willing to put up with a lot. Sci-fi movies/TV are usually underfunded, under-appreciated and misunderstood. I tried to like this, I really did, but it is to good TV sci-fi as Babylon 5 is to Star Trek (the original). Silly prosthetics, cheap cardboard sets, stilted dialogues, CG that doesn&#39;t match the background, and painfully one-dimensional characters cannot be overcome with a &#39;sci-fi&#39; setting. (I&#39;m sure there are those of you out there who think Babylon 5 is good sci-fi TV. It&#39;s not. It&#39;s clichéd and uninspiring.) While US viewers might like emotion and character development, sci-fi is a genre that does not take itself seriously (cf. Star Trek). It may treat important issues, yet not as a serious philosophy. It&#39;s really difficult to care about the characters here as they are not simply foolish, just missing a spark of life. Their actions and reactions are wooden and predictable, often painful to watch. The makers of Earth KNOW it&#39;s rubbish as they have to always say &quot;Gene Roddenberry&#39;s Earth...&quot; otherwise people would not continue watching. Roddenberry&#39;s ashes must be turning in their orbit as this dull, cheap, poorly edited (watching it without advert breaks really brings this home) trudging Trabant of a show lumbers into space. Spoiler. So, kill off a main character. And then bring him back as another actor. Jeeez! Dallas all over again.
+***** label *****
+1
+</pre></div>
+</div>
+</div>
+</div>
+<p>To get the better performance (accuracy), we standarize the input’s review text as follows.</p>
+<p>(1) Make all words to lowercase<br>
+(ex. “I am a Greatest Showman !” -&gt; “i am a greatest showman !”)</p>
+<p>(2) Remove all stop words, such as, “a”, “the”, “is”, “i”, etc<br>
+(ex. “i am a greatest showman !” -&gt; “greatest showman !”)</p>
+<p>(3) Remove all punctuation, such as, “!”, “?”, “#”, etc<br>
+(ex. “greatest showman !” -&gt; “greatest showman”)</p>
+<div class="alert alert-info">
+<p><strong>Note</strong> : Some normalization - such as, changing to lower case - is also done in the following tokenizer.<br></p>
+<p><strong>N-gram words</strong> (such as, “New York”, “Barack Obama”) and lemmatization (standardization for such as “have”, “had” or “having”) should be dealed with, but here I have skipped these pre-processing.</p>
+<p>In the strict pre-processing, we should also care about the polysemy. (The different meanings in the same word should have different tokens.)</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">import</span> <span class="nn">string</span>
+
+<span class="k">def</span> <span class="nf">standarize_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="n">new_text</span> <span class="o">=</span> <span class="n">text</span>
+
+    <span class="c1"># 1. To lowercase</span>
+    <span class="n">new_text</span> <span class="o">=</span> <span class="n">new_text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="c1"># 2. Remove stop words</span>
+    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">):</span>
+        <span class="n">new_text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
+            <span class="s2">&quot;(^|\s+)</span><span class="si">%s</span><span class="s2">(\s+|$)&quot;</span> <span class="o">%</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">w</span><span class="p">),</span>
+            <span class="s2">&quot; &quot;</span><span class="p">,</span>
+            <span class="n">new_text</span><span class="p">)</span>
+    <span class="n">new_text</span> <span class="o">=</span> <span class="n">new_text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="c1"># 3. Remove punctuation</span>
+    <span class="n">new_text</span> <span class="o">=</span> <span class="n">new_text</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">))</span>
+    <span class="n">new_text</span> <span class="o">=</span> <span class="n">new_text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">new_text</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test</span>
+<span class="n">standarize_text</span><span class="p">(</span><span class="s2">&quot;I am a Greatest Showman !&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;greatest showman&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>In order to create a word’s index vector as follows, first we create a list for words (<code class="docutils literal notranslate"><span class="pre">vocab</span></code>) used in the training set.</p>
+<p><img alt="Index vectorize" src="../../../../_images/index_vectorize.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchtext.data.utils</span> <span class="kn">import</span> <span class="n">get_tokenizer</span>
+<span class="kn">from</span> <span class="nn">torchtext.vocab</span> <span class="kn">import</span> <span class="n">build_vocab_from_iterator</span>
+
+<span class="n">vocab_size</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="c1"># create tokenizer</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">get_tokenizer</span><span class="p">(</span><span class="s2">&quot;basic_english&quot;</span><span class="p">)</span>
+
+<span class="c1"># define tokenization function</span>
+<span class="k">def</span> <span class="nf">yield_tokens</span><span class="p">(</span><span class="n">data_iter</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">data_iter</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">standarize_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c1"># build vocabulary list</span>
+<span class="n">vocab</span> <span class="o">=</span> <span class="n">build_vocab_from_iterator</span><span class="p">(</span>
+    <span class="n">yield_tokens</span><span class="p">(</span><span class="n">train_iter</span><span class="p">),</span>
+    <span class="n">specials</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&lt;unk&gt;&quot;</span><span class="p">],</span>
+    <span class="n">max_tokens</span><span class="o">=</span><span class="n">vocab_size</span>
+<span class="p">)</span>
+<span class="n">vocab</span><span class="o">.</span><span class="n">set_default_index</span><span class="p">(</span><span class="n">vocab</span><span class="p">[</span><span class="s2">&quot;&lt;unk&gt;&quot;</span><span class="p">])</span>
+
+<span class="c1"># get list for index-to-word, and word-to-index</span>
+<span class="n">itos</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">get_itos</span><span class="p">()</span>
+<span class="n">stoi</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">get_stoi</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test</span>
+<span class="n">vocab</span><span class="p">([</span><span class="s2">&quot;greatest&quot;</span><span class="p">,</span> <span class="s2">&quot;movie&quot;</span><span class="p">,</span> <span class="s2">&quot;show&quot;</span><span class="p">,</span> <span class="s2">&quot;abcdefghijk&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[681, 2, 41, 0]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we build data loader with a collator function, in which data is pre-processed.</p>
+<p>In this collator,</p>
+<ol class="arabic simple">
+<li><p>The input’s text is standarized with previous <code class="docutils literal notranslate"><span class="pre">standarize_text</span></code> function.</p></li>
+<li><p>The input’s text is then tokenized into word’s index (integer’s list).</p></li>
+<li><p>Limit to 256 tokens.</p></li>
+<li><p>Generate mask array. For instance, if the length of token is 3, it will become <code class="docutils literal notranslate"><span class="pre">[1.0,</span> <span class="pre">1.0,</span> <span class="pre">1.0,</span> <span class="pre">0.0,</span> <span class="pre">0.0,</span> <span class="pre">...,</span> <span class="pre">0.0]</span></code>.</p></li>
+<li><p>Pad all sequence by zero, if the length of sequence is shorter than max tokens.</p></li>
+<li><p>Convert curent label 1 or 2 into 0 or 1 respectively.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+
+<span class="n">seq_len</span> <span class="o">=</span> <span class="mi">256</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">collate_batch</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
+    <span class="n">label_list</span><span class="p">,</span> <span class="n">token_list</span><span class="p">,</span> <span class="n">mask_list</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">:</span>
+        <span class="c1"># 1. standarize text</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">standarize_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="c1"># 2. generate word&#39;s index vector</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="n">vocab</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+        <span class="c1"># 3. limit to first tokens</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[:</span><span class="n">seq_len</span><span class="p">]</span>
+        <span class="c1"># 4. generate mask array</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+        <span class="n">mask_array</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">seq_len</span><span class="p">)]</span>
+        <span class="c1"># 5. pad sequence</span>
+        <span class="n">tokens</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">seq_len</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">))</span>
+        <span class="c1"># 6. convert label into 0 or 1</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">label</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="c1"># add to list</span>
+        <span class="n">label_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">token_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+        <span class="n">mask_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mask_array</span><span class="p">)</span>
+    <span class="c1"># convert to tensor</span>
+    <span class="n">label_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">label_list</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">token_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">token_list</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">mask_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">mask_list</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">label_list</span><span class="p">,</span> <span class="n">token_list</span><span class="p">,</span> <span class="n">mask_list</span>
+
+<span class="n">dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
+    <span class="n">train_iter</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">collate_fn</span><span class="o">=</span><span class="n">collate_batch</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test</span>
+<span class="k">for</span> <span class="n">labels</span><span class="p">,</span> <span class="n">tokens</span><span class="p">,</span> <span class="n">masks</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+    <span class="k">break</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;label shape in batch : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">size</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;token shape in batch : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tokens</span><span class="o">.</span><span class="n">size</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mask  shape in batch : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">masks</span><span class="o">.</span><span class="n">size</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***** label sample *****&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***** token sample *****&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***** input text *****&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">itos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***** mask *****&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">masks</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>label shape in batch : torch.Size([128])
+token shape in batch : torch.Size([128, 256])
+mask  shape in batch : torch.Size([128, 256])
+***** label sample *****
+tensor(0, device=&#39;cuda:0&#39;)
+***** token sample *****
+tensor([8261,    4, 1440,   23,    5,   17,   27,    0,    0, 2639,  232, 3768,
+        3301,  852,    0,  226,    0,    0, 6659,    0,  343,   87,  310,  224,
+        1476, 4918,    0,    0,    0,    0,    0, 4035,  680,  138, 3386,    0,
+          62,  859, 1068,   11,    0,  379, 3355,    0,  105,    5,   10,   71,
+         530,  200,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+           0,    0,    0,    0], device=&#39;cuda:0&#39;)
+***** input text *****
+[&#39;file&#39;, &#39;one&#39;, &#39;how&#39;, &#39;movies&#39;, &#39;like&#39;, &#39;get&#39;, &#39;made&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;indie&#39;, &#39;version&#39;, &#39;macbeth&#39;, &#39;adapted&#39;, &#39;fairly&#39;, &#39;&lt;unk&gt;&#39;, &#39;but&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;unconventional&#39;, &#39;&lt;unk&gt;&#39;, &#39;style&#39;, &#39;cast&#39;, &#39;gives&#39;, &#39;shot&#39;, &#39;christopher&#39;, &#39;walken&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;rising&#39;, &#39;dull&#39;, &#39;script&#39;, &#39;pat&#39;, &#39;&lt;unk&gt;&#39;, &#39;actors&#39;, &#39;wasted&#39;, &#39;audiences&#39;, &#39;time&#39;, &#39;&lt;unk&gt;&#39;, &#39;fans&#39;, &#39;brand&#39;, &#39;&lt;unk&gt;&#39;, &#39;may&#39;, &#39;like&#39;, &#39;it&#39;, &#39;though&#39;, &#39;4&#39;, &#39;10&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;, &#39;&lt;unk&gt;&#39;]
+***** mask *****
+tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+        1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0.], device=&#39;cuda:0&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="build-network">
+<h3>Build network<a class="headerlink" href="#build-network" title="Link to this heading">#</a></h3>
+<p>First we’ll build the embedding module.</p>
+<p><img alt="Embedding module" src="../../../../_images/embedding_layer.png" /></p>
+<p>This module converts each word’s index into corresponding embedded vector (dense vector) as follows.<br>
+If the size of inputs is <code class="docutils literal notranslate"><span class="pre">[128,</span> <span class="pre">256]</span></code> and embedding dimension is <code class="docutils literal notranslate"><span class="pre">16</span></code>, the size of inputs will then become <code class="docutils literal notranslate"><span class="pre">[128,</span> <span class="pre">256,</span> <span class="pre">16]</span></code></p>
+<p><img alt="Word embeddings" src="../../../../_images/word_embedding.png" /></p>
+<blockquote>
+<div><p>Note : Here for learning purpose, we are creating a custom embedding module from scratch, but we can use <code class="docutils literal notranslate"><span class="pre">torch.nn.Embedding</span></code> module in PyTorch.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+<span class="n">embedding_dim</span> <span class="o">=</span> <span class="mi">16</span>
+
+<span class="k">class</span> <span class="nc">Embedding</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_embeddings</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Embedding</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">num_embeddings</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset_parameters</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">reset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">uniform_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">[</span><span class="nb">input</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">embs</span> <span class="o">=</span> <span class="n">e</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;output shape : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">embs</span><span class="o">.</span><span class="n">size</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***** output *****&quot;</span><span class="p">)</span>
+<span class="n">embs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>output shape : torch.Size([128, 256, 16])
+***** output *****
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[[ 0.0537,  0.0995, -0.0639,  ..., -0.0117, -0.0210, -0.0004],
+         [ 0.0994, -0.0006,  0.0512,  ..., -0.0381,  0.0587, -0.0776],
+         [-0.0408, -0.0242, -0.0683,  ..., -0.0763, -0.0033,  0.0752],
+         ...,
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391],
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391],
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391]],
+
+        [[-0.0635, -0.0664,  0.0637,  ..., -0.0536, -0.0019,  0.0504],
+         [ 0.0791,  0.0604,  0.0386,  ...,  0.0170,  0.0313, -0.0888],
+         [-0.0570, -0.0719, -0.0392,  ..., -0.0905,  0.0871, -0.0014],
+         ...,
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391],
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391],
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391]],
+
+        [[ 0.0164,  0.0208, -0.0965,  ..., -0.0159, -0.0105, -0.0977],
+         [-0.0785,  0.0128,  0.0330,  ..., -0.0051,  0.0685, -0.0039],
+         [ 0.0897, -0.0164,  0.0486,  ...,  0.0224, -0.0740,  0.0836],
+         ...,
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391],
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391],
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391]],
+
+        ...,
+
+        [[-0.0767,  0.0026,  0.0898,  ...,  0.0570, -0.0813,  0.0734],
+         [ 0.0147,  0.0882, -0.0059,  ..., -0.0005,  0.0965,  0.0330],
+         [-0.0840,  0.0118, -0.0646,  ...,  0.0153,  0.0669, -0.0279],
+         ...,
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391],
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391],
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391]],
+
+        [[ 0.0865, -0.0626, -0.0700,  ..., -0.0905,  0.0485, -0.0487],
+         [-0.0176,  0.0219, -0.0390,  ..., -0.0985, -0.0119, -0.0879],
+         [-0.0978, -0.0426,  0.0983,  ...,  0.0707,  0.0164, -0.0214],
+         ...,
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391],
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391],
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391]],
+
+        [[-0.0801, -0.0978, -0.0325,  ...,  0.0299,  0.0905, -0.0513],
+         [ 0.0348, -0.0246,  0.0625,  ...,  0.0199, -0.0878, -0.0442],
+         [-0.0831,  0.0064,  0.0506,  ...,  0.0753, -0.0491,  0.0541],
+         ...,
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391],
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391],
+         [ 0.0227,  0.0767,  0.0386,  ..., -0.0433,  0.0949, -0.0391]]],
+       device=&#39;cuda:0&#39;, grad_fn=&lt;IndexBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we get CBOW (continuous bag-of-words) representation for word’s embedded vectors as follows.</p>
+<div class="math notranslate nohighlight">
+\[ \frac{1}{k} \sum_{i=1}^{k} v(w_i) \]</div>
+<p>Where <span class="math notranslate nohighlight">\(w_i\)</span> is a word vector (in this case, the scalar number representing a word) and <span class="math notranslate nohighlight">\(v(\cdot)\)</span> is embedding function.</p>
+<p><img alt="CBOW" src="../../../../_images/continuous_bow.png" /></p>
+<p>👉 In this CBOW representation, the order of words in the sentence will be ignored, and it won’t then capture contexts, such as :</p>
+<p>“it’s exciting, but it’s unfavorable.”</p>
+<p>Furthermore it won’t understand n-grams, such as, “don’t like”.<br></p>
+<p>In the following CBOW representation’s implementation, I use mask (in which 0 is assigned in padded positions, and otherwise 1) in order to skip computation in padded positions.</p>
+<blockquote>
+<div><p>Note : In PyTorch, you can use <code class="docutils literal notranslate"><span class="pre">torch.nn.functional.avg_pool1d()</span></code> for averaging globally. You can also use <code class="docutils literal notranslate"><span class="pre">torch.nn.EmbeddingBag</span></code> to get the mean of embedded vectors.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CBOW</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">embedded</span><span class="p">,</span> <span class="n">masks</span><span class="p">):</span>
+        <span class="c1"># generate mask with embedding --&gt; [batch_size, seq_len, embedding_dim]</span>
+        <span class="n">extend_masks</span> <span class="o">=</span> <span class="n">masks</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">extend_masks</span> <span class="o">=</span> <span class="n">extend_masks</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
+        <span class="c1"># filter embedding by multiplication</span>
+        <span class="n">masked_embedded</span> <span class="o">=</span> <span class="n">embedded</span> <span class="o">*</span> <span class="n">extend_masks</span>
+        <span class="c1"># sum all embedding in each sequence --&gt; [batch_size, embedding_dim]</span>
+        <span class="n">embedded_sum</span> <span class="o">=</span> <span class="n">masked_embedded</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># compute token length --&gt; [batch_size]</span>
+        <span class="n">token_length</span> <span class="o">=</span> <span class="n">masks</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># divide by token length</span>
+        <span class="c1"># [batch_size, embedding_dim] / [batch_size] --&gt; [batch_size, embedding_dim]</span>
+        <span class="n">embedded_sum</span> <span class="o">=</span> <span class="n">embedded_sum</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">token_length</span>
+        <span class="k">return</span> <span class="n">embedded_sum</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">CBOW</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">cbow</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="n">embs</span><span class="p">,</span> <span class="n">masks</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;output shape : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cbow</span><span class="o">.</span><span class="n">size</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***** output *****&quot;</span><span class="p">)</span>
+<span class="n">cbow</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>output shape : torch.Size([128, 16])
+***** output *****
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[ 0.0109,  0.0271,  0.0090,  ..., -0.0210,  0.0267, -0.0084],
+        [ 0.0064,  0.0199,  0.0137,  ..., -0.0186,  0.0045, -0.0095],
+        [ 0.0061,  0.0170, -0.0031,  ..., -0.0107,  0.0222, -0.0050],
+        ...,
+        [ 0.0050,  0.0042, -0.0062,  ..., -0.0173,  0.0200, -0.0131],
+        [-0.0021,  0.0077, -0.0024,  ..., -0.0098,  0.0032, -0.0044],
+        [ 0.0041,  0.0017,  0.0063,  ..., -0.0084,  0.0047, -0.0023]],
+       device=&#39;cuda:0&#39;, grad_fn=&lt;TransposeBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally we’ll build the task layer.</p>
+<p><img alt="Task layer" src="../../../../_images/task_layer.png" /></p>
+<p>In our network, we just use fully connected feed-forward network (DenseNet), in which the final output is one-hot logits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test</span>
+<span class="n">l</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">logits</span> <span class="o">=</span> <span class="n">l</span><span class="p">(</span><span class="n">cbow</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;output shape : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">logits</span><span class="o">.</span><span class="n">size</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***** output *****&quot;</span><span class="p">)</span>
+<span class="n">logits</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>output shape : torch.Size([128, 2])
+***** output *****
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[ 0.1841, -0.0176],
+        [ 0.1860, -0.0200],
+        [ 0.1846, -0.0180],
+        [ 0.1830, -0.0159],
+        [ 0.1825, -0.0143],
+        [ 0.1820, -0.0134],
+        [ 0.1762, -0.0149],
+        [ 0.1812, -0.0116],
+        [ 0.1811, -0.0171],
+        [ 0.1789, -0.0131],
+        [ 0.1859, -0.0158],
+        [ 0.1821, -0.0178],
+        [ 0.1768, -0.0121],
+        [ 0.1690, -0.0115],
+        [ 0.1768, -0.0138],
+        [ 0.1794, -0.0155],
+        [ 0.1816, -0.0166],
+        [ 0.1573, -0.0196],
+        [ 0.1725, -0.0146],
+        [ 0.1761, -0.0134],
+        [ 0.1796, -0.0169],
+        [ 0.1806, -0.0131],
+        [ 0.1821, -0.0139],
+        [ 0.1806, -0.0194],
+        [ 0.1818, -0.0148],
+        [ 0.1746, -0.0088],
+        [ 0.1834, -0.0149],
+        [ 0.1837, -0.0178],
+        [ 0.1864, -0.0232],
+        [ 0.1800, -0.0160],
+        [ 0.1772, -0.0126],
+        [ 0.1855, -0.0177],
+        [ 0.1804, -0.0155],
+        [ 0.1908, -0.0187],
+        [ 0.1863, -0.0173],
+        [ 0.1746, -0.0128],
+        [ 0.1857, -0.0180],
+        [ 0.1756, -0.0130],
+        [ 0.1836, -0.0153],
+        [ 0.1831, -0.0137],
+        [ 0.1800, -0.0171],
+        [ 0.1820, -0.0110],
+        [ 0.1765, -0.0135],
+        [ 0.1839, -0.0156],
+        [ 0.1767, -0.0137],
+        [ 0.1806, -0.0149],
+        [ 0.1824, -0.0170],
+        [ 0.1720, -0.0106],
+        [ 0.1751, -0.0115],
+        [ 0.1871, -0.0164],
+        [ 0.1848, -0.0188],
+        [ 0.1736, -0.0184],
+        [ 0.1861, -0.0167],
+        [ 0.1811, -0.0149],
+        [ 0.1813, -0.0125],
+        [ 0.1873, -0.0162],
+        [ 0.1753, -0.0105],
+        [ 0.1823, -0.0159],
+        [ 0.1818, -0.0155],
+        [ 0.1724, -0.0100],
+        [ 0.1878, -0.0152],
+        [ 0.1823, -0.0155],
+        [ 0.1781, -0.0126],
+        [ 0.1825, -0.0147],
+        [ 0.1840, -0.0126],
+        [ 0.1821, -0.0114],
+        [ 0.1826, -0.0158],
+        [ 0.1797, -0.0110],
+        [ 0.1854, -0.0164],
+        [ 0.1795, -0.0169],
+        [ 0.1912, -0.0220],
+        [ 0.1789, -0.0136],
+        [ 0.1828, -0.0167],
+        [ 0.1779, -0.0124],
+        [ 0.1877, -0.0150],
+        [ 0.1755, -0.0172],
+        [ 0.1816, -0.0126],
+        [ 0.1829, -0.0150],
+        [ 0.1822, -0.0157],
+        [ 0.1731, -0.0136],
+        [ 0.1791, -0.0172],
+        [ 0.1860, -0.0201],
+        [ 0.1766, -0.0163],
+        [ 0.1737, -0.0159],
+        [ 0.1795, -0.0175],
+        [ 0.1859, -0.0173],
+        [ 0.1768, -0.0142],
+        [ 0.1850, -0.0175],
+        [ 0.1801, -0.0129],
+        [ 0.1897, -0.0168],
+        [ 0.1747, -0.0095],
+        [ 0.1874, -0.0193],
+        [ 0.1769, -0.0137],
+        [ 0.1797, -0.0186],
+        [ 0.1820, -0.0155],
+        [ 0.1803, -0.0138],
+        [ 0.1813, -0.0164],
+        [ 0.1699, -0.0124],
+        [ 0.1863, -0.0180],
+        [ 0.1835, -0.0118],
+        [ 0.1832, -0.0149],
+        [ 0.1777, -0.0148],
+        [ 0.1844, -0.0144],
+        [ 0.1723, -0.0120],
+        [ 0.1764, -0.0115],
+        [ 0.1775, -0.0117],
+        [ 0.1815, -0.0141],
+        [ 0.1831, -0.0192],
+        [ 0.1838, -0.0144],
+        [ 0.1808, -0.0142],
+        [ 0.1800, -0.0151],
+        [ 0.1744, -0.0137],
+        [ 0.1829, -0.0149],
+        [ 0.1829, -0.0156],
+        [ 0.1799, -0.0149],
+        [ 0.1790, -0.0162],
+        [ 0.1760, -0.0121],
+        [ 0.1806, -0.0144],
+        [ 0.1884, -0.0207],
+        [ 0.1837, -0.0169],
+        [ 0.1841, -0.0180],
+        [ 0.1878, -0.0178],
+        [ 0.1782, -0.0112],
+        [ 0.1881, -0.0163],
+        [ 0.1762, -0.0126],
+        [ 0.1819, -0.0160],
+        [ 0.1727, -0.0174],
+        [ 0.1792, -0.0140]], device=&#39;cuda:0&#39;, grad_fn=&lt;AddmmBackward0&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we put it all together and build a model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">CBOWClassifier</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">class_num</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">Embedding</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cbow</span> <span class="o">=</span> <span class="n">CBOW</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">embedding_dim</span><span class="p">,</span> <span class="n">class_num</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokens</span><span class="p">,</span> <span class="n">masks</span><span class="p">):</span>
+        <span class="n">embs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cbow</span><span class="p">(</span><span class="n">embs</span><span class="p">,</span> <span class="n">masks</span><span class="p">)</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">logits</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">CBOWClassifier</span><span class="p">(</span><span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Try to predict sentiment (0 - negative, 1 - positive) before training.<br>
+As you can see, the result is not correct.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">text</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;I love this movie.&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;It&#39;s so disappointed.&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;I have recognized that a lot of people liked this story.&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;I agree with the reviewer who said this work is boring.&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;I found it so turgid and poorly expressed by casts.&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;It helps you put into words what you want from main character.&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;I think the ending is illogical at least and is fiction.&quot;</span><span class="p">],</span>
+<span class="p">]</span>
+<span class="n">true_labels</span><span class="p">,</span> <span class="n">tokens</span><span class="p">,</span> <span class="n">masks</span> <span class="o">=</span> <span class="n">collate_batch</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="n">pred_logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">masks</span><span class="p">)</span>
+<span class="n">pred_labels</span> <span class="o">=</span> <span class="n">pred_logits</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">text</span><span class="p">],</span>
+        <span class="n">true_labels</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="n">pred_labels</span><span class="o">.</span><span class="n">tolist</span><span class="p">())),</span>
+    <span class="n">columns</span> <span class="o">=</span><span class="p">[</span><span class="s2">&quot;Text&quot;</span><span class="p">,</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span> <span class="s2">&quot;Pred&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Text</th>
+      <th>True</th>
+      <th>Pred</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>I love this movie.</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>It's so disappointed.</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>I have recognized that a lot of people liked t...</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>I agree with the reviewer who said this work i...</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>I found it so turgid and poorly expressed by c...</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>It helps you put into words what you want from...</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>I think the ending is illogical at least and i...</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="train-model-and-evaluate">
+<h3>Train model and Evaluate<a class="headerlink" href="#train-model-and-evaluate" title="Link to this heading">#</a></h3>
+<p>Now let’s train our network.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
+
+<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">15</span>
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">AdamW</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">labels</span><span class="p">,</span> <span class="n">tokens</span><span class="p">,</span> <span class="n">masks</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+        <span class="c1"># optimize</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">masks</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="c1"># calculate accuracy</span>
+        <span class="n">pred_labels</span> <span class="o">=</span> <span class="n">logits</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">num_correct</span> <span class="o">=</span> <span class="p">(</span><span class="n">pred_labels</span> <span class="o">==</span> <span class="n">labels</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">num_correct</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Epoch </span><span class="si">{}</span><span class="s2"> - loss: </span><span class="si">{:2.4f}</span><span class="s2"> - accuracy: </span><span class="si">{:2.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">accuracy</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1 - loss: 0.6533 - accuracy: 0.6250
+Epoch 2 - loss: 0.5507 - accuracy: 0.7750
+Epoch 3 - loss: 0.3829 - accuracy: 0.8750
+Epoch 4 - loss: 0.3148 - accuracy: 0.9250
+Epoch 5 - loss: 0.3395 - accuracy: 0.8500
+Epoch 6 - loss: 0.3428 - accuracy: 0.8000
+Epoch 7 - loss: 0.2202 - accuracy: 0.9250
+Epoch 8 - loss: 0.1837 - accuracy: 0.9500
+Epoch 9 - loss: 0.2222 - accuracy: 0.9250
+Epoch 10 - loss: 0.1923 - accuracy: 0.9000
+Epoch 11 - loss: 0.2358 - accuracy: 0.9250
+Epoch 12 - loss: 0.1134 - accuracy: 1.0000
+Epoch 13 - loss: 0.1036 - accuracy: 0.9750
+Epoch 14 - loss: 0.1339 - accuracy: 0.9500
+Epoch 15 - loss: 0.2219 - accuracy: 0.9000
+</pre></div>
+</div>
+</div>
+</div>
+<p>After the training has completed, predict sample text again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;I love this movie.&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;It&#39;s so disappointed.&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;I have recognized that a lot of people liked this story.&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;I agree with the reviewer who said this work is boring.&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;I found it so turgid and poorly expressed by casts.&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;It helps you put into words what you want from main character.&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;I think the ending is illogical at least and is fiction.&quot;</span><span class="p">],</span>
+<span class="p">]</span>
+<span class="n">true_labels</span><span class="p">,</span> <span class="n">tokens</span><span class="p">,</span> <span class="n">masks</span> <span class="o">=</span> <span class="n">collate_batch</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="n">pred_logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">masks</span><span class="p">)</span>
+<span class="n">pred_labels</span> <span class="o">=</span> <span class="n">pred_logits</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">text</span><span class="p">],</span>
+        <span class="n">true_labels</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="n">pred_labels</span><span class="o">.</span><span class="n">tolist</span><span class="p">())),</span>
+    <span class="n">columns</span> <span class="o">=</span><span class="p">[</span><span class="s2">&quot;Text&quot;</span><span class="p">,</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span> <span class="s2">&quot;Pred&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Text</th>
+      <th>True</th>
+      <th>Pred</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>I love this movie.</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>It's so disappointed.</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>I have recognized that a lot of people liked t...</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>I agree with the reviewer who said this work i...</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>I found it so turgid and poorly expressed by c...</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>It helps you put into words what you want from...</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>I think the ending is illogical at least and i...</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The word embedding is a byproduct in this example.</p>
+<p>For instance, let’s get top 10 words similar to the word “<code class="docutils literal notranslate"><span class="pre">great</span></code>” with trained embedding.<br></p>
+<p><mark>This embedding is trained to capture the tone for sentiment, and it won’t then detect other contexts of similarity, such like, “<code class="docutils literal notranslate"><span class="pre">dog</span></code>” and “<code class="docutils literal notranslate"><span class="pre">puppy</span></code>”.</mark></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="c1"># create new embedding and restore weight from trained model</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">embedding</span>
+<span class="c1"># get embedding vector for the word &quot;great&quot;</span>
+<span class="n">token</span> <span class="o">=</span> <span class="n">stoi</span><span class="p">[</span><span class="s2">&quot;great&quot;</span><span class="p">]</span>
+<span class="c1"># get embedded vector for &quot;great&quot;</span>
+<span class="n">vec_t</span> <span class="o">=</span> <span class="n">e</span><span class="p">(</span><span class="n">token</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="c1"># get vector list for all words (10,000 words)</span>
+<span class="n">all_vec</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vocab</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())]</span>
+<span class="c1"># get L2 distance in all words</span>
+<span class="n">vec_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">vec_t</span><span class="p">)</span>
+<span class="n">all_vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_vec</span><span class="p">)</span>
+<span class="n">all_distance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">vec_t</span><span class="p">,</span><span class="n">v</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">vec_t</span><span class="p">)</span><span class="o">*</span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">all_vec</span><span class="p">])</span>
+<span class="c1"># get top 10 words similar to the word &quot;great&quot;</span>
+<span class="n">indices_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">all_distance</span><span class="p">)</span>
+<span class="p">[</span><span class="n">itos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices_list</span><span class="p">[:</span><span class="mi">10</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;great&#39;,
+ &#39;different&#39;,
+ &#39;gem&#39;,
+ &#39;bravo&#39;,
+ &#39;refreshing&#39;,
+ &#39;710&#39;,
+ &#39;excellent&#39;,
+ &#39;perfect&#39;,
+ &#39;beauty&#39;,
+ &#39;ward&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/mlguide",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/ai/nlp/concepts"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="001_traditional_nlp.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Word Vectors</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="003_ngram_cnn.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">N-Gram detection with 1D Convolution</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-vectors">Sparse Vectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#count-vectorize">Count Vectorize</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tf-idf-weighting">TF-IDF weighting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dense-vectors">Dense Vectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-data">Prepare data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-network">Build network</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#train-model-and-evaluate">Train model and Evaluate</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div class="social-icons">
+    <a href="https://twitter.com/chaturanukool" target="_blank"><i class="fab fa-twitter"></i></a>
+    <a href="https://linkedin.com/in/anukool-chaturvedi" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://github.com/anukchat" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="mailto:chaturvedianukool@gmail.com"><i class="fas fa-envelope"></i></a>
+    </p>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

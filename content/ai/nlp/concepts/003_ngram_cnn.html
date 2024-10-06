@@ -1,0 +1,1463 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>N-Gram detection with 1D Convolution</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=b40f3148" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/ai/nlp/concepts/003_ngram_cnn';</script>
+    <link rel="canonical" href="https://mlguide.in/content/ai/nlp/concepts/003_ngram_cnn.html" />
+    <link rel="icon" href="../../../../_static/logo.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Word2Vec algorithm (Negative Sampling Example)" href="004_word2vec.html" />
+    <link rel="prev" title="Embeddings" href="002_embeddings.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt=" - Home"/>
+    <script>document.write(`<img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt=" - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Guide</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/3_functions_and_modules.html">Functions &amp; Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/4_Object_Oriented.html">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/8_advanced.html">Advanced Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/conceptual_topics.html">Interpreter vs Compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/exercises.html">Excercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Introduction_to_ml.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/000_Data_Exploration.html">Exploratory Data Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/001_Data_Preparation.html">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/003_Classification.html">Classfication</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/005_Evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/006_Advanced.html">K-Fold Cross Validation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../classicml/concepts/007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../neural/neural_toc.html">Neural Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/002_Backpropogation.html">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/003_Activations.html">Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../neural/concepts/004_Optimization.html">Optimizations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../neural/concepts/pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../neural/concepts/pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../nlp_intro.html">Natural Language Processing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="001_traditional_nlp.html">Word Vectors</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="002_embeddings.html">Embeddings</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">N Gram using CNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="004_word2vec.html">Word2Vec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="005_language_model_basic.html">Neural Language Model</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="006_language_model_rnn.html">Recurrent Neural Network (RNN)</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="007_encoder_decoder.html">Encoder Decoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="008_attention.html">Attention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="009_transformer.html">Transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="010_llm_tasks.html">Language Modelling Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="011_appendix.html">Appendix</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../genai/introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../genai/concepts/transformers/01_transformers_from_scratch.html">Transformers</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../genai/langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/intro.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/courses/courses_toc.html">Courses</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/anukchat/mlguide/main?urlpath=lab/tree/content/ai/nlp/concepts/003_ngram_cnn.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/anukchat/mlguide/blob/main/content/ai/nlp/concepts/003_ngram_cnn.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/content/ai/nlp/concepts/003_ngram_cnn.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>N-Gram detection with 1D Convolution</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-required-packages">Install required packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-data">Prepare data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-data-loader">Build data loader</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-network">Build network</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-model">Train model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classify-text">Classify text</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="n-gram-detection-with-1d-convolution">
+<h1>N-Gram detection with 1D Convolution<a class="headerlink" href="#n-gram-detection-with-1d-convolution" title="Link to this heading">#</a></h1>
+<p>Earlier we have run tasks on embeddings in each word, but we sometimes should handle a set of ordered items.<br></p>
+<p>👉 For instance, <strong>“hot dog”</strong> won’t be in the <strong>species of “dog”</strong>, but it will be a part of food.</p>
+<p>👉 <strong>“Paris Hilton”</strong> will also be far from <strong>“Paris”</strong> in language context.</p>
+<p>👉 Even when you find <strong>“good”</strong> in the sentence, it might be a signal of negative sentiment in the context <strong>“not good”</strong>.<br></p>
+<p>Not only bi-grams, but the same is true for tri-grams and generic N-grams.</p>
+<p>The convolution network (CNN) is a today’s widely used model in computer vision (such as, image classification, object detection, segmentation, etc). In NLP, this convolutional architecture can also be applied in N-gram detection.<br></p>
+<p>In computer vision, 2D convolution (convolution by 2 dimensions of width and height) is generally used, but in N-gram detection, 1D convolution is applied as follows.</p>
+<p><img alt="Bi-gram CNN" src="../../../../_images/bigram_convolution.png" /></p>
+<p>There exist several variations for N-gram detection in NLP by convolutions.<br></p>
+<p>The <strong>hierarchical convolutions</strong> can capture <strong>patterns with gaps</strong>, such as, “not — good” or “see — little” where “—” stands for a short sequence of words.<br></p>
+<p>Similar to image processing, <strong>multiple channels</strong> can also be applied in NLP convolution. For instance, when each word has multiple embeddings (such as, word embedding, POS-tag embedding, position-wise word embedding, etc), these embeddings can be manipulated as multiple channels in NLP.<br></p>
+<p>Or, after applying multiple N-grams (such as, 2-gram, 4-gram, and 6-gram), the results can also be manipulated as multiple channels.</p>
+<section id="install-required-packages">
+<h2>Install required packages<a class="headerlink" href="#install-required-packages" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">torch</span><span class="o">==</span><span class="m">2</span>.3.0<span class="w"> </span><span class="nv">torchtext</span><span class="o">==</span><span class="m">0</span>.18.0<span class="w"> </span>--no-cache-dir<span class="w"> </span>--extra-index-url<span class="w"> </span>https://download.pytorch.org/whl/cu113
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PyTorch version:&#39;</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">torchtext</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;torchtext version:&#39;</span><span class="p">,</span> <span class="n">torchtext</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PyTorch version: 2.3.0
+torchtext version: 0.18.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pandas<span class="w"> </span>numpy<span class="w"> </span>nltk
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;popular&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="prepare-data">
+<h2>Prepare data<a class="headerlink" href="#prepare-data" title="Link to this heading">#</a></h2>
+<p>We will use text in news papers dataset. (In this example, we use 2 columns of “headline” and “short description”.)</p>
+<p>Before starting, please download <a class="reference external" href="https://www.kaggle.com/datasets/rmisra/news-category-dataset">News_Category_Dataset_v3.json</a> (collected by HuffPost) in Kaggle.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s2">&quot;News_Category_Dataset_v3.json&quot;</span><span class="p">,</span><span class="n">lines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example, we’ll apply text classification task.</p>
+<p>The words appearing in the former part in sequence will be more indicative (topical) rather than the latter part.</p>
+<p>For this reason, in practical text classification, a long text will then be separated into <strong>regions</strong>. In each region, the convolution (with pooling) is then applied and concatenated. (See below.)<br></p>
+<p>For instance, with RCV1 (Reuters Corpus Volume I) dataset, 20 equally sized regions has better performance in category classification. (See <a class="reference external" href="https://arxiv.org/abs/1504.01255">Johnson and Zhang (2015)</a>.)</p>
+<p><img alt="region separation" src="../../../../_images/region_separation.png" /></p>
+<p>In this example, <code class="docutils literal notranslate"><span class="pre">headline</span></code> and <code class="docutils literal notranslate"><span class="pre">short_description</span></code> are both short text, and we then treat these features as regions, instead of separating a single text into regions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s2">&quot;headline&quot;</span><span class="p">,</span> <span class="s2">&quot;short_description&quot;</span><span class="p">]]</span>
+<span class="n">label_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;category&quot;</span><span class="p">]</span>
+<span class="n">text_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>headline</th>
+      <th>short_description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Over 4 Million Americans Roll Up Sleeves For O...</td>
+      <td>Health experts said it is too early to predict...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>American Airlines Flyer Charged, Banned For Li...</td>
+      <td>He was subdued by passengers and crew when he ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>23 Of The Funniest Tweets About Cats And Dogs ...</td>
+      <td>"Until you have a dog you don't understand wha...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>The Funniest Tweets From Parents This Week (Se...</td>
+      <td>"Accidentally put grown-up toothpaste on my to...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Woman Who Called Cops On Black Bird-Watcher Lo...</td>
+      <td>Amy Cooper accused investment firm Franklin Te...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>209522</th>
+      <td>RIM CEO Thorsten Heins' 'Significant' Plans Fo...</td>
+      <td>Verizon Wireless and AT&amp;T are already promotin...</td>
+    </tr>
+    <tr>
+      <th>209523</th>
+      <td>Maria Sharapova Stunned By Victoria Azarenka I...</td>
+      <td>Afterward, Azarenka, more effusive with the pr...</td>
+    </tr>
+    <tr>
+      <th>209524</th>
+      <td>Giants Over Patriots, Jets Over Colts Among  M...</td>
+      <td>Leading up to Super Bowl XLVI, the most talked...</td>
+    </tr>
+    <tr>
+      <th>209525</th>
+      <td>Aldon Smith Arrested: 49ers Linebacker Busted ...</td>
+      <td>CORRECTION: An earlier version of this story i...</td>
+    </tr>
+    <tr>
+      <th>209526</th>
+      <td>Dwight Howard Rips Teammates After Magic Loss ...</td>
+      <td>The five-time all-star center tore into his te...</td>
+    </tr>
+  </tbody>
+</table>
+<p>209527 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>To get the better performance (accuracy), we standarize the input text as follows.</p>
+<ul class="simple">
+<li><p>Make all words to lowercase in order to reduce words</p></li>
+<li><p>Make “-” (hyphen) to space</p></li>
+<li><p>Remove stop words</p></li>
+<li><p>Remove all punctuation</p></li>
+</ul>
+<div class="alert alert-block alert-info">
+<p>Here I have removed stop words, but we need to take care if we train model for other tasks (such as, sentiment detection), since it might include important words for n-gram detection (such as, “not”, “don’t”, “isn’t”, etc).</p>
+<p>Lemmatization (standardization for such as “have”, “had” or “having”) should be dealed with, but here I have skipped these pre-processing.<br></p>
+<p>In the strict pre-processing, we should also care about the polysemy. (The different meanings in the same word should have different tokens.)</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Convert to lowercase</span>
+<span class="n">text_data</span> <span class="o">=</span> <span class="n">text_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+
+<span class="c1"># Replace hyphens with spaces</span>
+<span class="n">text_data</span> <span class="o">=</span> <span class="n">text_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="c1"># Remove stop words (only when they include punctuation)</span>
+<span class="n">punct_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(^|\w+)[</span><span class="si">%s</span><span class="s2">](\w+|$)&quot;</span> <span class="o">%</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">punct_pattern</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
+        <span class="c1"># Use raw string for the pattern</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(^|\s+)</span><span class="si">%s</span><span class="s2">(\s+|$)&quot;</span> <span class="o">%</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+        <span class="n">text_data</span> <span class="o">=</span> <span class="n">text_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+<span class="n">text_data</span> <span class="o">=</span> <span class="n">text_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+<span class="c1"># Remove punctuation</span>
+<span class="n">punct_replace_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[</span><span class="si">%s</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">))</span>
+
+<span class="n">text_data</span> <span class="o">=</span> <span class="n">text_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">punct_replace_pattern</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">text_data</span> <span class="o">=</span> <span class="n">text_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+<span class="c1"># Remove stop words (only when they don&#39;t include punctuation)</span>
+<span class="n">non_punct_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(^|\w+)[</span><span class="si">%s</span><span class="s2">](\w+|$)&quot;</span> <span class="o">%</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">non_punct_pattern</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
+        <span class="c1"># Use raw string for the pattern</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(^|\s+)</span><span class="si">%s</span><span class="s2">(\s+|$)&quot;</span> <span class="o">%</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+        <span class="n">text_data</span> <span class="o">=</span> <span class="n">text_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+<span class="n">text_data</span> <span class="o">=</span> <span class="n">text_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>headline</th>
+      <th>short_description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4 million americans roll sleeves omicron targe...</td>
+      <td>health experts said early predict whether dema...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>american airlines flyer charged banned life pu...</td>
+      <td>subdued passengers crew fled back aircraft con...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>23 funniest tweets cats dogs week sept 17 23</td>
+      <td>dog understand could eaten</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>funniest tweets parents week sept 17 23</td>
+      <td>accidentally put grown toothpaste toddler’s to...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>woman called cops black bird watcher loses law...</td>
+      <td>amy cooper accused investment firm franklin te...</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>209522</th>
+      <td>rim ceo thorsten heins significant plans black...</td>
+      <td>verizon wireless att already promoting lte dev...</td>
+    </tr>
+    <tr>
+      <th>209523</th>
+      <td>maria sharapova stunned victoria azarenka aust...</td>
+      <td>afterward azarenka effusive press normal credi...</td>
+    </tr>
+    <tr>
+      <th>209524</th>
+      <td>giants patriots jets colts among improbable su...</td>
+      <td>leading super bowl xlvi talked game could end ...</td>
+    </tr>
+    <tr>
+      <th>209525</th>
+      <td>aldon smith arrested 49ers linebacker busted dui</td>
+      <td>correction earlier version story incorrectly s...</td>
+    </tr>
+    <tr>
+      <th>209526</th>
+      <td>dwight howard rips teammates magic loss hornets</td>
+      <td>five time star center tore teammates friday ni...</td>
+    </tr>
+  </tbody>
+</table>
+<p>209527 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>Next we convert a category name (e.g, “WORLD NEWS”) to label ID (e.g, 2).<br></p>
+<p>First we build functions for convertions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">category_array</span> <span class="o">=</span> <span class="n">label_data</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="n">category_dic</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">category_array</span><span class="p">)}</span>
+<span class="n">itoc</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">category_dic</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">ctoi</span> <span class="o">=</span> <span class="n">category_dic</span>
+<span class="n">category_dic</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;U.S. NEWS&#39;: 0,
+ &#39;COMEDY&#39;: 1,
+ &#39;PARENTING&#39;: 2,
+ &#39;WORLD NEWS&#39;: 3,
+ &#39;CULTURE &amp; ARTS&#39;: 4,
+ &#39;TECH&#39;: 5,
+ &#39;SPORTS&#39;: 6,
+ &#39;ENTERTAINMENT&#39;: 7,
+ &#39;POLITICS&#39;: 8,
+ &#39;WEIRD NEWS&#39;: 9,
+ &#39;ENVIRONMENT&#39;: 10,
+ &#39;EDUCATION&#39;: 11,
+ &#39;CRIME&#39;: 12,
+ &#39;SCIENCE&#39;: 13,
+ &#39;WELLNESS&#39;: 14,
+ &#39;BUSINESS&#39;: 15,
+ &#39;STYLE &amp; BEAUTY&#39;: 16,
+ &#39;FOOD &amp; DRINK&#39;: 17,
+ &#39;MEDIA&#39;: 18,
+ &#39;QUEER VOICES&#39;: 19,
+ &#39;HOME &amp; LIVING&#39;: 20,
+ &#39;WOMEN&#39;: 21,
+ &#39;BLACK VOICES&#39;: 22,
+ &#39;TRAVEL&#39;: 23,
+ &#39;MONEY&#39;: 24,
+ &#39;RELIGION&#39;: 25,
+ &#39;LATINO VOICES&#39;: 26,
+ &#39;IMPACT&#39;: 27,
+ &#39;WEDDINGS&#39;: 28,
+ &#39;COLLEGE&#39;: 29,
+ &#39;PARENTS&#39;: 30,
+ &#39;ARTS &amp; CULTURE&#39;: 31,
+ &#39;STYLE&#39;: 32,
+ &#39;GREEN&#39;: 33,
+ &#39;TASTE&#39;: 34,
+ &#39;HEALTHY LIVING&#39;: 35,
+ &#39;THE WORLDPOST&#39;: 36,
+ &#39;GOOD NEWS&#39;: 37,
+ &#39;WORLDPOST&#39;: 38,
+ &#39;FIFTY&#39;: 39,
+ &#39;ARTS&#39;: 40,
+ &#39;DIVORCE&#39;: 41}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ctoi</span><span class="p">[</span><span class="s2">&quot;WORLD NEWS&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">itoc</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;WORLD NEWS&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we convert all label to label IDs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">label_data</span> <span class="o">=</span> <span class="n">label_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">:</span> <span class="n">ctoi</span><span class="p">[</span><span class="n">y</span><span class="p">])</span>
+<span class="n">label_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0         0
+1         0
+2         1
+3         2
+4         0
+         ..
+209522    5
+209523    6
+209524    6
+209525    6
+209526    6
+Name: category, Length: 209527, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="build-data-loader">
+<h2>Build data loader<a class="headerlink" href="#build-data-loader" title="Link to this heading">#</a></h2>
+<p>Now we will tokenize, in which it converts each text to the sequence of word’s indices as follows.<br></p>
+<p>In this example, each text will be padded by the padding index (here, 50000) when the the length of text is smaller than 140.</p>
+<p><img alt="Index vectorize" src="../../../../_images/index_vectorize2.png" /></p>
+<p>First we create a list of vocabulary (<code class="docutils literal notranslate"><span class="pre">vocab</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchtext.data.utils</span> <span class="kn">import</span> <span class="n">get_tokenizer</span>
+<span class="kn">from</span> <span class="nn">torchtext.vocab</span> <span class="kn">import</span> <span class="n">build_vocab_from_iterator</span>
+
+<span class="n">torchtext</span><span class="o">.</span><span class="n">disable_torchtext_deprecation_warning</span><span class="p">()</span>
+
+<span class="n">vocab_size</span> <span class="o">=</span> <span class="mi">50000</span>
+<span class="n">max_seq_len</span> <span class="o">=</span> <span class="mi">140</span>
+
+<span class="c1"># create tokenizer</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">get_tokenizer</span><span class="p">(</span><span class="s2">&quot;basic_english&quot;</span><span class="p">)</span>
+
+<span class="c1"># define tokenization function</span>
+<span class="k">def</span> <span class="nf">yield_tokens</span><span class="p">(</span><span class="n">text_data</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">text_data</span><span class="p">:</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[:</span><span class="n">max_seq_len</span><span class="p">]</span>
+        <span class="k">yield</span> <span class="n">tokens</span>
+
+<span class="c1"># union headline and short_description</span>
+<span class="n">text_all</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">text_data</span><span class="p">[</span><span class="s2">&quot;headline&quot;</span><span class="p">],</span> <span class="n">text_data</span><span class="p">[</span><span class="s2">&quot;short_description&quot;</span><span class="p">]])</span>
+
+<span class="c1"># build vocabulary list</span>
+<span class="n">vocab</span> <span class="o">=</span> <span class="n">build_vocab_from_iterator</span><span class="p">(</span>
+    <span class="n">yield_tokens</span><span class="p">(</span><span class="n">text_all</span><span class="p">),</span>
+    <span class="n">specials</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;&lt;unk&gt;&quot;</span><span class="p">],</span>
+    <span class="n">max_tokens</span><span class="o">=</span><span class="n">vocab_size</span>
+<span class="p">)</span>
+<span class="n">vocab</span><span class="o">.</span><span class="n">set_default_index</span><span class="p">(</span><span class="n">vocab</span><span class="p">[</span><span class="s2">&quot;&lt;unk&gt;&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The generated token index is <code class="docutils literal notranslate"><span class="pre">0,</span> <span class="pre">1,</span> <span class="pre">...</span> <span class="pre">,</span> <span class="pre">vocab_size</span> <span class="pre">-</span> <span class="pre">1</span></code>.<br></p>
+<p>Now I will set <code class="docutils literal notranslate"><span class="pre">vocab_size</span></code> (here 50000) as a token id in padded positions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pad_index</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
+<span class="n">vocab</span><span class="o">.</span><span class="n">append_token</span><span class="p">(</span><span class="s2">&quot;&lt;pad&gt;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Get list for both index-to-word and word-to-index.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">itos</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">get_itos</span><span class="p">()</span>
+<span class="n">stoi</span> <span class="o">=</span> <span class="n">vocab</span><span class="o">.</span><span class="n">get_stoi</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The number of token index is </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vocab</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The padded index is </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">stoi</span><span class="p">[</span><span class="s2">&quot;&lt;pad&gt;&quot;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The number of token index is 50001.
+The padded index is 50000.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we build a collator function, which is used for pre-processing in data loader.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">collate_batch</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
+    <span class="n">label_list</span><span class="p">,</span> <span class="n">head_token_list</span><span class="p">,</span> <span class="n">desc_token_list</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">:</span>
+
+        <span class="c1"># 1. skip None data</span>
+        <span class="k">if</span> <span class="n">head</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">desc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="c1"># 2. generate word&#39;s index vector</span>
+        <span class="n">head_token</span> <span class="o">=</span> <span class="n">vocab</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">(</span><span class="n">head</span><span class="p">))</span>
+        <span class="n">desc_token</span> <span class="o">=</span> <span class="n">vocab</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">(</span><span class="n">desc</span><span class="p">))</span>
+
+        <span class="c1"># 3. limit token length to max_seq_len</span>
+        <span class="n">head_token</span> <span class="o">=</span> <span class="n">head_token</span><span class="p">[:</span><span class="n">max_seq_len</span><span class="p">]</span>
+        <span class="n">desc_token</span> <span class="o">=</span> <span class="n">desc_token</span><span class="p">[:</span><span class="n">max_seq_len</span><span class="p">]</span>
+
+        <span class="c1"># 4. pad sequence</span>
+        <span class="n">head_token</span> <span class="o">+=</span> <span class="p">[</span><span class="n">pad_index</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">max_seq_len</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">head_token</span><span class="p">))</span>
+        <span class="n">desc_token</span> <span class="o">+=</span> <span class="p">[</span><span class="n">pad_index</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">max_seq_len</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">desc_token</span><span class="p">))</span>
+
+        <span class="c1"># add to list</span>
+        <span class="n">label_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">head_token_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">head_token</span><span class="p">)</span>
+        <span class="n">desc_token_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">desc_token</span><span class="p">)</span>
+        
+    <span class="c1"># convert to tensor</span>
+    <span class="n">label_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">label_list</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">head_token_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">head_token_list</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">desc_token_list</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">desc_token_list</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">label_list</span><span class="p">,</span> <span class="n">head_token_list</span><span class="p">,</span> <span class="n">desc_token_list</span>
+
+<span class="n">dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
+    <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">label_data</span><span class="p">,</span> <span class="n">text_data</span><span class="p">[</span><span class="s2">&quot;headline&quot;</span><span class="p">],</span> <span class="n">text_data</span><span class="p">[</span><span class="s2">&quot;short_description&quot;</span><span class="p">])),</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">collate_fn</span><span class="o">=</span><span class="n">collate_batch</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test</span>
+<span class="k">for</span> <span class="n">labels</span><span class="p">,</span> <span class="n">heads</span><span class="p">,</span> <span class="n">descs</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+    <span class="k">break</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;label shape in batch : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">size</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;headline token shape in batch : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">heads</span><span class="o">.</span><span class="n">size</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;short_desc token shape in batch : </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">descs</span><span class="o">.</span><span class="n">size</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***** label sample *****&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***** headline token sample *****&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">heads</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;***** short_desc token sample *****&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">descs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>label shape in batch : torch.Size([512])
+headline token shape in batch : torch.Size([512, 140])
+short_desc token shape in batch : torch.Size([512, 140])
+***** label sample *****
+tensor(28)
+***** headline token sample *****
+tensor([ 2020, 19177,   745, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000])
+***** short_desc token sample *****
+tensor([    5,   286,  2520,   973, 11909,   745,  9374,    18,    52,   350,
+          251,  3303,    34,    45,  3128,   247,   607,  1408,  2936,   470,
+         2359,  1087,  3108, 19177,   745, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000,
+        50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000, 50000])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="build-network">
+<h2>Build network<a class="headerlink" href="#build-network" title="Link to this heading">#</a></h2>
+<p>Now let’s build network.<br></p>
+<p>👉 As you saw in previous examples, we build embedding vectors (dense vectors) <span class="math notranslate nohighlight">\( \{ \mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_m \} \)</span> from text for both <code class="docutils literal notranslate"><span class="pre">headline</span></code> and <code class="docutils literal notranslate"><span class="pre">short_description</span></code> respectively.</p>
+<p>👉 For these embedding vectors, we apply 1D convolution <span class="math notranslate nohighlight">\( \mathbf{p}_i = g(U (\mathbf{x}_i) + \mathbf{b}) \)</span> where <span class="math notranslate nohighlight">\( \mathbf{x}_i = [\mathbf{w}_i, \mathbf{w}_{i+1}] \)</span>, <span class="math notranslate nohighlight">\(U\)</span> is a weight matrix, <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> is a bias vector, and <span class="math notranslate nohighlight">\( g() \)</span> is RELU activaiton. (i.e, In convolutions, the size of window is 2 (bi-gram) and the size of stride is 1.)<br></p>
+<p>In this example, we apply half padding convolution (i.e, apply <span class="math notranslate nohighlight">\( \mathbf{x}_i = [\mathbf{w}_i, \mathbf{w}_{i+1}] \)</span> for <span class="math notranslate nohighlight">\( i=1,\ldots,m \)</span> where <span class="math notranslate nohighlight">\(\mathbf{w}_{m+1}\)</span> is zero) and the number of outputs will then also be <span class="math notranslate nohighlight">\(m\)</span>.<br></p>
+<p>I assume that the result is <span class="math notranslate nohighlight">\(n\)</span>-dimensional vectors <span class="math notranslate nohighlight">\( \mathbf{p}_1, \mathbf{p}_2, \cdots, \mathbf{p}_m \)</span> .</p>
+<p>👉 Next we get <span class="math notranslate nohighlight">\(n\)</span>-dimensional vector <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> by applying <span class="math notranslate nohighlight">\(\mathbf{c}_{[j]} = \max_{1 \leq i \leq m} \mathbf{p}_{i [j]} \forall j \in [1,n]\)</span>. (i.e, max pooling)<br></p>
+<p>Here I have denoted <span class="math notranslate nohighlight">\(j\)</span>-th element of vecotr <span class="math notranslate nohighlight">\(\mathbf{p}_i\)</span> by <span class="math notranslate nohighlight">\(\mathbf{p}_{i [j]}\)</span>. (<span class="math notranslate nohighlight">\(i \in [1,m], j \in [1,n]\)</span>)</p>
+<p>👉 We concatenate the result’s vectors <span class="math notranslate nohighlight">\(\mathbf{c}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{d}\)</span>, each of which is corresponing to <code class="docutils literal notranslate"><span class="pre">headline</span></code> and <code class="docutils literal notranslate"><span class="pre">short_description</span></code>.</p>
+<p>👉 Finally, we apply fully-connected feed-forward network (i.e, Dense Net) for predicting class label.</p>
+<p><img alt="composing network" src="../../../../_images/1d_conv_net.png" /></p>
+<p>Before max pooling, the values in padding positions (which index of token is <code class="docutils literal notranslate"><span class="pre">pad_index</span></code>) are converted into zero, and these will then be underestimated in gradient descent.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+<span class="n">embedding_dim</span> <span class="o">=</span> <span class="mi">200</span>
+
+<span class="k">class</span> <span class="nc">BigramClassifier</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">class_num</span><span class="p">,</span> <span class="n">padding_idx</span><span class="p">,</span> <span class="n">conv_channel</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">padding_idx</span> <span class="o">=</span> <span class="n">padding_idx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv_channel</span> <span class="o">=</span> <span class="n">conv_channel</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding01</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span>
+            <span class="n">vocab_size</span><span class="p">,</span>
+            <span class="n">embedding_dim</span><span class="p">,</span>
+            <span class="n">padding_idx</span><span class="o">=</span><span class="n">padding_idx</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">embedding02</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span>
+            <span class="n">vocab_size</span><span class="p">,</span>
+            <span class="n">embedding_dim</span><span class="p">,</span>
+            <span class="n">padding_idx</span><span class="o">=</span><span class="n">padding_idx</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv01</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span>
+            <span class="n">in_channels</span><span class="o">=</span><span class="n">embedding_dim</span><span class="p">,</span>
+            <span class="n">out_channels</span><span class="o">=</span><span class="n">conv_channel</span><span class="p">,</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv02</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span>
+            <span class="n">in_channels</span><span class="o">=</span><span class="n">embedding_dim</span><span class="p">,</span>
+            <span class="n">out_channels</span><span class="o">=</span><span class="n">conv_channel</span><span class="p">,</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">stride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">padding</span><span class="o">=</span><span class="s2">&quot;same&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relu</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_pool</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">MaxPool1d</span><span class="p">(</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="n">max_seq_len</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">conv_channel</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classify</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">class_num</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">region01</span><span class="p">,</span> <span class="n">region02</span><span class="p">):</span>
+        <span class="c1"># Get padding masks (in which, element is 0.0 when it&#39;s in padded position, otherwise 1.0)</span>
+        <span class="n">mask01</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">region01</span><span class="o">.</span><span class="n">size</span><span class="p">())</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">mask01</span> <span class="o">=</span> <span class="n">mask01</span><span class="o">.</span><span class="n">masked_fill</span><span class="p">(</span><span class="n">region01</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding_idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">mask02</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">region02</span><span class="o">.</span><span class="n">size</span><span class="p">())</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">mask02</span> <span class="o">=</span> <span class="n">mask02</span><span class="o">.</span><span class="n">masked_fill</span><span class="p">(</span><span class="n">region02</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding_idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># Embedding</span>
+        <span class="c1">#   --&gt; [batch_size, max_seq_len, embedding_dim]</span>
+        <span class="n">out01</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding01</span><span class="p">(</span><span class="n">region01</span><span class="p">)</span>
+        <span class="n">out02</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding02</span><span class="p">(</span><span class="n">region02</span><span class="p">)</span>
+        <span class="c1"># Apply convolution on dimension=1</span>
+        <span class="c1">#   --&gt; [batch_size, max_seq_len, conv_channel]</span>
+        <span class="n">out01</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv01</span><span class="p">(</span><span class="n">out01</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">out02</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv02</span><span class="p">(</span><span class="n">out02</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># Apply masking (In padded position, it will then be 0.0)</span>
+        <span class="n">extend_mask01</span> <span class="o">=</span> <span class="n">mask01</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">extend_mask01</span> <span class="o">=</span> <span class="n">extend_mask01</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_channel</span><span class="p">)</span>
+        <span class="n">out01</span> <span class="o">=</span> <span class="n">out01</span> <span class="o">*</span> <span class="n">extend_mask01</span>
+        <span class="n">extend_mask02</span> <span class="o">=</span> <span class="n">mask02</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">extend_mask02</span> <span class="o">=</span> <span class="n">extend_mask02</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_channel</span><span class="p">)</span>
+        <span class="n">out02</span> <span class="o">=</span> <span class="n">out02</span> <span class="o">*</span> <span class="n">extend_mask02</span>
+        <span class="c1"># Apply relu</span>
+        <span class="n">out01</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">out01</span><span class="p">)</span>
+        <span class="n">out02</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">out02</span><span class="p">)</span>
+        <span class="c1"># Apply max pooling on dimension=1</span>
+        <span class="c1">#   --&gt; [batch_size, 1, conv_channel]</span>
+        <span class="n">out01</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_pool</span><span class="p">(</span><span class="n">out01</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">out02</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_pool</span><span class="p">(</span><span class="n">out02</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># Flatten</span>
+        <span class="c1">#   --&gt; [batch_size, conv_channel]</span>
+        <span class="n">out01</span> <span class="o">=</span> <span class="n">out01</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">out02</span> <span class="o">=</span> <span class="n">out02</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Concat outputs of head and short_description</span>
+        <span class="c1">#   --&gt; [batch_size, conv_channel * 2]</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">out01</span><span class="p">,</span> <span class="n">out02</span><span class="p">),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Apply classification head</span>
+        <span class="c1">#   --&gt; [batch_size, hidden_dim]</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="c1">#   --&gt; [batch_size, class_num]</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">logits</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">BigramClassifier</span><span class="p">(</span><span class="n">vocab</span><span class="o">.</span><span class="fm">__len__</span><span class="p">(),</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ctoi</span><span class="p">),</span> <span class="n">pad_index</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="train-model">
+<h2>Train model<a class="headerlink" href="#train-model" title="Link to this heading">#</a></h2>
+<p>Now let’s train our network for 1 epochs (If you are running Google colab, select gpu and can run for multiple epochs).</p>
+<p>Here, we are using Stochastic Gradient Descent (SDG) i.e. Calculating loss and doing parameter updation after every sample</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
+
+<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">AdamW</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.001</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">labels</span><span class="p">,</span> <span class="n">heads</span><span class="p">,</span> <span class="n">descs</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+        <span class="c1"># optimize</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">heads</span><span class="p">,</span> <span class="n">descs</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">cross_entropy</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="c1"># calculate accuracy</span>
+        <span class="n">pred_labels</span> <span class="o">=</span> <span class="n">logits</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">num_correct</span> <span class="o">=</span> <span class="p">(</span><span class="n">pred_labels</span> <span class="o">==</span> <span class="n">labels</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">num_correct</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Epoch </span><span class="si">{}</span><span class="s2"> - loss: </span><span class="si">{:2.4f}</span><span class="s2"> - accuracy: </span><span class="si">{:2.4f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epoch</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">accuracy</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="classify-text">
+<h2>Classify text<a class="headerlink" href="#classify-text" title="Link to this heading">#</a></h2>
+<p>Now we classify text with “<code class="docutils literal notranslate"><span class="pre">Paris</span></code>”, “<code class="docutils literal notranslate"><span class="pre">Hilton</span> <span class="pre">Hotel</span></code>”, and “<code class="docutils literal notranslate"><span class="pre">Paris</span> <span class="pre">Hilton</span></code>”.<br></p>
+<p>Only “<code class="docutils literal notranslate"><span class="pre">Paris</span> <span class="pre">Hilton</span></code>” will be categorized as <code class="docutils literal notranslate"><span class="pre">ENTERTAINMENT</span></code>, because 2-gram word “<code class="docutils literal notranslate"><span class="pre">Paris</span> <span class="pre">Hilton</span></code>” frequently occurs in <code class="docutils literal notranslate"><span class="pre">ENTERTAINMENT</span></code> article.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">classify_text</span><span class="p">(</span><span class="n">headline</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+    <span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">headline</span><span class="p">,</span> <span class="n">description</span><span class="p">],</span>
+    <span class="p">]</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">test_heads</span><span class="p">,</span> <span class="n">test_descs</span> <span class="o">=</span> <span class="n">collate_batch</span><span class="p">(</span><span class="n">test_list</span><span class="p">)</span>
+    <span class="n">pred_logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">test_heads</span><span class="p">,</span> <span class="n">test_descs</span><span class="p">)</span>
+    <span class="n">pred_index</span> <span class="o">=</span> <span class="n">pred_logits</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">itoc</span><span class="p">[</span><span class="n">pred_index</span><span class="o">.</span><span class="n">item</span><span class="p">()]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">classify_text</span><span class="p">(</span>
+    <span class="s2">&quot;report about paris&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;paris is brilliant&quot;</span>
+<span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classify_text</span><span class="p">(</span>
+    <span class="s2">&quot;report about hilton hotel&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hilton hotel is brilliant&quot;</span>
+<span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classify_text</span><span class="p">(</span>
+    <span class="s2">&quot;report about paris hilton&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;paris hilton is brilliant&quot;</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FOOD &amp; DRINK
+TRAVEL
+POLITICS
+</pre></div>
+</div>
+</div>
+</div>
+<p>The next example will classify text with “<code class="docutils literal notranslate"><span class="pre">Michael</span> <span class="pre">Jackson</span></code>”, “<code class="docutils literal notranslate"><span class="pre">Michael</span> <span class="pre">Avenatti</span></code>”, and “<code class="docutils literal notranslate"><span class="pre">Ronny</span> <span class="pre">Jackson</span></code>”.<br></p>
+<p>Each of text includes either of “<code class="docutils literal notranslate"><span class="pre">Michael</span></code>” or “<code class="docutils literal notranslate"><span class="pre">Jackson</span></code>”, or both of these. But the results will differ, because these 2-gram phrases have different occurrences in the source text.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">classify_text</span><span class="p">(</span>
+    <span class="s2">&quot;report about michael jackson&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;michael jackson is wise and honest&quot;</span>
+<span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classify_text</span><span class="p">(</span>
+    <span class="s2">&quot;report about michael avenatti&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;michael avenatti is wise and honest&quot;</span>
+<span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classify_text</span><span class="p">(</span>
+    <span class="s2">&quot;report about ronny jackson&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ronny jackson is wise and honest&quot;</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>POLITICS
+POLITICS
+ENTERTAINMENT
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/mlguide",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/ai/nlp/concepts"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="002_embeddings.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Embeddings</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="004_word2vec.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Word2Vec algorithm (Negative Sampling Example)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-required-packages">Install required packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-data">Prepare data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-data-loader">Build data loader</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-network">Build network</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-model">Train model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classify-text">Classify text</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div class="social-icons">
+    <a href="https://twitter.com/chaturanukool" target="_blank"><i class="fab fa-twitter"></i></a>
+    <a href="https://linkedin.com/in/anukool-chaturvedi" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://github.com/anukchat" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="mailto:chaturvedianukool@gmail.com"><i class="fas fa-envelope"></i></a>
+    </p>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
