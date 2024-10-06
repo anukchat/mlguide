@@ -46,7 +46,7 @@ Optimizations in NN
 :::
 
 ::: {card} 5️⃣ Pytorch
-:link: ../neural/concepts/pytorch_toc.html
+:link: ../neural/concepts/pytorch/pytorch_toc.html
 :link-type: url
 :shadow: md
 :margin: 3
