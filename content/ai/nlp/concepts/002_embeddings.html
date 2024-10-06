@@ -66,7 +66,7 @@
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <link rel="next" title="N-Gram detection with 1D Convolution" href="003_ngram_cnn.html" />
-    <link rel="prev" title="Word Vectors" href="001_traditional_nlp.html" />
+    <link rel="prev" title="Word Vectors &amp; Dependency Parsing" href="001_traditional_nlp.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -249,8 +249,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../nlp_intro.html">Natural Language Processing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="001_traditional_nlp.html">Word Vectors</a></li>
-
+<li class="toctree-l2"><a class="reference internal" href="001_traditional_nlp.html">Word Vectors &amp; Dependency Parsing</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Embeddings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="003_ngram_cnn.html">N Gram using CNN</a></li>
 <li class="toctree-l2"><a class="reference internal" href="004_word2vec.html">Word2Vec</a></li>
@@ -545,78 +544,6 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
 <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;popular&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[nltk_data] Downloading collection &#39;popular&#39;
-[nltk_data]    | 
-[nltk_data]    | Downloading package cmudict to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    |   Unzipping corpora/cmudict.zip.
-[nltk_data]    | Downloading package gazetteers to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    |   Unzipping corpora/gazetteers.zip.
-[nltk_data]    | Downloading package genesis to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    |   Unzipping corpora/genesis.zip.
-[nltk_data]    | Downloading package gutenberg to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    |   Unzipping corpora/gutenberg.zip.
-[nltk_data]    | Downloading package inaugural to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    |   Unzipping corpora/inaugural.zip.
-[nltk_data]    | Downloading package movie_reviews to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    |   Unzipping corpora/movie_reviews.zip.
-[nltk_data]    | Downloading package names to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    |   Unzipping corpora/names.zip.
-[nltk_data]    | Downloading package shakespeare to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    |   Unzipping corpora/shakespeare.zip.
-[nltk_data]    | Downloading package stopwords to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    |   Unzipping corpora/stopwords.zip.
-[nltk_data]    | Downloading package treebank to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    |   Unzipping corpora/treebank.zip.
-[nltk_data]    | Downloading package twitter_samples to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    |   Unzipping corpora/twitter_samples.zip.
-[nltk_data]    | Downloading package omw to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    | Downloading package omw-1.4 to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    | Downloading package wordnet to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    |   Package wordnet is already up-to-date!
-[nltk_data]    | Downloading package wordnet2021 to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    | Downloading package wordnet31 to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    | Downloading package wordnet_ic to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    |   Unzipping corpora/wordnet_ic.zip.
-[nltk_data]    | Downloading package words to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    |   Unzipping corpora/words.zip.
-[nltk_data]    | Downloading package maxent_ne_chunker to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    |   Unzipping chunkers/maxent_ne_chunker.zip.
-[nltk_data]    | Downloading package punkt to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    |   Unzipping tokenizers/punkt.zip.
-[nltk_data]    | Downloading package snowball_data to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    | Downloading package averaged_perceptron_tagger to
-[nltk_data]    |     /Users/anukoolchaturvedi/nltk_data...
-[nltk_data]    |   Unzipping taggers/averaged_perceptron_tagger.zip.
-[nltk_data]    | 
-[nltk_data]  Done downloading collection popular
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
 </pre></div>
 </div>
 </div>
@@ -1114,11 +1041,11 @@ I love sci-fi and am willing to put up with a lot. Sci-fi movies/TV are usually 
 </div>
 </div>
 <p>To get the better performance (accuracy), we standarize the input’s review text as follows.</p>
-<p>(1) Make all words to lowercase<br>
+<p>👉 Make all words to lowercase<br>
 (ex. “I am a Greatest Showman !” -&gt; “i am a greatest showman !”)</p>
-<p>(2) Remove all stop words, such as, “a”, “the”, “is”, “i”, etc<br>
+<p>👉 Remove all stop words, such as, “a”, “the”, “is”, “i”, etc<br>
 (ex. “i am a greatest showman !” -&gt; “greatest showman !”)</p>
-<p>(3) Remove all punctuation, such as, “!”, “?”, “#”, etc<br>
+<p>👉 Remove all punctuation, such as, “!”, “?”, “#”, etc<br>
 (ex. “greatest showman !” -&gt; “greatest showman”)</p>
 <div class="alert alert-info">
 <p><strong>Note</strong> : Some normalization - such as, changing to lower case - is also done in the following tokenizer.<br></p>
@@ -1999,7 +1926,7 @@ Epoch 15 - loss: 0.2219 - accuracy: 0.9000
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Word Vectors</p>
+        <p class="prev-next-title">Word Vectors &amp; Dependency Parsing</p>
       </div>
     </a>
     <a class="right-next"

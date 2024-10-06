@@ -89,7 +89,7 @@ Initially, most of NLP tasks were solved using traditional methods such as gramm
 :gutter: 0
 
 ::: {card} 1️⃣ Word Vectors
-:link: ../concepts/001_traditional_nlp.html
+:link: ../nlp/concepts/001_traditional_nlp.html
 :link-type: url
 :shadow: md
 :margin: 3
@@ -99,7 +99,7 @@ Know about word vectors in NLP.
 :::
 
 ::: {card} 2️⃣ Embeddings
-:link: ../concepts/002_embeddings.html
+:link: ../nlp/concepts/002_embeddings.html
 :link-type: url
 :shadow: md
 :margin: 3
@@ -109,7 +109,7 @@ Know about embeddings in NLP.
 :::
 
 ::: {card} 3️⃣ N Grams using CNN
-:link: ../concepts/003_ngram_cnn.html
+:link: ../nlp/concepts/003_ngram_cnn.html
 :link-type: url
 :shadow: md
 :margin: 3
@@ -119,7 +119,7 @@ Know how to build N Gram using 1D CNN
 :::
 
 ::: {card} 4️⃣ Word2Vec
-:link: ../concepts/004_word2vec.html
+:link: ../nlp/concepts/004_word2vec.html
 :link-type: url
 :shadow: md
 :margin: 3
@@ -129,7 +129,7 @@ Deep dive in implementation of Word2Vec
 :::
 
 ::: {card} 5️⃣ Neural Language Model
-:link: ../concepts/005_language_model_basic.html
+:link: ../nlp/concepts/005_language_model_basic.html
 :link-type: url
 :shadow: md
 :margin: 3
@@ -139,7 +139,7 @@ Know basics of Neural Language Model
 :::
 
 ::: {card} 6️⃣ RNN
-:link: ../concepts/006_language_model_rnn.html
+:link: ../nlp/concepts/006_language_model_rnn.html
 :link-type: url
 :shadow: md
 :margin: 3
@@ -149,7 +149,7 @@ Understand how RNN works
 :::
 
 ::: {card} 7️⃣ Encoder Decoder
-:link: ../concepts/007_encoder_decoder.html
+:link: ../nlp/concepts/007_encoder_decoder.html
 :link-type: url
 :shadow: md
 :margin: 3
@@ -159,7 +159,7 @@ Understand how Encoder Decoder works
 :::
 
 ::: {card} 8️⃣ Attention
-:link: ../concepts/008_attention.html
+:link: ../nlp/concepts/008_attention.html
 :link-type: url
 :shadow: md
 :margin: 3
@@ -169,7 +169,7 @@ Deep dive in to implementation of Attention
 :::
 
 ::: {card} 9️⃣ Transformers
-:link: ../concepts/009_transformer.html
+:link: ../nlp/concepts/009_transformer.html
 :link-type: url
 :shadow: md
 :margin: 3
@@ -179,7 +179,7 @@ Learn how to implement Transformers
 :::
 
 ::: {card} NLP Tasks
-:link: ../concepts/010_llm_tasks.html
+:link: ../nlp/concepts/010_llm_tasks.html
 :link-type: url
 :shadow: md
 :margin: 3
@@ -189,7 +189,7 @@ Learn various types of tasks NLP can perform
 :::
 
 ::: {card} Appendix
-:link: ../concepts/011_appendix.html
+:link: ../nlp/concepts/011_appendix.html
 :link-type: url
 :shadow: md
 :margin: 3

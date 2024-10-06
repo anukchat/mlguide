@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Word Vectors</title>
+    <title>Word Vectors &amp; Dependency Parsing</title>
   
   
   
@@ -249,8 +249,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../nlp_intro.html">Natural Language Processing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Word Vectors</a></li>
-
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Word Vectors &amp; Dependency Parsing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="002_embeddings.html">Embeddings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="003_ngram_cnn.html">N Gram using CNN</a></li>
 <li class="toctree-l2"><a class="reference internal" href="004_word2vec.html">Word2Vec</a></li>
@@ -493,7 +492,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Word Vectors</h1>
+    <h1>Word Vectors & Dependency Parsing</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -503,38 +502,34 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Word Vectors</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wordnet">WordNet</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations">Limitations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#word-vectors">Word Vectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wordnet">WordNet</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations">Limitations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#word2vec">Word2Vec</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm">Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word2vec">Word2Vec</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm">Algorithm</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-gram-with-negative-sampling">Skip-Gram With Negative Sampling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#co-occurrence-vectors">Co-occurrence Vectors</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Limitations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-gram-with-negative-sampling">Skip-Gram With Negative Sampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#co-occurrence-vectors">Co-occurrence Vectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Limitations</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionality-reduction">Dimensionality Reduction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#glove">GloVe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-word-vectors">Evaluating Word Vectors</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glove">GloVe</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-word-vectors">Evaluating Word Vectors</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-parsing">Dependency Parsing</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntactic-structure-constituency-and-dependency">Syntactic structure: constituency and dependency</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-parsing">Dependency Parsing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#syntactic-structure-constituency-and-dependency">Syntactic structure: constituency and dependency</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constituency"><strong><mark>Constituency</mark></strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency"><strong><mark>Dependency</mark></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-grammar-and-dependency-structure">Dependency grammar and dependency structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-dependency-parser">Building A Dependency Parser</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-grammar-and-dependency-structure">Dependency grammar and dependency structure</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-dependency-parser">Building A Dependency Parser</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -545,19 +540,16 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="word-vectors">
-<h1>Word Vectors<a class="headerlink" href="#word-vectors" title="Link to this heading">#</a></h1>
-<hr class="docutils" />
+  <section class="tex2jax_ignore mathjax_ignore" id="word-vectors-dependency-parsing">
+<h1>Word Vectors &amp; Dependency Parsing<a class="headerlink" href="#word-vectors-dependency-parsing" title="Link to this heading">#</a></h1>
 <p><strong>References</strong> <a class="reference external" href="https://www.youtube.com/watch?v=rmVRLeJRkl4">Stanford CS224N</a></p>
 <p>(This course is the gold mine by Professor Christopher Manning from Stanford University, that you wouldn’t want to miss)</p>
-<section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<section id="word-vectors">
+<h2>Word Vectors<a class="headerlink" href="#word-vectors" title="Link to this heading">#</a></h2>
 <p>If we want to solve Natural Language Processing (NLP) tasks with neural networks, we need some way to represent text as tensors.</p>
 <p>Computers already represent textual characters as numbers that map to fonts on your screen using encodings such as ASCII or UTF-8.</p>
 <a class="reference internal image-reference" href="../../../../_images/ascii-character-map.png"><img alt="Image showing diagram mapping a character to an ASCII and binary representation" src="../../../../_images/ascii-character-map.png" style="width: 50%;" /></a>
-<blockquote>
-<div><p><a class="reference external" href="https://www.seobility.net/en/wiki/ASCII">Image source</a></p>
-</div></blockquote>
+<p><a class="reference external" href="https://www.seobility.net/en/wiki/ASCII">Image source</a></p>
 <p>As humans, we understand what each letter <strong>represents</strong>, and how all characters come together to form the words of a sentence.</p>
 <p>However, <mark>computers by themselves do not have such an understanding</mark>, and neural network has to learn the meaning during training.</p>
 <div class="alert alert-block alert-info">
@@ -578,16 +570,14 @@ document.write(`
 <div class="alert alert-block alert-info">
 <p><strong>What is One-Hot Encoding?</strong></p>
 <p>One-hot encoding is a representation of categorical variables as binary vectors. In other words, each categorical variable is represented by a binary vector of length equal to the number of categories.</p>
-<p><img alt="One Hot Encoding" src="https://miro.medium.com/v2/resize:fit:4800/format:webp/1*ggtP4a5YaRx6l09KQaYOnw.png" /></p>
-</div></div>
-<p>In traditional NLP, we represent words as one-hot vectors. This is called a <strong>localist representation</strong>.</p>
+<a class="reference internal image-reference" href="https://miro.medium.com/v2/resize:fit:4800/format:webp/1*ggtP4a5YaRx6l09KQaYOnw.png"><img alt="One Hot Encoding" src="https://miro.medium.com/v2/resize:fit:4800/format:webp/1*ggtP4a5YaRx6l09KQaYOnw.png" style="width: 50%;" /></a>
+</div><p>In traditional NLP, we represent words as one-hot vectors. This is called a <strong>localist representation</strong>.</p>
 <p>However, <mark>using one-hot vectors to encode words <strong>lacks</strong> similarity between words and context in general</mark>.</p>
 <p>In the modern day, we use <strong>embedding vectors</strong> built on the idea of <strong>distributional semantics</strong> which defines a words meaning not by what idea it’s associated with, but by <mark>what context or window of words the word appears in.</mark></p>
-<p><img alt="image.png" src="content/ai/nlp/concepts/attachment:image.png" /> <br>
+<p><img alt="Distributional Semantics" src="../../../../_images/distributional_semantics.PNG" /> <br>
 <em>Figure 1. Distributional Semantics.</em></p>
-</section>
 <section id="wordnet">
-<h2>WordNet<a class="headerlink" href="#wordnet" title="Link to this heading">#</a></h2>
+<h3>WordNet<a class="headerlink" href="#wordnet" title="Link to this heading">#</a></h3>
 <p><strong>WordNet</strong> groups together words that are syonymous but is limited in capability.</p>
 <div class="alert alert-block alert-info"> 
 <p><strong>What is WordNet?</strong></p>
@@ -595,7 +585,7 @@ document.write(`
 <p>The cognitive synonyms which are called <strong>synsets</strong> are presented in lexical and semantic relations.</p>
 <p>Synonyms–words that denote the same concept and are interchangeable in many contexts–are grouped into unordered sets (synsets)</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/WordNet#:~:text=WordNet%20is%20a%20lexical%20database,of%20a%20dictionary%20and%20thesaurus">WordNet</a></p>
-<p>WordNet can be used using nltk package in python, let’s understand using an example. Nltk stands for Natural Language Toolkit, is a python package for traditional natural language processing tasks.</p>
+</div><p>WordNet can be used using nltk package in python, let’s understand using an example. Nltk stands for Natural Language Toolkit, is a python package for traditional natural language processing tasks.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-U<span class="w"> </span>nltk
 </pre></div>
 </div>
@@ -704,7 +694,7 @@ The hypernyms for invite as a noun:
 </div>
 </div>
 <section id="limitations">
-<h3>Limitations<a class="headerlink" href="#limitations" title="Link to this heading">#</a></h3>
+<h4>Limitations<a class="headerlink" href="#limitations" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Great as a resource but missing nuance • e.g., “proficient” is listed as a synonym for “good” This is only correct in some contexts</p></li>
 <li><p>Missing new meanings of words • e.g., wicked, badass, nifty, wizard, genius, ninja, bombest</p></li>
@@ -720,29 +710,29 @@ The hypernyms for invite as a noun:
 </section>
 </section>
 <section id="word2vec">
-<h2>Word2Vec<a class="headerlink" href="#word2vec" title="Link to this heading">#</a></h2>
+<h3>Word2Vec<a class="headerlink" href="#word2vec" title="Link to this heading">#</a></h3>
 <p><strong>Word2vec</strong> is a 2013 framework for <mark>learning word vectors </mark>.</p>
 <p>👉 The idea is to go through a large corpus/body of text and define a vocabulary table where each word is represented by an embedding vector.</p>
 <p>👉 Go through each position <span class="math notranslate nohighlight">\(t\)</span> in the text with center word <span class="math notranslate nohighlight">\(c\)</span> and context words <span class="math notranslate nohighlight">\(o\)</span> and calculate the <strong>probability of <span class="math notranslate nohighlight">\(o\)</span> given <span class="math notranslate nohighlight">\(c\)</span></strong>. We adjust the word vectors to maximize this probability.</p>
 <p>👉 We Keep adjusting the word vectors to maximize this probability (backpropogation)</p>
-<p><img alt="image.png" src="../../../../_images/1-word2vec-example.png" /> <br>
-<em>Figure 2. Word2vec.</em></p>
+<a class="reference internal image-reference" href="../../../../_images/1-word2vec-example.png"><img alt="Word2Vec" src="../../../../_images/1-word2vec-example.png" style="width: 600px; height: 300px;" /></a>
+<p><em>Figure 2. Word2vec.</em></p>
 <section id="algorithm">
-<h3>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading">#</a></h3>
+<h4>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading">#</a></h4>
 <p><strong>Objective function</strong></p>
 <p>For each position <span class="math notranslate nohighlight">\(t = 1, ... , 𝑇\)</span>, predict context words within a window of fixed size <span class="math notranslate nohighlight">\(m\)</span>, given center word <span class="math notranslate nohighlight">\(w_j\)</span>. Data likelihood:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}Likelihood = L(\theta) = \prod_{t}^{T} \prod_{\substack{-m \leq j \leq m \\ j \neq m}} P(w_{t+j}|{w_{t}; \theta}) \tag{1}\end{split}\]</div>
+\[\begin{split}Likelihood = L(\theta) = \prod_{t}^{T} \prod_{\substack{-m \leq j \leq m \\ j \neq m}} P(w_{t+j}|{w_{t}; \theta})\end{split}\]</div>
 <p>The objective/loss/cost function for <span class="math notranslate nohighlight">\((1)\)</span> is the average negative log likelihood:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}J(\theta) = - \frac{1}{T} logL(\theta) = - \frac{1}{T} \sum_{t=1}^{T} \sum_{\substack{-m \leq j \leq m \\ j \neq m}} log P(w_{t+j}|{w_{t}; \theta}) \tag{2}\end{split}\]</div>
+\[\begin{split}J(\theta) = - \frac{1}{T} logL(\theta) = - \frac{1}{T} \sum_{t=1}^{T} \sum_{\substack{-m \leq j \leq m \\ j \neq m}} log P(w_{t+j}|{w_{t}; \theta})\end{split}\]</div>
 <p><strong>Prediction function</strong></p>
 <p>Denote by <span class="math notranslate nohighlight">\(v_{c}\)</span> and <span class="math notranslate nohighlight">\(v_{o}\)</span> respectively the center word and the context word, using <strong>softmax</strong>, we get the following prediction function of predicting <span class="math notranslate nohighlight">\(v_{c}\)</span> given <span class="math notranslate nohighlight">\(v_{o}\)</span> and the vocubulary <span class="math notranslate nohighlight">\(V\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[P(o|c) = \frac{exp(\mathbf{u_{o}^{T} v_{c}})}{\sum_{w \in V} exp(\mathbf{u_{w}^{T} v_{c}})} \tag{3}\]</div>
 <br>
 <br>
-<img alt="../../../../_images/1-softmax.png" src="../../../../_images/1-softmax.png" />
+<a class="reference internal image-reference" href="../../../../_images/1-softmax.png"><img alt="../../../../_images/1-softmax.png" src="../../../../_images/1-softmax.png" style="width: 60%;" /></a>
 <p>While <strong>Word2vec</strong> is a framework for learning embedding vectors. There are also variants of this framework.</p>
 <ul class="simple">
 <li><p><strong>Skip-grams (SG)</strong> predicts context words based on center word (this is word2vec)</p></li>
@@ -751,7 +741,7 @@ The hypernyms for invite as a noun:
 </section>
 </section>
 <section id="skip-gram-with-negative-sampling">
-<h2>Skip-Gram With Negative Sampling<a class="headerlink" href="#skip-gram-with-negative-sampling" title="Link to this heading">#</a></h2>
+<h3>Skip-Gram With Negative Sampling<a class="headerlink" href="#skip-gram-with-negative-sampling" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
 P(o ~|~ c) = \frac{exp(u_{o}^T v_c)}{\sum_{w \in V} exp(u_{w}^T v_c)}
@@ -765,11 +755,11 @@ J_{t}(\theta) = log \sigma (u_{o}^{T} v_{c}) + \sum_{i = 1}^{k} \mathbb{E}_{j \s
 <p>The negative words are sampled such that less frequent words are sampled more often.</p>
 </section>
 <section id="co-occurrence-vectors">
-<h2>Co-occurrence Vectors<a class="headerlink" href="#co-occurrence-vectors" title="Link to this heading">#</a></h2>
+<h3>Co-occurrence Vectors<a class="headerlink" href="#co-occurrence-vectors" title="Link to this heading">#</a></h3>
 <p>Co-occurrence matrices are used to model the relationships between words. The matrix is a <span class="math notranslate nohighlight">\( V \times V \)</span> matrix where <span class="math notranslate nohighlight">\(V\)</span> is the number of words in the vocabulary.</p>
 <p>The <span class="math notranslate nohighlight">\(i\)</span> th and <span class="math notranslate nohighlight">\(j\)</span> th entry of the matrix is the number of times that word <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> co-occur in the corpus.</p>
-<p><img alt="image.png" src="../../../../_images/2-cooccurrence-matrix-example.png" /> <br>
-<em>Figure 1. Co-Occurrence Matrix.</em></p>
+<a class="reference internal image-reference" href="../../../../_images/2-cooccurrence-matrix-example.png"><img alt="Co-occurrence Matrix" src="../../../../_images/2-cooccurrence-matrix-example.png" style="width: 60%;" /></a>
+<p><em>Figure 1. Co-Occurrence Matrix.</em></p>
 <p>This is a way of modeling the relationships between words. There are 2 ways to make a co-occurrence matrix:</p>
 <ul class="simple">
 <li><p>Using a sliding window over a corpus of text</p></li>
@@ -780,7 +770,7 @@ J_{t}(\theta) = log \sigma (u_{o}^{T} v_{c}) + \sum_{i = 1}^{k} \mathbb{E}_{j \s
 </li>
 </ul>
 <section id="id1">
-<h3>Limitations<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h4>Limitations<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Simple count co-occurrence vectors</p></li>
 <li><p>Vectors increase in size with vocabulary</p></li>
@@ -788,6 +778,7 @@ J_{t}(\theta) = log \sigma (u_{o}^{T} v_{c}) + \sum_{i = 1}^{k} \mathbb{E}_{j \s
 <li><p>Subsequent classification models have sparsity issues, Models are less robust</p></li>
 </ul>
 <p>Let’s understand <strong>How to reduce the dimensionality</strong></p>
+</section>
 </section>
 <section id="dimensionality-reduction">
 <h3>Dimensionality Reduction<a class="headerlink" href="#dimensionality-reduction" title="Link to this heading">#</a></h3>
@@ -808,8 +799,8 @@ A = U \Sigma V^T
 </ul>
 </div>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Singular_value_decomposition">Singular Value Decomposition</a></p>
-<p><img alt="../../../../_images/2-svd.png" src="../../../../_images/2-svd.png" /> <br>
-<em>Figure 2. Reducing the dimensionality of co-occurrence matrices via SVD.</em></p>
+<p><a class="reference internal" href="../../../../_images/2-svd.png"><img alt="../../../../_images/2-svd.png" src="../../../../_images/2-svd.png" style="width: 60%;" /></a> <br></p>
+<p><em>Figure 2. Reducing the dimensionality of co-occurrence matrices via SVD.</em></p>
 <p>SVD on raw counts doesn’t work well.</p>
 <p>Problems:</p>
 <ul class="simple">
@@ -820,11 +811,10 @@ A = U \Sigma V^T
 <li><p>Requires the incorporation of some hacks on X to account for the drastic imbalance in word frequency (see below)</p></li>
 </ul>
 </section>
-</section>
 <section id="glove">
-<h2>GloVe<a class="headerlink" href="#glove" title="Link to this heading">#</a></h2>
-<p>!<img alt="../../../../_images/2-counts-based-versus-direct-prediction.png" src="../../../../_images/2-counts-based-versus-direct-prediction.png" /> <br>
-<em>Figure 3. Count-based vs direct prediction.</em></p>
+<h3>GloVe<a class="headerlink" href="#glove" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="../../../../_images/2-counts-based-versus-direct-prediction.png"><img alt="../../../../_images/2-counts-based-versus-direct-prediction.png" src="../../../../_images/2-counts-based-versus-direct-prediction.png" style="width: 60%;" /></a> <br></p>
+<p><em>Figure 3. Count-based vs direct prediction.</em></p>
 <p>GloVe combines the predictive modeling that is in the purple box with the methods for word similarity in the blue box. It also has an additional feature: encoding meaning components in vector differences.</p>
 <p>Basic idea is <mark>Ratios of co-occurrence probabilities can encode meaning components </mark></p>
 <a class="reference internal image-reference" href="../../../../_images/2-glove-basic-ideas.png"><img alt="../../../../_images/2-glove-basic-ideas.png" src="../../../../_images/2-glove-basic-ideas.png" style="width: 600px; height: 300px;" /></a>
@@ -842,12 +832,11 @@ w_x ~ \cdot (w_a - w_b) =log \frac{P(x~|~a)}{P(x~|~b)}\\
 J = \sum_{i, j = 1}^{V} f(X_{ij})(\underbrace{w_i^T \tilde{w}_j + b_i + \tilde{b}_j}_{pred} - \underbrace{log X_{ij}}_{label})^2 \hspace{1em} (Eq.~2)\\
 \end{split}\]</div>
 <p><span class="math notranslate nohighlight">\(w_i\)</span> and <span class="math notranslate nohighlight">\(w_j\)</span> are embedding vectors for the <span class="math notranslate nohighlight">\(i\)</span>-th and <span class="math notranslate nohighlight">\(j\)</span>-th words. They also have their corresponding bias terms. This objective function can directly optimize on the ground truth co-occurrence matrix <span class="math notranslate nohighlight">\(X\)</span>. The function <span class="math notranslate nohighlight">\(f(X_{ij})\)</span> is shown below. Its purpose is to limit the frequency of very frequent words.</p>
-<img src='./img/stanford/2-glove-subsampling-f.png' width='400' height='200'>
-<br>
+<a class="reference internal image-reference" href="../../../../_images/2-glove-subsampling-f.png"><img alt="../../../../_images/2-glove-subsampling-f.png" src="../../../../_images/2-glove-subsampling-f.png" style="width: 400px; height: 200px;" /></a>
 <p><em>Figure 5. F function in GloVe.</em></p>
 </section>
 <section id="evaluating-word-vectors">
-<h2>Evaluating Word Vectors<a class="headerlink" href="#evaluating-word-vectors" title="Link to this heading">#</a></h2>
+<h3>Evaluating Word Vectors<a class="headerlink" href="#evaluating-word-vectors" title="Link to this heading">#</a></h3>
 <p>There are 2 ways to evaluate word vectors:</p>
 <ul class="simple">
 <li><p><strong>Intrinsic</strong>:</p>
@@ -877,12 +866,12 @@ d = \underset{i}{argmax} \frac{(x_b - x_a + x_c)^T x_i}{||x_b - x_a + x_c||} \hs
 <p>One idea is to have multiple sensor vectors for all the definitions of a word. Though in practice it is often enough to just have 1 embedding vector per word as it is a weighted sum (or linear superposition) of all the definitions of that word. Because of <em>sparse encoding</em> (high-dimensional embedding dimension), we can actually separate out the senses.</p>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="dependency-parsing">
-<h1>Dependency Parsing<a class="headerlink" href="#dependency-parsing" title="Link to this heading">#</a></h1>
-<hr class="docutils" />
+<section id="dependency-parsing">
+<h2>Dependency Parsing<a class="headerlink" href="#dependency-parsing" title="Link to this heading">#</a></h2>
 <p>Dependency parsing is the process of inferring the syntactic structure of a sentence.</p>
 <section id="syntactic-structure-constituency-and-dependency">
-<h2>Syntactic structure: constituency and dependency<a class="headerlink" href="#syntactic-structure-constituency-and-dependency" title="Link to this heading">#</a></h2>
+<h3>Syntactic structure: constituency and dependency<a class="headerlink" href="#syntactic-structure-constituency-and-dependency" title="Link to this heading">#</a></h3>
+</section>
 <section id="constituency">
 <h3><strong><mark>Constituency</mark></strong><a class="headerlink" href="#constituency" title="Link to this heading">#</a></h3>
 <ul class="simple">
@@ -960,9 +949,8 @@ d = \underset{i}{argmax} \frac{(x_b - x_a + x_c)^T x_i}{||x_b - x_a + x_c||} \hs
 </li>
 </ul>
 </section>
-</section>
 <section id="dependency-grammar-and-dependency-structure">
-<h2>Dependency grammar and dependency structure<a class="headerlink" href="#dependency-grammar-and-dependency-structure" title="Link to this heading">#</a></h2>
+<h3>Dependency grammar and dependency structure<a class="headerlink" href="#dependency-grammar-and-dependency-structure" title="Link to this heading">#</a></h3>
 <p>Dependency syntax postulates that syntactic structure consists of relations between lexical items, <strong>normally binary asymmetric relations</strong> (“arrows”) called <strong>dependencies</strong>.</p>
 <p>Currently, there is no unified method to represent dependency structures graphically. For example, in the notebook, the arrows start from the head and point to the dependent. However, some may have the arrows start from the dependent and point to the head. Nevertheless, the following two methods are two basic ways to represent dependency structures in a graph.</p>
 <br>
@@ -975,15 +963,13 @@ d = \underset{i}{argmax} \frac{(x_b - x_a + x_c)^T x_i}{||x_b - x_a + x_c||} \hs
 </ul>
 <a class="reference internal image-reference" href="../../../../_images/5-dependency-grammar-repr.png"><img alt="../../../../_images/5-dependency-grammar-repr.png" src="../../../../_images/5-dependency-grammar-repr.png" style="width: 600px; height: 300px;" /></a>
 <br>
- <br><p><img alt="image.png" src="content/ai/nlp/concepts/attachment:image.png" /> <br>
-<em>Figure 3. Dependency Structure convention.</em></p>
-<p>Dependency structure is usually done by drawing an arrow from the head to the dependent word or the words that modify the head. We also usually add a fake ROOT so every word is dependent on roughly 1 other node.</p>
+ <br><p>Dependency structure is usually done by drawing an arrow from the head to the dependent word or the words that modify the head. We also usually add a fake ROOT so every word is dependent on roughly 1 other node.</p>
 <p>A <strong>dependency parser</strong> is basically an algorithm that will generate some quantified format of the dependency structure you see in Figure 3.</p>
 <p>A <strong>tree bank</strong> is a huge collection of hand-annotated trees.</p>
 <p>Usually, we start with writing a grammar or lexicon, but with tree banks, it’s a little different. Granted, treebanks are slower and are initially less useful than writing a grammar by hand. However, treebanks are reusable for many different tasks (dependency parsing, other things can be built to extract information from parsing). They can also be used to evaluate NLP systems. I’m imagining a hand-annotated treebank can be compared to different dependency parsers to see which algorithm works best.</p>
 </section>
 <section id="building-a-dependency-parser">
-<h2>Building A Dependency Parser<a class="headerlink" href="#building-a-dependency-parser" title="Link to this heading">#</a></h2>
+<h3>Building A Dependency Parser<a class="headerlink" href="#building-a-dependency-parser" title="Link to this heading">#</a></h3>
 <p>Dependency parsers leverage 4 common themes:</p>
 <ul class="simple">
 <li><p>Bilexical affinities</p>
@@ -1009,8 +995,9 @@ d = \underset{i}{argmax} \frac{(x_b - x_a + x_c)^T x_i}{||x_b - x_a + x_c||} \hs
 </ul>
 <p>To perform dependency parsing, <strong>we parse through a sentence and choose for each word what other word is it a dependent of</strong>.</p>
 <p>There are some constraints:</p>
-<p><a class="reference internal" href="../../../../_images/5-parsing-general.png"><img alt="../../../../_images/5-parsing-general.png" src="../../../../_images/5-parsing-general.png" style="width: 600px; height: 300px;" /></a> <br>
-<em>Figure 4. Crossing arcs.</em></p>
+<p><a class="reference internal" href="../../../../_images/5-parsing-general.png"><img alt="../../../../_images/5-parsing-general.png" src="../../../../_images/5-parsing-general.png" style="width: 600px; height: 300px;" /></a> <br></p>
+<p><em>Figure 4. Crossing arcs.</em></p>
+</section>
 </section>
 </section>
 
@@ -1078,38 +1065,34 @@ d = \underset{i}{argmax} \frac{(x_b - x_a + x_c)^T x_i}{||x_b - x_a + x_c||} \hs
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Word Vectors</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wordnet">WordNet</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations">Limitations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#word-vectors">Word Vectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wordnet">WordNet</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations">Limitations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#word2vec">Word2Vec</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm">Algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word2vec">Word2Vec</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm">Algorithm</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-gram-with-negative-sampling">Skip-Gram With Negative Sampling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#co-occurrence-vectors">Co-occurrence Vectors</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Limitations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#skip-gram-with-negative-sampling">Skip-Gram With Negative Sampling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#co-occurrence-vectors">Co-occurrence Vectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Limitations</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionality-reduction">Dimensionality Reduction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#glove">GloVe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-word-vectors">Evaluating Word Vectors</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#glove">GloVe</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-word-vectors">Evaluating Word Vectors</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-parsing">Dependency Parsing</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#syntactic-structure-constituency-and-dependency">Syntactic structure: constituency and dependency</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-parsing">Dependency Parsing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#syntactic-structure-constituency-and-dependency">Syntactic structure: constituency and dependency</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constituency"><strong><mark>Constituency</mark></strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency"><strong><mark>Dependency</mark></strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-grammar-and-dependency-structure">Dependency grammar and dependency structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-dependency-parser">Building A Dependency Parser</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependency-grammar-and-dependency-structure">Dependency grammar and dependency structure</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-a-dependency-parser">Building A Dependency Parser</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
