@@ -41,12 +41,13 @@ The good news is that computers are really good at applying formal rules, and yo
 
 The history of trying to make computers understand human language goes back decades, and one of the earliest scientists to consider natural language processing was ***Alan Turing***. 
 
-### **The 'Turing test'**
+**The 'Turing test'**
  
 When **Turing** was researching *artificial intelligence* in the 1950's, he considered if a conversational test could be given to a human and computer (via typed correspondence) where the human in the conversation was not sure if they were conversing with another human or a computer.
 
 If, <mark>after a certain length of conversation, the human could not determine that the answers were from a computer or not, then could the computer be said to be *thinking* </mark>
-### 'The imitation game'
+
+**'The imitation game'**
 
 The idea for this came from a party game called *The Imitation Game* where an interrogator is alone in a room and tasked with determining which of two people (in another room) are male and female respectively. 
  
@@ -59,7 +60,6 @@ Schubert, Lenhart, "Computational Linguistics", *The Stanford Encyclopedia of Ph
 </div>
 
 ## NLP Tasks
-
 
 * **Text classification** is a typical classification problem pertaining to text sequences. 
   > Examples include 
