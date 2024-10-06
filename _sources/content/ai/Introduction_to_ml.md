@@ -83,3 +83,100 @@ A typical traditional ML workflow starts from
 
 ![ML workflow](ml-workflow.png)
 
+## Modules
+
+:::: {grid} 1 2 3 4
+:align: center
+:margin: 0
+:gutter: 0
+
+::: {card} 1️⃣ Introduction
+:link: ../ai/classicml/concepts/01_introduction.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+
+Introduction to Classical Machine Learning
+:::
+
+::: {card} 2️⃣ Exploratory Data Analysis
+:link: ../ai/classicml/concepts/000_Data_Exploration.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+
+Exploratory Data Analysis for researching the problem.
+:::
+
+::: {card} 3️⃣ Data Preparation
+:link: ../ai/classicml/concepts/001_Data_Preparation.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+
+Data preparatiom and cleaning
+:::
+
+::: {card} 4️⃣ Regression
+:link: ../ai/classicml/concepts/002_Regression.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+
+Classical ML Regression algorithms
+:::
+
+::: {card} 5️⃣ Classification
+:link: ../ai/classicml/concepts/003_Classification.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+
+Classifcation algorithms for ML.
+:::
+
+::: {card} 6️⃣ Clustering
+:link: ../ai/classicml/concepts/004_Clustering.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+
+Clustering algorithms
+:::
+
+::: {card} 7️⃣ Model Evaluation
+:link: ../ai/classicml/concepts/005_Evaluation.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+
+Evaluating classical ML models
+:::
+
+::: {card} 8️⃣ Other Algorithms
+:link: ../ai/classicml/concepts/006_Advanced.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+
+Common ML techniques
+:::
+
+::: {card} 9️⃣ Dimensionality Reduction
+:link: ../ai/classicml/concepts/007_Dimensionality_Reduction.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+
+Dimensionality reduction techniques in classical ML
+:::
+::::
