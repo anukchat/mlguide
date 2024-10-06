@@ -35,24 +35,28 @@ If you struggle with the difference between the *simple present* and *present pr
 
 The good news is that computers are really good at applying formal rules, and you will learn to write code that can *parse* a sentence as well as a human. The greater challenge you will examine later is understanding the *meaning*, and *sentiment*, of a sentence.
 
->[!TIP] Interesting Fact
-The history of trying to make computers understand human language goes back decades, and one of the earliest scientists to consider natural language processing was ***Alan Turing***. 
->
->### **The 'Turing test'**
-> 
-> When **Turing** was researching *artificial intelligence* in the 1950's, he considered if a conversational test could be given to a human and computer (via typed correspondence) where the human in the conversation was not sure if they were conversing with another human or a computer.
->
-> If, <mark>after a certain length of conversation, the human could not determine that the answers were from a computer or not, then could the computer be said to be *thinking* </mark>
-> ### 'The imitation game'
-> 
-> The idea for this came from a party game called *The Imitation Game* where an interrogator is alone in a room and tasked with determining which of two people (in another room) are male and female respectively. 
-> 
-> The interrogator can send notes, and must <mark>try to think of questions where the written answers reveal the gender of the mystery person.</mark> Of course, the players in the other room are trying to trick the interrogator by answering questions in such as way as to mislead or confuse the interrogator, whilst also giving the appearance of answering honestly.
->
-> **Reference**
-> 
-> Schubert, Lenhart, "Computational Linguistics", *The Stanford Encyclopedia of Philosophy* (Spring 2020 Edition), Edward N. Zalta (ed.), URL = <https://plato.stanford.edu/archives/spr2020/entries/computational-linguistics/>.
+<div class="alert alert-info alert-block">
 
+💡 **Interesting Fact**
+
+The history of trying to make computers understand human language goes back decades, and one of the earliest scientists to consider natural language processing was ***Alan Turing***. 
+
+### **The 'Turing test'**
+ 
+When **Turing** was researching *artificial intelligence* in the 1950's, he considered if a conversational test could be given to a human and computer (via typed correspondence) where the human in the conversation was not sure if they were conversing with another human or a computer.
+
+If, <mark>after a certain length of conversation, the human could not determine that the answers were from a computer or not, then could the computer be said to be *thinking* </mark>
+### 'The imitation game'
+
+The idea for this came from a party game called *The Imitation Game* where an interrogator is alone in a room and tasked with determining which of two people (in another room) are male and female respectively. 
+ 
+The interrogator can send notes, and must <mark>try to think of questions where the written answers reveal the gender of the mystery person.</mark> Of course, the players in the other room are trying to trick the interrogator by answering questions in such as way as to mislead or confuse the interrogator, whilst also giving the appearance of answering honestly.
+
+**Reference**
+
+Schubert, Lenhart, "Computational Linguistics", *The Stanford Encyclopedia of Philosophy* (Spring 2020 Edition), Edward N. Zalta (ed.), URL = <https://plato.stanford.edu/archives/spr2020/entries/computational-linguistics/>.
+
+</div>
 
 ## NLP Tasks
 
@@ -71,15 +75,19 @@ The history of trying to make computers understand human language goes back deca
 * **Text summarization** Computer to "read" long text and summarize it in a few sentences.
 * **Machine translation** is the task of translating text from one language to another.
 
->[!TIP] Traditional Method
-Initially, most of NLP tasks were solved using traditional methods such as grammars. For example, in machine translation parsers were used to transform initial sentence into a syntax tree, then higher level semantic structures were extracted to represent the meaning of the sentence, and based on this meaning and grammar of the target language the result was generated.
->
->Nowadays, many NLP tasks are more effectively solved using neural networks.
->
-> Many classical NLP methods are implemented in [Natural Language Processing Toolkit (NLTK)](https://www.nltk.org) Python library. 
-> 
-> There is a great [NLTK Book](https://www.nltk.org/book/) available online that covers how different NLP tasks can be solved using NLTK.
+<div class="alert alert-info alert-block">
 
+💡 **Traditional Method**
+
+Initially, most of NLP tasks were solved using traditional methods such as grammars. For example, in machine translation parsers were used to transform initial sentence into a syntax tree, then higher level semantic structures were extracted to represent the meaning of the sentence, and based on this meaning and grammar of the target language the result was generated.
+
+Nowadays, many NLP tasks are more effectively solved using neural networks.
+
+Many classical NLP methods are implemented in [Natural Language Processing Toolkit (NLTK)](https://www.nltk.org) Python library. 
+
+There is a great [NLTK Book](https://www.nltk.org/book/) available online that covers how different NLP tasks can be solved using NLTK.
+
+</div>
 
 ## Modules
 
