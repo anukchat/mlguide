@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
         text: "Anukool Chaturvedi",
         ease: "none",
         repeat: -1,
-        repeatDelay: 2,
+        repeatDelay: 8,
         yoyo: false
     });
 
