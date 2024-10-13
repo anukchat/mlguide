@@ -123,4 +123,33 @@ document.addEventListener("DOMContentLoaded", function() {
         card.style.transition = "opacity 0.5s, transform 0.5s";
         observer.observe(card);
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const overlay = document.getElementById('subscribeOverlay');
+        const form = document.getElementById('popupSubscribeForm');
+
+        function checkSubscription() {
+            // Send message to parent window to check subscription status
+            window.parent.postMessage('checkSubscription', '*');
+        }
+
+        // Listen for messages from the parent window
+        window.addEventListener('message', function(event) {
+            if (event.data === 'subscribed') {
+                overlay.classList.add('hidden');
+            } else if (event.data === 'notSubscribed') {
+                overlay.classList.remove('hidden');
+            }
+        });
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('popupEmail').value;
+            // Send subscription request to parent window
+            window.parent.postMessage({type: 'subscribe', email: email}, '*');
+        });
+
+        // Check subscription status when the page loads
+        checkSubscription();
+    });
 });
