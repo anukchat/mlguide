@@ -18,20 +18,20 @@
             --text-color-logo-blue: #448CFF;
             --text-color-logo-yellow: #FEC000;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--background-color);
         }
-
+        
         /* Subscription Overlay Styles */
         #subscriptionOverlay {
             position: fixed;
@@ -47,22 +47,20 @@
             opacity: 0;
             transition: opacity 0.3s ease-in-out;
         }
-
+        
         #subscriptionOverlay .popup {
             background-color: var(--background-color);
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
             box-shadow: 0 0 20px rgba(0,0,0,0.2);
-            max-width: 38%;
-            width: 90%;
             position: relative;
             transform: scale(0.8);
             opacity: 0;
             transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
             font-family: 'Poppins', sans-serif;
         }
-
+        
         #subscriptionOverlay .close-button {
             position: absolute;
             top: 10px;
@@ -74,39 +72,39 @@
             color: var(--text-color);
             z-index: 1;
         }
-
+        
         #subscriptionOverlay h2 {
             color: var(--primary-color);
             font-size: 24px;
             margin-top: 20px;
             margin-bottom: 20px;
         }
-
+        
         #subscriptionOverlay p {
             color: var(--secondary-color);
             margin-bottom: 20px;
             font-size: 16px;
         }
-
+        
         #subscriptionOverlay form {
             display: flex;
             flex-direction: column;
             align-items: stretch;
         }
-
+        
         #subscriptionOverlay .form-group {
             position: relative;
             display: flex;
-            border-radius: 50px;
+            border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: box-shadow 0.3s ease;
         }
-
+        
         #subscriptionOverlay .form-group:focus-within {
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
         }
-
+        
         #subscriptionOverlay input[type="email"] {
             flex-grow: 1;
             border: none;
@@ -115,11 +113,11 @@
             outline: none;
             background-color: var(--card-bg-color);
         }
-
+        
         #subscriptionOverlay input[type="email"]::placeholder {
             color: var(--secondary-color);
         }
-
+        
         #subscriptionOverlay button[type="submit"] {
             border: none;
             background-color: var(--text-color-logo-blue);
@@ -133,11 +131,11 @@
             align-items: center;
             justify-content: center;
         }
-
+        
         #subscriptionOverlay button[type="submit"]:hover {
             background-color: var(--primary-color);
         }
-
+        
         #subscriptionOverlay .loader {
             display: none;
             width: 20px;
@@ -148,12 +146,12 @@
             animation: spin 1s linear infinite;
             margin-left: 10px;
         }
-
+        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
+        
         #subscriptionOverlay .response {
             margin-top: 1rem;
             padding: 10px 15px;
@@ -165,48 +163,101 @@
             transition: opacity 0.3s ease, transform 0.3s ease;
             font-size: 14px;
         }
-
+        
         #subscriptionOverlay .response.show {
             opacity: 1;
             transform: translateY(0);
         }
-
+        
         #subscriptionOverlay .success-message {
             background-color: #d4edda;
             color: #155724;
         }
-
+        
         #subscriptionOverlay .error-message {
             background-color: #f8d7da;
             color: #721c24;
         }
-
+        
         #subscriptionOverlay .info-message {
             background-color: #cce5ff;
             color: #004085;
         }
-
+        
         /* Responsive Design for Overlay */
         @media (max-width: 768px) {
             #subscriptionOverlay .popup {
                 padding: 1.5rem;
+                width: 90%; /* Make the popup take full width */
+                transform: scale(1); /* Remove the scale for mobile */
             }
-
+        
             #subscriptionOverlay h2 {
                 font-size: 20px;
             }
-
+        
             #subscriptionOverlay p {
                 font-size: 14px;
             }
-
+        
             #subscriptionOverlay input[type="email"],
             #subscriptionOverlay button[type="submit"] {
                 padding: 12px 15px;
                 font-size: 14px;
             }
-        }
+            
+            /* Ensure the button comes below the input field */
+            #subscriptionOverlay form {
+                flex-direction: column;
+            }
 
+            #subscriptionOverlay .form-group {
+                flex-direction: column;
+                width: 100%; /* Make the form group take full width */
+            }
+
+            #subscriptionOverlay .form-group input[type="email"] {
+                margin-bottom: 10px; /* Add some margin for space */
+            }
+
+            #subscriptionOverlay .form-group button[type="submit"] {
+                margin-top: 10px; /* Push the button down */
+                width: 100%; /* Make the button take full width */
+                padding: 14px 20px;
+            }
+
+            /* Ensure the close button is responsive */
+            #subscriptionOverlay .close-button {
+                top: 8px;
+                right: 10px;
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #subscriptionOverlay .popup {
+                padding: 1rem;
+            }
+        
+            #subscriptionOverlay h2 {
+                font-size: 18px;
+            }
+        
+            #subscriptionOverlay p {
+                font-size: 12px;
+            }
+        
+            #subscriptionOverlay input[type="email"],
+            #subscriptionOverlay button[type="submit"] {
+                padding: 10px 12px;
+                font-size: 12px;
+            }
+        
+            #subscriptionOverlay .response {
+                font-size: 12px;
+            }
+        }
+        
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -218,12 +269,11 @@
                 transform: translateY(0);
             }
         }
-
+        
         #subscriptionOverlay .popup {
             animation: fadeInUp 0.6s ease-out;
         }
-
-        /* Modern animations */
+        
         @keyframes pulse {
             0% {
                 transform: scale(1);
@@ -235,10 +285,10 @@
                 transform: scale(1);
             }
         }
-
+        
         #subscribeForm .form-group button {
             animation: pulse 2s infinite;
-        }
+        }        
         `;
 
         document.head.appendChild(style);
