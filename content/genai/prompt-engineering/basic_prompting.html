@@ -71,16 +71,14 @@
                 gtag('config', 'G-GJG3T4ZRZH');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/genai/prompt-engineering/intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/genai/prompt-engineering/basic_prompting';</script>
     <script src="../../../_static/subscription_overlay.js?v=2e74803e"></script>
     <script src="https://apis.google.com/js/platform.js"></script>
     <script src="../../../_static/landing.js?v=93f722cb"></script>
-    <link rel="canonical" href="https://mlguide.in/content/genai/prompt-engineering/intro.html" />
+    <link rel="canonical" href="https://mlguide.in/content/genai/prompt-engineering/basic_prompting.html" />
     <link rel="icon" href="../../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Langchain" href="../langchain/langchain_toc.html" />
-    <link rel="prev" title="Generative AI" href="../introduction.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -143,6 +141,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -191,7 +191,7 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Guide</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../python/1_installation.html">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
@@ -279,8 +279,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../ai/nlp/concepts/011_appendix.html">Appendix</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../introduction.html">Generative AI</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Prompt Engineering</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Prompt Engineering</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../langchain/intro.html">Introduction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../langchain/01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
@@ -358,7 +358,7 @@
       
       
       
-      <li><a href="../../../_sources/content/genai/prompt-engineering/intro.md" target="_blank"
+      <li><a href="../../../_sources/content/genai/prompt-engineering/basic_prompting.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -429,7 +429,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -445,6 +447,30 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-prompts">Basic Prompts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-prompts">Standard Prompts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-elements">Prompt Elements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#designing-prompts">Designing Prompts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-settings">LLM Settings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-prompts-usage">Basic Prompts Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-summarization">Text Summarization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information-extraction">Information Extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-answering">Question Answering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-classification">Text Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversation">Conversation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-generation">Code Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reasoning">Reasoning</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -456,22 +482,222 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="prompt-engineering">
 <h1>Prompt Engineering<a class="headerlink" href="#prompt-engineering" title="Link to this heading">#</a></h1>
-<div class="sd-container-fluid sd-sphinx-override sd-m-0 docutils">
-<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-3 sd-row-cols-lg-4 sd-g-0 sd-g-xs-0 sd-g-sm-0 sd-g-md-0 sd-g-lg-0 docutils">
-<div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-md sd-card-hover sd-text-center docutils">
-<div class="sd-card-body docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-1️⃣ Basic Prompting</div>
+<p>Prompt engineering helps optimize prompts for better use of language models (LMs) in various tasks. It improves how developers and researchers work with large language models (LLMs), like question answering and reasoning.</p>
+<section id="basic-prompts">
+<h2>Basic Prompts<a class="headerlink" href="#basic-prompts" title="Link to this heading">#</a></h2>
+<p>Prompts contain instructions or questions for the model, but quality depends on how detailed the input is.</p>
+<p><em>Example Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">sky</span> <span class="ow">is</span>
+</pre></div>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="../prompt-engineering/basic_prompting.html"><span>../prompt-engineering/basic_prompting.html</span></a></div>
-<div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-md sd-card-hover sd-text-center docutils">
-<div class="sd-card-body docutils">
-<div class="sd-card-title sd-font-weight-bold docutils">
-2️⃣ Advanced Prompting</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">blue</span><span class="o">.</span> <span class="n">On</span> <span class="n">a</span> <span class="n">cloudy</span> <span class="n">day</span><span class="p">,</span> <span class="n">it</span> <span class="n">may</span> <span class="n">be</span> <span class="n">gray</span> <span class="ow">or</span> <span class="n">white</span><span class="o">.</span>
+</pre></div>
 </div>
-<a class="sd-stretched-link sd-hide-link-text reference external" href="../prompt-engineering/advance_prompting.html"><span>../prompt-engineering/advance_prompting.html</span></a></div>
+<p>To improve, be specific:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Complete</span> <span class="n">the</span> <span class="n">sentence</span><span class="p">:</span> <span class="n">The</span> <span class="n">sky</span> <span class="ow">is</span>
+</pre></div>
 </div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">so</span> <span class="n">beautiful</span> <span class="n">today</span><span class="o">.</span>
+</pre></div>
 </div>
+<p>This shows how prompt engineering tailors results.</p>
+<section id="standard-prompts">
+<h3>Standard Prompts<a class="headerlink" href="#standard-prompts" title="Link to this heading">#</a></h3>
+<p>A basic prompt format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;Question&gt;?
+</pre></div>
+</div>
+<p>For QA tasks, try few-shot prompts:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Q: &lt;Question&gt;?
+A: &lt;Answer&gt;
+
+Q: &lt;Question&gt;?
+A:
+</pre></div>
+</div>
+<p>This helps models learn tasks with just a few examples.</p>
+</section>
+<section id="prompt-elements">
+<h3>Prompt Elements<a class="headerlink" href="#prompt-elements" title="Link to this heading">#</a></h3>
+<p>Prompts can include:</p>
+<ul class="simple">
+<li><p><strong>Instruction</strong>: What task to perform</p></li>
+<li><p><strong>Context</strong>: Background information</p></li>
+<li><p><strong>Input Data</strong>: What to analyze</p></li>
+<li><p><strong>Output Indicator</strong>: Desired response format</p></li>
+</ul>
+<p>Not all are necessary, but they guide the model’s responses.</p>
+</section>
+<section id="designing-prompts">
+<h3>Designing Prompts<a class="headerlink" href="#designing-prompts" title="Link to this heading">#</a></h3>
+<p><strong>👉 Start Simple</strong>
+Begin with basic prompts and iterate. Break down complex tasks into subtasks for better results.</p>
+<p><strong>👉 The Instruction</strong>
+Use commands like “Summarize”, “Translate”, “Classify” for clarity.</p>
+<p><strong>👉 Specificity</strong>
+Be clear and concise. Add examples for better output formats.</p>
+<p><strong>👉  Avoid Impreciseness</strong>
+Be direct. Instead of vague commands, use specific instructions.</p>
+<p><strong>👉 To Do or Not to Do?</strong>
+Focus on what to do, rather than what not to do, for clearer results.</p>
+</section>
+</section>
+<section id="llm-settings">
+<h2>LLM Settings<a class="headerlink" href="#llm-settings" title="Link to this heading">#</a></h2>
+<p>Key settings for prompt results:</p>
+<ul class="simple">
+<li><p><strong>Temperature:</strong> Controls randomness (higher values = more creative).</p></li>
+<li><p><strong>Top_p:</strong> Adjusts sampling diversity.</p></li>
+</ul>
+<p>Experiment with these to balance accuracy and creativity.</p>
+</section>
+<section id="basic-prompts-usage">
+<h2>Basic Prompts Usage<a class="headerlink" href="#basic-prompts-usage" title="Link to this heading">#</a></h2>
+<p>Let’s see how prompts are used and introduce key concepts that will be important for the more advanced techniques.</p>
+<section id="text-summarization">
+<h3>Text Summarization<a class="headerlink" href="#text-summarization" title="Link to this heading">#</a></h3>
+<p>One of the standard tasks in natural language generation is text summarization. Text summarization can include many different flavors and domains. One of the most promising applications of language models is the ability to summarize articles and concepts into quick and easy-to-read summaries. Let’s try a basic summarization task using prompts.</p>
+<p>Let’s say I am interested to learn about antibiotics, I could try a prompt like this:</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Explain</span> <span class="n">antibiotics</span>
+
+<span class="n">A</span><span class="p">:</span>
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Antibiotics are a type of medication used to treat bacterial infections. They work by either killing the bacteria or preventing them from reproducing, allowing the body’s immune system to fight off the infection. Antibiotics are usually taken orally in the form of pills, capsules, or liquid solutions, or sometimes administered intravenously. They are not effective against viral infections, and using them inappropriately can lead to antibiotic resistance.
+</pre></div>
+</div>
+<p>The “A:” is an explicit prompt format that’s used in question answering. I used it here to tell the model that there is an expected further. In this example, it’s not clear how this is useful vs not using it but we will leave it that for later examples. Let’s just assume that this is too much information and want to summarize it further. We can instruct the model to summarize into one sentence like so:</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Antibiotics are a type of medication used to treat bacterial infections. They work by either killing the bacteria or preventing them from reproducing, allowing the body’s immune system to fight off the infection. Antibiotics are usually taken orally in the form of pills, capsules, or liquid solutions, or sometimes administered intravenously. They are not effective against viral infections, and using them inappropriately can lead to antibiotic resistance.
+
+Explain the above in one sentence:
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Antibiotics</span> <span class="n">are</span> <span class="n">medications</span> <span class="n">used</span> <span class="n">to</span> <span class="n">treat</span> <span class="n">bacterial</span> <span class="n">infections</span> <span class="n">by</span> <span class="n">either</span> <span class="n">killing</span> <span class="n">the</span> <span class="n">bacteria</span> <span class="ow">or</span> <span class="n">stopping</span> <span class="n">them</span> <span class="kn">from</span> <span class="nn">reproducing</span><span class="p">,</span> <span class="n">but</span> <span class="n">they</span> <span class="n">are</span> <span class="ow">not</span> <span class="n">effective</span> <span class="n">against</span> <span class="n">viruses</span> <span class="ow">and</span> <span class="n">overuse</span> <span class="n">can</span> <span class="n">lead</span> <span class="n">to</span> <span class="n">antibiotic</span> <span class="n">resistance</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="information-extraction">
+<h3>Information Extraction<a class="headerlink" href="#information-extraction" title="Link to this heading">#</a></h3>
+<p>While language models are trained to perform natural language generation and related tasks, it’s also very capable of performing classification and a range of other natural language processing (NLP) tasks.</p>
+<p>Here is an example of a prompt that extracts information from a given paragraph.</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Author</span><span class="o">-</span><span class="n">contribution</span> <span class="n">statements</span> <span class="ow">and</span> <span class="n">acknowledgements</span> <span class="ow">in</span> <span class="n">research</span> <span class="n">papers</span> <span class="n">should</span> <span class="n">state</span> <span class="n">clearly</span> <span class="ow">and</span> <span class="n">specifically</span> <span class="n">whether</span><span class="p">,</span> <span class="ow">and</span> <span class="n">to</span> <span class="n">what</span> <span class="n">extent</span><span class="p">,</span> <span class="n">the</span> <span class="n">authors</span> <span class="n">used</span> <span class="n">AI</span> <span class="n">technologies</span> <span class="n">such</span> <span class="k">as</span> <span class="n">ChatGPT</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">preparation</span> <span class="n">of</span> <span class="n">their</span> <span class="n">manuscript</span> <span class="ow">and</span> <span class="n">analysis</span><span class="o">.</span> <span class="n">They</span> <span class="n">should</span> <span class="n">also</span> <span class="n">indicate</span> <span class="n">which</span> <span class="n">LLMs</span> <span class="n">were</span> <span class="n">used</span><span class="o">.</span> <span class="n">This</span> <span class="n">will</span> <span class="n">alert</span> <span class="n">editors</span> <span class="ow">and</span> <span class="n">reviewers</span> <span class="n">to</span> <span class="n">scrutinize</span> <span class="n">manuscripts</span> <span class="n">more</span> <span class="n">carefully</span> <span class="k">for</span> <span class="n">potential</span> <span class="n">biases</span><span class="p">,</span> <span class="n">inaccuracies</span> <span class="ow">and</span> <span class="n">improper</span> <span class="n">source</span> <span class="n">crediting</span><span class="o">.</span> <span class="n">Likewise</span><span class="p">,</span> <span class="n">scientific</span> <span class="n">journals</span> <span class="n">should</span> <span class="n">be</span> <span class="n">transparent</span> <span class="n">about</span> <span class="n">their</span> <span class="n">use</span> <span class="n">of</span> <span class="n">LLMs</span><span class="p">,</span> <span class="k">for</span> <span class="n">example</span> <span class="n">when</span> <span class="n">selecting</span> <span class="n">submitted</span> <span class="n">manuscripts</span><span class="o">.</span>
+
+<span class="n">Mention</span> <span class="n">the</span> <span class="n">large</span> <span class="n">language</span> <span class="n">model</span> <span class="n">based</span> <span class="n">product</span> <span class="n">mentioned</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">paragraph</span> <span class="n">above</span><span class="p">:</span>
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">large</span> <span class="n">language</span> <span class="n">model</span> <span class="n">based</span> <span class="n">product</span> <span class="n">mentioned</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">paragraph</span> <span class="n">above</span> <span class="ow">is</span> <span class="n">ChatGPT</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Paragraph source: <a class="reference external" href="https://www.nature.com/articles/d41586-023-00288-7">ChatGPT: five priorities for research</a></p>
+</section>
+<hr class="docutils" />
+<section id="question-answering">
+<h3>Question Answering<a class="headerlink" href="#question-answering" title="Link to this heading">#</a></h3>
+<p>One of the best ways to get the model to respond to specific answers is to improve the format of the prompt. As covered before, a prompt could combine instructions, context, input, and output indicators to get improved results.</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Answer the question based on the context below. Keep the answer short. Respond &quot;Unsure about answer&quot; if not sure about the answer.
+
+Context: Teplizumab traces its roots to a New Jersey drug company called Ortho Pharmaceutical. There, scientists generated an early version of the antibody, dubbed OKT3. Originally sourced from mice, the molecule was able to bind to the surface of T cells and limit their cell-killing potential. In 1986, it was approved to help prevent organ rejection after kidney transplants, making it the first therapeutic antibody allowed for human use.
+
+Question: What was OKT3 originally sourced from?
+
+Answer:
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mice</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="text-classification">
+<h3>Text Classification<a class="headerlink" href="#text-classification" title="Link to this heading">#</a></h3>
+<p>As a prompt engineer, you will need to get better at providing better instructions. For harder use cases, just providing instructions won’t be enough. Other elements you can provide are <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">data</span></code> or <code class="docutils literal notranslate"><span class="pre">examples</span></code>.</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Classify</span> <span class="n">the</span> <span class="n">text</span> <span class="n">into</span> <span class="n">neutral</span><span class="p">,</span> <span class="n">negative</span> <span class="ow">or</span> <span class="n">positive</span><span class="o">.</span> 
+
+<span class="n">Text</span><span class="p">:</span> <span class="n">I</span> <span class="n">think</span> <span class="n">the</span> <span class="n">food</span> <span class="n">was</span> <span class="n">okay</span><span class="o">.</span> 
+<span class="n">Sentiment</span><span class="p">:</span>
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Neutral</span>
+</pre></div>
+</div>
+<p>Let’s try specifying output format by providing examples:</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Classify</span> <span class="n">the</span> <span class="n">text</span> <span class="n">into</span> <span class="n">neutral</span><span class="p">,</span> <span class="n">negative</span> <span class="ow">or</span> <span class="n">positive</span><span class="o">.</span> 
+
+<span class="n">Text</span><span class="p">:</span> <span class="n">I</span> <span class="n">think</span> <span class="n">the</span> <span class="n">vacation</span> <span class="ow">is</span> <span class="n">okay</span><span class="o">.</span>
+<span class="n">Sentiment</span><span class="p">:</span> <span class="n">neutral</span> 
+
+<span class="n">Text</span><span class="p">:</span> <span class="n">I</span> <span class="n">think</span> <span class="n">the</span> <span class="n">food</span> <span class="n">was</span> <span class="n">okay</span><span class="o">.</span> 
+<span class="n">Sentiment</span><span class="p">:</span>
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">neutral</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="conversation">
+<h3>Conversation<a class="headerlink" href="#conversation" title="Link to this heading">#</a></h3>
+<p>Instructing the LLM system on behavior and identity is key in conversational systems.</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>The following is a conversation with an AI research assistant. The assistant tone is technical and scientific.
+
+Human: Hello, who are you?
+AI: Greeting! I am an AI research assistant. How can I help you today?
+Human: Can you tell me about the creation of black holes?
+AI:
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Sure! Black holes are regions of spacetime where the gravitational force is so strong that nothing, not even light, can escape from it.
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="code-generation">
+<h3>Code Generation<a class="headerlink" href="#code-generation" title="Link to this heading">#</a></h3>
+<p>LLMs are highly effective at code generation.</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span>
+<span class="n">Ask</span> <span class="n">the</span> <span class="n">user</span> <span class="k">for</span> <span class="n">their</span> <span class="n">name</span> <span class="ow">and</span> <span class="n">say</span> <span class="s2">&quot;Hello&quot;</span>
+<span class="o">*/</span>
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>let name = prompt(&quot;What is your name?&quot;);
+console.log(`Hello, ${name}!`);
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="reasoning">
+<h3>Reasoning<a class="headerlink" href="#reasoning" title="Link to this heading">#</a></h3>
+<p>LLMs perform basic arithmetic and reasoning tasks.</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>What is 9,000 * 9,000?
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">81</span><span class="p">,</span><span class="mi">000</span><span class="p">,</span><span class="mi">000</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -504,30 +730,43 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../introduction.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Generative AI</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../langchain/langchain_toc.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Langchain</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-prompts">Basic Prompts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-prompts">Standard Prompts</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-elements">Prompt Elements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#designing-prompts">Designing Prompts</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-settings">LLM Settings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-prompts-usage">Basic Prompts Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-summarization">Text Summarization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information-extraction">Information Extraction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-answering">Question Answering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-classification">Text Classification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversation">Conversation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-generation">Code Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reasoning">Reasoning</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

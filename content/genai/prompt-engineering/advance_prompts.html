@@ -1,0 +1,912 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Advanced Prompting</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/intro.css?v=b40f3148" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GJG3T4ZRZH"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-GJG3T4ZRZH');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-GJG3T4ZRZH');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/genai/prompt-engineering/advance_prompts';</script>
+    <script src="../../../_static/subscription_overlay.js?v=2e74803e"></script>
+    <script src="https://apis.google.com/js/platform.js"></script>
+    <script src="../../../_static/landing.js?v=93f722cb"></script>
+    <link rel="canonical" href="https://mlguide.in/content/genai/prompt-engineering/advance_prompts.html" />
+    <link rel="icon" href="../../../_static/logo.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt=" - Home"/>
+    <script>document.write(`<img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt=" - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../python/1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/3_functions_and_modules.html">Functions &amp; Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/4_Object_Oriented.html">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/8_advanced.html">Advanced Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/conceptual_topics.html">Interpreter vs Compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../python/exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statistics/statistics-101.html">Statistics</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ai/Introduction_to_ml.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/000_Data_Exploration.html">Exploratory Data Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/001_Data_Preparation.html">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/003_Classification.html">Classfication</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/005_Evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/006_Advanced.html">K-Fold Cross Validation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../ai/classicml/concepts/007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ai/neural/neural_toc.html">Neural Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/neural/concepts/001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/neural/concepts/002_Backpropogation.html">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/neural/concepts/003_Activations.html">Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/neural/concepts/004_Optimization.html">Optimizations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ai/neural/concepts/pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ai/neural/concepts/pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ai/neural/concepts/pytorch/01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ai/neural/concepts/pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ai/neural/concepts/pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ai/neural/concepts/pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ai/neural/concepts/pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ai/nlp/nlp_intro.html">Natural Language Processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/nlp/concepts/001_traditional_nlp.html">Word Vectors &amp; Dependency Parsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/nlp/concepts/002_embeddings.html">Embeddings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/nlp/concepts/003_ngram_cnn.html">N Gram using CNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/nlp/concepts/004_word2vec.html">Word2Vec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/nlp/concepts/005_language_model_basic.html">Neural Language Model</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../ai/nlp/concepts/006_language_model_rnn.html">Recurrent Neural Network (RNN)</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../ai/nlp/concepts/007_encoder_decoder.html">Encoder Decoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/nlp/concepts/008_attention.html">Attention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/nlp/concepts/009_transformer.html">Transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/nlp/concepts/010_llm_tasks.html">Language Modelling Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ai/nlp/concepts/011_appendix.html">Appendix</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="intro.html">Prompt Engineering</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../langchain/intro.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../langchain/01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../langchain/02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../RAG/intro.html">RAG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agents/intro.html">Agents</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources/courses/courses_toc.html">Courses</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/content/genai/prompt-engineering/advance_prompts.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Advanced Prompting</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-prompting">Zero-Shot Prompting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-prompting">Few-Shot Prompting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-few-shot-prompting">Limitations of Few-Shot Prompting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-of-thought-prompting">Chain-of-Thought Prompting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-cot">Zero-Shot CoT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-consistency">Self-Consistency</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generated-knowledge-prompting">Generated Knowledge Prompting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-prompt-engineer-ape">Automatic Prompt Engineer (APE)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="advanced-prompting">
+<h1>Advanced Prompting<a class="headerlink" href="#advanced-prompting" title="Link to this heading">#</a></h1>
+<p>The essence of prompt engineering is enhancing prompts to achieve better results across various tasks.</p>
+<p>Before diving into advanced topics, let’s formally explore some key concepts.</p>
+<section id="zero-shot-prompting">
+<h2>Zero-Shot Prompting<a class="headerlink" href="#zero-shot-prompting" title="Link to this heading">#</a></h2>
+<p>In zero-shot prompting, no examples are provided. Instead, clear instructions guide the model.</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Classify</span> <span class="n">the</span> <span class="n">text</span> <span class="n">into</span> <span class="n">neutral</span><span class="p">,</span> <span class="n">negative</span><span class="p">,</span> <span class="ow">or</span> <span class="n">positive</span><span class="o">.</span> 
+
+<span class="n">Text</span><span class="p">:</span> <span class="n">I</span> <span class="n">think</span> <span class="n">the</span> <span class="n">vacation</span> <span class="ow">is</span> <span class="n">okay</span><span class="o">.</span>
+<span class="n">Sentiment</span><span class="p">:</span>
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Neutral</span>
+</pre></div>
+</div>
+<p>Zero-shot leverages the model’s training on vast data. If ineffective, consider providing examples through few-shot prompting.</p>
+</section>
+<hr class="docutils" />
+<section id="few-shot-prompting">
+<h2>Few-Shot Prompting<a class="headerlink" href="#few-shot-prompting" title="Link to this heading">#</a></h2>
+<p>Zero-shot prompting fall short on more complex tasks. Few-shot prompting improves performance on complex tasks by providing demonstrations within the prompt.</p>
+<p>The demonstrations serve as conditioning for subsequent examples where we would like the model to generate a response.</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="s2">&quot;whatpu&quot;</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">small</span><span class="p">,</span> <span class="n">furry</span> <span class="n">animal</span> <span class="n">native</span> <span class="n">to</span> <span class="n">Tanzania</span><span class="o">.</span> <span class="n">An</span> <span class="n">example</span> <span class="n">of</span> <span class="n">a</span> <span class="n">sentence</span> <span class="n">that</span> <span class="n">uses</span>
+<span class="n">the</span> <span class="n">word</span> <span class="n">whatpu</span> <span class="ow">is</span><span class="p">:</span>
+<span class="n">We</span> <span class="n">were</span> <span class="n">traveling</span> <span class="ow">in</span> <span class="n">Africa</span> <span class="ow">and</span> <span class="n">we</span> <span class="n">saw</span> <span class="n">these</span> <span class="n">very</span> <span class="n">cute</span> <span class="n">whatpus</span><span class="o">.</span>
+<span class="n">To</span> <span class="n">do</span> <span class="n">a</span> <span class="s2">&quot;farduddle&quot;</span> <span class="n">means</span> <span class="n">to</span> <span class="n">jump</span> <span class="n">up</span> <span class="ow">and</span> <span class="n">down</span> <span class="n">really</span> <span class="n">fast</span><span class="o">.</span> <span class="n">An</span> <span class="n">example</span> <span class="n">of</span> <span class="n">a</span> <span class="n">sentence</span> <span class="n">that</span> <span class="n">uses</span>
+<span class="n">the</span> <span class="n">word</span> <span class="n">farduddle</span> <span class="ow">is</span><span class="p">:</span>
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">When</span> <span class="n">we</span> <span class="n">won</span> <span class="n">the</span> <span class="n">game</span><span class="p">,</span> <span class="n">we</span> <span class="nb">all</span> <span class="n">started</span> <span class="n">to</span> <span class="n">farduddle</span> <span class="ow">in</span> <span class="n">celebration</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Increasing the number of examples (e.g., 3-shot) can enhance performance. Key tips:</p>
+<ul class="simple">
+<li><p>Ensure label space and input distribution match demonstrations.</p></li>
+<li><p>Consistent formatting boosts accuracy.</p></li>
+<li><p>Use realistic label distributions.</p></li>
+</ul>
+<p>Let’s try out a few examples. Let’s first try an example with random labels (meaning the labels Negative and Positive are randomly assigned to the inputs):</p>
+<p><em>Example with randomized labels:</em></p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>This is awesome! // Negative
+This is bad! // Positive
+Wow that movie was rad! // Positive
+What a horrible show! //
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Negative</span>
+</pre></div>
+</div>
+<p>We still get the correct answer, even though the labels have been randomized. Note that we also kept the format, which helps too. In fact, with further experimentation, it seems the newer GPT models we are experimenting with are becoming more robust to even random formats. Example:</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Positive This is awesome! 
+This is bad! Negative
+Wow that movie was rad!
+Positive
+What a horrible show! --
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Negative</span>
+</pre></div>
+</div>
+<p>Even with varied formats, models can predict correctly, though consistency aids reliability.</p>
+<section id="limitations-of-few-shot-prompting">
+<h3>Limitations of Few-Shot Prompting<a class="headerlink" href="#limitations-of-few-shot-prompting" title="Link to this heading">#</a></h3>
+<p>Few-shot works well for many tasks but struggles with complex reasoning. For instance:</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">odd</span> <span class="n">numbers</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">group</span> <span class="n">add</span> <span class="n">up</span> <span class="n">to</span> <span class="n">an</span> <span class="n">even</span> <span class="n">number</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">82</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mf">1.</span> 
+
+<span class="n">A</span><span class="p">:</span> 
+</pre></div>
+</div>
+<p>If we try this again, the model outputs the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Yes</span><span class="p">,</span> <span class="n">the</span> <span class="n">odd</span> <span class="n">numbers</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">group</span> <span class="n">add</span> <span class="n">up</span> <span class="n">to</span> <span class="mi">107</span><span class="p">,</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">an</span> <span class="n">even</span> <span class="n">number</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>This is not the correct response, which not only highlights the limitations of these systems but that there is a need for more advanced prompt engineering.</p>
+<p>Let’s try to add some examples to see if few-shot prompting improves the results.</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">odd</span> <span class="n">numbers</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">group</span> <span class="n">add</span> <span class="n">up</span> <span class="n">to</span> <span class="n">an</span> <span class="n">even</span> <span class="n">number</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.</span>
+<span class="n">A</span><span class="p">:</span> <span class="n">The</span> <span class="n">answer</span> <span class="ow">is</span> <span class="kc">False</span><span class="o">.</span>
+
+<span class="n">The</span> <span class="n">odd</span> <span class="n">numbers</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">group</span> <span class="n">add</span> <span class="n">up</span> <span class="n">to</span> <span class="n">an</span> <span class="n">even</span> <span class="n">number</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>  <span class="mi">10</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">24.</span>
+<span class="n">A</span><span class="p">:</span> <span class="n">The</span> <span class="n">answer</span> <span class="ow">is</span> <span class="kc">True</span><span class="o">.</span>
+
+<span class="n">The</span> <span class="n">odd</span> <span class="n">numbers</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">group</span> <span class="n">add</span> <span class="n">up</span> <span class="n">to</span> <span class="n">an</span> <span class="n">even</span> <span class="n">number</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>  <span class="mi">11</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mf">24.</span>
+<span class="n">A</span><span class="p">:</span> <span class="n">The</span> <span class="n">answer</span> <span class="ow">is</span> <span class="kc">True</span><span class="o">.</span>
+
+<span class="n">The</span> <span class="n">odd</span> <span class="n">numbers</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">group</span> <span class="n">add</span> <span class="n">up</span> <span class="n">to</span> <span class="n">an</span> <span class="n">even</span> <span class="n">number</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">2.</span>
+<span class="n">A</span><span class="p">:</span> <span class="n">The</span> <span class="n">answer</span> <span class="ow">is</span> <span class="kc">False</span><span class="o">.</span>
+
+<span class="n">The</span> <span class="n">odd</span> <span class="n">numbers</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">group</span> <span class="n">add</span> <span class="n">up</span> <span class="n">to</span> <span class="n">an</span> <span class="n">even</span> <span class="n">number</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">82</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mf">1.</span> 
+<span class="n">A</span><span class="p">:</span> 
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">answer</span> <span class="ow">is</span> <span class="kc">True</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Incorrect responses highlight the need for advanced techniques like chain-of-thought (CoT) prompting. It seems like few-shot prompting is not enough to get reliable responses for this type of reasoning problem.</p>
+<p>Overall, it seems that providing examples is useful for solving some tasks. When zero-shot prompting and few-shot prompting are not sufficient, it might mean that whatever was learned by the model isn’t enough to do well at the task. From here it is recommended to start thinking about fine-tuning your models or experimenting with more advanced prompting techniques</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="chain-of-thought-prompting">
+<h2>Chain-of-Thought Prompting<a class="headerlink" href="#chain-of-thought-prompting" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://arxiv.org/abs/2201.11903">Wei et al. (2022)</a> introduced CoT prompting, which includes reasoning steps to enhance complex task performance.</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">odd</span> <span class="n">numbers</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">group</span> <span class="n">add</span> <span class="n">up</span> <span class="n">to</span> <span class="n">an</span> <span class="n">even</span> <span class="n">number</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.</span>
+<span class="n">A</span><span class="p">:</span> <span class="n">Adding</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">odd</span> <span class="n">numbers</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="n">gives</span> <span class="mf">25.</span> <span class="n">The</span> <span class="n">answer</span> <span class="ow">is</span> <span class="kc">False</span><span class="o">.</span>
+
+<span class="n">The</span> <span class="n">odd</span> <span class="n">numbers</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">group</span> <span class="n">add</span> <span class="n">up</span> <span class="n">to</span> <span class="n">an</span> <span class="n">even</span> <span class="n">number</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>  <span class="mi">10</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">24.</span>
+<span class="n">A</span><span class="p">:</span> <span class="n">Adding</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">odd</span> <span class="n">numbers</span> <span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">19</span><span class="p">)</span> <span class="n">gives</span> <span class="mf">36.</span> <span class="n">The</span> <span class="n">answer</span> <span class="ow">is</span> <span class="kc">True</span><span class="o">.</span>
+
+<span class="n">The</span> <span class="n">odd</span> <span class="n">numbers</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">group</span> <span class="n">add</span> <span class="n">up</span> <span class="n">to</span> <span class="n">an</span> <span class="n">even</span> <span class="n">number</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>  <span class="mi">11</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mf">24.</span>
+<span class="n">A</span><span class="p">:</span> <span class="n">Adding</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">odd</span> <span class="n">numbers</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span> <span class="n">gives</span> <span class="mf">24.</span> <span class="n">The</span> <span class="n">answer</span> <span class="ow">is</span> <span class="kc">True</span><span class="o">.</span>
+
+<span class="n">The</span> <span class="n">odd</span> <span class="n">numbers</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">group</span> <span class="n">add</span> <span class="n">up</span> <span class="n">to</span> <span class="n">an</span> <span class="n">even</span> <span class="n">number</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">2.</span>
+<span class="n">A</span><span class="p">:</span> <span class="n">Adding</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">odd</span> <span class="n">numbers</span> <span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span> <span class="n">gives</span> <span class="mf">39.</span> <span class="n">The</span> <span class="n">answer</span> <span class="ow">is</span> <span class="kc">False</span><span class="o">.</span>
+
+<span class="n">The</span> <span class="n">odd</span> <span class="n">numbers</span> <span class="ow">in</span> <span class="n">this</span> <span class="n">group</span> <span class="n">add</span> <span class="n">up</span> <span class="n">to</span> <span class="n">an</span> <span class="n">even</span> <span class="n">number</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">82</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mf">1.</span> 
+<span class="n">A</span><span class="p">:</span>
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Adding</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">odd</span> <span class="n">numbers</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="n">gives</span> <span class="mf">41.</span> <span class="n">The</span> <span class="n">answer</span> <span class="ow">is</span> <span class="kc">False</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Providing reasoning steps significantly improves accuracy, even with fewer examples.</p>
+</section>
+<hr class="docutils" />
+<section id="zero-shot-cot">
+<h2>Zero-Shot CoT<a class="headerlink" href="#zero-shot-cot" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://arxiv.org/abs/2205.11916">Zero-shot CoT</a> adds prompts like “Let’s think step by step” to enable reasoning without examples.</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>I went to the market and bought 10 apples. I gave 2 apples to the neighbor and 2 to the repairman. I then went and bought 5 more apples and ate 1. How many apples did I remain with?
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">11</span> <span class="n">apples</span>
+</pre></div>
+</div>
+<p>The answer is incorrect! Now Let’s try with the special prompt.</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>I went to the market and bought 10 apples. I gave 2 apples to the neighbor and 2 to the repairman. I then went and bought 5 more apples and ate 1. How many apples did I remain with?
+
+Let&#39;s think step by step.
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">First</span><span class="p">,</span> <span class="n">you</span> <span class="n">started</span> <span class="k">with</span> <span class="mi">10</span> <span class="n">apples</span><span class="o">.</span>
+<span class="n">You</span> <span class="n">gave</span> <span class="n">away</span> <span class="mi">2</span> <span class="n">apples</span> <span class="n">to</span> <span class="n">the</span> <span class="n">neighbor</span> <span class="ow">and</span> <span class="mi">2</span> <span class="n">to</span> <span class="n">the</span> <span class="n">repairman</span><span class="p">,</span> <span class="n">so</span> <span class="n">you</span> <span class="n">had</span> <span class="mi">6</span> <span class="n">apples</span> <span class="n">left</span><span class="o">.</span>
+<span class="n">Then</span> <span class="n">you</span> <span class="n">bought</span> <span class="mi">5</span> <span class="n">more</span> <span class="n">apples</span><span class="p">,</span> <span class="n">so</span> <span class="n">now</span> <span class="n">you</span> <span class="n">had</span> <span class="mi">11</span> <span class="n">apples</span><span class="o">.</span>
+<span class="n">Finally</span><span class="p">,</span> <span class="n">you</span> <span class="n">ate</span> <span class="mi">1</span> <span class="n">apple</span><span class="p">,</span> <span class="n">so</span> <span class="n">you</span> <span class="n">would</span> <span class="n">remain</span> <span class="k">with</span> <span class="mi">10</span> <span class="n">apples</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>It’s impressive that this simple prompt is effective at this task. This is particularly useful where you don’t have too many examples to use in the prompt.</p>
+</section>
+<hr class="docutils" />
+<section id="self-consistency">
+<h2>Self-Consistency<a class="headerlink" href="#self-consistency" title="Link to this heading">#</a></h2>
+<p>Perhaps one of the more advanced techniques out there for prompt engineering is self-consistency. Proposed by <a class="reference external" href="https://arxiv.org/pdf/2203.11171.pdf">Wang et al. (2022)</a>, self-consistency aims “to replace the naive greedy decoding used in chain-of-thought prompting”.</p>
+<p>The idea is to sample multiple, diverse reasoning paths through few-shot CoT, and use the generations to select the most consistent answer. This helps to boost the performance of CoT prompting on tasks involving arithmetic and commonsense reasoning.</p>
+<p>Let’s try the following example for arithmetic reasoning:</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>When I was 6 my sister was half my age. Now
+I’m 70 how old is my sister?
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">35</span>
+</pre></div>
+</div>
+<p>The output is wrong! How may we improve this with self-consistency? Let’s try it out. We will use the few-shot exemplars from Wang et al. 2022 (Table 17):</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Q: There are 15 trees in the grove. Grove workers will plant trees in the grove today. After they are done,
+there will be 21 trees. How many trees did the grove workers plant today?
+A: We start with 15 trees. Later we have 21 trees. The difference must be the number of trees they planted.
+So, they must have planted 21 - 15 = 6 trees. The answer is 6.
+
+Q: If there are 3 cars in the parking lot and 2 more cars arrive, how many cars are in the parking lot?
+A: There are 3 cars in the parking lot already. 2 more arrive. Now there are 3 + 2 = 5 cars. The answer is 5.
+
+Q: Leah had 32 chocolates and her sister had 42. If they ate 35, how many pieces do they have left in total?
+A: Leah had 32 chocolates and Leah’s sister had 42. That means there were originally 32 + 42 = 74
+chocolates. 35 have been eaten. So in total they still have 74 - 35 = 39 chocolates. The answer is 39.
+
+Q: Jason had 20 lollipops. He gave Denny some lollipops. Now Jason has 12 lollipops. How many lollipops
+did Jason give to Denny?
+A: Jason had 20 lollipops. Since he only has 12 now, he must have given the rest to Denny. The number of
+lollipops he has given to Denny must have been 20 - 12 = 8 lollipops. The answer is 8.
+
+Q: Shawn has five toys. For Christmas, he got two toys each from his mom and dad. How many toys does
+he have now?
+A: He has 5 toys. He got 2 from mom, so after that he has 5 + 2 = 7 toys. Then he got 2 more from dad, so
+in total he has 7 + 2 = 9 toys. The answer is 9.
+
+Q: There were nine computers in the server room. Five more computers were installed each day, from
+monday to thursday. How many computers are now in the server room?
+A: There are 4 days from monday to thursday. 5 computers were added each day. That means in total 4 * 5 =
+20 computers were added. There were 9 computers in the beginning, so now there are 9 + 20 = 29 computers.
+The answer is 29.
+
+Q: Michael had 58 golf balls. On tuesday, he lost 23 golf balls. On wednesday, he lost 2 more. How many
+golf balls did he have at the end of wednesday?
+A: Michael initially had 58 balls. He lost 23 on Tuesday, so after that he has 58 - 23 = 35 balls. On
+Wednesday he lost 2 more so now he has 35 - 2 = 33 balls. The answer is 33.
+
+Q: Olivia has $23. She bought five bagels for $3 each. How much money does she have left?
+A: She bought 5 bagels for $3 each. This means she spent 5
+
+Q: When I was 6 my sister was half my age. Now I’m 70 how old is my sister?
+A:
+</pre></div>
+</div>
+<p><em>Output 1:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">When</span> <span class="n">I</span> <span class="n">was</span> <span class="mi">6</span> <span class="n">my</span> <span class="n">sister</span> <span class="n">was</span> <span class="n">half</span> <span class="n">my</span> <span class="n">age</span><span class="p">,</span> <span class="n">so</span> <span class="n">she</span> <span class="n">was</span> <span class="mf">3.</span> <span class="n">Now</span> <span class="n">I</span> <span class="n">am</span> <span class="mi">70</span><span class="p">,</span> <span class="n">so</span> <span class="n">she</span> <span class="ow">is</span> <span class="mi">70</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">=</span> <span class="mf">67.</span> <span class="n">The</span> <span class="n">answer</span> <span class="ow">is</span> <span class="mf">67.</span>
+</pre></div>
+</div>
+<p><em>Output 2:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">When</span> <span class="n">the</span> <span class="n">narrator</span> <span class="n">was</span> <span class="mi">6</span><span class="p">,</span> <span class="n">his</span> <span class="n">sister</span> <span class="n">was</span> <span class="n">half</span> <span class="n">his</span> <span class="n">age</span><span class="p">,</span> <span class="n">which</span> <span class="ow">is</span> <span class="mf">3.</span> <span class="n">Now</span> <span class="n">that</span> <span class="n">the</span> <span class="n">narrator</span> <span class="ow">is</span> <span class="mi">70</span><span class="p">,</span> <span class="n">his</span> <span class="n">sister</span> <span class="n">would</span> <span class="n">be</span> <span class="mi">70</span> <span class="o">-</span> <span class="mi">3</span> <span class="o">=</span> <span class="mi">67</span> <span class="n">years</span> <span class="n">old</span><span class="o">.</span> <span class="n">The</span> <span class="n">answer</span> <span class="ow">is</span> <span class="mf">67.</span>
+</pre></div>
+</div>
+<p><em>Output 3:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">When</span> <span class="n">I</span> <span class="n">was</span> <span class="mi">6</span> <span class="n">my</span> <span class="n">sister</span> <span class="n">was</span> <span class="n">half</span> <span class="n">my</span> <span class="n">age</span><span class="p">,</span> <span class="n">so</span> <span class="n">she</span> <span class="n">was</span> <span class="mf">3.</span> <span class="n">Now</span> <span class="n">I</span> <span class="n">am</span> <span class="mi">70</span><span class="p">,</span> <span class="n">so</span> <span class="n">she</span> <span class="ow">is</span> <span class="mi">70</span><span class="o">/</span><span class="mi">2</span> <span class="o">=</span> <span class="mf">35.</span> <span class="n">The</span> <span class="n">answer</span> <span class="ow">is</span> <span class="mf">35.</span>
+</pre></div>
+</div>
+<p>Computing for the final answer involves a few steps (check out the paper for the details) but for the sake of simplicity, we can see that there is already a majority answer emerging so that would essentially become the final answer.</p>
+</section>
+<hr class="docutils" />
+<section id="generated-knowledge-prompting">
+<h2>Generated Knowledge Prompting<a class="headerlink" href="#generated-knowledge-prompting" title="Link to this heading">#</a></h2>
+<p>Incorporating generated knowledge can enhance model predictions for tasks like commonsense reasoning. hat’s what is attempted in the paper by <a class="reference external" href="https://arxiv.org/pdf/2110.08387.pdf">Liu et al. 2022</a> – generate knowledge to be used as part of the prompt.</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Part of golf is trying to get a higher point total than others. Yes or No?
+</pre></div>
+</div>
+<p><em>Output:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Yes</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>This type of mistake reveals the limitations of LLMs to perform tasks that require more knowledge about the world. How do we improve this with knowledge generation?</p>
+<p>First, we generate a few “knowledges”:</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Input: Greece is larger than mexico.
+Knowledge: Greece is approximately 131,957 sq km, while Mexico is approximately 1,964,375 sq km, making Mexico 1,389% larger than Greece.
+
+Input: Glasses always fog up.
+Knowledge: Condensation occurs on eyeglass lenses when water vapor from your sweat, breath, and ambient humidity lands on a cold surface, cools, and then changes into tiny drops of liquid, forming a film that you see as fog. Your lenses will be relatively cool compared to your breath, especially when the outside air is cold.
+
+Input: A fish is capable of thinking.
+Knowledge: Fish are more intelligent than they appear. In many areas, such as memory, their cognitive powers match or exceed those of ’higher’ vertebrates including non-human primates. Fish’s long-term memories help them keep track of complex social relationships.
+
+Input: A common effect of smoking lots of cigarettes in one’s lifetime is a higher than normal chance of getting lung cancer.
+Knowledge: Those who consistently averaged less than one cigarette per day over their lifetime had nine times the risk of dying from lung cancer than never smokers. Among people who smoked between one and 10 cigarettes per day, the risk of dying from lung cancer was nearly 12 times higher than that of never smokers.
+
+Input: A rock is the same size as a pebble.
+Knowledge: A pebble is a clast of rock with a particle size of 4 to 64 millimetres based on the Udden-Wentworth scale of sedimentology. Pebbles are generally considered larger than granules (2 to 4 millimetres diameter) and smaller than cobbles (64 to 256 millimetres diameter).
+
+Input: Part of golf is trying to get a higher point total than others.
+Knowledge:
+</pre></div>
+</div>
+<p><em>Knowledge 1:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">objective</span> <span class="n">of</span> <span class="n">golf</span> <span class="ow">is</span> <span class="n">to</span> <span class="n">play</span> <span class="n">a</span> <span class="nb">set</span> <span class="n">of</span> <span class="n">holes</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">least</span> <span class="n">number</span> <span class="n">of</span> <span class="n">strokes</span><span class="o">.</span> <span class="n">A</span> <span class="nb">round</span> <span class="n">of</span> <span class="n">golf</span> <span class="n">typically</span> <span class="n">consists</span> <span class="n">of</span> <span class="mi">18</span> <span class="n">holes</span><span class="o">.</span> <span class="n">Each</span> <span class="n">hole</span> <span class="ow">is</span> <span class="n">played</span> <span class="n">once</span> <span class="ow">in</span> <span class="n">the</span> <span class="nb">round</span> <span class="n">on</span> <span class="n">a</span> <span class="n">standard</span> <span class="n">golf</span> <span class="n">course</span><span class="o">.</span> <span class="n">Each</span> <span class="n">stroke</span> <span class="ow">is</span> <span class="n">counted</span> <span class="k">as</span> <span class="n">one</span> <span class="n">point</span><span class="p">,</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">total</span> <span class="n">number</span> <span class="n">of</span> <span class="n">strokes</span> <span class="ow">is</span> <span class="n">used</span> <span class="n">to</span> <span class="n">determine</span> <span class="n">the</span> <span class="n">winner</span> <span class="n">of</span> <span class="n">the</span> <span class="n">game</span><span class="o">.</span>
+</pre></div>
+</div>
+<p><em>Knowledge 2:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Golf</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">precision</span> <span class="n">club</span><span class="o">-</span><span class="ow">and</span><span class="o">-</span><span class="n">ball</span> <span class="n">sport</span> <span class="ow">in</span> <span class="n">which</span> <span class="n">competing</span> <span class="n">players</span> <span class="p">(</span><span class="ow">or</span> <span class="n">golfers</span><span class="p">)</span> <span class="n">use</span> <span class="n">many</span> <span class="n">types</span> <span class="n">of</span> <span class="n">clubs</span> <span class="n">to</span> <span class="n">hit</span> <span class="n">balls</span> <span class="n">into</span> <span class="n">a</span> <span class="n">series</span> <span class="n">of</span> <span class="n">holes</span> <span class="n">on</span> <span class="n">a</span> <span class="n">course</span> <span class="n">using</span> <span class="n">the</span> <span class="n">fewest</span> <span class="n">number</span> <span class="n">of</span> <span class="n">strokes</span><span class="o">.</span> <span class="n">The</span> <span class="n">goal</span> <span class="ow">is</span> <span class="n">to</span> <span class="n">complete</span> <span class="n">the</span> <span class="n">course</span> <span class="k">with</span> <span class="n">the</span> <span class="n">lowest</span> <span class="n">score</span><span class="p">,</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">calculated</span> <span class="n">by</span> <span class="n">adding</span> <span class="n">up</span> <span class="n">the</span> <span class="n">total</span> <span class="n">number</span> <span class="n">of</span> <span class="n">strokes</span> <span class="n">taken</span> <span class="n">on</span> <span class="n">each</span> <span class="n">hole</span><span class="o">.</span> <span class="n">The</span> <span class="n">player</span> <span class="k">with</span> <span class="n">the</span> <span class="n">lowest</span> <span class="n">score</span> <span class="n">wins</span> <span class="n">the</span> <span class="n">game</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>We are using the prompt provided in the paper by <a class="reference external" href="https://arxiv.org/pdf/2110.08387.pdf">Liu et al. 2022</a>.</p>
+<p>The next step is to integrate the knowledge and get a prediction. I reformatted the question into QA format to guide the answer format.</p>
+<p><em>Prompt:</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Question: Part of golf is trying to get a higher point total than others. Yes or No?
+
+Knowledge: The objective of golf is to play a set of holes in the least number of strokes. A round of golf typically consists of 18 holes. Each hole is played once in the round on a standard golf course. Each stroke is counted as one point, and the total number of strokes is used to determine the winner of the game.
+
+Explain and Answer: 
+</pre></div>
+</div>
+<p><em>Answer 1 (confidence very high):</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">No</span><span class="p">,</span> <span class="n">the</span> <span class="n">objective</span> <span class="n">of</span> <span class="n">golf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">to</span> <span class="n">get</span> <span class="n">a</span> <span class="n">higher</span> <span class="n">point</span> <span class="n">total</span> <span class="n">than</span> <span class="n">others</span><span class="o">.</span> <span class="n">Rather</span><span class="p">,</span> <span class="n">the</span> <span class="n">objective</span> <span class="ow">is</span> <span class="n">to</span> <span class="n">play</span> <span class="n">a</span> <span class="nb">set</span> <span class="n">of</span> <span class="n">holes</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">least</span> <span class="n">number</span> <span class="n">of</span> <span class="n">strokes</span><span class="o">.</span> <span class="n">The</span> <span class="n">total</span> <span class="n">number</span> <span class="n">of</span> <span class="n">strokes</span> <span class="ow">is</span> <span class="n">used</span> <span class="n">to</span> <span class="n">determine</span> <span class="n">the</span> <span class="n">winner</span> <span class="n">of</span> <span class="n">the</span> <span class="n">game</span><span class="p">,</span> <span class="ow">not</span> <span class="n">the</span> <span class="n">total</span> <span class="n">number</span> <span class="n">of</span> <span class="n">points</span><span class="o">.</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Question: Part of golf is trying to get a higher point total than others. Yes or No?
+
+Knowledge: Golf is a precision club-and-ball sport in which competing players (or golfers) use many types of clubs to hit balls into a series of holes on a course using the fewest number of strokes. The goal is to complete the course with the lowest score, which is calculated by adding up the total number of strokes taken on each hole. The player with the lowest score wins the game.
+
+Explain and Answer:
+</pre></div>
+</div>
+<p><em>Answer 2 (confidence is a lot lower):</em></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Yes</span><span class="p">,</span> <span class="n">part</span> <span class="n">of</span> <span class="n">golf</span> <span class="ow">is</span> <span class="n">trying</span> <span class="n">to</span> <span class="n">get</span> <span class="n">a</span> <span class="n">higher</span> <span class="n">point</span> <span class="n">total</span> <span class="n">than</span> <span class="n">others</span><span class="o">.</span> <span class="n">Each</span> <span class="n">player</span> <span class="n">tries</span> <span class="n">to</span> <span class="n">complete</span> <span class="n">the</span> <span class="n">course</span> <span class="k">with</span> <span class="n">the</span> <span class="n">lowest</span> <span class="n">score</span><span class="p">,</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">calculated</span> <span class="n">by</span> <span class="n">adding</span> <span class="n">up</span> <span class="n">the</span> <span class="n">total</span> <span class="n">number</span> <span class="n">of</span> <span class="n">strokes</span> <span class="n">taken</span> <span class="n">on</span> <span class="n">each</span> <span class="n">hole</span><span class="o">.</span> <span class="n">The</span> <span class="n">player</span> <span class="k">with</span> <span class="n">the</span> <span class="n">lowest</span> <span class="n">score</span> <span class="n">wins</span> <span class="n">the</span> <span class="n">game</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Some really interesting things happened with this example. In the first answer, the model was very confident but in the second not so much. I simplify the process for demonstration purposes but there are a few more details to consider when arriving at the final answer. Check out the paper for more.</p>
+</section>
+<hr class="docutils" />
+<section id="automatic-prompt-engineer-ape">
+<h2>Automatic Prompt Engineer (APE)<a class="headerlink" href="#automatic-prompt-engineer-ape" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://arxiv.org/abs/2211.01910">Zhou et al. (2022)</a> introduced APE, which automatically generates and selects optimal prompts using LLMs and optimization techniques.</p>
+<p><img alt="Automatic Prompt Engineer" src="../../../_images/ape.png" /></p>
+<p>APE can discover superior zero-shot CoT prompts, enhancing performance on benchmarks like MultiArith and GSM8K.</p>
+<p>👉 The first step involves a large language model (as an inference model) that is given output demonstrations to generate instruction candidates for a task.</p>
+<p>👉 These candidate solutions will guide the search procedure. The instructions are executed using a target model, and then the most appropriate instruction is selected based on computed evaluation scores.</p>
+<p>👉 APE discovers a better zero-shot CoT prompt than the human engineered “Let’s think step by step” prompt (Kojima et al., 2022).</p>
+<p>This paper touches on an important topic related to prompt engineering which is the idea of automatically optimizing prompts. While we don’t go deep into this topic in this guide, here are a few key papers if you are interested in the topic:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://arxiv.org/abs/2010.15980">AutoPrompt</a> - proposes an approach to automatically create prompts for a diverse set of tasks based on gradient-guided search.</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/2101.00190">Prefix Tuning</a> - a lightweight alternative to fine-tuning that prepends a trainable continuous prefix for NLG tasks.</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/2104.08691">Prompt Tuning</a> - proposes a mechanism for learning soft prompts through backpropagation.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/mlguide",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/genai/prompt-engineering"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-prompting">Zero-Shot Prompting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#few-shot-prompting">Few-Shot Prompting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-few-shot-prompting">Limitations of Few-Shot Prompting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-of-thought-prompting">Chain-of-Thought Prompting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#zero-shot-cot">Zero-Shot CoT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-consistency">Self-Consistency</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generated-knowledge-prompting">Generated Knowledge Prompting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-prompt-engineer-ape">Automatic Prompt Engineer (APE)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div class="social-icons">
+    <a href="https://twitter.com/chaturanukool" target="_blank"><i class="fab fa-twitter"></i></a>
+    <a href="https://linkedin.com/in/anukool-chaturvedi" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://github.com/anukchat" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="mailto:chaturvedianukool@gmail.com"><i class="fas fa-envelope"></i></a>
+    </p>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
