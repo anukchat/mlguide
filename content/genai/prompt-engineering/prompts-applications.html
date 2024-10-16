@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Prompt Engineering</title>
+    <title>Prompt Applications</title>
   
   
   
@@ -71,16 +71,16 @@
                 gtag('config', 'G-GJG3T4ZRZH');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/genai/prompt-engineering/basic_prompting';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/genai/prompt-engineering/prompts-applications';</script>
     <script src="../../../_static/subscription_overlay.js?v=2e74803e"></script>
     <script src="https://apis.google.com/js/platform.js"></script>
     <script src="../../../_static/landing.js?v=93f722cb"></script>
-    <link rel="canonical" href="https://mlguide.in/content/genai/prompt-engineering/basic_prompting.html" />
+    <link rel="canonical" href="https://mlguide.in/content/genai/prompt-engineering/prompts-applications.html" />
     <link rel="icon" href="../../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Prompt Applications" href="prompts-applications.html" />
-    <link rel="prev" title="Prompt Engineering" href="intro.html" />
+    <link rel="next" title="Adversarial Prompting" href="prompts-adversarial.html" />
+    <link rel="prev" title="Prompt Engineering" href="basic_prompting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -281,8 +281,8 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../introduction.html">Generative AI</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Prompt Engineering</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Basic Prompting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="prompts-applications.html">Prompts Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="basic_prompting.html">Basic Prompting</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Prompts Applications</a></li>
 <li class="toctree-l3"><a class="reference internal" href="prompts-adversarial.html">Prompts Adversarial</a></li>
 <li class="toctree-l3"><a class="reference internal" href="prompts-reliability.html">Reliability</a></li>
 
@@ -367,7 +367,7 @@
       
       
       
-      <li><a href="../../../_sources/content/genai/prompt-engineering/basic_prompting.md" target="_blank"
+      <li><a href="../../../_sources/content/genai/prompt-engineering/prompts-applications.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -451,7 +451,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Prompt Engineering</h1>
+    <h1>Prompt Applications</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -461,23 +461,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-prompts">Basic Prompts</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-prompts">Standard Prompts</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-elements">Prompt Elements</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#designing-prompts">Designing Prompts</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-settings">LLM Settings</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-prompts-usage">Basic Prompts Usage</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-summarization">Text Summarization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information-extraction">Information Extraction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-answering">Question Answering</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-classification">Text Classification</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversation">Conversation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-generation">Code Generation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reasoning">Reasoning</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-data">Generating Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pal-program-aided-language-models">PAL (Program-Aided Language Models)</a></li>
 </ul>
             </nav>
         </div>
@@ -489,223 +474,187 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="prompt-engineering">
-<h1>Prompt Engineering<a class="headerlink" href="#prompt-engineering" title="Link to this heading">#</a></h1>
-<p>Prompt engineering helps optimize prompts for better use of language models (LMs) in various tasks. It improves how developers and researchers work with large language models (LLMs), like question answering and reasoning.</p>
-<section id="basic-prompts">
-<h2>Basic Prompts<a class="headerlink" href="#basic-prompts" title="Link to this heading">#</a></h2>
-<p>Prompts contain instructions or questions for the model, but quality depends on how detailed the input is.</p>
-<p><em>Example Prompt:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">sky</span> <span class="ow">is</span>
-</pre></div>
-</div>
-<p><em>Output:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">blue</span><span class="o">.</span> <span class="n">On</span> <span class="n">a</span> <span class="n">cloudy</span> <span class="n">day</span><span class="p">,</span> <span class="n">it</span> <span class="n">may</span> <span class="n">be</span> <span class="n">gray</span> <span class="ow">or</span> <span class="n">white</span><span class="o">.</span>
-</pre></div>
-</div>
-<p>To improve, be specific:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Complete</span> <span class="n">the</span> <span class="n">sentence</span><span class="p">:</span> <span class="n">The</span> <span class="n">sky</span> <span class="ow">is</span>
-</pre></div>
-</div>
-<p><em>Output:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">so</span> <span class="n">beautiful</span> <span class="n">today</span><span class="o">.</span>
-</pre></div>
-</div>
-<p>This shows how prompt engineering tailors results.</p>
-<section id="standard-prompts">
-<h3>Standard Prompts<a class="headerlink" href="#standard-prompts" title="Link to this heading">#</a></h3>
-<p>A basic prompt format:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;Question&gt;?
-</pre></div>
-</div>
-<p>For QA tasks, try few-shot prompts:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Q: &lt;Question&gt;?
-A: &lt;Answer&gt;
-
-Q: &lt;Question&gt;?
-A:
-</pre></div>
-</div>
-<p>This helps models learn tasks with just a few examples.</p>
-</section>
-<section id="prompt-elements">
-<h3>Prompt Elements<a class="headerlink" href="#prompt-elements" title="Link to this heading">#</a></h3>
-<p>Prompts can include:</p>
-<ul class="simple">
-<li><p><strong>Instruction</strong>: What task to perform</p></li>
-<li><p><strong>Context</strong>: Background information</p></li>
-<li><p><strong>Input Data</strong>: What to analyze</p></li>
-<li><p><strong>Output Indicator</strong>: Desired response format</p></li>
-</ul>
-<p>Not all are necessary, but they guide the model’s responses.</p>
-</section>
-<section id="designing-prompts">
-<h3>Designing Prompts<a class="headerlink" href="#designing-prompts" title="Link to this heading">#</a></h3>
-<p><strong>👉 Start Simple</strong>
-Begin with basic prompts and iterate. Break down complex tasks into subtasks for better results.</p>
-<p><strong>👉 The Instruction</strong>
-Use commands like “Summarize”, “Translate”, “Classify” for clarity.</p>
-<p><strong>👉 Specificity</strong>
-Be clear and concise. Add examples for better output formats.</p>
-<p><strong>👉  Avoid Impreciseness</strong>
-Be direct. Instead of vague commands, use specific instructions.</p>
-<p><strong>👉 To Do or Not to Do?</strong>
-Focus on what to do, rather than what not to do, for clearer results.</p>
-</section>
-</section>
-<section id="llm-settings">
-<h2>LLM Settings<a class="headerlink" href="#llm-settings" title="Link to this heading">#</a></h2>
-<p>Key settings for prompt results:</p>
-<ul class="simple">
-<li><p><strong>Temperature:</strong> Controls randomness (higher values = more creative).</p></li>
-<li><p><strong>Top_p:</strong> Adjusts sampling diversity.</p></li>
-</ul>
-<p>Experiment with these to balance accuracy and creativity.</p>
-</section>
-<section id="basic-prompts-usage">
-<h2>Basic Prompts Usage<a class="headerlink" href="#basic-prompts-usage" title="Link to this heading">#</a></h2>
-<p>Let’s see how prompts are used and introduce key concepts that will be important for the more advanced techniques.</p>
-<section id="text-summarization">
-<h3>Text Summarization<a class="headerlink" href="#text-summarization" title="Link to this heading">#</a></h3>
-<p>One of the standard tasks in natural language generation is text summarization. Text summarization can include many different flavors and domains. One of the most promising applications of language models is the ability to summarize articles and concepts into quick and easy-to-read summaries. Let’s try a basic summarization task using prompts.</p>
-<p>Let’s say I am interested to learn about antibiotics, I could try a prompt like this:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="prompt-applications">
+<h1>Prompt Applications<a class="headerlink" href="#prompt-applications" title="Link to this heading">#</a></h1>
+<p>Let’s see some advanced and interesting ways we can use prompt engineering to perform useful and more advanced tasks.</p>
+<hr class="docutils" />
+<section id="generating-data">
+<h2>Generating Data<a class="headerlink" href="#generating-data" title="Link to this heading">#</a></h2>
+<p>LLMs have strong capabilities to generate text. Using effective prompt strategies can steer the model to produce better, more consistent, and more factual responses. LLMs can also be especially useful for generating data which is useful to run all sorts of experiments. For example, we can use it to generate quick samples for a sentiment classifier like so:</p>
 <p><em>Prompt:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Explain</span> <span class="n">antibiotics</span>
-
-<span class="n">A</span><span class="p">:</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Produce</span> <span class="mi">10</span> <span class="n">exemplars</span> <span class="k">for</span> <span class="n">sentiment</span> <span class="n">analysis</span><span class="o">.</span> <span class="n">Examples</span> <span class="n">are</span> <span class="n">categorized</span> <span class="k">as</span> <span class="n">either</span> <span class="n">positive</span> <span class="ow">or</span> <span class="n">negative</span><span class="o">.</span> <span class="n">Produce</span> <span class="mi">2</span> <span class="n">negative</span> <span class="n">examples</span> <span class="ow">and</span> <span class="mi">8</span> <span class="n">positive</span> <span class="n">examples</span><span class="o">.</span> <span class="n">Use</span> <span class="n">this</span> <span class="nb">format</span> <span class="k">for</span> <span class="n">the</span> <span class="n">examples</span><span class="p">:</span>
+<span class="n">Q</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">sentence</span><span class="o">&gt;</span>
+<span class="n">A</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">sentiment</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p><em>Output:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Antibiotics are a type of medication used to treat bacterial infections. They work by either killing the bacteria or preventing them from reproducing, allowing the body’s immune system to fight off the infection. Antibiotics are usually taken orally in the form of pills, capsules, or liquid solutions, or sometimes administered intravenously. They are not effective against viral infections, and using them inappropriately can lead to antibiotic resistance.
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Q: I just got the best news ever!
+A: Positive
+
+Q: We just got a raise at work!
+A: Positive
+
+Q: I&#39;m so proud of what I accomplished today.
+A: Positive
+
+Q: I&#39;m having the best day ever!
+A: Positive
+
+Q: I&#39;m really looking forward to the weekend.
+A: Positive
+
+Q: I just got the best present ever!
+A: Positive
+
+Q: I&#39;m so happy right now.
+A: Positive
+
+Q: I&#39;m so blessed to have such an amazing family.
+A: Positive
+
+Q: The weather outside is so gloomy.
+A: Negative
+
+Q: I just got some terrible news.
+A: Negative
 </pre></div>
 </div>
-<p>The “A:” is an explicit prompt format that’s used in question answering. I used it here to tell the model that there is an expected further. In this example, it’s not clear how this is useful vs not using it but we will leave it that for later examples. Let’s just assume that this is too much information and want to summarize it further. We can instruct the model to summarize into one sentence like so:</p>
+<p>This is very useful. We use this example for a different test in another section of the guides.</p>
+<p>Here is another prompt example showing how to leverage the LLM for data labeling/augmentation task.</p>
 <p><em>Prompt:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Antibiotics are a type of medication used to treat bacterial infections. They work by either killing the bacteria or preventing them from reproducing, allowing the body’s immune system to fight off the infection. Antibiotics are usually taken orally in the form of pills, capsules, or liquid solutions, or sometimes administered intravenously. They are not effective against viral infections, and using them inappropriately can lead to antibiotic resistance.
-
-Explain the above in one sentence:
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">produce</span> <span class="mi">3</span> <span class="n">wine</span> <span class="n">reviews</span> <span class="ow">and</span> <span class="n">label</span> <span class="n">taste</span><span class="p">,</span> <span class="n">flavor</span><span class="p">,</span> <span class="n">aroma</span> <span class="n">related</span> <span class="n">token</span><span class="p">;</span> <span class="n">present</span> <span class="n">the</span> <span class="n">result</span> <span class="k">as</span> <span class="n">a</span> <span class="n">json</span> <span class="n">file</span><span class="p">,</span> <span class="ow">in</span> <span class="n">addition</span> <span class="n">add</span> <span class="n">the</span> <span class="n">coordinate</span> <span class="n">of</span> <span class="n">each</span> <span class="n">term</span> <span class="k">for</span> <span class="n">NER</span> <span class="n">task</span>
 </pre></div>
 </div>
 <p><em>Output:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Antibiotics</span> <span class="n">are</span> <span class="n">medications</span> <span class="n">used</span> <span class="n">to</span> <span class="n">treat</span> <span class="n">bacterial</span> <span class="n">infections</span> <span class="n">by</span> <span class="n">either</span> <span class="n">killing</span> <span class="n">the</span> <span class="n">bacteria</span> <span class="ow">or</span> <span class="n">stopping</span> <span class="n">them</span> <span class="kn">from</span> <span class="nn">reproducing</span><span class="p">,</span> <span class="n">but</span> <span class="n">they</span> <span class="n">are</span> <span class="ow">not</span> <span class="n">effective</span> <span class="n">against</span> <span class="n">viruses</span> <span class="ow">and</span> <span class="n">overuse</span> <span class="n">can</span> <span class="n">lead</span> <span class="n">to</span> <span class="n">antibiotic</span> <span class="n">resistance</span><span class="o">.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;review&quot;</span><span class="p">:</span> <span class="s2">&quot;This Chardonnay has a rich, creamy texture with notes of vanilla and buttery oak. The taste is smooth and well-balanced, with a hint of tropical fruit on the finish.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;tokens&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;rich&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;flavor&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;creamy&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;texture&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;vanilla&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;flavor&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">35</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;buttery&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;flavor&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">47</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;oak&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;aroma&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">48</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">51</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;smooth&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;taste&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">61</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">67</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;well-balanced&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;taste&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">68</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">81</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;hint&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;flavor&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">89</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">93</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;tropical fruit&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;flavor&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">98</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">112</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;finish&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;taste&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">116</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">122</span><span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;review&quot;</span><span class="p">:</span> <span class="s2">&quot;This Cabernet Sauvignon has a bold, full-bodied flavor with notes of black cherry and dark chocolate. The aroma is rich and complex, with hints of tobacco and leather.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;tokens&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;bold&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;flavor&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;full-bodied&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;texture&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;black cherry&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;flavor&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;dark chocolate&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;flavor&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">47</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">60</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;rich&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;aroma&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">69</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">73</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;complex&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;aroma&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">78</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">85</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;hints&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;aroma&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">96</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;tobacco&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;aroma&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">101</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">108</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;leather&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;aroma&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">113</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">120</span><span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;review&quot;</span><span class="p">:</span> <span class="s2">&quot;This Riesling has a crisp, refreshing taste with notes of green apple and honey. The aroma is floral and fruity, with a hint of citrus.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;tokens&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;crisp&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;texture&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;refreshing&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;texture&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">22</span><span class="p">},</span>
+      <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;green apple&quot;</span><span class="p">,</span> <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;flavor&quot;</span><span class="p">,</span> <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">},</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <hr class="docutils" />
-<section id="information-extraction">
-<h3>Information Extraction<a class="headerlink" href="#information-extraction" title="Link to this heading">#</a></h3>
-<p>While language models are trained to perform natural language generation and related tasks, it’s also very capable of performing classification and a range of other natural language processing (NLP) tasks.</p>
-<p>Here is an example of a prompt that extracts information from a given paragraph.</p>
-<p><em>Prompt:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Author</span><span class="o">-</span><span class="n">contribution</span> <span class="n">statements</span> <span class="ow">and</span> <span class="n">acknowledgements</span> <span class="ow">in</span> <span class="n">research</span> <span class="n">papers</span> <span class="n">should</span> <span class="n">state</span> <span class="n">clearly</span> <span class="ow">and</span> <span class="n">specifically</span> <span class="n">whether</span><span class="p">,</span> <span class="ow">and</span> <span class="n">to</span> <span class="n">what</span> <span class="n">extent</span><span class="p">,</span> <span class="n">the</span> <span class="n">authors</span> <span class="n">used</span> <span class="n">AI</span> <span class="n">technologies</span> <span class="n">such</span> <span class="k">as</span> <span class="n">ChatGPT</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">preparation</span> <span class="n">of</span> <span class="n">their</span> <span class="n">manuscript</span> <span class="ow">and</span> <span class="n">analysis</span><span class="o">.</span> <span class="n">They</span> <span class="n">should</span> <span class="n">also</span> <span class="n">indicate</span> <span class="n">which</span> <span class="n">LLMs</span> <span class="n">were</span> <span class="n">used</span><span class="o">.</span> <span class="n">This</span> <span class="n">will</span> <span class="n">alert</span> <span class="n">editors</span> <span class="ow">and</span> <span class="n">reviewers</span> <span class="n">to</span> <span class="n">scrutinize</span> <span class="n">manuscripts</span> <span class="n">more</span> <span class="n">carefully</span> <span class="k">for</span> <span class="n">potential</span> <span class="n">biases</span><span class="p">,</span> <span class="n">inaccuracies</span> <span class="ow">and</span> <span class="n">improper</span> <span class="n">source</span> <span class="n">crediting</span><span class="o">.</span> <span class="n">Likewise</span><span class="p">,</span> <span class="n">scientific</span> <span class="n">journals</span> <span class="n">should</span> <span class="n">be</span> <span class="n">transparent</span> <span class="n">about</span> <span class="n">their</span> <span class="n">use</span> <span class="n">of</span> <span class="n">LLMs</span><span class="p">,</span> <span class="k">for</span> <span class="n">example</span> <span class="n">when</span> <span class="n">selecting</span> <span class="n">submitted</span> <span class="n">manuscripts</span><span class="o">.</span>
+<section id="pal-program-aided-language-models">
+<h2>PAL (Program-Aided Language Models)<a class="headerlink" href="#pal-program-aided-language-models" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://arxiv.org/abs/2211.10435">Gao et al., (2022)</a> presents a method that uses LLMs to read natural language problems and generate programs as the intermediate reasoning steps. Coined, program-aided language models (PAL), differ from chain-of-thought prompting in that instead of using free-form text to obtain a solution it offloads the solution step to a programmatic runtime such as a Python interpreter.</p>
+<p><img alt="" src="../../../_images/pal.png" /></p>
+<p>Let’s look at an example using LangChain and OpenAI GPT-3. We are interested to develop a simple application that’s able to interpret the question being asked and provide an answer by leveraging the Python interpreter.</p>
+<p>Specifically, we are interested to create a function that allows the use of the LLM to answer questions that require date understanding. We will provide the LLM a prompt that includes a few exemplars that are adopted from <a class="reference external" href="https://github.com/reasoning-machines/pal/blob/main/pal/prompt/date_understanding_prompt.py">here</a>.</p>
+<p>These are the imports we need:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">openai</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">dateutil.relativedelta</span> <span class="kn">import</span> <span class="n">relativedelta</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+</pre></div>
+</div>
+<p>Let’s first configure a few things:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">load_dotenv</span><span class="p">()</span>
 
-<span class="n">Mention</span> <span class="n">the</span> <span class="n">large</span> <span class="n">language</span> <span class="n">model</span> <span class="n">based</span> <span class="n">product</span> <span class="n">mentioned</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">paragraph</span> <span class="n">above</span><span class="p">:</span>
+<span class="c1"># API configuration</span>
+<span class="n">openai</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">)</span>
+
+<span class="c1"># for LangChain</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><em>Output:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">large</span> <span class="n">language</span> <span class="n">model</span> <span class="n">based</span> <span class="n">product</span> <span class="n">mentioned</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">paragraph</span> <span class="n">above</span> <span class="ow">is</span> <span class="n">ChatGPT</span><span class="o">.</span>
+<p>Setup model instance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">llm</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;text-davinci-003&#39;</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Paragraph source: <a class="reference external" href="https://www.nature.com/articles/d41586-023-00288-7">ChatGPT: five priorities for research</a></p>
-</section>
+<p>Setup prompt + question:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;Today is 27 February 2023. I was born exactly 25 years ago. What is the date I was born in MM/DD/YYYY?&quot;</span>
+
+<span class="n">DATE_UNDERSTANDING_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2"># Q: 2015 is coming in 36 hours. What is the date one week from today in MM/DD/YYYY?</span>
+<span class="s2"># If 2015 is coming in 36 hours, then today is 36 hours before.</span>
+<span class="s2">today = datetime(2015, 1, 1) - relativedelta(hours=36)</span>
+<span class="s2"># One week from today,</span>
+<span class="s2">one_week_from_today = today + relativedelta(weeks=1)</span>
+<span class="s2"># The answer formatted with %m/</span><span class="si">%d</span><span class="s2">/%Y is</span>
+<span class="s2">one_week_from_today.strftime(&#39;%m/</span><span class="si">%d</span><span class="s2">/%Y&#39;)</span>
+<span class="s2"># Q: The first day of 2019 is a Tuesday, and today is the first Monday of 2019. What is the date today in MM/DD/YYYY?</span>
+<span class="s2"># If the first day of 2019 is a Tuesday, and today is the first Monday of 2019, then today is 6 days later.</span>
+<span class="s2">today = datetime(2019, 1, 1) + relativedelta(days=6)</span>
+<span class="s2"># The answer formatted with %m/</span><span class="si">%d</span><span class="s2">/%Y is</span>
+<span class="s2">today.strftime(&#39;%m/</span><span class="si">%d</span><span class="s2">/%Y&#39;)</span>
+<span class="s2"># Q: The concert was scheduled to be on 06/01/1943, but was delayed by one day to today. What is the date 10 days ago in MM/DD/YYYY?</span>
+<span class="s2"># If the concert was scheduled to be on 06/01/1943, but was delayed by one day to today, then today is one day later.</span>
+<span class="s2">today = datetime(1943, 6, 1) + relativedelta(days=1)</span>
+<span class="s2"># 10 days ago,</span>
+<span class="s2">ten_days_ago = today - relativedelta(days=10)</span>
+<span class="s2"># The answer formatted with %m/</span><span class="si">%d</span><span class="s2">/%Y is</span>
+<span class="s2">ten_days_ago.strftime(&#39;%m/</span><span class="si">%d</span><span class="s2">/%Y&#39;)</span>
+<span class="s2"># Q: It is 4/19/1969 today. What is the date 24 hours later in MM/DD/YYYY?</span>
+<span class="s2"># It is 4/19/1969 today.</span>
+<span class="s2">today = datetime(1969, 4, 19)</span>
+<span class="s2"># 24 hours later,</span>
+<span class="s2">later = today + relativedelta(hours=24)</span>
+<span class="s2"># The answer formatted with %m/</span><span class="si">%d</span><span class="s2">/%Y is</span>
+<span class="s2">today.strftime(&#39;%m/</span><span class="si">%d</span><span class="s2">/%Y&#39;)</span>
+<span class="s2"># Q: Jane thought today is 3/11/2002, but today is in fact Mar 12, which is 1 day later. What is the date 24 hours later in MM/DD/YYYY?</span>
+<span class="s2"># If Jane thought today is 3/11/2002, but today is in fact Mar 12, then today is 3/1/2002.</span>
+<span class="s2">today = datetime(2002, 3, 12)</span>
+<span class="s2"># 24 hours later,</span>
+<span class="s2">later = today + relativedelta(hours=24)</span>
+<span class="s2"># The answer formatted with %m/</span><span class="si">%d</span><span class="s2">/%Y is</span>
+<span class="s2">later.strftime(&#39;%m/</span><span class="si">%d</span><span class="s2">/%Y&#39;)</span>
+<span class="s2"># Q: Jane was born on the last day of Feburary in 2001. Today is her 16-year-old birthday. What is the date yesterday in MM/DD/YYYY?</span>
+<span class="s2"># If Jane was born on the last day of Feburary in 2001 and today is her 16-year-old birthday, then today is 16 years later.</span>
+<span class="s2">today = datetime(2001, 2, 28) + relativedelta(years=16)</span>
+<span class="s2"># Yesterday,</span>
+<span class="s2">yesterday = today - relativedelta(days=1)</span>
+<span class="s2"># The answer formatted with %m/</span><span class="si">%d</span><span class="s2">/%Y is</span>
+<span class="s2">yesterday.strftime(&#39;%m/</span><span class="si">%d</span><span class="s2">/%Y&#39;)</span>
+<span class="s2"># Q: </span><span class="si">{question}</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">llm_out</span> <span class="o">=</span> <span class="n">llm</span><span class="p">(</span><span class="n">DATE_UNDERSTANDING_PROMPT</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">question</span><span class="o">=</span><span class="n">question</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">llm_out</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">exec</span><span class="p">(</span><span class="n">llm_out</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">born</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will output the following: <code class="docutils literal notranslate"><span class="pre">02/27/1998</span></code></p>
 <hr class="docutils" />
-<section id="question-answering">
-<h3>Question Answering<a class="headerlink" href="#question-answering" title="Link to this heading">#</a></h3>
-<p>One of the best ways to get the model to respond to specific answers is to improve the format of the prompt. As covered before, a prompt could combine instructions, context, input, and output indicators to get improved results.</p>
-<p><em>Prompt:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Answer the question based on the context below. Keep the answer short. Respond &quot;Unsure about answer&quot; if not sure about the answer.
-
-Context: Teplizumab traces its roots to a New Jersey drug company called Ortho Pharmaceutical. There, scientists generated an early version of the antibody, dubbed OKT3. Originally sourced from mice, the molecule was able to bind to the surface of T cells and limit their cell-killing potential. In 1986, it was approved to help prevent organ rejection after kidney transplants, making it the first therapeutic antibody allowed for human use.
-
-Question: What was OKT3 originally sourced from?
-
-Answer:
-</pre></div>
-</div>
-<p><em>Output:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mice</span><span class="o">.</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="text-classification">
-<h3>Text Classification<a class="headerlink" href="#text-classification" title="Link to this heading">#</a></h3>
-<p>As a prompt engineer, you will need to get better at providing better instructions. For harder use cases, just providing instructions won’t be enough. Other elements you can provide are <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">data</span></code> or <code class="docutils literal notranslate"><span class="pre">examples</span></code>.</p>
-<p><em>Prompt:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Classify</span> <span class="n">the</span> <span class="n">text</span> <span class="n">into</span> <span class="n">neutral</span><span class="p">,</span> <span class="n">negative</span> <span class="ow">or</span> <span class="n">positive</span><span class="o">.</span> 
-
-<span class="n">Text</span><span class="p">:</span> <span class="n">I</span> <span class="n">think</span> <span class="n">the</span> <span class="n">food</span> <span class="n">was</span> <span class="n">okay</span><span class="o">.</span> 
-<span class="n">Sentiment</span><span class="p">:</span>
-</pre></div>
-</div>
-<p><em>Output:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Neutral</span>
-</pre></div>
-</div>
-<p>Let’s try specifying output format by providing examples:</p>
-<p><em>Prompt:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Classify</span> <span class="n">the</span> <span class="n">text</span> <span class="n">into</span> <span class="n">neutral</span><span class="p">,</span> <span class="n">negative</span> <span class="ow">or</span> <span class="n">positive</span><span class="o">.</span> 
-
-<span class="n">Text</span><span class="p">:</span> <span class="n">I</span> <span class="n">think</span> <span class="n">the</span> <span class="n">vacation</span> <span class="ow">is</span> <span class="n">okay</span><span class="o">.</span>
-<span class="n">Sentiment</span><span class="p">:</span> <span class="n">neutral</span> 
-
-<span class="n">Text</span><span class="p">:</span> <span class="n">I</span> <span class="n">think</span> <span class="n">the</span> <span class="n">food</span> <span class="n">was</span> <span class="n">okay</span><span class="o">.</span> 
-<span class="n">Sentiment</span><span class="p">:</span>
-</pre></div>
-</div>
-<p><em>Output:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">neutral</span>
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="conversation">
-<h3>Conversation<a class="headerlink" href="#conversation" title="Link to this heading">#</a></h3>
-<p>Instructing the LLM system on behavior and identity is key in conversational systems.</p>
-<p><em>Prompt:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>The following is a conversation with an AI research assistant. The assistant tone is technical and scientific.
-
-Human: Hello, who are you?
-AI: Greeting! I am an AI research assistant. How can I help you today?
-Human: Can you tell me about the creation of black holes?
-AI:
-</pre></div>
-</div>
-<p><em>Output:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Sure! Black holes are regions of spacetime where the gravitational force is so strong that nothing, not even light, can escape from it.
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="code-generation">
-<h3>Code Generation<a class="headerlink" href="#code-generation" title="Link to this heading">#</a></h3>
-<p>LLMs are highly effective at code generation.</p>
-<p><em>Prompt:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span>
-<span class="n">Ask</span> <span class="n">the</span> <span class="n">user</span> <span class="k">for</span> <span class="n">their</span> <span class="n">name</span> <span class="ow">and</span> <span class="n">say</span> <span class="s2">&quot;Hello&quot;</span>
-<span class="o">*/</span>
-</pre></div>
-</div>
-<p><em>Output:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>let name = prompt(&quot;What is your name?&quot;);
-console.log(`Hello, ${name}!`);
-</pre></div>
-</div>
-</section>
-<hr class="docutils" />
-<section id="reasoning">
-<h3>Reasoning<a class="headerlink" href="#reasoning" title="Link to this heading">#</a></h3>
-<p>LLMs perform basic arithmetic and reasoning tasks.</p>
-<p><em>Prompt:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>What is 9,000 * 9,000?
-</pre></div>
-</div>
-<p><em>Output:</em></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">81</span><span class="p">,</span><span class="mi">000</span><span class="p">,</span><span class="mi">000</span>
-</pre></div>
-</div>
-<hr class="docutils" />
-</section>
 </section>
 </section>
 
@@ -740,7 +689,7 @@ console.log(`Hello, ${name}!`);
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="basic_prompting.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
@@ -749,11 +698,11 @@ console.log(`Hello, ${name}!`);
       </div>
     </a>
     <a class="right-next"
-       href="prompts-applications.html"
+       href="prompts-adversarial.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Prompt Applications</p>
+        <p class="prev-next-title">Adversarial Prompting</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -773,23 +722,8 @@ console.log(`Hello, ${name}!`);
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-prompts">Basic Prompts</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-prompts">Standard Prompts</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-elements">Prompt Elements</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#designing-prompts">Designing Prompts</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#llm-settings">LLM Settings</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-prompts-usage">Basic Prompts Usage</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-summarization">Text Summarization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information-extraction">Information Extraction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-answering">Question Answering</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-classification">Text Classification</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conversation">Conversation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-generation">Code Generation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reasoning">Reasoning</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-data">Generating Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pal-program-aided-language-models">PAL (Program-Aided Language Models)</a></li>
 </ul>
   </nav></div>
 

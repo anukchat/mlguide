@@ -20,4 +20,29 @@
 :margin: 3
 :text-align: center
 :::
+
+::: {card} 3️⃣ Prompts Applications
+:link: ../prompt-engineering/prompts-applications.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+:::
+
+::: {card} 4️⃣ Adversarial Prompting
+:link: ../prompt-engineering/prompts-adversarial.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+:::
+
+::: {card} 5️⃣ Reliability of Prompting
+:link: ../prompt-engineering/prompts-reliability.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+:::
+
 ::::
