@@ -79,7 +79,7 @@
     <link rel="icon" href="../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Transformers from scratch" href="concepts/transformers/01_transformers_from_scratch.html" />
+    <link rel="next" title="Prompt Engineering" href="prompt-engineering/intro.html" />
     <link rel="prev" title="Appendix" href="../ai/nlp/concepts/011_appendix.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -280,7 +280,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Generative AI</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="concepts/transformers/01_transformers_from_scratch.html">Transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prompt-engineering/intro.html">Prompt Engineering</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="langchain/intro.html">Introduction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="langchain/01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
@@ -289,6 +289,8 @@
 
 </ul>
 </details></li>
+<li class="toctree-l2"><a class="reference internal" href="RAG/intro.html">RAG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agents/intro.html">Agents</a></li>
 </ul>
 </details></li>
 </ul>
@@ -427,7 +429,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -443,6 +447,19 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timeline">Timeline</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-led-to-rapid-evolution-of-generative-ai">What led to rapid evolution of generative AI ?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-generative-ai-works">How Generative AI works</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -454,6 +471,59 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="generative-ai">
 <h1>Generative AI<a class="headerlink" href="#generative-ai" title="Link to this heading">#</a></h1>
+<p>Generative AI is artificial intelligence capable of <mark>generating text, images and other types of content </mark>.</p>
+<p>What makes it a fantastic technology is that it democratizes AI, <mark>anyone can use it with as little as a text prompt. A sentence written in a natural language.</mark></p>
+<p>There’s no need for you to learn a language like Java or SQL to accomplish something worthwhile, <mark>all you need is to use your language, state what you want and out comes a suggestion from an AI model</mark>.</p>
+<p>The applications and impact for this is huge, you write or understand reports, write applications and much more, all in seconds.</p>
+<p><img alt="Generative AI" src="../../_images/genai-intro.png" /></p>
+<section id="timeline">
+<h2>Timeline<a class="headerlink" href="#timeline" title="Link to this heading">#</a></h2>
+<p><img alt="AI timeline" src="../../_images/ai-timeline.png" />
+Source: <a class="reference external" href="https://www.brilworks.com/blog/evolution-of-generative-ai/">https://www.brilworks.com/blog/evolution-of-generative-ai/</a></p>
+<section id="what-led-to-rapid-evolution-of-generative-ai">
+<h3>What led to rapid evolution of generative AI ?<a class="headerlink" href="#what-led-to-rapid-evolution-of-generative-ai" title="Link to this heading">#</a></h3>
+<p>👉 <strong><mark>Advances in computing power</mark></strong>, including the development of GPUs (Graphics Processing Units) and specialized hardware like TPUs (Tensor Processing Units), have enabled the training of large-scale generative models more efficiently.</p>
+<p>👉 The proliferation of the internet and digital data has provided <strong><mark>vast amounts of training data for AI systems</mark></strong>. This allows generative models to learn and produce more accurate outputs.</p>
+<p>👉 <strong><mark>Continuous improvements in generative AI algorithms</mark></strong> and training techniques have played a significant role. Techniques such as attention mechanisms, self-attention, and reinforcement learning have contributed to the effectiveness of generative models.</p>
+<p>Advances in natural language processing research have been crucial for text generation tasks.</p>
+</section>
+</section>
+<section id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Link to this heading">#</a></h2>
+<div class="sd-container-fluid sd-sphinx-override sd-m-0 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-3 sd-row-cols-lg-4 sd-g-0 sd-g-xs-0 sd-g-sm-0 sd-g-md-0 sd-g-lg-0 docutils">
+<div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-md sd-card-hover sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+1️⃣ Prompt Engineering</div>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="../genai/prompt-engineering/intro.html"><span>../genai/prompt-engineering/intro.html</span></a></div>
+<div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-md sd-card-hover sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+2️⃣ Langchain</div>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="../genai/langchain/intro.html"><span>../genai/langchain/intro.html</span></a></div>
+<div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-md sd-card-hover sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+3️⃣ RAG</div>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="../genai/RAG/intro.html"><span>../genai/RAG/intro.html</span></a></div>
+<div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-md sd-card-hover sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+4️⃣ Agents</div>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="../genai/agents/intro.html"><span>../genai/agents/intro.html</span></a></div>
+</div>
+</div>
+</section>
+<section id="how-generative-ai-works">
+<h2>How Generative AI works<a class="headerlink" href="#how-generative-ai-works" title="Link to this heading">#</a></h2>
+<p>Take a look into an awesome explaination from the blog <strong>Generative AI exists because of the transformer</strong></p>
+<iframe src="https://ig.ft.com/generative-ai/" width="100%" height="600px" frameborder="0" allowfullscreen/>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -498,11 +568,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="concepts/transformers/01_transformers_from_scratch.html"
+       href="prompt-engineering/intro.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Transformers from scratch</p>
+        <p class="prev-next-title">Prompt Engineering</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -512,6 +582,26 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timeline">Timeline</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-led-to-rapid-evolution-of-generative-ai">What led to rapid evolution of generative AI ?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modules">Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-generative-ai-works">How Generative AI works</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

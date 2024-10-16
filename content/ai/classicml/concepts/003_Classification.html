@@ -282,7 +282,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../genai/introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../genai/concepts/transformers/01_transformers_from_scratch.html">Transformers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../genai/prompt-engineering/intro.html">Prompt Engineering</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../genai/langchain/langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/intro.html">Introduction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
@@ -291,6 +291,8 @@
 
 </ul>
 </details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../genai/RAG/intro.html">RAG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../genai/agents/intro.html">Agents</a></li>
 </ul>
 </details></li>
 </ul>
@@ -696,8 +698,8 @@ $<span class="math notranslate nohighlight">\(p=\frac{1}{1+e^{-h_{\theta}\left(x
 <section id="gradient-of-sigmoid-function">
 <h3>Gradient of sigmoid function<a class="headerlink" href="#gradient-of-sigmoid-function" title="Link to this heading">#</a></h3>
 <p>$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0d65a514-0f02-41f1-b0ec-e835d3a77b89">
-<span class="eqno">(3)<a class="headerlink" href="#equation-0d65a514-0f02-41f1-b0ec-e835d3a77b89" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-3f9e8fcc-a965-478d-a426-26411299abd4">
+<span class="eqno">(3)<a class="headerlink" href="#equation-3f9e8fcc-a965-478d-a426-26411299abd4" title="Permalink to this equation">#</a></span>\[\begin{align}
 \dfrac{d}{dx} \sigma(x) &amp;= \dfrac{d}{dx} \left[ \dfrac{1}{1 + e^{-x}} \right] \\
 &amp;= \dfrac{d}{dx} \left( 1 + \mathrm{e}^{-x} \right)^{-1} \\
 &amp;= -(1 + e^{-x})^{-2}(-e^{-x}) \\
@@ -758,8 +760,8 @@ $<span class="math notranslate nohighlight">\(p=\frac{1}{1+e^{-h_{\theta}\left(x
 </ol>
 <p>Our loss function will be:
 $$</p>
-<div class="amsmath math notranslate nohighlight" id="equation-97887e28-b14c-41c0-b79a-d5cbb6fec978">
-<span class="eqno">(4)<a class="headerlink" href="#equation-97887e28-b14c-41c0-b79a-d5cbb6fec978" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b894376d-68e8-408a-80ac-0c8017508d15">
+<span class="eqno">(4)<a class="headerlink" href="#equation-b894376d-68e8-408a-80ac-0c8017508d15" title="Permalink to this equation">#</a></span>\[\begin{equation}
     Cost(h_\theta(x), y)=
     \begin{cases}
         -log(h_\theta(x)), &amp; \text{if}\ y=0 \\
@@ -817,8 +819,8 @@ $$h_\theta(x) = \frac{1}{1 + e^{-x}}\]</div>
 <img alt="../../../../_images/5bfea8c70273ea5af8ce300eec7e7c0b14fa1846b69c165284be14846bfd25e9.png" src="../../../../_images/5bfea8c70273ea5af8ce300eec7e7c0b14fa1846b69c165284be14846bfd25e9.png" />
 </div>
 </div>
-<div class="amsmath math notranslate nohighlight" id="equation-8edd036c-e3bd-4c77-87dd-3d0eb45f17f4">
-<span class="eqno">(5)<a class="headerlink" href="#equation-8edd036c-e3bd-4c77-87dd-3d0eb45f17f4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9f50c501-f4d9-46ec-a8ad-7a70cbef15e4">
+<span class="eqno">(5)<a class="headerlink" href="#equation-9f50c501-f4d9-46ec-a8ad-7a70cbef15e4" title="Permalink to this equation">#</a></span>\[\begin{equation}
   X=
   \begin{cases}
     0, &amp; \text{if}\ a=1 \\
