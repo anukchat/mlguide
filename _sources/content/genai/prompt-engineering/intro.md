@@ -14,7 +14,7 @@
 :::
 
 ::: {card} 2️⃣ Advanced Prompting
-:link: ../prompt-engineering/advance_prompting.html
+:link: ../prompt-engineering/advance_prompts.html
 :link-type: url
 :shadow: md
 :margin: 3
