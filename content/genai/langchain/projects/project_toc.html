@@ -16,17 +16,19 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -37,10 +39,11 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=b40f3148" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
@@ -79,8 +82,11 @@
     <link rel="icon" href="../../../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="RAGs" href="../../RAG/intro.html" />
+    <link rel="prev" title="LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳" href="../02_LangChain_Use_Cases.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -96,19 +102,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../../../search.html"
       method="get">
@@ -116,7 +111,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -124,8 +118,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -141,9 +135,8 @@
       
       
       
-        
-      
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -173,25 +166,21 @@
     
     
     <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt=" - Home"/>
-    <script>document.write(`<img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt=" - Home"/>`);</script>
+    <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark pst-js-only" alt=" - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Guide</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../python/1_installation.html">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
@@ -279,7 +268,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/011_appendix.html">Appendix</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../introduction.html">Generative AI</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../prompt-engineering/intro.html">Prompt Engineering</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../prompt-engineering/basic_prompting.html">Basic Prompting</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../prompt-engineering/advance_prompts.html">Advanced Prompting</a></li>
@@ -291,12 +280,12 @@
 
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../intro.html">Introduction</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../intro.html">Langchain</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
 
 <li class="toctree-l3"><a class="reference internal" href="../02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
 
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Projects</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../RAG/intro.html">RAG</a></li>
@@ -421,24 +410,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 
 </div></div>
       
@@ -466,18 +447,28 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="langchain-projects-gallery">
 <h1>Langchain projects gallery<a class="headerlink" href="#langchain-projects-gallery" title="Link to this heading">#</a></h1>
-<!-- 🖼️ **[Agents](/content/tools/langchain/projects/agents/Agents.ipynb)** -->
-<p>🖼️ <strong><a class="reference internal" href="#/content/tools/langchain/projects/agents/Agents%20+%20ZapierToolkit.ipynb"><span class="xref myst">Agents with ZapierToolkit</span></a></strong></p>
-<p>🖼️ <strong><a class="reference internal" href="#/content/tools/langchain/projects/bots/Twitter_Reply_Bot/Twitter%20Reply%20Bot%20Notebook.ipynb"><span class="xref myst">Twitter reply bot</span></a></strong></p>
-<p>🖼️ <strong><a class="reference internal" href="#/content/tools/langchain/projects/data_generation/Working%20With%20Call%20or%20Video%20Transcripts.ipynb"><span class="xref myst">Extraction from call or video transcripts</span></a></strong></p>
-<p>🖼️ <strong><a class="reference internal" href="#/content/tools/langchain/projects/data_generation/Using%20LLMs%20To%20Summarize%20Personal%20Research.ipynb"><span class="xref myst">Summarize personal research</span></a></strong></p>
-<p>🖼️ <strong><a class="reference internal" href="#/content/tools/langchain/projects/data_generation/Topic%20Modeling%20With%20Language%20Models.ipynb"><span class="xref myst">Topic modelling</span></a></strong></p>
-<p>🖼️ <strong><a class="reference internal" href="#/content/tools/langchain/projects/data_generation/Personalized%20Email%20Generation.ipynb"><span class="xref myst">Personalized email generation</span></a></strong></p>
-<p>🖼️ <strong><a class="reference internal" href="#/content/tools/langchain/projects/data_generation/Instructing%20LLMs%20To%20Match%20Tone.ipynb"><span class="xref myst">Tone matching</span></a></strong></p>
-<p>🖼️ <strong><a class="reference internal" href="#/content/tools/langchain/projects/data_generation/Expert%20Structured%20Output%20(Using%20Function%20Calling).ipynb"><span class="xref myst">Extracting structured datasets using function calling</span></a></strong></p>
-<p>🖼️ <strong><a class="reference internal" href="#/content/tools/langchain/projects/data_generation/Expert%20Structured%20Output%20(Using%20Kor).ipynb"><span class="xref myst">Extracting structured datasets using Kor</span></a></strong></p>
-<p>🖼️ <strong><a class="reference internal" href="#/content/tools/langchain/projects/data_generation/Custom%20Files%20Question%20&amp;%20Answer.ipynb"><span class="xref myst">Custom file Q &amp; A</span></a></strong></p>
-<p>🖼️ <strong><a class="reference internal" href="#/content/tools/langchain/projects/data_generation/Ask%20A%20Book%20Questions.ipynb"><span class="xref myst">Ask books some questions</span></a></strong></p>
+<div class="sd-container-fluid sd-sphinx-override sd-m-0 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-2 sd-row-cols-md-3 sd-row-cols-lg-4 sd-g-0 sd-g-xs-0 sd-g-sm-0 sd-g-md-0 sd-g-lg-0 docutils">
+<div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-md sd-card-hover sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+1️⃣ Summarization</div>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="../genai/langchain/projects/1_Summarizations.html"><span>../genai/langchain/projects/1_Summarizations.html</span></a></div>
+<div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-md sd-card-hover sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+2️⃣ Question Answering</div>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="../genai/langchain/projects/2_Question_Answering.html"><span>../genai/langchain/projects/2_Question_Answering.html</span></a></div>
+<div class="sd-card sd-sphinx-override sd-m-3 sd-shadow-md sd-card-hover sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+3️⃣ Text Generation</div>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference external" href="../genai/langchain/projects/3_Text_Generation.html"><span>../genai/langchain/projects/3_Text_Generation.html</span></a></div>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -510,6 +501,24 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../02_LangChain_Use_Cases.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../RAG/intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">RAGs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -563,8 +572,8 @@ By Anukool Chaturvedi
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

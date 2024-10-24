@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../../../../../" >
+<html lang="en" data-content_root="../../../../" >
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>5 Levels Of Summarization: Novice to Expert</title>
+    <title>Summarizations</title>
   
   
   
@@ -16,44 +16,47 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=b40f3148" />
   
-  <link href="../../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/intro.css?v=b40f3148" />
-  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
-    <script src="../../../../../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../../../../../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../../../../../_static/copybutton.js?v=f281be69"></script>
-    <script src="../../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GJG3T4ZRZH"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -62,7 +65,7 @@
                 gtag('config', 'G-GJG3T4ZRZH');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -71,16 +74,17 @@
                 gtag('config', 'G-GJG3T4ZRZH');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/genai/langchain/projects/data_generation/5 Levels Of Summarization - Novice To Expert';</script>
-    <script src="../../../../../_static/subscription_overlay.js?v=2e74803e"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/genai/langchain/projects/1_Summarizations';</script>
+    <script src="../../../../_static/subscription_overlay.js?v=2e74803e"></script>
     <script src="https://apis.google.com/js/platform.js"></script>
-    <script src="../../../../../_static/landing.js?v=93f722cb"></script>
-    <link rel="canonical" href="https://mlguide.in/content/genai/langchain/projects/data_generation/5 Levels Of Summarization - Novice To Expert.html" />
-    <link rel="icon" href="../../../../../_static/logo.png"/>
-    <link rel="index" title="Index" href="../../../../../genindex.html" />
-    <link rel="search" title="Search" href="../../../../../search.html" />
+    <script src="../../../../_static/landing.js?v=93f722cb"></script>
+    <link rel="canonical" href="https://mlguide.in/content/genai/langchain/projects/1_Summarizations.html" />
+    <link rel="icon" href="../../../../_static/logo.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -96,27 +100,15 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
-      action="../../../../../search.html"
+      action="../../../../search.html"
       method="get">
   <i class="fa-solid fa-magnifying-glass"></i>
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -124,8 +116,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -143,7 +135,8 @@
       
         
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -161,7 +154,7 @@
     
   
 
-<a class="navbar-brand logo" href="../../../../../intro.html">
+<a class="navbar-brand logo" href="../../../../intro.html">
   
   
   
@@ -172,148 +165,144 @@
       
     
     
-    <img src="../../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt=" - Home"/>
-    <script>document.write(`<img src="../../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt=" - Home"/>`);</script>
+    <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt=" - Home"/>
+    <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark pst-js-only" alt=" - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Guide</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../../python/1_installation.html">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../python/3_functions_and_modules.html">Functions &amp; Modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../python/4_Object_Oriented.html">Object Oriented Programming</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../python/5_Exceptions_Handling.html">Exceptions Handling</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../python/6_Handling_Files.html">Handling Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../python/7_Datetime_Operations.html">Datetime Operations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../python/8_advanced.html">Advanced Concepts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../python/conceptual_topics.html">Interpreter vs Compiler</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../python/exercises.html">Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/3_functions_and_modules.html">Functions &amp; Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/4_Object_Oriented.html">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/8_advanced.html">Advanced Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/conceptual_topics.html">Interpreter vs Compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/exercises.html">Exercises</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../statistics/statistics-101.html">Statistics</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../../mathematics/linear-algebra_vectors.html">Vectors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../mathematics/linear-algebra_matrices.html">Matrices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistics/statistics-101.html">Statistics</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
 </ul>
 </details></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../ai/Introduction_to_ml.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/01_Introduction.html">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/000_Data_Exploration.html">Exploratory Data Analysis</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../ai/Introduction_to_ml.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/000_Data_Exploration.html">Exploratory Data Analysis</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/001_Data_Preparation.html">Data Preparation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/002_Regression.html">Regression</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/003_Classification.html">Classfication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/001_Data_Preparation.html">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/003_Classification.html">Classfication</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/004_Clustering.html">Clustering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/005_Evaluation.html">Evaluation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/006_Advanced.html">K-Fold Cross Validation</a></li>
-
-
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/classicml/concepts/007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../ai/neural/neural_toc.html">Neural Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/neural/concepts/001_Introduction.html">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/neural/concepts/002_Backpropogation.html">Backpropogation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/neural/concepts/003_Activations.html">Activations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/neural/concepts/004_Optimization.html">Optimizations</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../../ai/neural/concepts/pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../../ai/neural/concepts/pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../ai/neural/concepts/pytorch/01_pytorch_workflow.html">Workflow</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../ai/neural/concepts/pytorch/02_pytorch_classification.html">Classification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../ai/neural/concepts/pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../ai/neural/concepts/pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../ai/neural/concepts/pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
-</ul>
-</details></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../ai/nlp/nlp_intro.html">Natural Language Processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/nlp/concepts/001_traditional_nlp.html">Word Vectors &amp; Dependency Parsing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/nlp/concepts/002_embeddings.html">Embeddings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/nlp/concepts/003_ngram_cnn.html">N Gram using CNN</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/nlp/concepts/004_word2vec.html">Word2Vec</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/nlp/concepts/005_language_model_basic.html">Neural Language Model</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/nlp/concepts/006_language_model_rnn.html">Recurrent Neural Network (RNN)</a></li>
-
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/nlp/concepts/007_encoder_decoder.html">Encoder Decoder</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/nlp/concepts/008_attention.html">Attention</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/nlp/concepts/009_transformer.html">Transformer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/nlp/concepts/010_llm_tasks.html">Language Modelling Tasks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../ai/nlp/concepts/011_appendix.html">Appendix</a></li>
-</ul>
-</details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../../introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../prompt-engineering/intro.html">Prompt Engineering</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../prompt-engineering/basic_prompting.html">Basic Prompting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../prompt-engineering/advance_prompts.html">Advanced Prompting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../prompt-engineering/prompts-applications.html">Prompts Applications</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../prompt-engineering/prompts-adversarial.html">Prompts Adversarial</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../prompt-engineering/prompts-reliability.html">Reliability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/005_Evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/006_Advanced.html">K-Fold Cross Validation</a></li>
 
 
-
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../langchain_toc.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../intro.html">Introduction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../ai/neural/neural_toc.html">Neural Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/neural/concepts/001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/neural/concepts/002_Backpropogation.html">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/neural/concepts/003_Activations.html">Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/neural/concepts/004_Optimization.html">Optimizations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../ai/neural/concepts/pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../ai/neural/concepts/pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ai/neural/concepts/pytorch/01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ai/neural/concepts/pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ai/neural/concepts/pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ai/neural/concepts/pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ai/neural/concepts/pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../ai/nlp/nlp_intro.html">Natural Language Processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/001_traditional_nlp.html">Word Vectors &amp; Dependency Parsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/002_embeddings.html">Embeddings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/003_ngram_cnn.html">N Gram using CNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/004_word2vec.html">Word2Vec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/005_language_model_basic.html">Neural Language Model</a></li>
 
-<li class="toctree-l3"><a class="reference internal" href="../../02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/006_language_model_rnn.html">Recurrent Neural Network (RNN)</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/007_encoder_decoder.html">Encoder Decoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/008_attention.html">Attention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/009_transformer.html">Transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/010_llm_tasks.html">Language Modelling Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/011_appendix.html">Appendix</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../prompt-engineering/intro.html">Prompt Engineering</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../prompt-engineering/basic_prompting.html">Basic Prompting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prompt-engineering/advance_prompts.html">Advanced Prompting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prompt-engineering/prompts-applications.html">Prompts Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prompt-engineering/prompts-adversarial.html">Prompts Adversarial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../prompt-engineering/prompts-reliability.html">Reliability</a></li>
+
+
 
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../RAG/intro.html">RAG</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../agents/intro.html">Agents</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../intro.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="project_toc.html">Projects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../RAG/intro.html">RAG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../agents/intro.html">Agents</a></li>
 </ul>
 </details></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../../resources/blogs/blogs_toc.html">Blogs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../resources/papers/papers_toc.html">Research papers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../resources/books/books_toc.html">E-Books</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../resources/courses/courses_toc.html">Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/blogs/blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/papers/papers_toc.html">Research papers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/books/books_toc.html">E-Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources/courses/courses_toc.html">Courses</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">About</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../../../../intro_me.html">About me</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro_me.html">About me</a></li>
 </ul>
 
     </div>
@@ -368,7 +357,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/anukchat/mlguide/main?urlpath=lab/tree/content/genai/langchain/projects/data_generation/5 Levels Of Summarization - Novice To Expert.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/anukchat/mlguide/main?urlpath=lab/tree/content/genai/langchain/projects/1_Summarizations.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Binder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -377,7 +366,7 @@
 
 <span class="btn__icon-container">
   
-    <img alt="Binder logo" src="../../../../../_static/images/logo_binder.svg">
+    <img alt="Binder logo" src="../../../../_static/images/logo_binder.svg">
   </span>
 <span class="btn__text-container">Binder</span>
 </a>
@@ -386,7 +375,7 @@
       
       
       
-      <li><a href="https://colab.research.google.com/github/anukchat/mlguide/blob/main/content/genai/langchain/projects/data_generation/5 Levels Of Summarization - Novice To Expert.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/anukchat/mlguide/blob/main/content/genai/langchain/projects/1_Summarizations.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Colab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -395,7 +384,7 @@
 
 <span class="btn__icon-container">
   
-    <img alt="Colab logo" src="../../../../../_static/images/logo_colab.png">
+    <img alt="Colab logo" src="../../../../_static/images/logo_colab.png">
   </span>
 <span class="btn__text-container">Colab</span>
 </a>
@@ -435,7 +424,7 @@
       
       
       
-      <li><a href="../../../../../_sources/content/genai/langchain/projects/data_generation/5 Levels Of Summarization - Novice To Expert.ipynb" target="_blank"
+      <li><a href="../../../../_sources/content/genai/langchain/projects/1_Summarizations.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -488,24 +477,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -519,7 +500,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>5 Levels Of Summarization: Novice to Expert</h1>
+    <h1>Summarizations</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -529,11 +510,20 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#level-1-basic-prompt-summarize-a-couple-sentences">Level 1: Basic Prompt - Summarize a couple sentences</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#level-2-prompt-templates-summarize-a-couple-paragraphs">Level 2: Prompt Templates - Summarize a couple paragraphs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#level-3-map-reduce-summarize-a-couple-pages-multiple-pages">Level 3: Map Reduce - Summarize a couple pages multiple pages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#level-4-best-representation-vectors-summarize-an-entire-book">Level 4: Best Representation Vectors - Summarize an entire book</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#level-5-agents-summarize-an-unknown-amount-of-text">Level 5: Agents - Summarize an unknown amount of text</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#levels-of-summarization-novice-to-expert">5 Levels Of Summarization: Novice to Expert</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#level-1-basic-prompt-summarize-a-couple-sentences">Level 1: Basic Prompt - Summarize a couple sentences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#level-2-prompt-templates-summarize-a-couple-paragraphs">Level 2: Prompt Templates - Summarize a couple paragraphs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#level-3-map-reduce-summarize-a-couple-pages-multiple-pages">Level 3: Map Reduce - Summarize a couple pages multiple pages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#level-4-best-representation-vectors-summarize-an-entire-book">Level 4: Best Representation Vectors - Summarize an entire book</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#level-5-agents-summarize-an-unknown-amount-of-text">Level 5: Agents - Summarize an unknown amount of text</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-llms-to-summarize-personal-research">Using LLMs To Summarize Personal Research</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-data-from-twitter">Pulling Data From Twitter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-data-from-websites">Pulling Data From Websites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-data-from-youtube">Pulling Data From YouTube</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -545,8 +535,15 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="levels-of-summarization-novice-to-expert">
-<h1>5 Levels Of Summarization: Novice to Expert<a class="headerlink" href="#levels-of-summarization-novice-to-expert" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="summarizations">
+<h1>Summarizations<a class="headerlink" href="#summarizations" title="Link to this heading">#</a></h1>
+<p>LLM-based summarization involves using LLMs to generate concise versions of longer texts while retaining key information and context. The model analyzes the input, identifies important points, and rephrases the content into a shorter summary.</p>
+<p>There are two main types:</p>
+<p><strong>Extractive Summarization:</strong> Selects and extracts key sentences directly from the source.</p>
+<p><strong>Abstractive Summarization</strong>: Rewrites the content in a new way, generating novel sentences that capture the main ideas.
+LLM-based summarization is useful for simplifying complex documents, news articles, or reports.</p>
+<section id="levels-of-summarization-novice-to-expert">
+<h2>5 Levels Of Summarization: Novice to Expert<a class="headerlink" href="#levels-of-summarization-novice-to-expert" title="Link to this heading">#</a></h2>
 <p>Summarization is a fundamental building block of many LLM tasks. You’ll frequently run into use cases where you would like to distill a large body of text into a succinct set of points.</p>
 <p>Depending on the length of the text you’d like to summarize, you have different summarization methods to choose from.</p>
 <p>We’re going to run through 5 methods for summarization that start with Novice and end up expert. These aren’t the only options, feel free to make up your own. If you find another one you like please share it with the community.</p>
@@ -583,7 +580,7 @@ document.write(`
 </div>
 </div>
 <section id="level-1-basic-prompt-summarize-a-couple-sentences">
-<h2>Level 1: Basic Prompt - Summarize a couple sentences<a class="headerlink" href="#level-1-basic-prompt-summarize-a-couple-sentences" title="Link to this heading">#</a></h2>
+<h3>Level 1: Basic Prompt - Summarize a couple sentences<a class="headerlink" href="#level-1-basic-prompt-summarize-a-couple-sentences" title="Link to this heading">#</a></h3>
 <p>If you just have a few sentences you want to one-off summarize you can use a simple prompt and copy and paste your text.</p>
 <p>This method isn’t scalable and only practical for a few use cases…the perfect level #1!</p>
 <div class="cell docutils container">
@@ -692,7 +689,7 @@ document.write(`
 <p>Nice! That’s much better, but let’s look at something we can automate a bit more</p>
 </section>
 <section id="level-2-prompt-templates-summarize-a-couple-paragraphs">
-<h2>Level 2: Prompt Templates - Summarize a couple paragraphs<a class="headerlink" href="#level-2-prompt-templates-summarize-a-couple-paragraphs" title="Link to this heading">#</a></h2>
+<h3>Level 2: Prompt Templates - Summarize a couple paragraphs<a class="headerlink" href="#level-2-prompt-templates-summarize-a-couple-paragraphs" title="Link to this heading">#</a></h3>
 <p>Prompt templates are a great way to dynamically place text within your prompts. They are like <a class="reference external" href="https://realpython.com/python-f-strings/">python f-strings</a> but specialized for working with language models.</p>
 <p>We’re going to look at 2 short Paul Graham essays</p>
 <div class="cell docutils container">
@@ -785,10 +782,9 @@ Summary: This text explores the idea that feeling like a &quot;noob&quot; is act
 </div>
 </section>
 <section id="level-3-map-reduce-summarize-a-couple-pages-multiple-pages">
-<h2>Level 3: Map Reduce - Summarize a couple pages multiple pages<a class="headerlink" href="#level-3-map-reduce-summarize-a-couple-pages-multiple-pages" title="Link to this heading">#</a></h2>
+<h3>Level 3: Map Reduce - Summarize a couple pages multiple pages<a class="headerlink" href="#level-3-map-reduce-summarize-a-couple-pages-multiple-pages" title="Link to this heading">#</a></h3>
 <p>If you have multiple pages you’d like to summarize, you’ll likely run into a token limit. Token limits won’t always be a problem, but it is good to know how to handle them if you run into the issue.</p>
 <p>The chain type “Map Reduce” is a method that helps with this. You first generate a summary of smaller chunks (that fit within the token limit) and then you get a summary of the summaries.\</p>
-<p>Check out <a class="reference external" href="https://www.youtube.com/watch?v=f9_BWhCI4Zo">this video</a> for more information on how chain types work</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain</span> <span class="kn">import</span> <span class="n">OpenAI</span>
@@ -948,7 +944,7 @@ Summary: This text explores the idea that feeling like a &quot;noob&quot; is act
 </div>
 </section>
 <section id="level-4-best-representation-vectors-summarize-an-entire-book">
-<h2>Level 4: Best Representation Vectors - Summarize an entire book<a class="headerlink" href="#level-4-best-representation-vectors-summarize-an-entire-book" title="Link to this heading">#</a></h2>
+<h3>Level 4: Best Representation Vectors - Summarize an entire book<a class="headerlink" href="#level-4-best-representation-vectors-summarize-an-entire-book" title="Link to this heading">#</a></h3>
 <p>In the above method we pass the entire document (all 9.5K tokens of it) to the LLM. But what if you have more tokens than that?</p>
 <p>What if you had a book you wanted to summarize? Let’s load one up, we’re going to load <a class="reference external" href="https://www.amazon.com/Into-Thin-Air-Personal-Disaster/dp/0385494785">Into Thin Air</a> about the 1996 Everest Disaster</p>
 <div class="cell docutils container">
@@ -989,7 +985,6 @@ Summary: This text explores the idea that feeling like a &quot;noob&quot; is act
 </div>
 <p>Wow, that’s over 100K tokens, even <a class="reference external" href="https://help.openai.com/en/articles/7127966-what-is-the-difference-between-the-gpt-4-models">GPT 32K</a> wouldn’t be able to handle that in one go. At <a class="reference external" href="https://help.openai.com/en/articles/7127956-how-much-does-gpt-4-cost">0.03 per 1K prompt tokens</a>, this would cost us $4.17 just for the prompt alone.</p>
 <p>So how do we do this without going through all the tokens? Pick random chunks? Pick equally spaced chunks?</p>
-<p>I kicked off a <a class="reference external" href="https://twitter.com/GregKamradt/status/1653060004226924544">twitter thread</a> with a proposed solution to see if I was off base. I’m calling it the Best Representation Vectors method (not sure if a name already exists for it).</p>
 <p><strong>Goal:</strong> Chunk your book then get embeddings of the chunks. Pick a subset of chunks which represent a wholistic but diverse view of the book. Or another way, is there a way to pick the top 10 passages that describe the book the best?</p>
 <p>Once we have our chunks that represent the book then we can summarize those chunks and hopefully get a pretty good summary.</p>
 <p>Keep in mind there are tools that would likely do this for you, and with token limits increasing this won’t be a problem for long. But if you want to do it from scratch this might help.</p>
@@ -1290,7 +1285,7 @@ Summary: This text explores the idea that feeling like a &quot;noob&quot; is act
 <p>Wow that was a long process, but you get the gist, hopefully we’ll see some library abstractions in the coming months that do this automatically for us! Let me know what you think on <a class="reference external" href="https://twitter.com/GregKamradt">Twitter</a></p>
 </section>
 <section id="level-5-agents-summarize-an-unknown-amount-of-text">
-<h2>Level 5: Agents - Summarize an unknown amount of text<a class="headerlink" href="#level-5-agents-summarize-an-unknown-amount-of-text" title="Link to this heading">#</a></h2>
+<h3>Level 5: Agents - Summarize an unknown amount of text<a class="headerlink" href="#level-5-agents-summarize-an-unknown-amount-of-text" title="Link to this heading">#</a></h3>
 <p>What if you have an unknown amount of text you need to summarize? This may be a verticalize use case (like law or medical) where more research is required as you uncover the first pieces of information.</p>
 <p>We’re going to use agents below, this is still a very actively developed area and should be handled with care. Future agents will be able to handle a lot more complicated tasks.</p>
 <div class="cell docutils container">
@@ -1351,7 +1346,432 @@ Summary: This text explores the idea that feeling like a &quot;noob&quot; is act
 </div>
 </div>
 </div>
-<p>Awesome, good luck summarizing!</p>
+</section>
+</section>
+<section id="using-llms-to-summarize-personal-research">
+<h2>Using LLMs To Summarize Personal Research<a class="headerlink" href="#using-llms-to-summarize-personal-research" title="Link to this heading">#</a></h2>
+<p>Our goal is to have LLM aid us in generating interview quetions for someone. I find that I’m constantly trying to ramp up to a person’s background and story when preparing to meet them.</p>
+<p>There is a ton of awesome resources about a person online we can use</p>
+<ul class="simple">
+<li><p>Twitter Profiles</p></li>
+<li><p>Websites</p></li>
+<li><p>Other Interviews (YouTube or Text)</p></li>
+</ul>
+<p>Let’s bring all these together by first pulling the information and then generating questions or bullet points we can use as preparation.</p>
+<p>First let’s import our packages! We’ll be using LangChain to help us interact with OpenAI</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unzip data folder</span>
+
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s1">&#39;../../data.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+    <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># LLMs</span>
+<span class="kn">from</span> <span class="nn">langchain</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+<span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
+<span class="kn">from</span> <span class="nn">langchain.chains.summarize</span> <span class="kn">import</span> <span class="n">load_summarize_chain</span>
+<span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+
+<span class="c1"># Twitter</span>
+<span class="kn">import</span> <span class="nn">tweepy</span>
+
+<span class="c1"># Scraping</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">from</span> <span class="nn">markdownify</span> <span class="kn">import</span> <span class="n">markdownify</span> <span class="k">as</span> <span class="n">md</span>
+
+<span class="c1"># YouTube</span>
+<span class="kn">from</span> <span class="nn">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">YoutubeLoader</span>
+<span class="c1"># !pip install youtube-transcript-api</span>
+
+<span class="c1"># Environment Variables</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>You’ll need a few API keys to complete the script below. It’s modular so if you don’t want to pull from Twitter feel free to leave those blank</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">TWITTER_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;TWITTER_API_KEY&#39;</span><span class="p">,</span> <span class="s1">&#39;YourAPIKeyIfNotSet&#39;</span><span class="p">)</span>
+<span class="n">TWITTER_API_SECRET</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;TWITTER_API_SECRET&#39;</span><span class="p">,</span> <span class="s1">&#39;YourAPIKeyIfNotSet&#39;</span><span class="p">)</span>
+<span class="n">TWITTER_ACCESS_TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;TWITTER_ACCESS_TOKEN&#39;</span><span class="p">,</span> <span class="s1">&#39;YourAPIKeyIfNotSet&#39;</span><span class="p">)</span>
+<span class="n">TWITTER_ACCESS_TOKEN_SECRET</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;TWITTER_ACCESS_TOKEN_SECRET&#39;</span><span class="p">,</span> <span class="s1">&#39;YourAPIKeyIfNotSet&#39;</span><span class="p">)</span>
+<span class="n">OPENAI_API_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;OPENAI_API_KEY&#39;</span><span class="p">,</span> <span class="s1">&#39;YourAPIKeyIfNotSet&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For this tutorial, let’s pretend we are going to be interviewing <a class="reference external" href="https://eladgil.com/">Elad Gil</a> since he has a bunch of content online</p>
+<section id="pulling-data-from-twitter">
+<h3>Pulling Data From Twitter<a class="headerlink" href="#pulling-data-from-twitter" title="Link to this heading">#</a></h3>
+<p>Great, now let’s set up a function that will pull tweets for us. This will help us get current events that the user is talking about. I’m excluding replies since they usually don’t have a ton of high signal text from the user. This is the same code that was used in the <a class="reference external" href="https://youtu.be/yLWLDjT01q8">Twitter AI Bot tutorial</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_original_tweets</span><span class="p">(</span><span class="n">screen_name</span><span class="p">,</span> <span class="n">tweets_to_pull</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">tweets_to_return</span><span class="o">=</span><span class="mi">80</span><span class="p">):</span>
+    
+    <span class="c1"># Tweepy set up</span>
+    <span class="n">auth</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">OAuthHandler</span><span class="p">(</span><span class="n">TWITTER_API_KEY</span><span class="p">,</span> <span class="n">TWITTER_API_SECRET</span><span class="p">)</span>
+    <span class="n">auth</span><span class="o">.</span><span class="n">set_access_token</span><span class="p">(</span><span class="n">TWITTER_ACCESS_TOKEN</span><span class="p">,</span> <span class="n">TWITTER_ACCESS_TOKEN_SECRET</span><span class="p">)</span>
+    <span class="n">api</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">API</span><span class="p">(</span><span class="n">auth</span><span class="p">)</span>
+
+    <span class="c1"># Holder for the tweets you&#39;ll find</span>
+    <span class="n">tweets</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="c1"># Go and pull the tweets</span>
+    <span class="n">tweepy_results</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">Cursor</span><span class="p">(</span><span class="n">api</span><span class="o">.</span><span class="n">user_timeline</span><span class="p">,</span>
+                                   <span class="n">screen_name</span><span class="o">=</span><span class="n">screen_name</span><span class="p">,</span>
+                                   <span class="n">tweet_mode</span><span class="o">=</span><span class="s1">&#39;extended&#39;</span><span class="p">,</span>
+                                   <span class="n">exclude_replies</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="n">tweets_to_pull</span><span class="p">)</span>
+    
+    <span class="c1"># Run through tweets and remove retweets and quote tweets so we can only look at a user&#39;s raw emotions</span>
+    <span class="k">for</span> <span class="n">status</span> <span class="ow">in</span> <span class="n">tweepy_results</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="s1">&#39;retweeted_status&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="s1">&#39;quoted_status&#39;</span><span class="p">):</span>
+            <span class="c1"># Skip if it&#39;s a retweet or quote tweet</span>
+            <span class="k">continue</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tweets</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;full_text&#39;</span><span class="p">:</span> <span class="n">status</span><span class="o">.</span><span class="n">full_text</span><span class="p">,</span> <span class="s1">&#39;likes&#39;</span><span class="p">:</span> <span class="n">status</span><span class="o">.</span><span class="n">favorite_count</span><span class="p">})</span>
+
+    
+    <span class="c1"># Sort the tweets by number of likes. This will help us short_list the top ones later</span>
+    <span class="n">sorted_tweets</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">tweets</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;likes&#39;</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Get the text and drop the like count from the dictionary</span>
+    <span class="n">full_text</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;full_text&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sorted_tweets</span><span class="p">][:</span><span class="n">tweets_to_return</span><span class="p">]</span>
+    
+    <span class="c1"># Convert the list of tweets into a string of tweets we can use in the prompt later</span>
+    <span class="n">users_tweets</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">full_text</span><span class="p">)</span>
+            
+    <span class="k">return</span> <span class="n">users_tweets</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ok cool, let’s try it out!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_tweets</span> <span class="o">=</span> <span class="n">get_original_tweets</span><span class="p">(</span><span class="s2">&quot;eladgil&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">user_tweets</span><span class="p">[:</span><span class="mi">300</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>More AI companies with sudden virality + paying customers should just bootstrap
+
+0. Running co for cash may be best success
+
+1. If it does scale, being profitable or near to it creates lot of options
+
+2. it may not scale, or only work for a few months
+
+3. Why get on the… https://t.co/Q9TRQo4yau
+
+Som
+</pre></div>
+</div>
+</div>
+</div>
+<p>Awesome, now we have a few tweets let’s move onto pulling data from a web page or two.</p>
+</section>
+<section id="pulling-data-from-websites">
+<h3>Pulling Data From Websites<a class="headerlink" href="#pulling-data-from-websites" title="Link to this heading">#</a></h3>
+<p>Let’s do two pages</p>
+<ol class="arabic simple">
+<li><p>His personal website which has his background - <a class="reference external" href="https://eladgil.com/">https://eladgil.com/</a></p></li>
+<li><p>One of my favorite blog posts from him around AI defensibility &amp; moats - <a class="reference external" href="https://blog.eladgil.com/p/defensibility-and-competition">https://blog.eladgil.com/p/defensibility-and-competition</a></p></li>
+</ol>
+<p>First let’s create a function that will scrape a website for us.</p>
+<p>We’ll do this by pulling the raw html, put it in a BeautifulSoup object, then convert that object to Markdown for better parsing</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pull_from_website</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    
+    <span class="c1"># Doing a try in case it doesn&#39;t work</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="c1"># In case it doesn&#39;t work</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Whoops, error&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+    
+    <span class="c1"># Put your response in a beautiful soup</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># Get your text</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span>
+
+    <span class="c1"># Convert your html to markdown. This reduces tokens and noise</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">md</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+     
+    <span class="k">return</span> <span class="n">text</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># I&#39;m going to store my website data in a simple string.</span>
+<span class="c1"># There is likely optimization to make this better but it&#39;s a solid 80% solution</span>
+
+<span class="n">website_data</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;https://eladgil.com/&quot;</span><span class="p">,</span> <span class="s2">&quot;https://blog.eladgil.com/p/defensibility-and-competition&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">pull_from_website</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    
+    <span class="n">website_data</span> <span class="o">+=</span> <span class="n">text</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Awesome, now that we have both of those data sources, let’s check out a sample</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="n">website_data</span><span class="p">[:</span><span class="mi">400</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Elad Gil
+
+
+
+
+Welcome to Elad Gil&#39;s retro homepage!
+
+ Who? I am a technology entrepreneur. LinkedIn profile is here.
+What?
+I am an investor or advisor to companies including Airbnb, Airtable, Anduril, Brex, Checkr, Coinbase, dbt Labs, Deel, Figma, Flexport, Gitlab, Gusto, Instacart, Navan, Notion, Opendoor, PagerDuty, Pinterest, Retool, Rippling, Samsara, Square, Stripe
+I am involved with AI com
+</pre></div>
+</div>
+</div>
+</div>
+<p>Awesome, to round us off, let’s get the information from a youtube video. YouTube has tons of data like Podcasts and interviews. This will be valuable for us to have.</p>
+</section>
+<section id="pulling-data-from-youtube">
+<h3>Pulling Data From YouTube<a class="headerlink" href="#pulling-data-from-youtube" title="Link to this heading">#</a></h3>
+<p>We’ll use LangChains YouTube loaders for this. It only works if there is a transcript on the YT video already, if there isn’t then we’ll move on. You could get the transcript via Whisper if you really wanted to, but that’s out of scope for today.</p>
+<p>We’ll make a function we can use to loop through videos</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pulling data from YouTube in text form</span>
+<span class="k">def</span> <span class="nf">get_video_transcripts</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+    <span class="n">loader</span> <span class="o">=</span> <span class="n">YoutubeLoader</span><span class="o">.</span><span class="n">from_youtube_url</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">add_video_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">documents</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+    <span class="n">transcript</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">doc</span><span class="o">.</span><span class="n">page_content</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">documents</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">transcript</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using a regular string to store the youtube transcript data</span>
+<span class="c1"># Video selection will be important.</span>
+<span class="c1"># Parsing interviews is a whole other can of worms so I&#39;m opting for one where Elad is mostly talking about himself</span>
+<span class="n">video_urls</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;https://www.youtube.com/watch?v=nglHX4B33_o&#39;</span><span class="p">]</span>
+<span class="n">videos_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+<span class="k">for</span> <span class="n">video_url</span> <span class="ow">in</span> <span class="n">video_urls</span><span class="p">:</span>
+    <span class="n">video_text</span> <span class="o">=</span> <span class="n">get_video_transcripts</span><span class="p">(</span><span class="n">video_url</span><span class="p">)</span>
+    
+    <span class="n">videos_text</span> <span class="o">+=</span> <span class="n">video_text</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s look at at sample from the video</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">video_text</span><span class="p">[:</span><span class="mi">300</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>I like to say that startups are an act of desperation and the desperation went out of the ecosystem over the last two or three years and we just had people showing up for the status and the money and now I think it&#39;s getting back to people who are doing it for a variety of reasons including the impa
+</pre></div>
+</div>
+</div>
+</div>
+<p>Awesome now that we have all of our data, let’s combine it together into a single information block</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_information</span> <span class="o">=</span> <span class="n">user_tweets</span> <span class="o">+</span> <span class="n">website_data</span> <span class="o">+</span> <span class="n">video_text</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our <code class="docutils literal notranslate"><span class="pre">user_information</span></code> variable is a big messy wall of text. Ideally we would clean this up more and try to increase the signal to noise ratio. However for this project we’ll just focus on the core use case of gathering data.</p>
+<p>Next we’ll chunk our wall of text into pieces so we can do a map_reduce process on it. If you want learn more about techniques to split up your data check out my video on <a class="reference external" href="https://www.youtube.com/watch?v=f9_BWhCI4Zo">OpenAI Token Workarounds</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First we make our text splitter</span>
+<span class="n">text_splitter</span> <span class="o">=</span> <span class="n">RecursiveCharacterTextSplitter</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">20000</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Then we split our user information into different documents</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">create_documents</span><span class="p">([</span><span class="n">user_information</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s see how many documents we created</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because we have a special requset for the LLM on our data, I want to make custom prompts. This will allow me to tinker with what data the LLM pulls out. I’ll use Langchain’s <code class="docutils literal notranslate"><span class="pre">load_summarize_chain</span></code> with custom prompts to do this. We aren’t making a summary, but rather just using <code class="docutils literal notranslate"><span class="pre">load_summarize_chain</span></code> for its easy mapreduce functionality.</p>
+<p>First let’s make our custom map prompt. This is where we’ll instruction the LLM that it will pull out interview questoins and what makes a good question.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">map_prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;You are a helpful AI bot that aids a user in research.</span>
+<span class="s2">Below is information about a person named </span><span class="si">{persons_name}</span><span class="s2">.</span>
+<span class="s2">Information will include tweets, interview transcripts, and blog posts about </span><span class="si">{persons_name}</span>
+<span class="s2">Your goal is to generate interview questions that we can ask </span><span class="si">{persons_name}</span>
+<span class="s2">Use specifics from the research when possible</span>
+
+<span class="s2">% START OF INFORMATION ABOUT </span><span class="si">{persons_name}</span><span class="s2">:</span>
+<span class="si">{text}</span>
+<span class="si">% E</span><span class="s2">ND OF INFORMATION ABOUT </span><span class="si">{persons_name}</span><span class="s2">:</span>
+
+<span class="s2">Please respond with list of a few interview questions based on the topics above</span>
+
+<span class="s2">YOUR RESPONSE:&quot;&quot;&quot;</span>
+<span class="n">map_prompt_template</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span><span class="n">template</span><span class="o">=</span><span class="n">map_prompt</span><span class="p">,</span> <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;persons_name&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we’ll make our custom combine promopt. This is the set of instructions that we’ll LLM on how to handle the list of questions that is returned in the first step above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">combine_prompt</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">You are a helpful AI bot that aids a user in research.</span>
+<span class="s2">You will be given a list of potential interview questions that we can ask </span><span class="si">{persons_name}</span><span class="s2">.</span>
+
+<span class="s2">Please consolidate the questions and return a list</span>
+
+<span class="s2">% INTERVIEW QUESTIONS</span>
+<span class="si">{text}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">combine_prompt_template</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span><span class="n">template</span><span class="o">=</span><span class="n">combine_prompt</span><span class="p">,</span> <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;persons_name&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s create our LLM and chain. I’m increasing the color a bit for more creative language. If you notice that your questions have hallucinations in them, turn temperature to 0</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mf">.25</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;gpt-4&#39;</span><span class="p">)</span>
+
+<span class="n">chain</span> <span class="o">=</span> <span class="n">load_summarize_chain</span><span class="p">(</span><span class="n">llm</span><span class="p">,</span>
+                             <span class="n">chain_type</span><span class="o">=</span><span class="s2">&quot;map_reduce&quot;</span><span class="p">,</span>
+                             <span class="n">map_prompt</span><span class="o">=</span><span class="n">map_prompt_template</span><span class="p">,</span>
+                             <span class="n">combine_prompt</span><span class="o">=</span><span class="n">combine_prompt_template</span><span class="p">,</span>
+<span class="c1">#                              verbose=True</span>
+                            <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ok, finally! With all of our data gathered and prompts ready, let’s run our chain</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">chain</span><span class="p">({</span><span class="s2">&quot;input_documents&quot;</span><span class="p">:</span> <span class="n">docs</span><span class="p">,</span> <span class="c1"># The seven docs that were created before</span>
+                <span class="s2">&quot;persons_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Elad Gil&quot;</span>
+               <span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: model not found. Using cl100k_base encoding.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">&#39;output_text&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1. As an investor and advisor to various AI companies, what are some common challenges you&#39;ve observed in the industry, and how do you recommend overcoming them?
+
+2. Can you elaborate on the advantages of bootstrapping for AI startups and share any success stories you&#39;ve come across?
+
+3. What are some key lessons you&#39;ve learned from your experiences in high-profile companies like Twitter, Google, and Color Health that have shaped your approach to investing and advising startups?
+
+4. How do you think AI will continue to shape the job market in the coming years?
+
+5. What motivated you to enter the healthcare space as a co-founder of Color Health, and how do you envision the role of AI in improving healthcare outcomes?
+
+6. Can you share some insights on what sets high growth companies apart from others and the key factors that contribute to their rapid growth?
+
+7. How do you evaluate the defensibility of AI startups when considering investment or advisory opportunities?
+
+8. What excites you the most about the future of AI, and what challenges do you foresee in its development and implementation?
+
+9. Can you share your vision for Color Health and how it aims to revolutionize the healthcare industry?
+
+10. What were the key challenges you faced during the rapid growth of Twitter, and how did you overcome them?
+
+11. What advice would you give to founders looking to build defensibility into their startups from the beginning?
+
+12. Can you share an example of a company that has successfully maintained a user-centric focus and how it has contributed to their success?
+
+13. How do you see the balance between serving customer needs and building defensibility evolving in the future of AI-driven products and services?
+
+14. Can you elaborate on the factors that contribute to your prediction of 2023 being a rough year for mid to late-stage private technology companies and how startups can prepare for these challenges?
+
+15. What do you think are the most promising applications of large language models like GPT in the near future, and how can startups leverage them for growth?
+
+16. How do you see the open versus closed structure playing out in the AI industry, and what implications could it have for startups and established companies in the AI space?
+
+17. How do you think the costs involved in training large language models like GPT-3 and GPT-4 will affect competition and innovation in the AI industry, particularly for startups with limited resources?
+
+18. What do you think are the key factors driving growth in the space and defense technology sector, and what opportunities do you see for startups in this industry?
+
+19. How do you envision the future of defense tech startups, and what challenges do they need to overcome to succeed in this competitive landscape?
+
+20. What lessons can other startups in the defense sector learn from Anduril&#39;s success, and how can they apply these strategies to their own businesses?
+</pre></div>
+</div>
+</div>
+</div>
+<p>Awesome! Now we have some questions we can iterate on before we chat with the person. You can swap out different sources for different people.</p>
+<p>These questions won’t be 100% ‘copy &amp; paste’ ready, but they should serve as a really solid starting point for you to build on top of.</p>
+<p>Next, let’s port this code over to a <a class="reference external" href="https://streamlit.io/">Streamlit</a> app so we can share a deployed version easily</p>
+</section>
 </section>
 </section>
 
@@ -1368,7 +1788,7 @@ Summary: This text explores the idea that feeling like a &quot;noob&quot; is act
         },
         kernelOptions: {
             name: "python3",
-            path: "./content/genai/langchain/projects/data_generation"
+            path: "./content/genai/langchain/projects"
         },
         predefinedOutput: true
     }
@@ -1392,7 +1812,8 @@ Summary: This text explores the idea that feeling like a &quot;noob&quot; is act
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1401,11 +1822,20 @@ Summary: This text explores the idea that feeling like a &quot;noob&quot; is act
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#level-1-basic-prompt-summarize-a-couple-sentences">Level 1: Basic Prompt - Summarize a couple sentences</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#level-2-prompt-templates-summarize-a-couple-paragraphs">Level 2: Prompt Templates - Summarize a couple paragraphs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#level-3-map-reduce-summarize-a-couple-pages-multiple-pages">Level 3: Map Reduce - Summarize a couple pages multiple pages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#level-4-best-representation-vectors-summarize-an-entire-book">Level 4: Best Representation Vectors - Summarize an entire book</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#level-5-agents-summarize-an-unknown-amount-of-text">Level 5: Agents - Summarize an unknown amount of text</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#levels-of-summarization-novice-to-expert">5 Levels Of Summarization: Novice to Expert</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#level-1-basic-prompt-summarize-a-couple-sentences">Level 1: Basic Prompt - Summarize a couple sentences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#level-2-prompt-templates-summarize-a-couple-paragraphs">Level 2: Prompt Templates - Summarize a couple paragraphs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#level-3-map-reduce-summarize-a-couple-pages-multiple-pages">Level 3: Map Reduce - Summarize a couple pages multiple pages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#level-4-best-representation-vectors-summarize-an-entire-book">Level 4: Best Representation Vectors - Summarize an entire book</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#level-5-agents-summarize-an-unknown-amount-of-text">Level 5: Agents - Summarize an unknown amount of text</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-llms-to-summarize-personal-research">Using LLMs To Summarize Personal Research</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-data-from-twitter">Pulling Data From Twitter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-data-from-websites">Pulling Data From Websites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-data-from-youtube">Pulling Data From YouTube</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
@@ -1457,8 +1887,8 @@ By Anukool Chaturvedi
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

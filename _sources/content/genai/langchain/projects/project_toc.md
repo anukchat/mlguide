@@ -1,27 +1,33 @@
 
 # Langchain projects gallery
 
-<!-- 🖼️ **[Agents](/content/tools/langchain/projects/agents/Agents.ipynb)** -->
+:::: {grid} 1 2 3 4
+:align: center
+:margin: 0
+:gutter: 0
 
-🖼️ **[Agents with ZapierToolkit](/content/tools/langchain/projects/agents/Agents%20+%20ZapierToolkit.ipynb)**
+::: {card} 1️⃣ Summarization
+:link: ../genai/langchain/projects/1_Summarizations.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+:::
 
-🖼️ **[Twitter reply bot](/content/tools/langchain/projects/bots/Twitter_Reply_Bot/Twitter%20Reply%20Bot%20Notebook.ipynb)**
+::: {card} 2️⃣ Question Answering
+:link: ../genai/langchain/projects/2_Question_Answering.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+:::
 
-🖼️ **[Extraction from call or video transcripts](/content/tools/langchain/projects/data_generation/Working%20With%20Call%20or%20Video%20Transcripts.ipynb)**
+::: {card} 3️⃣ Text Generation
+:link: ../genai/langchain/projects/3_Text_Generation.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+:::
 
-🖼️ **[Summarize personal research](/content/tools/langchain/projects/data_generation/Using%20LLMs%20To%20Summarize%20Personal%20Research.ipynb)**
-
-🖼️ **[Topic modelling](/content/tools/langchain/projects/data_generation/Topic%20Modeling%20With%20Language%20Models.ipynb)**
-
-🖼️ **[Personalized email generation](/content/tools/langchain/projects/data_generation/Personalized%20Email%20Generation.ipynb)**
-
-🖼️ **[Tone matching](/content/tools/langchain/projects/data_generation/Instructing%20LLMs%20To%20Match%20Tone.ipynb)**
-
-🖼️ **[Extracting structured datasets using function calling](/content/tools/langchain/projects/data_generation/Expert%20Structured%20Output%20(Using%20Function%20Calling).ipynb)**
-
-🖼️ **[Extracting structured datasets using Kor](/content/tools/langchain/projects/data_generation/Expert%20Structured%20Output%20(Using%20Kor).ipynb)**
-
-🖼️ **[Custom file Q & A](/content/tools/langchain/projects/data_generation/Custom%20Files%20Question%20&%20Answer.ipynb)**
-
-🖼️ **[Ask books some questions](/content/tools/langchain/projects/data_generation/Ask%20A%20Book%20Questions.ipynb)**
-
+::::

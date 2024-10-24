@@ -16,17 +16,19 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -37,10 +39,11 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/intro.css?v=b40f3148" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
@@ -80,9 +83,10 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳" href="02_LangChain_Use_Cases.html" />
-    <link rel="prev" title="Table of Contents" href="intro.html" />
+    <link rel="prev" title="Langchain" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -98,19 +102,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../../search.html"
       method="get">
@@ -118,7 +111,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -126,8 +118,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -143,7 +135,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -173,21 +166,17 @@
     
     
     <img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt=" - Home"/>
-    <script>document.write(`<img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt=" - Home"/>`);</script>
+    <img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark pst-js-only" alt=" - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Guide</span></p>
@@ -291,12 +280,12 @@
 
 </ul>
 </details></li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="langchain_toc.html">Langchain</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Langchain</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
 
 <li class="toctree-l3"><a class="reference internal" href="02_LangChain_Use_Cases.html">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
 
+<li class="toctree-l3"><a class="reference internal" href="projects/project_toc.html">Projects</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../RAG/intro.html">RAG</a></li>
@@ -488,24 +477,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -541,7 +522,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documents"><strong>Documents</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models-the-interface-to-the-ai-brains">Models - The interface to the AI brains</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models">Models</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#language-model"><strong>Language Model</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chat-model"><strong>Chat Model</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-calling-models">Function Calling Models</a></li>
@@ -553,10 +534,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template"><strong>Prompt Template</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-selectors"><strong>Example Selectors</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-parsers-method-1-prompt-instructions-string-parsing"><strong>Output Parsers Method 1: Prompt Instructions &amp; String Parsing</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-parsers-method-2-openai-fuctions"><strong>Output Parsers Method 2: OpenAI Fuctions</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-parsers-method-2-openai-functions"><strong>Output Parsers Method 2: OpenAI Functions</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexes-structuring-documents-to-llms-can-work-with-them">Indexes - Structuring documents to LLMs can work with them</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexes-structuring-documents-for-llms">Indexes - Structuring documents for LLMs</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#document-loaders"><strong>Document Loaders</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-splitters"><strong>Text Splitters</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retrievers"><strong>Retrievers</strong></a></li>
@@ -595,33 +576,22 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="langchain-cookbook">
 <h1>LangChain Cookbook 👨‍🍳👩‍🍳<a class="headerlink" href="#langchain-cookbook" title="Link to this heading">#</a></h1>
 <p><em>This cookbook is based off the <a class="reference external" href="https://docs.langchain.com/docs/">LangChain Conceptual Documentation</a></em></p>
-<p><strong>Links:</strong></p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://docs.langchain.com/docs/">LC Conceptual Documentation</a></p></li>
-<li><p><a class="reference external" href="https://python.langchain.com/en/latest/">LC Python Documentation</a></p></li>
-<li><p><a class="reference external" href="https://js.langchain.com/docs/">LC Javascript/Typescript Documentation</a></p></li>
-<li><p><a class="reference external" href="https://discord.gg/6adMQxSpJS">LC Discord</a></p></li>
-<li><p><a class="reference external" href="https://langchain.com/">www.langchain.com</a></p></li>
-<li><p><a class="reference external" href="https://twitter.com/LangChainAI">LC Twitter</a></p></li>
-</ul>
 <section id="what-is-langchain">
 <h2><strong>What is LangChain?</strong><a class="headerlink" href="#what-is-langchain" title="Link to this heading">#</a></h2>
 <blockquote>
 <div><p>LangChain is a framework for developing applications powered by language models.</p>
 </div></blockquote>
-<p><strong>~~TL~~DR</strong>: LangChain makes the complicated parts of working &amp; building with AI models easier. It helps do this in two ways:</p>
+<p>LangChain makes the complicated parts of working &amp; building with AI models easier. It helps do this in two ways:</p>
 <ol class="arabic simple">
-<li><p><strong>Integration</strong> - Bring external data, such as your files, other applications, and api data, to your LLMs</p></li>
-<li><p><strong>Agency</strong> - Allow your LLMs to interact with it’s environment via decision making. Use LLMs to help decide which action to take next</p></li>
+<li><p><strong>Integration</strong> - <mark>Bring external data</mark>, such as your files, other applications, and api data, to your LLMs</p></li>
+<li><p><strong>Agency</strong> - Allow your <mark>LLMs to interact with it’s environment via decision making</mark>. Use LLMs to help decide which action to take next</p></li>
 </ol>
 </section>
 <section id="why-langchain">
 <h2><strong>Why LangChain?</strong><a class="headerlink" href="#why-langchain" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p><strong>Components</strong> - LangChain makes it easy to swap out abstractions and components necessary to work with language models.</p></li>
-<li><p><strong>Customized Chains</strong> - LangChain provides out of the box support for using and customizing ‘chains’ - a series of actions strung together.</p></li>
-<li><p><strong>Speed 🚢</strong> - This team ships insanely fast. You’ll be up to date with the latest LLM features.</p></li>
-<li><p><strong>Community 👥</strong> - Wonderful discord and community support, meet ups, hackathons, etc.</p></li>
+<li><p><strong>Customized Chains</strong> - LangChain provides out of the box support for using and customizing <mark><strong>‘chains’</strong></mark> - a series of actions strung together.</p></li>
 </ol>
 <p>Though LLMs can be straightforward (text-in, text-out) you’ll quickly run into friction points that LangChain helps with once you develop more complicated applications.</p>
 <p><em>Note: This cookbook will not cover all aspects of LangChain. It’s contents have been curated to get you to building &amp; impact as quick as possible. For more, please check out <a class="reference external" href="https://docs.langchain.com/docs/">LangChain Conceptual Documentation</a></em></p>
@@ -791,8 +761,8 @@ document.write(`
 </div>
 </section>
 </section>
-<section id="models-the-interface-to-the-ai-brains">
-<h2>Models - The interface to the AI brains<a class="headerlink" href="#models-the-interface-to-the-ai-brains" title="Link to this heading">#</a></h2>
+<section id="models">
+<h2>Models<a class="headerlink" href="#models" title="Link to this heading">#</a></h2>
 <section id="language-model">
 <h3><strong>Language Model</strong><a class="headerlink" href="#language-model" title="Link to this heading">#</a></h3>
 <p>A model that does text in ➡️ text out!</p>
@@ -1253,10 +1223,10 @@ YOUR RESPONSE:
 </div>
 </div>
 </section>
-<section id="output-parsers-method-2-openai-fuctions">
-<h3><strong>Output Parsers Method 2: OpenAI Fuctions</strong><a class="headerlink" href="#output-parsers-method-2-openai-fuctions" title="Link to this heading">#</a></h3>
+<section id="output-parsers-method-2-openai-functions">
+<h3><strong>Output Parsers Method 2: OpenAI Functions</strong><a class="headerlink" href="#output-parsers-method-2-openai-functions" title="Link to this heading">#</a></h3>
 <p>When OpenAI released function calling, the game changed. This is recommended method when starting out.</p>
-<p>They trained models specifically for outputing structured data. It became super easy to specify a Pydantic schema and get a structured output.</p>
+<p>They <mark>trained models specifically for outputing structured data.</mark> It became super easy to specify a Pydantic schema and get a structured output.</p>
 <p>There are many ways to define your schema, I prefer using Pydantic Models because of how organized they are. Feel free to reference OpenAI’s <a class="reference external" href="https://platform.openai.com/docs/guides/gpt/function-calling">documention</a> for other methods.</p>
 <p>In order to use this method you’ll need to use a model that supports <a class="reference external" href="https://openai.com/blog/function-calling-and-other-api-updates#:~:text=Developers%20can%20now%20describe%20functions%20to%20gpt%2D4%2D0613%20and%20gpt%2D3.5%2Dturbo%2D0613%2C">function calling</a>. I’ll use <code class="docutils literal notranslate"><span class="pre">gpt4-0613</span></code></p>
 <p><strong>Example 1: Simple</strong></p>
@@ -1369,8 +1339,8 @@ YOUR RESPONSE:
 </div>
 </section>
 </section>
-<section id="indexes-structuring-documents-to-llms-can-work-with-them">
-<h2>Indexes - Structuring documents to LLMs can work with them<a class="headerlink" href="#indexes-structuring-documents-to-llms-can-work-with-them" title="Link to this heading">#</a></h2>
+<section id="indexes-structuring-documents-for-llms">
+<h2>Indexes - Structuring documents for LLMs<a class="headerlink" href="#indexes-structuring-documents-for-llms" title="Link to this heading">#</a></h2>
 <section id="document-loaders">
 <h3><strong>Document Loaders</strong><a class="headerlink" href="#document-loaders" title="Link to this heading">#</a></h3>
 <p>Easy ways to import data from other sources. Shared functionality with <a class="reference external" href="https://openai.com/blog/chatgpt-plugins">OpenAI Plugins</a> <a class="reference external" href="https://github.com/openai/chatgpt-retrieval-plugin">specifically retrieval plugins</a></p>
@@ -2041,9 +2011,6 @@ Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> I now know the fina
 </div>
 </div>
 </div>
-<p><img alt="Wild Belle" src="content/genai/langchain/data/WildBelle1.png" /></p>
-<p>🎵Enjoy🎵
-<a class="reference external" href="https://open.spotify.com/track/1eREJIBdqeCcqNCB1pbz7w?si=c014293b63c7478c">https://open.spotify.com/track/1eREJIBdqeCcqNCB1pbz7w?si=c014293b63c7478c</a></p>
 </section>
 </section>
 </section>
@@ -2084,7 +2051,7 @@ Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> I now know the fina
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Table of Contents</p>
+        <p class="prev-next-title">Langchain</p>
       </div>
     </a>
     <a class="right-next"
@@ -2103,7 +2070,8 @@ Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> I now know the fina
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -2124,7 +2092,7 @@ Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> I now know the fina
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documents"><strong>Documents</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models-the-interface-to-the-ai-brains">Models - The interface to the AI brains</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#models">Models</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#language-model"><strong>Language Model</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chat-model"><strong>Chat Model</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-calling-models">Function Calling Models</a></li>
@@ -2136,10 +2104,10 @@ Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> I now know the fina
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prompt-template"><strong>Prompt Template</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-selectors"><strong>Example Selectors</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-parsers-method-1-prompt-instructions-string-parsing"><strong>Output Parsers Method 1: Prompt Instructions &amp; String Parsing</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-parsers-method-2-openai-fuctions"><strong>Output Parsers Method 2: OpenAI Fuctions</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-parsers-method-2-openai-functions"><strong>Output Parsers Method 2: OpenAI Functions</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexes-structuring-documents-to-llms-can-work-with-them">Indexes - Structuring documents to LLMs can work with them</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indexes-structuring-documents-for-llms">Indexes - Structuring documents for LLMs</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#document-loaders"><strong>Document Loaders</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-splitters"><strong>Text Splitters</strong></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retrievers"><strong>Retrievers</strong></a></li>
@@ -2215,8 +2183,8 @@ By Anukool Chaturvedi
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

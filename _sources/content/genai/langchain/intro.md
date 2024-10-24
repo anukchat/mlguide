@@ -1,16 +1,34 @@
+# Langchain
 
-# Table of Contents
-- [Table of Contents](#table-of-contents)
-  - [Introduction](#introduction)
-  - [Installation](#installation)
-  - [Using Langchain](#using-langchain)
-    - [Importing the Package](#importing-the-package)
+## Learning Modules
 
-## Introduction
-Langchain is a framework for developing applications powered by 
-## Installation
-To install Langchain...
+:::: {grid} 1 2 3 4
+:align: center
+:margin: 0
+:gutter: 0
 
-## Using Langchain
-### Importing the Package
-To import the Langchain package...
+::: {card} 1️⃣ Langchain Cookbook 1
+:link: ../genai/langchain/01_LangChain_Fundamentals.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+:::
+
+::: {card} 2️⃣ Langchain Cookbook 2
+:link: ../genai/langchain/02_LangChain_Use_Cases.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+:::
+
+::: {card} 3️⃣ Projects
+:link: ../genai/langchain/projects/projects_toc.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+:::
+
+::::

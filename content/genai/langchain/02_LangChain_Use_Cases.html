@@ -16,17 +16,19 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -37,10 +39,11 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/intro.css?v=b40f3148" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
@@ -79,10 +82,11 @@
     <link rel="icon" href="../../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="RAGs" href="../RAG/intro.html" />
+    <link rel="next" title="Langchain projects gallery" href="projects/project_toc.html" />
     <link rel="prev" title="LangChain Cookbook 👨‍🍳👩‍🍳" href="01_LangChain_Fundamentals.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -98,19 +102,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../../../search.html"
       method="get">
@@ -118,7 +111,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -126,8 +118,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -143,7 +135,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -173,21 +166,17 @@
     
     
     <img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt=" - Home"/>
-    <script>document.write(`<img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt=" - Home"/>`);</script>
+    <img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark pst-js-only" alt=" - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Guide</span></p>
@@ -291,12 +280,12 @@
 
 </ul>
 </details></li>
-<li class="toctree-l2 current active has-children"><a class="reference internal" href="langchain_toc.html">Langchain</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="intro.html">Langchain</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="01_LangChain_Fundamentals.html">LangChain Cookbook 👨‍🍳👩‍🍳</a></li>
 
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a></li>
 
+<li class="toctree-l3"><a class="reference internal" href="projects/project_toc.html">Projects</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../RAG/intro.html">RAG</a></li>
@@ -488,24 +477,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -530,8 +511,6 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-langchain"><strong>What is LangChain?</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-langchain"><strong>Why LangChain?</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-use-cases"><strong>Main Use Cases</strong></a></li>
 </ul>
 </li>
@@ -574,37 +553,6 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="langchain-cookbook-part-2-use-cases">
 <h1>LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳<a class="headerlink" href="#langchain-cookbook-part-2-use-cases" title="Link to this heading">#</a></h1>
 <p><em>This cookbook is based on the <a class="reference external" href="https://docs.langchain.com/docs/">LangChain Conceptual Documentation</a></em></p>
-<p><strong>LangChain Links:</strong></p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://docs.langchain.com/docs/">LC Conceptual Documentation</a></p></li>
-<li><p><a class="reference external" href="https://python.langchain.com/en/latest/">LC Python Documentation</a></p></li>
-<li><p><a class="reference external" href="https://js.langchain.com/docs/">LC Javascript/Typescript Documentation</a></p></li>
-<li><p><a class="reference external" href="https://discord.gg/6adMQxSpJS">LC Discord</a></p></li>
-<li><p><a class="reference external" href="https://langchain.com/">www.langchain.com</a></p></li>
-<li><p><a class="reference external" href="https://twitter.com/LangChainAI">LC Twitter</a></p></li>
-</ul>
-<section id="what-is-langchain">
-<h2><strong>What is LangChain?</strong><a class="headerlink" href="#what-is-langchain" title="Link to this heading">#</a></h2>
-<blockquote>
-<div><p>LangChain is a framework for developing applications powered by language models.
-<em><a class="reference external" href="https://blog.langchain.dev/announcing-our-10m-seed-round-led-by-benchmark/#:~:text=LangChain%20is%20a%20framework%20for%20developing%20applications%20powered%20by%20language%20models">Source</a></em></p>
-</div></blockquote>
-<p><strong>TLDR</strong>: LangChain makes the complicated parts of working &amp; building with AI models easier. It helps do this in two ways:</p>
-<ol class="arabic simple">
-<li><p><strong>Integration</strong> - Bring external data, such as your files, other applications, and api data, to your LLMs</p></li>
-<li><p><strong>Agency</strong> - Allow your LLMs to interact with its environment via decision making. Use LLMs to help decide which action to take next</p></li>
-</ol>
-</section>
-<section id="why-langchain">
-<h2><strong>Why LangChain?</strong><a class="headerlink" href="#why-langchain" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p><strong>Components</strong> - LangChain makes it easy to swap out abstractions and components necessary to work with language models.</p></li>
-<li><p><strong>Customized Chains</strong> - LangChain provides out of the box support for using and customizing ‘chains’ - a series of actions strung together.</p></li>
-<li><p><strong>Speed 🚢</strong> - This team ships insanely fast. You’ll be up to date with the latest LLM features.</p></li>
-<li><p><strong>Community 👥</strong> - Wonderful <a class="reference external" href="https://discord.gg/6adMQxSpJS">discord</a> and community support, meet ups, hackathons, etc.</p></li>
-</ol>
-<p>Though LLMs can be straightforward (text-in, text-out) you’ll quickly run into friction points that LangChain helps with once you develop more complicated applications.</p>
-</section>
 <section id="main-use-cases">
 <h2><strong>Main Use Cases</strong><a class="headerlink" href="#main-use-cases" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -619,9 +567,6 @@ document.write(`
 <li><p><strong>Agents</strong> - Use LLMs to make decisions about what to do next. Enable these decisions with tools.</p></li>
 </ul>
 <p>Want to see live examples of these use cases? Head over to the <a class="reference internal" href="projects/project_toc.html"><span class="std std-doc">LangChain Project Gallery</span></a></p>
-<ul class="simple">
-<li><p>This cookbook will not cover all aspects of LangChain. It’s contents have been curated to get you to building &amp; impact as quick as possible. For more, please check out <a class="reference external" href="https://python.langchain.com/en/latest/index.html">LangChain Technical Documentation</a></p></li>
-</ul>
 <p>Let’s get started</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -664,10 +609,8 @@ document.write(`
 <h1>LangChain Use Cases<a class="headerlink" href="#langchain-use-cases" title="Link to this heading">#</a></h1>
 <section id="summarization">
 <h2>Summarization<a class="headerlink" href="#summarization" title="Link to this heading">#</a></h2>
-<p>One of the most common use cases for LangChain and LLMs is summarization. You can summarize any piece of text, but use cases span from summarizing calls, articles, books, academic papers, legal documents, user history, a table, or financial documents. It’s super helpful to have a tool which can summarize information quickly.</p>
+<p>One of the most common use cases for LangChain and LLMs is <mark>summarization</mark>. You can summarize any piece of text, but use cases span from summarizing calls, articles, books, academic papers, legal documents, user history, a table, or financial documents. It’s super helpful to have a tool which can summarize information quickly.</p>
 <ul class="simple">
-<li><p><strong>Deep Dive</strong> - (Coming Soon)</p></li>
-<li><p><strong>Examples</strong> - <a class="reference external" href="https://www.youtube.com/watch?v=DIw4rbpI9ic">Summarizing B2B Sales Calls</a></p></li>
 <li><p><strong>Use Cases</strong> - Summarize Articles, Transcripts, Chat History, Slack/Discord, Customer Interactions, Medical Papers, Legal Documents, Podcasts, Tweet Threads, Code Bases, Product Reviews, Financial Documents</p></li>
 </ul>
 <section id="summaries-of-short-text">
@@ -827,9 +770,7 @@ the one I&#39;d pick.
 </div>
 </div>
 </div>
-<p>Next we need to load up a chain which will make successive calls to the LLM for us. Want to see the prompt being used in the chain below? Check out the <a class="reference external" href="https://github.com/hwchase17/langchain/blob/master/langchain/chains/summarize/map_reduce_prompt.py">LangChain documentation</a></p>
-<p>For information on the difference between chain types, check out this video on <a class="reference external" href="https://youtu.be/f9_BWhCI4Zo">token limit workarounds</a></p>
-<p><em>Note: You could also get fancy and make the first 4 calls of the map_reduce run in parallel too</em></p>
+<p>Next we need to load up a chain which will make successive calls to the LLM for us.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get your chain ready to use</span>
@@ -864,8 +805,6 @@ the one I&#39;d pick.
 </ol>
 <p>Simplified, this process looks like this “llm(your context + your question) = your answer”</p>
 <ul class="simple">
-<li><p><strong>Deep Dive</strong> - <a class="reference external" href="https://youtu.be/h0DHDp1FbmQ">Question A Book</a>, <a class="reference external" href="https://youtu.be/EnT-ZTrcPrg">Ask Questions To Your Custom Files</a>, <a class="reference external" href="https://www.youtube.com/watch?v=Ix9WIZpArm0&amp;amp;t=1051s">Chat Your Data JS (1000 pages of Financial Reports)</a>, <a class="reference external" href="https://www.crowdcast.io/c/rh66hcwivly0">LangChain Q&amp;A webinar</a></p></li>
-<li><p><strong>Examples</strong> - <a class="reference external" href="https://www.chatpdf.com/">ChatPDF</a></p></li>
 <li><p><strong>Use Cases</strong> - Chat your documents, ask questions to academic papers, create study guides, reference medical information</p></li>
 </ul>
 <section id="simple-q-a-example">
@@ -914,7 +853,7 @@ the one I&#39;d pick.
 </section>
 <section id="using-embeddings">
 <h3>Using Embeddings<a class="headerlink" href="#using-embeddings" title="Link to this heading">#</a></h3>
-<p>I informally call what were about to go through as “The VectorStore Dance”. It’s the process of splitting your text, embedding the chunks, putting the embeddings in a DB, and then querying them. For a full video on this check out <a class="reference external" href="https://www.youtube.com/watch?v=h0DHDp1FbmQ">How To Question A Book</a></p>
+<p>I informally call what were about to go through as “The VectorStore Dance”. It’s the process of splitting your text, embedding the chunks, putting the embeddings in a DB, and then querying them.</p>
 <p>The goal is to select relevant chunks of our long text, but which chunks do we pull? The most popular method is to pull <em>similar</em> texts based off comparing vector embeddings.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1020,11 +959,8 @@ You have 74663 characters in that document
 <p><em><a class="reference external" href="https://python.langchain.com/en/latest/use_cases/extraction.html">LangChain Extraction Docs</a></em></p>
 <p>Extraction is the process of parsing data from a piece of text. This is commonly used with output parsing in order to <em>structure</em> our data.</p>
 <ul class="simple">
-<li><p><strong>Deep Dive</strong> - <a class="reference external" href="https://youtu.be/xZzvwR9jdPA">Use LLMs to Extract Data From Text (Expert Level Text Extraction</a>, <a class="reference external" href="https://youtu.be/KwAXfey-xQk">Structured Output From OpenAI (Clean Dirty Data)</a></p></li>
-<li><p><strong>Examples</strong> - <a class="reference external" href="https://twitter.com/GregKamradt/status/1646500373837008897">OpeningAttributes</a></p></li>
 <li><p><strong>Use Cases:</strong> Extract a structured row from a sentence to insert into a database, extract multiple rows from a long document to insert into a database, extracting parameters from a user query to make an API call</p></li>
 </ul>
-<p>A popular library for extraction is <a class="reference external" href="https://eyurtsev.github.io/kor/">Kor</a>. We won’t cover it today but I highly suggest checking it out for advanced extraction.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To help construct our Chat Messages</span>
@@ -1207,8 +1143,6 @@ I really like So Young by Portugal. The Man
 <p><em><a class="reference external" href="https://python.langchain.com/en/latest/use_cases/evaluation.html">LangChain Evaluation Docs</a></em></p>
 <p>Evaluation is the process of doing quality checks on the output of your applications. Normal, deterministic, code has tests we can run, but judging the output of LLMs is more difficult because of the unpredictableness and variability of natural language. LangChain provides tools that aid us in this journey.</p>
 <ul class="simple">
-<li><p><strong>Deep Dive</strong> - Coming Soon</p></li>
-<li><p><strong>Examples</strong> - <a class="reference external" href="https://twitter.com/RLanceMartin">Lance Martin’s Advanced</a> <a class="reference external" href="https://github.com/rlancemartin/auto-evaluator">Auto-Evaluator</a></p></li>
 <li><p><strong>Use Cases:</strong> Run quality checks on your summarization or Question &amp; Answer pipelines, check the output of you summarization pipeline</p></li>
 </ul>
 <div class="cell docutils container">
@@ -1353,11 +1287,8 @@ You have 74663 characters in that document
 <p><em><a class="reference external" href="https://python.langchain.com/en/latest/use_cases/tabular.html">LangChain Querying Tabular Data Docs</a></em></p>
 <p>The most common type of data in the world sits in tabular form (ok, ok, besides unstructured data). It is super powerful to be able to query this data with LangChain and pass it through to an LLM</p>
 <ul class="simple">
-<li><p><strong>Deep Dive</strong> - Coming Soon</p></li>
-<li><p><strong>Examples</strong> - TBD</p></li>
 <li><p><strong>Use Cases:</strong> Use LLMs to query data about users, do data analysis, get real time information from your DBs</p></li>
 </ul>
-<p>For futher reading check out “Agents + Tabular Data” (<a class="reference external" href="https://python.langchain.com/en/latest/modules/agents/toolkits/examples/pandas.html">Pandas</a>, <a class="reference external" href="https://python.langchain.com/en/latest/modules/agents/toolkits/examples/sql_database.html">SQL</a>, <a class="reference external" href="https://python.langchain.com/en/latest/modules/agents/toolkits/examples/csv.html">CSV</a>)</p>
 <p>Let’s query an SQLite DB with natural language. We’ll look at the <a class="reference external" href="https://data.sfgov.org/City-Infrastructure/Street-Tree-List/tkzw-k3nq">San Francisco Trees</a> dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1462,8 +1393,6 @@ Answer:<span class=" -Color -Color-Bold -Color-Bold-Green">There are 578 Species
 <p><em><a class="reference external" href="https://python.langchain.com/en/latest/use_cases/code.html">LangChain Code Understanding Docs</a></em></p>
 <p>One of the most exciting abilities of LLMs is code undestanding. People around the world are leveling up their output in both speed &amp; quality due to AI help. A big part of this is having a LLM that can understand code and help you with a particular task.</p>
 <ul class="simple">
-<li><p><strong>Deep Dive</strong> - Coming Soon</p></li>
-<li><p><strong>Examples</strong> - TBD</p></li>
 <li><p><strong>Use Cases:</strong> Co-Pilot-esque functionality that can help answer questions from a specific library, help you generate new code</p></li>
 </ul>
 <div class="cell docutils container">
@@ -1634,11 +1563,8 @@ print(best[0])
 <p><em><a class="reference external" href="https://python.langchain.com/en/latest/use_cases/apis.html">LangChain API Interaction Docs</a></em></p>
 <p>If the data or action you need is behind an API, you’ll need your LLM to interact with APIs</p>
 <ul class="simple">
-<li><p><strong>Deep Dive</strong> - Coming Soon</p></li>
-<li><p><strong>Examples</strong> - TBD</p></li>
 <li><p><strong>Use Cases:</strong> Understand a request from a user and carry out an action, be able to automate more real-world workflows</p></li>
 </ul>
-<p>This topic is closely related to Agents and Plugins, though we’ll look at a simple use case for this section. For more information, check out <a class="reference external" href="https://python.langchain.com/en/latest/use_cases/agents/custom_agent_with_plugin_retrieval_using_plugnplai.html">LangChain + plugins</a> documentation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">APIChain</span>
@@ -1721,8 +1647,6 @@ print(best[0])
 <p><em><a class="reference external" href="https://python.langchain.com/en/latest/use_cases/chatbots.html">LangChain Chatbot Docs</a></em></p>
 <p>Chatbots use many of the tools we’ve already looked at with the addition of an important topic: Memory. There are a ton of different <a class="reference external" href="https://python.langchain.com/en/latest/modules/memory/how_to_guides.html">types of memory</a>, tinker to see which is best for you.</p>
 <ul class="simple">
-<li><p><strong>Deep Dive</strong> - Coming Soon</p></li>
-<li><p><strong>Examples</strong> - <a class="reference external" href="https://www.chatbase.co/?via=greg">ChatBase</a> (Affiliate link), <a class="reference external" href="https://twitter.com/achammah1/status/1649482899253501958?s=20">NexusGPT</a>, <a class="reference external" href="https://www.chatpdf.com/">ChatPDF</a></p></li>
 <li><p><strong>Use Cases:</strong> Have a real time interaction with a user, provide an approachable UI for users to ask natural language questions</p></li>
 </ul>
 <div class="cell docutils container">
@@ -1832,11 +1756,8 @@ Prompt after formatting:
 <p><em><a class="reference external" href="https://python.langchain.com/en/latest/modules/agents.html">LangChain Agent Docs</a></em></p>
 <p>Agents are one of the hottest <a class="reference external" href="https://media.tenor.com/IH7C6xNbkuoAAAAC/so-hot-right-now-trending.gif">🔥</a> topics in LLMs. Agents are the decision makers that can look a data, reason about what the next action should be, and execute that action for you via tools</p>
 <ul class="simple">
-<li><p><strong>Deep Dive</strong> - <a class="reference external" href="https://youtu.be/2xxziIWmaSA?t=1972">Introduction to agents</a>, <a class="reference external" href="https://www.crowdcast.io/c/46erbpbz609r">LangChain Agents Webinar</a>, much deeper dive coming soon</p></li>
-<li><p><strong>Examples</strong> - TBD</p></li>
 <li><p><strong>Use Cases:</strong> Run programs autonomously without the need for human input</p></li>
 </ul>
-<p>Examples of advanced uses of agents appear in <a class="reference external" href="https://github.com/yoheinakajima/babyagi">BabyAGI</a> and <a class="reference external" href="https://github.com/Significant-Gravitas/Auto-GPT">AutoGPT</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Helpers</span>
@@ -2006,11 +1927,11 @@ Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> I now know the comm
       </div>
     </a>
     <a class="right-next"
-       href="../RAG/intro.html"
+       href="projects/project_toc.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">RAGs</p>
+        <p class="prev-next-title">Langchain projects gallery</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2021,7 +1942,8 @@ Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> I now know the comm
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -2031,8 +1953,6 @@ Thought:<span class=" -Color -Color-Bold -Color-Bold-Green"> I now know the comm
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">LangChain Cookbook Part 2: Use Cases👨‍🍳👩‍🍳</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-langchain"><strong>What is LangChain?</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-langchain"><strong>Why LangChain?</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-use-cases"><strong>Main Use Cases</strong></a></li>
 </ul>
 </li>
@@ -2112,8 +2032,8 @@ By Anukool Chaturvedi
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>
