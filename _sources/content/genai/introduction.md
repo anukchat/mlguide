@@ -50,7 +50,7 @@ Advances in natural language processing research have been crucial for text gene
 :text-align: center
 :::
 
-::: {card} 3️⃣ RAG
+::: {card} 3️⃣ RAG **(Coming Soon)** ⌛
 :link: ../genai/RAG/intro.html
 :link-type: url
 :shadow: md
@@ -58,8 +58,24 @@ Advances in natural language processing research have been crucial for text gene
 :text-align: center
 :::
 
-::: {card} 4️⃣ Agents
+::: {card} 4️⃣ Agents **(Coming Soon)** ⌛
 :link: ../genai/agents/intro.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+:::
+
+::: {card} 5️⃣ LLM Recipes **(Coming Soon)** ⌛
+:link: ../genai/llm-recipes/intro.html
+:link-type: url
+:shadow: md
+:margin: 3
+:text-align: center
+:::
+
+::: {card} 6️⃣ Evaluations **(Coming Soon)** ⌛
+:link: ../genai/evaluations/intro.html
 :link-type: url
 :shadow: md
 :margin: 3
