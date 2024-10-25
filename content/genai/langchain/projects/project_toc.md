@@ -7,7 +7,7 @@
 :gutter: 0
 
 ::: {card} 1️⃣ Summarization
-:link: ../genai/langchain/projects/1_Summarizations.html
+:link: ../projects/1_Summarizations.html
 :link-type: url
 :shadow: md
 :margin: 3
@@ -15,7 +15,7 @@
 :::
 
 ::: {card} 2️⃣ Question Answering
-:link: ../genai/langchain/projects/2_Question_Answering.html
+:link: ../projects/2_Question_Answering.html
 :link-type: url
 :shadow: md
 :margin: 3
@@ -23,7 +23,7 @@
 :::
 
 ::: {card} 3️⃣ Text Generation
-:link: ../genai/langchain/projects/3_Text_Generation.html
+:link: ../projects/3_Text_Generation.html
 :link-type: url
 :shadow: md
 :margin: 3
