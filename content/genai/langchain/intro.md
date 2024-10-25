@@ -24,7 +24,7 @@
 :::
 
 ::: {card} 3️⃣ Projects
-:link: ../genai/langchain/projects/projects_toc.html
+:link: ../genai/langchain/projects/project_toc.html
 :link-type: url
 :shadow: md
 :margin: 3
