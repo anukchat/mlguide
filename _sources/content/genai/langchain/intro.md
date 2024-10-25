@@ -8,7 +8,7 @@
 :gutter: 0
 
 ::: {card} 1️⃣ Langchain Cookbook 1
-:link: ../genai/langchain/01_LangChain_Fundamentals.html
+:link: ../langchain/01_LangChain_Fundamentals.html
 :link-type: url
 :shadow: md
 :margin: 3
@@ -16,7 +16,7 @@
 :::
 
 ::: {card} 2️⃣ Langchain Cookbook 2
-:link: ../genai/langchain/02_LangChain_Use_Cases.html
+:link: ../langchain/02_LangChain_Use_Cases.html
 :link-type: url
 :shadow: md
 :margin: 3
