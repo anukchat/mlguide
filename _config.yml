@@ -104,6 +104,7 @@ sphinx:
     - sphinx.ext.intersphinx
     - sphinx_design
     - sphinx_jupyterbook_latex
+    - ablog
 
   config:
     html_theme: sphinx_book_theme
@@ -114,3 +115,18 @@ sphinx:
       - https://apis.google.com/js/platform.js
     html_head_extra: |
       <meta name="google-signin-client_id" content="415025588210-l56g7pger5g8914op033ukl17f16i5m6.apps.googleusercontent.com">
+    blog_path: content/resources/blogs
+    disqus_shortname: mlguide
+    blog_baseurl: https://mlguide.in
+    # html_sidebars:
+    #   content/resources/blogs/*:
+    #     - postcard.html
+    html_theme_options:
+      secondary_sidebar_items:
+        "**":
+          - page-toc
+        content/resources/blogs/*:
+          - ablog/recentposts.html
+          - ablog/categories.html
+          - ablog/tagcloud.html
+        
