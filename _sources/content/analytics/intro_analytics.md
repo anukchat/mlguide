@@ -1,7 +1,6 @@
 # Analytics
 
 :::: {grid} 1 2 3 4
-:align: center
 :margin: 0
 :gutter: 0
 

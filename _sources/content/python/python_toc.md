@@ -45,7 +45,6 @@ The bytecode is sent to the Python Virtual Machine (PVM), which is a part of the
 ## Modules
 
 :::: {grid} 1 2 3 4
-:align: center
 :margin: 0
 :gutter: 0
 

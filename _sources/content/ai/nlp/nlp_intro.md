@@ -92,7 +92,6 @@ There is a great [NLTK Book](https://www.nltk.org/book/) available online that c
 ## Modules
 
 :::: {grid} 1 2 3 4
-:align: center
 :margin: 0
 :gutter: 0
 
