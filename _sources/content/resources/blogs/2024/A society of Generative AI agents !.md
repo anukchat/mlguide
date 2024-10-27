@@ -1,16 +1,18 @@
 ---
-tags: AI, GenerativeAI
-date: 2023-08-19
 blogpost: true
+author: Anukool Chaturvedi
+date: August 19, 2023
+tags: AI, GenerativeAI
 excerpt: 1
 category: LLM
-lang: English
+language: English
 ---
+
 # A society of Generative AI agents !
 
-![Generative AI Agents](./images/generative_ai_agents.png)
-
 Imagine, you visit a place where a group of bots have created a society of their own. They have their own shops, homes, schools and they interact with knowns and unknowns, build relationships, do get-togethers, plan a party or say they create an entire ecosystem of their own just like humans do. It may be hard to imagine but fun to think of.
+
+![Generative AI Agents](./images/generative_ai_agents.png)
 
 It used to look like a science fiction few years back, it might still look like one for some, but in the age of Generative AI, everything is possible.  
 
