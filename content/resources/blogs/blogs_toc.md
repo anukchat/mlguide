@@ -7,6 +7,6 @@
 :date: "%B %d, %Y"
 :format: "{title} - {date}"
 :excerpts:
-:sort: date-desc
+:sort: 
 :expand: Read more →
 ```

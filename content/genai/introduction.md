@@ -30,7 +30,6 @@ Advances in natural language processing research have been crucial for text gene
 ## Modules
 
 :::: {grid} 1 2 3 4
-:align: center
 :margin: 0
 :gutter: 0
 

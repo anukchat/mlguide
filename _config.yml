@@ -5,7 +5,7 @@
 
 #######################################################################################
 # Book settings
-title                       :  # The title of the book. Will be placed in the left navbar.
+title                       : "" # The title of the book. Will be placed in the left navbar.
 author                      : Anukool Chaturvedi
 email                       : chaturvedianukool@gmail.com # The author of the book
 copyright                   : "2024"  # Copyright year to be placed in the footer
@@ -61,29 +61,11 @@ html:
   announcement              : "" # A banner announcement at the top of the site.
 html_context:
   default_mode: light
-
 #######################################################################################
 # LaTeX-specific settings
 latex:
   latex_engine              : pdflatex  # one of 'pdflatex', 'xelatex' (recommended for unicode), 'luatex', 'platex', 'uplatex'
   use_jupyterbook_latex     : true # use sphinx-jupyterbook-latex for pdf builds as default
-
-#######################################################################################
-# Launch button settings
-launch_buttons:
-  notebook_interface        : "jupyterlab"  # The interface interactive links will activate ["classic", "jupyterlab"]
-  binderhub_url             : https://mybinder.org  # The URL of the BinderHub (e.g., https://mybinder.org)
-  # jupyterhub_url            : ""  # The URL of the JupyterHub (e.g., https://datahub.berkeley.edu)
-  thebe                     : true  # Add a thebe button to pages (requires the repository to run on Binder)
-  colab_url                 : https://colab.research.google.com
-#  The URL of Google Colab (https://colab.research.google.com)
-
-repository:
-  url                       : https://github.com/anukchat/mlguide # The URL to your book's repository
-  path_to_book              : "" # A path to your book's folder, relative to the repository root.
-  branch                    : main  # Which branch of the repository should be used when creating links
-
-#######################################################################################
 # Advanced and power-user settings
 
 sphinx:
@@ -103,16 +85,9 @@ sphinx:
     html_theme: sphinx_book_theme
     html_extra_path: ['assets']
     html_show_copyright: false
-    html_css_files: ['custom.css']
-    html_js_files:
-      - subscription_overlay.js
-      - https://apis.google.com/js/platform.js
-    html_head_extra: |
-      <meta name="google-signin-client_id" content="415025588210-l56g7pger5g8914op033ukl17f16i5m6.apps.googleusercontent.com">
     blog_path: content/resources/blogs
     disqus_shortname: mlguide
     blog_baseurl: https://mlguide.in
-    post_auto_excerpt_length: 50
     html_theme_options:
       secondary_sidebar_items:
         "**":
@@ -121,6 +96,15 @@ sphinx:
           - ablog/recentposts.html
           - ablog/categories.html
           - ablog/tagcloud.html
+      launch_buttons:
+        notebook_interface        : "jupyterlab"  # The interface interactive links will activate ["classic", "jupyterlab"]
+        binderhub_url             : https://mybinder.org  # The URL of the BinderHub (e.g., https://mybinder.org)
+        jupyterhub_url            : ""  # The URL of the JupyterHub (e.g., https://datahub.berkeley.edu)
+        thebe                     : true  # Add a thebe button to pages (requires the repository to run on Binder)
+        colab_url                 : https://colab.research.google.com
+      repository_url              : https://github.com/anukchat/mlguide # The URL to your book's repository
+      path_to_docs                : "" # A path to your book's folder, relative to the repository root.
+      repository_branch           : main  # Which branch of the repository should be used when creating links
       extra_footer: |
         <div class="social-icons">
             <a href="https://twitter.com/chaturanukool" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -128,4 +112,6 @@ sphinx:
             <a href="https://github.com/anukchat" target="_blank"><i class="fab fa-github"></i></a>
             </p>
         </div>
-        
+      analytics:
+        google_analytics_id: G-GJG3T4ZRZH
+          
