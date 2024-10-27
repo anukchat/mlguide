@@ -91,7 +91,7 @@ A typical traditional ML workflow starts from
 :gutter: 0
 
 ::: {card} 1️⃣ Introduction
-:link: ../ai/classicml/concepts/01_introduction.html
+:link: ../ai/classicml/concepts/01_Introduction.html
 :link-type: url
 :shadow: md
 :margin: 3
