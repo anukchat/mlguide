@@ -1,0 +1,113 @@
+/* Clean, minimal blog listing styles */
+.blogs-container {
+    max-width: 48rem;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 3rem;
+}
+
+.postlist {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;  /* Increased spacing between posts */
+}
+
+.ablog-post {
+    border-bottom: 0.5px solid #eaeaea;
+    padding-bottom: 2rem;
+}
+
+.ablog-post:last-child {
+    border-bottom: none;
+}
+
+.ablog-post-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.ablog-post-title a {
+    color: #2563eb;  /* Blue link color */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.ablog-post-title a:hover {
+    color: #1d4ed8;
+}
+
+.ablog-post-excerpt {
+    line-height: 1.7;
+    color: #4b5563;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Number of lines you want to display */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ablog-post-expand {
+    display: inline-block;
+    color: #2563eb;
+    font-size: 1rem;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.ablog-post-expand:hover {
+    text-decoration: underline;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #111827;
+    }
+    
+    h1 {
+        color: #ffffff;
+    }
+    
+    .ablog-post-title a {
+        color: #60a5fa;
+    }
+    
+    .ablog-post-title a:hover {
+        color: #93c5fd;
+    }
+    
+    .ablog-post-excerpt {
+        color: #d1d5db;
+    }
+    
+    .ablog-post {
+        border-bottom-color: #374151;
+    }
+    
+    .ablog-post-expand {
+        color: #60a5fa;
+    }
+}
+
+/* Typography improvements */
+.ablog-post-excerpt em,
+.ablog-post-excerpt i {
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Add subtle hover effect */
+.ablog-post {
+    transition: transform 0.2s ease;
+}
+
+.ablog-post:hover {
+    transform: translateX(4px);
+}

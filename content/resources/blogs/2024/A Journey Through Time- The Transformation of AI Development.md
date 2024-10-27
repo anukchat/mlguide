@@ -1,11 +1,13 @@
 ---
 blogpost: true
-date: 2023-03-01
+category: LLM
+date: March 1, 2023
 author: Anukool Chaturvedi
 tags: AI
 language: English
 excerpt: 1
 ---
+
 # A Journey Through Time- The Transformation of AI Development
 
 I started studying about Machine Learning in 2016, when I took a famous course by Andrew Ng on Machine Learning. After a lot of breaks in between, I was able to complete it and learnt the basics.
