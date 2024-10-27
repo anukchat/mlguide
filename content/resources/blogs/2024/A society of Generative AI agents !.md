@@ -23,7 +23,7 @@ This experiment can empower interactive applications ranging from immersive envi
 So, how can all this be achieved ? This paper proposes an architecture which extends LLMs to store complete record of agent’s experiences using natural language, synthesize those memories over time into higher level reflections and retrieve them dynamically to plan a behavior at any instance.  
 
 
-![[Pasted image 20240815092123.png]]
+[!Generative AI](./images/generative_ai_agents_1.png)
 
 A simulated environment is created consisting of say 25 generative agents. Now an end user interacts with this environment using natural language and gives a scenario for the agents to work on. Say, one agent wants to throw a Valentine’s Day party, the agents then autonomously spread invitations to the party over the next two days, make new acquaintances, ask each other out on dates to the party, and coordinate to show up for the party together at the right time.
 
@@ -35,7 +35,7 @@ Such simulations which can mimic human behaviors can populate virtual spaces and
 4. Power ubiquitous computing applications and social robots and
 5. Underpin non-playable game characters that can navigate complex human relationships in an open world
 
-  ![[Pasted image 20240815092138.png]]
+  [!Generative AI 2](./images/generative_ai_agents_2.png)
 
 However, understanding human behavior is vast and complex. Although there has been progress in creating LLMs that can mimic human behavior at a single moment in time, but creating fully functional agents that can manage memories that constantly grow as new interactions, conflicts, and events arise and fade over time has to be developed.
 
