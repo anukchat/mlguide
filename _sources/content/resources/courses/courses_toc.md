@@ -6,6 +6,8 @@ Awesome list of gold standard curated courses on Machine Learning and related to
 
 :::{dropdown} **Stanford CS229: Machine Learning**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 Learn some of the basics of ML:
 
@@ -24,6 +26,8 @@ Learn some of the basics of ML:
 
 :::{dropdown} **Applied Machine Learning**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 To learn some of the most widely used techniques in ML:
 
@@ -40,6 +44,8 @@ To learn some of the most widely used techniques in ML:
 
 :::{dropdown} **Introduction to Machine Learning (Tübingen)**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 The course serves as a basic introduction to machine learning and covers key concepts in regression, classification, optimization, regularization, clustering, and dimensionality reduction.
 
@@ -57,6 +63,8 @@ The course serves as a basic introduction to machine learning and covers key con
 
 :::{dropdown} **Machine Learning Lecture (Stefan Harmeling)**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 Covers many fundamental ML concepts:
 
@@ -75,6 +83,8 @@ Covers many fundamental ML concepts:
 
 :::{dropdown} **Statistical Machine Learning (Tübingen)**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 The course covers the standard paradigms and algorithms in statistical machine learning.
 
@@ -95,6 +105,8 @@ The course covers the standard paradigms and algorithms in statistical machine l
 
 :::{dropdown} **Probabilistic Machine Learning**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 To learn the probabilistic paradigm of ML:
 
@@ -114,6 +126,8 @@ To learn the probabilistic paradigm of ML:
 
 :::{dropdown} **Neural Networks: Zero to Hero (by Andrej Karpathy)**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 Course providing an in-depth overview of neural networks.
 
@@ -127,6 +141,8 @@ Course providing an in-depth overview of neural networks.
 
 :::{dropdown} **Stanford CS230: Deep Learning (2018)**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 Covers the foundations of deep learning, how to build different neural networks(CNNs, RNNs, LSTMs, etc...), how to lead machine learning projects, and career advice for deep learning practitioners.
 
@@ -143,6 +159,8 @@ Covers the foundations of deep learning, how to build different neural networks(
 
 :::{dropdown} **Deep Learning: CS 182**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 To learn some of the widely used techniques in deep learning:
 
@@ -161,6 +179,8 @@ To learn some of the widely used techniques in deep learning:
 
 :::{dropdown} **Deep Unsupervised Learning**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 To learn the latest and most widely used techniques in deep unsupervised learning:
 
@@ -177,6 +197,8 @@ To learn the latest and most widely used techniques in deep unsupervised learnin
 
 :::{dropdown} **Foundation Models**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 To learn about foundation models like GPT-3, CLIP, Flamingo, Codex, and DINO.
 
@@ -186,6 +208,8 @@ To learn about foundation models like GPT-3, CLIP, Flamingo, Codex, and DINO.
 
 :::{dropdown} **Deep Learning (Tübingen)**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 This course introduces the practical and theoretical principles of deep neural networks.
 
@@ -203,6 +227,8 @@ This course introduces the practical and theoretical principles of deep neural n
 
 :::{dropdown} **LLMOps: Building Real-World Applications With Large Language Models**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 Learn to build modern software with LLMs using the newest tools and techniques in the field.
 
@@ -211,6 +237,8 @@ Learn to build modern software with LLMs using the newest tools and techniques i
 
 :::{dropdown} **Evaluating and Debugging Generative AI**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 You'll learn:
 
@@ -227,6 +255,8 @@ You'll learn:
 
 :::{dropdown} **ChatGPT Prompt Engineering for Developers**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 Learn how to use a large language model (LLM) to quickly build new and powerful applications.
 
@@ -235,6 +265,8 @@ Learn how to use a large language model (LLM) to quickly build new and powerful 
 
 :::{dropdown} **LangChain for LLM Application Development**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 You'll learn:
 
@@ -249,6 +281,8 @@ You'll learn:
 
 :::{dropdown} **LangChain: Chat with Your Data**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 You'll learn about:
 
@@ -264,6 +298,8 @@ You'll learn about:
 
 :::{dropdown} **Building Systems with the ChatGPT API**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 Learn how to automate complex workflows using chain calls to a large language model.
 
@@ -272,6 +308,8 @@ Learn how to automate complex workflows using chain calls to a large language mo
 
 :::{dropdown} **LangChain & Vector Databases in Production**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 Learn how to use LangChain and Vector DBs in Production:
 
@@ -286,6 +324,8 @@ Learn how to use LangChain and Vector DBs in Production:
 
 :::{dropdown} **Building LLM-Powered Apps**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 Learn how to build LLM-powered applications using LLM APIs
 
@@ -299,6 +339,8 @@ Learn how to build LLM-powered applications using LLM APIs
 
 :::{dropdown} **Full Stack LLM Bootcamp**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 To learn how to build and deploy LLM-powered applications:
 
@@ -316,6 +358,8 @@ To learn how to build and deploy LLM-powered applications:
 
 :::{dropdown} **Full Stack Deep Learning**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 To learn full-stack production deep learning:
 
@@ -334,6 +378,8 @@ To learn full-stack production deep learning:
 
 :::{dropdown} **Practical Deep Learning for Coders**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 This course covers topics such as how to:
 
@@ -351,6 +397,8 @@ This course covers topics such as how to:
 
 :::{dropdown} **Stanford MLSys Seminars**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 A seminar series on all sorts of topics related to building machine learning systems.
 
@@ -359,6 +407,8 @@ A seminar series on all sorts of topics related to building machine learning sys
 
 :::{dropdown} **Machine Learning Engineering for Production (MLOps)**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 Specialization course on MLOPs by Andrew Ng.
 
@@ -367,6 +417,8 @@ Specialization course on MLOPs by Andrew Ng.
 
 :::{dropdown} **Introduction to Deep Learning and Deep Generative Models**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 Covers the fundamental concepts of deep learning
 
@@ -385,6 +437,8 @@ Covers the fundamental concepts of deep learning
 
 :::{dropdown} **XCS224U: Natural Language Understanding (2023)**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 This course covers topics such as:
 
@@ -400,6 +454,8 @@ This course covers topics such as:
 
 :::{dropdown} **Stanford CS25: Transformers United (2023)**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 This course consists of lectures focused on Transformers, providing a deep dive and their applications
 
@@ -417,6 +473,8 @@ This course consists of lectures focused on Transformers, providing a deep dive 
 
 :::{dropdown} **NLP Course (Hugging Face)**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 Learn about different NLP concepts and how to apply language models and Transformers to NLP:
 
@@ -433,6 +491,8 @@ Learn about different NLP concepts and how to apply language models and Transfor
 
 :::{dropdown} **CS224N: Natural Language Processing with Deep Learning (Stanford)**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 To learn the latest approaches for deep learning based NLP:
 
@@ -450,6 +510,8 @@ To learn the latest approaches for deep learning based NLP:
 
 :::{dropdown} **Natural Language Understanding***
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 To learn the latest concepts in natural language understanding:
 
@@ -465,6 +527,8 @@ To learn the latest concepts in natural language understanding:
 
 :::{dropdown} **Advanced NLP** 
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 To learn advanced concepts in NLP:
 
@@ -485,6 +549,8 @@ To learn advanced concepts in NLP:
 
 :::{dropdown} **Machine Learning with Graphs (Stanford)**
 :icon: video
+:color: primary
+:animate: fade-in-slide-down
 
 Machine Learning with Graphs (Stanford)
 
