@@ -1,6 +1,6 @@
-# Industry Readings
+# Expert articles
 
-Awesome list of industry and research experts on Machine Learning and Generative AI.
+Awesome list of industry and research experts articles on Machine Learning and Generative AI.
 
 ```{note}
 This section is coming soon
