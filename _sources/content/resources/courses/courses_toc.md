@@ -4,7 +4,7 @@ Awesome list of gold standard curated courses on Machine Learning and related to
 
 ## Machine Learning
 
-:::{dropdown} **Stanford CS229: Machine Learning**
+:::{dropdown} Stanford CS229: Machine Learning
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -24,7 +24,7 @@ Learn some of the basics of ML:
 🔗 [Link to Course](https://www.youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU)
 :::
 
-:::{dropdown} **Applied Machine Learning**
+:::{dropdown} Applied Machine Learning
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -42,7 +42,7 @@ To learn some of the most widely used techniques in ML:
 🔗 [Link to Course](https://www.youtube.com/playlist?list=PL2UML_KCiC0UlY7iCQDSiGDMovaupqc83)
 :::
 
-:::{dropdown} **Introduction to Machine Learning (Tübingen)**
+:::{dropdown} Introduction to Machine Learning (Tübingen)
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -61,7 +61,7 @@ The course serves as a basic introduction to machine learning and covers key con
 🔗 [Link to Course](https://www.youtube.com/playlist?list=PL05umP7R6ij35ShKLDqccJSDntugY4FQT)
 :::
 
-:::{dropdown} **Machine Learning Lecture (Stefan Harmeling)**
+:::{dropdown} Machine Learning Lecture (Stefan Harmeling)
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -81,7 +81,7 @@ Covers many fundamental ML concepts:
 🔗 [Link to Course](https://www.youtube.com/playlist?list=PLzrCXlf6ypbxS5OYOY3EN_0u2fDuIT6Gt)
 :::
 
-:::{dropdown} **Statistical Machine Learning (Tübingen)**
+:::{dropdown} Statistical Machine Learning (Tübingen)
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -103,7 +103,7 @@ The course covers the standard paradigms and algorithms in statistical machine l
 🔗 [Link to Course](https://www.youtube.com/playlist?list=PL05umP7R6ij2XCvrRzLokX6EoHWaGA2cC)
 :::
 
-:::{dropdown} **Probabilistic Machine Learning**
+:::{dropdown} Probabilistic Machine Learning
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -124,7 +124,7 @@ To learn the probabilistic paradigm of ML:
 
 ## Deep Learning
 
-:::{dropdown} **Neural Networks: Zero to Hero (by Andrej Karpathy)**
+:::{dropdown} Neural Networks: Zero to Hero (by Andrej Karpathy)
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -139,7 +139,7 @@ Course providing an in-depth overview of neural networks.
 🔗 [Link to Course](https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ)
 :::
 
-:::{dropdown} **Stanford CS230: Deep Learning (2018)**
+:::{dropdown} Stanford CS230: Deep Learning (2018)
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -157,7 +157,7 @@ Covers the foundations of deep learning, how to build different neural networks(
 
 🔗 [Link to Course](https://youtube.com/playlist?list=PLoROMvodv4rOABXSygHTsbvUz4G_YQhOb) 🔗 [Link to Materials](https://cs230.stanford.edu/syllabus/)
 
-:::{dropdown} **Deep Learning: CS 182**
+:::{dropdown} Deep Learning: CS 182
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -177,7 +177,7 @@ To learn some of the widely used techniques in deep learning:
 🔗 [Link to Course](https://www.youtube.com/playlist?list=PL_iWQOsE6TfVmKkQHucjPAoRtIJYt8a5A)
 :::
 
-:::{dropdown} **Deep Unsupervised Learning**
+:::{dropdown} Deep Unsupervised Learning
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -195,7 +195,7 @@ To learn the latest and most widely used techniques in deep unsupervised learnin
 🔗 [Link to Course](https://www.youtube.com/playlist?list=PLwRJQ4m4UJjPiJP3691u-qWwPGVKzSlNP)
 :::
 
-:::{dropdown} **Foundation Models**
+:::{dropdown} Foundation Models
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -206,7 +206,7 @@ To learn about foundation models like GPT-3, CLIP, Flamingo, Codex, and DINO.
 
 :::
 
-:::{dropdown} **Deep Learning (Tübingen)**
+:::{dropdown} Deep Learning (Tübingen)
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -225,7 +225,7 @@ This course introduces the practical and theoretical principles of deep neural n
 
 ## Practical Machine Learning
 
-:::{dropdown} **LLMOps: Building Real-World Applications With Large Language Models**
+:::{dropdown} LLMOps: Building Real-World Applications With Large Language Models
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -235,7 +235,7 @@ Learn to build modern software with LLMs using the newest tools and techniques i
 🔗 [Link to Course](https://www.comet.com/site/llm-course/)
 :::
 
-:::{dropdown} **Evaluating and Debugging Generative AI**
+:::{dropdown} Evaluating and Debugging Generative AI
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -253,7 +253,7 @@ You'll learn:
 🔗 [Link to Course](https://www.deeplearning.ai/short-courses/evaluating-debugging-generative-ai/)
 :::
 
-:::{dropdown} **ChatGPT Prompt Engineering for Developers**
+:::{dropdown} ChatGPT Prompt Engineering for Developers
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -263,7 +263,7 @@ Learn how to use a large language model (LLM) to quickly build new and powerful 
 🔗 [Link to Course](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/)
 :::
 
-:::{dropdown} **LangChain for LLM Application Development**
+:::{dropdown} LangChain for LLM Application Development
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -279,7 +279,7 @@ You'll learn:
 🔗 [Link to Course](https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/)
 :::
 
-:::{dropdown} **LangChain: Chat with Your Data**
+:::{dropdown} LangChain: Chat with Your Data
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -296,7 +296,7 @@ You'll learn about:
 🔗 [Link to Course](https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/)
 :::
 
-:::{dropdown} **Building Systems with the ChatGPT API**
+:::{dropdown} Building Systems with the ChatGPT API
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -306,7 +306,7 @@ Learn how to automate complex workflows using chain calls to a large language mo
 🔗 [Link to Course](https://www.deeplearning.ai/short-courses/building-systems-with-chatgpt/)
 :::
 
-:::{dropdown} **LangChain & Vector Databases in Production**
+:::{dropdown} LangChain & Vector Databases in Production
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -322,7 +322,7 @@ Learn how to use LangChain and Vector DBs in Production:
 🔗 [Link to Course](https://learn.activeloop.ai/courses/langchain)
 :::
 
-:::{dropdown} **Building LLM-Powered Apps**
+:::{dropdown} Building LLM-Powered Apps
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -337,7 +337,7 @@ Learn how to build LLM-powered applications using LLM APIs
 🔗 [Link to Course](https://www.wandb.courses/courses/building-llm-powered-apps)
 :::
 
-:::{dropdown} **Full Stack LLM Bootcamp**
+:::{dropdown} Full Stack LLM Bootcamp
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -356,7 +356,7 @@ To learn how to build and deploy LLM-powered applications:
 🔗 [Link to Course](https://fullstackdeeplearning.com/llm-bootcamp/spring-2023/)
 :::
 
-:::{dropdown} **Full Stack Deep Learning**
+:::{dropdown} Full Stack Deep Learning
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -376,7 +376,7 @@ To learn full-stack production deep learning:
 🔗 [Link to Course](https://www.youtube.com/playlist?list=PL1T8fO7ArWlcWg04OgNiJy91PywMKT2lv)
 :::
 
-:::{dropdown} **Practical Deep Learning for Coders**
+:::{dropdown} Practical Deep Learning for Coders
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -395,7 +395,7 @@ This course covers topics such as how to:
 🔗 [Link to Course - Part 2](https://www.youtube.com/watch?v=_7rMfsA24Ls&ab_channel=JeremyHoward)
 :::
 
-:::{dropdown} **Stanford MLSys Seminars**
+:::{dropdown} Stanford MLSys Seminars
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -405,7 +405,7 @@ A seminar series on all sorts of topics related to building machine learning sys
 🔗 [Link to Lectures](https://www.youtube.com/playlist?list=PLSrTvUm384I9PV10koj_cqit9OfbJXEkq)
 :::
 
-:::{dropdown} **Machine Learning Engineering for Production (MLOps)**
+:::{dropdown} Machine Learning Engineering for Production (MLOps)
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -415,7 +415,7 @@ Specialization course on MLOPs by Andrew Ng.
 🔗 [Link to Lectures](https://www.youtube.com/playlist?list=PLkDaE6sCZn6GMoA0wbpJLi3t34Gd8l0aK)
 :::
 
-:::{dropdown} **Introduction to Deep Learning and Deep Generative Models**
+:::{dropdown} Introduction to Deep Learning and Deep Generative Models
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -435,7 +435,7 @@ Covers the fundamental concepts of deep learning
 
 ## Natural Language Processing
 
-:::{dropdown} **XCS224U: Natural Language Understanding (2023)**
+:::{dropdown} XCS224U: Natural Language Understanding (2023)
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -452,7 +452,7 @@ This course covers topics such as:
 🔗 [Link to Course](https://www.youtube.com/playlist?list=PLoROMvodv4rOwvldxftJTmoR3kRcWkJBp)
 :::
 
-:::{dropdown} **Stanford CS25: Transformers United (2023)**
+:::{dropdown} Stanford CS25: Transformers United (2023)
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -471,7 +471,7 @@ This course consists of lectures focused on Transformers, providing a deep dive 
 🔗 [Link to Course](https://www.youtube.com/playlist?list=PLoROMvodv4rNiJRchCzutFw5ItR_Z27CM)
 :::
 
-:::{dropdown} **NLP Course (Hugging Face)**
+:::{dropdown} NLP Course (Hugging Face)
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -489,7 +489,7 @@ Learn about different NLP concepts and how to apply language models and Transfor
 🔗 [Link to Course](https://www.youtube.com/playlist?list=PLo2EIpI_JMQvWfQndUesu0nPBAtZ9gP1o)
 :::
 
-:::{dropdown} **CS224N: Natural Language Processing with Deep Learning (Stanford)**
+:::{dropdown} CS224N: Natural Language Processing with Deep Learning (Stanford)
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -508,7 +508,7 @@ To learn the latest approaches for deep learning based NLP:
 🔗 [Link to Course](https://www.youtube.com/playlist?list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ)
 :::
 
-:::{dropdown} **Natural Language Understanding***
+:::{dropdown} Natural Language Understanding*
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -525,7 +525,7 @@ To learn the latest concepts in natural language understanding:
 🔗 [Link to Course](https://www.youtube.com/playlist?list=PLoROMvodv4rPt5D0zs3YhbWSZA8Q_DyiJ)
 :::
 
-:::{dropdown} **Advanced NLP** 
+:::{dropdown} Advanced NLP 
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
@@ -547,7 +547,7 @@ To learn advanced concepts in NLP:
 
 ## Graph Machine Learning
 
-:::{dropdown} **Machine Learning with Graphs (Stanford)**
+:::{dropdown} Machine Learning with Graphs (Stanford)
 :icon: video
 :color: primary
 :animate: fade-in-slide-down
