@@ -1,0 +1,1346 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Building Reliable Local Agents with LangGraph, LLaMA3, and Elasticsearch</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=adbe4504" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=2a9655cd" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GJG3T4ZRZH"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-GJG3T4ZRZH');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-GJG3T4ZRZH');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/resources/blogs/2024/Building Reliable Local Agents with LangGraph, LLaMA3, and Elasticsearch';</script>
+    <script src="../../../../_static/subscription_overlay.js?v=2e74803e"></script>
+    <link rel="canonical" href="https://mlguide.in/content/resources/blogs/2024/Building Reliable Local Agents with LangGraph, LLaMA3, and Elasticsearch.html" />
+    <link rel="icon" href="../../../../_static/logo.png"/>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" /> 
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  href="../../blogs/atom.xml"
+  title="Blog"
+/>
+  
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt=" - Home"/>
+    <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark pst-js-only" alt=" - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../python/python_toc.html">Python</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/1_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/2_syntax_and_symantics.html">Syntax &amp; Symantics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/3_functions_and_modules.html">Functions &amp; Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/4_Object_Oriented.html">Object Oriented Programming</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/5_Exceptions_Handling.html">Exceptions Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/6_Handling_Files.html">Handling Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/7_Datetime_Operations.html">Datetime Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/8_advanced.html">Advanced Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/conceptual_topics.html">Interpreter vs Compiler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../python/exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../statistics/statistics-101.html">Statistics</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../mathematics/mathematics_toc.html">Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_vectors.html">Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/linear-algebra_matrices.html">Matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../mathematics/dissimilarity_measures.html">Similarity measure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../analytics/intro_analytics.html">Data analytics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/numpy/numpy_toc.html">Numpy</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/001_Python_NumPy.html">NumPy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/numpy/Python_Numpy_Exercises_with_hints.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/pandas/pandas_toc.html">Pandas</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/001_Python_Pandas_DataFrame.html">Pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/002_Pandas_HowTos.html">How To's</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/pandas/003_Pandas_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../analytics/matplotlib/matplotlib_toc.html">Matplotlib</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/001_Python_Matplotlib.html">Matplotlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../analytics/matplotlib/003_Python_Matplotlib_Exercises.html">Exercises</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../ai/Introduction_to_ml.html">Machine Learning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/01_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/000_Data_Exploration.html">Exploratory Data Analysis</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/001_Data_Preparation.html">Data Preparation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/002_Regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/003_Classification.html">Classfication</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/004_Clustering.html">Clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/005_Evaluation.html">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/006_Advanced.html">K-Fold Cross Validation</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/classicml/concepts/007_Dimensionality_Reduction.html">Dimensionality Reduction</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../ai/neural/neural_toc.html">Neural Networks</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/neural/concepts/001_Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/neural/concepts/002_Backpropogation.html">Backpropogation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/neural/concepts/003_Activations.html">Activations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/neural/concepts/004_Optimization.html">Optimizations</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../ai/neural/concepts/pytorch/pytorch_toc.html">Pytorch</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../ai/neural/concepts/pytorch/00_pytorch_fundamentals.html">Fundamentals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ai/neural/concepts/pytorch/01_pytorch_workflow.html">Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ai/neural/concepts/pytorch/02_pytorch_classification.html">Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ai/neural/concepts/pytorch/03_pytorch_computer_vision.html">Computer Vision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ai/neural/concepts/pytorch/04_pytorch_custom_datasets.html">Custom Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../ai/neural/concepts/pytorch/06_pytorch_transfer_learning.html">Transfer Learning</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../ai/nlp/nlp_intro.html">Natural Language Processing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/001_traditional_nlp.html">Word Vectors &amp; Dependency Parsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/002_embeddings.html">Embeddings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/003_ngram_cnn.html">N Gram using CNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/004_word2vec.html">Word2Vec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/005_language_model_basic.html">Neural Language Model</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/006_language_model_rnn.html">Recurrent Neural Network (RNN)</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/007_encoder_decoder.html">Encoder Decoder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/008_attention.html">Attention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/009_transformer.html">Transformer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/010_llm_tasks.html">Language Modelling Tasks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../ai/nlp/concepts/011_appendix.html">Appendix</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../genai/introduction.html">Generative AI</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../genai/prompt-engineering/intro.html">Prompt Engineering</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/prompt-engineering/basic_prompting.html">Basic Prompting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/prompt-engineering/advance_prompts.html">Advanced Prompting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/prompt-engineering/prompts-applications.html">Prompts Applications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/prompt-engineering/prompts-adversarial.html">Prompts Adversarial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/prompt-engineering/prompts-reliability.html">Reliability</a></li>
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../genai/langchain/intro.html">Langchain</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/01_LangChain_Fundamentals.html">Langchain Cookbook 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/02_LangChain_Use_Cases.html">Langchain Cookbook 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../genai/langchain/projects/project_toc.html">Projects</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../genai/RAG/intro.html">RAG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../genai/agents/intro.html">Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../genai/llm-recipes/intro.html">LLM Recipes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../genai/evaluations/intro.html">Evaluations</a></li>
+</ul>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../blogs_toc.html">Blogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../courses/courses_toc.html">Courses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../books/books_toc.html">Books</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../github/awesome-repos.html">Github</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readings/articles.html">News</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readings/papers_toc.html">Research papers</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">About</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../intro_me.html">About me</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/content/resources/blogs/2024/Building Reliable Local Agents with LangGraph, LLaMA3, and Elasticsearch.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Building Reliable Local Agents with LangGraph, LLaMA3, and Elasticsearch</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-rag-pipeline-with-langgraph">Building the RAG Pipeline with LangGraph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-advanced-rag-features-with-langgraph">Implementing Advanced RAG Features with LangGraph</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                   <section class="tex2jax_ignore mathjax_ignore" id="building-reliable-local-agents-with-langgraph-llama3-and-elasticsearch">
+<h1>Building Reliable Local Agents with LangGraph, LLaMA3, and Elasticsearch<a class="headerlink" href="#building-reliable-local-agents-with-langgraph-llama3-and-elasticsearch" title="Link to this heading">#</a></h1>
+<p>This post details the construction of a robust local agent, leveraging the capabilities of LangGraph, LLaMA3, and Elasticsearch. <mark>We address the challenge of creating reliable local agents, which often suffer from inconsistencies and inaccuracies due to their reliance on limited context.</mark> This blog post is a companion piece to the original article published by Elastic Search Labs, which can be found here: <a class="reference external" href="https://www.elastic.co/search-labs/blog/local-rag-agent-elasticsearch-langgraph-llama3">https://www.elastic.co/search-labs/blog/local-rag-agent-elasticsearch-langgraph-llama3</a>. <mark>Our solution employs LangGraph to orchestrate the agent’s workflow, LLaMA3 for its reasoning and generation capabilities, and Elasticsearch for efficient and accurate information retrieval.</mark> This combination allows for a more dependable agent, capable of handling complex tasks with improved performance.</p>
+<section id="building-the-rag-pipeline-with-langgraph">
+<h2>Building the RAG Pipeline with LangGraph<a class="headerlink" href="#building-the-rag-pipeline-with-langgraph" title="Link to this heading">#</a></h2>
+<p>This section details the implementation of the RAG pipeline using LangGraph, focusing on indexing data into Elasticsearch, creating a retrieval grader, and setting up the generator for answering user questions.</p>
+<p>First, we will need to load, process, and index our targetted data into our Vector Store. In this tutorial, we will be indexing documents from these respective Blog posts:</p>
+<ul class="simple">
+<li><p>“<a class="reference external" href="https://lilianweng.github.io/posts/2023-06-23-agent/">https://lilianweng.github.io/posts/2023-06-23-agent/</a>”,</p></li>
+<li><p>“<a class="reference external" href="https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/">https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/</a>”,</p></li>
+<li><p>“<a class="reference external" href="https://lilianweng.github.io/posts/2023-10-25-adv-attack-llm/">https://lilianweng.github.io/posts/2023-10-25-adv-attack-llm/</a>”,</p></li>
+</ul>
+<p>Into our vector store, which will then add as a data source for our RAG implementation, as the index is the key component of our RAG flow without which we won’t be able to retrive the documents.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Index</span>
+
+<span class="kn">from</span> <span class="nn">langchain_community.document_loaders</span> <span class="kn">import</span> <span class="n">WebBaseLoader</span>
+<span class="kn">from</span> <span class="nn">langchain_nomic.embeddings</span> <span class="kn">import</span> <span class="n">NomicEmbeddings</span>
+<span class="kn">from</span> <span class="nn">langchain_elasticsearch</span> <span class="kn">import</span> <span class="n">ElasticsearchStore</span>
+<span class="kn">from</span> <span class="nn">langchain_text_splitters</span> <span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
+
+<span class="n">urls</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;https://lilianweng.github.io/posts/2023-06-23-agent/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;https://lilianweng.github.io/posts/2023-10-25-adv-attack-llm/&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">docs</span> <span class="o">=</span> <span class="p">[</span><span class="n">WebBaseLoader</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">]</span>
+<span class="n">docs_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">docs</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
+
+<span class="n">text_splitter</span> <span class="o">=</span> <span class="n">RecursiveCharacterTextSplitter</span><span class="o">.</span><span class="n">from_tiktoken_encoder</span><span class="p">(</span>
+    <span class="n">chunk_size</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">chunk_overlap</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">doc_splits</span> <span class="o">=</span> <span class="n">text_splitter</span><span class="o">.</span><span class="n">split_documents</span><span class="p">(</span><span class="n">docs_list</span><span class="p">)</span>
+<span class="n">documents</span><span class="o">=</span><span class="n">doc_splits</span>
+
+<span class="n">embeddings</span><span class="o">=</span><span class="n">NomicEmbeddings</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;nomic-embed-text-v1.5&quot;</span><span class="p">,</span> <span class="n">inference_mode</span><span class="o">=</span><span class="s2">&quot;local&quot;</span><span class="p">)</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">ElasticsearchStore</span><span class="o">.</span><span class="n">from_documents</span><span class="p">(</span>
+    <span class="n">documents</span><span class="p">,</span>
+    <span class="n">embeddings</span><span class="p">,</span>
+    <span class="n">es_url</span><span class="o">=</span><span class="s2">&quot;https://pratikrana23.es.us-central1.gcp.cloud.es.io&quot;</span><span class="p">,</span>
+    <span class="n">es_user</span><span class="o">=</span><span class="s2">&quot;elastic&quot;</span><span class="p">,</span>
+    <span class="n">es_password</span><span class="o">=</span><span class="s2">&quot;9Y9Xwz0J65gPCbJeUoSPdzHO&quot;</span><span class="p">,</span>
+    <span class="n">index_name</span><span class="o">=</span><span class="s2">&quot;rag-elastic&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">retriever</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">as_retriever</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Code Description:</strong></p>
+<ul class="simple">
+<li><p>A list of URLs is defined, pointing to three different blog posts on Lilian Weng’s website.</p></li>
+<li><p>The content from each URL is loaded using <code class="docutils literal notranslate"><span class="pre">WebBaseLoader</span></code>, and the result is stored in the <code class="docutils literal notranslate"><span class="pre">docs</span></code> list.</p></li>
+<li><p>The loaded documents are stored as a list of lists (each containing one or more documents). These lists are flattened into a single list using a list comprehension.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">RecursiveCharacterTextSplitter</span></code> is initialized with a specific chunk size (250 characters) and no overlap. This is used to split the documents into smaller chunks.</p></li>
+<li><p>The split chunks are stored in the <code class="docutils literal notranslate"><span class="pre">documents</span></code> variable.</p></li>
+<li><p>An instance of <code class="docutils literal notranslate"><span class="pre">NomicEmbeddings</span></code> is created to generate embeddings for the document chunks. The model used is specified as <code class="docutils literal notranslate"><span class="pre">&quot;nomic-embed-text-v1.5&quot;</span></code>, and inference is done locally.</p></li>
+<li><p>The documents, along with their embeddings, are stored in an Elasticsearch database. The connection details (URL, username, password) and the index name are provided.</p></li>
+<li><p>Finally, a retriever object is created from the Elasticsearch database, which can be used to query and retrieve documents based on their embeddings.</p></li>
+</ul>
+<p>Once we index our respective documents into the data store, we will need to create a grader that evaluates the relevance of our retrieved document to a given user question. We will leverage <code class="docutils literal notranslate"><span class="pre">llama3</span></code> to perform this task. The prompt instructs the model to grade a document and return a JSON object with a score of <code class="docutils literal notranslate"><span class="pre">yes</span></code> or <code class="docutils literal notranslate"><span class="pre">no</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieval Grader</span>
+
+<span class="kn">from</span> <span class="nn">langchain_community.chat_models</span> <span class="kn">import</span> <span class="n">ChatOllama</span>
+<span class="kn">from</span> <span class="nn">langchain_core.output_parsers</span> <span class="kn">import</span> <span class="n">JsonOutputParser</span>
+<span class="kn">from</span> <span class="nn">langchain_core.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+
+<span class="c1"># LLM</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">local_llm</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;&lt;|begin_of_text|&gt;&lt;|start_header_id|&gt;system&lt;|end_header_id|&gt; You are a grader assessing relevance </span>
+<span class="s2">    of a retrieved document to a user question. If the document contains keywords related to the user question, </span>
+<span class="s2">    grade it as relevant. It does not need to be a stringent test. The goal is to filter out erroneous retrievals. </span><span class="se">\n</span>
+<span class="s2">    Give a binary score &#39;yes&#39; or &#39;no&#39; score to indicate whether the document is relevant to the question. </span><span class="se">\n</span>
+<span class="s2">    Provide the binary score as a JSON with a single key &#39;score&#39; and no premable or explanation.</span>
+<span class="s2">     &lt;|eot_id|&gt;&lt;|start_header_id|&gt;user&lt;|end_header_id|&gt;</span>
+<span class="s2">    Here is the retrieved document: </span><span class="se">\n\n</span><span class="s2"> </span><span class="si">{document}</span><span class="s2"> </span><span class="se">\n\n</span>
+<span class="s2">    Here is the user question: </span><span class="si">{question}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> &lt;|eot_id|&gt;&lt;|start_header_id|&gt;assistant&lt;|end_header_id|&gt;</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">,</span> <span class="s2">&quot;document&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">retrieval_grader</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">JsonOutputParser</span><span class="p">()</span>
+<span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;agent memory&quot;</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+<span class="n">doc_txt</span> <span class="o">=</span> <span class="n">docs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">page_content</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">retrieval_grader</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="s2">&quot;document&quot;</span><span class="p">:</span> <span class="n">doc_txt</span><span class="p">}))</span>
+</pre></div>
+</div>
+<p><strong>Code Description:</strong></p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">ChatOllama</span></code> model is instantiated with a specific configuration. The model is set to output responses in JSON format with a temperature of 0, meaning the output is deterministic (no randomness).</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">PromptTemplate</span></code> is defined, which sets up the instructions that will be sent to the LLM. This prompt instructs the LLM to act as a grader that assesses whether a retrieved document is relevant to a user’s question.</p></li>
+<li><p>The grader’s task is simple: if the document contains keywords related to the user question, it should return a binary score (<code class="docutils literal notranslate"><span class="pre">yes</span></code> or <code class="docutils literal notranslate"><span class="pre">no</span></code>) indicating relevance.</p></li>
+<li><p>The response is expected in a JSON format with a single key <code class="docutils literal notranslate"><span class="pre">score</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">retrieval_grader</span></code> is created by chaining the <code class="docutils literal notranslate"><span class="pre">prompt</span></code>, <code class="docutils literal notranslate"><span class="pre">llm</span></code>, and <code class="docutils literal notranslate"><span class="pre">JsonOutputParser</span></code> together. This forms a pipeline where the user’s question and the document are first formatted by the <code class="docutils literal notranslate"><span class="pre">PromptTemplate</span></code>, then processed by the LLM, and finally, the output is parsed by <code class="docutils literal notranslate"><span class="pre">JsonOutputParser</span></code>.</p></li>
+<li><p>A sample question (“agent memory”) is defined.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">retriever.invoke(question)</span></code> method is used to fetch documents related to the question.</p></li>
+<li><p>The content of the second retrieved document (<code class="docutils literal notranslate"><span class="pre">docs[1]</span></code>) is extracted.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">retrieval_grader</span></code> pipeline is then invoked with the question and document as inputs. The output is the JSON-formatted binary score indicating whether the document is relevant.</p></li>
+</ul>
+<p>Moving on, we need to script code that can generate a concise answer to the user’s question using context from the retrieved documents.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate</span>
+
+<span class="kn">from</span> <span class="nn">langchain_core.output_parsers</span> <span class="kn">import</span> <span class="n">StrOutputParser</span>
+<span class="kn">from</span> <span class="nn">langchain_core.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+
+<span class="c1"># Prompt</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;&lt;|begin_of_text|&gt;&lt;|start_header_id|&gt;system&lt;|end_header_id|&gt; You are an assistant for question-answering tasks. </span>
+<span class="s2">    Use the following pieces of retrieved context to answer the question. If you don&#39;t know the answer, just say that you don&#39;t know. </span>
+<span class="s2">    Use three sentences maximum and keep the answer concise &lt;|eot_id|&gt;&lt;|start_header_id|&gt;user&lt;|end_header_id|&gt;</span>
+<span class="s2">    Question: </span><span class="si">{question}</span><span class="s2"> </span>
+<span class="s2">    Context: </span><span class="si">{context}</span><span class="s2"> </span>
+<span class="s2">    Answer: &lt;|eot_id|&gt;&lt;|start_header_id|&gt;assistant&lt;|end_header_id|&gt;&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">,</span> <span class="s2">&quot;document&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">local_llm</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+
+<span class="c1"># Post-processing</span>
+<span class="k">def</span> <span class="nf">format_docs</span><span class="p">(</span><span class="n">docs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">page_content</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">)</span>
+
+
+<span class="c1"># Chain</span>
+<span class="n">rag_chain</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">StrOutputParser</span><span class="p">()</span>
+
+<span class="c1"># Run</span>
+<span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;agent memory&quot;</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+<span class="n">generation</span> <span class="o">=</span> <span class="n">rag_chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">docs</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">generation</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Code Description:</strong></p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">prompt</span></code></strong>: This is a <code class="docutils literal notranslate"><span class="pre">PromptTemplate</span></code> object that defines the structure of the prompt sent to the language model (LLM). The prompt instructs the LLM to act as an assistant for answering questions. The LLM is provided with a question and context (retrieved documents) and is instructed to generate a concise answer in three sentences or fewer. If the LLM doesn’t know the answer, it is told to simply say that it doesn’t know.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">llm</span></code></strong>: This initializes the LLM using the <code class="docutils literal notranslate"><span class="pre">ChatOllama</span></code> model with a temperature of 0, which ensures that the output is more deterministic and less random.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">format_docs(docs)</span></code></strong>: This function takes a list of document objects and concatenates their content (<code class="docutils literal notranslate"><span class="pre">page_content</span></code>) into a single string, with each document’s content separated by a double newline (<code class="docutils literal notranslate"><span class="pre">\n\n</span></code>). This formatted string is then used as the <code class="docutils literal notranslate"><span class="pre">context</span></code> in the prompt.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">rag_chain</span></code></strong>: This creates a processing chain that combines the <code class="docutils literal notranslate"><span class="pre">prompt</span></code>, the LLM (<code class="docutils literal notranslate"><span class="pre">llm</span></code>), and the <code class="docutils literal notranslate"><span class="pre">StrOutputParser</span></code>. The <code class="docutils literal notranslate"><span class="pre">prompt</span></code> is filled with the <code class="docutils literal notranslate"><span class="pre">question</span></code> and <code class="docutils literal notranslate"><span class="pre">context</span></code>, sent to the LLM for processing, and the output is parsed into a string using <code class="docutils literal notranslate"><span class="pre">StrOutputParser</span></code>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">Running</span> <span class="pre">the</span> <span class="pre">chain</span></code></strong>:</p>
+<ul>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">question</span></code></strong>: The user’s question, in this case, “agent memory.”</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">docs</span></code></strong>: A list of documents retrieved using the <code class="docutils literal notranslate"><span class="pre">retriever.invoke(question)</span></code> function, which retrieves documents relevant to the <code class="docutils literal notranslate"><span class="pre">question</span></code>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">format_docs(docs)</span></code></strong>: Formats the retrieved documents into a single string of context, separated by double newlines.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">rag_chain.invoke({&quot;context&quot;:</span> <span class="pre">format_docs(docs),</span> <span class="pre">&quot;question&quot;:</span> <span class="pre">question})</span></code></strong>: This line executes the chain. It passes the formatted context and question into the <code class="docutils literal notranslate"><span class="pre">rag_chain</span></code>, which processes the input through the LLM and returns the generated answer.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">print(generation)</span></code></strong>: Outputs the generated answer to the console.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="" src="https://pbs.twimg.com/media/GchFneqaMAY4eq4?format=jpg&amp;name=orig" /></p>
+</section>
+<section id="implementing-advanced-rag-features-with-langgraph">
+<h2>Implementing Advanced RAG Features with LangGraph<a class="headerlink" href="#implementing-advanced-rag-features-with-langgraph" title="Link to this heading">#</a></h2>
+<p>This section focuses on implementing advanced RAG features, including hallucination and answer grading, a router for directing questions, web search integration, and the overall control flow using LangGraph.</p>
+<p>To enhance our RAG system, we incorporate several advanced features. First, we implement a <strong>retrieval grader</strong> that assesses the relevance of retrieved documents to a given user question. This is achieved using a <code class="docutils literal notranslate"><span class="pre">ChatOllama</span></code> model with a specific prompt, instructing the LLM to return a JSON with a score of <code class="docutils literal notranslate"><span class="pre">yes</span></code> or <code class="docutils literal notranslate"><span class="pre">no</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain_community.chat_models</span> <span class="kn">import</span> <span class="n">ChatOllama</span>
+<span class="kn">from</span> <span class="nn">langchain_core.output_parsers</span> <span class="kn">import</span> <span class="n">JsonOutputParser</span>
+<span class="kn">from</span> <span class="nn">langchain_core.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+
+<span class="c1"># LLM</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">local_llm</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;&lt;|begin_of_text|&gt;&lt;|start_header_id|&gt;system&lt;|end_header_id|&gt; You are a grader assessing relevance </span>
+<span class="s2">    of a retrieved document to a user question. If the document contains keywords related to the user question, </span>
+<span class="s2">    grade it as relevant. It does not need to be a stringent test. The goal is to filter out erroneous retrievals. </span><span class="se">\n</span>
+<span class="s2">    Give a binary score &#39;yes&#39; or &#39;no&#39; score to indicate whether the document is relevant to the question. </span><span class="se">\n</span>
+<span class="s2">    Provide the binary score as a JSON with a single key &#39;score&#39; and no premable or explanation.</span>
+<span class="s2">     &lt;|eot_id|&gt;&lt;|start_header_id|&gt;user&lt;|end_header_id|&gt;</span>
+<span class="s2">    Here is the retrieved document: </span><span class="se">\n\n</span><span class="s2"> </span><span class="si">{document}</span><span class="s2"> </span><span class="se">\n\n</span>
+<span class="s2">    Here is the user question: </span><span class="si">{question}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> &lt;|eot_id|&gt;&lt;|start_header_id|&gt;assistant&lt;|end_header_id|&gt;</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">,</span> <span class="s2">&quot;document&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">retrieval_grader</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">JsonOutputParser</span><span class="p">()</span>
+<span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;agent memory&quot;</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+<span class="n">doc_txt</span> <span class="o">=</span> <span class="n">docs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">page_content</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">retrieval_grader</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="s2">&quot;document&quot;</span><span class="p">:</span> <span class="n">doc_txt</span><span class="p">}))</span>
+</pre></div>
+</div>
+<p>Next, we need a <strong>generator</strong> to produce concise answers using the context from the retrieved documents. This involves a prompt template that instructs the LLM to answer the question using the provided context, limiting the answer to three sentences.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain_core.output_parsers</span> <span class="kn">import</span> <span class="n">StrOutputParser</span>
+<span class="kn">from</span> <span class="nn">langchain_core.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+
+<span class="c1"># Prompt</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;&lt;|begin_of_text|&gt;&lt;|start_header_id|&gt;system&lt;|end_header_id|&gt; You are an assistant for question-answering tasks. </span>
+<span class="s2">    Use the following pieces of retrieved context to answer the question. If you don&#39;t know the answer, just say that you don&#39;t know. </span>
+<span class="s2">    Use three sentences maximum and keep the answer concise &lt;|eot_id|&gt;&lt;|start_header_id|&gt;user&lt;|end_header_id|&gt;</span>
+<span class="s2">    Question: </span><span class="si">{question}</span><span class="s2"> </span>
+<span class="s2">    Context: </span><span class="si">{context}</span><span class="s2"> </span>
+<span class="s2">    Answer: &lt;|eot_id|&gt;&lt;|start_header_id|&gt;assistant&lt;|end_header_id|&gt;&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">,</span> <span class="s2">&quot;document&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">local_llm</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+
+<span class="c1"># Post-processing</span>
+<span class="k">def</span> <span class="nf">format_docs</span><span class="p">(</span><span class="n">docs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">page_content</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">)</span>
+
+
+<span class="c1"># Chain</span>
+<span class="n">rag_chain</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">StrOutputParser</span><span class="p">()</span>
+
+<span class="c1"># Run</span>
+<span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;agent memory&quot;</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+<span class="n">generation</span> <span class="o">=</span> <span class="n">rag_chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">docs</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">generation</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To ensure the quality of generated content, we implement two graders: a <strong>hallucination grader</strong> and an <strong>answer grader</strong>. The hallucination grader checks if the generated answer is grounded in the provided documents, while the answer grader assesses if the answer is useful in resolving the question. Both graders return a binary score in JSON format.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hallucination Grader</span>
+
+<span class="c1"># LLM</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">local_llm</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Prompt</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot; &lt;|begin_of_text|&gt;&lt;|start_header_id|&gt;system&lt;|end_header_id|&gt; You are a grader assessing whether </span>
+<span class="s2">    an answer is grounded in / supported by a set of facts. Give a binary &#39;yes&#39; or &#39;no&#39; score to indicate </span>
+<span class="s2">    whether the answer is grounded in / supported by a set of facts. Provide the binary score as a JSON with a </span>
+<span class="s2">    single key &#39;score&#39; and no preamble or explanation. &lt;|eot_id|&gt;&lt;|start_header_id|&gt;user&lt;|end_header_id|&gt;</span>
+<span class="s2">    Here are the facts:</span>
+<span class="s2">    </span><span class="se">\n</span><span class="s2"> ------- </span><span class="se">\n</span>
+<span class="s2">    </span><span class="si">{documents}</span><span class="s2"> </span>
+<span class="s2">    </span><span class="se">\n</span><span class="s2"> ------- </span><span class="se">\n</span>
+<span class="s2">    Here is the answer: </span><span class="si">{generation}</span><span class="s2">  &lt;|eot_id|&gt;&lt;|start_header_id|&gt;assistant&lt;|end_header_id|&gt;&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;generation&quot;</span><span class="p">,</span> <span class="s2">&quot;documents&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">hallucination_grader</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">JsonOutputParser</span><span class="p">()</span>
+<span class="n">hallucination_grader</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="n">docs</span><span class="p">,</span> <span class="s2">&quot;generation&quot;</span><span class="p">:</span> <span class="n">generation</span><span class="p">})</span>
+
+<span class="c1">### Answer Grader</span>
+
+<span class="c1"># LLM</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">local_llm</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Prompt</span>
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;&lt;|begin_of_text|&gt;&lt;|start_header_id|&gt;system&lt;|end_header_id|&gt; You are a grader assessing whether an </span>
+<span class="s2">    answer is useful to resolve a question. Give a binary score &#39;yes&#39; or &#39;no&#39; to indicate whether the answer is </span>
+<span class="s2">    useful to resolve a question. Provide the binary score as a JSON with a single key &#39;score&#39; and no preamble or explanation.</span>
+<span class="s2">     &lt;|eot_id|&gt;&lt;|start_header_id|&gt;user&lt;|end_header_id|&gt; Here is the answer:</span>
+<span class="s2">    </span><span class="se">\n</span><span class="s2"> ------- </span><span class="se">\n</span>
+<span class="s2">    </span><span class="si">{generation}</span><span class="s2"> </span>
+<span class="s2">    </span><span class="se">\n</span><span class="s2"> ------- </span><span class="se">\n</span>
+<span class="s2">    Here is the question: </span><span class="si">{question}</span><span class="s2"> &lt;|eot_id|&gt;&lt;|start_header_id|&gt;assistant&lt;|end_header_id|&gt;&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;generation&quot;</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">answer_grader</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">JsonOutputParser</span><span class="p">()</span>
+<span class="n">answer_grader</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="s2">&quot;generation&quot;</span><span class="p">:</span> <span class="n">generation</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>A <strong>router</strong> is implemented to direct questions to either a vector store or web search based on the content of the question. The router uses an LLM to decide whether a question is related to specific topics (LLM agents, prompt engineering, or adversarial attacks) and routes it accordingly.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Router</span>
+
+<span class="kn">from</span> <span class="nn">langchain_community.chat_models</span> <span class="kn">import</span> <span class="n">ChatOllama</span>
+<span class="kn">from</span> <span class="nn">langchain_core.output_parsers</span> <span class="kn">import</span> <span class="n">JsonOutputParser</span>
+<span class="kn">from</span> <span class="nn">langchain_core.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+
+<span class="c1"># LLM</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOllama</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">local_llm</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;json&quot;</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">prompt</span> <span class="o">=</span> <span class="n">PromptTemplate</span><span class="p">(</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;&lt;|begin_of_text|&gt;&lt;|start_header_id|&gt;system&lt;|end_header_id|&gt; You are an expert at routing a </span>
+<span class="s2">    user question to a vectorstore or web search. Use the vectorstore for questions on LLM  agents, </span>
+<span class="s2">    prompt engineering, and adversarial attacks. You do not need to be stringent with the keywords </span>
+<span class="s2">    in the question related to these topics. Otherwise, use web-search. Give a binary choice &#39;web_search&#39; </span>
+<span class="s2">    or &#39;vectorstore&#39; based on the question. Return the a JSON with a single key &#39;datasource&#39; and </span>
+<span class="s2">    no premable or explanation. Question to route: </span><span class="si">{question}</span><span class="s2"> &lt;|eot_id|&gt;&lt;|start_header_id|&gt;assistant&lt;|end_header_id|&gt;&quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">input_variables</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="n">question_router</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">JsonOutputParser</span><span class="p">()</span>
+<span class="n">question</span> <span class="o">=</span> <span class="s2">&quot;llm agent memory&quot;</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">get_relevant_documents</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+<span class="n">doc_txt</span> <span class="o">=</span> <span class="n">docs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">page_content</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">question_router</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">}))</span>
+</pre></div>
+</div>
+<p>For questions that require information outside of the vector store, a <strong>web search</strong> tool is integrated using the Tavily Search API. This tool fetches the top 3 search results for a given query.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Search</span>
+<span class="kn">from</span> <span class="nn">langchain_community.tools.tavily_search</span> <span class="kn">import</span> <span class="n">TavilySearchResults</span>
+<span class="n">web_search_tool</span> <span class="o">=</span> <span class="n">TavilySearchResults</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, the entire workflow is orchestrated using <strong>LangGraph</strong>, which allows us to define a stateful, graph-based workflow. The graph includes nodes for retrieval, generation, grading, and web search. Conditional edges are used to control the flow based on the results of each step, ensuring that the system can adapt to different types of questions and generate high-quality answers.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">langchain_core.documents</span> <span class="kn">import</span> <span class="n">Document</span>
+<span class="kn">from</span> <span class="nn">typing_extensions</span> <span class="kn">import</span> <span class="n">TypedDict</span>
+
+<span class="kn">from</span> <span class="nn">langgraph.graph</span> <span class="kn">import</span> <span class="n">END</span><span class="p">,</span> <span class="n">StateGraph</span>
+
+<span class="c1"># State</span>
+
+
+<span class="k">class</span> <span class="nc">GraphState</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents the state of our graph.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        question: question</span>
+<span class="sd">        generation: LLM generation</span>
+<span class="sd">        web_search: whether to add search</span>
+<span class="sd">        documents: list of documents</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">question</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">generation</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">web_search</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">documents</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+
+
+<span class="c1"># Nodes</span>
+
+
+<span class="k">def</span> <span class="nf">retrieve</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieve documents from vectorstore</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (dict): The current graph state</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        state (dict): New key added to state, documents, that contains retrieved documents</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---RETRIEVE---&quot;</span><span class="p">)</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Retrieval</span>
+    <span class="n">documents</span> <span class="o">=</span> <span class="n">retriever</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="n">documents</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate answer using RAG on retrieved documents</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (dict): The current graph state</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        state (dict): New key added to state, generation, that contains LLM generation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---GENERATE---&quot;</span><span class="p">)</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">]</span>
+    <span class="n">documents</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">]</span>
+
+    <span class="c1"># RAG generation</span>
+    <span class="n">generation</span> <span class="o">=</span> <span class="n">rag_chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;context&quot;</span><span class="p">:</span> <span class="n">documents</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">})</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="n">documents</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="s2">&quot;generation&quot;</span><span class="p">:</span> <span class="n">generation</span><span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">grade_documents</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determines whether the retrieved documents are relevant to the question</span>
+<span class="sd">    If any document is not relevant, we will set a flag to run web search</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (dict): The current graph state</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        state (dict): Filtered out irrelevant documents and updated web_search state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---CHECK DOCUMENT RELEVANCE TO QUESTION---&quot;</span><span class="p">)</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">]</span>
+    <span class="n">documents</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Score each doc</span>
+    <span class="n">filtered_docs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">web_search</span> <span class="o">=</span> <span class="s2">&quot;No&quot;</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">documents</span><span class="p">:</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">retrieval_grader</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
+            <span class="p">{</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="s2">&quot;document&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">page_content</span><span class="p">}</span>
+        <span class="p">)</span>
+        <span class="n">grade</span> <span class="o">=</span> <span class="n">score</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span>
+        <span class="c1"># Document relevant</span>
+        <span class="k">if</span> <span class="n">grade</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---GRADE: DOCUMENT RELEVANT---&quot;</span><span class="p">)</span>
+            <span class="n">filtered_docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="c1"># Document not relevant</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---GRADE: DOCUMENT NOT RELEVANT---&quot;</span><span class="p">)</span>
+            <span class="c1"># We do not include the document in filtered_docs</span>
+            <span class="c1"># We set a flag to indicate that we want to run web search</span>
+            <span class="n">web_search</span> <span class="o">=</span> <span class="s2">&quot;Yes&quot;</span>
+            <span class="k">continue</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="n">filtered_docs</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="s2">&quot;web_search&quot;</span><span class="p">:</span> <span class="n">web_search</span><span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">web_search</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Web search based based on the question</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (dict): The current graph state</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        state (dict): Appended web results to documents</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---WEB SEARCH---&quot;</span><span class="p">)</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">]</span>
+    <span class="n">documents</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Web search</span>
+    <span class="n">docs</span> <span class="o">=</span> <span class="n">web_search_tool</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">})</span>
+    <span class="n">web_results</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">])</span>
+    <span class="n">web_results</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">page_content</span><span class="o">=</span><span class="n">web_results</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">documents</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">documents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">web_results</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">documents</span> <span class="o">=</span> <span class="p">[</span><span class="n">web_results</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="n">documents</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">}</span>
+
+
+<span class="c1"># Conditional edge</span>
+
+
+<span class="k">def</span> <span class="nf">route_question</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Route question to web search or RAG.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (dict): The current graph state</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Next node to call</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---ROUTE QUESTION---&quot;</span><span class="p">)</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">question</span><span class="p">)</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">question_router</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">})</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">source</span><span class="p">[</span><span class="s2">&quot;datasource&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">source</span><span class="p">[</span><span class="s2">&quot;datasource&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;web_search&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---ROUTE QUESTION TO WEB SEARCH---&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;websearch&quot;</span>
+    <span class="k">elif</span> <span class="n">source</span><span class="p">[</span><span class="s2">&quot;datasource&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;vectorstore&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---ROUTE QUESTION TO RAG---&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;vectorstore&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">decide_to_generate</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determines whether to generate an answer, or add web search</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (dict): The current graph state</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Binary decision for next node to call</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---ASSESS GRADED DOCUMENTS---&quot;</span><span class="p">)</span>
+    <span class="n">state</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">]</span>
+    <span class="n">web_search</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;web_search&quot;</span><span class="p">]</span>
+    <span class="n">state</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">web_search</span> <span class="o">==</span> <span class="s2">&quot;Yes&quot;</span><span class="p">:</span>
+        <span class="c1"># All documents have been filtered check_relevance</span>
+        <span class="c1"># We will re-generate a new query</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;---DECISION: ALL DOCUMENTS ARE NOT RELEVANT TO QUESTION, INCLUDE WEB SEARCH---&quot;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;websearch&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># We have relevant documents, so generate answer</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---DECISION: GENERATE---&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;generate&quot;</span>
+
+
+<span class="c1"># Conditional edge</span>
+
+
+<span class="k">def</span> <span class="nf">grade_generation_v_documents_and_question</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determines whether the generation is grounded in the document and answers question.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state (dict): The current graph state</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Decision for next node to call</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---CHECK HALLUCINATIONS---&quot;</span><span class="p">)</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;question&quot;</span><span class="p">]</span>
+    <span class="n">documents</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">]</span>
+    <span class="n">generation</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;generation&quot;</span><span class="p">]</span>
+    
+    <span class="n">score</span> <span class="o">=</span> <span class="n">hallucination_grader</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span>
+        <span class="p">{</span><span class="s2">&quot;documents&quot;</span><span class="p">:</span> <span class="n">documents</span><span class="p">,</span> <span class="s2">&quot;generation&quot;</span><span class="p">:</span> <span class="n">generation</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">grade</span> <span class="o">=</span> <span class="n">score</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Check hallucination</span>
+    <span class="k">if</span> <span class="n">grade</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---DECISION: GENERATION IS GROUNDED IN DOCUMENTS---&quot;</span><span class="p">)</span>
+        <span class="c1"># Check question-answering</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---GRADE GENERATION vs QUESTION---&quot;</span><span class="p">)</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="n">answer_grader</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">&quot;question&quot;</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span> <span class="s2">&quot;generation&quot;</span><span class="p">:</span> <span class="n">generation</span><span class="p">})</span>
+        <span class="n">grade</span> <span class="o">=</span> <span class="n">score</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">grade</span> <span class="o">==</span> <span class="s2">&quot;yes&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---DECISION: GENERATION ADDRESSES QUESTION---&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;useful&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---DECISION: GENERATION DOES NOT ADDRESS QUESTION---&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;not useful&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="s2">&quot;---DECISION: GENERATION IS NOT GROUNDED IN DOCUMENTS, RE-TRY---&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;not supported&quot;</span>
+
+
+<span class="n">workflow</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">GraphState</span><span class="p">)</span>
+
+<span class="c1"># Define the nodes</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;websearch&quot;</span><span class="p">,</span> <span class="n">web_search</span><span class="p">)</span>  <span class="c1"># web search</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;retrieve&quot;</span><span class="p">,</span> <span class="n">retrieve</span><span class="p">)</span>  <span class="c1"># retrieve</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;grade_documents&quot;</span><span class="p">,</span> <span class="n">grade_documents</span><span class="p">)</span>  <span class="c1"># grade documents</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;generate&quot;</span><span class="p">,</span> <span class="n">generate</span><span class="p">)</span>  <span class="c1"># generatae</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build graph</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">set_conditional_entry_point</span><span class="p">(</span>
+    <span class="n">route_question</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;websearch&quot;</span><span class="p">:</span> <span class="s2">&quot;websearch&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vectorstore&quot;</span><span class="p">:</span> <span class="s2">&quot;retrieve&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;retrieve&quot;</span><span class="p">,</span> <span class="s2">&quot;grade_documents&quot;</span><span class="p">)</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span>
+    <span class="s2">&quot;grade_documents&quot;</span><span class="p">,</span>
+    <span class="n">decide_to_generate</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;websearch&quot;</span><span class="p">:</span> <span class="s2">&quot;websearch&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;generate&quot;</span><span class="p">:</span> <span class="s2">&quot;generate&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;websearch&quot;</span><span class="p">,</span> <span class="s2">&quot;generate&quot;</span><span class="p">)</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span>
+    <span class="s2">&quot;generate&quot;</span><span class="p">,</span>
+    <span class="n">grade_generation_v_documents_and_question</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;not supported&quot;</span><span class="p">:</span> <span class="s2">&quot;generate&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;useful&quot;</span><span class="p">:</span> <span class="n">END</span><span class="p">,</span>
+        <span class="s2">&quot;not useful&quot;</span><span class="p">:</span> <span class="s2">&quot;websearch&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>By combining these components, we have created a robust RAG system that not only retrieves relevant information but also ensures the quality and reliability of the generated answers.
+<img alt="" src="https://pbs.twimg.com/media/GchFneqaMAY4eq4?format=jpg&amp;name=orig" /></p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>In this tutorial, we’ve explored the process of building a local Retrieval Augmented Generation (RAG) agent using Elasticsearch, LangGraph, and Llama3. We demonstrated how to <mark>index your data into Elasticsearch</mark>, construct a LangGraph workflow for querying, and integrate Llama3 for generating responses. The key takeaway is that you can create a powerful, locally-run RAG system by combining these technologies.</p>
+<p>We encourage you to experiment with the provided code, adapt it to your specific needs, and explore the various configuration options available within Elasticsearch, LangGraph, and Llama3. For further exploration, refer to the original blog post, <a class="reference external" href="https://www.elastic.co/search-labs/blog/local-rag-agent-elasticsearch-langgraph-llama3">Local RAG Agent with Elasticsearch, LangGraph and Llama3</a>, which provides additional context and insights into the design choices. This tutorial serves as a starting point, and the possibilities for customization and enhancement are vast.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/mlguide",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/resources/blogs/2024"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+<div class="section ablog__blog_comments">
+     
+<div class="section ablog__prev-next">
+  <span class="ablog__prev">
+     
+    <a href="Decoding%20the%20Byte%20Latent%20Transformer_%20A%20New%20Approach%20to%20Language%20Processing.html">
+      
+      <i class="fa fa-arrow-circle-left"></i>
+      
+      <span>Byte Latent Transformer: A New Approach to Language Processing</span>
+    </a>
+    
+  </span>
+  <span class="ablog__spacer">&nbsp;</span>
+  <span class="ablog__next">
+    
+  </span>
+</div>
+  
+  <div class="section ablog__comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = "mlguide";
+      var disqus_identifier = "/content/resources/blogs/2024/Building Reliable Local Agents with LangGraph, LLaMA3, and Elasticsearch/";
+      var disqus_title = "Building Reliable Local Agents with LangGraph, LLaMA3, and Elasticsearch";
+      var disqus_url = "https://mlguide.in/content/resources/blogs/2024/Building Reliable Local Agents with LangGraph, LLaMA3, and Elasticsearch";
+
+      (function () {
+        var dsq = document.createElement("script");
+        dsq.type = "text/javascript";
+        dsq.async = true;
+        dsq.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+        (
+          document.getElementsByTagName("head")[0] ||
+          document.getElementsByTagName("body")[0]
+        ).appendChild(dsq);
+      })();
+    </script>
+    <noscript>
+      Please enable JavaScript to view the
+      <a href="https://disqus.com/?ref_noscript">
+        comments powered by Disqus.</a
+      ></noscript
+    >
+    <a href="https://disqus.com" class="dsq-brlink">
+      comments powered by <span class="logo-disqus">Disqus</span>
+    </a>
+  </div>
+  
+</div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div class="ablog-sidebar-item ablog__recentposts">
+  <h3>
+    <a href="../../blogs.html">Recent Posts</a>
+  </h3>
+  <ul>
+     
+    <li>
+      <a href="Decoding%20the%20Byte%20Latent%20Transformer_%20A%20New%20Approach%20to%20Language%20Processing.html">
+        22 December - Byte Latent Transformer: A New Approach to Language Processing
+      </a>
+    </li>
+    
+    <li>
+      <a href="DeepSeek-VL2_%20A%20Powerful%20Vision-Language%20Model%20for%20Multimodal%20Understanding%20%281%29.html">
+        18 December - DeepSeek-VL2: A Powerful Vision-Language Model for Multimodal Understanding
+      </a>
+    </li>
+    
+    <li>
+      <a href="Prompt%20tuning.html">
+        10 April - Prompt Tuning
+      </a>
+    </li>
+    
+    <li>
+      <a href="LoRA%20%28Low%20Rank%20Adaptation%20of%20Large%20Language%20Models%29.html">
+        10 April - LoRA (Low Rank Adaptation of Large Language Models)
+      </a>
+    </li>
+    
+    <li>
+      <a href="A%20society%20of%20Generative%20AI%20agents%20%21.html">
+        19 August - A society of Generative AI agents !
+      </a>
+    </li>
+    
+  </ul>
+</div>
+</div>
+
+  <div class="sidebar-secondary-item">
+<div class="ablog-sidebar-item ablog__categories">
+  <h3>
+    <a href="../category.html">Categories</a>
+  </h3>
+  <ul>
+     
+    <li>
+      <a href="../category/llm.html">LLM (7)</a>
+    </li>
+     
+  </ul>
+</div>
+</div>
+
+  <div class="sidebar-secondary-item">
+<div class="ablog-sidebar-item ablog__tagcloud">
+  <link
+    rel="stylesheet"
+    href="../../../../_static/ablog/tagcloud.css"
+    type="text/css"
+  />
+  <h3><a href="../tag.html">Tags</a></h3>
+  <ul class="ablog-cloud">
+     
+    <li class="ablog-cloud ablog-cloud-5">
+      <a href="../tag/ai.html">AI</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/computer-vision.html">Computer Vision</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/deep-learning.html">Deep Learning</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/elasticsearch.html">Elasticsearch</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/fine-tuning.html">Fine-Tuning</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/generativeai.html">GenerativeAI</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-2">
+      <a href="../tag/llm.html">LLM</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/llama3.html">LLaMA3</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/langgraph.html">LangGraph</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/language-processing.html">Language Processing</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/large-language-models.html">Large Language Models</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/lora.html">LoRA</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/local-agents.html">Local Agents</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/machine-learning.html">Machine Learning</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/mixture-of-experts.html">Mixture-of-Experts</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/nlp.html">NLP</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/natural-language-processing.html">Natural Language Processing</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/prompt-tuning.html">Prompt-Tuning</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/rag.html">RAG</a>
+    </li>
+      
+    <li class="ablog-cloud ablog-cloud-1">
+      <a href="../tag/vision-language-models.html">Vision-Language Models</a>
+    </li>
+     
+  </ul>
+</div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Anukool Chaturvedi
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div class="social-icons">
+    <a href="https://twitter.com/chaturanukool" target="_blank"><i class="fab fa-twitter"></i></a>
+    <a href="https://linkedin.com/in/anukool-chaturvedi" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://github.com/anukchat" target="_blank"><i class="fab fa-github"></i></a>
+    </p>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
