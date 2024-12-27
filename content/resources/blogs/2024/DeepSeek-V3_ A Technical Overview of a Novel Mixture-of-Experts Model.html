@@ -6,8 +6,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Posts tagged Large Language Models</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>DeepSeek-V3: A Technical Overview of a Novel Mixture-of-Experts Model</title>
   
   
   
@@ -74,9 +75,9 @@
                 gtag('config', 'G-GJG3T4ZRZH');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'content/resources/blogs/tag/large-language-models';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/resources/blogs/2024/DeepSeek-V3_ A Technical Overview of a Novel Mixture-of-Experts Model';</script>
     <script src="../../../../_static/subscription_overlay.js?v=2e74803e"></script>
-    <link rel="canonical" href="https://mlguide.in/content/resources/blogs/tag/large-language-models.html" />
+    <link rel="canonical" href="https://mlguide.in/content/resources/blogs/2024/DeepSeek-V3_ A Technical Overview of a Novel Mixture-of-Experts Model.html" />
     <link rel="icon" href="../../../../_static/logo.png"/>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
@@ -87,7 +88,7 @@
   rel="alternate"
   type="application/atom+xml"
   href="../../blogs/atom.xml"
-  title="Posts tagged Large Language Models"
+  title="Blog"
 />
   
   </head>
@@ -355,6 +356,54 @@
 
 
 
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/content/resources/blogs/2024/DeepSeek-V3_ A Technical Overview of a Novel Mixture-of-Experts Model.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
 <button onclick="toggleFullScreen()"
   class="btn btn-sm btn-fullscreen-button"
   title="Fullscreen mode"
@@ -380,7 +429,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -391,11 +442,32 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1></h1>
+    <h1>DeepSeek-V3: A Technical Overview of a Novel Mixture-of-Experts Model</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architectural-innovations-and-training-efficiency">Architectural Innovations and Training Efficiency</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-training-and-performance-benchmarks">Post-Training and Performance Benchmarks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#post-training-knowledge-distillation-from-deepseek-r1">Post-Training: Knowledge Distillation from DeepSeek-R1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-benchmarks">Performance Benchmarks</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#base-model-performance">Base Model Performance</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#context-window-evaluation">Context Window Evaluation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#chat-model-performance">Chat Model Performance</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#open-ended-generation-evaluation">Open-Ended Generation Evaluation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-availability-and-local-deployment">Model Availability and Local Deployment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -404,85 +476,118 @@
                 
 <div id="searchbox"></div>
                 <article class="bd-article">
-                   
-<div class="section ablog__collection">
-  <h1>
-    
-    <span
-      >Posts tagged  Large Language Models 
-    </span>
-  </h1>
-   
-  <div class="section ablog-post">
-    <h2 class="ablog-post-title">
-      <a href="../2024/Decoding%20the%20Byte%20Latent%20Transformer_%20A%20New%20Approach%20to%20Language%20Processing.html">Byte Latent Transformer: A New Approach to Language Processing</a>
-    </h2>
-    <ul class="ablog-archive">
-      <li>
-         
-        <i class="fa fa-calendar"></i>
-        
-        <span>22 December 2024</span>
-        
-      </li>
-      <div class="ablog-sidebar-item ablog__postcard2">
-   
-  <li id="ablog-sidebar-item author ablog__author">
-    <span>
-      
-      <i class="fa-fw fa fa-user"></i>
-      
-    </span>
-     
-    <a href="../author/anukool-chaturvedi.html">Anukool Chaturvedi</a>
-      
-  </li>
-    
-  <li id="ablog-sidebar-item language ablog__language">
-    <span>
-      
-      <i class="fa-fw fa fa-language"></i>
-      
-    </span>
-     
-    <a href="../language/english.html">English</a>
-      
-  </li>
-   
-  <li id="ablog-sidebar-item category ablog__category">
-    <span>
-      
-      <i class="fa-fw fa fa-folder-open"></i>
-      
-    </span>
-     
-    <a href="../category/llm.html">LLM</a>
-      
-  </li>
-   
-  <li id="ablog-sidebar-item tags ablog__tags">
-    <span>
-       
-      <i class="fa-fw fa fa-tags"></i>
-       
-    </span>
-     
-    <a href="ai.html">AI</a>
-        
-    <a href="language-processing.html">Language Processing</a>
-        
-    <a href="nlp.html">NLP</a>
-        
-    <a href="machine-learning.html">Machine Learning</a>
-        
-    <a href="#">Large Language Models</a>
-      
-  </li>
-   
+                   <section class="tex2jax_ignore mathjax_ignore" id="deepseek-v3-a-technical-overview-of-a-novel-mixture-of-experts-model">
+<h1>DeepSeek-V3: A Technical Overview of a Novel Mixture-of-Experts Model<a class="headerlink" href="#deepseek-v3-a-technical-overview-of-a-novel-mixture-of-experts-model" title="Link to this heading">#</a></h1>
+<p>DeepSeek-V3 emerges as a significant advancement in the field of large language models (LLMs). This model, detailed in the accompanying technical report, <mark>employs a Mixture-of-Experts (MoE) architecture</mark>, a design choice that allows for both high performance and computational efficiency. The architecture is composed of a number of expert sub-networks, which are activated conditionally based on the input, enabling the model to scale effectively. The training process involved a large corpus of text and code data, leveraging a combination of supervised learning and reinforcement learning techniques. <mark>DeepSeek-V3 demonstrates strong performance across a range of benchmarks</mark>, while maintaining a focus on efficient inference. The model is available on GitHub, providing access to both the model weights and the technical documentation.</p>
+<section id="architectural-innovations-and-training-efficiency">
+<h2>Architectural Innovations and Training Efficiency<a class="headerlink" href="#architectural-innovations-and-training-efficiency" title="Link to this heading">#</a></h2>
+<p>DeepSeek-V3 builds upon the efficient architecture of DeepSeek-V2, incorporating several key innovations to enhance performance and training efficiency. The model utilizes a Mixture-of-Experts (MoE) architecture with 671 billion total parameters, of which 37 billion are activated for each token. This design allows for a large model capacity while maintaining computational efficiency during inference.</p>
+<p><mark>A core component of DeepSeek-V3 is the Multi-head Latent Attention (MLA) mechanism.</mark> This attention mechanism, thoroughly validated in DeepSeek-V2, contributes to the model’s ability to process information effectively. The DeepSeekMoE architecture, also inherited from DeepSeek-V2, further optimizes the model’s performance by enabling efficient routing of tokens to different experts.</p>
+<p>A significant innovation in DeepSeek-V3 is the introduction of an <mark>auxiliary-loss-free strategy for load balancing.</mark> Traditional load balancing techniques often involve auxiliary losses that can negatively impact model performance. DeepSeek-V3’s approach mitigates this issue by achieving effective load balancing without the performance degradation associated with auxiliary losses. This is a crucial step toward optimizing the MoE architecture for maximum efficiency.</p>
+<p>Furthermore, DeepSeek-V3 employs a Multi-Token Prediction (MTP) objective during training. This objective has been shown to improve model performance and can also be used for speculative decoding, potentially accelerating inference.</p>
+<p><mark>The pre-training of DeepSeek-V3 leverages an FP8 mixed precision training framework.</mark> This is the first validation of FP8 training on an extremely large-scale model, demonstrating its feasibility and effectiveness. The use of FP8 significantly reduces memory requirements and computational costs, enabling the training of larger models with fewer resources.</p>
+<p>To overcome communication bottlenecks in cross-node MoE training, DeepSeek-V3 employs a co-design approach involving algorithms, frameworks, and hardware. <mark>This approach achieves near full computation-communication overlap, significantly improving training efficiency and reducing training costs.</mark> This allows for scaling up the model size without incurring additional overhead.</p>
+<p>The pre-training of DeepSeek-V3 was completed on 14.8 trillion tokens using only 2.664 million H800 GPU hours. This cost-effective training process resulted in a strong open-source base model. The subsequent fine-tuning stages required only 0.1 million GPU hours, further highlighting the efficiency of the training process.</p>
+<p>The model’s architecture and training methodology are designed for stability. Throughout the entire training process, no irrecoverable loss spikes or rollbacks were experienced.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">inference</span>
+<span class="n">python</span> <span class="n">fp8_cast_bf16</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">fp8</span><span class="o">-</span><span class="n">hf</span><span class="o">-</span><span class="n">path</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">fp8_weights</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">bf16</span><span class="o">-</span><span class="n">hf</span><span class="o">-</span><span class="n">path</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">bf16_weights</span>
+</pre></div>
 </div>
-    </ul>
-    <p class="ablog-post-excerpt"><p>Let’s understand <strong>“Byte Latent Transformer: Patches Scale Better Than Tokens.”</strong>  This paper introduces a novel approach to handling large language models tokens, potentially offering significant improvements in efficiency and performance. We will explore the core concepts, methodology, and potential implications of this research, drawing insights from the original paper and related discussions.</p>
-</p>
+<p>The provided code snippet demonstrates how to convert FP8 weights to BF16, which is useful for experimentation.</p>
+</section>
+<section id="post-training-and-performance-benchmarks">
+<h2>Post-Training and Performance Benchmarks<a class="headerlink" href="#post-training-and-performance-benchmarks" title="Link to this heading">#</a></h2>
+<section id="post-training-knowledge-distillation-from-deepseek-r1">
+<h3>Post-Training: Knowledge Distillation from DeepSeek-R1<a class="headerlink" href="#post-training-knowledge-distillation-from-deepseek-r1" title="Link to this heading">#</a></h3>
+<p>We employ an innovative methodology to distill reasoning capabilities from a long-Chain-of-Thought (CoT) model, specifically from one of the DeepSeek R1 series models, into standard Large Language Models (LLMs), particularly DeepSeek-V3. Our pipeline incorporates the verification and reflection patterns of R1 into DeepSeek-V3, which notably improves its reasoning performance. Furthermore, we maintain control over the output style and length of DeepSeek-V3.</p>
+</section>
+<section id="performance-benchmarks">
+<h3>Performance Benchmarks<a class="headerlink" href="#performance-benchmarks" title="Link to this heading">#</a></h3>
+<p>DeepSeek-V3 demonstrates strong performance across a range of benchmarks, as detailed below.</p>
+<section id="base-model-performance">
+<h4>Base Model Performance<a class="headerlink" href="#base-model-performance" title="Link to this heading">#</a></h4>
+<p>The following table compares DeepSeek-V3’s base model performance against other models on standard benchmarks:</p>
+<p><img alt="" src="../../../../_images/2024" /></p>
+<p><mark>DeepSeek-V3 achieves the best performance on most benchmarks, particularly on math and code tasks.</mark></p>
+</section>
+<section id="context-window-evaluation">
+<h4>Context Window Evaluation<a class="headerlink" href="#context-window-evaluation" title="Link to this heading">#</a></h4>
+<p><a class="reference internal" href="#/deepseek-ai/DeepSeek-V3/blob/main/figures/niah.png"><span class="xref myst"><img alt="" src="deepseek-ai/DeepSeek-V3/raw/main/figures/niah.png" /></span></a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Needle</span> <span class="pre">In</span> <span class="pre">A</span> <span class="pre">Haystack</span></code> (NIAH) test results indicate that DeepSeek-V3 maintains strong performance across all context window lengths up to <strong>128K</strong>.</p>
+</section>
+<section id="chat-model-performance">
+<h4>Chat Model Performance<a class="headerlink" href="#chat-model-performance" title="Link to this heading">#</a></h4>
+<p>The following table compares DeepSeek-V3’s chat model performance against other models (larger than 67B) on standard benchmarks:</p>
+<p><img alt="Model benchmark" src="https://pbs.twimg.com/media/GfuKUsuagAEfvM2?format=jpg&amp;name=large" /></p>
+<p><mark>DeepSeek-V3 stands as the best-performing open-source model and exhibits competitive performance against frontier closed-source models.</mark></p>
+</section>
+<section id="open-ended-generation-evaluation">
+<h4>Open-Ended Generation Evaluation<a class="headerlink" href="#open-ended-generation-evaluation" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Model</p></th>
+<th class="head"><p>Arena-Hard</p></th>
+<th class="head"><p>AlpacaEval 2.0</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>DeepSeek-V2.5-0905</p></td>
+<td><p>76.2</p></td>
+<td><p>50.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>Qwen2.5-72B-Instruct</p></td>
+<td><p>81.2</p></td>
+<td><p>49.1</p></td>
+</tr>
+<tr class="row-even"><td><p>LLaMA-3.1 405B</p></td>
+<td><p>69.3</p></td>
+<td><p>40.5</p></td>
+</tr>
+<tr class="row-odd"><td><p>GPT-4o-0513</p></td>
+<td><p>80.4</p></td>
+<td><p>51.1</p></td>
+</tr>
+<tr class="row-even"><td><p>Claude-Sonnet-3.5-1022</p></td>
+<td><p>85.2</p></td>
+<td><p>52.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>DeepSeek-V3</p></td>
+<td><p><strong>85.5</strong></p></td>
+<td><p><strong>70.0</strong></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>DeepSeek-V3 achieves the top scores in both Arena-Hard and AlpacaEval 2.0 for English open-ended conversation.</p>
+</section>
+</section>
+</section>
+<section id="model-availability-and-local-deployment">
+<h2>Model Availability and Local Deployment<a class="headerlink" href="#model-availability-and-local-deployment" title="Link to this heading">#</a></h2>
+<p>DeepSeek-V3 models are available for download on Hugging Face, with two variants: <code class="docutils literal notranslate"><span class="pre">DeepSeek-V3-Base</span></code> and <code class="docutils literal notranslate"><span class="pre">DeepSeek-V3</span></code>. The total size of the models on Hugging Face is 685B, which includes 671B for the main model weights and 14B for the Multi-Token Prediction (MTP) module weights.</p>
+<p>To facilitate local deployment, DeepSeek-V3 supports multiple hardware and open-source community software options:</p>
+<ul class="simple">
+<li><p><strong>DeepSeek-Infer Demo</strong>: A lightweight demo is provided for FP8 and BF16 inference. This serves as a basic example for running the model.</p></li>
+<li><p><strong>SGLang</strong>: <mark>SGLang fully supports DeepSeek-V3 with both BF16 and FP8 inference modes</mark>. It leverages Multi-head Latent Attention (MLA) optimizations, FP8 (W8A8), FP8 KV Cache, and Torch Compile for efficient performance on both NVIDIA and AMD GPUs.</p></li>
+<li><p><strong>LMDeploy</strong>: This framework enables efficient FP8 and BF16 inference for local and cloud deployment. It integrates with PyTorch-based workflows and offers offline and online deployment capabilities.</p></li>
+<li><p><strong>TensorRT-LLM</strong>: <mark>TensorRT-LLM supports BF16 inference and INT4/8 quantization for DeepSeek-V3</mark>, with FP8 support planned for the near future. A custom branch is available for direct experience with these features.</p></li>
+<li><p><strong>vLLM</strong>: <mark>vLLM supports DeepSeek-V3 with FP8 and BF16 modes</mark>, utilizing tensor parallelism and pipeline parallelism for distributed inference.</p></li>
+<li><p><strong>AMD GPU</strong>: DeepSeek-V3 can be run on AMD GPUs using SGLang, with full compatibility for both BF16 and FP8 precision.</p></li>
+<li><p><strong>Huawei Ascend NPU</strong>: The MindIE framework supports running the BF16 version of DeepSeek-V3 on Huawei Ascend devices.</p></li>
+</ul>
+<p>Since FP8 training is natively adopted in the DeepSeek-V3 framework, only FP8 weights are provided. For users requiring BF16 weights for experimentation, a conversion script is available:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">inference</span>
+<span class="n">python</span> <span class="n">fp8_cast_bf16</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="nb">input</span><span class="o">-</span><span class="n">fp8</span><span class="o">-</span><span class="n">hf</span><span class="o">-</span><span class="n">path</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">fp8_weights</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">bf16</span><span class="o">-</span><span class="n">hf</span><span class="o">-</span><span class="n">path</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">bf16_weights</span>
+</pre></div>
+</div>
+<p>It is important to note that Hugging Face’s Transformers library does not currently have direct support for DeepSeek-V3.</p>
+<p>For detailed instructions on running DeepSeek-V3 with each of these options, please refer to the links provided in the original document.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>In summary, DeepSeek-V3 represents a significant advancement in large language model technology, achieving <mark>state-of-the-art performance</mark> across a range of benchmarks while maintaining remarkable efficiency. Its optimized architecture and training methodologies have resulted in a model that is both powerful and practical for real-world applications. We encourage researchers and developers to explore the model’s capabilities, delve into the technical details outlined in the provided resources, and leverage DeepSeek-V3 to push the boundaries of what’s possible with AI. Access the model and its associated resources on the official GitHub repository: <a class="github reference external" href="https://github.com/deepseek-ai/DeepSeek-V3">deepseek-ai/DeepSeek-V3</a> and the technical report: <a class="github reference external" href="https://github.com/deepseek-ai/DeepSeek-V3/blob/main/DeepSeek_V3.pdf">deepseek-ai/DeepSeek-V3</a>.</p>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -497,18 +602,69 @@
         },
         kernelOptions: {
             name: "python3",
-            path: "./content/resources/blogs/tag"
+            path: "./content/resources/blogs/2024"
         },
         predefinedOutput: true
     }
     </script>
     <script>kernelName = 'python3'</script>
-    <p class="ablog-post-expand">
-      <a href="../2024/Decoding%20the%20Byte%20Latent%20Transformer_%20A%20New%20Approach%20to%20Language%20Processing.html"><em>Read more ...</em></a>
-    </p>
-    <hr />
+<div class="section ablog__blog_comments">
+     
+<div class="section ablog__prev-next">
+  <span class="ablog__prev">
+     
+    <a href="Building%20Reliable%20Local%20Agents%20with%20LangGraph%2C%20LLaMA3%2C%20and%20Elasticsearch.html">
+      
+      <i class="fa fa-arrow-circle-left"></i>
+      
+      <span>Building Reliable Local Agents with LangGraph, LLaMA3, and Elasticsearch</span>
+    </a>
+    
+  </span>
+  <span class="ablog__spacer">&nbsp;</span>
+  <span class="ablog__next">
+     
+    <a href="Qwen%202.5%20Coder%20Models%20Enhanced%20Code%20Generation%20and%20Reasoning.html">
+      <span>Qwen 2.5 Coder Models: Enhanced Code Generation and Reasoning</span>
+      
+      <i class="fa fa-arrow-circle-right"></i>
+      
+    </a>
+    
+  </span>
+</div>
+  
+  <div class="section ablog__comments">
+    <h2>Comments</h2>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = "mlguide";
+      var disqus_identifier = "/content/resources/blogs/2024/DeepSeek-V3_ A Technical Overview of a Novel Mixture-of-Experts Model/";
+      var disqus_title = "DeepSeek-V3: A Technical Overview of a Novel Mixture-of-Experts Model";
+      var disqus_url = "https://mlguide.in/content/resources/blogs/2024/DeepSeek-V3_ A Technical Overview of a Novel Mixture-of-Experts Model";
+
+      (function () {
+        var dsq = document.createElement("script");
+        dsq.type = "text/javascript";
+        dsq.async = true;
+        dsq.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+        (
+          document.getElementsByTagName("head")[0] ||
+          document.getElementsByTagName("body")[0]
+        ).appendChild(dsq);
+      })();
+    </script>
+    <noscript>
+      Please enable JavaScript to view the
+      <a href="https://disqus.com/?ref_noscript">
+        comments powered by Disqus.</a
+      ></noscript
+    >
+    <a href="https://disqus.com" class="dsq-brlink">
+      comments powered by <span class="logo-disqus">Disqus</span>
+    </a>
   </div>
-   
+  
 </div>
 
                 </article>
@@ -540,32 +696,32 @@
   <ul>
      
     <li>
-      <a href="../2024/Qwen%202.5%20Coder%20Models%20Enhanced%20Code%20Generation%20and%20Reasoning.html">
+      <a href="Qwen%202.5%20Coder%20Models%20Enhanced%20Code%20Generation%20and%20Reasoning.html">
         27 December - Qwen 2.5 Coder Models: Enhanced Code Generation and Reasoning
       </a>
     </li>
     
     <li>
-      <a href="../2024/DeepSeek-V3_%20A%20Technical%20Overview%20of%20a%20Novel%20Mixture-of-Experts%20Model.html">
-        27 December - DeepSeek-V3: A Technical Overview of a Novel Mixture-of-Experts Model
-      </a>
-    </li>
-    
-    <li>
-      <a href="../2024/Building%20Reliable%20Local%20Agents%20with%20LangGraph%2C%20LLaMA3%2C%20and%20Elasticsearch.html">
+      <a href="Building%20Reliable%20Local%20Agents%20with%20LangGraph%2C%20LLaMA3%2C%20and%20Elasticsearch.html">
         25 December - Building Reliable Local Agents with LangGraph, LLaMA3, and Elasticsearch
       </a>
     </li>
     
     <li>
-      <a href="../2024/Decoding%20the%20Byte%20Latent%20Transformer_%20A%20New%20Approach%20to%20Language%20Processing.html">
+      <a href="Decoding%20the%20Byte%20Latent%20Transformer_%20A%20New%20Approach%20to%20Language%20Processing.html">
         22 December - Byte Latent Transformer: A New Approach to Language Processing
       </a>
     </li>
     
     <li>
-      <a href="../2024/DeepSeek-VL2_%20A%20Powerful%20Vision-Language%20Model%20for%20Multimodal%20Understanding%20%281%29.html">
+      <a href="DeepSeek-VL2_%20A%20Powerful%20Vision-Language%20Model%20for%20Multimodal%20Understanding%20%281%29.html">
         18 December - DeepSeek-VL2: A Powerful Vision-Language Model for Multimodal Understanding
+      </a>
+    </li>
+    
+    <li>
+      <a href="Prompt%20tuning.html">
+        10 April - Prompt Tuning
       </a>
     </li>
     
@@ -599,99 +755,99 @@
   <ul class="ablog-cloud">
      
     <li class="ablog-cloud ablog-cloud-5">
-      <a href="ai.html">AI</a>
+      <a href="../tag/ai.html">AI</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="code-generation.html">Code Generation</a>
+      <a href="../tag/code-generation.html">Code Generation</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="computer-vision.html">Computer Vision</a>
+      <a href="../tag/computer-vision.html">Computer Vision</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="deep-learning.html">Deep Learning</a>
+      <a href="../tag/deep-learning.html">Deep Learning</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="deepseek-v3.html">DeepSeek-V3</a>
+      <a href="../tag/deepseek-v3.html">DeepSeek-V3</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="elasticsearch.html">Elasticsearch</a>
+      <a href="../tag/elasticsearch.html">Elasticsearch</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="fine-tuning.html">Fine-Tuning</a>
+      <a href="../tag/fine-tuning.html">Fine-Tuning</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="generativeai.html">GenerativeAI</a>
+      <a href="../tag/generativeai.html">GenerativeAI</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-2">
-      <a href="llm.html">LLM</a>
+      <a href="../tag/llm.html">LLM</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="llama3.html">LLaMA3</a>
+      <a href="../tag/llama3.html">LLaMA3</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="langgraph.html">LangGraph</a>
+      <a href="../tag/langgraph.html">LangGraph</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="language-processing.html">Language Processing</a>
+      <a href="../tag/language-processing.html">Language Processing</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="#">Large Language Models</a>
+      <a href="../tag/large-language-models.html">Large Language Models</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="lora.html">LoRA</a>
+      <a href="../tag/lora.html">LoRA</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="local-agents.html">Local Agents</a>
+      <a href="../tag/local-agents.html">Local Agents</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="machine-learning.html">Machine Learning</a>
+      <a href="../tag/machine-learning.html">Machine Learning</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="mixture-of-experts.html">Mixture-of-Experts</a>
+      <a href="../tag/mixture-of-experts.html">Mixture-of-Experts</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="nlp.html">NLP</a>
+      <a href="../tag/nlp.html">NLP</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="natural-language-processing.html">Natural Language Processing</a>
+      <a href="../tag/natural-language-processing.html">Natural Language Processing</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="open-source.html">Open Source</a>
+      <a href="../tag/open-source.html">Open Source</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="prompt-tuning.html">Prompt-Tuning</a>
+      <a href="../tag/prompt-tuning.html">Prompt-Tuning</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="qwen.html">Qwen</a>
+      <a href="../tag/qwen.html">Qwen</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="rag.html">RAG</a>
+      <a href="../tag/rag.html">RAG</a>
     </li>
       
     <li class="ablog-cloud ablog-cloud-1">
-      <a href="vision-language-models.html">Vision-Language Models</a>
+      <a href="../tag/vision-language-models.html">Vision-Language Models</a>
     </li>
      
   </ul>
