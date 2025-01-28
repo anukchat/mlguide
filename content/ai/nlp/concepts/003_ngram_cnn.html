@@ -30,15 +30,15 @@
   <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=adbe4504" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=22107f9c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=adbe4504" />
   
   <!-- So that users can add custom icons -->
   <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -562,10 +562,10 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span> 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PyTorch version:&#39;</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">torchtext</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torchtext</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;torchtext version:&#39;</span><span class="p">,</span> <span class="n">torchtext</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -586,7 +586,7 @@ torchtext version: 0.18.0
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">nltk</span>
 <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;popular&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -599,7 +599,7 @@ torchtext version: 0.18.0
 <p>Before starting, please download <a class="reference external" href="https://www.kaggle.com/datasets/rmisra/news-category-dataset">News_Category_Dataset_v3.json</a> (collected by HuffPost) in Kaggle.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="s2">&quot;News_Category_Dataset_v3.json&quot;</span><span class="p">,</span><span class="n">lines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -717,11 +717,11 @@ torchtext version: 0.18.0
 <p>In the strict pre-processing, we should also care about the polysemy. (The different meanings in the same word should have different tokens.)</p>
 </div><div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
-<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">string</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">nltk</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nltk.corpus</span><span class="w"> </span><span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">string</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
 <span class="c1"># Convert to lowercase</span>
 <span class="n">text_data</span> <span class="o">=</span> <span class="n">text_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
@@ -967,8 +967,8 @@ Name: category, Length: 209527, dtype: int64
 <p>First we create a list of vocabulary (<code class="docutils literal notranslate"><span class="pre">vocab</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchtext.data.utils</span> <span class="kn">import</span> <span class="n">get_tokenizer</span>
-<span class="kn">from</span> <span class="nn">torchtext.vocab</span> <span class="kn">import</span> <span class="n">build_vocab_from_iterator</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">torchtext.data.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_tokenizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchtext.vocab</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_vocab_from_iterator</span>
 
 <span class="n">torchtext</span><span class="o">.</span><span class="n">disable_torchtext_deprecation_warning</span><span class="p">()</span>
 
@@ -979,7 +979,7 @@ Name: category, Length: 209527, dtype: int64
 <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">get_tokenizer</span><span class="p">(</span><span class="s2">&quot;basic_english&quot;</span><span class="p">)</span>
 
 <span class="c1"># define tokenization function</span>
-<span class="k">def</span> <span class="nf">yield_tokens</span><span class="p">(</span><span class="n">text_data</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">yield_tokens</span><span class="p">(</span><span class="n">text_data</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">text_data</span><span class="p">:</span>
         <span class="n">tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="n">tokens</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[:</span><span class="n">max_seq_len</span><span class="p">]</span>
@@ -1036,12 +1036,12 @@ The padded index is 50000.
 <p>Now we build a collator function, which is used for pre-processing in data loader.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
 
 <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">collate_batch</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">collate_batch</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
     <span class="n">label_list</span><span class="p">,</span> <span class="n">head_token_list</span><span class="p">,</span> <span class="n">desc_token_list</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span> <span class="n">desc</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">:</span>
 
@@ -1156,12 +1156,12 @@ tensor([    5,   286,  2520,   973, 11909,   745,  9374,    18,    52,   350,
 <p>Before max pooling, the values in padding positions (which index of token is <code class="docutils literal notranslate"><span class="pre">pad_index</span></code>) are converted into zero, and these will then be underestimated in gradient descent.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
 
 <span class="n">embedding_dim</span> <span class="o">=</span> <span class="mi">200</span>
 
-<span class="k">class</span> <span class="nc">BigramClassifier</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">class_num</span><span class="p">,</span> <span class="n">padding_idx</span><span class="p">,</span> <span class="n">conv_channel</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BigramClassifier</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">class_num</span><span class="p">,</span> <span class="n">padding_idx</span><span class="p">,</span> <span class="n">conv_channel</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">padding_idx</span> <span class="o">=</span> <span class="n">padding_idx</span>
@@ -1198,7 +1198,7 @@ tensor([    5,   286,  2520,   973, 11909,   745,  9374,    18,    52,   350,
         <span class="bp">self</span><span class="o">.</span><span class="n">hidden</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">conv_channel</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">classify</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">class_num</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">region01</span><span class="p">,</span> <span class="n">region02</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">region01</span><span class="p">,</span> <span class="n">region02</span><span class="p">):</span>
         <span class="c1"># Get padding masks (in which, element is 0.0 when it&#39;s in padded position, otherwise 1.0)</span>
         <span class="n">mask01</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">region01</span><span class="o">.</span><span class="n">size</span><span class="p">())</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
         <span class="n">mask01</span> <span class="o">=</span> <span class="n">mask01</span><span class="o">.</span><span class="n">masked_fill</span><span class="p">(</span><span class="n">region01</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">padding_idx</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -1256,7 +1256,7 @@ tensor([    5,   286,  2520,   973, 11909,   745,  9374,    18,    52,   350,
 <p>Here, we are using Stochastic Gradient Descent (SDG) i.e. Calculating loss and doing parameter updation after every sample</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
 
 <span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">1</span>
 
@@ -1286,9 +1286,9 @@ tensor([    5,   286,  2520,   973, 11909,   745,  9374,    18,    52,   350,
 <p>Only “<code class="docutils literal notranslate"><span class="pre">Paris</span> <span class="pre">Hilton</span></code>” will be categorized as <code class="docutils literal notranslate"><span class="pre">ENTERTAINMENT</span></code>, because 2-gram word “<code class="docutils literal notranslate"><span class="pre">Paris</span> <span class="pre">Hilton</span></code>” frequently occurs in <code class="docutils literal notranslate"><span class="pre">ENTERTAINMENT</span></code> article.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="k">def</span> <span class="nf">classify_text</span><span class="p">(</span><span class="n">headline</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">classify_text</span><span class="p">(</span><span class="n">headline</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
     <span class="n">test_list</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">headline</span><span class="p">,</span> <span class="n">description</span><span class="p">],</span>
     <span class="p">]</span>

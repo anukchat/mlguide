@@ -30,15 +30,15 @@
   <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=adbe4504" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=22107f9c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=adbe4504" />
   
   <!-- So that users can add custom icons -->
   <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -654,8 +654,8 @@ Hi.	Salut !	CC-BY 2.0 (France) Attribution: tatoeba.org #538123 (CM) &amp; #5098
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="n">pathobj</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;fra-eng/fra.txt&quot;</span><span class="p">)</span>
 <span class="n">text_all</span> <span class="o">=</span> <span class="n">pathobj</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
@@ -691,8 +691,8 @@ Hi.	Salut !	CC-BY 2.0 (France) Attribution: tatoeba.org #538123 (CM) &amp; #5098
 <p>When data consists of multiple sentences, it converts to a single sentence.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
-<span class="kn">import</span> <span class="nn">nltk.data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">nltk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nltk.data</span>
 
 <span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;punkt&quot;</span><span class="p">)</span>
 <span class="n">tokenizer_en</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tokenizers/punkt/english.pickle&quot;</span><span class="p">)</span>
@@ -724,7 +724,7 @@ Hi.	Salut !	CC-BY 2.0 (France) Attribution: tatoeba.org #538123 (CM) &amp; #5098
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">string</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">string</span>
 
 <span class="n">train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">lower</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span>
 <span class="n">train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
@@ -768,8 +768,8 @@ Hi.	Salut !	CC-BY 2.0 (France) Attribution: tatoeba.org #538123 (CM) &amp; #5098
 <p>First we create a list of vocabulary (<code class="docutils literal notranslate"><span class="pre">vocab</span></code>) for both source text (French) and target text (English) respectively.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torchtext.data.utils</span> <span class="kn">import</span> <span class="n">get_tokenizer</span>
-<span class="kn">from</span> <span class="nn">torchtext.vocab</span> <span class="kn">import</span> <span class="n">build_vocab_from_iterator</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">torchtext.data.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_tokenizer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torchtext.vocab</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_vocab_from_iterator</span>
 
 <span class="n">max_word</span> <span class="o">=</span> <span class="mi">10000</span>
 
@@ -777,7 +777,7 @@ Hi.	Salut !	CC-BY 2.0 (France) Attribution: tatoeba.org #538123 (CM) &amp; #5098
 <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">get_tokenizer</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 
 <span class="c1"># define tokenization function</span>
-<span class="k">def</span> <span class="nf">yield_tokens</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">yield_tokens</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
         <span class="n">tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="k">yield</span> <span class="n">tokens</span>
@@ -866,15 +866,15 @@ The padded index in features is <code class="docutils literal notranslate"><span
 <p><code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">:</span> <span class="pre">[7,</span> <span class="pre">5,</span> <span class="pre">14,</span> <span class="pre">1,</span> <span class="pre">-100,</span> <span class="pre">-100,</span> <span class="pre">...</span> <span class="pre">,</span> <span class="pre">-100]</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataLoader</span>
 
 <span class="n">seq_len_fr</span> <span class="o">=</span> <span class="mi">45</span>
 <span class="n">seq_len_en</span> <span class="o">=</span> <span class="mi">38</span>
 
 <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">collate_batch</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">collate_batch</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
     <span class="n">label_list</span><span class="p">,</span> <span class="n">feature_source_list</span><span class="p">,</span> <span class="n">feature_target_list</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">text_fr</span><span class="p">,</span> <span class="n">text_en</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">:</span>
         <span class="c1"># (1) tokenize to a list of word&#39;s indices</span>
@@ -971,14 +971,14 @@ tensor([    2,     3,   450,   112,     1, 10000, 10000, 10000, 10000, 10000,
 <p>Note that the size of the following <code class="docutils literal notranslate"><span class="pre">masks</span></code> output is <code class="docutils literal notranslate"><span class="pre">(batch_size,</span> <span class="pre">seq_len)</span></code>, in which its element’s value is 0 when it’s a padded position, and otherwise 1. (This <code class="docutils literal notranslate"><span class="pre">masks</span></code> will then be used in the following softmax operation in decoder side.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
 
 <span class="n">embedding_dim</span> <span class="o">=</span> <span class="mi">256</span>
 <span class="n">rnn_units</span> <span class="o">=</span> <span class="mi">1024</span>
 
-<span class="k">class</span> <span class="nc">Encoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">rnn_units</span><span class="p">,</span> <span class="n">padding_idx</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Encoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">rnn_units</span><span class="p">,</span> <span class="n">padding_idx</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">seq_len</span> <span class="o">=</span> <span class="n">seq_len</span>
@@ -996,7 +996,7 @@ tensor([    2,     3,   450,   112,     1, 10000, 10000, 10000, 10000, 10000,
             <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
         <span class="c1"># embedding</span>
         <span class="c1">#   --&gt; (batch_size, seq_len, embedding_dim)</span>
         <span class="n">outs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">embedding</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
@@ -1041,10 +1041,10 @@ tensor([    2,     3,   450,   112,     1, 10000, 10000, 10000, 10000, 10000,
 <p>👉 Once we get the context <code class="docutils literal notranslate"><span class="pre">c</span></code>, the subsequent steps are the same as <a class="reference internal" href="#./07_encoder_decoder.ipynb"><span class="xref myst">previous example</span></a>. (See previous example for details.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">torch.nn</span> <span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="kn">import</span> <span class="n">functional</span> <span class="k">as</span> <span class="n">F</span>
 
-<span class="k">class</span> <span class="nc">DecoderWithAttention</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">rnn_units</span><span class="p">,</span> <span class="n">padding_idx</span><span class="p">,</span> <span class="n">hidden_dim1</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">hidden_dim2</span><span class="o">=</span><span class="mi">1024</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DecoderWithAttention</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">,</span> <span class="n">embedding_dim</span><span class="p">,</span> <span class="n">rnn_units</span><span class="p">,</span> <span class="n">padding_idx</span><span class="p">,</span> <span class="n">hidden_dim1</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">hidden_dim2</span><span class="o">=</span><span class="mi">1024</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">padding_idx</span> <span class="o">=</span> <span class="n">padding_idx</span>
@@ -1067,7 +1067,7 @@ tensor([    2,     3,   450,   112,     1, 10000, 10000, 10000, 10000, 10000,
         <span class="bp">self</span><span class="o">.</span><span class="n">output_dense1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">rnn_units</span><span class="p">,</span> <span class="n">hidden_dim2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">output_dense2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim2</span><span class="p">,</span> <span class="n">vocab_size</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">enc_outputs</span><span class="p">,</span> <span class="n">enc_masks</span><span class="p">,</span> <span class="n">states</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_states</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">enc_outputs</span><span class="p">,</span> <span class="n">enc_masks</span><span class="p">,</span> <span class="n">states</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_states</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="c1">#</span>
         <span class="c1"># get size</span>
         <span class="c1">#</span>
@@ -1219,12 +1219,12 @@ Epoch 5 - loss: 0.7531 - accuracy: 0.8333
 </div></blockquote>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="n">end_index_en</span> <span class="o">=</span> <span class="n">stoi_en</span><span class="p">[</span><span class="s2">&quot;&lt;end&gt;&quot;</span><span class="p">]</span>
 <span class="n">max_output</span> <span class="o">=</span> <span class="mi">128</span>
 
-<span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">translate</span><span class="p">(</span><span class="n">sentence</span><span class="p">):</span>
     <span class="c1"># preprocess inputs</span>
     <span class="n">text_fr</span> <span class="o">=</span> <span class="n">sentence</span>
     <span class="n">text_fr</span> <span class="o">=</span> <span class="n">text_fr</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>

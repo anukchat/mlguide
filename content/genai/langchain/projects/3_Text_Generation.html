@@ -30,15 +30,15 @@
   <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=adbe4504" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=22107f9c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=adbe4504" />
   
   <!-- So that users can add custom icons -->
   <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
@@ -571,7 +571,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unzip data folder</span>
 
-<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
 <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s1">&#39;../../data.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
     <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
 </pre></div>
@@ -581,15 +581,15 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># LangChain</span>
-<span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
-<span class="kn">from</span> <span class="nn">langchain</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.chat_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptTemplate</span>
 
 <span class="c1"># Environment Variables</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
 
 <span class="c1"># Twitter</span>
-<span class="kn">import</span> <span class="nn">tweepy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tweepy</span>
 
 <span class="n">load_dotenv</span><span class="p">()</span>
 </pre></div>
@@ -710,7 +710,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We&#39;ll query 70 tweets because we end up filtering out a bunch, but we&#39;ll only return the top 12.</span>
 <span class="c1"># We will also only use a subset of the top tweets later</span>
-<span class="k">def</span> <span class="nf">get_original_tweets</span><span class="p">(</span><span class="n">screen_name</span><span class="p">,</span> <span class="n">tweets_to_pull</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">tweets_to_return</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_original_tweets</span><span class="p">(</span><span class="n">screen_name</span><span class="p">,</span> <span class="n">tweets_to_pull</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">tweets_to_return</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
     
     <span class="c1"># Tweepy set up</span>
     <span class="n">auth</span> <span class="o">=</span> <span class="n">tweepy</span><span class="o">.</span><span class="n">OAuthHandler</span><span class="p">(</span><span class="n">TWITTER_API_KEY</span><span class="p">,</span> <span class="n">TWITTER_API_KEY_SECRET</span><span class="p">)</span>
@@ -927,7 +927,7 @@ YOUR TWEET:
 <p>I found that when I asked the model for a description of the tone it would be passive and noncommittal so I included a line in the prompt about taking an active voice</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_authors_tone_description</span><span class="p">(</span><span class="n">how_to_describe_tone</span><span class="p">,</span> <span class="n">users_tweets</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_authors_tone_description</span><span class="p">(</span><span class="n">how_to_describe_tone</span><span class="p">,</span> <span class="n">users_tweets</span><span class="p">):</span>
     <span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">        You are an AI Bot that is very good at generating writing in a similar tone as examples.</span>
 <span class="s2">        Be opinionated and have an active voice.</span>
@@ -1053,7 +1053,7 @@ YOUR TWEET:
 <p>Let’s first identify authors the model thinks the example tweets sound like, then we’ll reference those later. Keep in mind this isn’t a true classification exercise and the point isn’t to be 100% correct on similar people, it’s to get a reference to who the model <em>thinks</em> is similar so we can use that inuition for instructions later.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_similar_public_figures</span><span class="p">(</span><span class="n">tweet_examples</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_similar_public_figures</span><span class="p">(</span><span class="n">tweet_examples</span><span class="p">):</span>
     <span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    You are an AI Bot that is very good at identifying authors, public figures, or writers whos style matches a piece of text</span>
 <span class="s2">    Your goal is to identify which authors, public figures, or writers sound most similar to the text below</span>
@@ -1166,11 +1166,11 @@ I recently visited a remarkable school in Kenya, where students are using solar-
 <h2>Personalized email generation<a class="headerlink" href="#personalized-email-generation" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">langchain.document_loaders</span> <span class="kn">import</span> <span class="n">UnstructuredURLLoader</span>
-<span class="kn">from</span> <span class="nn">langchain.chains.summarize</span> <span class="kn">import</span> <span class="n">load_summarize_chain</span>
-<span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
-<span class="kn">from</span> <span class="nn">langchain.text_splitter</span> <span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
-<span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">PromptTemplate</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain.document_loaders</span><span class="w"> </span><span class="kn">import</span> <span class="n">UnstructuredURLLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.chains.summarize</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_summarize_chain</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.llms</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.text_splitter</span><span class="w"> </span><span class="kn">import</span> <span class="n">RecursiveCharacterTextSplitter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.prompts</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptTemplate</span>
 </pre></div>
 </div>
 </div>
@@ -1179,7 +1179,7 @@ I recently visited a remarkable school in Kenya, where students are using solar-
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unzip data folder</span>
 
-<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
 <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s1">&#39;../../data.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
     <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
 </pre></div>
@@ -1197,7 +1197,7 @@ I recently visited a remarkable school in Kenya, where students are using solar-
 <h3>Load up your HTML from your company page<a class="headerlink" href="#load-up-your-html-from-your-company-page" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_company_page</span><span class="p">(</span><span class="n">company_path</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_company_page</span><span class="p">(</span><span class="n">company_path</span><span class="p">):</span>
     <span class="n">y_combinator_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://www.ycombinator.com</span><span class="si">{</span><span class="n">company_path</span><span class="si">}</span><span class="s2">&quot;</span>
     
     <span class="nb">print</span> <span class="p">(</span><span class="n">y_combinator_url</span><span class="p">)</span>
@@ -1683,7 +1683,7 @@ Sales Rep at RapidRoad
 <h3>Rinse and Repeat: Loop Through Companies<a class="headerlink" href="#rinse-and-repeat-loop-through-companies" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 </pre></div>
 </div>
 </div>
