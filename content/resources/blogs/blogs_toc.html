@@ -16,35 +16,32 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=ff7e8708" />
     <link rel="stylesheet" type="text/css" href="../../../_static/intro.css?v=adbe4504" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
@@ -83,8 +80,7 @@
     <link rel="next" title="Course References" href="../courses/courses_toc.html" />
     <link rel="prev" title="LLM Evaluations" href="../../genai/evaluations/intro.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" /> 
+  <meta name="docsearch:language" content="en"/> 
 <link
   rel="alternate"
   type="application/atom+xml"
@@ -107,8 +103,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../../search.html"
       method="get">
@@ -116,6 +123,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -123,8 +131,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -140,8 +148,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -171,17 +178,21 @@
     
     
     <img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt=" - Home"/>
-    <img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark pst-js-only" alt=" - Home"/>
+    <script>document.write(`<img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt=" - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Guide</span></p>
@@ -314,14 +325,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -418,16 +424,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 
 </div></div>
       
@@ -455,8 +469,8 @@
                    <section class="tex2jax_ignore mathjax_ignore" id="blogs">
 <h1>Blogs<a class="headerlink" href="#blogs" title="Link to this heading">#</a></h1>
 <ul class="postlist-style-none postlist">
-<li class="ablog-post"><p class="ablog-post-title"><a class="reference internal" href="2024/Qwen%202.5%20Coder%20Models%20Enhanced%20Code%20Generation%20and%20Reasoning.html">Qwen 2.5 Coder Models: Enhanced Code Generation and Reasoning</a> - December 27, 2024</p>
-<p class="ablog-post-excerpt">The landscape of code generation is constantly evolving, demanding models that can not only produce syntactically correct code but also understand complex logic and reasoning. The Qwen 2.5 Coder models address this challenge by providing advanced capabilities in code synthesis and comprehension. These models, available in various parameter sizes, offer a solution for developers seeking more robust and reliable code generation tools. <mark>This introduction highlights the key problem these models solve and the solution they provide.</mark> For those interested in exploring these models, a comprehensive collection is available on Hugging Face: <a class="reference external" href="https://huggingface.co/collections/unsloth/qwen-25-coder-all-versions-6732bc833ed65dd1964994d4">Qwen 2.5 Coder All Versions</a>. Additionally, a Google Colab notebook is provided for hands-on experimentation: <a class="reference external" href="https://colab.research.google.com/drive/18sN803sU23XuJV9Q8On2xgqHSer6-UZF?usp=sharing">Qwen 2.5 Coder Colab</a>.
+<li class="ablog-post"><p class="ablog-post-title"><a class="reference internal" href="2024/A%20Journey%20Through%20Time-%20The%20Transformation%20of%20AI%20Development.html">A Journey Through Time- The Transformation of AI Development</a> - March 01, 2023</p>
+<p class="ablog-post-excerpt">I started studying about Machine Learning in 2016, when I took a famous course by Andrew Ng on Machine Learning. After a lot of breaks in between, I was able to complete it and learnt the basics.
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -476,145 +490,7 @@
     }
     </script>
     <script>kernelName = 'python3'</script></p>
-<p class="ablog-post-expand"><a class="reference internal" href="2024/Qwen%202.5%20Coder%20Models%20Enhanced%20Code%20Generation%20and%20Reasoning.html"><em>Read more →</em></a></p>
-</li>
-<li class="ablog-post"><p class="ablog-post-title"><a class="reference internal" href="2024/DeepSeek-V3_%20A%20Technical%20Overview%20of%20a%20Novel%20Mixture-of-Experts%20Model.html">DeepSeek-V3: A Technical Overview of a Novel Mixture-of-Experts Model</a> - December 27, 2024</p>
-<p class="ablog-post-excerpt">DeepSeek-V3 emerges as a significant advancement in the field of large language models (LLMs). This model, detailed in the accompanying technical report, <mark>employs a Mixture-of-Experts (MoE) architecture</mark>, a design choice that allows for both high performance and computational efficiency. The architecture is composed of a number of expert sub-networks, which are activated conditionally based on the input, enabling the model to scale effectively. The training process involved a large corpus of text and code data, leveraging a combination of supervised learning and reinforcement learning techniques. <mark>DeepSeek-V3 demonstrates strong performance across a range of benchmarks</mark>, while maintaining a focus on efficient inference. The model is available on GitHub, providing access to both the model weights and the technical documentation.
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "anukchat/mlguide",
-            ref: "main",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./content/resources/blogs"
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script></p>
-<p class="ablog-post-expand"><a class="reference internal" href="2024/DeepSeek-V3_%20A%20Technical%20Overview%20of%20a%20Novel%20Mixture-of-Experts%20Model.html"><em>Read more →</em></a></p>
-</li>
-<li class="ablog-post"><p class="ablog-post-title"><a class="reference internal" href="2024/Building%20Reliable%20Local%20Agents%20with%20LangGraph%2C%20LLaMA3%2C%20and%20Elasticsearch.html">Building Reliable Local Agents with LangGraph, LLaMA3, and Elasticsearch</a> - December 25, 2024</p>
-<p class="ablog-post-excerpt">This post details the construction of a robust local agent, leveraging the capabilities of LangGraph, LLaMA3, and Elasticsearch. <mark>We address the challenge of creating reliable local agents, which often suffer from inconsistencies and inaccuracies due to their reliance on limited context.</mark> This blog post is a companion piece to the original article published by Elastic Search Labs, which can be found here: <a class="reference external" href="https://www.elastic.co/search-labs/blog/local-rag-agent-elasticsearch-langgraph-llama3">https://www.elastic.co/search-labs/blog/local-rag-agent-elasticsearch-langgraph-llama3</a>. <mark>Our solution employs LangGraph to orchestrate the agent’s workflow, LLaMA3 for its reasoning and generation capabilities, and Elasticsearch for efficient and accurate information retrieval.</mark> This combination allows for a more dependable agent, capable of handling complex tasks with improved performance.
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "anukchat/mlguide",
-            ref: "main",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./content/resources/blogs"
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script></p>
-<p class="ablog-post-expand"><a class="reference internal" href="2024/Building%20Reliable%20Local%20Agents%20with%20LangGraph%2C%20LLaMA3%2C%20and%20Elasticsearch.html"><em>Read more →</em></a></p>
-</li>
-<li class="ablog-post"><p class="ablog-post-title"><a class="reference internal" href="2024/Decoding%20the%20Byte%20Latent%20Transformer_%20A%20New%20Approach%20to%20Language%20Processing.html">Byte Latent Transformer: A New Approach to Language Processing</a> - December 22, 2024</p>
-<p class="ablog-post-excerpt">Let’s understand <strong>“Byte Latent Transformer: Patches Scale Better Than Tokens.”</strong>  This paper introduces a novel approach to handling large language models tokens, potentially offering significant improvements in efficiency and performance. We will explore the core concepts, methodology, and potential implications of this research, drawing insights from the original paper and related discussions.
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "anukchat/mlguide",
-            ref: "main",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./content/resources/blogs"
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script></p>
-<p class="ablog-post-expand"><a class="reference internal" href="2024/Decoding%20the%20Byte%20Latent%20Transformer_%20A%20New%20Approach%20to%20Language%20Processing.html"><em>Read more →</em></a></p>
-</li>
-<li class="ablog-post"><p class="ablog-post-title"><a class="reference internal" href="2024/DeepSeek-VL2_%20A%20Powerful%20Vision-Language%20Model%20for%20Multimodal%20Understanding%20%281%29.html">DeepSeek-VL2: A Powerful Vision-Language Model for Multimodal Understanding</a> - December 18, 2024</p>
-<p class="ablog-post-excerpt">This blog post dives into the exciting advancements of DeepSeek-VL2, a new series of open-source Vision-Language Models (VLMs).  We’ll explore its architecture, training methodology, and impressive performance across diverse multimodal tasks, including visual question answering, optical character recognition, and document understanding.  The model’s innovative approach to handling high-resolution images and its efficient Mixture-of-Experts (MoE) architecture make it a significant leap forward in the field.
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "anukchat/mlguide",
-            ref: "main",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./content/resources/blogs"
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script></p>
-<p class="ablog-post-expand"><a class="reference internal" href="2024/DeepSeek-VL2_%20A%20Powerful%20Vision-Language%20Model%20for%20Multimodal%20Understanding%20%281%29.html"><em>Read more →</em></a></p>
-</li>
-<li class="ablog-post"><p class="ablog-post-title"><a class="reference internal" href="2024/Prompt%20tuning.html">Prompt Tuning</a> - April 10, 2024</p>
-<p class="ablog-post-excerpt">Training large pretrained language models is very time-consuming and compute-intensive. As they continue to grow in size, there is increasing interest in more efficient training methods such as <em>prompting</em>.
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "anukchat/mlguide",
-            ref: "main",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./content/resources/blogs"
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script></p>
-<p class="ablog-post-expand"><a class="reference internal" href="2024/Prompt%20tuning.html"><em>Read more →</em></a></p>
-</li>
-<li class="ablog-post"><p class="ablog-post-title"><a class="reference internal" href="2024/LoRA%20%28Low%20Rank%20Adaptation%20of%20Large%20Language%20Models%29.html">LoRA (Low Rank Adaptation of Large Language Models)</a> - April 10, 2024</p>
-<p class="ablog-post-excerpt">Before diving into LoRA, it’s essential to grasp the concept of <strong>Matrix Decomposition</strong>.
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "anukchat/mlguide",
-            ref: "main",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            name: "python3",
-            path: "./content/resources/blogs"
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script></p>
-<p class="ablog-post-expand"><a class="reference internal" href="2024/LoRA%20%28Low%20Rank%20Adaptation%20of%20Large%20Language%20Models%29.html"><em>Read more →</em></a></p>
+<p class="ablog-post-expand"><a class="reference internal" href="2024/A%20Journey%20Through%20Time-%20The%20Transformation%20of%20AI%20Development.html"><em>Read more →</em></a></p>
 </li>
 <li class="ablog-post"><p class="ablog-post-title"><a class="reference internal" href="2024/A%20society%20of%20Generative%20AI%20agents%20%21.html">A society of Generative AI agents !</a> - August 19, 2023</p>
 <p class="ablog-post-excerpt">Imagine, you visit a place where a group of bots have created a society of their own. They have their own shops, homes, schools and they interact with knowns and unknowns, build relationships, do get-togethers, plan a party or say they create an entire ecosystem of their own just like humans do. It may be hard to imagine but fun to think of.
@@ -639,8 +515,8 @@
     <script>kernelName = 'python3'</script></p>
 <p class="ablog-post-expand"><a class="reference internal" href="2024/A%20society%20of%20Generative%20AI%20agents%20%21.html"><em>Read more →</em></a></p>
 </li>
-<li class="ablog-post"><p class="ablog-post-title"><a class="reference internal" href="2024/A%20Journey%20Through%20Time-%20The%20Transformation%20of%20AI%20Development.html">A Journey Through Time- The Transformation of AI Development</a> - March 01, 2023</p>
-<p class="ablog-post-excerpt">I started studying about Machine Learning in 2016, when I took a famous course by Andrew Ng on Machine Learning. After a lot of breaks in between, I was able to complete it and learnt the basics.
+<li class="ablog-post"><p class="ablog-post-title"><a class="reference internal" href="2024/LoRA%20%28Low%20Rank%20Adaptation%20of%20Large%20Language%20Models%29.html">LoRA (Low Rank Adaptation of Large Language Models)</a> - April 10, 2024</p>
+<p class="ablog-post-excerpt">Before diving into LoRA, it’s essential to grasp the concept of <strong>Matrix Decomposition</strong>.
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
@@ -660,7 +536,145 @@
     }
     </script>
     <script>kernelName = 'python3'</script></p>
-<p class="ablog-post-expand"><a class="reference internal" href="2024/A%20Journey%20Through%20Time-%20The%20Transformation%20of%20AI%20Development.html"><em>Read more →</em></a></p>
+<p class="ablog-post-expand"><a class="reference internal" href="2024/LoRA%20%28Low%20Rank%20Adaptation%20of%20Large%20Language%20Models%29.html"><em>Read more →</em></a></p>
+</li>
+<li class="ablog-post"><p class="ablog-post-title"><a class="reference internal" href="2024/Prompt%20tuning.html">Prompt Tuning</a> - April 10, 2024</p>
+<p class="ablog-post-excerpt">Training large pretrained language models is very time-consuming and compute-intensive. As they continue to grow in size, there is increasing interest in more efficient training methods such as <em>prompting</em>.
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/mlguide",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/resources/blogs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script></p>
+<p class="ablog-post-expand"><a class="reference internal" href="2024/Prompt%20tuning.html"><em>Read more →</em></a></p>
+</li>
+<li class="ablog-post"><p class="ablog-post-title"><a class="reference internal" href="2024/DeepSeek-VL2_%20A%20Powerful%20Vision-Language%20Model%20for%20Multimodal%20Understanding%20%281%29.html">DeepSeek-VL2: A Powerful Vision-Language Model for Multimodal Understanding</a> - December 18, 2024</p>
+<p class="ablog-post-excerpt">This blog post dives into the exciting advancements of DeepSeek-VL2, a new series of open-source Vision-Language Models (VLMs).  We’ll explore its architecture, training methodology, and impressive performance across diverse multimodal tasks, including visual question answering, optical character recognition, and document understanding.  The model’s innovative approach to handling high-resolution images and its efficient Mixture-of-Experts (MoE) architecture make it a significant leap forward in the field.
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/mlguide",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/resources/blogs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script></p>
+<p class="ablog-post-expand"><a class="reference internal" href="2024/DeepSeek-VL2_%20A%20Powerful%20Vision-Language%20Model%20for%20Multimodal%20Understanding%20%281%29.html"><em>Read more →</em></a></p>
+</li>
+<li class="ablog-post"><p class="ablog-post-title"><a class="reference internal" href="2024/Decoding%20the%20Byte%20Latent%20Transformer_%20A%20New%20Approach%20to%20Language%20Processing.html">Byte Latent Transformer: A New Approach to Language Processing</a> - December 22, 2024</p>
+<p class="ablog-post-excerpt">Let’s understand <strong>“Byte Latent Transformer: Patches Scale Better Than Tokens.”</strong>  This paper introduces a novel approach to handling large language models tokens, potentially offering significant improvements in efficiency and performance. We will explore the core concepts, methodology, and potential implications of this research, drawing insights from the original paper and related discussions.
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/mlguide",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/resources/blogs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script></p>
+<p class="ablog-post-expand"><a class="reference internal" href="2024/Decoding%20the%20Byte%20Latent%20Transformer_%20A%20New%20Approach%20to%20Language%20Processing.html"><em>Read more →</em></a></p>
+</li>
+<li class="ablog-post"><p class="ablog-post-title"><a class="reference internal" href="2024/Building%20Reliable%20Local%20Agents%20with%20LangGraph%2C%20LLaMA3%2C%20and%20Elasticsearch.html">Building Reliable Local Agents with LangGraph, LLaMA3, and Elasticsearch</a> - December 25, 2024</p>
+<p class="ablog-post-excerpt">This post details the construction of a robust local agent, leveraging the capabilities of LangGraph, LLaMA3, and Elasticsearch. <mark>We address the challenge of creating reliable local agents, which often suffer from inconsistencies and inaccuracies due to their reliance on limited context.</mark> This blog post is a companion piece to the original article published by Elastic Search Labs, which can be found here: <a class="reference external" href="https://www.elastic.co/search-labs/blog/local-rag-agent-elasticsearch-langgraph-llama3">https://www.elastic.co/search-labs/blog/local-rag-agent-elasticsearch-langgraph-llama3</a>. <mark>Our solution employs LangGraph to orchestrate the agent’s workflow, LLaMA3 for its reasoning and generation capabilities, and Elasticsearch for efficient and accurate information retrieval.</mark> This combination allows for a more dependable agent, capable of handling complex tasks with improved performance.
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/mlguide",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/resources/blogs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script></p>
+<p class="ablog-post-expand"><a class="reference internal" href="2024/Building%20Reliable%20Local%20Agents%20with%20LangGraph%2C%20LLaMA3%2C%20and%20Elasticsearch.html"><em>Read more →</em></a></p>
+</li>
+<li class="ablog-post"><p class="ablog-post-title"><a class="reference internal" href="2024/DeepSeek-V3_%20A%20Technical%20Overview%20of%20a%20Novel%20Mixture-of-Experts%20Model.html">DeepSeek-V3: A Technical Overview of a Novel Mixture-of-Experts Model</a> - December 27, 2024</p>
+<p class="ablog-post-excerpt">DeepSeek-V3 emerges as a significant advancement in the field of large language models (LLMs). This model, detailed in the accompanying technical report, <mark>employs a Mixture-of-Experts (MoE) architecture</mark>, a design choice that allows for both high performance and computational efficiency. The architecture is composed of a number of expert sub-networks, which are activated conditionally based on the input, enabling the model to scale effectively. The training process involved a large corpus of text and code data, leveraging a combination of supervised learning and reinforcement learning techniques. <mark>DeepSeek-V3 demonstrates strong performance across a range of benchmarks</mark>, while maintaining a focus on efficient inference. The model is available on GitHub, providing access to both the model weights and the technical documentation.
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/mlguide",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/resources/blogs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script></p>
+<p class="ablog-post-expand"><a class="reference internal" href="2024/DeepSeek-V3_%20A%20Technical%20Overview%20of%20a%20Novel%20Mixture-of-Experts%20Model.html"><em>Read more →</em></a></p>
+</li>
+<li class="ablog-post"><p class="ablog-post-title"><a class="reference internal" href="2024/Qwen%202.5%20Coder%20Models%20Enhanced%20Code%20Generation%20and%20Reasoning.html">Qwen 2.5 Coder Models: Enhanced Code Generation and Reasoning</a> - December 27, 2024</p>
+<p class="ablog-post-excerpt">The landscape of code generation is constantly evolving, demanding models that can not only produce syntactically correct code but also understand complex logic and reasoning. The Qwen 2.5 Coder models address this challenge by providing advanced capabilities in code synthesis and comprehension. These models, available in various parameter sizes, offer a solution for developers seeking more robust and reliable code generation tools. <mark>This introduction highlights the key problem these models solve and the solution they provide.</mark> For those interested in exploring these models, a comprehensive collection is available on Hugging Face: <a class="reference external" href="https://huggingface.co/collections/unsloth/qwen-25-coder-all-versions-6732bc833ed65dd1964994d4">Qwen 2.5 Coder All Versions</a>. Additionally, a Google Colab notebook is provided for hands-on experimentation: <a class="reference external" href="https://colab.research.google.com/drive/18sN803sU23XuJV9Q8On2xgqHSer6-UZF?usp=sharing">Qwen 2.5 Coder Colab</a>.
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "anukchat/mlguide",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./content/resources/blogs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script></p>
+<p class="ablog-post-expand"><a class="reference internal" href="2024/Qwen%202.5%20Coder%20Models%20Enhanced%20Code%20Generation%20and%20Reasoning.html"><em>Read more →</em></a></p>
 </li>
 </ul>
 </section>
@@ -768,8 +782,8 @@ By Anukool Chaturvedi
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

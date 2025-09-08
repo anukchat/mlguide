@@ -16,35 +16,32 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ff7e8708" />
     <link rel="stylesheet" type="text/css" href="../../_static/intro.css?v=adbe4504" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
@@ -85,8 +82,7 @@
     <link rel="next" title="Functions &amp; Modules" href="3_functions_and_modules.html" />
     <link rel="prev" title="Installation" href="1_installation.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" /> 
+  <meta name="docsearch:language" content="en"/> 
 <link
   rel="alternate"
   type="application/atom+xml"
@@ -109,8 +105,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../search.html"
       method="get">
@@ -118,6 +125,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -125,8 +133,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -142,8 +150,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -173,17 +180,21 @@
     
     
     <img src="../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt=" - Home"/>
-    <img src="../../_static/MLGuide_logo_nb.png" class="logo__image only-dark pst-js-only" alt=" - Home"/>
+    <script>document.write(`<img src="../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt=" - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Guide</span></p>
@@ -316,14 +327,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -487,16 +493,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -732,10 +746,12 @@
 <h2>Indentation<a class="headerlink" href="#indentation" title="Link to this heading">#</a></h2>
 <hr class="docutils" />
 <p>No spaces or tab characters allowed at the start of a statement: Indentation plays a special role in Python.</p>
-<a class="reference internal image-reference" href="../../_images/ind1.png"><img alt="indentation" src="../../_images/ind1.png" style="width: 700px;" /></a>
+<a class="reference internal image-reference" href="../../_images/ind1.png"><img alt="indentation" src="../../_images/ind1.png" style="width: 700px;" />
+</a>
 <p>Most of the programming languages like C, C++, and Java use braces <strong><code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">}</span></code></strong> to define a block of code. <strong>Python, however, uses indentation.</strong></p>
 <p>A comparison of C &amp; Python will help you understand it better.</p>
-<a class="reference internal image-reference" href="../../_images/ind2.png"><img alt="indentation" src="../../_images/ind2.png" style="width: 700px;" /></a>
+<a class="reference internal image-reference" href="../../_images/ind2.png"><img alt="indentation" src="../../_images/ind2.png" style="width: 700px;" />
+</a>
 <div class="alert alert-info"  role="alert">
 <b>💡 Note: </b> </br>
 In the case of Python, indentation is not for styling purpose. It is rather a requirement for your code to get compiled and executed. Thus it is mandatory!!!
@@ -1505,7 +1521,8 @@ id(2) = 4334066392
 </div>
 <p>What is happening in the above sequence of steps? Let’s use a diagram to explain this:</p>
 <p><strong>Memory diagram of variables in Python</strong>:</p>
-<a class="reference internal image-reference" href="../../_images/ns1.png"><img alt="../../_images/ns1.png" src="../../_images/ns1.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../../_images/ns1.png"><img alt="../../_images/ns1.png" src="../../_images/ns1.png" style="width: 500px;" />
+</a>
 <ul>
 <li><p>Initially, an object <strong><code class="docutils literal notranslate"><span class="pre">2</span></code></strong> is created and the name a is associated with it,</p></li>
 <li><p>When we do <strong><code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">a+1</span></code></strong>, a new object <strong><code class="docutils literal notranslate"><span class="pre">3</span></code></strong> is created and now a is associated with this object.</p>
@@ -1614,7 +1631,8 @@ a = 90
 </pre></div>
 </div>
 </div></blockquote>
-<a class="reference internal image-reference" href="../../_images/if2.png"><img alt="if-statement" src="../../_images/if2.png" style="width: 250px;" /></a>
+<a class="reference internal image-reference" href="../../_images/if2.png"><img alt="if-statement" src="../../_images/if2.png" style="width: 250px;" />
+</a>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: If the number is positive, we print an appropriate message</span>
@@ -1651,7 +1669,8 @@ This is also always printed.
 </pre></div>
 </div>
 </div></blockquote>
-<a class="reference internal image-reference" href="../../_images/ife0.png"><img alt="../../_images/ife0.png" src="../../_images/ife0.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../../_images/ife0.png"><img alt="../../_images/ife0.png" src="../../_images/ife0.png" style="width: 300px;" />
+</a>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
@@ -1686,7 +1705,8 @@ This is also always printed.
 </pre></div>
 </div>
 </div></blockquote>
-<a class="reference internal image-reference" href="../../_images/eif0.png"><img alt="if-elif-else" src="../../_images/eif0.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../../_images/eif0.png"><img alt="if-elif-else" src="../../_images/eif0.png" style="width: 500px;" />
+</a>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example:</span>
@@ -1766,7 +1786,8 @@ This is also always printed.
 <li><p>Second, all the <strong><code class="docutils literal notranslate"><span class="pre">statements</span></code></strong> in the body of the for loop are executed with the same value. The body of for loop is separated from the rest of the code using indentation.</p></li>
 <li><p>Finally, loop continues until we reach the last item in the <strong><code class="docutils literal notranslate"><span class="pre">sequence</span></code></strong>. The body of for loop is separated from the rest of the code using indentation.</p></li>
 </ol>
-<a class="reference internal image-reference" href="../../_images/for0.png"><img alt="../../_images/for0.png" src="../../_images/for0.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="../../_images/for0.png"><img alt="../../_images/for0.png" src="../../_images/for0.png" style="width: 400px;" />
+</a>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1: For loop </span>
@@ -1793,7 +1814,8 @@ five
 <p>The <strong>range()</strong> function returns a sequence of numbers starting from 0 (by default) if the initial limit is not specified and it increments by 1 (by default) until a final limit is reached.</p>
 <p>The <strong><code class="docutils literal notranslate"><span class="pre">range()</span></code></strong> function is used with a loop to specify the range (how many times) the code block will be executed.</p>
 <p>We can generate a sequence of numbers using <strong><code class="docutils literal notranslate"><span class="pre">range()</span></code></strong> function. <strong><code class="docutils literal notranslate"><span class="pre">range(5)</span></code></strong> will generate numbers from 0 to 4 (5 numbers).</p>
-<a class="reference internal image-reference" href="../../_images/forrange.png"><img alt="for-loop" src="../../_images/forrange.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="../../_images/forrange.png"><img alt="for-loop" src="../../_images/forrange.png" style="width: 600px;" />
+</a>
 <p>We can also define the start, stop and step size as <strong><code class="docutils literal notranslate"><span class="pre">range(start,</span> <span class="pre">stop,step_size)</span></code></strong>. <strong><code class="docutils literal notranslate"><span class="pre">step_size</span></code></strong> defaults to 1 if not provided.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2026,7 +2048,8 @@ Banana
 <li><p>The body of the loop is entered only if the expression/condition evaluates to <strong><code class="docutils literal notranslate"><span class="pre">True</span></code></strong>.</p></li>
 <li><p>After one iteration, the expression/condition is checked again. This process continues until the test_expression evaluates to <strong><code class="docutils literal notranslate"><span class="pre">False</span></code></strong>.</p></li>
 </ol>
-<a class="reference internal image-reference" href="../../_images/wh0.png"><img alt="../../_images/wh0.png" src="../../_images/wh0.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="../../_images/wh0.png"><img alt="../../_images/wh0.png" src="../../_images/wh0.png" style="width: 400px;" />
+</a>
 <blockquote>
 <div><p><strong>Note:</strong> An infinite loop occurs when a program keeps executing within one loop, never leaving it. To exit out of infinite loops on the command line, press <strong>CTRL + C</strong>.</p>
 </div></blockquote>
@@ -2080,15 +2103,18 @@ Banana
 </table>
 </div>
 <p>The <strong><code class="docutils literal notranslate"><span class="pre">break</span></code></strong> and <strong><code class="docutils literal notranslate"><span class="pre">continue</span></code></strong> statements are part of a control flow statements that helps you to understand the basics of Python.</p>
-<a class="reference internal image-reference" href="../../_images/ctrl1.png"><img alt="control-state" src="../../_images/ctrl1.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="../../_images/ctrl1.png"><img alt="control-state" src="../../_images/ctrl1.png" style="width: 200px;" />
+</a>
 <section id="break">
 <h4>Break<a class="headerlink" href="#break" title="Link to this heading">#</a></h4>
 <p><strong><code class="docutils literal notranslate"><span class="pre">break</span></code></strong> statement provides you with the opportunity to <strong>exit out</strong> of a loop when an external condition is <strong>triggered</strong>, and the program control transfer to the next statement following the loop.</p>
 <p>If the <strong><code class="docutils literal notranslate"><span class="pre">break</span></code></strong> statement is inside a nested loop (loop inside another loop), the <strong><code class="docutils literal notranslate"><span class="pre">break</span></code></strong> statement will terminate the innermost loop.</p>
 <p>You’ll put the <strong><code class="docutils literal notranslate"><span class="pre">break</span></code></strong> statement within the block of code under your loop statement.</p>
-<a class="reference internal image-reference" href="../../_images/b1.png"><img alt="break" src="../../_images/b1.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../../_images/b1.png"><img alt="break" src="../../_images/b1.png" style="width: 300px;" />
+</a>
 <p>The working of <strong><code class="docutils literal notranslate"><span class="pre">break</span></code></strong> statement in <strong><code class="docutils literal notranslate"><span class="pre">for</span></code></strong> loop and <strong><code class="docutils literal notranslate"><span class="pre">while</span></code></strong>  loop is shown below.</p>
-<a class="reference internal image-reference" href="../../_images/b2.png"><img alt="break1" src="../../_images/b2.png" style="width: 700px;" /></a>
+<a class="reference internal image-reference" href="../../_images/b2.png"><img alt="break1" src="../../_images/b2.png" style="width: 700px;" />
+</a>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example 1:</span>
@@ -2133,7 +2159,8 @@ Banana
 <section id="continue">
 <h4>Continue<a class="headerlink" href="#continue" title="Link to this heading">#</a></h4>
 <p>In Python, the <strong><code class="docutils literal notranslate"><span class="pre">continue</span></code></strong> statement is a <strong>jump statement</strong> which is used to skip execution of current iteration. After <strong>skipping</strong>, loop <strong><code class="docutils literal notranslate"><span class="pre">continue</span></code></strong> with next iteration. We can use <strong><code class="docutils literal notranslate"><span class="pre">continue</span></code></strong> statement <strong>only</strong> with <strong>for loop</strong> as well as <strong>while loop</strong> in Python.</p>
-<a class="reference internal image-reference" href="../../_images/con1.png"><img alt="continue" src="../../_images/con1.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../../_images/con1.png"><img alt="continue" src="../../_images/con1.png" style="width: 300px;" />
+</a>
 <p>The working of <strong><code class="docutils literal notranslate"><span class="pre">continue</span></code></strong> statement in <strong><code class="docutils literal notranslate"><span class="pre">for</span></code></strong> loop and <strong><code class="docutils literal notranslate"><span class="pre">while</span></code></strong> loop is shown below.</p>
 <p>&lt;img src=“images/con2.png” width=“700” alt=”continue1/&gt;</p>
 <div class="cell docutils container">
@@ -2339,8 +2366,8 @@ By Anukool Chaturvedi
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

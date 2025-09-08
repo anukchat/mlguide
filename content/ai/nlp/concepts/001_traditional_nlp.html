@@ -16,35 +16,32 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=ff7e8708" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/intro.css?v=adbe4504" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
@@ -85,8 +82,7 @@
     <link rel="next" title="Embeddings" href="002_embeddings.html" />
     <link rel="prev" title="Natural Language Processing" href="../nlp_intro.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" /> 
+  <meta name="docsearch:language" content="en"/> 
 <link
   rel="alternate"
   type="application/atom+xml"
@@ -109,8 +105,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../../../search.html"
       method="get">
@@ -118,6 +125,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -125,8 +133,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -142,8 +150,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -173,17 +180,21 @@
     
     
     <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt=" - Home"/>
-    <img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark pst-js-only" alt=" - Home"/>
+    <script>document.write(`<img src="../../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt=" - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Guide</span></p>
@@ -316,14 +327,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -487,16 +493,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -565,7 +579,8 @@
 <h2>Word Vectors<a class="headerlink" href="#word-vectors" title="Link to this heading">#</a></h2>
 <p>If we want to solve Natural Language Processing (NLP) tasks with neural networks, we need some way to represent text as tensors.</p>
 <p>Computers already represent textual characters as numbers that map to fonts on your screen using encodings such as ASCII or UTF-8.</p>
-<a class="reference internal image-reference" href="../../../../_images/ascii-character-map.png"><img alt="Image showing diagram mapping a character to an ASCII and binary representation" src="../../../../_images/ascii-character-map.png" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="../../../../_images/ascii-character-map.png"><img alt="Image showing diagram mapping a character to an ASCII and binary representation" src="../../../../_images/ascii-character-map.png" style="width: 50%;" />
+</a>
 <p><a class="reference external" href="https://www.seobility.net/en/wiki/ASCII">Image source</a></p>
 <p>As humans, we understand what each letter <strong>represents</strong>, and how all characters come together to form the words of a sentence.</p>
 <p>However, <mark>computers by themselves do not have such an understanding</mark>, and neural network has to learn the meaning during training.</p>
@@ -587,7 +602,8 @@
 <div class="alert alert-block alert-info">
 <p><strong>What is One-Hot Encoding?</strong></p>
 <p>One-hot encoding is a representation of categorical variables as binary vectors. In other words, each categorical variable is represented by a binary vector of length equal to the number of categories.</p>
-<a class="reference internal image-reference" href="https://miro.medium.com/v2/resize:fit:4800/format:webp/1*ggtP4a5YaRx6l09KQaYOnw.png"><img alt="One Hot Encoding" src="https://miro.medium.com/v2/resize:fit:4800/format:webp/1*ggtP4a5YaRx6l09KQaYOnw.png" style="width: 50%;" /></a>
+<a class="reference internal image-reference" href="https://miro.medium.com/v2/resize:fit:4800/format:webp/1*ggtP4a5YaRx6l09KQaYOnw.png"><img alt="One Hot Encoding" src="https://miro.medium.com/v2/resize:fit:4800/format:webp/1*ggtP4a5YaRx6l09KQaYOnw.png" style="width: 50%;" />
+</a>
 </div><p>In traditional NLP, we represent words as one-hot vectors. This is called a <strong>localist representation</strong>.</p>
 <p>However, <mark>using one-hot vectors to encode words <strong>lacks</strong> similarity between words and context in general</mark>.</p>
 <p>In the modern day, we use <strong>embedding vectors</strong> built on the idea of <strong>distributional semantics</strong> which defines a words meaning not by what idea it’s associated with, but by <mark>what context or window of words the word appears in.</mark></p>
@@ -732,7 +748,8 @@ The hypernyms for invite as a noun:
 <p>👉 The idea is to go through a large corpus/body of text and define a vocabulary table where each word is represented by an embedding vector.</p>
 <p>👉 Go through each position <span class="math notranslate nohighlight">\(t\)</span> in the text with center word <span class="math notranslate nohighlight">\(c\)</span> and context words <span class="math notranslate nohighlight">\(o\)</span> and calculate the <strong>probability of <span class="math notranslate nohighlight">\(o\)</span> given <span class="math notranslate nohighlight">\(c\)</span></strong>. We adjust the word vectors to maximize this probability.</p>
 <p>👉 We Keep adjusting the word vectors to maximize this probability (backpropogation)</p>
-<a class="reference internal image-reference" href="../../../../_images/1-word2vec-example.png"><img alt="Word2Vec" src="../../../../_images/1-word2vec-example.png" style="width: 600px; height: 300px;" /></a>
+<a class="reference internal image-reference" href="../../../../_images/1-word2vec-example.png"><img alt="Word2Vec" src="../../../../_images/1-word2vec-example.png" style="width: 600px; height: 300px;" />
+</a>
 <p><em>Figure 2. Word2vec.</em></p>
 <section id="algorithm">
 <h4>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading">#</a></h4>
@@ -749,7 +766,8 @@ The hypernyms for invite as a noun:
 \[P(o|c) = \frac{exp(\mathbf{u_{o}^{T} v_{c}})}{\sum_{w \in V} exp(\mathbf{u_{w}^{T} v_{c}})} \tag{3}\]</div>
 <br>
 <br>
-<a class="reference internal image-reference" href="../../../../_images/1-softmax.png"><img alt="../../../../_images/1-softmax.png" src="../../../../_images/1-softmax.png" style="width: 60%;" /></a>
+<a class="reference internal image-reference" href="../../../../_images/1-softmax.png"><img alt="../../../../_images/1-softmax.png" src="../../../../_images/1-softmax.png" style="width: 60%;" />
+</a>
 <p>While <strong>Word2vec</strong> is a framework for learning embedding vectors. There are also variants of this framework.</p>
 <ul class="simple">
 <li><p><strong>Skip-grams (SG)</strong> predicts context words based on center word (this is word2vec)</p></li>
@@ -775,7 +793,8 @@ J_{t}(\theta) = log \sigma (u_{o}^{T} v_{c}) + \sum_{i = 1}^{k} \mathbb{E}_{j \s
 <h3>Co-occurrence Vectors<a class="headerlink" href="#co-occurrence-vectors" title="Link to this heading">#</a></h3>
 <p>Co-occurrence matrices are used to model the relationships between words. The matrix is a <span class="math notranslate nohighlight">\( V \times V \)</span> matrix where <span class="math notranslate nohighlight">\(V\)</span> is the number of words in the vocabulary.</p>
 <p>The <span class="math notranslate nohighlight">\(i\)</span> th and <span class="math notranslate nohighlight">\(j\)</span> th entry of the matrix is the number of times that word <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> co-occur in the corpus.</p>
-<a class="reference internal image-reference" href="../../../../_images/2-cooccurrence-matrix-example.png"><img alt="Co-occurrence Matrix" src="../../../../_images/2-cooccurrence-matrix-example.png" style="width: 60%;" /></a>
+<a class="reference internal image-reference" href="../../../../_images/2-cooccurrence-matrix-example.png"><img alt="Co-occurrence Matrix" src="../../../../_images/2-cooccurrence-matrix-example.png" style="width: 60%;" />
+</a>
 <p><em>Figure 1. Co-Occurrence Matrix.</em></p>
 <p>This is a way of modeling the relationships between words. There are 2 ways to make a co-occurrence matrix:</p>
 <ul class="simple">
@@ -834,7 +853,8 @@ A = U \Sigma V^T
 <p><em>Figure 3. Count-based vs direct prediction.</em></p>
 <p>GloVe combines the predictive modeling that is in the purple box with the methods for word similarity in the blue box. It also has an additional feature: encoding meaning components in vector differences.</p>
 <p>Basic idea is <mark>Ratios of co-occurrence probabilities can encode meaning components </mark></p>
-<a class="reference internal image-reference" href="../../../../_images/2-glove-basic-ideas.png"><img alt="../../../../_images/2-glove-basic-ideas.png" src="../../../../_images/2-glove-basic-ideas.png" style="width: 600px; height: 300px;" /></a>
+<a class="reference internal image-reference" href="../../../../_images/2-glove-basic-ideas.png"><img alt="../../../../_images/2-glove-basic-ideas.png" src="../../../../_images/2-glove-basic-ideas.png" style="width: 600px; height: 300px;" />
+</a>
 <br>
 <p><em>Figure 4. Encoding meaning in vector differences.</em></p>
 <p>To create an objective function from this idea, we see that a <strong>log-bilinear model</strong> can be used to capture the ratio of co-occurrence probabilities.</p>
@@ -849,7 +869,8 @@ w_x ~ \cdot (w_a - w_b) =log \frac{P(x~|~a)}{P(x~|~b)}\\
 J = \sum_{i, j = 1}^{V} f(X_{ij})(\underbrace{w_i^T \tilde{w}_j + b_i + \tilde{b}_j}_{pred} - \underbrace{log X_{ij}}_{label})^2 \hspace{1em} (Eq.~2)\\
 \end{split}\]</div>
 <p><span class="math notranslate nohighlight">\(w_i\)</span> and <span class="math notranslate nohighlight">\(w_j\)</span> are embedding vectors for the <span class="math notranslate nohighlight">\(i\)</span>-th and <span class="math notranslate nohighlight">\(j\)</span>-th words. They also have their corresponding bias terms. This objective function can directly optimize on the ground truth co-occurrence matrix <span class="math notranslate nohighlight">\(X\)</span>. The function <span class="math notranslate nohighlight">\(f(X_{ij})\)</span> is shown below. Its purpose is to limit the frequency of very frequent words.</p>
-<a class="reference internal image-reference" href="../../../../_images/2-glove-subsampling-f.png"><img alt="../../../../_images/2-glove-subsampling-f.png" src="../../../../_images/2-glove-subsampling-f.png" style="width: 400px; height: 200px;" /></a>
+<a class="reference internal image-reference" href="../../../../_images/2-glove-subsampling-f.png"><img alt="../../../../_images/2-glove-subsampling-f.png" src="../../../../_images/2-glove-subsampling-f.png" style="width: 400px; height: 200px;" />
+</a>
 <p><em>Figure 5. F function in GloVe.</em></p>
 </section>
 <section id="evaluating-word-vectors">
@@ -900,7 +921,8 @@ d = \underset{i}{argmax} \frac{(x_b - x_a + x_c)^T x_i}{||x_b - x_a + x_c||} \hs
 </li>
 <li><p>Example:</p></li>
 </ul>
-<a class="reference internal image-reference" href="../../../../_images/5-constituency.png"><img alt="../../../../_images/5-constituency.png" src="../../../../_images/5-constituency.png" style="width: 600px; height: 300px;" /></a>
+<a class="reference internal image-reference" href="../../../../_images/5-constituency.png"><img alt="../../../../_images/5-constituency.png" src="../../../../_images/5-constituency.png" style="width: 600px; height: 300px;" />
+</a>
 <br>
 <p>Phrase structure does this by defining a <strong>lexicon</strong> and a <strong>grammar</strong>.</p>
 <p><mark>The lexicon is simply the type of word (noun, preposition, verb, etc) mapped to the word (a dictionary mapping).</mark>.</p>
@@ -913,7 +935,8 @@ d = \underset{i}{argmax} \frac{(x_b - x_a + x_c)^T x_i}{||x_b - x_a + x_c||} \hs
 <li><p>Dependency structure: <strong>which words depend on (modify or are arguments of) which other words</strong>; semantic relationship</p></li>
 <li><p>Example (from the internet):</p></li>
 </ul>
-<a class="reference internal image-reference" href="../../../../_images/5-dependency-example.png"><img alt="../../../../_images/5-dependency-example.png" src="../../../../_images/5-dependency-example.png" style="width: 400px; height: 200px;" /></a>
+<a class="reference internal image-reference" href="../../../../_images/5-dependency-example.png"><img alt="../../../../_images/5-dependency-example.png" src="../../../../_images/5-dependency-example.png" style="width: 400px; height: 200px;" />
+</a>
 <br>
 <ul class="simple">
 <li><p>Why dependency?</p>
@@ -930,7 +953,8 @@ d = \underset{i}{argmax} \frac{(x_b - x_a + x_c)^T x_i}{||x_b - x_a + x_c||} \hs
 </ul>
 </li>
 </ul>
-<a class="reference internal image-reference" href="../../../../_images/5-dependency-example2.png"><img alt="../../../../_images/5-dependency-example2.png" src="../../../../_images/5-dependency-example2.png" style="width: 400px; height: 200px;" /></a>
+<a class="reference internal image-reference" href="../../../../_images/5-dependency-example2.png"><img alt="../../../../_images/5-dependency-example2.png" src="../../../../_images/5-dependency-example2.png" style="width: 400px; height: 200px;" />
+</a>
 <p>Below are some examples of ambiguities in the English language (and thus why sentence structure is important):</p>
 <ul class="simple">
 <li><p><strong>Prepositional phrase attachment ambiguity</strong></p>
@@ -972,12 +996,14 @@ d = \underset{i}{argmax} \frac{(x_b - x_a + x_c)^T x_i}{||x_b - x_a + x_c||} \hs
 <p>Currently, there is no unified method to represent dependency structures graphically. For example, in the notebook, the arrows start from the head and point to the dependent. However, some may have the arrows start from the dependent and point to the head. Nevertheless, the following two methods are two basic ways to represent dependency structures in a graph.</p>
 <br>
 <p><strong><mark>Represented by a connected, acyclic, single-head tree</strong></mark></p>
-<a class="reference internal image-reference" href="../../../../_images/5-dependency-grammar.png"><img alt="../../../../_images/5-dependency-grammar.png" src="../../../../_images/5-dependency-grammar.png" style="width: 600px; height: 300px;" /></a>
+<a class="reference internal image-reference" href="../../../../_images/5-dependency-grammar.png"><img alt="../../../../_images/5-dependency-grammar.png" src="../../../../_images/5-dependency-grammar.png" style="width: 600px; height: 300px;" />
+</a>
 <p><strong><mark>Represented by dependency arcs (curved arrows) above a sentence</mark></strong></p>
 <ul class="simple">
 <li><p>Usually add a fake ROOT so every word is a dependent of precisely 1 other node</p></li>
 </ul>
-<a class="reference internal image-reference" href="../../../../_images/5-dependency-grammar-repr.png"><img alt="../../../../_images/5-dependency-grammar-repr.png" src="../../../../_images/5-dependency-grammar-repr.png" style="width: 600px; height: 300px;" /></a>
+<a class="reference internal image-reference" href="../../../../_images/5-dependency-grammar-repr.png"><img alt="../../../../_images/5-dependency-grammar-repr.png" src="../../../../_images/5-dependency-grammar-repr.png" style="width: 600px; height: 300px;" />
+</a>
 <br>
  <br><p>Dependency structure is usually done by drawing an arrow from the head to the dependent word or the words that modify the head. We also usually add a fake ROOT so every word is dependent on roughly 1 other node.</p>
 <p>A <strong>dependency parser</strong> is basically an algorithm that will generate some quantified format of the dependency structure you see in Figure 3.</p>
@@ -1120,8 +1146,8 @@ By Anukool Chaturvedi
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

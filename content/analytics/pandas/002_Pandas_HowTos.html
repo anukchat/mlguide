@@ -16,35 +16,32 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=ff7e8708" />
     <link rel="stylesheet" type="text/css" href="../../../_static/intro.css?v=adbe4504" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
@@ -83,8 +80,7 @@
     <link rel="next" title="Pandas Exercises" href="003_Pandas_Exercises.html" />
     <link rel="prev" title="Pandas" href="001_Python_Pandas_DataFrame.html" /> 
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" /> 
+  <meta name="docsearch:language" content="en"/> 
 <link
   rel="alternate"
   type="application/atom+xml"
@@ -107,8 +103,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../../../search.html"
       method="get">
@@ -116,6 +123,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -123,8 +131,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -140,8 +148,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -171,17 +178,21 @@
     
     
     <img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-light" alt=" - Home"/>
-    <img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark pst-js-only" alt=" - Home"/>
+    <script>document.write(`<img src="../../../_static/MLGuide_logo_nb.png" class="logo__image only-dark" alt=" - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Guide</span></p>
@@ -314,14 +325,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -485,16 +491,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -880,7 +894,8 @@ Standard 3 Class A    Jill      72.00
 <div><p><strong>Note:</strong> It throws <strong><code class="docutils literal notranslate"><span class="pre">KeyError</span></code></strong> if the label does not exist in DataFrame.</p>
 </div></blockquote>
 <p><strong>Example:</strong></p>
-<a class="reference internal image-reference" href="../../../_images/dfat.png"><img alt="../../../_images/dfat.png" src="../../../_images/dfat.png" style="width: 250px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/dfat.png"><img alt="../../../_images/dfat.png" src="../../../_images/dfat.png" style="width: 250px;" />
+</a>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -935,7 +950,8 @@ Standard 3 Class A    Jill      72.00
 <h3>Select value using row and column position using DataFrame.iat<a class="headerlink" href="#select-value-using-row-and-column-position-using-dataframe-iat" title="Link to this heading">#</a></h3>
 <p>Allows you to select a single value from a DataFrame using integer-based row and column positions.</p>
 <p><strong>Example:</strong></p>
-<a class="reference internal image-reference" href="../../../_images/dfiat.png"><img alt="../../../_images/dfiat.png" src="../../../_images/dfiat.png" style="width: 250px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/dfiat.png"><img alt="../../../_images/dfiat.png" src="../../../_images/dfiat.png" style="width: 250px;" />
+</a>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -993,7 +1009,8 @@ Standard 3 Class A    Jill      72.00
 <section id="drop-single-column">
 <h3>Drop single column<a class="headerlink" href="#drop-single-column" title="Link to this heading">#</a></h3>
 <p>We may need to delete a single or specific column from a DataFrame.</p>
-<a class="reference internal image-reference" href="../../../_images/dropscol.png"><img alt="../../../_images/dropscol.png" src="../../../_images/dropscol.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/dropscol.png"><img alt="../../../_images/dropscol.png" src="../../../_images/dropscol.png" style="width: 200px;" />
+</a>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -1342,7 +1359,8 @@ After dropping:
 <p>DataFrame can have multiple column headers, such DataFrame is called a <strong>multi-index</strong> DataFrame. Such headers are divided into the levels where the first header is at level 0, the second header is at level 1, and so on.</p>
 <p>We can drop a column from any level of multi-index DataFrame. By default, it drops columns from all the levels, but we can use a parameter <strong><code class="docutils literal notranslate"><span class="pre">level</span></code></strong> to drop from a particular level only.</p>
 <p>We need to pass a level name or level index as <strong><code class="docutils literal notranslate"><span class="pre">level=level_index</span></code></strong>.</p>
-<a class="reference internal image-reference" href="../../../_images/dcolfmi.png"><img alt="../../../_images/dcolfmi.png" src="../../../_images/dcolfmi.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/dcolfmi.png"><img alt="../../../_images/dcolfmi.png" src="../../../_images/dcolfmi.png" style="width: 500px;" />
+</a>
 <blockquote>
 <div><p><strong>Note:</strong> If we do not provide a <strong><code class="docutils literal notranslate"><span class="pre">level</span></code></strong> parameter then it will drop the column from all the levels if exist.</p>
 </div></blockquote>
@@ -1499,7 +1517,8 @@ After dropping column:
 <h3>Drop duplicates but keep first<a class="headerlink" href="#drop-duplicates-but-keep-first" title="Link to this heading">#</a></h3>
 <p>When we have the DataFrame with many duplicate rows that we want to remove we use <strong><code class="docutils literal notranslate"><span class="pre">DataFrame.drop_duplicates()</span></code></strong>.</p>
 <p>The rows that contain the same values in all the columns then are identified as duplicates. If the row is duplicated then by default <strong><code class="docutils literal notranslate"><span class="pre">DataFrame.drop_duplicates()</span></code></strong> keeps the first occurrence of that row and drops all other duplicates of it.</p>
-<a class="reference internal image-reference" href="../../../_images/ddkf.png"><img alt="../../../_images/ddkf.png" src="../../../_images/ddkf.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/ddkf.png"><img alt="../../../_images/ddkf.png" src="../../../_images/ddkf.png" style="width: 200px;" />
+</a>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -1623,7 +1642,8 @@ After dropping column:
 <h3>Drop all duplicates<a class="headerlink" href="#drop-all-duplicates" title="Link to this heading">#</a></h3>
 <p>As explained in the above section, by default, <strong><code class="docutils literal notranslate"><span class="pre">DataFrame.drop_duplicates()</span></code></strong> keeps the duplicate row’s first occurrence and removes all others.</p>
 <p>If we need to drop all the duplicate rows, then it can be done by using keep=False, as shown below.</p>
-<a class="reference internal image-reference" href="../../../_images/dad.png"><img alt="../../../_images/dad.png" src="../../../_images/dad.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/dad.png"><img alt="../../../_images/dad.png" src="../../../_images/dad.png" style="width: 200px;" />
+</a>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -1744,7 +1764,8 @@ After dropping column:
 <h3>Drop column where at least one value is missing<a class="headerlink" href="#drop-column-where-at-least-one-value-is-missing" title="Link to this heading">#</a></h3>
 <p>If we need to drop such columns that contain NA, we can use the <strong><code class="docutils literal notranslate"><span class="pre">axis=columns</span></code></strong> parameter of <strong><code class="docutils literal notranslate"><span class="pre">DataFrame.dropna()</span></code></strong> to specify deleting the columns.</p>
 <p>By default, it removes the column where one or more values are missing.</p>
-<a class="reference internal image-reference" href="../../../_images/dcwaONA.png"><img alt="../../../_images/dcwaONA.png" src="../../../_images/dcwaONA.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/dcwaONA.png"><img alt="../../../_images/dcwaONA.png" src="../../../_images/dcwaONA.png" style="width: 200px;" />
+</a>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -1872,7 +1893,8 @@ After dropping column NA:
 <h3>Drop NA from defined rows<a class="headerlink" href="#drop-na-from-defined-rows" title="Link to this heading">#</a></h3>
 <p>When we need to drop a column if it does not have data in its initial rows.</p>
 <p>In such a case, we can use <strong><code class="docutils literal notranslate"><span class="pre">subset=[row1,</span> <span class="pre">row2]</span></code></strong> of <strong><code class="docutils literal notranslate"><span class="pre">DataFrame.dropna()</span></code></strong> to specify the list of row indexes so that it drops the columns containing missing values in these rows only, i.e., row1 and row2 in this case.</p>
-<a class="reference internal image-reference" href="../../../_images/dcfsr.png"><img alt="../../../_images/dcfsr.png" src="../../../_images/dcfsr.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/dcfsr.png"><img alt="../../../_images/dcfsr.png" src="../../../_images/dcfsr.png" style="width: 200px;" />
+</a>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -2225,12 +2247,14 @@ df.columns[2]: percentage
 </tbody>
 </table>
 </div>
-<a class="reference internal image-reference" href="../../../_images/df2dict.png"><img alt="../../../_images/df2dict.png" src="../../../_images/df2dict.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/df2dict.png"><img alt="../../../_images/df2dict.png" src="../../../_images/df2dict.png" style="width: 500px;" />
+</a>
 <section id="convert-pandas-dataframe-to-dict">
 <h3>Convert pandas DataFrame to dict<a class="headerlink" href="#convert-pandas-dataframe-to-dict" title="Link to this heading">#</a></h3>
 <p>In the below example, we read the input from the <strong><a class="reference internal" href="#/content/tools/pandas/001_Python_Pandas_Methods/student_data.csv"><span class="xref myst">student_data.csv</span></a></strong> file and create a DataFrame object. It is then converted into the Python dictionary object.</p>
 <p>Input CSV file contains a simple dataset of student data with two columns, <strong><code class="docutils literal notranslate"><span class="pre">Name</span></code></strong> and <strong><code class="docutils literal notranslate"><span class="pre">Marks</span></code></strong>.</p>
-<a class="reference internal image-reference" href="../../../_images/dfcsv.png"><img alt="../../../_images/dfcsv.png" src="../../../_images/dfcsv.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/dfcsv.png"><img alt="../../../_images/dfcsv.png" src="../../../_images/dfcsv.png" style="width: 200px;" />
+</a>
 <p>DataFrame is converted into <strong><code class="docutils literal notranslate"><span class="pre">dict</span></code></strong> using the default <strong><code class="docutils literal notranslate"><span class="pre">'dict'</span></code></strong> parameter.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3081,7 +3105,8 @@ Harry 91.54   19
 </ul>
 </li>
 </ol>
-<a class="reference internal image-reference" href="../../../_images/dfri.png"><img alt="../../../_images/dfri.png" src="../../../_images/dfri.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/dfri.png"><img alt="../../../_images/dfri.png" src="../../../_images/dfri.png" style="width: 600px;" />
+</a>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -3333,7 +3358,8 @@ After reset index:
 <h3>Reset multi-level index<a class="headerlink" href="#reset-multi-level-index" title="Link to this heading">#</a></h3>
 <p>When Python pandas DataFrame has multiple row index or column headers, then are called <strong>multi-level</strong> or <strong>hierarchical</strong> DataFrame. We can apply <strong><code class="docutils literal notranslate"><span class="pre">DataFrame.reset</span> <span class="pre">index()</span></code></strong> on such multi-index DataFrame.</p>
 <p>The below diagram shows hierarchical DataFrame of Student data with two-column headers where column labels <strong><code class="docutils literal notranslate"><span class="pre">Name</span></code></strong> and <strong><code class="docutils literal notranslate"><span class="pre">Marks</span></code></strong> are at level 0 and <strong><code class="docutils literal notranslate"><span class="pre">Surname</span></code></strong> and <strong><code class="docutils literal notranslate"><span class="pre">Percentage</span></code></strong> at level 1. Similarly, two-row indexes where index <strong><code class="docutils literal notranslate"><span class="pre">Standard</span></code></strong> at level 0 and <strong><code class="docutils literal notranslate"><span class="pre">Class</span></code></strong> at level 1 of the DataFrame.</p>
-<a class="reference internal image-reference" href="../../../_images/midf.png"><img alt="../../../_images/midf.png" src="../../../_images/midf.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="../../../_images/midf.png"><img alt="../../../_images/midf.png" src="../../../_images/midf.png" style="width: 600px;" />
+</a>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -3589,8 +3615,8 @@ By Anukool Chaturvedi
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
