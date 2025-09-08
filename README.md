@@ -1,7 +1,7 @@
 
 # Machine Learning Guide 📘
 
-Welcome to the **Machine Learning Guide**! This repository is designed for anyone looking to dive into the field of machine learning, from Python basics all the way to advanced concepts like generative AI, LLMs, MLOps, and more. Each module is crafted with simplicity in mind, aiming to provide foundational and advanced ML knowledge that’s both practical and accessible.
+Welcome to the **Machine Learning Guide**! This repository is designed for anyone looking to dive into the field of machine learning, from Python basics all the way to advanced concepts like generative AI, LLMs, MLOps, and more. Each module is crafted with simplicity in mind aiming to provide foundational and advanced ML knowledge that’s both practical and accessible.
 
 ## 🌟 About the Guide
 
